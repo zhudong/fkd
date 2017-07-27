@@ -1,0 +1,8 @@
+package com.fuexpress.kr.ui.adapter;
+
+/**
+ * Created by root on 17-2-27.
+ */
+
+public class UserPhoneNumberAdapter {
+}

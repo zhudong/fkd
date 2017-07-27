@@ -1,0 +1,132 @@
+package com.fuexpress.kr.ui.activity.coupon;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.CouponDataManager;
+import com.fuexpress.kr.ui.activity.CouponExchangeActivity;
+import com.fuexpress.kr.ui.adapter.CouponCurrencyDataAdapter;
+import com.fuexpress.kr.ui.fragment.CouponListFragment;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class CouponsActivity extends BaseActivity {
+
+
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView mTitleIvRight;
+    @BindView(R.id.tab)
+    SlidingTabLayout mTab;
+    @BindView(R.id.pager)
+    ViewPager mPager;
+    private List<String> mStrings;
+    private List<Fragment> mFragments = new ArrayList<>();
+
+    public Fragment getFragment(int i) {
+        if (null == mFragments || mFragments.size() < i || i < 0) {
+            return null;
+        } else {
+            return mFragments.get(i);
+        }
+    }
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_coupons, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        init();
+
+    }
+
+    public void init() {
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setText(getString(R.string.main_me_tab_string));
+        mTitleTvRight.setText(getString(R.string.exchange));
+        mTitleTvCenter.setText(getString(R.string.coupon));
+        mTitleTvRight.setVisibility(View.VISIBLE);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        CouponDataManager.getInstance().getCouponDataList(1);
+      //  initData();
+    }
+
+    private void setData() {
+        if(null==CouponDataManager.getInstance().getDatas()){
+            return;
+        }
+        for(int i = 0; i<CouponDataManager.getInstance().getDatas().size(); i++){
+            Bundle args=new Bundle();
+            args.putString(CouponListFragment.CURRENCY_CODE,CouponDataManager.getInstance().getDatas().get(i).currencyCode);
+            CouponListFragment c=CouponListFragment.newInstance(args);
+            if(null==mFragments){
+                mFragments=new ArrayList<>();
+            }
+            mFragments.add(i,c);
+        }
+        mPager.setAdapter(new CouponCurrencyDataAdapter(getSupportFragmentManager(),this,CouponDataManager.getInstance().getDatas()));
+        mTab.setTabTitleTextSize(14);
+        mTab.setTitleTextColor(Color.BLACK, Color.GRAY);
+        mTab.setSelectedIndicatorColors(Color.alpha(0));
+        KLog.i("size = ",CouponDataManager.getInstance().getDatas().size()+"");
+        if(CouponDataManager.getInstance().getDatas().size()<4){
+            mTab.setDistributeEvenly(true);
+        }
+        mTab.setViewPager(mPager);
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_right})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_right:
+                toActivity(CouponExchangeActivity.class);
+                break;
+        }
+    }
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if(event.getType()==BusEvent.GET_COUPON_CURRENCY_LIST_SUCCESS){
+            setData();
+        }
+    }
+}
+

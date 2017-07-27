@@ -1,0 +1,24 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+public class AddressSearchActivity extends BaseActivity {
+
+    private View mRootView;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_address_search, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+}

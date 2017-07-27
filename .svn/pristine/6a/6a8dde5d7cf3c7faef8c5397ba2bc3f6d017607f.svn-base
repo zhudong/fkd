@@ -1,0 +1,91 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpMeSingleBean;
+import com.fuexpress.kr.ui.view.imageselector.imsbean.Image;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 帮我收货的外部预览Adapter
+ */
+public class AdapterForHsSmall extends BaseAdapter {
+
+
+    private Context mContext;
+    private List<HelpMeSingleBean> mProductDataLists;
+    private final LayoutInflater mLayoutInflater;
+
+    public AdapterForHsSmall(Context context, List<HelpMeSingleBean> productDataLists) {
+        mContext = checkNotNull(context, "Context Not Null!");
+        mProductDataLists = checkNotNull(productDataLists, "Data Not Null!");
+        mLayoutInflater = LayoutInflater.from(mContext);
+    }
+
+
+    @Override
+    public int getCount() {
+        return mProductDataLists == null ? 0 : mProductDataLists.size() == 0 ? 1 : mProductDataLists.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mProductDataLists == null ? null : mProductDataLists.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return mProductDataLists == null ? 0 : position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (mProductDataLists.size() < 1) {
+            convertView = mLayoutInflater.inflate(R.layout.item_hs_empty, parent, false);
+        } else {
+            ViewHolder viewHolder;
+            if (convertView == null) {
+                viewHolder = new ViewHolder();
+                convertView = mLayoutInflater.inflate(R.layout.item_for_hs_small, parent, false);
+                viewHolder.iv_in_item_hs = (ImageView) convertView.findViewById(R.id.iv_in_item_hs);
+                viewHolder.tv_hs_item_title = (TextView) convertView.findViewById(R.id.tv_hs_item_title);
+                viewHolder.tv_hs_item_price = (TextView) convertView.findViewById(R.id.tv_hs_item_price);
+                viewHolder.tv_hs_item_qty = (TextView) convertView.findViewById(R.id.tv_hs_item_qty);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            HelpMeSingleBean productDataList = checkNotNull(mProductDataLists.get(position),
+                    "this position:" + position + " data is null");
+            Glide.with(mContext).load(productDataList.getImagePathLit().get(0)).into(viewHolder.iv_in_item_hs);
+            viewHolder.tv_hs_item_title.setText(productDataList.getDesc());
+            viewHolder.tv_hs_item_price.setText(productDataList.getPrice());
+            viewHolder.tv_hs_item_qty.setText(productDataList.getItemNum());
+
+        }
+        return convertView;
+    }
+
+
+    static class ViewHolder {
+        ImageView iv_in_item_hs;
+        TextView tv_hs_item_title;
+        TextView tv_hs_item_price;
+        TextView tv_hs_item_qty;
+    }
+}

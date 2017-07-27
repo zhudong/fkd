@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:layout_width="wrap_content"
+        android:id="@+id/title_in_merbusiness"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_in_merchant_bussiness_localtion"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@mipmap/location_pin_new"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="地址地址地址地址地址"
+            />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/default_bg"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_in_merchant_bussiness_tel"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@mipmap/tel"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="电话电话电话"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_in_merchant_bussiness_desc_01"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_in_merchant_bussiness_desc_02"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_in_merchant_bussiness_main_bussiness"
+                style="@style/system_Mytextsize_black_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/merchant_business_main_title"/>
+
+            <TextView
+                android:id="@+id/tv_in_merchant_bussiness_main_bussiness_detail"
+                style="@style/system_Mytextsize_gray_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_in_merchant_bussiness_main_bussiness"
+                android:text="配饰"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            style="@style/system_Mytextsize_black_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/merchant_business_shoptime_title"/>
+
+        <LinearLayout
+            android:id="@+id/ll_in_merchant_business_shop_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_in_merchant_detail_info_is_working"
+            style="@style/system_Mytextsize_black_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

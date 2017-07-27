@@ -1,0 +1,551 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CartListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+
+import fksproto.CsCard;
+
+/**
+ * Created by Administrator on 2016/5/5.
+ */
+public class ShopCartForCardActivity extends BaseActivity {
+
+    private View rootView;
+
+    private TextView returnTv;
+//    private ListView cardListView;
+    private ScrollView contentSv;
+    private LinearLayout contentLayout;
+    private LinearLayout emptyLayout;
+    private LinearLayout TOULayout;
+    private LinearLayout listViewLayout;
+    private CheckBox allSelectedCb;
+    private TextView grandTotalTv;
+    private Button accounttBtn;
+
+
+    private CartListView listView;
+    private boolean isAllChecked = true;
+    private boolean isChecked = true;
+    private Map<Integer, Boolean> checkedMap = new HashMap<Integer, Boolean>();;
+    private List<CsCard.GiftItem> list;
+//    private CardAdapter cardAdapter;
+    private long grandTotal;
+    private long grandTotal2;
+//    private CsCard.GetGiftCardAlongCartResponse response;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_shop_cart_for_card, null);
+        TitleBarView titleBarView = (TitleBarView) rootView.findViewById(R.id.shop_cart_titlebar);
+        titleBarView.setTitleText(getString(R.string.gift_card_title_bar_title));
+        returnTv = titleBarView.getTv_in_title_left();
+        returnTv.setSingleLine(true);
+        returnTv.setMaxEms(5);
+        returnTv.setEllipsize(TextUtils.TruncateAt.END);
+        returnTv.setText(getString(R.string.String_buy_value_card));
+
+//        cardListView = (ListView) rootView.findViewById(R.id.card_cart_list_view);
+        contentSv = (ScrollView) rootView.findViewById(R.id.card_cart_content_sv);
+        contentLayout = (LinearLayout) rootView.findViewById(R.id.card_cart_content_layout);
+        emptyLayout = (LinearLayout) rootView.findViewById(R.id.card_cart_empty_layout);
+        TOULayout = (LinearLayout) rootView.findViewById(R.id.card_cart_TOU_layout);
+        listViewLayout = (LinearLayout) rootView.findViewById(R.id.card_cart_list_layout);
+        grandTotalTv = (TextView) rootView.findViewById(R.id.card_cart_grandtotal_tv);
+        accounttBtn = (Button) rootView.findViewById(R.id.card_cart_account_btn);
+        listView = new CartListView(this);
+        listViewLayout.addView(listView);
+
+        allSelectedCb = (CheckBox) rootView.findViewById(R.id.card_cart_all_select_cb);
+//        allSelectedCb.setChecked(true);
+        contentSv.scrollTo(0, 0);
+
+        TOULayout.setOnClickListener(this);
+        accounttBtn.setOnClickListener(this);
+        returnTv.setOnClickListener(this);
+        allSelectedCb.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        getGiftCardAlongCart(true, false);
+    }
+
+//    public void getGiftCardAlongCart(final boolean isChecked, final boolean isAllClick){
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                showLoading(5000);
+//
+//            }
+//        });
+//        CsCard.GetGiftCardAlongCartRequest.Builder builder = CsCard.GetGiftCardAlongCartRequest.newBuilder();
+//        NetEngine.postRequest(builder, new INetEngineListener<CsCard.GetGiftCardAlongCartResponse>() {
+//
+//            @Override
+//            public void onSuccess(CsCard.GetGiftCardAlongCartResponse response) {
+//                LogUtils.d(response.toString());
+//                if (!isAllClick) {
+//                    grandTotal = response.getGiftcardcart().getGrandTotal();
+//                }
+////                grandTotal2 = response.getGiftcardcart().getGrandTotal();
+//
+//                Message msg = Message.obtain();
+//                msg.obj = response;
+//                Bundle bundle = new Bundle();
+//                bundle.putBoolean("isChecked", isChecked);
+//                msg.setData(bundle);
+//                mHandler.sendMessage(msg);
+//            }
+//
+//            @Override
+//            public void onFailure(int ret, String errMsg) {
+//                closeLoading();
+//            }
+//        });
+//    }
+//
+//    private Handler mHandler = new Handler() {
+//        @Override
+//        public void dispatchMessage(Message msg) {
+//            response = (CsCard.GetGiftCardAlongCartResponse) msg.obj;
+//            Bundle  bundle    = msg.getData();
+//            boolean isChecked = bundle.getBoolean("isChecked");
+//            if (response.getGiftcardcart().getGiftitemCount() > 0) {
+//                String totalStr = getResources().getString(R.string.String_order_price);
+////                totalStr = String.format(totalStr, (float) response.getGiftcardcart().getGrandTotal());
+//                if (isChecked) {
+//                    grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, response.getGiftcardcart().getGrandTotal()));
+//                }
+//                emptyLayout.setVisibility(View.GONE);
+//                contentLayout.setVisibility(View.VISIBLE);
+//                cardAdapter = new CardAdapter(response, isChecked);
+//                listView.setAdapter(cardAdapter);
+//                setListViewHeightBasedOnChildren(listView);
+//            } else {
+//                emptyLayout.setVisibility(View.VISIBLE);
+//                contentLayout.setVisibility(View.GONE);
+//            }
+//            closeLoading();
+//        }
+//    };
+
+
+//    public String createTotalStr(float grandTotal){
+//        if(UIUtils.getCurrency(this).equals("₩")){
+//            return UIUtils.getCurrency(this) + new DecimalFormat("").format(grandTotal);
+//        }
+//        return UIUtils.getCurrency(this) + new DecimalFormat(".00").format(grandTotal);
+//    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_in_title_left:
+                finish();
+                break;
+            case R.id.card_cart_all_select_cb:
+                isAllChecked = allSelectedCb.isChecked();
+                allSelectedCb.setChecked(allSelectedCb.isChecked());
+                changeItemCheked(isAllChecked);
+                break;
+            case R.id.card_cart_account_btn:
+                Intent intent = new Intent();
+//                intent.setClass(this, CardCartOderActivity.class);
+                Bundle bundle = new Bundle();
+//                bundle.putSerializable("cardResponse", response);
+                bundle.putSerializable("cardList", (Serializable) getList());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+            case R.id.card_cart_TOU_layout:
+//                Intent TOUIntent = new Intent(this, CardTOUActivity.class);
+//                startActivity(TOUIntent);
+                break;
+        }
+    }
+
+//    private void toActivity(Class target, boolean certificate) {
+//
+//        if (certificate && !AccountManager.getInstance().isLogin) {
+//            //需要登录，并且没有登录
+//            toActivity(LoginActivity.class, false);
+//        } else {
+//            Intent intent = new Intent();
+//            intent.setClass(this, target);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("cardResponse", response);
+//            bundle.putSerializable("cardList", (Serializable) getList());
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//        }
+//
+//    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+//    class CardAdapter extends BaseAdapter {
+//        CsCard.GetGiftCardAlongCartResponse response;
+//        private ImageLoader imageLoader;
+//        private DisplayImageOptions options;
+//        private boolean             mIsChecked;
+//        private Map<Integer, Integer> numberMap = new HashMap<Integer, Integer>();
+//        private final int[] GIFT_CARD_RESOURCES = {R.mipmap.small_card1, R.mipmap.small_card2, R.mipmap.small_card3};
+//
+//        public CardAdapter(CsCard.GetGiftCardAlongCartResponse response, boolean isChecked) {
+//            checkedMap = new HashMap<Integer, Boolean>();
+//            this.response = response;
+//            this.mIsChecked = isChecked;
+//            grandTotal2 = 0;
+//            list = response.getGiftcardcart().getGiftitemList();
+//            this.options = ImageLoaderHelper.getInstance(ShopCartForCardActivity.this).getDisplayOptions();
+//            this.imageLoader = ImageLoader.getInstance();
+//            initChecked();
+//        }
+//
+//        public void initChecked() {
+//
+//            for (int i = 0; i < list.size(); i++) {
+//                numberMap.put(i, (int)list.get(i).getQty());
+//                String c = list.get(i).getChecked();
+//                grandTotal2 += list.get(i).getAmount() * list.get(i).getQty();
+//                if (TextUtils.equals(c, "0")) {
+//                    checkedMap.put(i, false);
+//                } else {
+//                    checkedMap.put(i, true);
+//                }
+//            }
+//            changeAllSelectChecked(checkedMap);
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return list != null ? list.size() : 0;
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return list.get(position);
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(final int position, View convertView, ViewGroup parent) {
+//            ViewHolder holder = null;
+//            if (convertView == null) {
+//                convertView = LayoutInflater.from(ShopCartForCardActivity.this).inflate(R.layout.cart_card_item, null);
+//                holder = new ViewHolder();
+//                holder.selectCb = (CheckBox) convertView.findViewById(R.id.card_item_select_cb);
+//                holder.emailTemplateIv = (ImageView) convertView.findViewById(R.id.card_item_img_iv);
+//                holder.priceTv = (TextView) convertView.findViewById(R.id.card_item_price_tv);
+//                holder.addresseeNameTv = (TextView) convertView.findViewById(R.id.card_item_addressee_name_tv);
+//                holder.addresseeMailTv = (TextView) convertView.findViewById(R.id.card_item_mail_tv);
+//                holder.messageTv = (TextView) convertView.findViewById(R.id.card_item_message_tv);
+//                holder.deleteIv = (ImageView) convertView.findViewById(R.id.card_item_delete_iv);
+//                holder.numberCounter = (NumberCounter2) convertView.findViewById(R.id.card_item_numbercount);
+//                convertView.setTag(holder);
+//            } else {
+//                holder = (ViewHolder) convertView.getTag();
+//            }
+//
+//            final CsCard.GiftItem giftItem = list.get(position);
+//            holder.selectCb.setChecked(checkedMap.get(position));
+//            final ViewHolder finalHolder = holder;
+//
+//            holder.selectCb.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    isChecked = finalHolder.selectCb.isChecked();
+//                    checkedMap.put(position, isChecked);
+//                    if (isChecked) {
+//                        grandTotal = grandTotal + giftItem.getAmount() * finalHolder.numberCounter.getCurrentNumber();
+//                    } else {
+//                        grandTotal = grandTotal - giftItem.getAmount() * finalHolder.numberCounter.getCurrentNumber();
+//                    }
+//                    if (grandTotal <= 0) {
+//                        grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, 0.00f));
+//                    } else {
+//                        String str = getResources().getString(R.string.recharge_order_detail_price);
+//                        str = String.format(str, (float) grandTotal);
+//                        grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, grandTotal));
+//                    }
+//
+//                    changeAllSelectChecked(checkedMap);
+//                }
+//            });
+//
+//            holder.selectCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                }
+//            });
+//            switch (giftItem.getEmailTemplate()){
+//                case "17":
+//                    holder.emailTemplateIv.setImageResource(GIFT_CARD_RESOURCES[0]);
+//                    break;
+//                case "18":
+//                    holder.emailTemplateIv.setImageResource(GIFT_CARD_RESOURCES[1]);
+//                    break;
+//                case "19":
+//                    holder.emailTemplateIv.setImageResource(GIFT_CARD_RESOURCES[2]);
+//                    break;
+//            }
+//            String price = getResources().getString(R.string.gift_card_item_price);
+////            price = String.format(price, giftItem.getAmount());
+//            holder.priceTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this) + giftItem.getAmount());
+//            holder.addresseeNameTv.setText(giftItem.getRecipientName());
+//            holder.addresseeMailTv.setText(giftItem.getRecipientEmail());
+//            holder.messageTv.setText(giftItem.getMessage());
+//            holder.deleteIv.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    final CustomDialog.Builder builder = new CustomDialog.Builder(ShopCartForCardActivity.this);
+//                    builder.setMessage(getString(R.string.gift_card_order_dialog_msg));
+//                    builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            checkedMap.remove(position);
+//                            deleteGiftCardCartNumber(giftItem.getGiftCardCartItemId());
+//                            grandTotal = grandTotal - giftItem.getAmount() * finalHolder.numberCounter.getCurrentNumber();
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    builder.create().show();
+//                }
+//            });
+//            holder.numberCounter.init(1, 9);
+//            holder.numberCounter.setNumber(numberMap.get(position));
+//            final ViewHolder finalHolder1 = holder;
+//            holder.numberCounter.setOnCounterClickListener(new NumberCounter2.OnCounterClickListener() {
+//                @Override
+//                public void onPlusClick(NumberCounter2 view) {
+//                    if (!finalHolder1.selectCb.isChecked()) {
+//                        return;
+//                    }
+//                    numberMap.put(position, view.getCurrentNumber());
+//                    ModifyGiftCardCartNumber(giftItem.getGiftCardCartItemId(), view.getCurrentNumber());
+//                    grandTotal = grandTotal + giftItem.getAmount();
+//                    grandTotal2 = grandTotal2 + giftItem.getAmount();
+//                    ;
+//                    grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, (float) grandTotal));
+//                }
+//
+//                @Override
+//                public void onMinusClick(NumberCounter2 view) {
+////                    if (view.getCurrentNumber() >= 1) {
+//                    if (!finalHolder1.selectCb.isChecked()) {
+//                        return;
+//                    }
+//                    numberMap.put(position, view.getCurrentNumber());
+//                    LogUtils.d("--------currentNumber " + view.getCurrentNumber());
+//                    ModifyGiftCardCartNumber(giftItem.getGiftCardCartItemId(), view.getCurrentNumber());
+//                    grandTotal = grandTotal - giftItem.getAmount();
+//                    grandTotal2 = grandTotal2 - giftItem.getAmount();
+//                    ;
+//                    grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, (float)grandTotal));
+////                    }
+//                }
+//            });
+//            return convertView;
+//        }
+//
+//        class ViewHolder{
+//            CheckBox selectCb;
+//            ImageView emailTemplateIv;
+//            TextView priceTv;
+//            TextView addresseeNameTv;
+//            TextView addresseeMailTv;
+//            TextView messageTv;
+//            ImageView deleteIv;
+//            NumberCounter2 numberCounter;
+//        }
+//    }
+//
+//    /**
+//     * 删除充值卡购物车请求
+//     * @param giftCardCartItemId
+//     */
+//    public void deleteGiftCardCartNumber(long giftCardCartItemId){
+//        CsCard.DeleteGiftCardCartNumberRequest.Builder builder = CsCard.DeleteGiftCardCartNumberRequest.newBuilder();
+//        builder.setGiftCardCartItemId(giftCardCartItemId);
+//        NetEngine.postRequest(builder, new INetEngineListener<CsCard.DeleteGiftCardCartNumberResponse>() {
+//
+//            @Override
+//            public void onSuccess(CsCard.DeleteGiftCardCartNumberResponse response) {
+//                LogUtils.d(response.toString());
+//                getGiftCardAlongCart(true, false);
+//            }
+//
+//            @Override
+//            public void onFailure(int ret, String errMsg) {
+//
+//            }
+//        });
+//    }
+//
+//    /**
+//     * 修改充值卡购物车订单数量
+//     * @param giftCardCartItemId
+//     * @param number
+//     */
+//    public void ModifyGiftCardCartNumber(long giftCardCartItemId, int number){
+//        CsCard.ModifyGiftCardCartNumberRequest.Builder builder = CsCard.ModifyGiftCardCartNumberRequest.newBuilder();
+//        builder.setGiftCardCartItemId(giftCardCartItemId);
+//        builder.setNum(number);
+//        NetEngine.postRequest(builder, new INetEngineListener<CsCard.ModifyGiftCardCartNumberResponse>() {
+//
+//            @Override
+//            public void onSuccess(CsCard.ModifyGiftCardCartNumberResponse response) {
+//                LogUtils.d(response.toString());
+//            }
+//
+//            @Override
+//            public void onFailure(int ret, String errMsg) {
+//
+//            }
+//        });
+//    }
+
+
+
+    public List<CsCard.GiftItem> getList(){
+        List<CsCard.GiftItem> cardList = new ArrayList<CsCard.GiftItem>();
+        Iterator iter  = checkedMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            Integer key = (Integer) entry.getKey();
+            Boolean value = (Boolean) entry.getValue();
+            if (value) {
+                cardList.add(list.get(key));
+            }
+
+        }
+        return cardList;
+    }
+
+
+    public void changeItemCheked(boolean isChecked) {
+        for (int i = 0; i < list.size(); i++) {
+            checkedMap.put(i, isChecked);
+        }
+//        cardAdapter.notifyDataSetChanged();
+
+//            getGiftCardAlongCart(isChecked, true);
+        if (isChecked) {
+            grandTotal = grandTotal2;
+            String str = getResources().getString(R.string.recharge_order_detail_price);
+            str = String.format(str, (float) grandTotal);
+            grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, grandTotal));
+            accounttBtn.setEnabled(true);
+            accounttBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_red_btn_drawable));
+        } else {
+//            grandTotal = 0;
+//            grandTotal2 = 0;
+            grandTotalTv.setText(UIUtils.getCurrency(ShopCartForCardActivity.this, 0.00f));
+            accounttBtn.setEnabled(false);
+            accounttBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.shape_btn_bg_red_more_radius_unenable));
+        }
+    }
+
+    public void changeAllSelectChecked(Map<Integer, Boolean> checkedMap) {
+        int      count = 0;
+        int size = checkedMap.size();
+        Iterator iter  = checkedMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            Integer key = (Integer) entry.getKey();
+            Boolean value = (Boolean) entry.getValue();
+            if (value) {
+                count++;
+                accounttBtn.setEnabled(true);
+                accounttBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_red_btn_drawable));
+            } else {
+                size--;
+                allSelectedCb.setChecked(false);
+                isAllChecked = false;
+            }
+
+        }
+        LogUtils.d("---------------ShopCartForCard size " + size);
+        if (count == list.size()) {
+            allSelectedCb.setChecked(true);
+
+        }
+        if(size == 0) {
+            accounttBtn.setEnabled(false);
+            accounttBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.shape_btn_bg_red_more_radius_unenable));
+        }
+    }
+
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        if (listView == null) return;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.setMargins(0, 3, 0, 0);
+        listView.setLayoutParams(params);
+    }
+}

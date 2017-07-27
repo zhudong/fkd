@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_bg"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/friends_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zhudong:text="@string/friends_titlebar_msg" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        style="@style/layout_style"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friends_invite_msg"
+            android:textSize="13sp"
+            android:textColor="@color/black_0"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/friends_invite_success_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/black_0"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/friends_list_view"
+        android:layout_marginTop="10dp"
+        android:divider="@color/gary_e8e8"
+        android:dividerHeight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -1,0 +1,514 @@
+package com.fuexpress.kr.utils;
+
+import android.content.ContentResolver;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
+import android.widget.Toast;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.ui.view.CustomToast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+
+/**
+ * @创建者 ${user}
+ * @创时间 2016/6/15
+ * @描述
+ * @版本 $Rev:
+ * @更新者 $Author:
+ * @更新时间 $Date:
+ * @更新描述 TODO
+ */
+
+public class BitMapUtils {
+
+
+    /**
+     * 计算出采样率
+     */
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            if (width > height) {
+                inSampleSize = Math.round((float) height / (float) reqHeight);
+            } else {
+                inSampleSize = Math.round((float) width / (float) reqWidth);
+            }
+        }
+        return inSampleSize;
+    }
+
+
+    /**
+     * 对获得的采样率进行decode处理
+     */
+    public static Bitmap decodeSampledBitmapFromFile(String filename,
+                                                     int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filename, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(filename, options);
+    }
+
+
+    public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+
+    public static Bitmap getResizedBitmap(Bitmap image, int bitmapWidth,
+                                          int bitmapHeight) {
+        return Bitmap.createScaledBitmap(image, bitmapWidth, bitmapHeight,
+                true);
+    }
+
+    /*同步返回压缩完的图片*/
+
+    public static synchronized String zipPhoto(String fileName) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            CustomToast.makeText(SysApplication.getContext(), "请检查你的SD卡是否安装!", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        Bitmap bitmap1 = null;
+        File file = new File(fileName);
+        String name = file.getName();
+        //name += System.currentTimeMillis();
+        String[] split = name.split("\\.");
+        String newName = split[0] + AccountManager.getInstance().mUin + System.currentTimeMillis();
+        //        Bitmap bitmap = BitmapFactory.decodeFile(fileName);
+        //        bitmap1 = decodeBitMapWAndH(bitmap);
+        bitmap1 = efficientZoomBitMapByFile(file);
+        //        bitmap.recycle();
+
+        FileOutputStream outStream = null;
+        File outFile = new File(FileUtils.getCacheDir() + newName);
+        try {
+            outStream = new FileOutputStream(outFile);
+            bitmap1.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+            // 把数据写入文件
+            //            bitmap1.recycle();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                //关闭流
+                outStream.flush();
+                outStream.close();
+                return outFile.getAbsolutePath();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return outFile.getAbsolutePath();
+    }
+
+
+    /**
+     * 保存在sd卡中,同时也是把裁剪完的bitmap转换成File
+     */
+    public static void setPicToView(final Bitmap mBitmap, final String fileName, final String pathName) {
+
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            CustomToast.makeText(SysApplication.getContext(), "请检查你的SD卡是否安装!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FileOutputStream b = null;
+                File file = new File(FileUtils.getCacheDir() + fileName);
+                try {
+                    b = new FileOutputStream(file);
+                    mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+                    // 把数据写入文件
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        //关闭流
+                        b.flush();
+                        b.close();
+                        EventBus.getDefault().post(new BusEvent(BusEvent.IMAGE_FILE_READY, file, pathName));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 保存在sd卡中,同时也是把裁剪完的bitmap转换成File
+     */
+    public static void setPicToView(final Bitmap mBitmap, final String fileName) {
+
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            CustomToast.makeText(SysApplication.getContext(), "请检查你的SD卡是否安装!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FileOutputStream b = null;
+                File file = new File(FileUtils.getCacheDir() + fileName);
+                try {
+                    b = new FileOutputStream(file);
+                    mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+                    // 把数据写入文件
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        //关闭流
+                        b.flush();
+                        b.close();
+                        EventBus.getDefault().post(new BusEvent(BusEvent.IMAGE_FILE_READY, file));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    // 缩放图片
+    public static Bitmap zoomImg(Uri uri, Context context) {
+        ContentResolver contentResolver = context.getContentResolver();
+        Bitmap bitmap1 = null;
+        try {
+            Bitmap bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri));
+            bitmap1 = decodeBitMapWAndH(bitmap);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (bitmap1 != null) {
+            return bitmap1;
+        }
+        return null;
+    }
+
+//    private void zoomThisImagMethod(String temp, Context context) {
+//        //String path = temp.getPath();
+//        Bitmap bitmap = BitMapUtils.zoomImg(temp, context);
+//        BitMapUtils.setPicToView(bitmap, "addItemPhoto" + AccountManager.getInstance().mUin + System.currentTimeMillis());
+//    }
+
+    public static Bitmap zoomImg(String pathName, Context context) {
+        ContentResolver contentResolver = context.getContentResolver();
+        Bitmap bitmap1 = null;
+        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
+        bitmap1 = decodeBitMapWAndH(bitmap);
+        if (bitmap1 != null) {
+            return bitmap1;
+        }
+        return null;
+    }
+
+    public static void zoomImg(final List<String> pathList) {
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (String pathName : pathList) {
+                    //Bitmap bitmap1 = null;
+                    File file = new File(pathName);
+                    Bitmap bitmap = efficientZoomBitMapByFile(file);
+                    String name = file.getName();
+                    String[] split = name.split("\\.");
+                    String newName = split[0] + AccountManager.getInstance().mUin + System.currentTimeMillis();
+                    //Bitmap bitmap = BitmapFactory.decodeFile(pathName);
+                    //bitmap1 = decodeBitMapWAndH(bitmap);
+                    setPicToView(bitmap, name);
+                }
+            }
+        }) {
+        }.start();*/
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (String pathName : pathList) {
+                    //Bitmap bitmap1 = null;
+                    File file = new File(pathName);
+                    Bitmap bitmap = efficientZoomBitMapByFile(file);
+                    String name = file.getName();
+                    String[] split = name.split("\\.");
+                    String newName = split[0] + AccountManager.getInstance().mUin + System.currentTimeMillis();
+                    //Bitmap bitmap = BitmapFactory.decodeFile(pathName);
+                    //bitmap1 = decodeBitMapWAndH(bitmap);
+                    setPicToView(bitmap, newName, pathName);
+                }
+            }
+        }) {
+        }.start();
+
+        //return null;
+    }
+
+
+    public static Bitmap decodeBitMapWAndH(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = width;
+        int newHeight = height;
+        if (width >= 1000 || height >= 1000) {
+            if (width >= 2000 || height >= 2000) {
+                if (width >= 4800 || height >= 4800) {
+                    newWidth = width / 8;
+                    newHeight = width / 8;
+                } else {
+
+                    newWidth = width / 4;
+                    newHeight = height / 4;
+                }
+            } else {
+                newWidth = width / 2;
+                newHeight = height / 2;
+            }
+        }
+        if (null != bitmap) {
+            return zoomImg(bitmap, newWidth, newHeight);
+        }
+        return null;
+    }
+
+
+    // 缩放图片
+    public static Bitmap zoomImg(String img) {
+        // 图片源
+        Bitmap bm = BitmapFactory.decodeFile(img);
+        //Bitmap bitmap = BitmapFactory.decodeStream();
+        Bitmap bitmap = decodeBitMapWAndH(bm);
+        if (bitmap != null) {
+            return bitmap;
+        }
+        return null;
+    }
+
+
+    // 缩放图片
+    public static Bitmap zoomImg(String img, int newWidth, int newHeight) {
+        // 图片源
+        Bitmap bm = BitmapFactory.decodeFile(img);
+        if (null != bm) {
+            return zoomImg(bm, newWidth, newHeight);
+        }
+        return null;
+    }
+
+    // 缩放图片
+    public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
+        // 获得图片的宽高
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return newbm;
+    }
+
+
+    public static Bitmap efficientZoomBitMapByFile(File file) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file.getPath(), options);
+        int sourceBitMapWidth = options.outWidth;
+        int sourceBitMapHeight = options.outHeight;
+        if (sourceBitMapWidth >= 1000 || sourceBitMapHeight >= 1000) {
+            if (sourceBitMapWidth >= 2000 || sourceBitMapHeight >= 2000) {
+                if (sourceBitMapWidth >= 4800 || sourceBitMapHeight >= 4800) {
+                    options.inSampleSize = 8;
+                } else {
+                    options.inSampleSize = 4;
+                }
+            } else {
+                options.inSampleSize = 2;
+            }
+        } else {
+            options.inSampleSize = 1;
+        }
+        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
+        //BitmapFactory.decodeFile
+        int bitmapDegree = getBitmapDegree(file.getPath());
+        if (bitmapDegree >= 90) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(bitmapDegree);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        }
+        return bitmap;
+    }
+
+
+    /**
+     * 获取原始图片的角度（解决三星手机拍照后图片是横着的问题）
+     *
+     * @param path 图片的绝对路径
+     * @return 原始图片的角度
+     */
+    public static int getBitmapDegree(String path) {
+        int degree = 0;
+        try {
+            // 从指定路径下读取图片，并获取其EXIF信息
+            ExifInterface exifInterface = new ExifInterface(path);
+            // 获取图片的旋转信息
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            LogUtils.e("角度是：", "orientation" + orientation);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
+
+    public static Bitmap efficientZoomBitMapByPath(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+        int sourceBitMapWidth = options.outWidth;
+        int sourceBitMapHeight = options.outHeight;
+        if (sourceBitMapWidth >= 1000 || sourceBitMapHeight >= 1000) {
+            if (sourceBitMapWidth >= 2000 || sourceBitMapHeight >= 2000) {
+                if (sourceBitMapWidth >= 4800 || sourceBitMapHeight >= 4800) {
+                    options.inSampleSize = 8;
+                } else {
+                    options.inSampleSize = 4;
+                }
+            } else {
+                options.inSampleSize = 2;
+            }
+        } else {
+            options.inSampleSize = 1;
+        }
+        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+        //BitmapFactory.decodeFile
+        int bitmapDegree = getBitmapDegree(path);
+        if (bitmapDegree >= 90) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(bitmapDegree);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        }
+        return bitmap;
+    }
+
+
+
+    public static File saveImage(Bitmap bitmap) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            CustomToast.makeText(SysApplication.getContext(), "请检查你的SD卡是否安装!", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        FileOutputStream b = null;
+        File file = new File(FileUtils.getCacheDir() + AccountManager.getInstance().mUin + System.currentTimeMillis() + ".JPG");
+        try {
+            b = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+            // 把数据写入文件
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                //关闭流
+                b.flush();
+                b.close();
+                //EventBus.getDefault().post(new BusEvent(BusEvent.IMAGE_FILE_READY, file));
+                return file;
+            } catch (IOException e) {
+                e.printStackTrace();
+                LogUtils.e("return了null");
+                return null;
+            }
+        }
+    }
+
+    public static File saveImage(Bitmap bitmap, boolean isAddCropTag) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            CustomToast.makeText(SysApplication.getContext(), "请检查你的SD卡是否安装!", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        FileOutputStream b = null;
+        File file;
+        if (isAddCropTag)
+            file = new File(FileUtils.getCacheDir() + AccountManager.getInstance().mUin + System.currentTimeMillis() + "|isCroppedTag.jpg");
+        else
+            file = new File(FileUtils.getCacheDir() + AccountManager.getInstance().mUin + System.currentTimeMillis() + ".jpg");
+        try {
+            b = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+            // 把数据写入文件
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                //关闭流
+                b.flush();
+                b.close();
+                //EventBus.getDefault().post(new BusEvent(BusEvent.IMAGE_FILE_READY, file));
+                return file;
+            } catch (IOException e) {
+                e.printStackTrace();
+                LogUtils.e("return了null");
+                return null;
+            }
+        }
+    }
+
+}

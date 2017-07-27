@@ -1,0 +1,118 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//用户地址
+message CustomerAddress
+{
+	optional int32  address_id = 1;//用户地址ID
+	optional string name       = 2;//姓名
+	optional string region     = 3;//地区编码
+	optional string street     = 4;//街道
+	optional string postcode   = 5;//邮编
+	optional string phone      = 6;//手机
+	optional string company    = 7;//公司名
+	optional string id_card    = 8;//身份证
+	optional bool   is_default = 9;//是否默认地址
+	optional string idcardfrontimage    = 10;//身份证正面
+	optional string idcardbackimage     = 11;//身份证反面
+	optional string country_code        = 12;//国家编码
+	optional int32  region_id           = 13;//地区id
+	optional string full_region_name    = 14;//
+	optional bool   is_default_bill     = 15;//是否默认账单地址
+	optional string fax                 = 16;//传真
+}
+
+message RegionCityInfo{
+	optional string  regionId    =  1;//城市ID
+	optional string  regionName  =  2;//地区城市名称
+}
+
+message RegionInfo{
+	optional string          RegionFirstLetter  = 1;//地区首字母("A-Z")
+	repeated RegionCityInfo  regionCityInfoList = 2;//城市具体信息
+}
+
+message CountryRegionInfo
+{
+	optional string      countryCode       = 1;//国家编码
+	optional string      countryName       = 2;//国家名称
+	repeated RegionInfo  regionInfoList    = 3;//地区信息列表
+}
+
+//添加用户地址请求
+message AddCustomerAddressRequest
+{
+	required BaseRequest     head     = 1;
+	required CustomerAddress address  = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//添加用户地址应答
+message AddCustomerAddressResponse
+{
+	required BaseResponse head       = 1;
+	optional int32        address_id = 2;
+}
+
+//编辑用户地址请求
+message EditCustomerAddressRequest
+{
+	required BaseRequest     head     = 1;
+	required CustomerAddress address  = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//编辑用户地址应答
+message EditCustomerAddressResponse
+{
+	required BaseResponse head = 1;
+}
+
+//删除用户地址请求
+message DelCustomerAddressRequest
+{
+	required BaseRequest head         = 1;
+	required int32       address_id   = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//删除用户地址应答
+message DelCustomerAddressResponse
+{
+	required BaseResponse head = 1;
+}
+
+//用户地址列表请求
+message GetCustomerAddressListRequest
+{
+	required BaseRequest     head     = 1;
+	optional BaseUserRequest baseuser = 3;
+	optional int32           pageNum  = 4;
+	optional string          key      = 5;
+}
+
+//用户地址列表应答
+message GetCustomerAddressListResponse
+{
+	required BaseResponse    head      = 1;
+	repeated CustomerAddress addresses = 2;
+	optional bool            more      = 3;
+}
+
+
+//仓库切换城市列表请求
+message GetWarehouseRegionRequest
+{
+	required BaseRequest     head       = 1;
+	optional BaseUserRequest baseuser   = 2;
+	optional string          localeCode = 3;
+}
+
+//仓库切换城市列表应答
+message GetWarehouseRegionResponse
+{
+	required BaseResponse      head              = 1;
+	repeated CountryRegionInfo countryRegionList = 2;
+}

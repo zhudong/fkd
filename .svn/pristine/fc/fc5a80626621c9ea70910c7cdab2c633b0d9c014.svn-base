@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <!--android:elevation="10dp"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.fuexpress.kr.ui.view.TitleBarView
+            android:id="@+id/adyen_titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/merchant_logo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top"
+            android:background="@color/blue_3A79BF"
+            android:fillViewport="true"
+            android:gravity="center|center_vertical"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/merchantLogoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <TextView
+                android:id="@+id/payment_form_title"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/adyen_save_and_update_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/adyen_save_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/adyen_saved_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/adyen_saved_btn_msg"
+                    android:textColor="@color/blue_3A79BF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/adyen_saved_line_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/blue_0054B1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/adyen_update_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/adyen_update_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/adyen_update_btn_msg"
+                    android:textColor="@color/gray_999"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/adyen_update_line_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray_B5B5B5" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/payment_form_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <adyen.com.adyenuisdk.customcomponents.AdyenEditText
+                    android:id="@+id/cardholdername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/ady_cardholder2"
+                    android:hint="Card holder name"
+                    android:lines="1"
+                    android:textColorHint="#979797"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <com.fuexpress.kr.ui.view.CreditCardForm
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--<adyen.com.adyenuisdk.CreditCardForm-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <CheckedTextView
+                android:id="@+id/save_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+                android:gravity="center"
+                android:text="@string/adyen_save_info_msg"
+                android:textAlignment="gravity" />
+
+            <RelativeLayout
+                android:id="@+id/pay_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/pay_button">
+
+                <TextView
+                    android:id="@+id/credit_card_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="Pay"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</ScrollView>

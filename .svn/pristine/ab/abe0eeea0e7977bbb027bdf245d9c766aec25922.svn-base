@@ -1,0 +1,117 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.adapter.AdapterForHsSmall;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 预览界面的Fragment
+ */
+public class HSPreviewFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.HSPreView, AdapterView.OnItemClickListener {
+
+    @BindView(R.id.tl_in_help_get_package)
+    TitleBarView mTlInHelpGetPackage;
+    @BindView(R.id.btn_add_demand)
+    Button mBtnAddDemand;
+    @BindView(R.id.lv_hs_preview)
+    ListView mLvHsPreview;
+    @BindView(R.id.tv_total)
+    TextView mTvTotal;
+    @BindView(R.id.tv_demand_submit)
+    TextView mTvDemandSubmit;
+    private View mRootView;
+
+    private HelpSignedContract.NewPresenter mPresenter;
+
+    private AdapterForHsSmall mAdapterForHsSmall;
+
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.hs_preview_fg_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        mTlInHelpGetPackage.getIv_in_title_back().setOnClickListener(this);
+        TextView title_back_tv = mTlInHelpGetPackage.getmTv_in_title_back_tv();
+        title_back_tv.setText(getString(R.string.main_home_tab_string));
+        title_back_tv.setOnClickListener(this);
+    }
+
+    @Override
+    public void refreshLiistViewShow() {
+        mAdapterForHsSmall.notifyDataSetChanged();
+        mTvTotal.setText(mPresenter.getProductDataList().size());
+    }
+
+    @Override
+    public void showLoadingView(int type, String text) {
+        mContext.showProgressDiaLog(type, text);
+    }
+
+    @Override
+    public void dissMissLoadingView(long delay) {
+        mContext.dissMissProgressDiaLog(delay);
+    }
+
+    @Override
+    public void transformationFragment() {
+        mContext.changeDetailFragmentShow();
+    }
+
+    @Override
+    public void setPresenter(@NonNull HelpSignedContract.NewPresenter presenter) {
+        mPresenter = checkNotNull(presenter, "Presenter is Not Null!");
+    }
+
+
+    @OnClick({R.id.btn_add_demand, R.id.tv_demand_submit})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_add_demand:
+                mPresenter.setItemOnclickPosition(mPresenter.getProductDataList().size());
+                transformationFragment();
+                break;
+            case R.id.tv_demand_submit:
+                //boolean isReady = mPresenter.checkItemParameter(mPresenter.getProductDataList());
+                //if (isReady)
+                mPresenter.submitItemToServer(mPresenter.getProductDataList());
+                break;
+            case R.id.tv_in_title_back_tv:
+            case R.id.iv_in_title_back:
+                mContext.finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mPresenter.setItemOnclickPosition(position);
+        transformationFragment();
+    }
+}

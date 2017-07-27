@@ -1,0 +1,75 @@
+package com.fuexpress.kr.ui.activity.package_detail;
+
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.google.protobuf.GeneratedMessage;
+
+import fksproto.CsParcel;
+
+/**
+ * Created by andy on 2016/12/23.
+ */
+public class OrderParcelUseCase {
+
+
+    /* message ShippingMethodIds
+     {
+         optional int32                   shippingmethodid = 1;
+     }
+
+     message ParcelNoticeShippingFeeRequest
+     {
+         required BaseRequest             head                = 1;
+         optional BaseUserRequest         second              = 2;
+         optional int32                   parcelid            = 3;//包裹id
+         optional int32                   shippingmethodidsnum= 4;//物流数量
+         repeated ShippingMethodIds       shippingmethodids   = 5;
+     }*/
+    public void selectShippingMethod() {
+        CsParcel.ParcelNoticeShippingFeeRequest.Builder builder = CsParcel.ParcelNoticeShippingFeeRequest.newBuilder();
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.ParcelNoticeShippingFeeResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.ParcelNoticeShippingFeeResponse response) {
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+
+    }
+
+    public void recharge() {
+        CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder builder = CsParcel.PayDoDirectGiftCardAppSingleRequest.newBuilder();
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayDoDirectGiftCardAppSingleResponse>() {
+            @Override
+            public void onSuccess(CsParcel.PayDoDirectGiftCardAppSingleResponse response) {
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+
+    public void submitParcelNotice() {
+        CsParcel.SubmitParcelNoticeRequest.Builder builder = CsParcel.SubmitParcelNoticeRequest.newBuilder();
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SubmitParcelNoticeResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.SubmitParcelNoticeResponse response) {
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+}

@@ -1,0 +1,104 @@
+package com.fuexpress.kr.ui.activity.login_register;
+
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.ui.activity.ChooseCountryActivity;
+import com.fuexpress.kr.utils.CountryNumberUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class RegisterByPhoneActivity extends BaseActivity {
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.tv_for_login_in_rl_01)
+    TextView mTvForLoginInRl01;
+    @BindView(R.id.tv_for_login_location)
+    TextView mTvForLoginLocation;
+    @BindView(R.id.rl_for_login_choose_location)
+    RelativeLayout mRlForLoginChooseLocation;
+    @BindView(R.id.tv_for_login_in_rl_02)
+    TextView mTvForLoginInRl02;
+    @BindView(R.id.ed_for_login_phone_number)
+    EditText mEdForLoginPhoneNumber;
+    @BindView(R.id.tv_for_login_in_rl_03)
+    TextView mTvForLoginInRl03;
+    @BindView(R.id.getCodeBtn)
+    Button mGetCodeBtn;
+    @BindView(R.id.ed_for_code)
+    EditText mEdForCode;
+    @BindView(R.id.ed_for_login_pwd)
+    EditText mEdForLoginPwd;
+    @BindView(R.id.logoutButton)
+    Button mLogoutButton;
+
+    private boolean isGetCode=false;
+    private String mcode,phoneStr,passwordStr;
+
+    @Override
+    public View setInitView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_register_phone, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleTvCenter.setText(getString(R.string.phone_login));
+        mTitleTvLeft.setText(getString(R.string.cancel));
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvRight.setText(getString(R.string.login));
+        mTitleTvRight.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick({R.id.title_tv_left, R.id.title_tv_right, R.id.rl_for_login_choose_location, R.id.getCodeBtn, R.id.logoutButton})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_right:
+                toActivity(LoginByPhoneActivity.class);
+                break;
+            case R.id.rl_for_login_choose_location:
+                toActivity(ChooseCountryActivity.class);
+                break;
+            case R.id.getCodeBtn:
+                phoneStr=mEdForLoginPhoneNumber.getText().toString();
+                if(TextUtils.isEmpty(phoneStr)|| CountryNumberUtils.isNumberCurrect(AccountManager.getInstance().userNumber,phoneStr)){
+                    mViewUtils.toast(getString(R.string.String_phone_error));
+                    return;
+                }else {
+                    isGetCode=true;
+                }
+                break;
+            case R.id.logoutButton:
+                register();
+                break;
+        }
+    }
+    private void register(){
+
+    }
+}

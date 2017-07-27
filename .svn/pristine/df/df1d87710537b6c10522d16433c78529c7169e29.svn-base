@@ -1,0 +1,18 @@
+package com.fuexpress.kr.ui.activity.order_show;
+
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+public class OrderShowActivity extends BaseActivity {
+
+
+    private View rootView;
+
+    @Override
+    public View setInitView() {
+        rootView = View.inflate(this, R.layout.activity_order_show, null);
+        return rootView;
+    }
+}

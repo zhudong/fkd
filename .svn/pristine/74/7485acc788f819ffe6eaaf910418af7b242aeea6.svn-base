@@ -1,0 +1,85 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/12/9.
+ * 帮我收的远程数据源(从网络上获取)
+ * 在这里的需求中,主要还是获取仓库列表的
+ * 因为pb的数据源定义位置不一样,所以这里我们就只能实现网络接口来获取对应的数据
+ * 本地源接口无视即可
+ * 因为不涉及到增删改仓库数据,这里我们就不需要实现其它增删改数据的接口
+ */
+public class HelpSignedRemoteDataSource implements HelpSignedDataSource {
+
+    @Nullable
+    private List<CsBase.Warehouse> mWarehouseList;
+
+
+    private static HelpSignedRemoteDataSource INSTANCE;
+
+
+    private HelpSignedRemoteDataSource() {
+
+    }
+
+
+    public static HelpSignedRemoteDataSource getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new HelpSignedRemoteDataSource();
+        return INSTANCE;
+    }
+
+
+    @Override
+    public List<CsParcel.ProductDataList> getHelpSignedDataList() {
+        return null;
+    }
+
+    @Override
+    public CsParcel.ProductDataList getHelpSignedDataOnly(int index) {
+        return null;
+    }
+
+    @Override
+    public void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData) {
+
+    }
+
+    @Override
+    public boolean deleteHelpSignedData(int index) {
+        return false;
+    }
+
+    @Override
+    public void deletAllHelpSignedData() {
+
+    }
+
+    @Override
+    public void refreshHelpSignedData() {
+
+    }
+
+    @Override
+    public void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData) {
+
+    }
+
+   /* @Override
+    public List<CsBase.Warehouse> getWareHouseDataList() {
+        if (mWarehouseList == null)
+            mWarehouseList = new ArrayList<>();
+
+
+
+        return null;
+    }*/
+}

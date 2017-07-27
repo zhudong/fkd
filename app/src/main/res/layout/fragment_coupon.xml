@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/default_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/noLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/infoIv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="60dp"
+            android:src="@mipmap/coupon_none" />
+
+        <TextView
+            android:id="@+id/infoTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/coupon_none_msg"
+            android:textColor="#666666"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/coupon_listview"
+        android:layout_width="match_parent"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:fadeScrollbars="false"
+        android:scrollbars="none"
+        android:layout_height="wrap_content" />
+</LinearLayout>

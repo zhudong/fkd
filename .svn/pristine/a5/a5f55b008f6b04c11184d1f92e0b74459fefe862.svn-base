@@ -1,0 +1,153 @@
+package com.fuexpress.kr.ui.activity.product_detail;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.TimeUtils;
+import com.joooonho.SelectableRoundedImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fksproto.CsBase;
+import fksproto.CsItem;
+
+/**
+ * Created by andy on 2017/7/3.
+ */
+public class ProductFollowerView extends LinearLayout {
+    CsItem.Liker mLiker;
+    @BindView(R.id.img_follow_icon)
+    SelectableRoundedImageView mImgFollowIcon;
+    @BindView(R.id.tv_follow_name)
+    TextView mTvFollowName;
+    @BindView(R.id.tv_follow_location)
+    TextView mTvFollowLocation;
+    @BindView(R.id.ll_follows_pictures)
+    LinearLayout mLlFollowsPictures;
+
+    private DisplayImageOptions mImageOptions;
+    private int mImageWidth;
+    private int mImageMarginLeft;
+    private int mImageCount;
+    private int mLikersItemCount;
+
+    public ProductFollowerView(Context context) {
+        this(context, null);
+    }
+
+    public ProductFollowerView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ProductFollowerView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView();
+    }
+
+    private void initView() {
+        View.inflate(getContext(), R.layout.item_for_item_follow, this);
+        ButterKnife.bind(this);
+        mImageOptions = ImageLoaderHelper.getInstance(getContext()).getDisplayOptions();
+        mImageWidth = UIUtils.dip2px(50);
+        mImageMarginLeft = UIUtils.dip2px(4);
+    }
+
+    public void notifyDataChange() {
+        final CsBase.UserInfo user = mLiker.getUser();
+        ImageLoader.getInstance().displayImage(user.getAvatar() + Constants.ImgUrlSuffix.small_9, mImgFollowIcon, mImageOptions);
+        mTvFollowName.setText(user.getNickname());
+        String region = user.getFullRegionName();
+        if (region.equals("")) {
+            mTvFollowLocation.setVisibility(View.GONE);
+        } else {
+            mTvFollowLocation.setText(region);
+        }
+        getUserLikeItem(mLiker.getUser().getUin());
+    }
+
+
+    public void getUserLikeItem(int uid) {
+        addLikersItemView();
+        CsItem.GetMyItemListRequest.Builder builder = CsItem.GetMyItemListRequest.newBuilder();
+        builder.setAuthor(uid);
+        builder.setPageno(1);
+        NetEngine.postRequest(builder, new INetEngineListener<CsItem.GetMyItemListResponse>() {
+            @Override
+            public void onSuccess(CsItem.GetMyItemListResponse response) {
+                List<CsBase.Item> itemsList = response.getItemsList();
+                int leng = mLikersItemCount < itemsList.size() ? mLikersItemCount : itemsList.size();
+
+                for (int i = 0; i < leng; i++) {
+                    final ItemBean item = ClassUtil.convertItem2ItemBean(itemsList.get(i));
+                    final ImageView child = (ImageView) mLlFollowsPictures.getChildAt(i);
+                    ((Activity) getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String uri = item.getImageUrl() + Constants.ImgUrlSuffix.small_9;
+                            ImageLoader.getInstance().displayImage(uri, child, mImageOptions);
+                        }
+                    });
+                    mLlFollowsPictures.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+                            intent.putExtra(ProductDetailActivity.ITEM_ID, item.getItemid());
+                            getContext().startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    private void addLikersItemView() {
+        int width = UIUtils.dip2px((float) 50);
+        int marginLeft = UIUtils.dip2px((float) 8);
+        int padding = UIUtils.dip2px((float) 1);
+        measure(0, 0);
+        int screenWidth = ((Activity)getContext()).getWindowManager().getDefaultDisplay().getWidth();
+        mLikersItemCount = (screenWidth - 2 * marginLeft) / (width + marginLeft);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+
+        for (int i = 0; i < mLikersItemCount; i++) {
+            ImageView img = new ImageView(getContext());
+            img.setPadding(padding, padding, padding, padding);
+            img.setCropToPadding(true);
+            img.setBackground(getResources().getDrawable(R.drawable.shape_album_circle_bg));
+            img.setImageDrawable(getResources().getDrawable(R.color.home_add_and_like_bg));
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            params.setMargins(marginLeft, 0, 0, 0);
+            mLlFollowsPictures.addView(img, params);
+        }
+    }
+
+    public void setLiker(CsItem.Liker liker) {
+        mLiker = liker;
+    }
+}

@@ -1,0 +1,31 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.view.View;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class MyNeedFragment extends BaseFragment<MainActivity>{
+
+    private View mRootView;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.need_fragment_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+}

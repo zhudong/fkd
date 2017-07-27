@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/default_bg"/>
+
+    <LinearLayout
+        style="@style/layout_style"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_in_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    style="@style/system_Mytextsize_black_13"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_in_ip_below"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_in_ip"
+                    android:text="123"
+                    android:textSize="11sp"
+                    android:textColor="@color/gray_999"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/star_in_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_star"
+                android:textColor="@color/the_red"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/ed_in_ip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:hint="333"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_999"
+            android:textCursorDrawable="@drawable/cursordrawable"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_in_ip_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="13sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_in_ip_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:src="@mipmap/arrow_down"
+            android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

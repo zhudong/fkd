@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/tl_in_help_get_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_in_normal_item"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <GridView
+                    android:id="@+id/gv_help_head"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:horizontalSpacing="2dp"
+                    android:numColumns="4"
+                    android:verticalSpacing="8dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/parcel_text_gray_99"
+                        android:text="@string/String_parcel_add_photo"/>
+
+                    <TextView
+                        style="@style/parcel_text_gray_99"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/String_parcel_photo_type"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/input_box_style"
+                    android:text="@string/hms_desc_text"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
+                    android:hint="@string/hms_desc_text_hint"
+                    android:maxLength="200"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/input_box_style"
+                    android:text="@string/hms_remarks_text"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
+                    android:hint="@string/hms_desc_text_hint"
+                    android:maxLength="200"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_choose_ware_house"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="1.1"
+                    android:gravity="right"
+                    android:text="@string/hm_item_ware_house"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ware_house_show"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="5.3"
+                    android:text="@string/hm_item_ware_house_hint"
+                    android:textColor="@color/gray_999"
+                    android:textSize="13sp"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:src="@mipmap/arrow_down"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_ware_house_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/dotted_line"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_ip_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_999"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ip_receiver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/gray_999"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ip_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/gray_999"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ip_post_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/gray_999"
+                        android:textSize="11sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="1.2"
+                    android:gravity="right"
+                    android:text="@string/hms_price_text"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="5.5"
+                    android:background="@null"
+                    android:hint="@string/hms_price_text_hint"
+                    android:inputType="numberDecimal"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_currency_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:text="KRW"
+                    android:textColor="@color/gray_999"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/input_box_style"
+                    android:text="@string/hm_item_quantity"
+
+                    />
+
+                <EditText
+                    android:id="@+id/ed_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
+                    android:hint="@string/hm_item_quantity_hint"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_add_demand"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="19.3dp"
+                android:background="@drawable/shape_layout_bg"
+                android:gravity="center"
+                android:text="@string/adapter_add_new_demand"
+                android:textColor="@color/red"/>
+
+            <Button
+                android:id="@+id/btn_confirm_demand"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="13.3dp"
+                android:background="@drawable/selector_btn_bg"
+                android:text="@string/string_confirms"
+                android:textColor="@drawable/selector_btn_back_text"
+                android:textSize="15sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_in_am_item_info"
+        style="@style/system_Mytextsize_black_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="张三  13888888888  518000"/>
+
+    <TextView
+        android:id="@+id/tv_in_am_item_address"
+        style="@style/system_Mytextsize_GRAY_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:text="深圳市罗湖区国贸大厦"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/default_bg"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_is_selected_in_am_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/select"/>
+
+        <TextView
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_is_selected_in_am_item"
+            android:text="@string/string_for_address_manager_def_item"/>
+
+        <TextView
+            style="@style/system_Mytextsize_GRAY_13"
+            android:id="@+id/tv_in_am_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@mipmap/address_delete"
+            android:drawablePadding="3dp"
+            android:gravity="center_vertical"
+            android:text="@string/String_parcel_delete"/>
+
+        <TextView
+            style="@style/system_Mytextsize_GRAY_13"
+            android:id="@+id/tv_in_am_item_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_in_am_item_delete"
+            android:drawableLeft="@mipmap/address_eidt"
+            android:drawablePadding="3dp"
+            android:gravity="center_vertical"
+            android:text="@string/string_for_address_manager_edit_item"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

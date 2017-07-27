@@ -1,0 +1,86 @@
+package com.fuexpress.kr.ui.fragment;
+
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.SysApplication;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
+/**
+ * Created by kevin.xie on 2016/10/25.
+ */
+
+public class CouponListFragment extends BaseFragment {
+    public final static String CURRENCY_CODE = "Currency_code";
+    @BindView(R.id.coupon_listview)
+    ListView mCouponListview;
+
+    private String mCurrencyCode;
+
+    public static CouponListFragment newInstance(Bundle args) {
+        CouponListFragment f = new CouponListFragment();
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        View view = View.inflate(SysApplication.getContext(), R.layout.fragment_coupon, null);
+        return view;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        Bundle bundle = getArguments();
+        mCurrencyCode = bundle.getString(CouponListFragment.CURRENCY_CODE);
+        KLog.i("coupon", mCurrencyCode);
+        //伪造数据
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            data.add("测试数据 " + i);
+        }
+
+       /* CouponAdapter adapter = new CouponAdapter(this.getActivity(), data);
+        mCouponListview.setAdapter(adapter);
+        mCouponListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String data = parent.getAdapter().getItem(position).toString();
+            //    setResult(RESULT_OK, new Intent().putExtra("couponName", data));
+            //    finish();
+            }
+        });*/
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+}

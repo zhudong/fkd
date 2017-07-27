@@ -1,0 +1,102 @@
+package com.fuexpress.kr.conf;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by Longer on 2017/2/28.
+ * 地址数据相关的数据库Helper类
+ */
+public class AddressDBHelper extends SQLiteOpenHelper {
+
+    public static String sDBName = "addressData";//数据库名字
+    private static final int sVersion = 1; //数据库版本
+
+
+    public AddressDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, sDBName, null, sVersion);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(countrySql);
+        db.execSQL(provinceSql);
+        db.execSQL(citySql);
+        db.execSQL(regionSql);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public interface CountryTable {
+        String TABLE_NAME = "country_table";
+        String COUNTRY_CODE = "country_code";
+        String COUNTRY_NAME = "country_name";
+    }
+
+    public interface ProvinceTable {
+        String TABLE_NAME = "province_table";
+        String COUNTRY_CODE = "country_code";
+        String PROVINCE_CODE = "province_code";
+        String PROVINCE_NAME = "province_name";
+    }
+
+    public interface CityTable {
+        String TABLE_NAME = "city_table";
+        String COUNTRY_CODE = "country_code";
+        String PROVINCE_CODE = "province_code";
+        String CITY_CODE = "city_code";
+        String CITY_NAME = "city_name";
+    }
+
+    public interface regionTable {
+        String TABLE_NAME = "region_table";//地址信息表名
+        String REGION_CODE = "region_code";//地址Code
+        String REGION_NAME = "region_name";//地址名
+        String IS_COUNTRY = "is_country";//是否是国家,0为否,1为是
+        String IS_PROVINCE = "is_province";//是否是省,同上
+        String IS_CITY = "is_city";//是否是城市,同上上
+        String COUNTRY_CODE = "country_code";//假如是省份的话,这个国家Code就会有值(用来把国家和旗下省份进行绑定)
+        String PROVINCE_CODE = "province_code";//假如是城市的话,这个省份Code就会有值(用来把省份和其下城市进行绑定)
+    }
+
+    interface TYPE {
+        String primaryKey = "PRIMARYKEY";
+        String NUM = "NULL";       // 空值
+        String INT = "INTEGER";   // 带符号整数，根据存入的数值的大小占据1,2,3,4,6或者8个字节
+        String REAL = "REAL";   // 浮点数，采用8byte（即双精度）的IEEE格式表示
+        String TEXT = "TEXT";  // 字符串文本，采用数据库的编码（UTF-8，UTF-16BE 或者UTF-
+        String BLOB = "BLOB";
+    }
+
+    public static String countrySql = "CREATE TABLE " + CountryTable.TABLE_NAME + "(" +
+            TYPE.primaryKey + " INTEGER primary key autoincrement," +
+            CountryTable.COUNTRY_CODE + " " + TYPE.TEXT + "," +
+            CountryTable.COUNTRY_NAME + " " + TYPE.TEXT + ")";
+
+    public static String provinceSql = "CREATE TABLE " + ProvinceTable.TABLE_NAME + "(" +
+            TYPE.primaryKey + " INTEGER primary key autoincrement," +
+            ProvinceTable.PROVINCE_CODE + " " + TYPE.TEXT + "," +
+            ProvinceTable.PROVINCE_NAME + " " + TYPE.TEXT + "," +
+            ProvinceTable.COUNTRY_CODE + " " + TYPE.TEXT + ")";
+
+    public static String citySql = "CREATE TABLE " + CityTable.TABLE_NAME + "(" +
+            TYPE.primaryKey + " INTEGER primary key autoincrement," +
+            CityTable.CITY_CODE + " " + TYPE.TEXT + "," +
+            CityTable.CITY_NAME + " " + TYPE.TEXT + "," +
+            CityTable.COUNTRY_CODE + " " + TYPE.TEXT + "," +
+            CityTable.PROVINCE_CODE + " " + TYPE.TEXT + ")";
+
+    public static String regionSql = "CREATE TABLE " + regionTable.TABLE_NAME + "(" +
+            TYPE.primaryKey + " INTEGER primary key autoincrement," +
+            regionTable.REGION_CODE + " " + TYPE.TEXT + "," +
+            regionTable.REGION_NAME + " " + TYPE.TEXT + "," +
+            regionTable.IS_COUNTRY + " " + TYPE.INT + "," +
+            regionTable.IS_PROVINCE + " " + TYPE.INT + "," +
+            regionTable.IS_CITY + " " + TYPE.INT + "," +
+            regionTable.COUNTRY_CODE + " " + TYPE.TEXT + "," +
+            regionTable.PROVINCE_CODE + " " + TYPE.TEXT + ")";
+}

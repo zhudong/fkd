@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/shape_btn_bg_red_more_radius_02" android:state_checked="true"></item>
+    <item android:drawable="@drawable/shape_btn_bg_red_more_radius_02" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/shape_btn_bg_red_more_radius"></item>
+    <item android:drawable="@drawable/shape_btn_bg_red_more_radius_unenable" android:state_enabled="false"/>
+
+</selector>

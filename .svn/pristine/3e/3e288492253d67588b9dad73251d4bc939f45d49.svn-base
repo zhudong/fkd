@@ -1,0 +1,48 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import android.support.annotation.NonNull;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/12/9.
+ * 帮我收的远程数据源(从网络上获取)
+ */
+public class HelpSignedRemoteDataSource implements HelpSignedDataSource {
+    @Override
+    public List<CsParcel.ProductDataList> getHelpSignedDataList() {
+        return null;
+    }
+
+    @Override
+    public CsParcel.ProductDataList getHelpSignedDataOnly(int index) {
+        return null;
+    }
+
+    @Override
+    public void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData) {
+
+    }
+
+    @Override
+    public void deleteHelpSignedData(int index) {
+
+    }
+
+    @Override
+    public void deletAllHelpSignedData() {
+
+    }
+
+    @Override
+    public void refreshHelpSignedData() {
+
+    }
+
+    @Override
+    public void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData) {
+
+    }
+}

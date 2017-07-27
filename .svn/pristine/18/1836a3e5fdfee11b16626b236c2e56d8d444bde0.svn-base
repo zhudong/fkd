@@ -1,0 +1,73 @@
+package com.fuexpress.kr.model;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.CouponCurrencyInfoData;
+import com.fuexpress.kr.bean.CouponDataBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsCard;
+
+/**
+ * Created by kevin.xie on 2016/10/25.
+ */
+
+public class CouponDataManager {
+    private HashMap<String,List<CsCard.CouponList>> mCouponList;//优惠券总列表
+    private List<CouponCurrencyInfoData> mDatas;
+    private static CouponDataManager ourInstance = new CouponDataManager();
+    public static CouponDataManager getInstance() {
+        return ourInstance;
+    }
+    private CouponDataManager() {
+    }
+
+    public  void  getCouponDataList(final int pageNo){
+        KLog.i("coupon "+pageNo);
+        CsCard.MyShippingCouponListRequest.Builder builder=CsCard.MyShippingCouponListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setPagenum(pageNo);
+        builder.setCurrencycode(Constants.Coupon.DEFAULT_CODE);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.MyShippingCouponListResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.MyShippingCouponListResponse response) {
+                KLog.i("coupon",response.toString());
+                for(CsCard.CurrencyCouponList currencyList:response.getCurrencylistList()){
+                    addToDatas(currencyList);
+                }
+                if(Constants.Coupon.NO_MORE.equals(response.getStatus())){
+                    //没有更多
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GET_COUPON_CURRENCY_LIST_SUCCESS,null));
+
+                }else {
+                    getCouponDataList(pageNo+1);
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("coupon" ,errMsg);
+            }
+        });
+    }
+    public void addToDatas(CsCard.CurrencyCouponList currencyList){
+        if(null==mDatas){
+            mDatas=new ArrayList<>();
+        }
+        mDatas.add(new CouponCurrencyInfoData(currencyList.getCurrencycode(),currencyList.getCurrencyname()
+                ,currencyList.getCurrencysign(),currencyList.getCount()));
+
+    }
+    public List<CouponCurrencyInfoData> getDatas(){
+        return mDatas;
+    }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/refresh_lv_package"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        android:divider="@null"/>
+
+    <LinearLayout
+        android:id="@+id/noLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/default_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/infoIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/package_none"/>
+
+        <TextView
+            android:id="@+id/infoTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/package_has_no"
+            android:textColor="#666666"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/selectBtn"
+            android:layout_width="104dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_for_btn_red"
+            android:gravity="center"
+            android:text="@string/package_to_append"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+</FrameLayout>

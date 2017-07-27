@@ -1,0 +1,616 @@
+/*
+* 一些约定，请认真阅读
+*
+* 1、关于命名空间
+*		所有的协议请以proto命名
+* 2、关于required/optional
+*		为了避免在兼容上的困惑，请尽量使用optional或者repeated
+* 3、关于命名规范
+*       message结构体名以骆驼形式命名，即单词首字母大写，其余小写
+*		messgae结构体字段名格式为"全部小写+下划线分隔"。
+*		enum命名格式同message。enum字段命名格式为"全部大写+下划线分隔"。(枚举值初值为0)
+* 4、支持的类型
+*		double、float、int32、int64、uint32、uint64、sint32、sint64、fixed32、fixed64、sfixed32、sfixed64、bool、string、bytes
+*       当整数有符号(可以为负数时)，用sint32，sint64效率更好!!!
+*
+* 更多信息请阅读Protocol Buffer官方文档
+* https://developers.google.com/protocol-buffers/docs/overview
+*/
+package fksproto;
+
+enum FksCSProtoMsgId
+{
+	MSGID_ACCOUNT_REQUEST         	          		= 1; //账号请求
+	MSGID_ACCOUNT_RESPONSE        	          		= 2; //账号应答
+	MSGID_LOGIN_REQUEST           	          		= 3; //登录请求
+	MSGID_LOGIN_RESPONSE          	          		= 4; //登录应答
+	MSGID_THIRD_LOGIN_REQUEST     	          		= 5; //第三方登录请求
+	MSGID_THIRD_LOGIN_RESPONSE    	          		= 6; //第三方登录应答
+
+	MSGID_SET_USER_INFO_FIELD_REQUEST   	  		= 7; //设置用户信息字段请求
+	MSGID_SET_USER_INFO_FIELD_RESPONSE  	  		= 8; //设置用户信息字段应答
+	MSGID_GET_USER_INFO_FIELD_REQUEST   	  		= 9; //获取用户信息字段请求
+	MSGID_GET_USER_INFO_FIELD_RESPONSE        		= 10;//获取用户信息字段应答	
+
+	MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST          = 11;//获取充值卡订单列表请求
+	MSGID_GET_GIFT_CARD_ORDER_LIST_REPONSE          = 12;//获取充值卡订单列表应答
+
+	MSGID_GET_GIFT_CARD_ORDER_DETAIL_REQUEST        = 13;
+	MSGID_GET_GIFT_CARD_ORDER_DETAIL_RESPONSE       = 14;
+
+	MSGID_GET_RECHARGE_ORDER_DETAIL_REQUEST         = 15;//获取直充卡订单详情请求
+	MSGID_GET_RECHARGE_ORDER_DETAIL_REPONSE         = 16;//获取直充卡订单详情应答
+
+	MSGID_CANCEL_GIFT_CARD_ORDER_REQUEST            = 17;//取消充值卡订单请求
+	MSGID_CANCEL_GIFT_CARD_ORDER_RESPONSE           = 18;//取消充值卡订单应答
+
+	MSGID_GIFT_CARD_BALANCE_LIST_REQUEST            = 19;//充值卡账户明细请求
+	MSGID_GIFT_CARD_BALANCE_LIST_RESPONSE           = 20;//充值卡账户明细应答
+
+	MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST       = 21;//充值卡账户明细下拉请求	
+	MSGID_GIFT_CARD_BALANCE_LIST_AJAX_RESPONSE      = 22;//充值卡账户明细下拉应答
+
+	MSGID_GET_PARCEL_LIST_REQUEST                   = 23;//获取包裹列表请求
+	MSGID_GET_PARCEL_LIST_RESPONSE                  = 24;//获取包裹列表应答
+
+	MSGID_GET_SIMPLE_USER_INFO_REQUEST   	  		= 25; //获取用户简单信息请求  by jack.zuoquan
+	MSGID_GET_SIMPLE_USER_INFO_RESPONSE        		= 26;//获取用户简单信息应答
+
+	MSGID_EXCHANGE_SHIPPING_COUPON_REQUEST  		= 27;//兑换运费优惠劵请求
+	MSGID_EXCHANGE_SHIPPING_COUPON_RESPONSE 		= 28;//兑换运费优惠劵应答 
+
+	MSGID_MYSHIPPING_COUPONLIST_REQUEST  			= 29;//我的优惠劵列表请求
+	MSGID_MYSHIPPING_COUPONLIST_RESPONSE 			= 30;//我的优惠劵列表应答
+
+	MSGID_USEABLE_COUPONLIST_REQUEST  				= 31;//支付时可用优惠劵列表请求
+	MSGID_USEABLE_COUPONLIST_RESPONSE 				= 32;//支付时可用优惠劵列表应答
+
+	MSGID_SEND_SUBMIT_REQUEST   	  		   	    = 33; //提交帮我寄信息请求
+	MSGID_SEND_SUBMIT_RESPONSE        		        = 34;//提交帮我寄信息应答
+
+	MSGID_SEND_INIT_REQUEST   	  		    		= 35; //帮我寄包裹初始化请求
+	MSGID_SEND_INIT_RESPONSE        				= 36;//帮我寄包裹初始化应答
+
+	MSGID_GET_SELECT_ADDRESS_AJAX_REQUEST             = 37;//获取配送方式请求
+	MSGID_GET_SELECT_ADDRESS_AJAX_RESPONSE            = 38;//获取配送方式应答	
+
+	MSGID_GET_SHIPPING_INFO_REQUEST   	  		    = 39; //根据配送方式计算运费请求
+	MSGID_GET_SHIPPING_INFO_RESPONSE        	    = 40;//根据配送方式计算运费应答
+
+	MSGID_PAY_GIFT_CARD_ORDER_REQUEST               = 41;//支付充值卡订单请求
+	MSGID_PAY_GIFT_CARD_ORDER_RESPONSE              = 42;//支付充值卡订单应答
+
+	MSGID_DO_DIRECT_GIFT_CARD_REQUSET               = 43; //拆分包裹去支付请求
+	MSGID_DO_DIRECT_GIFT_CARD_RESPONSE              = 44; //拆分包裹去支付应答
+
+	MSGID_SELECT_SHIPPING_METHOD_REQUEST              = 45;//包裹详情里选中配送方式请求
+	MSGID_SELECT_SHIPPING_METHOD_RESPONSE             = 46;//包裹详情里选中配送方式应答
+
+	MSGID_GEG_PARCEL_DETAIL_REQREST         		= 47; //我的包裹详情 请求
+	MSGID_GET_PARCEL_DETAIL_RESPONSE        		= 48; //我的包裹详情 应答
+
+	//帮我寄单个操作
+	MSGID_CHECK_TO_PAY_REQUEST   	  		        = 49; //帮我寄单个操作请求
+	MSGID_CHECK_TO_PAY_RESPONSE        		    	= 50;//帮我寄单个操作应答
+
+	MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_REQUEST  = 51;
+	MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_RESPONSE = 52;
+
+	MSGID_ADD_CUSTOMER_ADDRESS_REQUEST   	  		= 53; //新增收货地址请求
+	MSGID_ADD_CUSTOMER_ADDRESS_RESPONSE             = 54;//新增收货地址应答
+
+	MSGID_EDIT_CUSTOMER_ADDRESS_REQUEST   	  	    = 55; //编辑收货地址请求
+	MSGID_EDIT_CUSTOMER_ADDRESS_RESPONSE      	    = 56;//编辑收货地址应答
+
+	MSGID_DEL_CUSTOMER_ADDRESS_REQUEST   	  	    = 57; //删除收货地址请求
+	MSGID_DEL_CUSTOMER_ADDRESS_RESPONSE             = 58;//删除收货地址应答
+
+	MSGID_GET_CUSTOMER_ADDRESS_LIST_REQUEST         = 59; //获取用户地址列表请求
+	MSGID_GET_CUSTOMER_ADDRESS_LIST_RESPONSE        = 60; //获取用户地址列表应答
+
+	MSGID_CHANGE_CURRENCY_REQUEST                   = 61;
+	MSGID_CHANGE_CURRENCY_RESPONSE                  = 62;
+
+	MSGID_GET_SYS_NOTICE_MSG_REQUEST                = 63;//获取系统通知请求   
+	MSGID_GET_SYS_NOTICE_MSG_RESPONSE               = 64;//获取系统通知应答
+
+	MSGID_INDEX_ADIMAGE_REQUEST                     = 65;//首页图片跑马灯请求
+	MSGID_INDEX_ADIMAGE_RESPONSE                    = 66;//首页图片跑马灯应答
+
+	MSGID_GET_ACCOUNT_BALANCE_REQUEST                 = 67;//获取账户余额请求	
+	MSGID_GET_ACCOUNT_BALANCE_RESPONSE                = 68;//获取账户余额应答
+
+	MSGID_CHANGE_LOCALE_REQUEST                         = 69;//切换语种请求
+	MSGID_CHANGE_LOCALE_RESPONSE                        = 70;//切换语种应答
+
+	MSGID_GET_CURRENCY_LIST_REQUEST                     = 71;//获取币种列表请求
+	MSGID_GET_CURRENCY_LIST_RESPONSE                    = 72;//获取币种列表应答
+
+	MSGID_SAVE_HELP_MY_BUY_REQUEST                   = 73;//帮我买提交请求
+	MSGID_SAVE_HELP_MY_BUY_RESPONSE                  = 74;//帮我买提交应答
+
+	MSGID_SAVE_HELP_RECEIVE_REQUEST                   = 75;//帮我收提交请求
+	MSGID_SAVE_HELP_RECEIVE_RESPONSE                  = 76;//帮我收提交应答
+
+	MSGID_SAVE_HELP_MY_GET_REQUEST                   = 77;//帮我取提交请求
+	MSGID_SAVE_HELP_MY_GET_RESPONSE                  = 78;//帮我取提交应答
+
+	MSGID_GET_WAREHOUSELIST_REQUEST                  = 79;//获取仓库列表请求
+	MSGID_GET_WAREHOUSELIST_RESPONSE                 = 80;//获取仓库列表应答
+
+	MSGID_GET_FKDPAYMENT_LIST_REQUEST                = 81;//获取支付方式请求
+	MSGID_GET_FKDPAYMENT_LIST_RESPONSE               = 82;//获取支付方式应答
+
+	MSGID_HELP_MY_BUY_INIT_REQUEST                   = 83;//帮我买初始化请求
+	MSGID_HELP_MY_BUY_INIT_RESPONSE                  = 84;//帮我买初始化应答
+
+	MSGID_HELP_MY_RECEIVE_INIT_REQUEST               = 85;//帮我买初始化请求
+	MSGID_HELP_MY_RECEIVE_INIT_RESPONSE              = 86;//帮我买初始化应答
+
+	MSGID_HELP_MY_GET_INIT_REQUEST                   = 87;//帮我买初始化请求
+	MSGID_HELP_MY_GET_INIT_RESPONSE                  = 88;//帮我买初始化应答
+
+	MSGID_GET_KRBANK_INFO_REQUEST                    = 89;//获取友利银行信息请求
+	MSGID_GET_KRBANK_INFO_RESPONSE                   = 90;//获取友利银行信息应答
+
+	MSGID_GET_MY_RED_POINT_REQUEST                  = 91;//获取我的红点请求
+	MSGID_GET_MY_RED_POINT_RESPONSE                 = 92;//获取我的红点应答
+
+	MSGID_CHECK_TO_PAY_IN_APPREQUIRE_REQUEST        = 93;//支付检查请求
+	MSGID_CHECK_TO_PAY_IN_APPREQUIRE_RESPONSE       = 94;//支付检查应答
+
+	MSGID_HELP_MY_GETINFO_REQUEST                   = 95;//需求单-帮我取货详情请求
+	MSGID_HELP_MY_GETINFO_RESPONSE                  = 96;//需求单-帮我取货详情应答
+
+	MSGID_HELP_MY_BUYINFO_REQUEST                   = 97;//需求单-帮我补货详情请求
+	MSGID_HELP_MY_BUYINFO_RESPONSE                  = 98;//需求单-帮我补货详情应答
+
+	MSGID_HELP_MY_RECEIVEINFO_REQUEST               = 99;//需求单-帮我收货详情请求
+	MSGID_HELP_MY_RECEIVEINFO_RESPONSE              = 100;//需求单-帮我收货详情应答
+
+	MSGID_GET_MY_REQUIRE_LIST_REQUEST       	= 101;//获取我的需求列表请求
+	MSGID_GET_MY_REQUIRE_LIST_RESPONSE              = 102;//获取我的需求列表应答
+
+	MSGID_GET_MEMBER_GROUP_NAME_REQUEST       	= 103;//获取会员组名称请求
+	MSGID_GET_MEMBER_GROUP_NAME_RESPONSE      	= 104;//获取会员组名称应答
+
+	MSGID_SUBMIT_PARCEL_NOTICE_REQUEST              = 105;//提交包裹发货请求
+	MSGID_SUBMIT_PARCEL_NOTICE_RESPONSE             = 106;//提交包裹发货应答
+
+	MSGID_SEND_INIT_EDITITEM_REQUEST                = 107;//编辑初始化物品请求
+	MSGID_SEND_INIT_EDITITEM_RESPONSE               = 108;//编辑初始化物品应答
+	MSGID_ADD_ITEM_REQUEST              = 109;//增加物品请求
+	MSGID_ADD_ITEM_RESPONSE             = 110;//增加物品应答
+
+	MSGID_DEL_ITEM_REQUEST              = 111;//删除物品请求
+	MSGID_DEL_ITEM_RESPONSE             = 112;//删除物品应答
+
+	MSGID_SEND_FOR_ITEM_REQUEST              = 113;//帮我寄批量操作请求
+	MSGID_SEND_FOR_ITEM_RESPONSE             = 114;//帮我寄批量操作应答
+
+	MSGID_SEND_EDITITEM_REQUEST                     = 115;//编辑物品请求
+	MSGID_SEND_EDITITEM_RESPONSE                    = 116;//编辑物品应答
+
+	MSGID_PARCEL_NOTICE_SHIPPING_FEE_REQUEST  = 117;//包裹通知算运费请求
+	MSGID_PARCEL_NOTICE_SHIPPING_FEE_RESPONSE = 118;//包裹通知算运费应答 
+
+
+	MSGID_CANCEL_REQUIRE_REQUEST                 = 119;//需求单-取消请求
+	MSGID_CANCEL_REQUIRE_RESPONSE                = 120;//需求单-取消应答
+
+	MSGID_MYREQUIRE_PARCELNUM_REQUEST            = 121;//我的需求单和包裹数量请求
+	MSGID_MYREQUIRE_PARCELNUM_RESPONSE           = 122;//我的需求单和包裹数量应答
+
+	MSGID_GET_MATERIALS_LIST_REQUEST             = 123;//获取所有我的标签请求
+	MSGID_GET_MATERIALS_LIST_RESPONSE            = 124;//获取所有我的标签应答
+
+	MSGID_GET_CATEGORY_LIST_REQUEST              = 125;//获取我的分类列表请求
+	MSGID_GET_CATEGORY_LIST_RESPONSE             = 126;//获取我的分类列表应答
+
+	MSGID_BIND_GIFT_CARD_REQUEST                    = 127;//绑定充值卡请求
+	MSGID_BIND_GIFT_CARD_RESPONSE                   = 128;//绑定充值卡应答
+
+	MSGID_GET_GIFT_CARD_STORESITE_REQUEST			= 129;//获取充值卡购买网站请求
+	MSGID_GET_GIFT_CARD_STORESITE_RESPONSE			= 130;//获取充值卡购买网站应答
+
+	MSGID_INIT_REPARCEL_REQUEST                     = 131;//拆分包裹初始化请求
+	MSGID_INIT_REPARCEL_RESPONSE                    = 132;//拆分包裹初始化应答
+
+	MSGID_SAVE_REPARCEL_REQUEST                     = 133;//拆分包裹保存请求
+	MSGID_SAVE_REPARCEL_RESPONSE                    = 134;//拆分包裹保存应答
+
+	MSGID_REPARCEL_DO_DIRECT_GIFT_CARD_REQUSET      = 135;//拆分包裹去支付请求
+	MSGID_REPARCEL_DO_DIRECT_GIFT_CARD_RESPONSE     = 136;//拆分包裹去支付应答
+
+	MSGID_GET_UPDATE_COUNTRY_AND_REGION_REQUEST     = 137;//获取更新的国家和地区数据请求
+	MSGID_GET_UPDATE_COUNTRY_AND_REGION_RESPONSE    = 138;//获取更新的国家和地区数据应答
+
+	MSGID_GET_INVITEES_LIST_REQUEST                 = 139;//被邀请者列表请求
+	MSGID_GET_INVITEES_LIST_RESPONSE                = 140;//被邀请者列表应答
+
+	MSGID_GET_CREDITS_DETAIL_REQUEST                = 141;//积分明细
+	MSGID_GET_CREDITS_DETAIL_RESPONSE               = 142;//积分明细
+
+	MSGID_INIT_INSURANCE_DECLARATION_REQUEST        = 143;//保险申报初始化请求
+	MSGID_INIT_INSURANCE_DECLARATION_RESPONSE       = 144;//保险申报初始化应答
+
+	MSGID_SAVE_INSURANCE_DECLARATION_REQUEST        = 145;//保险申报保存请求
+	MSGID_SAVE_INSURANCE_DECLARATION_RESPONSE       = 146;//保险申报保存应答
+
+	MSGID_GET_INVITE_CONFIG_REQUEST                 = 147;//获取邀请链接等信息请求
+	MSGID_GET_INVITE_CONFIG_RESPONSE                = 148;//获取邀请链接等信息应答
+
+	MSGID_GET_ACCOUNTINFO_REQUEST                   = 149;//获取帐号账户余额,优惠券,积分信息请求
+	MSGID_GET_ACCOUNTINFO_RESPONSE                  = 150;//获取帐号账户余额,优惠券,积分信息应答
+
+	MSGID_GET_WAREHOUSE_REGION_REQUEST              = 151;//仓库切换城市列表请求
+	MSGID_GET_WAREHOUSE_REGION_RESPONSE             = 152;//仓库切换城市列表应答
+
+	MSGID_SAVE_WAREHOUSE_REGION_REQUEST             = 153;//仓库切换城市保存请求
+	MSGID_SAVE_WAREHOUSE_REGION_RESPONSE            = 154;//仓库切换城市保存应答
+
+	MSGID_GET_VERSION_INFO_REQUEST                    = 155;//获取版本信息请求
+	MSGID_GET_VERSION_INFO_RESPONSE                   = 156;//获取版本信息应答
+
+	MSGID_CREDIT_SWITHDRAW_REQUEST                  = 157;//积分提现申请请求
+	MSGID_CREDIT_SWITHDRAW_RESPONSE                 = 158;//积分提现申请应答
+
+	MSGID_GET_COUNTRY_LIST_REQUEST                    = 159;//地区联动-国家列表请求
+	MSGID_GET_COUNTRY_LIST_RESPONSE                   = 160;//地区联动-国家列表应答
+
+	MSGID_GET_REGION_LIST_REQUEST                     = 161;//地区联动-国家下一级地区列表请求
+	MSGID_GET_REGION_LIST_RESPONSE                    = 162;//地区联动-国家下一级地区列表应答
+
+	MSGID_GET_REGION_LIST_BY_REGION_REQUEST           = 163;//地区联动-地区列表请求
+	MSGID_GET_REGION_LIST_BY_REGION_RESPONSE          = 164;//地区联动-地区列表应答
+
+	MSGID_GET_DAOUPAY_VACCOUNT_URL_REQUEST            = 165;//
+	MSGID_GET_DAOUPAY_VACCOUNT_URL_RESPONSE           = 166;
+
+	MSGID_CREDITS_INVITE_INFO_REQUEST                 = 167;//积分说明请求
+	MSGID_CREDITS_INVITE_INFO_RESPONSE                = 168;//积分说明应答
+
+	MSGID_INIT_GIFT_CARD_REQUEST              	      = 169;//购买充值卡初始化请求
+	MSGID_INIT_GIFT_CARD_RESPONSE                     = 170;//购买充值卡初始化应答
+
+	MSGID_ADD_TO_GIFT_CARD_CART_REQUEST               = 171;//充值卡加入购物车请求
+	MSGID_ADD_TO_GIFT_CARD_CART_RESPONSE              = 172;//充值卡加入购物车应答
+
+	MSGID_GET_CART_INFO_NUM_REQUEST                   = 173;//返回购物车中数量请求
+	MSGID_GET_CART_INFO_NUM_RESPONSE                  = 174;//返回购物车中数量应答
+
+	MSGID_GET_GIFT_CARD_ALONG_CART_REQUEST            = 175;//获取充值卡购物车请求
+	MSGID_GET_GIFT_CARD_ALONG_CART_RESPONSE           = 176;//获取充值卡购物车应答
+
+	MSGID_DELETE_GIFT_CARD_CART_REQUEST               = 177;//删除充值卡购物车请求
+	MSGID_DELETE_GIFT_CARD_CART_RESPONSE              = 178;//删除充值卡购物车应答
+
+	MSGID_MODIFY_GIFT_CARD_CART_NUMBER_REQUEST        = 179;//修改充值卡购物车数量请求
+	MSGID_MODIFY_GIFT_CARD_CART_NUMBER_RESPONSE       = 180;//修改充值卡购物车数量应答
+
+	MSGID_GET_GIFT_CARD_ALONG_CART_PLAY_REQUEST       = 181;//获取充值卡购物车结算请求
+	MSGID_GET_GIFT_CARD_ALONG_CART_PLAY_RESPONSE      = 182;//获取充值卡购物车结算应答
+
+	MSGID_PLACE_GIFT_CARD_ORDER_REQUEST               = 183;//提交充值卡订单请求
+	MSGID_PLACE_GIFT_CARD_ORDER_RESPONSE              = 184;//提交充值卡订单应答
+
+	MSGID_REDEEM_GIFT_CARD_REQUEST                    = 185;//绑定充值卡初始化请求
+	MSGID_REDEEM_GIFT_CARD_RESPONSE                   = 186;//绑定充值卡初始化应答
+
+
+	MSGID_GET_COUNTRY_WAREHOUSE_LIST_REQUEST          = 187;//获取国家下的仓库列表请求
+	MSGID_GET_COUNTRY_WAREHOUSE_LIST_RESPONSE         = 188;//获取国家下的仓库列表应答
+
+	MSGID_GET_MERCHANT_ITEM_LIST_REQUEST      		  = 189;//获取商户单品列表请求
+	MSGID_GET_MERCHANT_ITEM_LIST_RESPONSE     		  = 190;//获取商户单品列表应答
+
+	MSGID_GET_MERCHANT_FOLLOWER_LIST_REQUEST  		  = 191;//获取商户的关注者列表请求
+	MSGID_GET_MERCHANT_FOLLOWER_LIST_RESPONSE 		  = 192;//获取商户的关注者列表应答
+
+	MSGID_GET_HOT_MERCHANT_LIST2_REQUEST              = 195;//获取热门商户列表请求
+	MSGID_GET_HOT_MERCHANT_LIST2_RESPONSE             = 196;//获取热门商户列表应答
+
+	MSGID_GET_MERCHANT_DETAIL_REQUEST                 = 197;//获取商户详情接口请求
+	MSGID_GET_MERCHANT_DETAIL_RESPONSE                = 198;//获取商户详情接口应答
+
+	MSGID_FOLLOW_MERCHANT_REQUEST                     = 199;//关注商户请求
+	MSGID_FOLLOW_MERCHANT_RESPONSE                    = 200;//关注商户应答
+
+	MSGID_GET_MY_ITEM_LIST_REQUEST                    = 201;//我的单品列表请求
+	MSGID_GET_MY_ITEM_LIST_RESPONSE                   = 202;//我的单品列表应答
+
+	MSGID_GET_FOLLOW_MERCHANT_LIST_REQUEST    	  = 203;//获取(我)关注的商户列表请求
+	MSGID_GET_FOLLOW_MERCHANT_LIST_RESPONSE   	  = 204;//获取(我)关注的商户列表应答
+
+	MSGID_LIKE_ITEM_REQUEST                           = 205;//喜欢单品请求
+	MSGID_LIKE_ITEM_RESPONSE                          = 206;//喜欢单品应答
+
+	MSGID_FOLLOWERS_REQUEST   	  		              = 207; //我的店铺－关注者请求followers
+	MSGID_FOLLOWERS_RESPONSE        		          = 208;//我的店铺－关注者应答
+
+	MSGID_GET_ITEM_IMAGELIST_REQUEST                  = 209;//获取商品分享信息请求
+	MSGID_GET_ITEM_IMAGELIST_RESPONSE                 = 210;//获取商品分享信息应答
+
+	MSGID_GET_ITEM_LIST_BY_PLACE_REQUEST              = 211;//获取某位置单品请求
+	MSGID_GET_ITEM_LIST_BY_PLACE_RESPONSE             = 212;//获取某位置单品应答
+
+	MSGID_GET_ITEM_LIST_BY_WEBSITE_REQUEST            = 213;//获取某站点单品请求
+	MSGID_GET_ITEM_LIST_BY_WEBSITE_RESPONSE           = 214;//获取某站点单品应答
+
+	MSGID_GET_MATCH_SHIPPING_LIST_REQUEST             = 215;//单品详情-配送列表请求
+	MSGID_GET_MATCH_SHIPPING_LIST_RESPONSE            = 216;//单品详情-配送列表应答
+
+	MSGID_GET_MATCH_SHIPPING_INFO_REQUEST        	  = 217;//获取单品详情-配送接口请求
+	MSGID_GET_MATCH_SHIPPING_INFO_RESPONSE            = 218;//获取单品详情-配送接口应答
+
+	MSGID_GET_ITEM_BASIC_DETAIL_REQUEST               = 219;//获取单品基本详情请求
+	MSGID_GET_ITEM_BASIC_DETAIL_RESPONSE              = 220;//获取单品基本详情应答
+
+	MSGID_GET_COMMENT_LIST_REQUEST		  	  		  = 221;//获取评论请求
+	MSGID_GET_COMMENT_LIST_RESPONSE	  		  		  = 222;//获取评论应答
+
+	MSGID_POST_COMMENT_REQUEST				  		  = 223;//发表评论请求
+	MSGID_POST_COMMENT_RESPONSE				  		  = 224;//发表请求应答
+
+	MSGID_GET_ITEM_LIKER_LIST_REQUEST     	  		  = 225;//获取单品的喜欢者列表请求
+	MSGID_GET_ITEM_LIKER_LIST_RESPONSE    	  		  = 226;//获取单品的喜欢者列表应答
+
+	MSGID_APPEND_SALES_CART_REQUEST           		  = 227;//添加购物车(单品)请求
+	MSGID_APPEND_SALES_CART_RESPONSE          		  = 228;//添加购物车(单品)应答
+
+	MSGID_REMOVE_SALES_CART_REQUEST           		  = 229;//移除购物车(单品)请求
+	MSGID_REMOVE_SALES_CART_RESPONSE          		  = 230;//移除购物车(单品)应答
+
+	MSGID_MODIFY_SALES_CART_REQUEST           		  = 231;//修改购物车(单品)请求
+	MSGID_MODIFY_SALES_CART_RESPONSE          		  = 232;//修改购物车(单品)应答
+
+	MSGID_GET_SALES_CART_LIST_REQUEST         		  = 233;//获取购物车列表请求
+	MSGID_GET_SALES_CART_LIST_RESPONSE        		  = 234;//获取购物车列表应答
+
+	MSGID_APPLY_COUPON_REQUEST                		  = 235;//使用优惠券请求
+	MSGID_APPLY_COUPON_RESPONSE               		  = 236;//使用优惠券应答
+
+	MSGID_SELECTED_SALES_CART_REQUEST                 = 237;//选中购物车(单品)请求
+	MSGID_SELECTED_SALES_CART_RESPONSE                = 238;//选中购物车(单品)应答
+
+	MSGID_REMOVE_BATCH_SALES_CART_REQUEST             = 239;//批量移除购物车(单品)请求
+	MSGID_REMOVE_BATCH_SALES_CART_RESPONSE            = 240;//批量移除购物车(单品)应答
+
+	MSGID_ADD_IMAGE_REVIEW_REQUEST                    = 241;//添加晒单请求
+	MSGID_ADD_IMAGE_REVIEW_RESPONSE                   = 242;//添加晒单应答
+
+	MSGID_GET_ITEM_PURCHASE_DETAIL_REQUEST            = 243;//获取单品购买详情请求
+	MSGID_GET_ITEM_PURCHASE_DETAIL_RESPONSE           = 244;//获取单品购买详情应答
+
+	//add by jack.zuoquan
+	MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST      = 503;//获取充值卡购物车请求
+	MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE     = 504;//获取充值卡购物车应答
+
+	MSGID_COUNTRY_LIST_REQUEST   	  		= 505; //地区联动-国家列表请求
+	MSGID_COUNTRY_LIST_RESPONSE  	  		= 506; //地区联动-国家列表应答
+
+	MSGID_REGION_LIST_REQUEST   	  		= 507; //地区联动-国家下一级地区列表请求
+	MSGID_REGION_LIST_RESPONSE  	  		= 508; //地区联动-国家下一级地区列表应答
+
+	MSGID_GET_CHILDREN_COUNT_REQUEST   	  		    = 511; //地区联动-地区数量请求
+	MSGID_GET_CHILDREN_COUNT_RESPONSE        		= 512;//地区联动-地区数量应答	
+
+	MSGID_MERCHANT_INDEX_REQUEST   	  		    = 513; //店铺首页请求merchantIndex
+	MSGID_MERCHANT_INDEX_RESPONSE        		= 514;//店铺首页应答
+
+	MSGID_ITEMS_REQUEST   	  		    = 515; //我的店铺（店铺单品列表）请求items
+	MSGID_ITEMS_RESPONSE        		= 516;//我的店铺（店铺单品列表）应答
+
+	MSGID_MERCHANT_INTRO_REQUEST   	  		    = 517; //我的店铺－简介请求merchantIntro
+	MSGID_MERCHANT_INTRO_RESPONSE        		= 518;//我的店铺－简介应答
+
+
+
+	MSGID_GET_MERCHANT_ALBUM_LIST_REQUEST          = 523; //商品管理-专辑 请求
+	MSGID_GET_MERCHANT_ALBUM_LIST_RESPONSE         = 524; //商品管理-专辑 应答
+
+	MSGID_GET_ALBUM_ITEM_LIST_REQUEST              = 525; //专辑详情-单品列表 请求
+	MSGID_GET_ALBUM_ITEM_LIST_RESPONSE             = 526; //专辑详情-单品列表 应答
+
+	MSGID_INIT_ADD_ALBUM_REQUEST                   = 527; //新建专辑-初始化 请求
+	MSGID_INIT_ADD_ALBUM_RESPONSE                  = 528; //新建专辑-初始化 应答
+
+	MSGID_IS_ALBUM_NAME_EXIST_REQUEST              = 529; //专辑名称是否存在 请求
+	MSGID_IS_ALBUM_NAME_EXIST_RESPONSE             = 530; //专辑名称是否存在 应答
+
+	MSGID_ALBUM_CATEGORY_LIST_REQUEST              = 531; //新建专辑-联动专辑分类列表 请求
+	MSGID_ALBUM_CATEGORY_LIST_RESPONSE             = 532; //新建专辑-联动专辑分类列表 应答
+
+	MSGID_ADD_ALBUM_SAVE_REQUEST                   = 533; //新建专辑-保存 请求
+	MSGID_ADD_ALBUM_SAVE_RESPONSE                  = 534; //新建专辑-保存 应答
+
+	MSGID_INIT_EDIT_ALBUM_REQUEST                  = 535; //编辑专辑-初始化 请求
+	MSGID_INIT_EDIT_ALBUM_RESPONSE                 = 536; //编辑专辑-初始化 应答
+
+	MSGID_EDIT_ALBUM_SAVE_REQUEST                  = 537; //编辑专辑-保存 请求
+	MSGID_EDIT_ALBUM_SAVE_RESPONSE                 = 538; //编辑专辑-保存 应答
+
+	MSGID_DELETE_ALBUM_REQUEST                     = 539; //编辑专辑-删除 请求
+	MSGID_DELETE_ALBUM_RESPONSE                    = 540; //编辑专辑-删除 应答
+
+	MSGID_INIT_ADD_ITEM_REQREST               	   = 541; //添加单品-初始化 	 请求
+	MSGID_INIT_ADD_ITEM_RESPONSE            	   = 542; //添加单品-初始化 	 应答
+
+	MSGID_ADD_ITEM_SAVE_REQUEST               	   = 543; //添加单品-保存 请求
+	MSGID_ADD_ITEM_SAVE_RESPONSE              	   = 544; //添加单品-保存 应答
+
+	MSGID_INIT_EDIT_ITEM_REQUEST                   = 545; //编辑商品-初始化 请求
+	MSGID_INIT_EDIT_ITEM_RESPONSE                  = 546; //编辑商品-初始化 应答
+
+	MSGID_EDIT_ITEM_SAVE_REQUEST                   = 547; //编辑商品-保存 请求
+	MSGID_EDIT_ITEM_SAVE_RESPONSE                  = 548; //编辑商品-保存 应答
+
+	MSGID_DELETE_ALBUM_ITEM_REQUSET                = 549; //编辑专辑-删除商品 请求
+	MSGID_DELETE_ALBUM_ITEM_RESPONSE               = 550; //编辑专辑-删除商品 应答
+
+	MSGID_CREATE_ALBUM_REQUSET                     = 551; //编辑商品－选择专辑时创建新专辑保存 请求
+	MSGID_CREATE_ALBUM_RESPONSE                    = 552; //编辑商品－选择专辑时创建新专辑保存 应答
+
+	MSGID_IMAGES_REQUEST   	  		    = 553; //我的店铺－图片请求images
+	MSGID_IMAGES_RESPONSE        		= 554;//我的店铺－图片应答
+
+	MSGID_UPLOAD_MERCHANT_IMAGE_REQUEST   	  	     = 555; //我的店铺-点加号上传图片(无用)请求uploadMerchantImage
+	MSGID_UPLOAD_MERCHANT_IMAGE_RESPONSE             = 556;//我的店铺-点加号上传图片(无用)应答
+
+	MSGID_SAVE_MERCHANT_IMAGE_REQUEST   	  		= 557; //我的店铺-上传保存请求saveMerchantImage
+	MSGID_SAVE_MERCHANT_IMAGE_RESPONSE        		= 558;//我的店铺-上传保存应答
+
+	MSGID_MY_MERCHANT_REQUEST   	  		    = 559; //我请求myMerchant
+	MSGID_MY_MERCHANT_RESPONSE        		    = 560;//我应答
+
+	MSGID_MY_ORDER_ITEM_REQUEST   	  		    = 561; //我-我的订单请求myOrderItem
+	MSGID_MY_ORDER_ITEM_RESPONSE        		= 562;//我-我的订单应答
+
+	MSGID_MERCHANT_SALES_STATISTICS_LIST_REQUEST = 563; //我-我的订单-历史统计请求merchantsalesStatisticsList
+	MSGID_MERCHANT_SALES_STATISTICS_LIST_RESPONSE= 564;//我-我的订单-历史统计应答
+
+	MSGID_MERCHANT_FORM_REQUEST   	  		    = 565; //我-商户信息-修改初始化请求merchantForm
+	MSGID_MERCHANT_FORM_RESPONSE        		= 566;//我-商户信息-修改初始化应答
+
+	MSGID_SAVE_MERCHANT_REQUEST   	  		    = 567; //我-商户信息-修改保存请求saveMerchant
+	MSGID_SAVE_MERCHANT_RESPONSE        		= 568;//我-商户信息-修改保存应答
+
+	MSGID_SAVE_MERCHANT_INDEX_IMAGE_REQUEST   	  		    = 569; //我的店铺-店招选择保存请求
+	MSGID_SAVE_MERCHANT_INDEX_IMAGE_RESPONSE        		= 570;//我的店铺-店招选择保存应答
+
+	MSGID_SEND_PARCEL_LIST_REQUEST          = 571; //帮我寄包裹列表 请求
+	MSGID_SEND_PARCEL_LIST_RESPONSE         = 572; //帮我寄包裹列表 应答
+
+	MSGID_GET_MY_NOTICE_LIST_REQUEST                       =573;//我的通知消息请求
+	MSGID_GET_MY_NOTICE_LIST_RESPONSE                      =574;//我的通知消息应答
+
+	MSGID_GET_MY_CUSTOMER_ICON_REQUEST                     =575;//修改头像初始化请求
+	MSGID_GET_MY_CUSTOMER_ICON_RESPONSE                    =576;//修改头像初始化应答
+
+	MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST                =577;//保存用户头像请求
+	MSGID_SET_MY_SAVE_CUSTOMER_ICON_RESPONSE               =578;//保存用户头像应答
+
+	MSGID_SET_MY_SAVE_CUSTOMER_PSW_REQUEST                 =579;//设置保存用户密码请求
+	MSGID_SET_MY_SAVE_CUSTOMER_PSW_RESPONSE                =580; //设置保存用户密码应答
+
+	MSGID_SET_MY_SEND_CONFIRM_EMAIL_REQUEST                 =581;//设置发送确认邮箱请求
+	MSGID_SET_MY_SEND_CONFIRM_EMAIL_RESPONSE                =582; //设置发送确认邮箱应答
+
+	MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUEST            =583;//绑定手机发送验证码请求
+	MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_RESPONSE           =584; //绑定手机发送验证码应答
+
+	MSGID_SEND_MY_PHONE_BIND_REQUEST                        =585;//完成绑定手机请求
+	MSGID_SEND_MY_PHONE_BIND_RESPONSE                       =586; //完成绑定手机应答
+
+	MSGID_SET_LOGDO_MERCHANT_REQUEST                        =587;//邮箱登录请求
+	MSGID_SET_LOGDO_MERCHANT_RESPONSE                       =588; //邮箱登录应答
+
+	MSGID_SET_LOGDO_MERCHANT_PHONE_REQUEST                  =589;//手机登录请求
+	MSGID_SET_LOGDO_MERCHANT_PHONE_RESPONSE                 =590;//手机登录应答
+
+	MSGID_GET_REG_MERCHANT_EMAIL_INIT_REQUEST               =591;//邮箱注册初始化请求
+	MSGID_GET_REG_MERCHANT_EMAIL_INIT_RESPONSE              =592;//邮箱注册初始化应答
+
+	MSGID_GET_REGDO_MERCHANT_EMAIL_REQUEST                  =593;//邮箱注册请求
+	MSGID_GET_REGDO_MERCHANT_EMAIL_RESPONSE                 =594;//邮箱注册应答
+
+	MSGID_GET_IS_EXIST_EMAIL_REQUEST                        =595;//邮箱是否存在请求
+	MSGID_GET_IS_EXIST_EMAIL_RESPONSE                       =596;//邮箱是否存在应答
+
+	MSGID_GET_IS_EXIST_PHONE_REQUEST                        =597;//手机是否存在请求
+	MSGID_GET_IS_EXIST_PHONE_RESPONSE                       =598;//手机是否存在应答
+
+
+	MSGID_SEND_FIND_PSW_REQUEST                             =601;//发送邮件找回密码请求
+	MSGID_SEND_FIND_PSW_RESPONSE                            =602;//发送邮件找回密码应答
+
+	MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_REQUEST            =603;//手机找回密码找回验证码请求
+	MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_RESPONSE           =604;//手机找回密码找回验证码应答
+
+	MSGID_GET_REST_PASSWORD_BY_PHONE_REQUEST                =605;//手机找回密码确定请求
+	MSGID_GET_REST_PASSWORD_BY_PHONE_RESPONSE               =606;//手机找回密码确定应答
+
+	MSGID_SELECT_ADDRESS_AJAX_REQUEST   	  		    = 607; //获取配送方式请求
+	MSGID_SELECT_ADDRESS_AJAX_RESPONSE        		    = 608;//获取配送方式应答
+
+	//手机注册发送验证码
+	MSGID_SEND_REGISTER_VERIFY_CODE_REQUEST   	  		        = 609; //手机注册发送验证码请求
+	MSGID_SEND_REGISTER_VERIFY_CODE_RESPONSE        		    = 610;//手机注册发送验证码应答
+
+	//手机注册
+	MSGID_REDO_MERCHANT_BY_PHONE_REQUEST   	  		        = 611; //手机注册请求
+	MSGID_REDO_MERCHANT_BY_PHONE_RESPONSE        		    = 612;//手机应答
+
+	//手机找回密码
+	MSGID_REST_PSW_BY_PHONE_REQUEST   	  		        = 613; //手机找回密码请求
+	MSGID_REST_PSW_BY_PHONE_RESPONSE        		    = 614;//手机找回密码应答
+
+	//修改支付方式
+	MSGID_SAVE_PAY_METHOD_REQUEST   	  		        = 615; //修改支付方式请求
+	MSGID_SAVE_PAY_METHOD_RESPONSE        		       = 616;//修改支付方式应答
+
+	//包裹中的单品列表
+	MSGID_GET_PARCEL_ITEM_LIST_REQUEST   	  		        = 617; //包裹中的单品列表请求
+	MSGID_GET_PARCEL_ITEM_LIST_RESPONSE        		       = 618;//包裹中的单品列表应答
+
+	MSGID_GET_MATCH_ITEM_CATEGORY_REQUEST                 =619;//获得单品分类请求
+	MSGID_GET_MATCH_ITEM_CATEGORY_RESPONSE                =620;//获得单品分类应答
+
+	MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST                 =621;//收货地址列表请求
+	MSG_GET_CUSTOMER_ADDRESS_LIST_RESPONSE                =622;//收货地址列表应答
+
+
+
+	//包裹详情里选中配送方式
+	MSG_GET_COLLECTION_LIST_REQUEST                 =625;//编辑商品-获得专辑列表请求
+	MSG_GET_COLLECTION_LIST_RESPONSE                =626;//编辑商品-获得专辑列表应答
+
+	MSGID_MY_ACCOUNT_HINT_REQUEST                       = 631;//获取我的红点请求 
+	MSGID_MY_ACCOUNT_HINT_RESPONSE                      = 632;//获取我的红点应答
+
+	//add by jianh2016/04/16
+	MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_REQUEST = 633;//修改充值卡订单支付方式初始化请求
+	MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_RESPONSE= 634;//修改充值卡订单支付方式初始化应答
+
+	MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_REQUEST   = 635;//修改充值卡订单支付方式请求	
+	MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_RESPONSE  = 636;//修改充值卡订单支付方式应答
+
+	MSGID_SET_MERCHANT_MESSAGE_REQUEST        = 637;//充值卡账户明细下拉请求	
+	MSGID_SET_MERCHANT_MESSAGE_RESPONSE       = 638;//充值卡账户明细下拉应答
+
+	MSGID_GET_RECEIPT_LIST_REQUEST        = 639;//新订单列表请求	
+	MSGID_GET_RECEIPT_LIST_RESPONSE       = 640;//新订单列表应答
+
+	MSGID_SET_SOLD_OUT_REQUEST        = 641;//设置商品已下架请求	
+	MSGID_SET_SOLD_OUT_RESPONSE       = 642;//设置商品已下架应答
+
+	MSGID_SET_EDIT_QTY_REQUEST        = 643;//设置商品的确认数量请求	
+	MSGID_SET_EDIT_QTY_RESPONSE       = 644;//设置商品的确认数量应答
+
+	MSGID_SET_REGISTER_VERIFY_REQUEST        = 645;//设置注册下一步验证请求	
+	MSGID_SET_REGISTER_VERIFY_RESPONSE       = 646;//设置注册下一步验证应答
+
+	MSGID_INIT_PERMISSIONS_REQUEST        = 647;//权限设置初始化请求	initPermissions
+	MSGID_INIT_PERMISSIONS_RESPONSE       = 648;//权限设置初始化应答
+
+	MSGID_SAVE_PERMISSIONS_REQUEST        = 649;//权限设置保存请求	
+	MSGID_SAVE_PERMISSIONS_RESPONSE       = 650;//权限设置保存应答
+
+	MSGID_ENABLE_MERCHANT_CUSTOMER_REQUEST    =651;//启用商户子账号请求
+	MSGID_ENABLE_MERCHANT_CUSTOMER_RESPONSE   =652;//启用商户子账号应答
+
+	MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST    =653;//停用商户子账号请求
+	MSGID_DISABLE_MERCHANT_CUSTOMER_RESPONSE   =654;//停用商户子账号应答
+
+	MSGID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST     =655;//添加商户子账户请求
+	MSGID_ADD_MERCHANT_SUB_ACCOUNT_RESPONSE    =656;//添加商户子账户应答
+
+	MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_REQUEST     =657;//获取商户子账户列表请求
+	MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_RESPONSE    =658;//获取商户子账户列表应答
+
+	MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_REQUEST  = 659;//获取商户子账户权限请求
+	MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_RESPONSE = 660;//获取商户子账号权限应答 
+
+
+
+}

@@ -1,0 +1,86 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.SysApplication;
+
+import java.util.ArrayList;
+
+import static com.fuexpress.kr.ui.activity.Down2UpDialogActivity.ADD_MERCHANT_ITEM_TYPE;
+import static com.fuexpress.kr.ui.activity.Down2UpDialogActivity.CHANGE_MERCHANT_PHOTO_TYPE;
+import static com.fuexpress.kr.ui.activity.Down2UpDialogActivity.CHOOSE_ID_CARD_TYPE;
+import static com.fuexpress.kr.ui.activity.Down2UpDialogActivity.GO_THIS_ACTIVITY_INTENT_KEY;
+
+/**
+ * Created by root on 17-2-27.
+ */
+
+public class ChooseUserPhoneActivity extends BaseActivity {
+    public static final String PHONE_LIST="phone_list";
+    int aspectX = 0;
+    int aspectY = 0;
+    int outputX = 0;
+    int outputY = 0;
+    private String mType;
+    @Override
+    public View setInitView() {
+        Intent intent = getIntent();
+        mType = intent.getStringExtra(GO_THIS_ACTIVITY_INTENT_KEY);
+
+        View view = View.inflate(this, R.layout.activity_down2_up_dialog, null);
+        setLocalInBottom(view);
+        TextView tv_in_down_to_up_dialog_take_photo = (TextView) view.findViewById(R.id.tv_in_down_to_up_dialog_take_photo);
+        tv_in_down_to_up_dialog_take_photo.setOnClickListener(this);
+        TextView tv_in_down_to_up_dialog_take_choose_in_album = (TextView) view.findViewById(R.id.tv_in_down_to_up_dialog_take_choose_in_album);
+        TextView tv_in_down_to_up_dialog_cancle = (TextView) view.findViewById(R.id.tv_in_down_to_up_dialog_cancle);
+        tv_in_down_to_up_dialog_cancle.setOnClickListener(this);
+        TextView tv_in_down_to_up_dialog_take_choose_in_location_album = (TextView) view.findViewById(R.id.tv_in_down_to_up_dialog_take_choose_in_location_album);
+        tv_in_down_to_up_dialog_take_choose_in_location_album.setOnClickListener(this);
+        if (!CHANGE_MERCHANT_PHOTO_TYPE.equals(mType)) {
+            if (ADD_MERCHANT_ITEM_TYPE.equals(mType) || CHOOSE_ID_CARD_TYPE.equals(mType)) {
+                aspectX = SysApplication.mWidthPixels;
+                aspectY = SysApplication.mWidthPixels;
+                outputX = SysApplication.mWidthPixels;
+                outputY = outputX;
+            } else {
+                aspectX = 1;
+                aspectY = 1;
+                outputX = 140;
+                outputY = 140;
+            }
+            tv_in_down_to_up_dialog_take_choose_in_location_album.setVisibility(View.VISIBLE);
+            tv_in_down_to_up_dialog_take_choose_in_album.setVisibility(View.GONE);
+        } else {
+            aspectX = SysApplication.mWidthPixels;
+            aspectY = (int) (SysApplication.mWidthPixels / 1.5);
+            outputX = SysApplication.mWidthPixels;
+            outputY = (int) (SysApplication.mWidthPixels / 1.5);
+            tv_in_down_to_up_dialog_take_choose_in_album.setOnClickListener(this);
+            tv_in_down_to_up_dialog_take_choose_in_album.setVisibility(View.VISIBLE);
+        }
+        return view;
+    }
+    public void setLocalInBottom(View view) {
+        Window window = this.getWindow();//宽度为屏幕宽,位置为底部
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.gravity = Gravity.BOTTOM;
+        view.setMinimumWidth(mWidthPixels);
+        window.setAttributes(lp);
+        LinearLayout ll_01_in_down_to_up_dialog = (LinearLayout) view.findViewById(R.id.ll_01_in_down_to_up_dialog);
+        ll_01_in_down_to_up_dialog.setAlpha(0.9f);
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ArrayList<String> phones =getIntent().getStringArrayListExtra(PHONE_LIST);
+    }
+}

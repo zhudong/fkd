@@ -1,0 +1,173 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.model.AddressManager;
+import com.fuexpress.kr.model.AssetFileManager;
+import com.fuexpress.kr.ui.activity.AddNewAddressActivity;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.view.CustomDialog;
+
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsAddress;
+
+/**
+ * Created by Longer on 2016/11/2.
+ */
+public class AddressManagerAdapter extends BaseAdapter implements View.OnClickListener {
+
+    private Context mContext;
+    public List<CsAddress.CustomerAddress> mData;
+    public boolean isCilckDefault = false;
+    public int oldDeafaultIndex = -1;
+
+    public AddressManagerAdapter(Context context, List<CsAddress.CustomerAddress> list) {
+        mContext = context;
+        mData = list;
+    }
+
+    @Override
+    public int getCount() {
+        // TODO: 2016/11/2 暂时写死一些数据,后期还是要改回来
+
+        return mData == null ? 0 : mData.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mData == null ? null : mData.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_address_manager, null);
+            viewHolder.iv_is_selected_in_am_item = (ImageView) convertView.findViewById(R.id.iv_is_selected_in_am_item);
+            viewHolder.iv_is_selected_in_am_item.setOnClickListener(this);
+            viewHolder.tv_in_am_item_address = (TextView) convertView.findViewById(R.id.tv_in_am_item_address);
+            viewHolder.tv_in_am_item_delete = (TextView) convertView.findViewById(R.id.tv_in_am_item_delete);
+            viewHolder.tv_in_am_item_delete.setOnClickListener(this);
+            viewHolder.tv_in_am_item_edit = (TextView) convertView.findViewById(R.id.tv_in_am_item_edit);
+            viewHolder.tv_in_am_item_edit.setOnClickListener(this);
+            viewHolder.tv_in_am_item_info = (TextView) convertView.findViewById(R.id.tv_in_am_item_info);
+            viewHolder.tv_address_default = (TextView) convertView.findViewById(R.id.tv_address_default);
+            viewHolder.tv_address_default.setOnClickListener(this);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        // TODO: 2016/11/2 一系列的视图数据绑定操作
+        CsAddress.CustomerAddress customerAddress = mData.get(position);
+        if (customerAddress.getIsDefault()) {
+            viewHolder.iv_is_selected_in_am_item.setImageResource(R.mipmap.select);
+            oldDeafaultIndex = position;
+        } else {
+            viewHolder.iv_is_selected_in_am_item.setImageResource(R.mipmap.demand_unselect);
+        }
+        viewHolder.tv_in_am_item_info.setText(mContext.getString(R.string.string_for_am_item_top, customerAddress.getName(), customerAddress.getPhone(), customerAddress.getPostcode()));
+        viewHolder.tv_in_am_item_address.setText(customerAddress.getStreet() + "," + AssetFileManager.getInstance().readFilePlus(customerAddress.getRegion(), AssetFileManager.ADDRESS_TYPE));
+        viewHolder.tv_in_am_item_edit.setTag(position);
+        viewHolder.iv_is_selected_in_am_item.setTag(position);
+        viewHolder.tv_in_am_item_delete.setTag(position);
+        viewHolder.tv_address_default.setTag(position);
+
+        return convertView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_in_am_item_edit:
+                int position = (int) v.getTag();
+                CsAddress.CustomerAddress customerAddress = mData.get(position);
+                Intent intent = new Intent(mContext, AddNewAddressActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("address", customerAddress);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+                break;
+            case R.id.tv_in_am_item_delete:
+                // TODO: 2016/11/7 删除地址的操作
+                showDialog((Integer) v.getTag());
+                break;
+            case R.id.tv_address_default:
+            case R.id.iv_is_selected_in_am_item:
+                int poDefault = (int) v.getTag();
+                switchIsDefault(poDefault);
+                break;
+        }
+    }
+
+
+    private CustomDialog.Builder dialog;
+
+    public void showDialog(final int index) {
+        dialog = new CustomDialog.Builder(mContext);
+        String dialogConfig = mContext.getString(R.string.my_gift_card_order_binding_dialog_config);
+        String dialogcancle = mContext.getString(R.string.my_gift_card_order_binding_dialog_cancle);
+        String message = mContext.getString(R.string.delet_address_dialog_message);
+        dialog.setMessage(message);
+        dialog.setPositiveButton(dialogConfig, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AddressManager.getInstance().deletAddressRequest(mData.get(index).getAddressId());
+                dialog.dismiss();
+            }
+        });
+        dialog.setNegativeButton(dialogcancle, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.create().show();
+    }
+
+    private void switchIsDefault(int newDefault) {
+        /*if (newDefault != oldDeafaultIndex) {
+            isCilckDefault = true;
+            mData.set(newDefault, switchAddressBuilder(newDefault));
+            mData.set(oldDeafaultIndex, switchAddressBuilder(oldDeafaultIndex));
+            oldDeafaultIndex = newDefault;
+            notifyDataSetChanged();
+        }*/
+        /*AddressManagerActivity addressManagerActivity = (AddressManagerActivity) mContext;
+        addressManagerActivity.showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "加载中");*/
+        AddressManager.getInstance().setAddressDefault(switchAddressBuilder(newDefault));
+    }
+
+    class ViewHolder {
+        TextView tv_in_am_item_info;
+        TextView tv_in_am_item_address;
+        ImageView iv_is_selected_in_am_item;
+        TextView tv_in_am_item_edit;
+        TextView tv_in_am_item_delete;
+        TextView tv_address_default;
+    }
+
+    public CsAddress.CustomerAddress switchAddressBuilder(int index) {
+        CsAddress.CustomerAddress.Builder builder = mData.get(index).toBuilder();
+        builder.setIsDefault(!builder.getIsDefault());
+        return builder.build();
+    }
+
+}

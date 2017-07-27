@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/gift_card_total_msg"
+                    android:textColor="@color/black_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/sumTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="560.00"
+                    android:textColor="#ff0000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/timeLeftTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/sumTv"
+                    android:layout_marginRight="120dp"
+                    android:layout_toRightOf="@+id/sumTv"
+                    android:text="@string/left_time"
+                    android:textColor="@color/black_to_pay"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/feeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="120dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/String_submit_hint"
+                    android:textColor="@color/black_to_pay"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/payBtn"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_for_login_btn"
+                    android:text="@string/order_goto_pay"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/mListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom"
+            android:divider="@null"></ListView>
+    </RelativeLayout>
+
+
+</LinearLayout>

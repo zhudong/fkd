@@ -1,0 +1,358 @@
+package com.fuexpress.kr.ui.activity.merchant_detail;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.model.OperaRequestManager;
+import com.fuexpress.kr.model.ShareManager;
+import com.fuexpress.kr.net.OperaRequestListener;
+import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.LogUtils;
+import com.joooonho.SelectableRoundedImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+
+/**
+ * Created by Longer on 2017/6/26.
+ */
+
+public class CategoryItemAdapter extends BaseAdapter {
+    private List<ItemBean> mDates;
+    private Activity mContext;
+    private DisplayImageOptions options;
+    private int mCurrentItem;
+
+    private ImageView mCImgIsLike;
+    private TextView mCTvLikeState;
+    private TextView mCTvLikeCount;
+    private boolean isRequesting;
+
+    public CategoryItemAdapter(Activity context, List<ItemBean> list) {
+        mDates = list;
+        this.mContext = context;
+        options = ImageLoaderHelper.getInstance(mContext).getDisplayOptions();
+        EventBus.getDefault().register(this);
+    }
+
+    public CategoryItemAdapter(Activity context) {
+        this.mContext = context;
+    }
+
+    @Override
+    public int getCount() {
+        if (mDates != null) {
+            return (mDates.size() + 1) / 2;
+        }
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        ArrayList<Object> list;
+        if (mDates != null) {
+            list = new ArrayList<>();
+            list.add(mDates.get(position * 2));
+
+            if ((position * 2 + 1) <= mDates.size() - 1) {
+                list.add(mDates.get(position * 2 + 1));
+            }
+            return list;
+        }
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        Holder holder = null;
+        if (convertView == null) {
+            holder = new Holder();
+            convertView = (ViewGroup) View.inflate(mContext, R.layout.item2_for_category, null);
+            for (int i = 0; i < 2; i++) {
+                Holder.Holderitem holderitem = holder.mHolderitems[i];
+                LinearLayout child = (LinearLayout) ((ViewGroup) convertView).getChildAt(i);
+                if (i == 1) {
+                    int margright = UIUtils.dip2px(8);
+                }
+                View viewById = child.findViewById(R.id.img_add_cart);
+                holderitem.mRoot = child;
+                holderitem.mAddCart = (RelativeLayout) viewById;
+                holderitem.mCrowd = (RelativeLayout) child.findViewById(R.id.img_crowd);
+                //holderitem.mLickeButton = (LikeButton) child.findViewById(R.id.btn_like);
+                holderitem.mTvName = (TextView) child.findViewById(R.id.tv_prduct_name);
+                holderitem.mTvPrice = (TextView) child.findViewById(R.id.tv_price);
+                holderitem.mImage = (SelectableRoundedImageView) child.findViewById(R.id.img_item_product);
+
+                holderitem.mRlLikeBtnRoot = (RelativeLayout) child.findViewById(R.id.rl_lv_item_like);
+                holderitem.mImgIsLike = (ImageView) child.findViewById(R.id.img_item_is_like);
+                holderitem.mTvLikeState = (TextView) child.findViewById(R.id.tv_item_like_state);
+                holderitem.mTvLikeCount = (TextView) child.findViewById(R.id.tv_item_like_count);
+            }
+            convertView.setTag(holder);
+        } else {
+            holder = (Holder) convertView.getTag();
+        }
+
+        List<ItemBean> list = (List<ItemBean>) getItem(position);
+
+        int index = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (i == 0) {
+                index = position * 2;
+            } else if (i == 1) {
+                index = position * 2 + 1;
+            }
+            final int fIndex = index;
+
+            if (list.size() > 1) {
+                holder.mHolderitems[1].mRoot.setVisibility(View.VISIBLE);
+            } else {
+                holder.mHolderitems[1].mRoot.setVisibility(View.INVISIBLE);
+            }
+
+            final ItemBean item = list.get(i);
+            final Holder.Holderitem holderitem = holder.mHolderitems[i];
+            String price = UIUtils.getCurrency(mContext, item.getDefaultPrice() * item.getExchangeRate());
+            SpannableString msp = new SpannableString(price);
+            msp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, price.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holderitem.mTvPrice.setText(msp);
+            holderitem.mTvName.setText(item.getTitle());
+            ImageLoader.getInstance().displayImage(item.getImageUrl() + Constants.ImgUrlSuffix.dp_tall, holderitem.mImage, options);
+
+            holderitem.mTvLikeCount.setText(item.getLikeCount() + "");
+            if (item.hasIsLike()) {
+                holderitem.mTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_unlike));
+                holderitem.mImgIsLike.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.unlike));
+            } else {
+                holderitem.mTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_like));
+                holderitem.mImgIsLike.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.like));
+            }
+            holderitem.mRlLikeBtnRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*if ((mContext instanceof PersonInfoActivity) && PersonInfoActivity.isMyself) {
+                        boolean userLogin = AccountManager.getInstance().isUserLogin(mContext);
+                        if (!userLogin) {
+                            isRequesting = false;
+                            return;
+                        }
+                        OperaRequestManager.operateLikeItem(item.itemid, item, mContext, new OperaRequestListener() {
+                            @Override
+                            public void onOperaSuccess() {
+                                if (mContext instanceof PersonInfoActivity) {
+                                    PersonInfoActivity activity = (PersonInfoActivity) mContext;
+                                    activity.unLikeItemSuccess(item.itemid);
+                                }
+                            }
+
+                            @Override
+                            public void onOperaFailure() {
+
+                            }
+                        });
+                    } else
+
+                    {*/
+                        likeItem(item, holderitem);
+                        mCurrentItem = fIndex;
+                   // }
+
+                }
+            });
+
+
+            /*if (item.getCannotBuyit()) {
+                holderitem.mAddCart.setVisibility(View.GONE);
+                if (item.getIsCrowd() == 2 || item.getIsCrowd() == 3) {
+                    //显示拼单
+                    holderitem.mCrowd.setVisibility(View.VISIBLE);
+                } else {
+                    //不显示
+                    holderitem.mCrowd.setVisibility(View.GONE);
+                }
+            } else {
+                holderitem.mAddCart.setVisibility(View.VISIBLE);
+                holderitem.mCrowd.setVisibility(View.GONE);
+            }*/
+            holderitem.mAddCart.setVisibility(View.VISIBLE);
+            holderitem.mCrowd.setVisibility(View.GONE);
+
+            holderitem.mRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentItem = fIndex;
+                    goDetail(item, false);
+                }
+            });
+
+
+            holderitem.mAddCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentItem = fIndex;
+                    //goDetail(item, true);
+                    ShareManager.init(item.itemid,mContext);
+                }
+            });
+
+            holderitem.mCrowd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentItem = fIndex;
+                    goDetail(item, false, true);
+                }
+            });
+        }
+        return convertView;
+    }
+
+
+    class Holder {
+        Holderitem[] mHolderitems = new Holderitem[]{new Holderitem(), new Holderitem()};
+
+        class Holderitem {
+            View mRoot;
+            TextView mTvName;
+            TextView mTvPrice;
+            //LikeButton mLickeButton;
+            RelativeLayout mAddCart;
+            RelativeLayout mCrowd;
+            SelectableRoundedImageView mImage;
+
+            RelativeLayout mRlLikeBtnRoot;
+            ImageView mImgIsLike;
+            TextView mTvLikeState;
+            TextView mTvLikeCount;
+        }
+    }
+
+    public void addItem(ItemBean item) {
+        mDates.add(item);
+    }
+
+    public void addItem(List<ItemBean> items) {
+        mDates.addAll(items);
+    }
+
+    public void setDate(List<ItemBean> items) {
+        mDates = items;
+    }
+
+    public void notifyReflash() {
+        this.notifyDataSetChanged();
+    }
+
+    public void goDetail(ItemBean item, boolean addCart) {
+        goDetail(item, addCart, false);
+    }
+
+    public void goDetail(ItemBean item, boolean addCart, boolean crowd) {
+        // TODO: 2017/6/26 跳转到单品详情 ,目前这版本暂时还不需要
+        Intent intent = new Intent(mContext, ProductDetailActivity.class);
+        Bundle bundle = new Bundle();
+//        bundle.putSerializable(ProductDetailActivity.ITEM_BEAN, item);
+        intent.putExtra(ProductDetailActivity.ITEM_ID, item.getItemid());
+//        intent.putExtra(ProductDetailActivity.IS_ADD_CART, addCart);
+//        intent.putExtra(ProductDetailActivity.IS_CROWD, crowd);//可以不传，打开弹出层
+        mContext.startActivity(intent);
+
+    }
+
+    public void onEventMainThread(BusEvent event) {
+        LogUtils.d("main", this.getClass().getSimpleName());
+
+        if (event.getType() == BusEvent.OPERA_ITEM_SUCCESS) {
+            isRequesting = false;
+            ItemBean item = mDates.get(mCurrentItem);
+
+            ItemBean param = (ItemBean) event.getParam();
+            if (item.itemid == param.getItemid()) {
+                item.is_like = param.is_like;
+                item.like_count = param.like_count;
+                if (isTop()) {
+                    showCurrentLikeState(item);
+                } else {
+                    notifyDataSetChanged();
+                }
+            }
+        }
+
+        if (event.getType() == BusEvent.OPERA_ITEM_FAIL) {
+            isRequesting = false;
+            ItemBean item = mDates.get(mCurrentItem);
+            if (isTop()) {
+                showCurrentLikeState(item);
+            } else {
+                notifyDataSetChanged();
+            }
+        }
+    }
+
+
+    private boolean isTop() {
+        String topActivity = UIUtils.getTopActivity(mContext);
+        String name = mContext.getClass().getName();
+        return name.equals(topActivity);
+    }
+
+
+    private void likeItem(final ItemBean item, final Holder.Holderitem holderitem) {
+        boolean userLogin = AccountManager.getInstance().isUserLogin(mContext);
+        if (!userLogin) {
+            isRequesting = false;
+            return;
+        }
+        if (isRequesting) return;
+        isRequesting = true;
+        if (item.is_like) {
+            holderitem.mTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_unliking));
+        } else {
+            holderitem.mTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_liking));
+        }
+        mCImgIsLike = holderitem.mImgIsLike;
+        mCTvLikeCount = holderitem.mTvLikeCount;
+        mCTvLikeState = holderitem.mTvLikeState;
+
+        OperaRequestManager.operateLikeItem(item.itemid, item, null);
+
+    }
+
+    private void showCurrentLikeState(ItemBean item) {
+        mCTvLikeCount.setText(item.getLikeCount() + "");
+        if (item.hasIsLike()) {
+            mCTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_unlike));
+            mCImgIsLike.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.unlike));
+        } else {
+            mCTvLikeState.setText(mContext.getResources().getString(R.string.String_for_home_item_like));
+            mCImgIsLike.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.like));
+        }
+    }
+
+}

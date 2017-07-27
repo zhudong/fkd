@@ -1,0 +1,155 @@
+package com.fuexpress.kr.bean;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Administrator on 2016-12-5.
+ */
+
+public class PickUpItemBean implements Serializable{
+    private int itemId;
+    private List<String> itemUrlList;
+    private String itemNote;
+    private String itemAddress;
+    private String itemPrice;
+    private String itemCount;
+    private String itemBrand;
+    private String itemMaterials;
+    private int matchtagid;
+    private int matchcategoryid;
+    private String itemClass;
+    private List<String> pathList = new ArrayList<String>();
+    private int imageCount;
+    private Map<String, String> map = new HashMap<>();
+
+    public String getItemCount() {
+        return itemCount;
+    }
+
+    public void setItemCount(String itemCount) {
+        this.itemCount = itemCount;
+    }
+
+    public String getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public String getItemAddress() {
+        return itemAddress;
+    }
+
+    public void setItemAddress(String itemAddress) {
+        this.itemAddress = itemAddress;
+    }
+
+    public String getItemNote() {
+        return itemNote;
+    }
+
+    public void setItemNote(String itemNote) {
+        this.itemNote = itemNote;
+    }
+
+    public List<String> getItemUrlList() {
+        return itemUrlList;
+    }
+
+    public void setItemUrlList(List<String> itemUrlList) {
+        this.itemUrlList = itemUrlList;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public List<String> getPathList() {
+        return pathList;
+    }
+
+    public void setPathList(List<String> pathList) {
+        this.pathList = pathList;
+    }
+
+    public int getImageCount() {
+        return imageCount;
+    }
+
+    public void setImageCount(int imageCount) {
+        this.imageCount = imageCount;
+    }
+
+    public Map<String, String> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, String> map) {
+        this.map = map;
+    }
+
+    @Override
+    public String toString() {
+        return "PickUpItemBean{" +
+                "itemId=" + itemId +
+                ", itemUrlList=" + itemUrlList +
+                ", itemNote='" + itemNote + '\'' +
+                ", itemAddress='" + itemAddress + '\'' +
+                ", itemPrice='" + itemPrice + '\'' +
+                ", itemCount='" + itemCount + '\'' +
+                ", pathList=" + pathList +
+                ", imageCount=" + imageCount +
+                ", map=" + map.toString() +
+                '}';
+    }
+
+    public String getItemClass() {
+        return itemClass;
+    }
+
+    public void setItemClass(String itemClass) {
+        this.itemClass = itemClass;
+    }
+
+    public String getItemMaterials() {
+        return itemMaterials;
+    }
+
+    public void setItemMaterials(String itemMaterials) {
+        this.itemMaterials = itemMaterials;
+    }
+
+    public String getItemBrand() {
+        return itemBrand;
+    }
+
+    public void setItemBrand(String itemBrand) {
+        this.itemBrand = itemBrand;
+    }
+
+    public int getMatchcategoryid() {
+        return matchcategoryid;
+    }
+
+    public void setMatchcategoryid(int matchcategoryid) {
+        this.matchcategoryid = matchcategoryid;
+    }
+
+    public int getMatchtagid() {
+        return matchtagid;
+    }
+
+    public void setMatchtagid(int matchtagid) {
+        this.matchtagid = matchtagid;
+    }
+}

@@ -1,0 +1,394 @@
+package com.fuexpress.kr.utils;
+
+import android.support.v4.util.LongSparseArray;
+import android.text.TextUtils;
+
+import com.fuexpress.kr.bean.DemandDetailBean;
+import com.fuexpress.kr.bean.ItemImageBean;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.bean.ProductDataBean;
+import com.fuexpress.kr.bean.SysNoticeBean;
+import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.model.MerChantBean;
+import com.fuexpress.kr.model.UserInfoBean;
+import com.fuexpress.kr.ui.view.imageselector.imsbean.Image;
+import com.socks.library.KLog;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsNotice;
+import fksproto.CsParcel;
+import fksproto.CsUser;
+
+
+/**
+ * Created by k550 on 2016/6/12.
+ */
+public class ClassUtil {
+    public static Object invoke(Object object, String methodName) {
+        try {
+            Method method = object.getClass().getMethod(methodName);
+            return method.invoke(object);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object invoke(Object object, String methodName, Object arg) {
+        try {
+            Method method = object.getClass().getMethod(methodName, arg.getClass());
+            return method.invoke(object, arg);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object invoke(Class clazz, String methodName, Object arg) {
+        try {
+            Method method = clazz.getMethod(methodName, arg.getClass());
+            return method.invoke(null, arg);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object invokeInt(Object object, String methodName, int arg) {
+        try {
+            Method method = object.getClass().getDeclaredMethod(methodName, new Class[]{int.class});
+            Object[] arguments = new Object[]{new Integer(arg)};
+            return method.invoke(object, arguments);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static SysNoticeBean conventSysNotice2SysNoticeBean(CsNotice.MesssageItemdata messsageItemdata) {
+        SysNoticeBean sysNoticeBean = new SysNoticeBean();
+        sysNoticeBean.coreMsgId = messsageItemdata.getCoreMsgId();
+        sysNoticeBean.title = messsageItemdata.getTitile();
+        sysNoticeBean.sendTimeStr = messsageItemdata.getSendTimestr();
+        sysNoticeBean.isRead = messsageItemdata.getIsReaded();
+        return sysNoticeBean;
+    }
+
+    public static List<SysNoticeBean> conventSysNotceList2SysNoticeBeanList(List<CsNotice.MesssageItemdata> messsageItemdatas) {
+        List<SysNoticeBean> sysNoticeBeans = new ArrayList<>();
+        for (CsNotice.MesssageItemdata messsageItemdata : messsageItemdatas) {
+            sysNoticeBeans.add(conventSysNotice2SysNoticeBean(messsageItemdata));
+        }
+        return sysNoticeBeans;
+    }
+
+    public static DemandDetailBean conventHelpMyGetInfoResponse2DemandDetailBean(CsUser.HelpMyGetInfoResponse helpMyGetInfoResponse) {
+        DemandDetailBean detailBean = new DemandDetailBean();
+        detailBean.salesrequireid = helpMyGetInfoResponse.getSalesrequireid();
+        detailBean.createtime = helpMyGetInfoResponse.getCreatetime();
+        detailBean.requiretype = helpMyGetInfoResponse.getRequiretype();
+        detailBean.status = helpMyGetInfoResponse.getStatus();
+        detailBean.description = helpMyGetInfoResponse.getDescription();
+        detailBean.price = helpMyGetInfoResponse.getPrice();
+        detailBean.remark = helpMyGetInfoResponse.getRemark();
+        detailBean.servicefee = helpMyGetInfoResponse.getServicefee();
+        detailBean.address = helpMyGetInfoResponse.getAddress();
+        detailBean.qty = helpMyGetInfoResponse.getQty();
+        detailBean.paymentcode = helpMyGetInfoResponse.getPaymentcode();
+        detailBean.subtotal = helpMyGetInfoResponse.getSubtotal();
+        detailBean.shippingname = helpMyGetInfoResponse.getShippingname();
+        detailBean.shippingphone = helpMyGetInfoResponse.getShippingphone();
+        detailBean.shippingaddress = helpMyGetInfoResponse.getShippingaddress();
+        detailBean.imagesurl = helpMyGetInfoResponse.getImagesurlList();
+
+        detailBean.currencycode = helpMyGetInfoResponse.getCurrencycode();
+        detailBean.totalpay = Float.valueOf(helpMyGetInfoResponse.getTotalpay() + "");
+        detailBean.merchantmessage = helpMyGetInfoResponse.getMerchantmessage();
+        detailBean.giftcardaccount = helpMyGetInfoResponse.getGiftcardaccount();
+        detailBean.pricecurrencycode = helpMyGetInfoResponse.getPricecurrencycode();
+        detailBean.paymentname = helpMyGetInfoResponse.getPaymentname();
+
+        detailBean.parcelId = helpMyGetInfoResponse.getParcelId();
+        detailBean.parcelName = helpMyGetInfoResponse.getParcelName();
+        detailBean.parcelStatus = helpMyGetInfoResponse.getParcelStatus();
+        detailBean.paymentname = helpMyGetInfoResponse.getPaymentname();
+        return detailBean;
+    }
+
+    public static DemandDetailBean conventhelpMyReceiveInfoResponse2DemandDetailBean(CsUser.helpMyReceiveInfoResponse helpMyReceiveInfoResponse) {
+        DemandDetailBean detailBean = new DemandDetailBean();
+        detailBean.salesrequireid = helpMyReceiveInfoResponse.getSalesrequireid();
+        detailBean.createtime = helpMyReceiveInfoResponse.getCreatetime();
+        detailBean.requiretype = helpMyReceiveInfoResponse.getRequiretype();
+        detailBean.status = helpMyReceiveInfoResponse.getStatus();
+        detailBean.description = helpMyReceiveInfoResponse.getDescription();
+        detailBean.price = helpMyReceiveInfoResponse.getPrice();
+        detailBean.remark = helpMyReceiveInfoResponse.getRemark();
+        detailBean.qty = helpMyReceiveInfoResponse.getQty();
+
+        detailBean.warehouseid = helpMyReceiveInfoResponse.getWarehouseid();
+        detailBean.warehousename = helpMyReceiveInfoResponse.getWarehousename();
+
+        detailBean.subtotal = helpMyReceiveInfoResponse.getSubtotal();
+        detailBean.shippingname = helpMyReceiveInfoResponse.getShippingname();
+        detailBean.shippingphone = helpMyReceiveInfoResponse.getShippingphone();
+        detailBean.shippingaddress = helpMyReceiveInfoResponse.getShippingaddress();
+        detailBean.imagesurl = helpMyReceiveInfoResponse.getImagesurlList();
+
+        detailBean.merchantmessage = helpMyReceiveInfoResponse.getMerchantmessage();
+        detailBean.pricecurrencycode = helpMyReceiveInfoResponse.getPricecurrencycode();
+        detailBean.fulladdress = helpMyReceiveInfoResponse.getFulladdress();
+        detailBean.receiver = helpMyReceiveInfoResponse.getReceiver();
+        detailBean.phone = helpMyReceiveInfoResponse.getPhone();
+        detailBean.postcode = helpMyReceiveInfoResponse.getPostcode();
+
+        detailBean.parcelId = helpMyReceiveInfoResponse.getParcelId();
+        detailBean.parcelName = helpMyReceiveInfoResponse.getParcelName();
+        detailBean.parcelStatus = helpMyReceiveInfoResponse.getParcelStatus();
+        return detailBean;
+    }
+
+    public static DemandDetailBean conventhelpMyBuyInfoResponse2DemandDetailBean(CsUser.helpMyBuyInfoResponse helpMyGetInfoResponse) {
+        DemandDetailBean detailBean = new DemandDetailBean();
+        detailBean.salesrequireid = helpMyGetInfoResponse.getSalesrequireid();
+        detailBean.createtime = helpMyGetInfoResponse.getCreatetime();
+        detailBean.requiretype = helpMyGetInfoResponse.getRequiretype();
+        detailBean.status = helpMyGetInfoResponse.getStatus();
+        detailBean.description = helpMyGetInfoResponse.getDescription();
+        detailBean.price = helpMyGetInfoResponse.getPrice();
+        detailBean.remark = helpMyGetInfoResponse.getRemark();
+        detailBean.servicefee = helpMyGetInfoResponse.getServicefee();
+        //    detailBean.address=helpMyGetInfoResponse.getAddress();
+        detailBean.qty = helpMyGetInfoResponse.getQty();
+        detailBean.paymentcode = helpMyGetInfoResponse.getPaymentcode();
+        detailBean.subtotal = helpMyGetInfoResponse.getSubtotal();
+        detailBean.shippingname = helpMyGetInfoResponse.getShippingname();
+        detailBean.shippingphone = helpMyGetInfoResponse.getShippingphone();
+        detailBean.shippingaddress = helpMyGetInfoResponse.getShippingaddress();
+        detailBean.imagesurl = helpMyGetInfoResponse.getImagesurlList();
+        detailBean.currencycode = helpMyGetInfoResponse.getCurrencycode();
+        detailBean.totalpay = Float.valueOf(helpMyGetInfoResponse.getTotalpay() + "");
+        detailBean.merchantmessage = helpMyGetInfoResponse.getMerchantmessage();
+        detailBean.giftcardaccount = helpMyGetInfoResponse.getGiftcardaccount();
+        detailBean.pricecurrencycode = helpMyGetInfoResponse.getPricecurrencycode();
+        detailBean.paymentname = helpMyGetInfoResponse.getPaymentname();
+
+        detailBean.parcelId = helpMyGetInfoResponse.getParcelId();
+        detailBean.parcelName = helpMyGetInfoResponse.getParcelName();
+        detailBean.parcelStatus = helpMyGetInfoResponse.getParcelStatus();
+        detailBean.paymentname = helpMyGetInfoResponse.getPaymentname();
+        detailBean.perOrderTime = helpMyGetInfoResponse.getPreorderTime();
+        detailBean.pickUpTime = helpMyGetInfoResponse.getPickupTime();
+        return detailBean;
+    }
+
+    public static ItemImageBean conventItemImage2Bean(CsBase.ItemImage itemImage) {
+        ItemImageBean bean = new ItemImageBean();
+        bean.setImage_ratio(itemImage.getImageRatio());
+        bean.setImage_url(itemImage.getImageUrl());
+        return bean;
+    }
+
+    public static List<ItemImageBean> conventItemImageList2List(List<CsBase.ItemImage> list) {
+        List<ItemImageBean> beanList = new ArrayList<>();
+        for (CsBase.ItemImage bean : list) {
+            beanList.add(conventItemImage2Bean(bean));
+        }
+        return beanList;
+    }
+
+    public static ProductDataBean conventProductData2Bean(CsParcel.ProductDataList list) {
+        ProductDataBean bean = new ProductDataBean();
+        bean.setProductname(list.getProductname());
+        bean.setProductdescription(list.getProductdescription());
+        bean.setProductremark(list.getProductremark());
+        bean.setWarehouseid(list.getWarehouseid());
+        bean.setAddressinfo(list.getAddressinfo());
+        bean.setPrice(list.getPrice());
+        bean.setNum(list.getNum());
+        bean.setImage_num(list.getImageNum());
+        bean.setExtra(conventItemImageList2List(list.getExtraList()));
+        return bean;
+    }
+
+    public static List<ProductDataBean> conventProductDataList2List(List<CsParcel.ProductDataList> lists) {
+        List<ProductDataBean> beanList = new ArrayList<>();
+        for (CsParcel.ProductDataList bean : lists) {
+            beanList.add(conventProductData2Bean(bean));
+        }
+        return beanList;
+    }
+
+    public static CsBase.ItemImage conventBean2Item(ItemImageBean bean) {
+        CsBase.ItemImage.Builder builder = CsBase.ItemImage.newBuilder();
+        builder.setImageRatio(bean.getImage_ratio());
+        builder.setImageUrl(bean.getImage_url());
+        return builder.build();
+    }
+
+    public static List<CsBase.ItemImage> conventBeanList2List(List<ItemImageBean> been) {
+        List<CsBase.ItemImage> itemImages = new ArrayList<>();
+        for (ItemImageBean bean : been) {
+            itemImages.add(conventBean2Item(bean));
+        }
+        return itemImages;
+    }
+
+    public static CsParcel.ProductDataList conventProductDataBean2Data(ProductDataBean bean) {
+        CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+        builder.setProductname(bean.getProductname());
+        builder.setProductdescription(bean.getProductdescription());
+        builder.setProductremark(bean.getProductremark());
+        builder.setWarehouseid(bean.getWarehouseid());
+        builder.setAddressinfo(bean.getAddressinfo());
+        builder.setPrice(bean.getPrice());
+        builder.setNum(bean.getNum());
+        for (ItemImageBean imageBean : bean.getExtra()) {
+            builder.addExtra(ClassUtil.conventBean2Item(imageBean));
+        }
+        return builder.build();
+    }
+
+    public static List<CsParcel.ProductDataList> conventProductDataBean2List(List<ProductDataBean> been) {
+        List<CsParcel.ProductDataList> lists = new ArrayList<>();
+        for (ProductDataBean bean : been) {
+            lists.add(conventProductDataBean2Data(bean));
+        }
+        return lists;
+    }
+
+    public static CsParcel.ProductDataList conventBean2ProductData(PickUpItemBean bean) {
+        CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+        //这里是针对补货的item的转换，分别对应商品名称，备注说明，价格，数量
+        //2017.1.20 添加品牌名称，材质，分类
+        builder.setProductname(bean.getItemNote());
+        builder.setProductremark(bean.getItemAddress());
+        KLog.i("description = " + bean.getItemAddress());
+        builder.setPrice(bean.getItemPrice());
+        builder.setNum(bean.getItemCount());
+        builder.setImageNum(bean.getPathList().size());
+        builder.setMatchcategoryid(bean.getMatchcategoryid());
+        if (!TextUtils.isEmpty(bean.getItemBrand())) {
+            builder.setBrandname(bean.getItemBrand());
+        }
+        if (!TextUtils.isEmpty(bean.getItemMaterials())) {
+            builder.setMatchtagid(bean.getMatchtagid());
+        }
+
+        for (String str : bean.getMap().values()) {
+            CsBase.ItemImage.Builder builder1 = CsBase.ItemImage.newBuilder();
+            builder1.setImageUrl(str);
+            builder.addExtra(builder1.build());
+        }
+
+        return builder.build();
+    }
+
+    public static List<CsParcel.ProductDataList> conventBeanList2DataList(List<PickUpItemBean> been) {
+        List<CsParcel.ProductDataList> lists = new ArrayList<>();
+        for (PickUpItemBean bean : been) {
+            if (bean != null) {
+                lists.add(conventBean2ProductData(bean));
+            }
+        }
+        return lists;
+    }
+
+
+    public static List<ItemBean> convertItemList2ItemBean(List<CsBase.Item> items) {
+        List<ItemBean> list = new ArrayList<>();
+        for (CsBase.Item item : items) {
+            list.add(convertItem2ItemBean(item));
+        }
+        return list;
+    }
+
+    public static ItemBean convertItem2ItemBean(CsBase.Item item) {
+        return convertItem2ItemBean(null, item);
+    }
+
+    public static ItemBean convertItem2ItemBean(ItemBean itemBean, CsBase.Item item) {
+        if (itemBean == null) {
+            itemBean = new ItemBean();
+        }
+        itemBean.itemid = item.getItemid();
+        itemBean.name = item.getName();
+        itemBean.title = item.getTitle();
+        itemBean.image_url = item.getImageUrl();
+        itemBean.default_currency = item.getDefaultCurrency();
+        itemBean.default_price = item.getDefaultPrice();
+        itemBean.desc = item.getDesc();
+        itemBean.like_count = item.getLikeCount();
+        itemBean.is_like = item.getIsLike();
+        itemBean.exchange_rate = item.getExchangeRate();
+        itemBean.album_id = item.getAlbumId();
+        itemBean.image_ratio = item.getImageRatio();
+        itemBean.cannot_buyit = item.getCannotBuyit();
+        itemBean.crowd_id = item.getCrowdId();
+        itemBean.place = item.getPlace();
+        itemBean.crowd_product_id = item.getCrowdProductId();
+        itemBean.product_id = item.getProductId();
+        itemBean.alert_type = item.getAlertType();
+        itemBean.is_crowd = item.getIsCrowd();
+        itemBean.crowd_order_id = item.getCrowdOrderId();
+        itemBean.create_id = item.getCreateId();
+        itemBean.currency_code = item.getCurrencyCode();
+        return itemBean;
+    }
+
+    public static UserInfoBean conventUser2UserInfoBean(CsBase.UserInfo userInfo) {
+        UserInfoBean userInfoBean = new UserInfoBean();
+        userInfoBean.setUin(userInfo.getUin());
+        userInfoBean.setAvatar(userInfo.getAvatar());
+        userInfoBean.setNickname(userInfo.getNickname());
+        userInfoBean.setGender(userInfo.getGender());
+        userInfoBean.setRegion(userInfo.getRegion());
+        userInfoBean.setMember_group(userInfo.getMemberGroup());
+        userInfoBean.setIntro(userInfo.getIntro());
+        return userInfoBean;
+    }
+
+
+    public static List<MerChantBean> conventMerChantList2MerChantBeanList(List<CsBase.Merchant> merchants) {
+        List<MerChantBean> merChantBeans = new ArrayList<>();
+        for (CsBase.Merchant merchant : merchants) {
+            merChantBeans.add(conventMerchant2MerChantBean(merchant));
+        }
+        return merChantBeans;
+    }
+
+    //转换CsBase.Merchant为 MerChantBean
+    public static MerChantBean conventMerchant2MerChantBean(CsBase.Merchant merchant) {
+        MerChantBean merChantBean = new MerChantBean();
+        merChantBean.setMerchantid(merchant.getMerchantid());
+        merChantBean.setAuthor(merchant.getAuthor());
+        merChantBean.setName(merchant.getName());
+        merChantBean.setTitle(merchant.getTitle());
+        merChantBean.setCover(merchant.getCover());
+        merChantBean.setAddress(merchant.getAddress());
+        merChantBean.setContact(merchant.getContact());
+        merChantBean.setDesc(merchant.getDesc());
+        merChantBean.setFollow_num(merchant.getFollowNum());
+        merChantBean.setIs_follow(merchant.getIsFollow());
+        merChantBean.setUrl(merchant.getUrl());
+        merChantBean.setLatitude(merchant.getLatitude());
+        merChantBean.setLongitude(merchant.getLongitude());
+        merChantBean.setPlace(merchant.getPlace());
+        return merChantBean;
+    }
+
+
+    //把item以键值对的形式储存起来的方法
+    public static void convertItemList2ItemBeanMap(List<CsBase.Item> items, LongSparseArray<ItemBean> itemBeanLongSparseArray) {
+        //List<ItemBean> list = new ArrayList<>();
+        //LongSparseArray<ItemBean> itemBeanLongSparseArray = new LongSparseArray<>();
+        for (CsBase.Item item : items) {
+            itemBeanLongSparseArray.put(item.getItemid(), convertItem2ItemBean(item));
+        }
+        //return itemBeanLongSparseArray;
+    }
+}

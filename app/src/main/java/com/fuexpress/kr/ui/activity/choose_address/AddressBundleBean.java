@@ -1,0 +1,192 @@
+package com.fuexpress.kr.ui.activity.choose_address;
+
+import com.fuexpress.kr.model.AccountManager;
+
+import java.io.Serializable;
+
+/**
+ * Created by Longer on 2017/4/27.
+ */
+public class AddressBundleBean implements Serializable {
+
+    String localeCode = AccountManager.getInstance().getLocaleCode();//语种
+    int page = 1;//第几页
+    int num = 20;//一页显示几条
+    String couSntryCode;//国家代码
+    String regionId;//地区id(新增不需要,编辑才需要)
+    String backTitle;//返回的箭头文字
+    String title;//标题
+    String selectedString;//已选中的地址信息String
+    boolean isCountryType;//用来标记是选国家还是地区
+    String parentId;//父地区ID
+    String regionCode;//地区的XX_XX_XX码
+    String defaultProvinceId;//默认的省码
+    String defaultCityId;//默认的市码
+    String defaultprovinceString;//默认的省字符串
+    String defaultCityString;//默认的市字符串
+    String defaultRegionCode;//默认的地区码
+    String provinceString;//省的String0
+    String cityString;//城市的字符串
+    boolean isCity;
+    int sortBy = 0;
+
+    public int getSortBy() {
+        return sortBy;
+    }
+
+    public void setSortBy(int sortBy) {
+        this.sortBy = sortBy;
+    }
+
+    public String getCityString() {
+        return cityString;
+    }
+
+    public void setCityString(String cityString) {
+        this.cityString = cityString;
+    }
+
+    public String getProvinceString() {
+        return provinceString;
+    }
+
+    public void setProvinceString(String provinceString) {
+        this.provinceString = provinceString;
+    }
+
+    public boolean isCity() {
+        return isCity;
+    }
+
+    public void setIsCity(boolean isCity) {
+        this.isCity = isCity;
+    }
+
+    public String getDefaultProvinceId() {
+        return defaultProvinceId;
+    }
+
+    public void setDefaultProvinceId(String defaultProvinceId) {
+        this.defaultProvinceId = defaultProvinceId;
+    }
+
+    public String getDefaultCityId() {
+        return defaultCityId;
+    }
+
+    public void setDefaultCityId(String defaultCityId) {
+        this.defaultCityId = defaultCityId;
+    }
+
+    public String getDefaultprovinceString() {
+        return defaultprovinceString;
+    }
+
+    public void setDefaultprovinceString(String defaultprovinceString) {
+        this.defaultprovinceString = defaultprovinceString;
+    }
+
+    public String getDefaultCityString() {
+        return defaultCityString;
+    }
+
+    public void setDefaultCityString(String defaultCityString) {
+        this.defaultCityString = defaultCityString;
+    }
+
+    public String getDefaultRegionCode() {
+        return defaultRegionCode;
+    }
+
+    public void setDefaultRegionCode(String defaultRegionCode) {
+        this.defaultRegionCode = defaultRegionCode;
+    }
+
+    public String getRegionCode() {
+        return regionCode;
+    }
+
+    public void setRegionCode(String regionCode) {
+        this.regionCode = regionCode;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public boolean isCountryType() {
+        return isCountryType;
+    }
+
+    public void setIsCountryType(boolean isCountryType) {
+        this.isCountryType = isCountryType;
+    }
+
+    public String getSelectedString() {
+        return selectedString;
+    }
+
+    public void setSelectedString(String selectedString) {
+        this.selectedString = selectedString;
+    }
+
+    public String getBackTitle() {
+        return backTitle;
+    }
+
+    public void setBackTitle(String backTitle) {
+        this.backTitle = backTitle;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getLocaleCode() {
+        return localeCode;
+    }
+
+    public void setLocaleCode(String localeCode) {
+        this.localeCode = localeCode;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getCouSntryCode() {
+        return couSntryCode;
+    }
+
+    public void setCouSntryCode(String couSntryCode) {
+        this.couSntryCode = couSntryCode;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+}

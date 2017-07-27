@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    >
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_address_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/address_manager"/>
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/rfl_in_address_manager"
+        android:dividerHeight="10dp"
+        android:divider="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

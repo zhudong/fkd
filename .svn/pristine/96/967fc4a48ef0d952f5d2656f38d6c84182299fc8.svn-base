@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_03"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/pay_success_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zhudong:text="@string/card_payment_success_title_bar_title"></com.fuexpress.kr.ui.view.TitleBarView>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/payment_success"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_result_payment_success_order_title"
+                android:textColor="@color/title_color"/>
+        </LinearLayout>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gift_card_thanks_msg"
+            android:textColor="@color/text_gray"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gift_card_payment_success_order_no"
+                android:textColor="@color/text_gray"
+                />
+
+            <TextView
+                android:id="@+id/card_payment_order_no_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title_color"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/card_payment_go_home_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/card_payment_success_to_home_msg"
+        android:textColor="@color/white" />
+</LinearLayout>

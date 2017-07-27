@@ -1,0 +1,80 @@
+package com.fuexpress.kr.model;
+
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.bean.AppInfo;
+import com.fuexpress.kr.service.UpdateService;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.CommonUtils;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Callback;
+
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class Update {
+    public static void getNewVersion(final Activity context) {
+        String url = " http://api.fir.im/apps/latest/57d91355ca87a8067b000608?api_token=9bb7210eb739780524f859683bcc40bc";
+//        String url = " http://api.fir.im/latest/57ccb739780524f859683bcc40bc";
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("update", "update fail");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                final AppInfo appInfo = gson.fromJson(response.body().string(), AppInfo.class);
+                int versionCode = CommonUtils.getVersionCode(context);
+                if (appInfo.getVersion() == null) {
+                    return;
+                }
+
+                if (Integer.valueOf(appInfo.getVersion()) <= versionCode) {
+                    return;
+                }
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context)
+                                .setTitle(context.getString(R.string.update_tip_title))
+                                .setMessage(appInfo.getName() + "\n" + context.getString(R.string.update_new_version) + appInfo.getVersionShort() + "\n" + appInfo.getChangelog())
+                                .setCancelable(false)
+                                .setPositiveButton(context.getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(context, UpdateService.class);
+                                        intent.putExtra(UpdateService.UPDATE_URL, appInfo.getInstall_url());
+                                        context.startService(intent);
+                                    }
+                                }).setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+//                                        work(0);
+                                    }
+                                });
+                        builder.show();
+                    }
+                });
+            }
+
+        });
+    }
+}

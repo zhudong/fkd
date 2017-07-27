@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_input_declare"
+            style="@style/parcel_text_gray_33_13"
+            android:text="@string/String_parcel_declare_item"/>
+
+        <ImageView
+            android:id="@+id/img_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_input_declare"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/tv_input_declare"
+            android:src="@mipmap/star"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <com.fuexpress.kr.ui.activity.package_detail.AutoEditText
+            android:id="@+id/edt_input"
+            style="@style/parcel_input_append_info"
+            android:layout_width="0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="85dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:dropDownVerticalOffset="4dp"
+            android:dropDownWidth="176dp"
+            android:hint="@string/String_parcel_declare_item_tips"
+            />
+
+        <TextView
+            android:id="@+id/tv_input_type"
+            style="@style/parcel_text_gray_99_13"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/String_money_unit"/>
+
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/arrow_right"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        style="@style/parcel_divide_line"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

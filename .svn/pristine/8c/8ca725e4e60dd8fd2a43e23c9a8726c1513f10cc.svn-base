@@ -1,0 +1,147 @@
+package com.fuexpress.kr.ui.fragment;
+
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.CouponAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fksproto.CsCard;
+import fksproto.CsUser;
+
+
+/**
+ * Created by kevin.xie on 2016/10/25.
+ */
+
+public class CouponListFragment extends BaseFragment {
+    public final static String CURRENCY_CODE = "Currency_code";
+    public final static String CURRENCY_SIGN="Currency_sign";
+
+    @BindView(R.id.coupon_listview)
+    RefreshListView mCouponListview;
+    private List<CsUser.CouponList> mCouponLists=new ArrayList<>();
+    private String mCurrencyCode,mCurrencySign;
+    private RefreshListView.OnRefreshListener mOnRefreshListener=new RefreshListView.OnRefreshListener() {
+        @Override
+        public void onRefresh(RefreshListView refreshListView) {
+            getCouponDataList(1,mCurrencyCode);
+            //   mCouponListview.startRefresh();
+        }
+
+        @Override
+        public void onLoadMore(RefreshListView refreshListView) {
+            mCouponListview.setHasLoadMore(false);
+            mCouponListview.stopLoadMore(false);
+        }
+    };
+    public static CouponListFragment newInstance(Bundle args) {
+        CouponListFragment f = new CouponListFragment();
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        View view = View.inflate(SysApplication.getContext(), R.layout.fragment_coupon, null);
+        return view;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        KLog.i("coupon","resume");
+        getCouponDataList(1,mCurrencyCode);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        //  CouponDataManager.getInstance().getCouponDataList();
+        Bundle bundle = getArguments();
+        mCurrencyCode = bundle.getString(CouponListFragment.CURRENCY_CODE);
+        mCurrencySign= bundle.getString(CouponListFragment.CURRENCY_SIGN);
+        getCouponDataList(1,mCurrencyCode);
+        mCouponListview.setOnRefreshListener(mOnRefreshListener);
+        mCouponListview.setHasLoadMore(false);
+        mCouponListview.stopLoadMore(false);
+        mCouponListview.setFooterViewHide();
+        return rootView;
+    }
+    public  void  getCouponDataList(final int pageNo, final String code){
+        if(pageNo==1){
+            mCouponLists=null;
+        }
+        CsUser.MyShippingCouponListRequest.Builder builder=CsUser.MyShippingCouponListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
+        builder.setPagenum(pageNo);
+        builder.setCurrencycode(code);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.MyShippingCouponListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.MyShippingCouponListResponse response) {
+//                KLog.i("coupon",response.toString());
+                for(CsUser.CouponList c:response.getCouponlistList()){
+                    addData2List(c);
+                }
+                if(Constants.Coupon.NO_MORE.equals(response.getStatus())){
+                    //没有更多
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCouponListview.stopRefresh();
+                            CouponAdapter adapter = new CouponAdapter(CouponListFragment.this.getContext(), mCouponLists,mCurrencySign);
+                            mCouponListview.setAdapter(adapter);
+                        }
+                    });
+                }else {
+                    getCouponDataList(pageNo+1,code);
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("coupon" ,errMsg);
+            }
+        });
+    }
+    private void addData2List(CsUser.CouponList list){
+        if(mCouponLists==null){
+            mCouponLists=new ArrayList<>();
+        }
+        mCouponLists.add(list);
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+}

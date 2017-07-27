@@ -1,0 +1,19 @@
+package com.fuexpress.kr.ui.activity.login_register;
+
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class BindThirdPlatformActivity extends BaseActivity {
+    @Override
+    public View setInitView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_login_phone, null);
+        return view;
+    }
+}

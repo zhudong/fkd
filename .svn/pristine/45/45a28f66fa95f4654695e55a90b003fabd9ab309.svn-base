@@ -1,0 +1,631 @@
+package com.fuexpress.kr.model;
+
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.RequestNetListener;
+import com.fuexpress.kr.ui.activity.login_register.BindThirdPlatformActivity;
+import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.CommonUtils;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.MD5Util;
+import com.fuexpress.kr.utils.SPUtils;
+import com.socks.library.KLog;
+
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsLogin;
+import fksproto.CsUser;
+
+
+/**
+ * Created by alick on 2/29/16.
+ * 4.28修正，取消使用账号密码登录，改为直接使用ticket,session.
+ * 5.3修正，对 密码、sessionkey,ticket,h5ticket,openid,token进行MD5和AES加密，其中AES加密使用与手机相关的一个标识码
+ */
+public class AccountManager {
+    private final static String TAG = "AccountManager";
+    //第三方登录标记EncryptUtils
+    public static final int THIRD_PLATFROM_WX = 1;
+    public static final int THIRD_PLATFROM_QQ = 2;
+    public static final int THIRD_PLATFROM_WB = 3;
+    public static final int THIRD_PLATFROM_FB = 4;
+    public static final int TYPE_PHONE = 4;
+    public static final int TYPE_EMAIL = 5;
+
+    public int mUin;
+    public String mTicket;
+    public String mH5Ticket;
+    public String H5head;
+    public String mSessionKey;
+    //登录类型
+    public int type;
+    //邮箱账号
+    public String emailStr = "";
+    // 个人简介
+    public String mIntro;
+    // 个人头像地址
+    public String avater = "";
+    //用户地区码
+    public String mLocaleCode ="";
+    //用户货币符号
+    public String mCurrencyCode ="";
+    //用户货币id
+    public int mCurrencyId=0;
+
+    public String nikename = "";
+    // 个人手机号
+    public String mMobile="";
+    //用户选择的国家和区号
+    public String userCountry =UIUtils.getString(R.string.country_default);
+    public String userNumber = "86";
+    //国家码
+    public String mCountryCode="CN";
+    //第三方登录需要的值
+    public String openid = "";
+    public String token = "";
+    public String WX_refresh_token = "";
+    public String thridUserIcon = "";
+    public String thridNickname = "";
+    public int thirdPlatfrom = 0;
+    //userInfo
+    public CsBase.UserInfo userInfo;
+    public int albumCount, itemCount, likeCount, followingShopCount, followingAlbumCount;
+    public static boolean isLogin = false;
+    public boolean needBind = false;
+    private static AccountManager ourInstance = new AccountManager();
+    public String mInviteKey;
+    private String mAccountNumber;
+    public int mGender;
+    public String mRegion;
+    public int mMemberGroup;
+    public boolean isOpenOrder=true;
+    public static AccountManager getInstance() {
+        return ourInstance;
+    }
+
+    private AccountManager() {
+    }
+
+    public void login(CsLogin.AccountType accountType, String account, final String password, final String accountExtra, final Context context) {
+        // type = 2 是手机185
+        SPUtils.put(context,Constants.LOGIN_TYPE.LOGIN_TYPE,accountType.getNumber());
+        type = accountType.getNumber();
+        CsLogin.LoginRequest.Builder builder = CsLogin.LoginRequest.newBuilder();
+        if (type == 1) {
+            emailStr = account;
+            SharedPreferences accountShare = context.getSharedPreferences("accountShare", 101);
+            accountShare.edit().putString("emailStr", emailStr).commit();
+        } else {
+            if (AccountManager.getInstance().userNumber != null) {
+                builder.setAccountExtra(AccountManager.getInstance().userNumber);
+            }
+        }
+        //    Log.i(TAG, "type = " + type);
+        builder.setAccountType(accountType.getNumber());
+        mAccountNumber = account;//因为修改密码需要用到这个参数，这里就作为成员变量保存一下
+        builder.setAccount(account);
+        try {
+            builder.setPassword(MD5Util.getMD5(password).toLowerCase());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        KLog.i("account = " + account + " password = " + (MD5Util.getMD5(password).toLowerCase()));
+        mSessionKey = null;
+        builder.setRandomKey(NetEngine.sRandomKey);
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.LoginResponse>() {
+            @Override
+            public void onSuccess(CsLogin.LoginResponse response) {
+                KLog.i("AccountManager", response.toString());
+                saveSeesion(response.getUin(), response.getSessionKey(), response.getTicket(), response.getH5Ticket(), response.getLocalecode(),response.getCurrencycode(),response.getCurrencyid(),password, accountExtra, context);
+                //todo: notify login success
+                EventBus.getDefault().post(new BusEvent(BusEvent.LOGIN_SUCCESS, null));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.e("Biz", "failed ,ret=" + ret + ",errMsg" +errMsg);
+                // 登录失败
+                EventBus.getDefault().post(new BusEvent(BusEvent.LOGIN_FAILURE, errMsg));
+            }
+        });
+    }
+
+    public void getUserCount() {
+        //    KLog.i(TAG, "获取我的关注图集，单品等数");
+        //简单信息
+     /*   CsUser.GetMyCounterRequest.Builder builder = CsUser.GetMyCounterRequest.newBuilder();
+        builder.setAuthor(AccountManager.getInstance().mUin);
+        //我的图集数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_ALBUM_VALUE);
+        //我的单品
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_ITEM_VALUE);
+        //喜欢
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_LIKE_VALUE);
+        //关注商店数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_FOLLOW_MERCHANT_VALUE);
+        //关注图集数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_FOLLOW_ALBUM_VALUE);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetMyCounterResponse>() {
+            @Override
+            public void onSuccess(CsUser.GetMyCounterResponse response) {
+                //    Log.i(TAG + " kevin", response.toString());
+                for (CsUser.Counter count : response.getCountersList()) {
+                    switch (count.getCounterType()) {
+                        case CsUser.CounterType.COUNTER_TYPE_ALBUM_VALUE:
+                            AccountManager.getInstance().albumCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_ITEM_VALUE:
+                            AccountManager.getInstance().itemCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_LIKE_VALUE:
+                            AccountManager.getInstance().likeCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_FOLLOW_MERCHANT_VALUE:
+                            AccountManager.getInstance().followingShopCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_FOLLOW_ALBUM_VALUE:
+                            AccountManager.getInstance().followingAlbumCount = count.getCounterValue();
+                            break;
+
+                    }
+                }
+             *//*   Log.i(TAG, "0 = " + response.getCounters(0).getCounterValue());
+                Log.i(TAG, "1 = " + response.getCounters(1).getCounterValue());*//*
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_COUNT_SUCCESS, null));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //     Log.e("kevinonFailure", "failed ,ret=" + ret + ",errMsg" + errMsg);
+            }
+        });*/
+
+    }
+
+    public void getUserinfo() {
+        //简单信息
+        KLog.i("getUserInfo");
+        CsUser.GetSimpleUserInfoRequest.Builder builder = CsUser.GetSimpleUserInfoRequest.newBuilder();
+        builder.setAuthor(AccountManager.getInstance().mUin);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetSimpleUserInfoResponse>() {
+            @Override
+            public void onSuccess(CsUser.GetSimpleUserInfoResponse response) {
+                KLog.i(response.toString());
+                avater = response.getUser().getAvatar();
+                //    LogUtils.e("userIcon", avater);
+                nikename = response.getUser().getNickname();
+                mGender = response.getUser().getGender();
+                mRegion = response.getUser().getRegion();
+                mMemberGroup = response.getUser().getMemberGroup();
+                mIntro = response.getUser().getIntro();
+                userInfo = response.getUser();
+                //    KLog.i("login");
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_INFO_SUCCESS, null));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.e("kevin onFailure", "failed ,ret=" + ret + ",errMsg" + errMsg);
+            }
+        });
+
+        //请求指定用户字段的请求,暂时只请求了用户的邀请码(Add By Longer)
+        CsUser.GetUserInfoFieldRequest.Builder builder1 = CsUser.GetUserInfoFieldRequest.newBuilder();
+        builder1.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_INVITE_KEY_VALUE);
+
+        //builder1.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_URL_KEY_VALUE);
+        NetEngine.postRequest(builder1, new INetEngineListener<CsUser.GetUserInfoFieldResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetUserInfoFieldResponse response) {
+                // LogUtils.e("我是请求回来的字段:" + response.toString());
+                CsUser.UserInfoField fields = response.getFields(0);
+                int fieldType = fields.getFieldType();
+                if (CsUser.UserInfoFieldType.USER_INFO_FIELD_INVITE_KEY_VALUE == fieldType) {
+                    mInviteKey = fields.getFieldValue();
+                }
+                //LogUtils.e("我是请求回来字段值的值:" + fieldValue);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //    LogUtils.e("请求用户字段失败!" + " " + ret + " " + errMsg);
+            }
+        });
+        getExtraInfo();
+    }
+    public void getExtraInfo(){
+        /*CsUser.GetUserInfoFieldRequest.Builder builder = CsUser.GetUserInfoFieldRequest.newBuilder();
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_EMAIL_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_MOBILE_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_PHONE_VALUE);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetUserInfoFieldResponse>() {
+            @Override
+            public void onSuccess(CsUser.GetUserInfoFieldResponse response) {
+                //   KLog.i("response" + response.toString());
+                for (CsUser.UserInfoField count : response.getFieldsList()) {
+                    switch (count.getFieldType()) {
+                        case 18:
+                            mMobile=count.getFieldValue();
+                            break;
+                        case 3:
+                            emailStr=count.getFieldValue();
+                            break;
+                    }
+                }
+            }
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //    LogUtils.e("请求用户字段失败!" + " " + ret + " " + errMsg);
+            }
+        });*/
+    }
+    //判断用户权限
+    public boolean isUserLogin(Context mContext) {
+        if (mContext == null) {
+            return false;
+        }
+        if (!isLogin) {
+            Intent intent = new Intent(mContext, LoginByPhoneActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//因为可能在非Activity中启动
+            mContext.startActivity(intent);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void logout(Context context) {
+        isLogin = false;
+        mUin = 0;
+        mTicket = "";
+        mH5Ticket = "";
+        mSessionKey = null;
+        albumCount = 0;
+        itemCount = 0;
+        likeCount = 0;
+        followingShopCount = 0;
+        followingAlbumCount = 0;
+        avater = "";
+        nikename = "";
+        mIntro = "";
+        H5head = "";
+        SPUtils.clear(context);
+       /* AlbumManager.getInstance().logout();
+        RedPointCountManager.Logout();
+        cleanCache((Activity) context);
+        EventBus.getDefault().post(new BusEvent(BusEvent.CLEAN_USER_INFO, null));*/
+    }
+
+    //第三方登录，参数分别是第三方登录需要的平台，token值，openid值,从其他的Activity调用登录则需要Activity。
+    public void loginByThirdPlatform(final int platform, final String token, final String openid, final Activity activity) {
+        KLog.i(TAG, "openid = " + openid + " access_token = " + token + " platform = " + platform);
+        if (platform > 5 || platform < 1) {
+            KLog.i(TAG, "平台信息有误");
+            return;
+        }
+        if (activity != null) {
+            AccountManager.getInstance().thirdPlatfrom = platform;
+            AccountManager.getInstance().openid = openid;
+            AccountManager.getInstance().token = token;
+        }
+
+
+        CsLogin.ThirdLoginRequest.Builder builder = CsLogin.ThirdLoginRequest.newBuilder();
+        switch (platform) {
+            case AccountManager.THIRD_PLATFROM_QQ:
+                //QQ登录
+                builder.setPlatform(CsLogin.AuthPlatform.AUTH_PLATFORM_QQ_VALUE);
+                break;
+            case AccountManager.THIRD_PLATFROM_WB:
+                //微博登录
+                builder.setPlatform(CsLogin.AuthPlatform.AUTH_PLATFORM_SINA_VALUE);
+                break;
+            case AccountManager.THIRD_PLATFROM_WX:
+                //微信登录
+                builder.setPlatform(CsLogin.AuthPlatform.AUTH_PLATFORM_WX_VALUE);
+                break;
+            case AccountManager.THIRD_PLATFROM_FB:
+                builder.setPlatform(CsLogin.AuthPlatform.AUTH_PLATFORM_FACEBOOK_VALUE);
+                break;
+        }
+
+        builder.setOpenid(openid);
+        builder.setToken(token);
+        builder.setRandomKey(NetEngine.sRandomKey);
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.ThirdLoginResponse>() {
+            @Override
+            public void onSuccess(CsLogin.ThirdLoginResponse response) {
+                //第三方登录成功
+                Log.i(TAG, response.toString());
+            //    EventBus.getDefault().post(new BusEvent(BusEvent.GET_INFO_SUCCESS, null));
+                saveSeesion(response.getUin(), response.getSessionKey(), response.getTicket(), response.getH5Ticket(),response.getLocalecode(),response.getCurrencycode(),response.getCurrencyid(), null, null, activity);
+
+            }
+
+            public void onFailure(final int ret, String errMsg) {
+                KLog.e(TAG, "failed ,ret=" + ret + ",errMsg " + errMsg + "  " + CommonUtils.getErrMsg(ret));
+//                if (platform == AccountManager.THIRD_PLATFROM_WB) {
+//                    String url = "https://api.weibo.com/2/users/show.json?access_token=" + token + "&uid=" + openid;
+//                    WeiBoUserManager.getWeiboUserInfo(url);
+//                }
+
+                if (activity != null) {
+                    Intent intent = new Intent(activity, BindThirdPlatformActivity.class);
+                    activity.startActivity(intent);
+                }
+            }
+        });
+    }
+
+    //第三方绑定手机号或者邮箱。在注册或者登陆成功后，调用此方法，绑定账号。绑定以后，既可以使用第三方账号登录
+    public void bindThirdPlatform(int type, String account, String pwd) {
+        if (type != TYPE_PHONE && type != TYPE_EMAIL) {
+            //参数有误，return
+            return;
+        }
+        CsLogin.AccountRequest.Builder builder = CsLogin.AccountRequest.newBuilder();
+        builder.setOperacode(CsLogin.AccountOperacode.ACCOUNT_OPERACODE_THIRD_BIND_VALUE);
+
+        switch (type) {
+            case TYPE_EMAIL:
+                builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_EMAIL_VALUE);
+                break;
+            case TYPE_PHONE:
+                builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_PHONE_VALUE);
+                builder.setAccountExtra(AccountManager.getInstance().userNumber);
+
+
+                break;
+        }
+//        KLog.i(TAG, "account = " + account + " pwd = " + pwd + " type = " + type);
+        builder.setAccount(account);
+        builder.setPassword(MD5Util.getMD5(pwd).toLowerCase());
+        builder.setRandomKey(NetEngine.sRandomKey);
+        CsLogin.ThirdAccount.Builder thirdAccount = CsLogin.ThirdAccount.newBuilder();
+        int platformInt = AccountManager.getInstance().thirdPlatfrom;
+        switch (AccountManager.getInstance().thirdPlatfrom) {
+            case THIRD_PLATFROM_WX:
+                platformInt = CsLogin.AuthPlatform.AUTH_PLATFORM_WX_VALUE;
+                break;
+            case THIRD_PLATFROM_QQ:
+                platformInt = CsLogin.AuthPlatform.AUTH_PLATFORM_QQ_VALUE;
+                break;
+            case THIRD_PLATFROM_WB:
+                platformInt = CsLogin.AuthPlatform.AUTH_PLATFORM_SINA_VALUE;
+                break;
+            case THIRD_PLATFROM_FB:
+                platformInt=CsLogin.AuthPlatform.AUTH_PLATFORM_FACEBOOK_VALUE;
+                break;
+        }
+        thirdAccount.setPlatform(platformInt);
+        thirdAccount.setOpenid(AccountManager.getInstance().openid);
+        thirdAccount.setToken(AccountManager.getInstance().token);
+        //    KLog.i("openid = "+openid+" token = "+token+ " int = "+platformInt);
+
+        builder.setThird(thirdAccount);
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.AccountResponse>() {
+            @Override
+            public void onSuccess(CsLogin.AccountResponse response) {
+                KLog.i(TAG, response.toString());
+                AccountManager.getInstance().loginByThirdPlatform(AccountManager.getInstance().thirdPlatfrom, AccountManager.getInstance().token, AccountManager.getInstance().openid, null);
+            }
+
+            public void onFailure(final int ret, String errMsg) {
+                KLog.e(TAG, "failed ,ret=" + ret + ",errMsg " + CommonUtils.getErrMsg(ret));
+
+
+            }
+        });
+    }
+
+    //从本地读取票据
+    public boolean getSession() {
+        Context context=UIUtils.getContext();
+        mUin = (int) SPUtils.get(context, Constants.USER_INFO.USER_MUIN, 0);
+        mTicket = (String) SPUtils.get(context, Constants.USER_INFO.USER_ITCKET, "");
+        mH5Ticket = (String) SPUtils.get(context, Constants.USER_INFO.USER_H5TICKET, "");
+        mSessionKey = (String) SPUtils.get(context, Constants.USER_INFO.USER_SESSION_KEY, "");
+        mLocaleCode =(String)SPUtils.get(context,Constants.USER_INFO.USER_LOCELA_CODE,"");
+        mCurrencyCode =(String)SPUtils.get(context,Constants.USER_INFO.USER_CURRENCY_CODE,"");
+        mCurrencyId=(int)SPUtils.get(context,Constants.USER_INFO.USER_CURRENCY_ID,0);
+        KLog.i(" mTicket  = " +mTicket+" mH5Ticket = "+mH5Ticket+" mSessionKey = "+mSessionKey+" uin = "+mUin);
+        if (mUin == 0 || TextUtils.isEmpty(mTicket) || TextUtils.isEmpty(mH5Ticket) || TextUtils.isEmpty(mSessionKey)) {
+            KLog.a("未登录");
+            return false;
+        } else {
+            AccountManager.isLogin = true;
+          /*  if (AlbumManager.getInstance().simpleAlbumBeans == null) {
+                AlbumManager.getInstance().getSimpleAlbumList();    //获取用户的图集列表
+            }
+            H5head = "&uin=" + mUin + "&ticket=" + mH5Ticket;
+            RedPointCountManager.getOrderCount();       //获取用户的红点数*/
+            getUserinfo();                              //获取用户的头像、昵称等
+            String device_token = (String) SPUtils.get(context, "device_token", "");
+            if(!"".equals(device_token)){
+                setPushInfo(context,device_token);                              //设置推送信息
+            }
+            return true;
+        }
+
+
+    }
+
+    //保存对话票据到本地
+    public void saveSeesion(int uin, String session, String ticket, String h5ticket,String localeCode,String currencyCode,int currencyId, String pw, String accountEx, Context context) {
+        if (context == null) {
+            context = SysApplication.getContext();
+        }
+        SPUtils.put(context, Constants.USER_INFO.USER_ITCKET, ticket);
+        SPUtils.put(context, Constants.USER_INFO.USER_MUIN, uin);
+        SPUtils.put(context, Constants.USER_INFO.USER_H5TICKET, h5ticket);
+        SPUtils.put(context, Constants.USER_INFO.USER_SESSION_KEY, session);
+        SPUtils.put(context,Constants.USER_INFO.USER_LOCELA_CODE,localeCode);
+        SPUtils.put(context,Constants.USER_INFO.USER_CURRENCY_CODE,currencyCode);
+        SPUtils.put(context,Constants.USER_INFO.USER_CURRENCY_ID,currencyId);
+        if (mAccountNumber != null) {//因为修改密码需要用到账号,这里保存一下  edit by Longer
+            SPUtils.put(context, Constants.USER_INFO.USER_ACCOUNT, mAccountNumber);
+        }
+        if (pw != null) {//密码双重md5加密保存(需要用到) edit by Longer
+            String md5 = MD5Util.getMD5(pw);
+            String md52 = MD5Util.getMD5(md5);
+            SPUtils.put(context, Constants.USER_INFO.USER_PWD, md52);
+        }
+        SPUtils.put(context, Constants.USER_INFO.USER_ACCOUNT_TYPE, type);//账户的登陆类型(需要用到) edit by Longer
+        if (accountEx != null) {
+            SPUtils.put(context, Constants.USER_INFO.USER_ACCOUNT_EXTRA, accountEx);//用户的区号也要保存
+        }
+        getSession();
+
+        //2016/10/09 添加了登录后根据用户的服务器返回语种切换资源文件的方法
+        String[] language = localeCode.split("_");
+        Resources res = SysApplication.getContext().getResources();
+        Configuration config = res.getConfiguration();
+        config.locale = new Locale(language[0], language[1]);
+        ConfigManager.getInstance(SysApplication.getContext()).updateConfigByNotActivity(config);
+    }
+
+    /**
+     * change password
+     *
+     * @param passWord password
+     * @param oldPW    旧密码
+     */
+    public void changePassWord(final String oldPW, final String passWord) {
+
+        CsLogin.AccountRequest.Builder builder = CsLogin.AccountRequest.newBuilder();
+        builder.setOperacode(CsLogin.AccountOperacode.ACCOUNT_OPERACODE_MODIFY_PASSWORD_VALUE);
+        builder.setPassword(MD5Util.getMD5(oldPW).toLowerCase());
+        final int type = (int) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, 0);
+        final String accountExtra = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+        if (1 == type) {
+            builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_EMAIL_VALUE);
+        } else if (2 == type) {
+            builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_PHONE_VALUE);
+            builder.setAccountExtra(accountExtra);
+        }
+        builder.setReserve(MD5Util.getMD5(passWord).toLowerCase());
+
+        if (mAccountNumber == null) {
+            mAccountNumber = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+        }
+        builder.setAccount(mAccountNumber);
+        builder.setRandomKey(NetEngine.sRandomKey);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.AccountResponse>() {
+            @Override
+            public void onSuccess(CsLogin.AccountResponse response) {
+                //LogUtils.e("我是修改账号密码成功!" + response.toString());
+                if (1 == type) {
+                    login(CsLogin.AccountType.ACCOUNT_TYPE_EMAIL, mAccountNumber, passWord, null, SysApplication.getContext());
+                } else if (2 == type) {
+                    login(CsLogin.AccountType.ACCOUNT_TYPE_PHONE, mAccountNumber, passWord, accountExtra, SysApplication.getContext());
+                }
+
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_PASS_WORD_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("修改账号密码失败:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_PASS_WORD_COMPLETE, false));
+            }
+        });
+    }
+    public  void cleanCache(Activity context){
+        SPUtils.put(context, Constants.USER_INFO.USER_ITCKET, "");
+        SPUtils.put(context, Constants.USER_INFO.USER_MUIN, 0);
+        SPUtils.put(context, Constants.USER_INFO.USER_H5TICKET, "");
+        SPUtils.put(context, Constants.USER_INFO.USER_SESSION_KEY, "");
+        SPUtils.put(context,Constants.USER_INFO.USER_LOCELA_CODE,"");
+        SPUtils.put(context,Constants.USER_INFO.USER_CURRENCY_CODE,"");
+        SPUtils.put(context,Constants.USER_INFO.USER_CURRENCY_ID,0);
+    }
+    //设置推送信息
+    public void setPushInfo(final Context context,final String deviceToken){
+       /* CsPush.SetPushInfoRequest.Builder builder=CsPush.SetPushInfoRequest.newBuilder();
+        KLog.i("mDeviceToken"+deviceToken);
+        builder.setToken(deviceToken);
+        NetEngine.postRequest(builder, new INetEngineListener<CsPush.SetPushInfoResponse>() {
+            @Override
+            public void onSuccess(CsPush.SetPushInfoResponse response) {
+                KLog.i(response.toString());
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("error "+CommonUtils.getErrMsg(ret));
+            }
+        });*/
+    }
+    public String getLocaleCode(){
+        if(!TextUtils.isEmpty(mLocaleCode)){
+            return mLocaleCode;
+        }else {
+            return SysApplication.DEFAULT_LANGUAGE;
+        }
+    }
+    public String getCurrencyCode(){
+        if(!TextUtils.isEmpty(mCurrencyCode)){
+            return mCurrencyCode;
+        }else {
+            return "USD";
+        }
+    }
+    public int getCurrencyId(){
+        if(mCurrencyId!=0){
+            return mCurrencyId;
+        }else {
+            return 0;
+        }
+    }
+    public void setLocaleCode(String localeCode){
+        if(!TextUtils.isEmpty(localeCode)){
+            SPUtils.put(UIUtils.getContext(),Constants.USER_INFO.USER_LOCELA_CODE,localeCode);
+//            mCurrencyCode=localeCode;
+            mLocaleCode = localeCode;
+        }
+
+    }
+    public void setCurrencyCode(String currencyCode,int currencyId){
+        if(!TextUtils.isEmpty(currencyCode)){
+            SPUtils.put(UIUtils.getContext(),Constants.USER_INFO.USER_CURRENCY_CODE,currencyCode);
+            SPUtils.put(UIUtils.getContext(),Constants.USER_INFO.USER_CURRENCY_ID,currencyId);
+            mCurrencyCode=currencyCode;
+            mCurrencyId=currencyId;
+        }
+    }
+    public void getUserSession(){
+        mUin=(int)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_MUIN,0);
+        if(mUin!=0){
+            isLogin=true;
+            mSessionKey=(String)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_SESSION_KEY,"");
+            mTicket=(String)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_ITCKET,"");
+            mH5Ticket=(String)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_H5TICKET,"");
+            mLocaleCode=(String)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_LOCELA_CODE,"");
+            mCurrencyId=(int) SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_CURRENCY_ID,0);
+            mCurrencyCode=(String)SPUtils.get(UIUtils.getContext(),Constants.USER_INFO.USER_CURRENCY_CODE,"");
+        }
+
+    }
+
+}

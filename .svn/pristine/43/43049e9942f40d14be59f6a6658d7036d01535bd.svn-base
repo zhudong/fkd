@@ -1,0 +1,93 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.app.Activity;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+
+
+import java.util.List;
+
+import fksproto.CsBase;
+
+/**
+ * Created by Longer on 2016/12/6.
+ * 位于帮我系列头布局中的图片Adapter
+ */
+public class HelpHeadAdapter extends BaseAdapter {
+    List<String> mDataList;
+    List<CsBase.ItemImage> mImageDataList;
+    Context mContext;
+    private int maxSize = 4;
+    private final LinearLayout.LayoutParams mLayoutParams;
+
+
+
+    /*public HelpHeadAdapter(@NonNull Context context, @NonNull List<String> dataList) {
+        mContext = context;
+        mDataList = dataList;
+        int width = UIUtils.getScreenWidthPixels((Activity) mContext) / 4 - 30;
+        mLayoutParams = new LinearLayout.LayoutParams(width, width);
+    }*/
+
+    public HelpHeadAdapter(@NonNull Context context, @NonNull List<CsBase.ItemImage> theDataList) {
+        mContext = context;
+        mImageDataList = theDataList;
+        int width = UIUtils.getScreenWidthPixels((Activity) mContext) / 4 - 30;
+        mLayoutParams = new LinearLayout.LayoutParams(width, width);
+    }
+
+    @Override
+    public int getCount() {
+        return mDataList.size() < maxSize ? mDataList.size() + 1 : mDataList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mDataList == null ? null : mDataList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return mDataList == null ? 0 : position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (position == mDataList.size() || mDataList.size() == 0) {
+            convertView = View.inflate(mContext, R.layout.item_head_empty, null);
+            ImageView iv_append_photo = (ImageView) convertView.findViewById(R.id.iv_append_photo);
+            iv_append_photo.setLayoutParams(mLayoutParams);
+            convertView.setTag(R.string.adapter_id_is_add, true);
+            return convertView;
+        }
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_head_gw, null);
+            viewHolder.iv_in_item_help_gw = (ImageView) convertView.findViewById(R.id.iv_in_item_help_gw);
+            viewHolder.iv_in_item_help_gw.setTag(R.string.adapter_id_02, position);
+            convertView.setTag(R.string.adapter_id_01, viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag(R.string.adapter_id_01);
+        }
+        viewHolder.iv_in_item_help_gw.setLayoutParams(mLayoutParams);
+        Glide.with(mContext).load(mImageDataList.get(position)).into(viewHolder.iv_in_item_help_gw);
+        convertView.setTag(R.string.adapter_id_is_add, false);
+        convertView.setTag(R.string.adapter_id_url, mDataList.get(position));
+        return convertView;
+    }
+
+    class ViewHolder {
+        ImageView iv_in_item_help_gw;
+    }
+}

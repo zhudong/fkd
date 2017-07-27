@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/gray_e4e4"
+              android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/add_new_address_consignee_title"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_consignee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/add_new_address_phone_title"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/ll_in_add_new_address_country"
+        style="@style/Layout"
+        android:layout_height="50dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_red_star_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:id="@+id/tv_country_text_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_red_star_01"
+            android:text="@string/add_new_address_country_title"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/add_new_address_country_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/tv_country_text_01"
+            android:gravity="center_vertical|right"
+            android:text="@string/user_info_drtail_please_choose"
+            android:textColor="@color/gray_999"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/arrow_down"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/ll_in_add_new_address_location"
+        style="@style/Layout"
+        android:layout_height="50dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_in_locataion_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:id="@+id/tv_location_text01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_in_locataion_star"
+            android:text="@string/add_new_address_region_title"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/add_new_address_city_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/tv_location_text01"
+            android:gravity="center_vertical|right"
+            android:text="@string/user_info_drtail_please_choose"
+            android:textColor="@color/gray_999"
+            android:textSize="13sp"/>
+        <!-- <EditText
+             android:id="@+id/ed_in_add_new_address_location"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="@null"
+             />-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/arrow_down"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/add_new_address_post_code_title"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_postcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red_shape"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/add_new_address_detail_address_title"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_detail_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:gravity="right"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/add_new_address_compony_title"/>
+
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <LinearLayout
+        style="@style/Layout"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/add_new_address_ID_title"/>
+
+        <EditText
+            android:id="@+id/ed_in_add_new_address_id_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="true"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+
+    <LinearLayout
+        android:id="@+id/add_new_address_is_default_layout"
+        style="@style/Layout"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="@string/add_new_address_default_title"
+            android:textColor="@color/black"/>
+
+        <CheckBox
+            android:id="@+id/cb_in_add_new_address_is_defalt"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/selector_cart_checkbox"
+            android:button="@null"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_new_address_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/String_parcel_save"
+        android:textColor="@color/white"/>
+</LinearLayout>

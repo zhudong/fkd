@@ -1,0 +1,182 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.fragment.myneed.AllFragment;
+import com.fuexpress.kr.ui.fragment.myneed.CancelFragment;
+import com.fuexpress.kr.ui.fragment.myneed.InStorgeFragment;
+import com.fuexpress.kr.ui.fragment.myneed.ToPayFragment;
+import com.fuexpress.kr.ui.view.NoteRadioGroup;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class MyNeedFragment extends BaseFragment<MainActivity> {
+    public static final String TAB_TO_PAY = "tab_to_pay";
+    public static final String TAB_IN_STOAGE = "tab_in_stoage";
+    public static final String TAB_CANCEL = "tab_cancel";
+    public static final String TAB_ALL = "tab_all";
+    @BindView(R.id.rbg_my_need_fragment)
+    NoteRadioGroup rbgMyNeedFragment;
+    @BindView(R.id.toSendCountTV)
+    TextView mToSendCountTV;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction transaction;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        return View.inflate(mContext, R.layout.activity_tab, null);
+    }
+
+    @Override
+    public void initData() {
+        mFragmentManager = getChildFragmentManager();
+        rbgMyNeedFragment.setOnCheckedChangeListener(new NoteRadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(NoteRadioGroup group, int checkedId) {
+                transaction = mFragmentManager.beginTransaction();
+                List<Fragment> fragments = mFragmentManager.getFragments();
+                if (fragments != null) {
+                    for (Fragment frg : fragments) {
+                        transaction.hide(frg);
+                    }
+                }
+                transaction.show(getFragment(checkedId));
+                transaction.commitAllowingStateLoss();
+            }
+        });
+        rbgMyNeedFragment.check(R.id.rb_to_pay);
+    }
+
+
+    public void setNeedPayCount(int count) {
+        if (count > 0) {
+            mToSendCountTV.setVisibility(View.VISIBLE);
+            mToSendCountTV.setText(count + "");
+        } else {
+            mToSendCountTV.setVisibility(View.GONE);
+        }
+    }
+
+
+    private Fragment getFragment(int status) {
+        Fragment fragment = null;
+        switch (status) {
+            case R.id.rb_to_pay:
+                fragment = mFragmentManager.findFragmentByTag(TAB_TO_PAY);
+                if (fragment == null) {
+                    fragment = new ToPayFragment();
+                    transaction.add(R.id.fl_need_container, fragment, TAB_TO_PAY);
+                }
+                break;
+            case R.id.rb_instorage:
+                fragment = mFragmentManager.findFragmentByTag(TAB_IN_STOAGE);
+                if (fragment == null) {
+                    fragment = new InStorgeFragment();
+                    transaction.add(R.id.fl_need_container, fragment, TAB_IN_STOAGE);
+                }
+
+                break;
+            case R.id.rb_cancel:
+                fragment = mFragmentManager.findFragmentByTag(TAB_CANCEL);
+                if (fragment == null) {
+                    fragment = new CancelFragment();
+                    transaction.add(R.id.fl_need_container, fragment, TAB_CANCEL);
+                }
+                break;
+            case R.id.rb_all:
+                fragment = mFragmentManager.findFragmentByTag(TAB_ALL);
+                if (fragment == null) {
+                    fragment = new AllFragment();
+                    transaction.add(R.id.fl_need_container, fragment, TAB_ALL);
+                }
+                break;
+        }
+        return fragment;
+    }
+
+
+
+
+
+    /*@BindView(android.R.id.tabs)
+    TabWidget tabs;
+
+    @BindView(android.R.id.tabhost)
+    FragmentTabHost mTabHost;
+    private View mRootView;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mRootView = inflater.inflate(R.layout.activity_tab, null);
+        ButterKnife.bind(this, mRootView);
+        setupTab();
+        return mRootView;
+    }
+
+    private void setupTab() {
+        mTabHost.setup(getContext(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(createTabSpec(TAB_TO_PAY, R.string.string_my_need_to_pay,
+                R.drawable.selector_tab_to_pay), ToPayFragment.class, null);
+        mTabHost.addTab(createTabSpec(TAB_IN_STOAGE, R.string.string_need_in_storage,
+                R.drawable.selector_tab_to_in_storage), InStorgeFragment.class, null);
+        mTabHost.addTab(createTabSpec(TAB_CANCEL, R.string.string_neeed_cancel,
+                R.drawable.selector_tab_to_cancel), CancelFragment.class, null);
+        mTabHost.addTab(createTabSpec(TAB_ALL, R.string.string_neeed_cancel,
+                R.drawable.selector_tab_to_all), AllFragment.class, null);
+    }
+
+    private TabHost.TabSpec createTabSpec(String tag, int stringRes, int drawableResId) {
+        TabHost.TabSpec spec = mTabHost.newTabSpec(tag);
+        spec.setIndicator(createTabIndicator(stringRes, drawableResId));
+        spec.setContent(new TabHost.TabContentFactory() {
+            public View createTabContent(String tag) {
+                return mRootView.findViewById(android.R.id.tabcontent);
+            }
+        });
+        return spec;
+    }
+
+    private View createTabIndicator(int res, int drawableResId) {
+        LinearLayout tabIndicator = (LinearLayout) LayoutInflater.from(getContext())
+                .inflate(R.layout.tab_indicator, mTabHost.getTabWidget(), false);
+
+        ImageView icon = (ImageView) tabIndicator.findViewById(android.R.id.icon1);
+        icon.setImageResource(drawableResId);
+
+        TextView text = ButterKnife.findById(tabIndicator, android.R.id.text1);
+        text.setText(res);
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabIndicator.getLayoutParams();
+
+        tabIndicator.setEnabled(true);
+        params.weight = 1.0F;
+        tabIndicator.setGravity(Gravity.CENTER);
+
+        return tabIndicator;
+    }*/
+
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/recharge_order_detail_layout"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recharge_order_detail_type_tv"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_details_content_title"/>
+
+            <TextView
+                android:id="@+id/card_order_detail_parcel_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:text="Parcel"/>
+
+        </LinearLayout>
+
+   <!--     <LinearLayout
+            android:id="@+id/recharge_order_detail_coupon_layout"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/recharge_order_detail_coupon_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_666"
+                android:textSize="12sp"
+                android:text="@string/recharge_order_detail_balance_pay"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/card_order_detail_coupon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥0.00"
+                android:textSize="12sp"
+                android:textColor="@color/gray_666"/>
+        </LinearLayout>-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/recharge_order_detail_freight_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_666"
+                android:textSize="12sp"
+                android:text="@string/recharge_order_detail_freight"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/card_order_detail_freight_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/gray_666"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

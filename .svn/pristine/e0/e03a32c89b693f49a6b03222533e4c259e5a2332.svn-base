@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        style="@style/layout_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friends_item_head_iv"
+            android:layout_width="140px"
+            android:layout_height="140px"
+            zhudong:civ_border_width="1dp"
+            zhudong:civ_border_color="@color/red_EF4213"
+            android:src="@mipmap/icon"/>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <TextView
+                android:id="@+id/friends_item_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/friends_name_1"
+                android:textSize="12sp"
+                android:textColor="@color/black_0"/>
+            <TextView
+                android:id="@+id/friends_item_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_height="wrap_content"
+                android:text="@string/friends_time_1"
+                android:textSize="11sp"
+                android:textColor="@color/gray_666"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/friends_item_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/integral_join"
+            android:textSize="11sp"
+            android:drawablePadding="3dp"
+            android:textColor="@color/gray_666"
+            android:text="@string/friends_status_1"/>
+    </LinearLayout>
+</LinearLayout>

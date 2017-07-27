@@ -1,0 +1,239 @@
+package com.fuexpress.kr.ui.activity.append_item;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.ItemAppendBean;
+import com.fuexpress.kr.ui.activity.help_send.ParcelItemUseCase;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomDialog;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.utils.ActivityUtils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class AppendItemActivity extends BaseActivity {
+    public static final String RESULT_ITEMS = "RESULT_ITEMS";
+    public static String PARCEL_ID = "PARCEL_ID";
+    public static String ITEM_LIST = "ITEM_LIST";
+    public static String TYPE = "TYPE";
+    public static String POSITION = "POSITION";
+
+    @BindView(R.id.title_iv_left)
+    ImageView titleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView titleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView titleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView titleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView titleIvRight;
+    private List<ItemAppendBean> items;
+    private List<AppendItemFragment> fragmentList;
+    private int index;
+    private ParcelItemUseCase itemUseCase;
+    private int mParcelID;
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_append_item, null);
+    }
+
+    @Override
+    public void initView() {
+        titleTvCenter.setText(R.string.string_append_item);
+        titleIvLeft.setVisibility(View.VISIBLE);
+        titleTvLeft.setText(getString(R.string.String_parcle_add));
+        titleTvLeft.setVisibility(View.VISIBLE);
+        titleTvRight.setText(R.string.String_parcel_delete);
+        initFragment();
+    }
+
+    private void initFragment() {
+        initdata();
+        showFragment();
+    }
+
+    private void showFragment() {
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragmentList.get(index), R.id.fl_container);
+    }
+
+    private void initdata() {
+        itemUseCase = new ParcelItemUseCase();
+        Intent intent = getIntent();
+        items = (List<ItemAppendBean>) intent.getSerializableExtra(ITEM_LIST);
+        mParcelID = intent.getIntExtra(PARCEL_ID, 0);
+        if (items == null)
+            items = new ArrayList<>();
+        boolean appendNew = intent.getBooleanExtra(TYPE, false);
+        fragmentList = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            ItemAppendBean itemAppendBean = items.get(i);
+            fragmentList.add(AppendItemFragment.newInstance(itemAppendBean, i, mParcelID));
+        }
+
+        if (appendNew) {
+            appendNewItem(false);
+        } else {
+            index = intent.getIntExtra(POSITION, -1);
+        }
+
+    }
+
+    public void appendNewItem(boolean show) {
+        ItemAppendBean item = new ItemAppendBean(new ArrayList<String>(), new HashMap<String, String>(), new ArrayList<String>());
+        item.setmParcelId(mParcelID);
+        index = fragmentList.size();
+        fragmentList.add(AppendItemFragment.newInstance(item, index, mParcelID));
+        if (show) {
+            CustomToast.makeText(this, getResources().getString(R.string.item_append_success), CustomToast.LENGTH_SHORT).show();
+            showFragment();
+        }
+    }
+
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_right})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_right:
+                showDeleteDiglog();
+
+
+//                deleteItem();
+                break;
+        }
+    }
+
+    private void showDeleteDiglog() {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setMessage(getString(R.string.string_confirm_del_item));
+        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteItem();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void deleteItem() {
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在删除...");
+        itemUseCase.deleteItem(items.get(index).getmItemID(), new ParcelItemUseCase.IOperareResult() {
+            @Override
+            public void onResult(boolean success, int itemID, String msg) {
+                closeLoading();
+                if (success) {
+                    items.remove(index);
+                    index--;
+                    if (index < 0) {
+                        close();
+                    } else {
+                        showFragment();
+                    }
+                } else {
+                    CustomToast.makeText(AppendItemActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    public int getItemSize() {
+        if (items != null)
+            return items.size();
+        return 0;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        close();
+    }
+
+    public void saveItem(final ItemAppendBean bean, final int index, final ParcelItemUseCase.IOperareResult operareResult) {
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "保存中...");
+        ParcelItemUseCase.IOperareResult iOperareResult = new ParcelItemUseCase.IOperareResult() {
+
+            @Override
+            public void onResult(final boolean success, final int itemID, final String msg) {
+                if (success) {
+                    bean.setmItemID(itemID);
+                    ItemAppendBean value = new ItemAppendBean();
+                    ItemAppendBean.copy(bean, value);
+                    value.setmItemID(itemID);
+                    if (index >= 0 && index < items.size()) {
+                        items.remove(index);
+                        items.add(index, value);
+                    }
+                    if (index >= items.size()) {
+                        items.add(value);
+                    }
+
+                }
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeLoading();
+//                        if (success)
+//                            CustomToast.makeText(AppendItemActivity.this, getResources().getString(R.string.item_append_success), CustomToast.LENGTH_SHORT).show();
+//                        else
+                        CustomToast.makeText(AppendItemActivity.this, msg, CustomToast.LENGTH_SHORT).show();
+                        operareResult.onResult(success, itemID, msg);
+                    }
+                });
+            }
+        };
+        if (index >= 0 && index < items.size() && items.get(index).equals(bean)) {
+            operareResult.onResult(true, bean.getmItemID(), "sucess");
+            closeLoading();
+        } else if (index >= 0 && index < items.size()) {
+            itemUseCase.editItem(bean, iOperareResult);
+        } else if (index >= items.size()) {
+            itemUseCase.appendItem(bean, iOperareResult);
+        }
+    }
+
+
+    public void close() {
+        Intent data = new Intent();
+        data.putExtra(RESULT_ITEMS, (Serializable) items);
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
+    public void showDelete(boolean appended) {
+
+        if (appended) {
+            titleTvRight.setVisibility(View.VISIBLE);
+            titleTvCenter.setText(R.string.string_edit_item);
+        } else {
+            titleTvRight.setVisibility(View.GONE);
+            titleTvCenter.setText(R.string.string_append_item);
+        }
+    }
+}

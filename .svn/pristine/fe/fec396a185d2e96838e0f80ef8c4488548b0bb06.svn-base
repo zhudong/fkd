@@ -1,0 +1,451 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.bean.CategoryBean;
+import com.fuexpress.kr.bean.MaterialsBean;
+import com.fuexpress.kr.bean.UpLoadImageValueBean;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpMeSingleBean;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSingedDataRepository;
+import com.fuexpress.kr.ui.activity.help_signed.data.WareHouseBean;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.StringUtils;
+import com.fuexpress.kr.utils.UpLoadImageUtils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/22.
+ * 帮我收的新逻辑层
+ */
+public class HelpSignedNewPresenter implements HelpSignedContract.NewPresenter {
+
+    @NonNull
+    private final HelpSingedDataRepository mHelpSingedDataRepository;//数据仓库对象,不可改且私有
+
+    @NonNull
+    private final HelpSignedContract.ItemView mHelpSingedItemView;//详情视图层对象
+
+    private ArrayMap<Integer, Boolean> mWantUpLoadIndexMap;//想上传图片的Index集合
+
+    private HelpMeSingleBean mProductDataList;
+
+    private int mChooseItemPosition = -1;
+
+    private String mWareHouseID = "";
+
+
+    //上传图片的回调
+    private final UpLoadImageUtils.UpLaodUtilsListener mUpLaodUtilsListener = new UpLoadImageUtils.UpLaodUtilsListener() {
+        @Override
+        public void upLoadStateListener(boolean isSuccess, int progress, int index, String url) {
+            if (isSuccess) {//成功了之后
+                LogUtils.e(url);
+                if (mHelpSingedItemView.getIsClickSub()) {//这里分两种情况,一种是点击了确认按钮之后
+                    addImageUrlIntoRepository(url);//不管是否完成都先将其加入到仓库
+                    if (progress < 100) {
+                        if (!mHelpSingedItemView.getLoadingDialogIsShowing()) {
+                            mHelpSingedItemView.showRemindDialog(SweetAlertDialog.PROGRESS_TYPE,
+                                    mHelpSingedItemView.getViewContext().
+                                            getString(R.string.uploading_string_image));
+                        }
+                    } else {
+                        // TODO: 2016/12/24 这里应该调用保存方法了
+                        CsParcel.ProductDataList productDataList = setItemData(index);
+                        CsParcel.ProductDataList productDataList1 = enterItemImageUrlList(productDataList.toBuilder(),
+                                getItemUpLoadUrlList(mHelpSingedDataRepository.getHelpMeSingleBeanOnly(index).getImagePathLit()));//把图片保存到集合中
+                        setItemDataToRepository(index, productDataList1);
+                        setTHisPositionIsUpLoadImageComplete(index, true);//把该下标的上传图片进度标记为完成
+                        ArrayMap<Integer, Boolean> isIndexCompleteUpLoadMap = mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap();
+                        if (!isIndexCompleteUpLoadMap.values().contains(false)) {//发现全部上传完毕,那么我们就消失进度框并上传东西
+                            mHelpSingedItemView.dissMissLoadingView(0);
+                            // TODO: 2016/12/24 上传东西
+
+                        }
+                    }
+                } else {//未点击提交按钮,且没被阻塞进来这里的,说明是静默上传,完成后我们需要把它添加到相应的数据中
+                    addImageUrlIntoRepository(url);//只需要把图片保存在仓库中即可
+                    if (progress == 100) {
+                        //CsParcel.ProductDataList productDataList = setItemData(index);
+                        //editItemImage(getItemUpLoadUrlList(mHelpSingedDataRepository.getHelpMeSingleBeanOnly(index).getImagePathLit()), index);
+                        setTHisPositionIsUpLoadImageComplete(index, true);//把该下标的上传图片进度标记为完成
+                        if (index < mHelpSingedDataRepository.getHelpSingleBeanList().size())//判断一下下标,如果小于就说明该Bean还存在
+                            if (mHelpSingedDataRepository.getHelpSingleBeanList().get(index).isClickConfirm())//该Bean被点击了确认,那么就说明要塞进去
+                                saveUrlToBean(mHelpSingedDataRepository.getHelpMeSingleBeanOnly(index));
+                    }
+                }
+            } else {//失败了我们要提醒一下
+                mHelpSingedItemView.showRemindDialog(SweetAlertDialog.ERROR_TYPE, "上传图片失败!");
+                mHelpSingedItemView.dissMissLoadingView(1000);
+            }
+
+        }
+    };
+    private boolean mIsAddType = false;//用来判断是否是添加状态
+
+    public HelpSignedNewPresenter(@NonNull HelpSingedDataRepository helpSingedDataRepository,
+                                  @NonNull HelpSignedContract.ItemView helpSingedItemView,
+                                  int chooseItemPosition) {
+        mHelpSingedDataRepository = checkNotNull(helpSingedDataRepository, "repository is not Null");
+        mHelpSingedItemView = helpSingedItemView;
+        mChooseItemPosition = chooseItemPosition;
+        if (mChooseItemPosition != mHelpSingedDataRepository.getHelpSingleBeanList().size()) {//当下标不等于集合的长度时,就去取出数据
+            if (mHelpSingedDataRepository.getHelpSignedRemoteDataSource() != null) {//假如远程数据不为空的情况下,我们就取出来
+                mProductDataList = mHelpSingedDataRepository.getHelpSignedRemoteDataSource().getHelpMeSingleBean();
+            } else {
+                mProductDataList = mHelpSingedDataRepository.getHelpMeSingleBeanOnly(mChooseItemPosition);
+            }
+            mWareHouseID = mProductDataList.getWareHouseID();
+            //mHelpSingedItemView.setActivityCurrentIndex(mChooseItemPosition);//要告诉Activity当前的Index
+        } else {//说明是新建的一个需求单
+            addNewDeMand(mProductDataList = creatNewDeMand());
+            mIsAddType = true;
+        }
+    }
+
+    @Override
+    public HelpMeSingleBean getShouldShowData() {
+        return mProductDataList;
+    }
+
+    @Override
+    public int getChooseItemIndex() {
+        return mChooseItemPosition;
+    }
+
+
+    @Override
+    public boolean getIsAddType() {
+        return mIsAddType;
+    }
+
+    @Override
+    public boolean isCanAddDemand() {
+        return mHelpSingedDataRepository.getHelpSingleBeanList().size() < 4;
+    }
+
+    @Override
+    public void addAndReplaceDeMand() {
+        mChooseItemPosition++;
+        addNewDeMand(mProductDataList = creatNewDeMand());
+    }
+
+    @Override
+    public void addNewDeMand(HelpMeSingleBean productDataList) {
+        mHelpSingedDataRepository.addHelpSingleBean(productDataList);
+        mHelpSingedDataRepository.saveHelpSignedData(CsParcel.ProductDataList.newBuilder().build());
+        //mHelpSingedItemView.setActivityCurrentIndex(mChooseItemPosition);//告诉Activity知道当前的Index
+    }
+
+    @Override
+    public void setDeMand(int index, HelpMeSingleBean helpMeSingleBean) {//设置好需求
+        mHelpSingedDataRepository.modifyHelpSingleBean(index, helpMeSingleBean);
+    }
+
+    @Override
+    public void deleteDemand(int index) {
+        //mHelpSingedDataRepository.deleteHelpSignedData(index);
+        mHelpSingedDataRepository.reMoveHelpSingleBean(index);
+        ArrayMap<Integer, Boolean> isIndexCompleteUpLoadMap = mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap();
+        if (mIsAddType)//如果是添加状态
+            if (isIndexCompleteUpLoadMap.keySet().contains(index))//退出时,把上传状态置为否
+                if (isIndexCompleteUpLoadMap.get(index))
+                    isIndexCompleteUpLoadMap.put(index, false);
+    }
+
+    @Override
+    public HelpMeSingleBean creatNewDeMand() {
+        return new HelpMeSingleBean();
+    }
+
+    @Override
+    public List<CsParcel.ProductDataList> getProductDataList() {
+        return mHelpSingedDataRepository.getHelpSignedDataList();
+    }
+
+    @Override
+    public String transformPrice(String currencyCode, String price) {
+        String changePrice = price;
+        if ("KRW".equals(currencyCode))
+            if (TextUtils.isEmpty(price))
+                changePrice = StringUtils.changeFolatToString(Float.parseFloat(price));
+
+        return changePrice;
+    }
+
+    @Override
+    public void setWareHouseInfo(String wareHouseID, CsBase.Warehouse warehouse) {
+        mHelpSingedDataRepository.saveWareHouseData(wareHouseID, warehouse);
+        mHelpSingedItemView.showWareHouseInfo(warehouse, true);
+        mWareHouseID = wareHouseID;
+    }
+
+    @Override
+    public void setWareHouseToBean(String wareHouseID, HelpMeSingleBean houseToBean) {
+        CsBase.Warehouse wareHouseData = mHelpSingedDataRepository.getWareHouseData(wareHouseID);
+        WareHouseBean wareHouseBean = new WareHouseBean();
+        wareHouseBean.setID(wareHouseID);
+        wareHouseBean.setName(wareHouseData.getName());
+        wareHouseBean.setAddress(wareHouseData.getFulladdress());
+        wareHouseBean.setReceiver(wareHouseData.getReceiver());
+        wareHouseBean.setPhone(wareHouseData.getPhone());
+        wareHouseBean.setPostCode(wareHouseData.getPostcode());
+        houseToBean.setWareHouseBean(wareHouseBean);
+    }
+
+    @Override
+    public CsBase.Warehouse getWareHouseInfo(String wareHouseID) {
+        return mHelpSingedDataRepository.getWareHouseData(wareHouseID);
+    }
+
+    @Override
+    public String getWareHouseID() {
+        return mWareHouseID;
+    }
+
+    @Override
+    public CategoryBean getDataCateoryBean() {
+        return mProductDataList.getCategoryBean();
+    }
+
+    @Override
+    public void setDataCategoryBean(CategoryBean categoryBean) {
+        mProductDataList.setCategoryBean(categoryBean);
+    }
+
+    @Override
+    public void setDataMaterialBean(MaterialsBean materialBean) {
+        mProductDataList.setMaterialsBean(materialBean);
+    }
+
+    @Override
+    public MaterialsBean getDataMaterialBean() {
+        return mProductDataList.getMaterialsBean();
+    }
+
+
+    @Override
+    public void setTHisPositionIsUpLoadImageComplete(int index, boolean isComplete) {
+        mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap().put(index, isComplete);
+    }
+
+    @Override
+    public boolean IsUpLoadImageComplete(int index) {
+        return mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap().get(index);
+    }
+
+    @Override
+    public ArrayList<String> getItemImageList(int position) {
+        return mHelpSingedDataRepository.getImageIndexArrayMap().get(position);
+    }
+
+    @Override
+    public ArrayList<String> getItemUpLoadUrlList(List<String> pathList) {//根据本地路径找到url
+        ArrayMap<String, String> allImageUpLoadUrlArrayMap = mHelpSingedDataRepository.getAllImageUpLoadUrlArrayMap();
+        ArrayList<String> tempUrlList = new ArrayList<>();
+        for (String path : pathList) {
+            String url = allImageUpLoadUrlArrayMap.get(path);
+            if (!TextUtils.isEmpty(url))
+                tempUrlList.add(url);
+        }
+        return tempUrlList;
+    }
+
+    @Override
+    public UpLoadImageUtils.UpLaodUtilsListener getPresenterUpLoadListener() {
+        return mUpLaodUtilsListener;
+    }
+
+    @Override
+    public List<String> handleImageSelectorReturn(int type, int index, ArrayList<String> list) {//处理返回的图片集合,并返回需要上传的图片路径
+        List<String> showImageList = mHelpSingedItemView.getShowImageList();//获得显示图片集合
+        List<String> imagePathLastList = mHelpSingedItemView.getImagePathLastList();//获得本地图片路径集合
+        if (0 == type) {//处理图片选择器返回相关:
+            if (showImageList.size() != 0) {//已经有图片了
+                showImageList.removeAll(imagePathLastList);
+            }
+            showImageList.addAll(list);
+            imagePathLastList.clear();
+            imagePathLastList.addAll(list);
+        } else {//处理预览图片相关:
+            List<String> imagePathList = mHelpSingedItemView.getImagePathList();
+            showImageList.clear();
+            showImageList.addAll(list);
+            //筛选掉本地选择的图片:
+            Iterator<String> iterator = imagePathList.iterator();
+            while (iterator.hasNext()) {
+                String next = iterator.next();
+                if (!list.contains(next))
+                    iterator.remove();
+            }
+            imagePathLastList.clear();
+            imagePathLastList.addAll(imagePathList);
+        }
+
+        mHelpSingedItemView.referGridViewShow();//先更新下视图
+        ArrayMap<Integer, Boolean> isIndexCompleteUpLoadMap = mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap();
+        List<String> shouldUpLoadList = new ArrayList<>();//需要上传的图片集合
+        List<String> urlList = new ArrayList<>();//已经上传好的url图片集合
+        ArrayMap<String, String> allImageUpLoadUrlArrayMap = mHelpSingedDataRepository.getAllImageUpLoadUrlArrayMap();//获得所以已经上传好的图片
+        //把本地的下标和图片Map集合更新一下
+        ArrayMap<Integer, ArrayList<String>> imageIndexArrayMap = mHelpSingedDataRepository.getImageIndexArrayMap();
+        imageIndexArrayMap.put(index, list);
+        for (String path : list) {
+            if (allImageUpLoadUrlArrayMap.containsKey(path))
+                urlList.add(allImageUpLoadUrlArrayMap.get(path));
+            else
+                shouldUpLoadList.add(path);
+        }
+        if (urlList.size() > 0) saveUrlToBean(mProductDataList);
+        if (shouldUpLoadList.size() > 0) {
+            isIndexCompleteUpLoadMap.put(index, false);
+            mHelpSingedDataRepository.getIsIndexCompleteUpLoadMap();
+            UpLoadImageUtils.getInstance().setContinue(mChooseItemPosition, false);//当有图片需要上传时,我们阻塞住原来旧的
+        } else {
+            isIndexCompleteUpLoadMap.put(index, true);
+        }
+        return shouldUpLoadList;
+    }
+
+    @Override
+    public void upLoadImageToUpYun(List<String> imagePathList, int type, UpLoadImageUtils.UpLaodUtilsListener upLaodUtilsListener, int index) {
+        UpLoadImageValueBean build = new UpLoadImageValueBean.Builder()
+                .setImagePathList(imagePathList)
+                .setIndex(index)
+                .setType(type)
+                .build();
+        UpLoadImageUtils.getInstance().setContinue(mChooseItemPosition, true);//开始上传操作,打开上传开关
+        mHelpSingedDataRepository.getHelpMeSingleBeanOnly(index).setIsUrlReady(false);
+        UpLoadImageUtils.getInstance().zoomImageAndUpLoadToYunSwitch(build, mUpLaodUtilsListener);
+    }
+
+    @Override
+    public ArrayMap<String, String> addImageUrlIntoRepository(String url) {//把上传好的图片都保存在该map的集合
+        ArrayMap<String, String> allImageUpLoadUrlArrayMap = mHelpSingedDataRepository.getAllImageUpLoadUrlArrayMap();
+        String[] urlSplit = url.split(",");
+        allImageUpLoadUrlArrayMap.put(urlSplit[1], urlSplit[0]);
+        return allImageUpLoadUrlArrayMap;
+    }
+
+    @Override
+    public void editItemImage(List<String> urlList, int index) {//把图片保存到对应的数据中的方法
+        CsParcel.ProductDataList helpSignedDataOnly = mHelpSingedDataRepository.getHelpSignedDataOnly(index);
+        CsParcel.ProductDataList.Builder tempBuilder = helpSignedDataOnly.toBuilder();
+        CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+        for (String url : urlList) {
+            imgBuilder.setImageUrl(url);
+            tempBuilder.addExtra(imgBuilder);
+        }
+        tempBuilder.setImageNum(urlList.size());
+        mHelpSingedDataRepository.editHelpSignedData(index, tempBuilder.build());
+        LogUtils.e("图片装载完毕");
+    }
+
+    @Override
+    public CsParcel.ProductDataList enterItemImageUrlList(CsParcel.ProductDataList.Builder builder, List<String> urlList) {
+        builder.clearExtra();//每次进来都清空一次
+        CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+        for (String url : urlList) {
+            imgBuilder.setImageUrl(url);
+            builder.addExtra(imgBuilder);
+        }
+        builder.setImageNum(urlList.size());
+        return builder.build();
+    }
+
+
+    @Override
+    public boolean checkItemDescIsRight(String desc) {
+        return !TextUtils.isEmpty(desc);
+    }
+
+    @Override
+    public boolean checkRemarkIsRight(String remark) {
+        return !TextUtils.isEmpty(remark);
+    }
+
+    @Override
+    public boolean isChooseWareHouse(String wareHouseID) {//判断是否为空
+        return !TextUtils.isEmpty(wareHouseID);
+    }
+
+    @Override
+    public boolean checkPriceIsRight(String price) {//申报价格这里的需求按照实际情况来,目前只是判断是否为空
+        return !TextUtils.isEmpty(price);
+    }
+
+    @Override
+    public boolean checkItemQuantity(String quantity) {//单品数量这里按照实际情况来,目前只是判断是否为空
+        return !TextUtils.isEmpty(quantity);
+    }
+
+    @Override
+    public boolean checkItemImageUrl(List<CsBase.ItemImage> list) {
+        return list.size() > 0;
+    }
+
+    @Override
+    public boolean checkImagePathList(List<String> list) {
+        return list.size() > 0;
+    }
+
+    @Override
+    public CsParcel.ProductDataList setItemData(int index) {
+        CsParcel.ProductDataList helpSignedDataOnly = mHelpSingedDataRepository.getHelpSignedDataOnly(index);
+        CsParcel.ProductDataList.Builder builder = helpSignedDataOnly.toBuilder();
+        builder.setProductdescription(mProductDataList.getDesc());
+        builder.setProductremark(mProductDataList.getRemark());
+        builder.setWarehouseid(mWareHouseID);
+        builder.setPrice(mProductDataList.getPrice());
+        builder.setNum(mProductDataList.getItemNum());
+        enterItemImageUrlList(builder, mProductDataList.getImagePathLit());
+        return builder.build();
+    }
+
+    @Override
+    public void saveDataToLoacl() {
+        mHelpSingedDataRepository.saveBeanDataToLoacl();
+    }
+
+    @Override
+    public void saveUrlToBean(HelpMeSingleBean helpMeSingleBean) {//把图片保存到Bean中
+        ArrayMap<String, String> pathUrlMap = helpMeSingleBean.getPathUrlMap();
+        pathUrlMap.clear();
+        ArrayMap<String, String> allImageUpLoadUrlArrayMap = mHelpSingedDataRepository.getAllImageUpLoadUrlArrayMap();
+        List<String> imagePathLit = helpMeSingleBean.getShowImgList();
+        for (String path : imagePathLit) {//有,我们就存url,没有我们就存一个空的""
+            pathUrlMap.put(path, allImageUpLoadUrlArrayMap.containsKey(path) ? allImageUpLoadUrlArrayMap.get(path) : "");
+        }
+    }
+
+    @Override
+    public void setItemDataToRepository(int position, CsParcel.ProductDataList productDataList) {
+        mHelpSingedDataRepository.editHelpSignedData(position, productDataList);
+    }
+
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+
+    }
+}

@@ -1,0 +1,46 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+
+// 帮我寄单个操作请求
+message CheckToPayRequest
+{
+    required BaseRequest head                       = 1;
+    required string   parcelid                      = 2;//
+    required string   paymentcode                   = 3;//支付方式
+    required BaseUserRequest  baseuser              = 4;//用户id
+    optional int32    shippingmethodid              = 5;//物流方式id
+    required int32    shippingcouponcustomerid      = 6;//该用户的优惠券ID
+    optional int32    customeraddressid             = 7;//用户地址id
+    optional string              idcard             = 8;//身份证号
+	optional string              idcardfrontimage   = 9;//身份证正面
+	optional string              idcardbackimage    = 10;//身份证反面
+
+}
+
+//帮我寄单个操作应答
+message CheckToPayResponse
+{
+    required BaseResponse    head               = 1;
+    optional string          redirecturl        = 2;//url地址
+}
+
+
+//获取账户余额请求
+message GetAccountBalanceRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional string          currencycode       = 3;// 币种
+}
+
+//获取账户余额应答
+message GetAccountBalanceResponse
+{
+	required BaseResponse  head                       = 1;
+	optional float         free_balance               = 2;//可用额度
+	optional float         frozen_balance             = 3;//冻结额度
+}
+

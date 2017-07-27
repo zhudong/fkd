@@ -1,0 +1,122 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.AddressDao;
+import com.fuexpress.kr.model.AddressManager;
+import com.fuexpress.kr.model.HeaderModel;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.ChooseCityActivity;
+import com.fuexpress.kr.ui.activity.PickUpActivity;
+import com.fuexpress.kr.ui.activity.ReplenishActivity;
+import com.fuexpress.kr.ui.activity.help_send.ToHelpSendActivity;
+import com.fuexpress.kr.ui.activity.help_signed.HelpMeSignedActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.SPUtils;
+import com.socks.library.KLog;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import fksproto.CsAddress;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class HomeFragment extends BaseFragment<MainActivity> {
+
+    @BindView(R.id.convenientBanner)
+    ConvenientBanner convenientBanner;
+    private View mRootView;
+    private TextView mTv_in_title_left;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.home_fragment_layout, null);
+        TitleBarView titleBarView = (TitleBarView) mRootView.findViewById(R.id.title_in_home);
+        mTv_in_title_left = titleBarView.getTv_in_title_left();
+        mTv_in_title_left.setOnClickListener(this);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        HeaderModel instance = HeaderModel.getInstance();
+        instance.cleanData();
+        instance.initDta(mContext, convenientBanner);
+        getUserCity();
+        AddressManager.getInstance().getUpdateCountryAndRegionRequest();
+    }
+
+    private void getUserCity() {
+        CsAddress.GetWarehouseRegionRequest.Builder builder = CsAddress.GetWarehouseRegionRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        builder.setType(1);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetWarehouseRegionResponse>() {
+            @Override
+            public void onSuccess(final CsAddress.GetWarehouseRegionResponse response) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        String city = response.getRegionName();
+                        if (!TextUtils.isEmpty(city)) {
+                            mTv_in_title_left.setText(city);
+                            SPUtils.putString(getActivity(), ChooseCityActivity.F_RECENT_CITY, city);
+                        }
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+            }
+        });
+    }
+
+
+    @OnClick({R.id.rl_in_hf_help_get, R.id.rl_in_hf_help_take, R.id.rl_in_hf_help_buy, R.id.rl_in_hf_help_send, R.id.tv_in_title_left})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_in_hf_help_get:
+                mContext.startDDMActivity(PickUpActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_take:
+                mContext.startDDMActivity(HelpMeSignedActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_buy:
+                mContext.startDDMActivity(ReplenishActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_send:
+                mContext.startDDMActivity(ToHelpSendActivity.class, true);
+                break;
+            case R.id.tv_in_title_left:
+                // TODO: 2017/3/28 开启城市选择功能
+                mContext.startDDMActivity(ChooseCityActivity.class, true);
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String string = SPUtils.getString(mContext, ChooseCityActivity.F_RECENT_CITY, "");
+        if (TextUtils.isEmpty(string)) string = getString(R.string.string_seoul);
+        mTv_in_title_left.setText(string);
+    }
+}

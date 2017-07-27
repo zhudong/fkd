@@ -1,0 +1,143 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsBase;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 帮我收的单项详细Fragment
+ * 包含添加和编辑
+ */
+public class HSItemDetailFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.ItemView, AdapterView.OnItemClickListener {
+
+    @BindView(R.id.tl_in_help_get_package)
+    TitleBarView mTlInHelpGetPackage;
+    @BindView(R.id.gv_help_head)
+    CustomGridView mGvHelpHead;
+    @BindView(R.id.ed_desc)
+    EditText mEdDesc;
+    @BindView(R.id.ed_remark)
+    EditText mEdRemark;
+    @BindView(R.id.tv_ware_house_show)
+    TextView mTvWareHouseShow;
+    @BindView(R.id.ll_choose_ware_house)
+    LinearLayout mLlChooseWareHouse;
+    @BindView(R.id.ll_ware_house_container)
+    LinearLayout mLlWareHouseContainer;
+    @BindView(R.id.ed_price)
+    EditText mEdPrice;
+    @BindView(R.id.tv_currency_code)
+    TextView mTvCurrencyCode;
+    @BindView(R.id.ed_quantity)
+    EditText mEdQuantity;
+    @BindView(R.id.tv_add_demand)
+    TextView mTvAddDemand;
+    @BindView(R.id.btn_confirm_demand)
+    Button mBtnConfirmDemand;
+    private View mRootView;
+
+    private HelpSignedContract.Presenter mPresenter;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.hs_item_detail_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        mTlInHelpGetPackage.getIv_in_title_back().setOnClickListener(this);
+        TextView title_back_tv = mTlInHelpGetPackage.getmTv_in_title_back_tv();
+        title_back_tv.setText(getString(R.string.home_fg_help_02));
+        title_back_tv.setOnClickListener(this);
+        //judgmentAndShowView(mPresenter.getItemOnclickPosition());
+    }
+
+    @Override
+    public void showDeleteDialog(int index) {
+
+    }
+
+    @Override
+    public void showWareHouseChoose() {
+
+    }
+
+    @Override
+    public void showWareHouseInfo(CsBase.Warehouse warehouse) {
+
+    }
+
+    @Override
+    public void referGridViewShow() {
+
+    }
+
+    @Override
+    public void clearItemView() {
+
+    }
+
+    @Override
+    public void setPresenter(HelpSignedContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter, "presenter is not null");
+    }
+
+    @Override
+    public void judgmentAndShowView(int position) {
+        if (-1 == position) {
+            mTlInHelpGetPackage.setTitleText(getString(R.string.parcel_append_item));
+            ArrayList<String> imagePathList = mPresenter.getItemLocalPathMap().get(position);
+        } else {
+
+        }
+    }
+
+
+    @OnClick({R.id.ll_choose_ware_house, R.id.tv_add_demand, R.id.btn_confirm_demand})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_choose_ware_house:
+                break;
+            case R.id.tv_add_demand:
+                break;
+            case R.id.btn_confirm_demand:
+                break;
+            case R.id.tv_in_title_back_tv:
+            case R.id.iv_in_title_back:
+                mContext.onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+}

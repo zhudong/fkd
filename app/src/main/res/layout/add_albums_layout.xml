@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_for_add_album_dialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#EEEEEE">
+
+            <TextView
+                style="@style/system_Mytextsize_black_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/add_to_album" />
+
+            <ImageView
+                android:id="@+id/iv_close_for_add_albums_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/close" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_bg_for_home_head"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/iv_head_for_add_albums_dialog"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:id="@+id/tv_desc_for_add_albums_dialog"
+                style="@style/system_Mytextsize_GRAY_12"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="女士针织毛领衬衫等XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_for_add_albums_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:divider="@color/default_bg"
+            android:dividerHeight="1dp"
+            android:visibility="gone" />
+
+        <com.fuexpress.kr.ui.view.RefreshListView
+            android:id="@+id/rfl_for_add_albums_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:divider="@color/default_bg"
+            android:dividerHeight="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_gray_02" />
+
+        <RelativeLayout
+            android:id="@+id/rl_add_for_add_albums_dialog_creat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="40dp"
+
+            >
+
+            <TextView
+                style="@style/system_Mytextsize_black_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="@string/create_new_album" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_for_fragment_home_02_addalbum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_for_subject_button"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pb_for_fragment_home_02_addalbum"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/tv_for_fragment_home_02_addalbum"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_for_fragment_home_02_addalbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_to_album_in"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</FrameLayout>

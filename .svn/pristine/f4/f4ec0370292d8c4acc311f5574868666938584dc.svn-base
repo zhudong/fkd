@@ -1,0 +1,114 @@
+import "cs_head.proto";
+
+package fksproto;
+
+enum AccountOperacode
+{
+	ACCOUNT_OPERACODE_APPLY_VERIFY_CODE   = 1; //申请验证码
+	ACCOUNT_OPERACODE_REGISTER            = 2; //注册
+	ACCOUNT_OPERACODE_EMAIL_RESET_PASSWORD= 3; //邮箱重置密码
+	ACCOUNT_OPERACODE_MODIFY_PASSWORD     = 4; //修改密码
+	ACCOUNT_OPERACODE_THIRD_BIND          = 5; //第三方绑定(第三方账号<-->一时尚)
+	ACCOUNT_OPERACODE_MODIFY_ACCOUNT      = 6; //修改账号
+	ACCOUNT_OPERACODE_CHECK_ACCOUNT_EXIST = 7; //判断账号是否已存在
+	ACCOUNT_OPERACODE_CHECK_NICKNAME_EXIST= 8; //判断昵称是否已存在
+	ACCOUNT_OPERACODE_PHONE_RESET_PASSWORD= 9; //手机重置密码
+	ACCOUNT_OPERACODE_PHONE_BIND          = 10;//手机号绑定
+}
+
+enum AccountType
+{
+	ACCOUNT_TYPE_EMAIL = 1;//email
+	ACCOUNT_TYPE_PHONE = 2;//phone
+}
+
+enum AuthPlatform
+{
+	AUTH_PLATFORM_WT   = 0; //自建授权平台
+	AUTH_PLATFORM_WX   = 1; //微信授权平台
+	AUTH_PLATFORM_QQ   = 2; //手Q授权平台
+	AUTH_PLATFORM_SINA = 3; //SINA授权平台
+	AUTH_PLATFORM_FACEBOOK = 4; //facebook授权平台
+}
+
+enum VerifyCodeScene
+{
+	VERIFY_CODE_SCENE_REGISTER        = 1;//注册
+	VERIFY_CODE_SCENE_RESET_PASSWORD  = 2;//重置密码
+	VERIFY_CODE_SCENE_PHONE_BIND      = 3;//手机号绑定
+}
+
+//第三方账号
+message ThirdAccount
+{
+	required int32  platform = 1;//第三方平台
+	required string openid   = 2;//openid
+	optional string token
+   = 3;//token
+}
+
+message AccountRequest
+{
+    required BaseRequest  head          = 1;
+    required int32        operacode     = 2; //操作码
+    required int32        account_type  = 3; //账号类型
+    required string       account       = 4; //账号
+    optional string       password      = 5; //密码md5
+    optional ThirdAccount third         = 6; //第三方账号
+    optional string       reserve       = 7;
+    optional string       random_key    = 8; //会话密钥，随机key
+    optional string       account_extra = 9; //当为手机号注册时，该字段填手机号的国家码
+    optional string       verify_code   = 10;//验证码
+    optional string       countrycode   = 11;//国家代码  CN--中国
+}
+
+message AccountResponse
+{
+    required BaseResponse head = 1;
+}
+
+//普通登录
+message LoginRequest
+{
+	required BaseRequest head          = 1;
+	required int32       account_type  = 2;//账号类型
+    required string      account       = 3;//账号
+    optional string      password      = 4;//密码md5
+    optional string      random_key    = 5;//会话密钥，随机key
+    optional string      account_extra = 6;//当为手机号注册时，该字段填手机号的国家码
+
+}
+
+message LoginResponse
+{
+	required BaseResponse head        = 1;
+    optional string       session_key = 2;//后续的会话密钥，客户端保留在本地
+    optional string       ticket      = 3;//票据，客户端保留在本地
+    optional uint32       uin         = 4;//userid，全平台唯一
+    optional string       h5_ticket   = 5;//H5票据，客户端保留在本地，客户端调用H5页面时用到
+    optional string      localecode    = 6;
+    optional string      currencycode  = 7;
+    optional uint32      currencyid    = 8;
+}
+
+//第三方登录
+message ThirdLoginRequest
+{
+	required BaseRequest head        = 1;
+	required int32       platform    = 2;//refer AuthPlatform
+	required string      openid      = 3;//openid
+	optional string      token       = 4;//access token
+    optional string      random_key  = 5;//会话密钥，随机key
+}
+
+message ThirdLoginResponse
+{
+	required BaseResponse head        = 1;
+    optional string       session_key = 2;//后续的会话密钥，客户端保留在本地
+    optional string       ticket      = 3;//票据，客户端保留在本地
+    optional uint32       uin         = 4;//userid，全平台唯一
+    optional string       h5_ticket   = 5;//H5票据，客户端保留在本地，客户端调用H5页面时用到
+    optional string      localecode    = 6;
+    optional string      currencycode  = 7;
+    optional uint32      currencyid    = 8;
+}

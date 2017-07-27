@@ -1,0 +1,103 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class MeFragment extends BaseFragment<MainActivity> {
+
+    @BindView(R.id.title_in_me)
+    TitleBarView mTitleInMe;
+    @BindView(R.id.profile_image)
+    CircleImageView mProfileImage;
+    @BindView(R.id.tv_login)
+    TextView mTvLogin;
+    @BindView(R.id.myMoneyLayout)
+    RelativeLayout mMyMoneyLayout;
+    @BindView(R.id.couponLayout)
+    RelativeLayout mCouponLayout;
+    @BindView(R.id.addressManagerLayout)
+    RelativeLayout mAddressManagerLayout;
+    @BindView(R.id.connectServiceLayout)
+    RelativeLayout mConnectServiceLayout;
+    @BindView(R.id.helpCenterLayout)
+    RelativeLayout mHelpCenterLayout;
+    @BindView(R.id.noticesRedPoint)
+    ImageView mNoticesRedPoint;
+    @BindView(R.id.noticeLayout)
+    RelativeLayout mNoticeLayout;
+    @BindView(R.id.cleanCacheLayout)
+    RelativeLayout mCleanCacheLayout;
+    @BindView(R.id.tv_versionName)
+    TextView mTvVersionName;
+    private View mRootView;
+
+    @Override
+    protected void initTitleBar() {
+        TitleBarView titleBarView = (TitleBarView) mRootView.findViewById(R.id.title_in_me);
+        ImageView iv_in_title_right = titleBarView.getIv_in_title_right();
+        iv_in_title_right.setImageResource(R.mipmap.me_setting);
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.me_fragment_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @OnClick({R.id.title_in_me, R.id.profile_image, R.id.tv_login, R.id.myMoneyLayout, R.id.couponLayout, R.id.addressManagerLayout, R.id.connectServiceLayout, R.id.helpCenterLayout, R.id.noticeLayout, R.id.cleanCacheLayout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_in_me:
+                break;
+            case R.id.profile_image:
+                break;
+            case R.id.tv_login:
+                break;
+            case R.id.myMoneyLayout:
+                break;
+            case R.id.couponLayout:
+                break;
+            case R.id.addressManagerLayout:
+                break;
+            case R.id.connectServiceLayout:
+                break;
+            case R.id.helpCenterLayout:
+                break;
+            case R.id.noticeLayout:
+                break;
+            case R.id.cleanCacheLayout:
+                break;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+package com.fuexpress.kr.ui.activity.help_send;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import staffproto.CsParcel;
+
+/**
+ * Created by yuan on 2016-6-13.
+ */
+public class HelpSendModel implements HelpSendContract.Model {
+    @Override
+    public List<CsParcel.Parcel> getParcels() {
+        List<CsParcel.Parcel> list = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            CsParcel.Parcel build = CsParcel.Parcel.newBuilder().build();
+            list.add(build);
+        }
+        return list;
+    }
+
+    @Override
+    public float getEstimatePrice() {
+        return 0;
+    }
+}

@@ -1,0 +1,34 @@
+package com.fuexpress.kr.ui.activity.address_new;
+
+import com.fuexpress.kr.base.BasePresenterRx;
+import com.fuexpress.kr.base.BaseViewGeneric;
+
+import java.util.List;
+
+/**
+ * Created by Longer on 2017/4/19.
+ * MVP模式
+ * 新的地址选择方式的合同接口
+ */
+public interface ChooseAddressContract {
+
+    interface View extends BaseViewGeneric<Presenter> {//视图层View的方法和行为
+
+        void setSelectedAddress(String selectedAddress);//设置已经选中的地址
+
+        void showAddressData();//显示地址信息
+
+        void jumpNextAddressPage(String regionID);//跳转到下一级页面
+
+        void operateAlertDialog(boolean isShow, int type, String text);//操作弹框
+
+        void chooseFinished();//选择完毕,结束选择流程
+    }
+
+    interface Presenter extends BasePresenterRx {//逻辑层Presenter的方法和行为
+
+        void getAddressDataRemote(String regionData);//从服务器中获取地址信息
+
+
+    }
+}

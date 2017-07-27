@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
+        <TextView
+            style="@style/parcel_divide_line"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#CCCCCC"/>
+
+        <com.fuexpress.kr.ui.view.NoteRadioGroup
+            android:id="@+id/rbg_home_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_home"
+                style="@style/content_rb_style"
+                android:drawableTop="@drawable/selector_home"
+                android:text="@string/main_home_tab_string" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/rb_need"
+                    style="@style/content_rb_style_in_fl"
+                    android:drawableTop="@drawable/selector_need"
+                    android:text="@string/main_need_tab_string" />
+
+                <ImageView
+                    android:id="@+id/iv_demand_red_point"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="19dp"
+                    android:background="@drawable/shape_cricle" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/rb_source"
+                    style="@style/content_rb_style_in_fl"
+                    android:drawableTop="@drawable/selector_source"
+                    android:text="@string/main_source" />
+
+                <ImageView
+                    android:id="@+id/iv_source_red_point"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="19dp"
+                    android:background="@drawable/shape_cricle" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/rb_package"
+                    style="@style/content_rb_style_in_fl"
+                    android:drawableTop="@drawable/selector_package"
+                    android:text="@string/main_package_tab_string" />
+
+                <ImageView
+                    android:id="@+id/iv_package_red_point"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="19dp"
+                    android:background="@drawable/shape_cricle" />
+            </FrameLayout>
+
+            <RadioButton
+                android:id="@+id/rb_me"
+                style="@style/content_rb_style"
+                android:drawableTop="@drawable/selector_me"
+                android:text="@string/main_me_tab_string" />
+
+
+        </com.fuexpress.kr.ui.view.NoteRadioGroup>
+    </LinearLayout>
+
+
+</FrameLayout>

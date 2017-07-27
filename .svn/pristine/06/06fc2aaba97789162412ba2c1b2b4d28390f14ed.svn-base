@@ -1,0 +1,78 @@
+package com.fuexpress.kr.model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.fuexpress.kr.bean.MaterialsBean;
+import com.fuexpress.kr.conf.SqlParcelsHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by andy on 2017/1/17.
+ */
+public class MaterialsDao {
+
+    static private SqlParcelsHelper sqlParcelsHelper;
+    private static MaterialsDao mInstance;
+    static private SQLiteDatabase mReadableDatabase;
+
+
+    static public MaterialsDao getInstance(Context context) {
+        sqlParcelsHelper = new SqlParcelsHelper(context, null, null, 0);
+        mInstance = new MaterialsDao();
+        mReadableDatabase = sqlParcelsHelper.getReadableDatabase();
+        return mInstance;
+    }
+
+
+    public List<MaterialsBean> search(String key) {
+//        SELECT 字段 FROM 表 WHERE 某字段 Like 条件
+        String sql = "SELECT * FROM " + MaterialsBean.Table.name + " WHERE u_name LIKE '%三%'";
+//        mReadableDatabase.
+
+        List<MaterialsBean> list = new ArrayList<>();
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        Cursor c = db.query(MaterialsBean.Table.name, null,null, new String[]{MaterialsBean.Table.id, MaterialsBean.Table.materialsName}, "", key, null);
+        while (c.moveToNext()) {
+            list.add(new MaterialsBean(c.getInt(0), c.getString(1)));
+        }
+        c.close();
+        db.close();
+        return list;
+
+    }
+
+
+    public List<MaterialsBean> getAll() {
+        List<MaterialsBean> list = new ArrayList<>();
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        Cursor c = db.query(MaterialsBean.Table.name, new String[]{MaterialsBean.Table.id, MaterialsBean.Table.materialsName}, "", null, null, null, null);
+        while (c.moveToNext()) {
+            list.add(new MaterialsBean(c.getInt(0), c.getString(1)));
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public void insert(List<MaterialsBean> materialsBeans) {
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        for (MaterialsBean bean : materialsBeans) {
+            db.insert(MaterialsBean.Table.name, null, createValue(bean));
+        }
+        db.close();
+    }
+
+    private ContentValues createValue(MaterialsBean bean) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MaterialsBean.Table.id, bean.getId());
+        contentValues.put(MaterialsBean.Table.materialsName, bean.getName());
+        return contentValues;
+    }
+
+
+}

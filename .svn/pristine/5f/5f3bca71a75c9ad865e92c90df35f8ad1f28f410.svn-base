@@ -1,0 +1,730 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.PickItemAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.protobuf.GeneratedMessage;
+import com.socks.library.KLog;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsParcel;
+
+/**
+ * Created by kevin on 2016/12/13.
+ */
+
+public class ReplenishActivity extends BaseActivity {
+    private static final int CODE_PAYMENT_REQUEST = 0x1001;
+    private static final int CODE_EDIT_REQUEST = 0x1002;
+    public static final String KOREA_CUCCENCY_CODE = "KRW";
+    @BindView(R.id.fee_list_tv)
+    TextView mFeeListTv;
+    private View rootView;
+    private LinearLayout paymentLayout;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private ImageView backIv;
+    private CustomListView pickListView;
+    private ScrollView pickUpSv;
+    private LinearLayout emptyLayout;
+
+    private TextView balanceTv;
+    private TextView grandTotalTv;
+    private LinearLayout serviceFeeLayout;
+    private TextView waringTv;
+    private Button submitBtn;
+    private TextView paymentTv;
+    private LinearLayout rateLayout;
+    private TextView rateTv;
+    private TextView rateBackTv;
+
+    private CsParcel.HelpMyBuyInitResponse mResponse;
+    private List<PickUpItemBean> pickUpItemlist = new ArrayList<PickUpItemBean>();
+    private int payType = Constants.PAYMENT_ALIPAY;
+    private String currencyCode;
+    private String payCode;
+
+    private Button addBtn;
+    private List<CsParcel.ProductDataList> productList;
+    private PickItemAdapter pickItemAdapter;
+    private List<PickUpItemBean> pickList = new ArrayList<>();
+    private SweetAlertDialog mSweetDialog;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_replenish, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.pick_up_titlebar);
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(getString(R.string.main_home_tab_string));
+        backIv = titleBarView.getIv_in_title_back();
+        emptyLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_empty_layout);
+        paymentLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_payment_layout);
+        paymentTv = (TextView) rootView.findViewById(R.id.pick_up_payment_tv);
+        pickUpSv = (ScrollView) rootView.findViewById(R.id.pick_up_sv);
+        pickListView = (CustomListView) rootView.findViewById(R.id.pick_up_listview);
+        balanceTv = (TextView) rootView.findViewById(R.id.pick_up_balance_tv);
+        serviceFeeLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_service_fee_layout);
+        waringTv = (TextView) rootView.findViewById(R.id.pick_up_service_waring_tv);
+        grandTotalTv = (TextView) rootView.findViewById(R.id.pick_up_grand_total_tv);
+        submitBtn = (Button) rootView.findViewById(R.id.pick_up_submit_btn);
+        addBtn = (Button) rootView.findViewById(R.id.pick_up_add_btn);
+        rateLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_rate_layout);
+        rateTv = (TextView) rootView.findViewById(R.id.pick_up_rate_msg_one);
+        rateBackTv = (TextView) rootView.findViewById(R.id.pick_up_rate_msg_two);
+
+        init();
+
+        backIv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        paymentLayout.setOnClickListener(this);
+        submitBtn.setOnClickListener(this);
+        addBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+
+    public void init() {
+        mSweetDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        productList = new ArrayList<CsParcel.ProductDataList>();
+        pickList = new ArrayList<PickUpItemBean>();
+        List<PickUpItemBean> itemList = (List<PickUpItemBean>) SPUtils.readObject(this, EditReplenishActivity.CODE_PICK_LIST);
+        List<CsParcel.ProductDataList> pList = (List<CsParcel.ProductDataList>) SPUtils.readObject(this, EditReplenishActivity.CODE_PRODUCT_LIST);
+        if (itemList != null) {
+            pickList.addAll(itemList);
+        }
+        for (PickUpItemBean itemBean : pickList) {
+            KLog.i(itemBean.getItemAddress());
+        }
+        if (pList != null) {
+            productList.addAll(pList);
+        }
+        if (pickList.size() == 0) {
+            emptyLayout.setVisibility(View.VISIBLE);
+            updateServiceFeeLayout(pickList);
+        } else {
+            emptyLayout.setVisibility(View.GONE);
+        }
+        pickItemAdapter = new PickItemAdapter(this, pickList, true);
+        pickListView.setAdapter(pickItemAdapter);
+        pickListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                CsParcel.ProductDataList item = (CsParcel.ProductDataList) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(ReplenishActivity.this, EditReplenishActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(EditReplenishActivity.CODE_PICK_LIST, (Serializable) pickList.get(position).getPathList());
+                bundle.putSerializable(EditReplenishActivity.CODE_PICK_ITEM, (Serializable) pickList.get(position));
+//                bundle.putSerializable(EditReplenishActivity.CODE_PRODUCT_ITEM, item);
+                intent.putExtra(EditReplenishActivity.CODE_POSITION, position);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, CODE_EDIT_REQUEST);
+            }
+        });
+        helpMyBuyInitRequest();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        KLog.i("code = " + AccountManager.getInstance().getCurrencyCode());
+        if (KOREA_CUCCENCY_CODE.equals(AccountManager.getInstance().getCurrencyCode())) {
+            //    rateLayout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+            case R.id.tv_in_title_right:
+                break;
+            case R.id.pick_up_payment_layout:
+                Intent intent = new Intent(this, PaymentActivity.class);
+                int i = (int) SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + "paymentPos", 0);
+                intent.putExtra("paymentPos", i);
+                intent.putExtra(PaymentActivity.CURRENCY_CODE, currencyCode);
+                intent.putExtra("payType", payType);
+                intent.putExtra("payCode", payCode);
+                intent.putExtra(PaymentActivity.IS_SEND_PACKAGE, false);
+                intent.putExtra("paymentString", paymentTv.getText().toString());
+                startActivityForResult(intent, CODE_PAYMENT_REQUEST);
+                break;
+            case R.id.pick_up_submit_btn:
+                sumbitBuyProductList();
+                //    saveHelpMyGetRequest(payCode, productList.size() + "", productList);
+                break;
+            case R.id.pick_up_add_btn:
+                Intent intent1 = new Intent(this, AddReplenishActivity.class);
+                intent1.putExtra(AddReplenishActivity.CODE_ITEM_COUNT, pickList.size());
+                startActivityForResult(intent1, 100);
+//                toActivity(AddReplenishActivity.class);
+                break;
+        }
+    }
+
+    private void sumbitBuyProductList(){
+        if(pickList.size()==0){
+            return;
+        }
+        CsParcel.SaveHelpMyBuyRequest.Builder builder=CsParcel.SaveHelpMyBuyRequest.newBuilder();
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(mResponse.getCurrencyCode());
+        builder.setPaymentcode(payCode);
+        builder.setSumcount(pickList.size()+"");
+        builder.addAllProductlist(ClassUtil.conventBeanList2DataList(pickList));
+        NetEngine.postRequest(builder, new INetEngineListener() {
+            @Override
+            public void onSuccess(GeneratedMessage response) {
+                KLog.i("tag ",response.toString());
+                //上传成功，清理数据 并且跳转
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        cleanData();
+                        toActivity(PickUpSuccessActivity.class);
+                        finish();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("ret = "+ret+" errMsg  "+errMsg);
+            }
+        });
+
+    }
+    //清理数据
+    public void cleanData(){
+        SPUtils.saveObject(this, EditReplenishActivity.CODE_PICK_LIST, "");
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.d("----requestCode " + requestCode);
+        if (resultCode == Constants.PAYMENT_REQUEST_CODE) {
+            String payString = SPUtils.get(ReplenishActivity.this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_NAME, "").toString();
+            payCode = SPUtils.get(ReplenishActivity.this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_CODE, "").toString();
+            paymentTv.setText(payString);
+        }
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            List<CsParcel.ProductDataList> list = (List<CsParcel.ProductDataList>) bundle.getSerializable(AddReplenishActivity.CODE_PRODUCT_LIST);
+            List<PickUpItemBean> pickItem = (List<PickUpItemBean>) bundle.getSerializable(AddReplenishActivity.CODE_PICK_LIST);
+//            pickList.clear();
+            pickList.addAll(pickItem);
+
+//            productList.clear();
+            productList.addAll(list);
+            if (pickList.size() > 0) {
+                if (pickList.size() >= 4) {
+                    addBtn.setEnabled(false);
+                    updateServiceFeeLayout(pickList);
+                    pickItemAdapter.notifyDataSetChanged();
+//                    addBtn.setBackground();
+                } else {
+                    emptyLayout.setVisibility(View.GONE);
+                    updateServiceFeeLayout(pickList);
+                    pickItemAdapter.notifyDataSetChanged();
+                }
+                for(PickUpItemBean bean:pickList){
+                    KLog.i(bean.toString());
+                }
+            } else {
+                emptyLayout.setVisibility(View.VISIBLE);
+            }
+        }
+        if (resultCode == EditReplenishActivity.CODE_RESULT_EDIT) {
+            Bundle bundle = data.getExtras();
+            List<CsParcel.ProductDataList> list = (List<CsParcel.ProductDataList>) bundle.getSerializable(EditReplenishActivity.CODE_PRODUCT_LIST);
+            List<PickUpItemBean> pickItem = (List<PickUpItemBean>) bundle.getSerializable(EditReplenishActivity.CODE_PICK_LIST);
+            int position = data.getIntExtra(EditReplenishActivity.CODE_POSITION, -1);
+            if(position > -1){
+                pickList.remove(position);
+                pickList.addAll(pickItem);
+            //    productList.remove(position);
+                //  productList.addAll(list);
+            }
+            if (pickList.size() > 0) {
+                if (pickList.size() >= 4) {
+                    addBtn.setEnabled(false);
+//                    addBtn.setBackground();
+                } else {
+                    emptyLayout.setVisibility(View.GONE);
+                    updateServiceFeeLayout(pickList);
+                    pickItemAdapter.notifyDataSetChanged();
+                }
+            } else {
+                emptyLayout.setVisibility(View.VISIBLE);
+            }
+        }
+        if (resultCode == EditReplenishActivity.CODE_RESULT_DELETE) {
+            boolean isDeleted = data.getBooleanExtra(EditReplenishActivity.CODE_IS_DELETE_ITEM, false);
+            if (isDeleted) {
+                int position = data.getIntExtra(EditReplenishActivity.CODE_POSITION, -1);
+                pickList.remove(position);
+                pickItemAdapter.notifyDataSetChanged();
+                SPUtils.saveObject(this, EditReplenishActivity.CODE_PICK_LIST, pickList);
+            }
+        }
+        SPUtils.saveObject(this,EditReplenishActivity.CODE_PICK_LIST,pickList);
+        if(mResponse !=null&&pickList!=null&&pickList.size()!=0){
+            setPaymentData(mResponse,pickList);
+        }
+    }
+
+    public void saveHelpMyGetRequest(String payCode, String sumcount, List<CsParcel.ProductDataList> productList) {
+
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.pick_up_submitting));
+        CsParcel.SaveHelpMyGetRequest.Builder builder = CsParcel.SaveHelpMyGetRequest.newBuilder();
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setPaymentcode(payCode);
+        builder.setSumcount(sumcount);
+        builder.addAllProductlist(productList);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SaveHelpMyGetResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.SaveHelpMyGetResponse response) {
+
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                saveHanlder.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dissMissProgressDiaLog(500);
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler saveHanlder = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CsParcel.SaveHelpMyGetResponse response = (CsParcel.SaveHelpMyGetResponse) msg.obj;
+            String redirectUrl = response.getRedirecturl();
+            String param[] = redirectUrl.split("\\?")[1].split("&");
+            String type = param[1].split("=")[1];
+            String appType = param[2].split("=")[1];
+            String paymentCode = param[3].split("=")[1];
+            String salesRequireManId = param[4].split("=")[1];
+            String total = param[5].split("=")[1];
+            doDirectGiftCardRequest(Integer.parseInt(type),
+                    Integer.parseInt(appType),
+                    paymentCode,
+                    Float.parseFloat(total),
+                    Integer.parseInt(salesRequireManId),
+                    ReplenishActivity.this.mResponse.getCurrencyCode());
+//            CustomToast.makeText(mContext, getString(R.string.pick_up_add_save_success_msg), Toast.LENGTH_SHORT).show();
+//            clearData();
+//            mSweetAlertDialog.dismiss();
+//            EventBus.getDefault().post(new BusEvent(BusEvent.CODE_GO_MERCHAND, true));
+            /*if(mResponse!=null&&pickList!=null&&pickList.size()!=0){
+                setServiceFeeData(mResponse,pickList);
+            }*/
+        }
+    };
+
+    public void doDirectGiftCardRequest(int type, int appType, String paymentCode, float total, int salesrequiremainid, String currencyCode) {
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.pick_up_generating_order));
+        CsParcel.DoDirectGiftCardRequest.Builder builder = CsParcel.DoDirectGiftCardRequest.newBuilder();
+        builder.setType(type);
+        builder.setAppType(appType);
+        builder.setPaymentCode(paymentCode);
+        builder.setTotal(total);
+        builder.setSalesrequiremainid(salesrequiremainid);
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(currencyCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.DoDirectGiftCardResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.DoDirectGiftCardResponse response) {
+
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                directHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dissMissProgressDiaLog(500);
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler directHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            CsParcel.DoDirectGiftCardResponse response = (CsParcel.DoDirectGiftCardResponse) msg.obj;
+            int giftCardOrderId = response.getOrderId();
+            String paymentCode = response.getPaymentCode();
+            payGiftCardOrderRequest(giftCardOrderId, paymentCode, ReplenishActivity.this.mResponse.getCurrencyCode());
+
+        }
+    };
+
+    public void payGiftCardOrderRequest(int giftCardOrderId, final String paymentCode, String currencyCode) {
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.pick_up_getting_pay_info));
+        CsParcel.PayGiftCardOrderRequest.Builder builder = CsParcel.PayGiftCardOrderRequest.newBuilder();
+        builder.setGiftCardOrderId(giftCardOrderId);
+        builder.setPaymentCode(paymentCode);
+        builder.setCurrencycode(currencyCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.PayGiftCardOrderResponse response) {
+                LogUtils.d(response.toString());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dissMissProgressDiaLog(500);
+                    }
+                });
+
+                if (TextUtils.equals(Constants.GIFT_CARD_PAYMENT_ALIPAY, paymentCode)) {
+                    PaymentManager.getInstance(ReplenishActivity.this).aliPay(response.getPayInfo(), new PaymentManager.OnAliPayListener() {
+                        @Override
+                        public void onSuccess(String resultStatus) {
+                            SPUtils.saveObject(ReplenishActivity.this, EditReplenishActivity.CODE_PICK_LIST,null);
+                            SPUtils.saveObject(ReplenishActivity.this, EditReplenishActivity.CODE_PRODUCT_LIST,null);
+                            Intent intent = new Intent(ReplenishActivity.this, PickUpSuccessActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(String resultStatus, final String errorMsg) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CustomToast.makeText(ReplenishActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                if (TextUtils.equals(Constants.GIFT_CARD_PAYMENT_WXPAY, paymentCode)) {
+                    PaymentManager.getInstance(ReplenishActivity.this).wechatPay(paymentCode);
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dissMissProgressDiaLog(500);
+                    }
+                });
+            }
+        });
+
+    }
+
+    public void showProgressDiaLog(int type, String titleText) {
+        if (SweetAlertDialog.PROGRESS_TYPE == type) {
+            mSweetDialog.getProgressHelper().setBarColor(Color.parseColor("#FFFFFF"));
+        }
+        if (!TextUtils.isEmpty(titleText) || !(titleText == null)) {
+            mSweetDialog.setTitleText(titleText);
+        }
+
+        mSweetDialog.setCancelable(false);
+        mSweetDialog.show();
+    }
+
+    public void dissMissProgressDiaLog() {
+        mSweetDialog.setTitleTextViewGone();
+        mSweetDialog.dismiss();
+    }
+
+    public void dissMissProgressDiaLog(long delay) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSweetDialog.setTitleTextViewGone();
+                mSweetDialog.dismiss();
+            }
+        }, delay);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mSweetDialog.dismiss();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (mSweetDialog != null) {
+                mSweetDialog.dismiss();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void helpMyBuyInitRequest() {
+        showLoading();
+        CsParcel.HelpMyBuyInitRequest.Builder builder = CsParcel.HelpMyBuyInitRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencyCode(AccountManager.getInstance().getCurrencyCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.HelpMyBuyInitResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.HelpMyBuyInitResponse response) {
+
+                closeLoading();
+                KLog.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                initHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("ret = " + ret + " errMsg " + errMsg);
+                closeLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.pick_up_getting_pay_info));
+                        dissMissProgressDiaLog(500);
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler initHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mResponse = (CsParcel.HelpMyBuyInitResponse) msg.obj;
+            currencyCode = mResponse.getCurrencyCode();
+            PaymentManager.getInstance(ReplenishActivity.this).getFKDPaymentListRequest(mResponse.getCurrencyCode(), new PaymentManager.OnFKDPaymentListener() {
+                @Override
+                public void onResult(int paymentType, final String pString, String pCode) {
+                    payCode = pCode;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            paymentTv.setText(pString);
+                        }
+                    });
+                }
+            });
+            if (currencyCode.equals("CNY")) {
+                rateTv.setText(getString(R.string.pick_up_rate_msg, mResponse.getExchangeRate()));
+                rateBackTv.setText(getString(R.string.pick_up_rate_back_msg, mResponse.getExchangeRateBack()));
+                rateLayout.setVisibility(View.VISIBLE);
+            } else {
+                rateLayout.setVisibility(View.GONE);
+            }
+            balanceTv.setText(getString(R.string.pick_up_payment_balance, mResponse.getGiftCardAccount()));
+            waringTv.setText(getString(R.string.pick_up_services_waring_msg, (int) mResponse.getServiceFee()));
+            if (mResponse != null && pickList != null) {
+                updateServiceFeeLayout(pickList);
+                setPaymentData(mResponse, pickList);
+            }
+//            itemAdapter = new ItemAdapter(ReplenishActivity.this, itemlist, mResponse.getCurrencyCode());
+//            itemAdapter.notifyDataSetChanged();
+        }
+    };
+
+
+
+
+    //设置支付方式数据
+    private void setPaymentData(CsParcel.HelpMyBuyInitResponse response, List<PickUpItemBean> list) {
+        if (response == null || list == null || list.size() == 0) {
+            return;
+        }
+    }
+    private String getServiceFeeListString(List<PickUpItemBean> mDataLists) {
+        if (mResponse == null || mDataLists == null || mDataLists.size() == 0) {
+            return "";
+        } else {
+            String result = "";
+            for (int i = 0; i < mDataLists.size(); i++) {
+                result = result + "\n" + getServiceFeeString(mDataLists.get(i));
+            }
+            return result.substring(1);
+        }
+
+    }
+    private String getServiceFeeString(PickUpItemBean list) {
+        String feeStr = UIUtils.getCurrency(this, mResponse.getCurrencyCode(), Float.valueOf(list.getItemPrice())) +
+                "*" + list.getItemCount() + "*" + mResponse.getServiceFee() + "%" + " = " +
+                UIUtils.getCurrency(this, mResponse.getCurrencyCode(), Float.valueOf(list.getItemPrice()) * (float) mResponse.getServiceFee() / 100);
+        return feeStr;
+    }
+    public void scrollToBottom() {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                pickUpSv.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        if (listView == null)
+            return;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
+    public void updateServiceFeeLayout(List<PickUpItemBean> productList) {
+        float grandTotal = 0;
+        if (null == mResponse) {
+            return;
+        }
+        serviceFeeLayout.removeAllViews();
+        for (PickUpItemBean item : productList) {
+            float price = Float.parseFloat(item.getItemPrice());
+            int count = Integer.parseInt(item.getItemCount());
+            float fee = (float) (price * count * (mResponse.getServiceFee() / 100));
+            String feeMsg = UIUtils.getCurrency(ReplenishActivity.this, mResponse.getCurrencyCode(), price) + "*" + count + "*" + (int) mResponse.getServiceFee() + "%=" + mResponse.getCurrencySign() + fee;
+
+            TextView feeTv = new TextView(ReplenishActivity.this);
+            feeTv.setTextColor(getResources().getColor(R.color.black_0));
+            feeTv.setTextSize(13);
+            feeTv.setText(feeMsg);
+            feeTv.setGravity(Gravity.RIGHT);
+            serviceFeeLayout.addView(feeTv);
+            grandTotal += price * count + fee;
+        }
+        grandTotalTv.setText(getString(R.string.String_price2, UIUtils.getCurrency(this), grandTotal));
+    }
+
+    public void updateServiceFeeLayout(Set<PickUpItemBean> serviceFeeSet) {
+        for (PickUpItemBean item : serviceFeeSet) {
+            float price = Float.parseFloat(item.getItemPrice());
+            int count = Integer.parseInt(item.getItemCount());
+            float fee = (float) (price * count * (mResponse.getServiceFee() / 100));
+            String feeMsg = mResponse.getCurrencySign() + price + "*" + count + "*" + (int) mResponse.getServiceFee() + "%=" + mResponse.getCurrencySign() + fee;
+
+            TextView feeTv = new TextView(ReplenishActivity.this);
+            feeTv.setTextColor(getResources().getColor(R.color.black_0));
+            feeTv.setTextSize(13);
+            feeTv.setText(feeMsg);
+            feeTv.setGravity(Gravity.RIGHT);
+            serviceFeeLayout.addView(feeTv);
+        }
+
+    }
+
+    int itemId = -1;
+
+    public void updateServiceFeeLayout(PickUpItemBean item) {
+        List<PickUpItemBean> list = new ArrayList<PickUpItemBean>();
+        if (itemId != item.getItemId()) {
+            pickUpItemlist.add(item);
+        } else {
+            for (int i = 0; i < pickUpItemlist.size(); i++) {
+                if (pickUpItemlist.get(i).getItemId() == item.getItemId()) {
+                    pickUpItemlist.set(i, item);
+                }
+            }
+        }
+        float grandTotal = 0;
+        for (int i = 0; i < pickUpItemlist.size(); i++) {
+            float price = Float.parseFloat(pickUpItemlist.get(i).getItemPrice());
+            int count = Integer.parseInt(pickUpItemlist.get(i).getItemCount());
+            float fee = (float) (price * count * (mResponse.getServiceFee() / 100));
+            String feeMsg = mResponse.getCurrencySign() + price + "*" + count + "*" + (int) mResponse.getServiceFee() + "%=" + mResponse.getCurrencySign() + fee;
+
+            TextView feeTv = new TextView(ReplenishActivity.this);
+            feeTv.setTextColor(getResources().getColor(R.color.black_0));
+            feeTv.setTextSize(13);
+            feeTv.setText(feeMsg);
+            feeTv.setGravity(Gravity.RIGHT);
+            serviceFeeLayout.addView(feeTv);
+            grandTotal += price * count + fee;
+        }
+        grandTotalTv.setText(getString(R.string.String_price2, UIUtils.getCurrency(this), grandTotal));
+        itemId = item.getItemId();
+    }
+
+    public void requestFocus(EditText editText) {
+        editText.requestFocus();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+}

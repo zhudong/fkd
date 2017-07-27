@@ -1,0 +1,130 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Context;
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+/**
+ * Created by Administrator on 2017-2-16.
+ */
+
+public class IntegralManagementActivity extends BaseActivity {
+
+    private final int[] RESOURCES = {R.string.integral_management_resources_1,
+            R.string.integral_management_resources_2,
+            R.string.integral_management_resources_3};
+
+    private static final int POSITION_INTEGRAL = 0;
+    private static final int POSITION_FRIENDS = 1;
+    private static final int POSITION_INVITE_FRIENDS = 2;
+
+
+    private View rootView;
+    private TitleBarView titleBarView;
+    private ImageView backIv;
+    private TextView backTv;
+    private ListView listView;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_integral_management, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.integral_management_titlebar);
+        backIv = titleBarView.getIv_in_title_back();
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(R.string.integral_management_back_msg);
+        listView = (ListView) rootView.findViewById(R.id.integral_management_list_view);
+        MyAdapter adapter = new MyAdapter(RESOURCES, this);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
+        backIv.setOnClickListener(this);
+        backIv.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position){
+            case POSITION_INTEGRAL:
+                startDDMActivity(IntegralActivity.class, true);
+                break;
+            case POSITION_FRIENDS:
+                startDDMActivity(FriendsActivity.class, true);
+                break;
+            case POSITION_INVITE_FRIENDS:
+                startDDMActivity(InviteFriendsActivity.class, true);
+                break;
+        }
+    }
+
+    class MyAdapter extends BaseAdapter{
+
+        private Context context;
+        private int[] resources;
+
+        public MyAdapter(int[] resources, Context context){
+            this.context = context;
+            this.resources = resources;
+        }
+
+        @Override
+        public int getCount() {
+            return resources.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return resources[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if(convertView == null){
+                convertView = LayoutInflater.from(context).inflate(R.layout.integral_management_item, null);
+                holder = new ViewHolder();
+                holder.parentLayout = (LinearLayout) convertView.findViewById(R.id.management_item_layout);
+                holder.titleTv = (TextView) convertView.findViewById(R.id.management_item_title_tv);
+                convertView.setTag(holder);
+            }else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.titleTv.setText(getString(resources[position]));
+
+            return convertView;
+        }
+
+        class ViewHolder{
+            LinearLayout parentLayout;
+            TextView titleTv;
+        }
+    }
+}

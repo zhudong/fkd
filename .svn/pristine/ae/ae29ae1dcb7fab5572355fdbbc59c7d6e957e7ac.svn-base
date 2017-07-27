@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/imageselector_activity_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ImageSelectorActivity">
+
+    <include layout="@layout/imageselector_title_bar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/image_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"/>
+
+        <ListView
+            android:id="@+id/lv_in_image_selector_activity"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone">
+
+        </ListView>
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:zhudong="http://schemas.android.com/apk/res-auto"
+              android:background="@color/gray_03"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal_two"></include>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/payment_success"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_demand_has_been_paid_successfully"
+                android:textColor="@color/title_color"/>
+        </LinearLayout>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/you_can_check_more_info_by_help_me"
+            android:textColor="@color/text_gray"/>
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_can_check_more_info_by_help_me"
+                android:textColor="@color/text_gray"
+                />
+
+            <TextView
+                android:id="@+id/card_payment_order_no_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title_color"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/card_payment_go_home_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/back_to_my_demand_list"
+        android:textColor="@color/white" />
+</LinearLayout>

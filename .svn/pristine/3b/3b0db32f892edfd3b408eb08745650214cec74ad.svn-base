@@ -1,0 +1,144 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.ui.activity.AddNewAddressActivity;
+
+import java.util.List;
+
+import staffproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/11/8.
+ */
+public class AddressAdapter extends BaseAdapter {
+
+    public static String USER_INFO_ACTIVITY_TAG = "user_info_activity";
+    private Context context;
+    private List<CsParcel.MerchantAddressList> addressList;
+    private int addressID;
+    private String mWhereFrom;
+
+    public AddressAdapter(Context context, List<CsParcel.MerchantAddressList> addressList, int addressID) {
+        this.context = context;
+        this.addressList = addressList;
+        this.addressID = addressID;
+    }
+
+    public AddressAdapter(Context context, List<CsParcel.MerchantAddressList> addressList) {
+        this.context = context;
+        this.addressList = addressList;
+    }
+
+    public AddressAdapter(Context context, List<CsParcel.MerchantAddressList> addressList, int addressID, String whereComeForm) {
+        this.context = context;
+        this.addressList = addressList;
+        this.addressID = addressID;
+        mWhereFrom = whereComeForm;
+    }
+
+    @Override
+    public int getCount() {
+        return addressList != null ? addressList.size() : 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return addressList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.package_address_item, null);
+            holder = new ViewHolder();
+            holder.defaultIv = (ImageView) convertView.findViewById(R.id.package_address_select_iv);
+            holder.nameAndPhoneTv = (TextView) convertView.findViewById(R.id.package_address_name_and_phone_tv);
+            holder.defaultTv = (ImageView) convertView.findViewById(R.id.package_address_default_iv);
+            holder.addressTv = (TextView) convertView.findViewById(R.id.package_address_tv);
+            holder.editIv = (ImageView) convertView.findViewById(R.id.package_address_edit_iv);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        final CsParcel.MerchantAddressList address = (CsParcel.MerchantAddressList) getItem(position);
+        holder.defaultIv.setImageResource(R.mipmap.tick);
+        /*if (addressID == address.getCustomeraddressid()) {
+            holder.defaultIv.setVisibility(View.VISIBLE);
+        } else {
+            holder.defaultIv.setVisibility(View.GONE);
+        }*/
+        holder.defaultIv.setVisibility(View.GONE);
+        String nameAndPhoneStr = context.getResources().getString(R.string.String_order_name_and_phone);
+        nameAndPhoneStr = String.format(nameAndPhoneStr, address.getName(), address.getTelephone(), address.getPostcode());
+        if (TextUtils.equals(address.getName(), "")) {
+            holder.nameAndPhoneTv.setText("未填写姓名");
+        } else if (TextUtils.equals(address.getTelephone(), "")) {
+            holder.nameAndPhoneTv.setText("未填写电话");
+        } else {
+            holder.nameAndPhoneTv.setText(nameAndPhoneStr);
+        }
+        String isdefaultship = address.getIsdefaultship();
+        if ("yes".equals(isdefaultship)) {
+            holder.defaultTv.setVisibility(View.VISIBLE);
+        } else {
+            holder.defaultTv.setVisibility(View.GONE);
+        }
+        /*AssetFileManager assetFileManager = new AssetFileManager(context);
+        String region = assetFileManager.readFile(address.getRegion());*/
+        //String region = AssetFileManager.getInstance().readFile(context, address.getRegion());
+        //String region = AssetFileManager.getInstance().readFilePlus(address.getRegion(), AssetFileManager.ADDRESS_TYPE);
+        //LogUtils.d(address.getRegion());
+        String fullregionname = address.getFullregionname();
+        String[] split = fullregionname.split("\\-");
+        String addressString = null;
+        if (split.length > 2) {
+            addressString = split[0] + split[1] + split[2];
+        } else {
+            addressString = split[0] + split[1];
+        }
+        holder.addressTv.setText(addressString + address.getStreet());
+        holder.editIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddNewAddressActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("address", address);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+
+        if (mWhereFrom != null && USER_INFO_ACTIVITY_TAG.equals(mWhereFrom)) {
+            holder.defaultIv.setVisibility(View.GONE);
+        }
+        return convertView;
+    }
+
+    class ViewHolder {
+        ImageView defaultIv;
+        TextView nameAndPhoneTv;
+        ImageView defaultTv;
+        TextView addressTv;
+        ImageView editIv;
+    }
+}

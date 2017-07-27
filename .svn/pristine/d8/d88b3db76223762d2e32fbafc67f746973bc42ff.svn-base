@@ -1,0 +1,77 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//用户地址
+message CustomerAddress
+{
+	optional int32  address_id = 1;//地址ID
+	optional string name       = 2;//姓名
+	optional string region     = 3;//地区
+	optional string street     = 4;//街道
+	optional string postcode   = 5;//邮编
+	optional string phone      = 6;//手机
+	optional string company    = 7;//公司名
+	optional string id_card    = 8;//身份证
+	optional bool   is_default = 9;//是否默认地址
+	optional string idcardfrontimage    = 10;//身份证正面
+	optional string idcardbackimage     = 11;//身份证反面
+}
+
+//添加用户地址请求
+message AddCustomerAddressRequest
+{
+	required BaseRequest     head     = 1;
+	required CustomerAddress address  = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//添加用户地址应答
+message AddCustomerAddressResponse
+{
+	required BaseResponse head       = 1;
+	optional int32        address_id = 2;
+}
+
+//编辑用户地址请求
+message EditCustomerAddressRequest
+{
+	required BaseRequest     head     = 1;
+	required CustomerAddress address  = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//编辑用户地址应答
+message EditCustomerAddressResponse
+{
+	required BaseResponse head = 1;
+}
+
+//删除用户地址请求
+message DelCustomerAddressRequest
+{
+	required BaseRequest head         = 1;
+	required int32       address_id   = 2;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//删除用户地址应答
+message DelCustomerAddressResponse
+{
+	required BaseResponse head = 1;
+}
+
+//用户地址列表请求
+message GetCustomerAddressListRequest
+{
+	required BaseRequest  head        = 1;
+	optional BaseUserRequest baseuser = 3;
+}
+
+//用户地址列表应答
+message GetCustomerAddressListResponse
+{
+	required BaseResponse    head      = 1;
+	repeated CustomerAddress addresses = 2;
+}

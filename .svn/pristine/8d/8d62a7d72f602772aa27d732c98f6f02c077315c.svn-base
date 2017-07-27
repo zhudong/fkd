@@ -1,0 +1,317 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.ProductDataBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.PickItemAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.SPUtils;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsParcel;
+
+/**
+ * Created by kevin on 2016/12/13.
+ */
+
+public class ReplenishActivity extends BaseActivity {
+    private final static String TAG = ReplenishActivity.class.getName();
+
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView mTitleIvRight;
+    @BindView(R.id.pick_up_add_btn)
+    Button mPickUpAddBtn;
+    @BindView(R.id.pick_up_listview)
+    CustomListView mPickUpListview;
+    @BindView(R.id.pick_up_service_fee_layout)
+    LinearLayout mPickUpServiceFeeLayout;
+    @BindView(R.id.pick_up_service_waring_tv)
+    TextView mPickUpServiceWaringTv;
+    @BindView(R.id.pick_up_balance_tv)
+    TextView mPickUpBalanceTv;
+    @BindView(R.id.pick_up_payment_tv)
+    TextView mPickUpPaymentTv;
+    @BindView(R.id.pick_up_payment_layout)
+    LinearLayout mPickUpPaymentLayout;
+    @BindView(R.id.pick_up_sv)
+    ScrollView mPickUpSv;
+    @BindView(R.id.pick_up_grand_total_tv)
+    TextView mPickUpGrandTotalTv;
+    @BindView(R.id.pick_up_submit_btn)
+    Button mPickUpSubmitBtn;
+    @BindView(R.id.empty_layout)
+    LinearLayout mEmptyLayout;
+
+    private CsParcel.HelpMyBuyInitResponse mResponse;
+    private List<CsParcel.ProductDataList> mDataLists=new ArrayList<>();
+    private double mFeeDouble = 0.0;
+
+    private PickItemAdapter mAdapter;
+
+
+    @BindView(R.id.exchange_rate_tv)
+    TextView mExchangeRateTv;
+    @BindView(R.id.exchange_rate_reverse_tv)
+    TextView mExchangeRateReverseTv;
+    @BindView(R.id.exchange_rate_layout)
+    LinearLayout mExchangeRateLayout;
+    @BindView(R.id.fee_list_tv)
+    TextView mFeeListTv;
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_replenish, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setText(getString(R.string.main_home_tab_string));
+        mTitleTvCenter.setText(getString(R.string.home_fg_help_03));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initReplenishList();
+        initHelpMeBuyInfo();
+        if (mDataLists != null && mDataLists.size() != 0) {
+         //   KLog.i(TAG, "listSize " + mDataLists.size());
+            mPickUpListview.setAdapter(new PickItemAdapter(this, mDataLists));
+            mPickUpListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    CsParcel.ProductDataList productDataList=mDataLists.get(position);
+                    Intent intent = new Intent(ReplenishActivity.this, AddReplenishActivity.class);
+                    intent.putExtra(AddReplenishActivity.PRODUCTDATA_BEAN, productDataList);
+                    intent.putExtra(AddReplenishActivity.PRODUCTDATA_INDEX,position);
+                    ReplenishActivity.this.startActivity(intent);
+                }
+            });
+            mEmptyLayout.setVisibility(View.GONE);
+        } else {
+            mEmptyLayout.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveDataList2SP();
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+//        KLog.i(TAG, event.getType() + " int");
+        switch (event.getType()) {
+            case BusEvent.ADD_REPLENISH_DATA_LIST_SUCCESS:
+                addDataList((CsParcel.ProductDataList) event.getParam());
+                break;
+            case BusEvent.EDIT_REPLENISH_DATA_LIST_SUCCESS:
+                editDataList(event.getIntParam(), (CsParcel.ProductDataList) event.getParam());
+                break;
+            case BusEvent.DELETE_REPLENISH_DATA_LIST_SUCCESS:
+                deleteDataList(event.getIntParam());
+                break;
+        }
+    }
+
+    //编辑数据，需要传递被编辑的index和编辑后的类
+    private void editDataList(int index, CsParcel.ProductDataList list) {
+        if (mDataLists != null && index > 0 && mDataLists.size() > index) {
+            mDataLists.remove(index);
+            mDataLists.add(index, list);
+        }
+    }
+
+    //删除数据，需要被删除的index
+    private void deleteDataList(int index) {
+        if (mDataLists != null && index > 0 && mDataLists.size() > index) {
+            mDataLists.remove(index);
+        }
+    }
+
+    //添加数据，只需要传一个类进来
+    private void addDataList(CsParcel.ProductDataList list) {
+        mDataLists.add(list);
+    }
+
+    private void saveDataList2SP() {
+        if (mDataLists == null || mDataLists.size() == 0) {
+            return;
+        } else {
+            //将mDataList 转为JSON 字符串
+            List<ProductDataBean> been = ClassUtil.conventProductDataList2List(mDataLists);
+
+            String dataJson = JSON.toJSONString(been);
+            KLog.i("been", dataJson);
+            //将JSON 存到SP里
+            SPUtils.put(this, Constants.SP_REPLENISH_LIST, dataJson);
+        }
+    }
+
+    private void initReplenishList() {
+        //初始化
+        if (mDataLists == null || mDataLists.size() == 0) {
+            //如果数据没有初始化，则从本地读取；
+            String dataJson = (String) SPUtils.get(this, Constants.SP_REPLENISH_LIST, "");
+            if (!TextUtils.isEmpty(dataJson)) {
+                try {
+                //    KLog.i(TAG, "from sp");
+                    List<ProductDataBean> beanList = JSON.parseArray(dataJson, ProductDataBean.class);
+                    mDataLists = ClassUtil.conventProductDataBean2List(beanList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            KLog.i(TAG, mDataLists.size() + "");
+        }
+
+    }
+
+    private void setSumbitLayout() {
+        if (mDataLists == null || mDataLists.size() == 0) {
+
+        }
+    }
+
+    private void setInitData() {
+        if (mResponse == null) {
+            return;
+        }
+
+        mFeeDouble = mResponse.getServiceFee();
+
+        mPickUpBalanceTv.setText(getString(R.string.pick_up_payment_balance, mResponse.getGiftCardAccount()));
+
+        if (mDataLists == null) {
+            //设置汇率
+            mExchangeRateLayout.setVisibility(View.GONE);
+        } else {
+            mExchangeRateLayout.setVisibility(View.VISIBLE);
+            mExchangeRateTv.setText(getString(R.string.exchange_rate_korea_2_rmb, mResponse.getExchangeRate()));
+            mExchangeRateReverseTv.setText(getString(R.string.exchange_rate_rmb_2_korea, mResponse.getExchangeRateBack()));
+            mFeeListTv.setText(getServiceFeeListString());
+        }
+
+
+    }
+
+    private String getServiceFeeListString() {
+        if (mResponse == null || mDataLists == null || mDataLists.size() == 0) {
+            return "";
+        } else {
+            String result = "";
+            for (int i = 0; i < mDataLists.size(); i++) {
+                result = result + "\n" + getServiceFeeString(mDataLists.get(i));
+            }
+            return result.substring(1);
+        }
+
+    }
+
+    private String getServiceFeeString(CsParcel.ProductDataList list) {
+        String feeStr = UIUtils.getCurrency(this, mResponse.getCurrencyCode(), Float.valueOf(list.getPrice())) +
+                "*" + list.getNum() + "*" + mFeeDouble + "%" + " = " +
+                UIUtils.getCurrency(this, mResponse.getCurrencyCode(), Float.valueOf(list.getPrice()) * (float) mFeeDouble / 100);
+        return feeStr;
+    }
+
+
+    private void initHelpMeBuyInfo() {
+        if (null == AccountManager.getInstance().getBaseUserRequest()) {
+            return;
+        }
+        CsParcel.HelpMyBuyInitRequest.Builder builder = CsParcel.HelpMyBuyInitRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencyCode(AccountManager.getInstance().getCurrencyCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.HelpMyBuyInitResponse>() {
+            @Override
+            public void onSuccess(CsParcel.HelpMyBuyInitResponse response) {
+                KLog.i("Replenish", response.toString());
+                mResponse = response;
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        setInitData();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("Replenish", "ret = " + ret + "  " + errMsg);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(myActivity().getString(R.string.get_message_failed));
+                    }
+                });
+            }
+        });
+
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.pick_up_add_btn, R.id.pick_up_payment_layout, R.id.pick_up_submit_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.pick_up_add_btn:
+                toActivity(AddReplenishActivity.class);
+                break;
+            case R.id.pick_up_payment_layout:
+                break;
+            case R.id.pick_up_submit_btn:
+                break;
+        }
+    }
+
+}

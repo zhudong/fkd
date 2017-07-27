@@ -1,0 +1,38 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//获取我的单品列表请求
+message GetMyItemListRequest
+{
+	required BaseRequest	 head	    = 1;
+	optional BaseUserRequest userinfo   = 2;
+	required int32           author     = 3;//看谁的单品列表
+	required int32			 pageno	    = 4;
+	optional string          localecode = 5;
+	optional string          currencycode = 6;
+	optional int32           currencyid = 7;
+}
+
+message GetMyItemListResponse
+{
+	required BaseResponse	head 	= 1;
+	optional bool 			more 	= 2;
+	repeated Item			items 	= 3;
+}
+
+//Like单品请求
+message LikeItemRequest
+{
+	required BaseRequest     head     = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int64           item_id  = 3;
+	required int32           opera    = 4;
+}
+
+//Like单品应答
+message LikeItemResponse
+{
+	required BaseResponse head	= 1;
+}

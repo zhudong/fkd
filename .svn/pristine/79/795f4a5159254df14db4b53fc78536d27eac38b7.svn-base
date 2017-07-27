@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl_title_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_weight="1"
+    android:background="@color/title_bar_black">
+
+    <ImageView
+        android:id="@+id/iv_in_title_back"
+        style="@style/title_bar_style_to_back"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:scaleType="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_in_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:drawablePadding="6dp"
+        android:drawableRight="@mipmap/arrow_down_white"
+        android:gravity="center_vertical"
+        android:scaleType="center"
+        android:text="首尔"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_in_title_back_tv"
+        style="@style/title_bar_style_to_back_tv"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_in_title"
+        style="@style/title_bar_style_to_title"
+        android:textColor="@color/white"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_in_title_right"
+        style="@style/title_bar_style_to_right_text"
+        android:textColor="@color/white"
+
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/iv_in_title_right"
+        style="@style/title_bar_style_to_right_image"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+
+    <com.fuexpress.kr.ui.view.SwitcherText
+        android:id="@+id/sw_category_hot_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/fl_title_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="24.33dp"
+            android:src="@mipmap/cart"/>
+
+        <TextView
+            android:id="@+id/tv_title_cart_amount_note"
+            style="@style/system_Mytextsize_orange_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_cricle_white"
+            android:gravity="center"
+            android:text="10"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+</RelativeLayout>

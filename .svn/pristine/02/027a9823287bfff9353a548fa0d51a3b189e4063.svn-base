@@ -1,0 +1,95 @@
+package com.fuexpress.kr.model;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.utils.LogUtils;
+import com.google.protobuf.GeneratedMessage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsAddress;
+
+/**
+ * Created by Longer on 2016/11/7.
+ */
+public class AddressManager {
+    private static AddressManager sAddressManager = new AddressManager();
+    public List<CsAddress.CustomerAddress> mAddressesList;
+
+    private AddressManager() {
+    }
+
+    public static AddressManager getInstance() {
+        return sAddressManager;
+    }
+
+
+    /**
+     * 获得用户的地址列表
+     */
+    public void getCustomerAddressListRequest() {
+        mAddressesList = new ArrayList<>();
+        CsAddress.GetCustomerAddressListRequest.Builder builder = CsAddress.GetCustomerAddressListRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetCustomerAddressListResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.GetCustomerAddressListResponse response) {
+                mAddressesList.addAll(response.getAddressesList());
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_ADDRESS_LIST_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_ADDRESS_LIST_COMPLETE, false));
+            }
+        });
+    }
+
+    public void deletAddressRequest(int addressID) {
+        CsAddress.DelCustomerAddressRequest.Builder builder = CsAddress.DelCustomerAddressRequest.newBuilder();
+        builder.setAddressId(addressID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.DelCustomerAddressResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.DelCustomerAddressResponse response) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.DELET_ADDRESS_REQUEST, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.DELET_ADDRESS_REQUEST, false));
+            }
+        });
+    }
+
+    /**
+     * 设置该地址为默认
+     *
+     * @param address
+     */
+    public void setAddressDefault(CsAddress.CustomerAddress address) {
+        /*CsAddress.CustomerAddress.Builder builder = address.toBuilder();
+        builder.setIsDefault(true);
+        CsAddress.CustomerAddress build = builder.build();*/
+        CsAddress.EditCustomerAddressRequest.Builder builder1 = CsAddress.EditCustomerAddressRequest.newBuilder();
+        builder1.setAddress(address);
+        builder1.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder1, new INetEngineListener<CsAddress.EditCustomerAddressResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.EditCustomerAddressResponse response) {
+                LogUtils.e("我是请求是否默认成功");
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_ADDRESS_IS_DEFAULT_COMPETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_ADDRESS_IS_DEFAULT_COMPETE, false));
+            }
+        });
+    }
+}

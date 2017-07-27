@@ -1,0 +1,136 @@
+package com.fuexpress.kr.model;
+
+import java.io.Serializable;
+
+/**
+ * Created by Longer on 2017/6/22.
+ */
+public class MerChantBean implements Serializable {
+
+    long merchantid;  //商户ID
+    int author;  //商户uin
+    String name;  //商户名称
+    String title;  //商户标题
+    String cover;  //商户封面
+    String address;  //商户地址
+    String contact;  //联系方式
+    String desc;  //商户介绍
+    int follow_num;  //商户关注数
+    boolean is_follow; //商户是否关注
+    String url; //商户的url
+    float longitude; //商户经度
+    float latitude; //商户纬度
+    String place; //商户位置
+
+    public void setMerchantid(long merchantid) {
+        this.merchantid = merchantid;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setFollow_num(int follow_num) {
+        this.follow_num = follow_num;
+    }
+
+    public void setIs_follow(boolean is_follow) {
+        this.is_follow = is_follow;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public long getMerchantid() {
+        return merchantid;
+    }
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public int getFollow_num() {
+        return follow_num;
+    }
+
+    public boolean is_follow() {
+        return is_follow;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+}

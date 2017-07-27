@@ -1,0 +1,46 @@
+package com.fuexpress.kr.model;
+
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.google.protobuf.GeneratedMessage;
+
+import fksproto.CsUser;
+
+/**
+ * Created by andy on 2017/1/17.
+ */
+public class MaterialsManager {
+
+    public static MaterialsManager mInstance = new MaterialsManager();
+
+    private MaterialsManager() {
+
+    }
+
+
+    public static MaterialsManager getInstance() {
+        return mInstance;
+    }
+
+
+    private void getMaterialsNet() {
+        CsUser.GetMaterialsListRequest.Builder builder = CsUser.GetMaterialsListRequest.newBuilder();
+        AccountManager instance = AccountManager.getInstance();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest())
+                .setLocaleCode(instance.getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetMaterialsListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetMaterialsListResponse response) {
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+
+}

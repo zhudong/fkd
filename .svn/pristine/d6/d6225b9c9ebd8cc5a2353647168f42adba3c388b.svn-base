@@ -1,0 +1,67 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+/**
+ * Created by Longer on 2016/12/27.
+ * 仓库的Bean对象
+ */
+public class WareHouseBean {
+
+    private String mName;
+    private String mAddress;
+
+    private String mReceiver;
+
+    private String mPhone;
+
+    private String mPostCode;
+
+    private String mID;
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress(String address) {
+        mAddress = address;
+    }
+
+    public String getReceiver() {
+        return mReceiver;
+    }
+
+    public void setReceiver(String receiver) {
+        mReceiver = receiver;
+    }
+
+    public String getPhone() {
+        return mPhone;
+    }
+
+    public void setPhone(String phone) {
+        mPhone = phone;
+    }
+
+    public String getPostCode() {
+        return mPostCode;
+    }
+
+    public void setPostCode(String postCode) {
+        mPostCode = postCode;
+    }
+
+    public String getID() {
+        return mID;
+    }
+
+    public void setID(String ID) {
+        mID = ID;
+    }
+}

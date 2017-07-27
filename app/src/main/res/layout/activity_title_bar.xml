@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/fl_title_bar_rootview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/title_bar_black"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title_titletext"
+            style="@style/system_Mytextsize_white_17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="取消"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_title_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:src="@mipmap/back"
+        android:visibility="gone"/>
+    <!--购物车-->
+    <TextView
+        android:id="@+id/textview_title_left_shorcart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text=" "
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/confirm_order_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text=" "
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/package_address_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="客户地址"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/gift_card_me_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="我"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+
+    <TextView
+
+        android:id="@+id/textview_title_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="取消"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/history_back_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/merchandise_submit_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_title_more"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:src="@mipmap/more"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/iv_title_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:visibility="gone"
+        />
+
+
+    <!--分类-->
+    <RelativeLayout
+        android:id="@+id/rl_for_common_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_title_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:padding="4dp"
+            android:src="@mipmap/back"/>
+
+        <ImageView
+            android:id="@+id/img_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:padding="4dp"
+            android:src="@mipmap/more"/>
+
+        <TextView
+            android:id="@+id/tv_title_right"
+            style="@style/system_Mytextsize_white_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:padding="4dp"
+            android:src="@mipmap/more"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="标题"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"/>
+
+        <ai.zhaoban.ydk.ui.view.SwitcherText
+            android:id="@+id/sw_category_hot_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</FrameLayout>

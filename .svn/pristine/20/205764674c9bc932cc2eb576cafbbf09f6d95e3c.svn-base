@@ -1,0 +1,90 @@
+package com.fuexpress.kr.net;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import fksproto.CsCard;
+import fksproto.CsLogin;
+import fksproto.CsMsgid;
+import fksproto.CsParcel;
+import fksproto.CsNotice;
+import fksproto.CsUser;
+import yssproto.CsPdu;
+
+
+/**
+ * Created by alick on 3/1/16.
+ */
+public class ProtoConfigManager {
+    private static ProtoConfigManager ourInstance = new ProtoConfigManager();
+    private List<ProtoConfig> mProtoConfigList;
+
+    public static ProtoConfigManager getInstance() {
+        return ourInstance;
+    }
+
+    public ProtoConfig getProtoConfig(Object object) {
+        for (ProtoConfig protoConfig : mProtoConfigList) {
+            if (object.getClass().isAssignableFrom(protoConfig.mRequestBuilderClazz)) {
+                return protoConfig;
+            }
+        }
+        return null;
+    }
+
+    private ProtoConfigManager() {
+        mProtoConfigList = new ArrayList<>();
+        // TODO: 3/1/16 put all Protocal HERE!
+        //登录
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_LOGIN_REQUEST, CsLogin.LoginRequest.Builder.class, CsLogin.LoginResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_ACCOUNT_REQUEST, CsLogin.AccountRequest.Builder.class, CsLogin.AccountResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_REQUEST, CsCard.GiftCardBalanceListRequest.Builder.class, CsCard.GiftCardBalanceListReponse.class, true));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST, CsCard.GiftCardBalanceListAjaxRequest.Builder.class, CsCard.GiftCardBalanceListAjaxReponse.class, true));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST, CsCard.GetGiftCardOrderListRequest.Builder.class, CsCard.GetGiftCardOrderListReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SET_USER_INFO_FIELD_REQUEST, CsUser.SetUserInfoFieldRequest.Builder.class, CsUser.SetUserInfoFieldResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SIMPLE_USER_INFO_REQUEST, CsUser.GetSimpleUserInfoRequest.Builder.class, CsUser.GetSimpleUserInfoResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_THIRD_LOGIN_REQUEST, CsLogin.ThirdLoginRequest.Builder.class, CsLogin.ThirdLoginResponse.class, CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+//
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_USER_INFO_FIELD_REQUEST, CsUser.GetUserInfoFieldRequest.Builder.class, CsUser.GetUserInfoFieldResponse.class));
+
+//        包裹
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_PARCEL_LIST_REQUEST, CsParcel.GetParcelListRequest.Builder.class, CsParcel.GetParcelListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SEND_INIT_REQUEST, CsParcel.SendInitRequest.Builder.class, CsParcel.SendInitReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSG_GET_SELECT_ADDRESS_AJAX_REQUEST, CsParcel.GetSelectAddressAjaxRequest.Builder.class, CsParcel.GetSelectAddressAjaxReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SHIPPING_INFO_REQUEST, CsParcel.GetShippingInfoRequest.Builder.class, CsParcel.GetShippingInfoReponse.class));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_RECHARGE_ORDER_DETAIL_REQUEST, CsCard.GetRechargeOrderDetailRequest.Builder.class, CsCard.GetRechargeOrderDetialResponse.class));
+
+        //优惠券
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_USEABLE_COUPONLIST_REQUEST, CsCard.UseableCouponListRequest.Builder.class, CsCard.UseableCouponListResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_MYSHIPPING_COUPONLIST_REQUEST, CsCard.MyShippingCouponListRequest.Builder.class, CsCard.MyShippingCouponListResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_EXCHANGE_SHIPPING_COUPON_REQUEST, CsCard.ExchangeShippingCouponRequest.Builder.class, CsCard.ExchangeShippingCouponResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CANCEL_GIFT_CARD_ORDER_REQUEST, CsCard.CancelGiftCardOrderRequest.Builder.class, CsCard.CancelGiftCardOrderResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SYS_NOTICE_MSG_REQUEST, CsNotice.GetSysNoticeMsgRequest.Builder.class, CsNotice.GetSysNoticeMsgResponse.class));
+
+    }
+}

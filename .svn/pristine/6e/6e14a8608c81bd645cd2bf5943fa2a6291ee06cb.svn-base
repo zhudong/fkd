@@ -1,0 +1,51 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+/**
+ * Created by Administrator on 2016-10-28.
+ */
+public class PaymentActivity extends BaseActivity {
+
+    private View rootView;
+    private Button confirmBtn;
+    private TextView couponNameTv;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_payment_activity, null);
+        confirmBtn = (Button) rootView.findViewById(R.id.btn_confirm);
+        couponNameTv = (TextView) rootView.findViewById(R.id.payment_coupon_name_tv);
+
+        confirmBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            if(data != null){
+                String couponName = data.getStringExtra("couponName");
+                couponNameTv.setText(couponName);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_confirm:
+                Intent intent = new Intent();
+                intent.setClass(PaymentActivity.this, CouponActivity.class);
+                startActivityForResult(intent, CouponActivity.CODE_RESULT_COUPON);
+                break;
+        }
+    }
+}

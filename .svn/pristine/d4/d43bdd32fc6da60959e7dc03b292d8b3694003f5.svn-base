@@ -1,0 +1,23 @@
+package com.fuexpress.kr.ui.activity.help_send;
+
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+public class ToHelpSendActivity extends BaseActivity {
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_to_help_send, null);
+    }
+
+    @Override
+    public void initView() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fl_container, new HelpSendFragment());
+        transaction.commit();
+    }
+}

@@ -1,0 +1,125 @@
+package com.fuexpress.kr.ui.view;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+
+/**
+ * Created by Longer on 2016/10/27.
+ * 自定义的横向输入布局
+ */
+public class InputBoxView extends LinearLayout {
+
+    private EditText mEd_in_ip;
+    private TextView mTv_in_ip_right;
+    private TextView mTv_in_ip_below;
+    private ImageView mIv_in_ip_right;
+
+    public InputBoxView(Context context) {
+        this(context, null);
+    }
+
+    public InputBoxView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public InputBoxView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater.inflate(R.layout.inputbox_layout, this);
+        TextView tv_in_ip = (TextView) findViewById(R.id.tv_in_ip);
+        TextView star_in_ip = (TextView) findViewById(R.id.star_in_ip);
+        mTv_in_ip_below = (TextView) findViewById(R.id.tv_in_ip_below);
+        mEd_in_ip = (EditText) findViewById(R.id.ed_in_ip);
+        mTv_in_ip_right = (TextView) findViewById(R.id.tv_in_ip_right);
+        mIv_in_ip_right = (ImageView) findViewById(R.id.iv_in_ip_right);
+
+        //取出定义好在arrt文件中的自定义属性
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ipboxtext, defStyleAttr, 0);
+        String ipText = typedArray.getString(R.styleable.ipboxtext_ipText);
+        String hintText = typedArray.getString(R.styleable.ipboxtext_hintText);
+        boolean isShow = typedArray.getBoolean(R.styleable.ipboxtext_isShowStar, false);
+        star_in_ip.setVisibility(isShow ? VISIBLE : GONE);
+        boolean showRight = typedArray.getBoolean(R.styleable.ipboxtext_showRight, false);
+        mTv_in_ip_right.setVisibility(showRight ? VISIBLE : GONE);
+        boolean showBelow = typedArray.getBoolean(R.styleable.ipboxtext_showBelow, false);
+        mTv_in_ip_below.setVisibility(showBelow ? VISIBLE : GONE);
+        boolean showRightImageView = typedArray.getBoolean(R.styleable.ipboxtext_showRightImageView, false);
+        mIv_in_ip_right.setVisibility(showRightImageView ? VISIBLE : GONE);
+        if (showRight)
+            mTv_in_ip_right.setText(typedArray.getString(R.styleable.ipboxtext_rightText));
+        if (showBelow)
+            mTv_in_ip_below.setText(typedArray.getString(R.styleable.ipboxtext_belowText));
+        typedArray.recycle();//取出完毕之后要回收资源
+
+        tv_in_ip.setText(ipText);
+        mEd_in_ip.setHint(hintText);
+
+    }
+
+    public boolean edIsEmpty() {
+        return TextUtils.isEmpty(mEd_in_ip.getText().toString().trim());
+    }
+
+
+    public String getEdStringText() {
+        return mEd_in_ip.getText().toString().trim();
+    }
+
+    /**
+     * 设置其输入方式的方法，具体类型参见EditInfo
+     *
+     * @param inputType EditText的输入类型
+     */
+    public void setEditTextInputType(int inputType) {
+        mEd_in_ip.setInputType(inputType);
+    }
+
+    /**
+     * 获得输入框的EditText控件
+     *
+     * @return 输入框的EditText控件
+     */
+    public EditText getEditTextView() {
+        return mEd_in_ip;
+    }
+
+
+    /**
+     * 获得右边的TextView方法
+     *
+     * @return 右边的TextView
+     */
+    public TextView getRightTextView() {
+        return mTv_in_ip_right;
+    }
+
+    /**
+     * 获得下边TextView的方法
+     *
+     * @return 下边TextView
+     */
+    public TextView getBelowTextView() {
+        return mTv_in_ip_below;
+    }
+
+    /**
+     * 获得右边ImageView的方法
+     * 注意这里默认是下箭头图片,如要修改请自己指定
+     * @return 右边的ImageView 控件
+     */
+    public ImageView getIvRight() {
+        return mIv_in_ip_right;
+    }
+
+}

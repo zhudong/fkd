@@ -1,0 +1,439 @@
+package com.fuexpress.kr.model;
+
+
+import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.RequestNetListener;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.CommonUtils;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.socks.library.KLog;
+
+import de.greenrobot.event.EventBus;
+import staffproto.CsBase;
+import staffproto.CsFeed;
+import staffproto.CsLogin;
+import staffproto.CsMy;
+
+
+/**
+ * Created by alick on 2/29/16.
+ * 4.28修正，取消使用账号密码登录，改为直接使用ticket,session.
+ * 5.3修正，对 密码、sessionkey,ticket,h5ticket,openid,token进行MD5和AES加密，其中AES加密使用与手机相关的一个标识码
+ */
+public class AccountManager {
+    private final static String TAG = "AccountManager";
+    //第三方登录标记EncryptUtils
+    public static final int THIRD_PLATFROM_WX = 1;
+    public static final int THIRD_PLATFROM_QQ = 2;
+    public static final int THIRD_PLATFROM_WB = 3;
+    public static final int TYPE_PHONE = 4;
+    public static final int TYPE_EMAIL = 5;
+
+
+    public String account;
+    public String pwd;
+    public int mUin;
+    public int mMid;
+    public String mTicket;
+    public String mH5Ticket;
+    public String H5head;
+    public String mSessionKey = "123456";
+    public boolean isOpenOrder = false;
+    public String mPermissions = "";  //子账户权限，登录为子账户时返回。
+    //登录类型
+    public int type;
+    //邮箱账号
+    public String emailStr = "";
+    // 个人简介
+    public String mIntro;
+    // 个人头像地址
+    public String avater = "";
+    //
+    public String nikename = "";
+    // 个人手机号
+    public String mMobile = "";
+    //用户选择的国家和区号
+    public String userCountry = "中国大陆";
+    public String userNumber = "86";
+
+    //第三方登录需要的值
+    public String openid = "";
+    public String token = "";
+    public String WX_refresh_token = "";
+    public String thridUserIcon = "";
+    public String thridNickname = "";
+    public int thirdPlatfrom = 0;
+    //userInfo
+    public int albumCount, itemCount, likeCount, followingShopCount, followingAlbumCount;
+    public static boolean isLogin = false;
+    public boolean needBind = false;
+    private static AccountManager ourInstance = new AccountManager();
+    public String mInviteKey;
+    private String mAccountNumber;
+    public int mGender;
+    public String mRegion;
+    public int mMemberGroup;
+    public CsBase.BaseUserRequest.Builder mBaseUserRequest = CsBase.BaseUserRequest.newBuilder().setUin(102636).setMid(2008).setTicket("fb5780692bf822c9a9e7181f6e2883433d4de6bb03746164f6d95c1b8e018aebbb149721b06dbcc2e77a32a9580c0eba");
+    ;
+    //红点数据三个
+    public static int mParcelCount = 0, mNoticeCount = 0, mOrderCount = 0;
+    public int mTheOrderCount;
+
+    public static AccountManager getInstance() {
+        return ourInstance;
+    }
+
+    private AccountManager() {
+    }
+
+    public void getBaseInfo() {
+
+    }
+
+    public void login() {
+        int type = (int) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, 0);
+        if (type == Constants.USER_INFO.EMAIL) {
+            String account = (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+            String password = (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_PWD, "");
+            loginByEmail(account, password, null);
+        } else if (type == Constants.USER_INFO.PHONE) {
+            String account = (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+            String password = (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_PWD, "");
+            String extra = (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+            userNumber = extra;
+            loginByPhone(account, password, null);
+        }
+    }
+
+    public void loginByEmail(final String account, final String password, final RequestNetListener<CsMy.GetLogDoMerchantResponse> listener) {
+        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
+            return;
+        }
+        CsMy.GetLogDoMerchantRequest.Builder builder = CsMy.GetLogDoMerchantRequest.newBuilder();
+        builder.setEmail(account);
+        builder.setPasswd(password);
+        builder.setAppType(3);
+        //    KLog.i("account " + account + " pwd  " + password);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetLogDoMerchantResponse>() {
+            @Override
+            public void onSuccess(final CsMy.GetLogDoMerchantResponse response) {
+                KLog.i(response.toString());
+                KLog.i(response.getHead().getErrmsg());
+                if (response.getResultcode() == 0 && response.getMid() != 0) {
+                    setBaseUserRequest(account, password, response.getUin(), response.getMid(), response.getTicket(), response.getH5Ticket(), Constants.USER_INFO.EMAIL, response.getIsOpenOrder(), response.getPermissions());
+                }
+                if (listener != null) {
+                    if (listener != null) {
+                        UIUtils.postTaskSafely(new Runnable() {
+                            @Override
+                            public void run() {
+                                listener.onSuccess(response);
+                            }
+                        });
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i(CommonUtils.getErrMsg(ret) + "errMsg = " + errMsg);
+                if (listener != null) {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onFailure();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public void loginByPhone(final String account, final String password, final RequestNetListener<CsMy.GetLogDoMerchantPhoneResponse> listener) {
+        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
+            return;
+        }
+        CsMy.GetLogDoMerchantPhoneRequest.Builder builder = CsMy.GetLogDoMerchantPhoneRequest.newBuilder();
+        builder.setPhone(AccountManager.getInstance().userNumber + account);
+        builder.setPassword(password);
+        builder.setAppType(3);
+        //        KLog.i("phone account "+account+" pwd  "+password);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetLogDoMerchantPhoneResponse>() {
+            @Override
+            public void onSuccess(final CsMy.GetLogDoMerchantPhoneResponse response) {
+                KLog.i(response.toString());
+                if (response.getResultcode() == 0 && response.getMid() != 0) {
+                    setBaseUserRequest(account, password, response.getUin(), response.getMid(), response.getTicket(), response.getH5Ticket(), Constants.USER_INFO.PHONE, response.getIsOpenOrder(), response.getPermissions());
+                }
+                if (listener != null) {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onSuccess(response);
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i(CommonUtils.getErrMsg(ret) + "errMsg = " + errMsg);
+                if (listener != null) {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onFailure();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public void setBaseUserRequest(String accountStr, String pwdStr, int uin, int mid, String ticket, String h5Ticket, int type, boolean isOpenOrder, String permissions) {
+        mBaseUserRequest = null;
+        this.account = accountStr;
+        this.pwd = pwdStr;
+        this.mUin = uin;
+        this.mMid = mid;
+        this.mTicket = ticket;
+        this.mH5Ticket = h5Ticket;
+        this.isOpenOrder = isOpenOrder;
+        this.mPermissions = permissions;
+        isLogin = true;
+        mBaseUserRequest = CsBase.BaseUserRequest.newBuilder();
+        mBaseUserRequest.setMid(mid);
+        mBaseUserRequest.setUin(uin);
+        mBaseUserRequest.setTicket(ticket);
+        saveLoginInfo2SP(type);
+        getRedPoint();
+    }
+
+    public void saveLoginInfo2SP(int i) {
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, i);
+        if (i == Constants.USER_INFO.PHONE) {
+            SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, AccountManager.getInstance().userNumber);
+            KLog.i("extra number = " + (String) SPUtils.get(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, ""));
+        } else {
+            SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+        }
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT, this.account);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_PWD, this.pwd);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_MID, this.mMid);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_MUIN, this.mUin);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_H5TICKET, this.mH5Ticket);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ITCKET, this.mTicket);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_IS_OPEN_ORDER, this.isOpenOrder);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_PERMISSIONS, this.mPermissions);
+    }
+
+    public void logout() {
+        mBaseUserRequest = null;
+        mMid = 0;
+        mUin = 0;
+        mTicket = "";
+        mH5Ticket = "";
+        isLogin = false;
+        //    EventBus.getDefault().post(new BusEvent(BusEvent.LOGOUT, null));
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, 0);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_PWD, "");
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_MID, 0);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_MUIN, 0);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_H5TICKET, "");
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_ITCKET, "");
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_IS_OPEN_ORDER, false);
+        SPUtils.put(UIUtils.getContext(), Constants.USER_INFO.USER_PERMISSIONS, "");
+
+    }
+
+    //获取用户信息
+    public void getUserInfo() {
+
+    }
+
+
+    public void changeUserPassWord(final String oldPW, final String passWord) {
+        CsLogin.AccountRequest.Builder builder = CsLogin.AccountRequest.newBuilder();
+        builder.setPassword(oldPW);
+        builder.setOperacode(CsLogin.AccountOperacode.ACCOUNT_OPERACODE_MODIFY_PASSWORD_VALUE);
+        final int type = (int) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, 0);
+        final String accountExtra = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+        if (1 == type) {
+            builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_EMAIL_VALUE);
+        } else if (2 == type) {
+            builder.setAccountType(CsLogin.AccountType.ACCOUNT_TYPE_PHONE_VALUE);
+            builder.setAccountExtra(accountExtra);
+        }
+        builder.setReserve(passWord);
+
+        if (mAccountNumber == null) {
+            mAccountNumber = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+        }
+        builder.setAccount(mAccountNumber);
+        builder.setRandomKey(NetEngine.sRandomKey);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.AccountResponse>() {
+            @Override
+            public void onSuccess(CsLogin.AccountResponse response) {
+                LogUtils.e("我是修改账号密码成功!" + response.toString());
+                if (1 == type) {
+                    loginByEmail(mAccountNumber, passWord, null);
+                } else if (2 == type) {
+                    loginByPhone(mAccountNumber, passWord, null);
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("修改账号密码失败:" + ret + " " + errMsg);
+            }
+        });
+    }
+
+
+    public void changUserPassWordRequest(String oldPassWord, final String newPassWord, String newPassWordAgain) {
+        CsMy.SaveMyCustomerPswRequest.Builder builder = CsMy.SaveMyCustomerPswRequest.newBuilder();
+
+        builder.setBaseuserinfo(AccountManager.getInstance().mBaseUserRequest);
+        builder.setOldPsw(oldPassWord);
+        builder.setNewPsw(newPassWord);
+        builder.setConfirmPsw(newPassWordAgain);
+
+        final int type = (int) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_TYPE, 0);
+        final String accountExtra = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT_EXTRA, "");
+        if (mAccountNumber == null || mAccountNumber.isEmpty()) {
+            mAccountNumber = (String) SPUtils.get(SysApplication.getContext(), Constants.USER_INFO.USER_ACCOUNT, "");
+        }
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.SaveMyCustomerPswResponse>() {
+
+            @Override
+            public void onSuccess(CsMy.SaveMyCustomerPswResponse response) {
+                LogUtils.e("我是设置用户密码的方法,我成功了!");
+                if (1 == type) {
+                    loginByEmail(mAccountNumber, newPassWord, null);
+                } else if (2 == type) {
+                    loginByPhone(mAccountNumber, newPassWord, null);
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("我是设置用户密码的方法,我失败了:" + ret + " " + errMsg);
+            }
+        });
+    }
+
+    public void getRedPoint() {
+
+        //OrderManager.getInstance(SysApplication.getContext()).getOrderCount();
+
+        if (null == AccountManager.getInstance().mBaseUserRequest) {
+            return;
+        }
+        CsFeed.MyAccountHintRequest.Builder builder = CsFeed.MyAccountHintRequest.newBuilder();
+        builder.setBaseuserinfo(AccountManager.getInstance().mBaseUserRequest);
+        builder.addTypes(1);//订单
+        builder.addTypes(2);//消息
+        builder.addTypes(3);//包裹
+        NetEngine.postRequest(builder, new INetEngineListener<CsFeed.MyAccountHintResponse>() {
+            @Override
+            public void onSuccess(CsFeed.MyAccountHintResponse response) {
+                //    KLog.i(response.toString());
+                mOrderCount = (int) response.getPairs(0).getV();
+                mNoticeCount = (int) response.getPairs(1).getV();
+                mParcelCount = (int) response.getPairs(2).getV();
+//                KLog.i("mNoticeCount out= " + mNoticeCount);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+
+    }
+
+    public void findIsPhoneExist(String phone, final RequestNetListener<CsMy.GetIsExistPhoneResponse> listener) {
+        KLog.i("phone = " + phone);
+        CsMy.GetIsExistPhoneRequest.Builder builder = CsMy.GetIsExistPhoneRequest.newBuilder();
+        builder.setPhonename(phone);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetIsExistPhoneResponse>() {
+            @Override
+            public void onSuccess(final CsMy.GetIsExistPhoneResponse response) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener != null) {
+                            listener.onSuccess(response);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener != null) {
+                            listener.onFailure();
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    public void findIsEmailIsExist(String email, final RequestNetListener<CsMy.GetIsExistEmailResponse> listener) {
+
+        CsMy.GetIsExistEmailRequest.Builder builder = CsMy.GetIsExistEmailRequest.newBuilder();
+        builder.setEmailname(email);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetIsExistEmailResponse>() {
+            @Override
+            public void onSuccess(final CsMy.GetIsExistEmailResponse response) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener != null) {
+                            listener.onSuccess(response);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener != null) {
+                            listener.onFailure();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public boolean isPermissionExist(String permission) {
+        if (TextUtils.isEmpty(mPermissions)) {
+            return false;
+        }
+        return mPermissions.contains(permission);
+    }
+}

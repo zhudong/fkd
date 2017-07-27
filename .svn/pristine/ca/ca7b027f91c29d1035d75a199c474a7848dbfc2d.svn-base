@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/add_gift_card_title"
+        android:textColor="@color/title_color" />
+
+
+    <com.yiss.gyi.ui.view.FlowLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/gift_card_flowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gift_card_face_value"
+        android:textColor="@color/title_color" />
+
+    <com.yiss.gyi.ui.view.FlowLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/gift_card_face_value_flowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gift_card_count"
+        android:textColor="@color/title_color" />
+
+    <com.yiss.gyi.ui.view.NumberCounter2
+        android:layout_marginTop="15dp"
+        android:id="@+id/gift_card_numberCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:padding="0dp"
+        android:id="@+id/gift_card_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/gift_card_confirm_btn"
+        android:textSize="18sp"
+        android:textColor="@color/white" />
+</LinearLayout>

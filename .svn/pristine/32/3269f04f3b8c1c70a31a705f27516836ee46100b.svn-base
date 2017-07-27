@@ -1,0 +1,489 @@
+package com.fuexpress.kr.model;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.PreferencesBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.RequestNetListener;
+import com.fuexpress.kr.ui.activity.AddRequireActivity;
+import com.fuexpress.kr.ui.activity.EditRequireActivity;
+import com.fuexpress.kr.ui.activity.PickUpActivity;
+import com.fuexpress.kr.ui.activity.choose_address.AddressBundleBean;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.DataCleanManager;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.fuexpress.kr.wxapi.WXPayEntryActivity;
+import com.google.protobuf.GeneratedMessage;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsUser;
+
+/**
+ * Created by Longer on 2016/10/31.
+ */
+public class UserManager {
+    private final static String TAG = "AccountManager";
+    public int mUin;
+
+    //登录类型
+    public int type;
+    // 个人简介
+    public String mIntro;
+    // 个人头像地址
+    public String avater = "";
+    //
+    public String nikename = "";
+    //用户选择的国家和区号
+    public int albumCount, itemCount, likeCount, followingShopCount, followingAlbumCount;
+
+    //用户的详细信息字段:
+    public String mEmail, mHomePage, mBrithday, mMobile, mMemberEnd;
+
+    private static UserManager ourInstance = new UserManager();
+    public List<CsUser.CurrencyList> mCurrencyListList;
+    public List<PreferencesBean> mPreferencesBeanList;
+    public String mRegionCode;
+    public String mCurrentCountryStr;
+    public String mFullRegionName;
+    public String mCurrentRegionStr;
+    public String mCountryCode;
+    public String mRegionID;
+    private int mMemberGroup;
+
+    public static UserManager getInstance() {
+        return ourInstance;
+    }
+
+    private UserManager() {
+    }
+
+    /*public void getUserCount(int uin) {
+        this.mUin = uin;
+        Log.i(TAG, "获取我的关注图集，单品等数");
+        //简单信息
+        CsUser.GetMyCounterRequest.Builder builder = CsUser.GetMyCounterRequest.newBuilder();
+        builder.setAuthor(uin);
+        //查看其他用户—— 图集数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_ALBUM_VALUE);
+        //查看其他用户—— 单品
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_ITEM_VALUE);
+        //查看其他用户——喜欢
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_LIKE_VALUE);
+        //查看其他用户——关注商店数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_FOLLOW_MERCHANT_VALUE);
+        //查看其他用户——关注图集数
+        builder.addTypes(CsUser.CounterType.COUNTER_TYPE_FOLLOW_ALBUM_VALUE);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetMyCounterResponse>() {
+            @Override
+            public void onSuccess(CsUser.GetMyCounterResponse response) {
+                Log.i(TAG + " kevin", response.toString());
+                for (CsUser.Counter count : response.getCountersList()) {
+                    switch (count.getCounterType()) {
+                        case CsUser.CounterType.COUNTER_TYPE_ALBUM_VALUE:
+                            UserManager.getInstance().albumCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_ITEM_VALUE:
+                            UserManager.getInstance().itemCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_LIKE_VALUE:
+                            UserManager.getInstance().likeCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_FOLLOW_MERCHANT_VALUE:
+                            UserManager.getInstance().followingShopCount = count.getCounterValue();
+                            break;
+                        case CsUser.CounterType.COUNTER_TYPE_FOLLOW_ALBUM_VALUE:
+                            UserManager.getInstance().followingAlbumCount = count.getCounterValue();
+                            break;
+
+                    }
+                }
+
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_OTHER_COUNT_SUCCESS, null));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.e("kevin onFailure", "failed ,ret=" + ret + ",errMsg" + errMsg);
+            }
+        });
+
+    }*/
+
+    /**
+     * 修改用户信息的方法
+     *
+     * @param whatSetFiled 需要修改的字段
+     * @param value        值
+     */
+    public void setUserInfo(final int whatSetFiled, final String value) {
+
+        CsUser.SetUserInfoFieldRequest.Builder builder = CsUser.SetUserInfoFieldRequest.newBuilder();
+        CsUser.UserInfoField.Builder builder1 = CsUser.UserInfoField.newBuilder();
+        builder1.setFieldType(whatSetFiled);
+        builder1.setFieldValue(value);
+        builder.addFields(builder1);
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.SetUserInfoFieldResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.SetUserInfoFieldResponse response) {
+                String s = response.toString();
+                //LogUtils.e("我是设置用户信息的方法成功:" + s);
+                if (CsUser.UserInfoFieldType.USER_INFO_FIELD_AVATAR_VALUE == whatSetFiled) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.HEAD_ICON_UPLOADE_COMPLETE_NOTE, value));
+                    //    AccountManager.getInstance().getUserinfo();
+                } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_EMAIL_VALUE == whatSetFiled) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_EMAIL_COMPLETE, true));
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                // LogUtils.e("我是设置用户信息的方法失败:" + ret + " " + errMsg);
+                if (CsUser.UserInfoFieldType.USER_INFO_FIELD_EMAIL_VALUE == whatSetFiled) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_EMAIL_COMPLETE, false));
+                }
+            }
+        });
+    }
+
+
+    public void setUserInfo(Map<Integer, String> paramMap) {
+
+        /*CsUser.SetUserInfoFieldRequest.Builder builder = CsUser.SetUserInfoFieldRequest.newBuilder();
+        CsUser.UserInfoField.Builder builder1 = CsUser.UserInfoField.newBuilder();
+        builder1.setFieldType(whatSetFiled);
+        builder1.setFieldValue(value);
+        builder.addFields(builder1);*/
+        CsUser.SetUserInfoFieldRequest.Builder builder = CsUser.SetUserInfoFieldRequest.newBuilder();
+        /*CsBase.BaseUserRequest.Builder baseUserRequest = CsBase.BaseUserRequest.newBuilder();
+        baseUserRequest.setMid(0);
+        baseUserRequest.setUin(AccountManager.getInstance().mUin);
+        baseUserRequest.setTicket("");*/
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        for (Map.Entry<Integer, String> entry : paramMap.entrySet()) {
+            CsUser.UserInfoField.Builder builder1 = CsUser.UserInfoField.newBuilder();
+            builder1.setFieldType(entry.getKey());
+            builder1.setFieldValue(entry.getValue());
+            builder.addFields(builder1);
+        }
+        KLog.i(" currency_code " + AccountManager.getInstance().getCurrencyCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.SetUserInfoFieldResponse>() {
+            @Override
+            public void onSuccess(CsUser.SetUserInfoFieldResponse response) {
+                String s = response.toString();
+                //LogUtils.e("我是设置用户信息的方法成功:" + s);
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_USER_INFO_FILED_COMPLETE, true));
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("我是设置用户信息的方法失败:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_USER_INFO_FILED_COMPLETE, false));
+            }
+        });
+    }
+
+    /**
+     * 获取用户的详细信息的方法:
+     * create by longer
+     */
+    public void getUserDetailInfo() {
+
+        CsUser.GetUserInfoFieldRequest.Builder builder = CsUser.GetUserInfoFieldRequest.newBuilder();
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_EMAIL_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_HOME_PAGE_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_BIRTHDAY_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_MOBILE_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_MEMBER_END_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_REGION_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_COUNTRY_CODE_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_REGION_ID_VALUE);
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_MEMBER_GROUP_VALUE);
+        /*CsBase.BaseUserRequest.Builder baseUserRequest = CsBase.BaseUserRequest.newBuilder();
+        baseUserRequest.setMid(0);
+        baseUserRequest.setUin(AccountManager.getInstance().mUin);
+        baseUserRequest.setTicket("");*/
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetUserInfoFieldResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetUserInfoFieldResponse response) {
+                //LogUtils.e("我是请求回来的字段:" + response.toString());
+                List<CsUser.UserInfoField> fieldsList = response.getFieldsList();
+                setUserDetailInfo(fieldsList);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("请求用户字段失败!" + " " + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_DETAIL_INFO_FILED_COMPLETE, false));
+            }
+        });
+    }
+
+
+    public void getUserDetailInfoByHeadIcon() {
+
+        CsUser.GetUserInfoFieldRequest.Builder builder = CsUser.GetUserInfoFieldRequest.newBuilder();
+        builder.addFields(CsUser.UserInfoFieldType.USER_INFO_FIELD_AVATAR_VALUE);
+        builder.setBaseuser(AccountManager.getInstance().getBaseUserRequest());
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetUserInfoFieldResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetUserInfoFieldResponse response) {
+                //LogUtils.e("我是请求回来的字段:" + response.toString());
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("请求用户字段失败!" + " " + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_DETAIL_INFO_FILED_COMPLETE, false));
+            }
+        });
+    }
+
+    /**
+     * 遍历用户字段的集合并获得值的方法
+     *
+     * @param fieldsList 用户信息字段的集合
+     *                   <p/>
+     *                   create by longer
+     */
+    private void setUserDetailInfo(List<CsUser.UserInfoField> fieldsList) {
+        for (int x = 0; x < fieldsList.size(); x++) {
+            CsUser.UserInfoField userInfoField = fieldsList.get(x);
+            int fieldType = userInfoField.getFieldType();
+            if (CsUser.UserInfoFieldType.USER_INFO_FIELD_EMAIL_VALUE == fieldType) {
+                mEmail = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_BIRTHDAY_VALUE == fieldType) {
+                mBrithday = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_HOME_PAGE_VALUE == fieldType) {
+                mHomePage = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_MEMBER_END_VALUE == fieldType) {
+                mMemberEnd = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_MOBILE_VALUE == fieldType) {
+                mMobile = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_REGION_VALUE == fieldType) {
+                mRegionCode = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_COUNTRY_CODE_VALUE == fieldType) {
+                //LogUtils.e(userInfoField.getFieldValue());
+                mCountryCode = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_REGION_ID_VALUE == fieldType) {
+                //LogUtils.e(userInfoField.getFieldValue());
+                mRegionID = userInfoField.getFieldValue();
+            } else if (CsUser.UserInfoFieldType.USER_INFO_FIELD_MEMBER_GROUP_VALUE == fieldType) {
+                mMemberGroup = Integer.valueOf(userInfoField.getFieldValue());
+            }
+        }
+        EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_DETAIL_INFO_FILED_COMPLETE, true));
+    }
+
+    //获取用户的基本信息
+    public void getUserSimpleInfo(int uin, final RequestNetListener listener) {
+        //getUserCount(uin);
+        CsUser.GetSimpleUserInfoRequest.Builder builder = CsUser.GetSimpleUserInfoRequest.newBuilder();
+        builder.setAuthor(uin);
+        builder.setBaseuser(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetSimpleUserInfoResponse>() {
+            @Override
+            public void onSuccess(final CsUser.GetSimpleUserInfoResponse response) {
+                KLog.i(TAG + " kevin", response.toString());
+                mCurrentCountryStr = response.getCountryname();
+                String regionName = response.getRegionname();
+                String[] regionSplit = regionName.split("\\|");
+                AddressBundleBean addressBundleBean = new AddressBundleBean();
+                if (regionSplit.length >= 2) {
+                    String parentId = regionSplit[1];
+                    addressBundleBean.setDefaultProvinceId(parentId);
+                    String region = regionSplit[0];
+                    String[] split = region.split("~");
+                    if (split.length >= 2) {
+                        String city = split[0];
+                        String province = split[1];
+                        addressBundleBean.setCityString(city);
+                        addressBundleBean.setProvinceString(province);
+                        addressBundleBean.setSelectedString(city + " " + province);
+                    }
+                } else {//说明只有省份
+                    addressBundleBean.setProvinceString(regionName);
+                    addressBundleBean.setSelectedString(regionName);
+                }
+                mFullRegionName = addressBundleBean.getSelectedString() + "," + response.getCountryname();
+                mCurrentRegionStr = addressBundleBean.getSelectedString();
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_SIMPLE_USER_INFO_COMPETE, true, addressBundleBean));
+                if (listener != null) {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onSuccess(response);
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.e("kevin onFailure", "failed ,ret=" + ret + ",errMsg" + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_SIMPLE_USER_INFO_COMPETE, false));
+            }
+        });
+    }
+
+
+    public void getCurrencyListRequest() {
+        CsUser.GetCurrencyListRequest.Builder builder = CsUser.GetCurrencyListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetCurrencyListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetCurrencyListResponse response) {
+                //LogUtils.e("这是请求回来的币种列表:" + response.toString());
+                mCurrencyListList = response.getCurrencyListList();
+                disposalData();
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("请求币种列表失败:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_CURRENCY_COMPLETE, false));
+            }
+        });
+    }
+
+    private void disposalData() {
+        mPreferencesBeanList = new ArrayList<>();
+        String currency_string = null;
+        for (CsUser.CurrencyList currencyList : mCurrencyListList) {
+            PreferencesBean preferencesBean = new PreferencesBean();
+            preferencesBean.setBeanString(currencyList.getCurrencyname());
+            preferencesBean.setBeanSign(currencyList.getCurrencysign());
+            preferencesBean.setBeanCode(currencyList.getCurrencycode());
+            preferencesBean.setBeanID(currencyList.getCurrencyid());
+            if (AccountManager.getInstance().getCurrencyCode().equals(currencyList.getCurrencycode())) {
+                preferencesBean.setIsSelected(true);
+                // TODO: 2016/11/4 暂时先注释
+                currency_string = currencyList.getCurrencyname() + SysApplication.getContext().getString(R.string.search_result_num_befor) + currencyList.getCurrencysign() + SysApplication.getContext().getString(R.string.search_result_num_end);
+                SPUtils.put(SysApplication.getContext(), Constants.USER_INFO.USER_CURRENCY_STRING, currency_string);
+            }
+            mPreferencesBeanList.add(preferencesBean);
+        }
+        EventBus.getDefault().post(new BusEvent(BusEvent.GET_CURRENCY_COMPLETE, true, currency_string));
+    }
+
+
+    public void changeLocaleRequest(String changeLocale) {
+        CsUser.ChangeLocaleRequest.Builder builder = CsUser.ChangeLocaleRequest.newBuilder();
+        builder.setLocalecode(changeLocale);
+        builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.ChangeLocaleResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.ChangeLocaleResponse response) {
+                //LogUtils.e("我是修改语种成功了");
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_LUANGAGUE_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("修改语种失败:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_LUANGAGUE_COMPLETE, false));
+            }
+        });
+    }
+
+    public void ChangeCurrencyRequest(String currencyCode) {
+        CsUser.ChangeCurrencyRequest.Builder builder = CsUser.ChangeCurrencyRequest.newBuilder();
+        builder.setCurrencycode(currencyCode);
+        builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.ChangeCurrencyResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.ChangeCurrencyResponse response) {
+                //LogUtils.e("切换币种成功!");
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_CURRENCY_COMPLETE, true));
+                DataCleanManager.cleanDatabases(SysApplication.getContext());
+                // TODO: 2017/1/3 切换货币后,清除本地已经保存好的数据
+                SPUtils.put(UIUtils.getContext(), Constants.SP_REPLENISH_LIST, "");
+                SPUtils.saveObject(UIUtils.getContext(), AddRequireActivity.CODE_PICK_LIST, null);
+                SPUtils.saveObject(UIUtils.getContext(), AddRequireActivity.CODE_PRODUCT_LIST, null);
+                SPUtils.putString(SysApplication.getContext(), Constants.USER_INFO.HELP_SIGNED_DATA, "");
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("切换币种失败");
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_CURRENCY_COMPLETE, false));
+            }
+        });
+    }
+
+    //获取首页的需求和包裹的数量,来决定是否需要显示小红点
+    public void getAllRedPointNum() {
+        CsUser.MyRequireParcelNumRequest.Builder builder = CsUser.MyRequireParcelNumRequest.newBuilder();
+
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.MyRequireParcelNumResponse>() {
+            @Override
+            public void onSuccess(CsUser.MyRequireParcelNumResponse response) {
+                //LogUtils.e("这是订单数量:" + response.getRequirecount() + "+" + response.getParcelcount());
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_DEMAND_AND_PACKAGE_COUNT_COMPLETE
+                        , true, response.getRequirecount(), response.getParcelcount()));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("失败了" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_DEMAND_AND_PACKAGE_COUNT_COMPLETE
+                        , false));
+            }
+        });
+    }
+
+    /**
+     * 把区域码转换成对应的国家名字
+     */
+    public String localeTransfrormName(String localeCode) {
+        String countryName = "";
+        Context context = SysApplication.getContext();
+        if (localeCode.equals("en_US")) {
+            countryName = context.getString(R.string.string_for_language_english);
+        } else if (localeCode.equals("ru_RU")) {
+            countryName = context.getString(R.string.string_for_language_russia);
+        } else if (localeCode.equals("ko_KR")) {
+            countryName = context.getString(R.string.string_for_language_korea);
+        } else if (localeCode.equals("zh_CN")) {
+            countryName = context.getString(R.string.string_for_language_chn);
+        } else if (localeCode.equals("zh_TW")) {
+            countryName = context.getString(R.string.string_for_language_chnn);
+        } else {
+            countryName = context.getString(R.string.string_for_language_english);
+        }
+        return countryName;
+    }
+
+    public int getMemberGroup() {
+        return mMemberGroup;
+    }
+}

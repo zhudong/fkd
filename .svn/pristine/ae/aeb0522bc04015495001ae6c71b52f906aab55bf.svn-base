@@ -1,0 +1,253 @@
+package com.fuexpress.kr.model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.conf.SqlParcelsHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016-10-31.
+ */
+public class ParcelHelpDao {
+
+    private final SqlParcelsHelper sqlParcelsHelper;
+    private static ParcelHelpDao mInstance;
+
+    private ParcelHelpDao(Context context) {
+        sqlParcelsHelper = new SqlParcelsHelper(context, null, null, 0);
+    }
+
+    public static ParcelHelpDao getInstance(Context context) {
+        if (mInstance == null) {
+            synchronized (ParcelHelpDao.class) {
+                if (mInstance == null) {
+                    mInstance = new ParcelHelpDao(context);
+                }
+            }
+        }
+        return mInstance;
+    }
+
+    public List<HelpSendParcelBean> getAllParcel(boolean isSave) {
+        return getAllParcel(true, isSave);
+    }
+
+    public HelpSendParcelBean getEditParcel() {
+        List<HelpSendParcelBean> allParcel = getAllParcel(false, true);
+        HelpSendParcelBean bean = null;
+        if (allParcel != null && allParcel.size() > 0) {
+            return allParcel.get(allParcel.size() - 1);
+        }
+        List<HelpSendParcelBean> noSaveParcel = getAllParcel(false, false);
+        if (noSaveParcel != null && noSaveParcel.size() > 0) {
+            bean = noSaveParcel.get(noSaveParcel.size() - 1);
+        }
+        return bean;
+    }
+
+
+    public List<HelpSendParcelBean> getAllParcel(boolean hasShipping, boolean isSave) {
+        int id = isSave ? 1 : 0;
+
+        String[] columns = new String[]{
+                SqlParcelsHelper.Parcel.PARCELID,
+                SqlParcelsHelper.Parcel.parcelName,
+                SqlParcelsHelper.Parcel.parcelCount,
+                SqlParcelsHelper.Parcel.productprice,
+                SqlParcelsHelper.Parcel.productdescription,
+                SqlParcelsHelper.Parcel.weight,
+                SqlParcelsHelper.Parcel.customeraddressid,
+                SqlParcelsHelper.Parcel.customeraddress,
+                SqlParcelsHelper.Parcel.qty,
+                SqlParcelsHelper.Parcel.shippingTitle,
+                SqlParcelsHelper.Parcel.shippingmethodid,
+                SqlParcelsHelper.Parcel.image_num,
+                SqlParcelsHelper.Parcel.wareHouseID,
+                SqlParcelsHelper.Parcel.shippingFee,
+                SqlParcelsHelper.Parcel.images,
+                SqlParcelsHelper.Parcel.imagePaths,
+                SqlParcelsHelper.Parcel.defaultWeight,
+                SqlParcelsHelper.Parcel.saved,
+                SqlParcelsHelper.Parcel.currencyCode,
+                SqlParcelsHelper.Parcel.idCadInfo,
+                SqlParcelsHelper.Parcel.pureShippingFee,
+                SqlParcelsHelper.Parcel.ext1,
+                SqlParcelsHelper.Parcel.ext2,
+                SqlParcelsHelper.Parcel.ext3
+        };
+
+        String selectShipping = "";
+        if (hasShipping) {
+            selectShipping = " and " + SqlParcelsHelper.Parcel.shippingmethodid + ">0";
+        } else {
+            selectShipping = " and " + SqlParcelsHelper.Parcel.shippingmethodid + "=0";
+        }
+
+
+        SQLiteDatabase db = sqlParcelsHelper.getReadableDatabase();
+        Cursor cursor = db.query(SqlParcelsHelper.Parcel.TAB_NAME, columns, SqlParcelsHelper.Parcel.saved + "=?" + selectShipping, new String[]{id + ""}, null, null, null);
+
+        ArrayList<HelpSendParcelBean> list = new ArrayList<HelpSendParcelBean>();
+        while (cursor.moveToNext()) {
+            HelpSendParcelBean bean = new HelpSendParcelBean();
+            bean.setParcelid(cursor.getInt(0));
+            bean.setParcelName(cursor.getString(1));
+            bean.setParcelCount(cursor.getInt(2));
+            bean.setProductprice(cursor.getFloat(3));
+            bean.setProductdescription(cursor.getString(4));
+            bean.setWeight(cursor.getFloat(5));
+            bean.setCustomeraddressid(cursor.getInt(6));
+            bean.setCustomeraddress(cursor.getString(7));
+            bean.setQty(cursor.getInt(8));
+            bean.setShippingTitle(cursor.getString(9));
+            bean.setShippingmethodid(cursor.getInt(10));
+            bean.setImage_num(cursor.getInt(11));
+            bean.setWareHouseID(cursor.getInt(12));
+            bean.setShippingFee(cursor.getFloat(13));
+            bean.setImages(cursor.getString(14));
+            bean.setImagePaths(cursor.getString(15));
+            bean.setDefaultWeight(cursor.getFloat(16));
+            bean.setSaved(cursor.getInt(17) == 1);
+            bean.setCurrencyCode(cursor.getString(18));
+            bean.setIDCardInfo(cursor.getString(19));
+            bean.setPureShippingFee(cursor.getFloat(20));
+            bean.setExt1(cursor.getString(21));
+            bean.setExt2(cursor.getString(22));
+            bean.setExt3(cursor.getString(23));
+            if (bean.getParcelid() != 0)
+                list.add(bean);
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+    public HelpSendParcelBean getItem(int id) {
+        String[] columns = new String[]{
+                SqlParcelsHelper.Parcel.PARCELID,
+                SqlParcelsHelper.Parcel.parcelName,
+                SqlParcelsHelper.Parcel.parcelCount,
+                SqlParcelsHelper.Parcel.productprice,
+                SqlParcelsHelper.Parcel.productdescription,
+                SqlParcelsHelper.Parcel.weight,
+                SqlParcelsHelper.Parcel.customeraddressid,
+                SqlParcelsHelper.Parcel.customeraddress,
+                SqlParcelsHelper.Parcel.qty,
+                SqlParcelsHelper.Parcel.shippingTitle,
+                SqlParcelsHelper.Parcel.shippingmethodid,
+                SqlParcelsHelper.Parcel.image_num,
+                SqlParcelsHelper.Parcel.wareHouseID,
+                SqlParcelsHelper.Parcel.shippingFee,
+                SqlParcelsHelper.Parcel.images,
+                SqlParcelsHelper.Parcel.imagePaths,
+                SqlParcelsHelper.Parcel.defaultWeight,
+                SqlParcelsHelper.Parcel.saved,
+                SqlParcelsHelper.Parcel.currencyCode,
+                SqlParcelsHelper.Parcel.idCadInfo,
+                SqlParcelsHelper.Parcel.pureShippingFee,
+                SqlParcelsHelper.Parcel.ext1,
+                SqlParcelsHelper.Parcel.ext2,
+                SqlParcelsHelper.Parcel.ext3,
+        };
+
+
+        SQLiteDatabase db = sqlParcelsHelper.getReadableDatabase();
+        Cursor cursor = db.query(SqlParcelsHelper.Parcel.TAB_NAME, columns, SqlParcelsHelper.Parcel.PARCELID + "=?", new String[]{id + ""}, null, null, null);
+
+        HelpSendParcelBean bean = null;
+        if (cursor.moveToNext()) {
+            bean = new HelpSendParcelBean();
+            bean.setParcelid(cursor.getInt(0));
+            bean.setParcelName(cursor.getString(1));
+            bean.setParcelCount(cursor.getInt(2));
+            bean.setProductprice(cursor.getFloat(3));
+            bean.setProductdescription(cursor.getString(4));
+            bean.setWeight(cursor.getFloat(5));
+            bean.setCustomeraddressid(cursor.getInt(6));
+            bean.setCustomeraddress(cursor.getString(7));
+            bean.setQty(cursor.getInt(8));
+            bean.setShippingTitle(cursor.getString(9));
+            bean.setShippingmethodid(cursor.getInt(10));
+            bean.setImage_num(cursor.getInt(11));
+            bean.setWareHouseID(cursor.getInt(12));
+            bean.setShippingFee(cursor.getFloat(13));
+            bean.setImages(cursor.getString(14));
+            bean.setImagePaths(cursor.getString(15));
+            bean.setDefaultWeight(cursor.getFloat(16));
+            bean.setSaved(cursor.getInt(17) == 1);
+            bean.setCurrencyCode(cursor.getString(18));
+            bean.setIDCardInfo(cursor.getString(19));
+            bean.setPureShippingFee(cursor.getFloat(20));
+            bean.setExt1(cursor.getString(21));
+            bean.setExt2(cursor.getString(22));
+            bean.setExt3(cursor.getString(23));
+        }
+        cursor.close();
+        db.close();
+        return bean;
+    }
+
+    public void update(HelpSendParcelBean bean) {
+        if (bean.getParcelid() == 0) return;
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        ContentValues contentValue = createContentValue(bean, false);
+        int update = db.update(SqlParcelsHelper.Parcel.TAB_NAME, contentValue, SqlParcelsHelper.Parcel.PARCELID + "=?", new String[]{bean.getParcelid() + ""});
+    }
+
+    public void insert(HelpSendParcelBean bean) {
+        if (bean.getParcelid() == 0) return;
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        db.insert(SqlParcelsHelper.Parcel.TAB_NAME, null, createContentValue(bean, true));
+    }
+
+    public void delete(boolean isSave) {
+        int id = isSave ? 1 : 0;
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        db.delete(SqlParcelsHelper.Parcel.TAB_NAME, SqlParcelsHelper.Parcel.saved + "=?" + " and " + SqlParcelsHelper.Parcel.shippingmethodid + ">0", new String[]{id + ""});
+    }
+
+    public void delete(int id) {
+        SQLiteDatabase db = sqlParcelsHelper.getWritableDatabase();
+        db.delete(SqlParcelsHelper.Parcel.TAB_NAME, SqlParcelsHelper.Parcel.PARCELID + "=?", new String[]{id + ""});
+    }
+
+
+    ContentValues createContentValue(HelpSendParcelBean bean, boolean insert) {
+        ContentValues values = new ContentValues();
+        if (insert) {
+            values.put(SqlParcelsHelper.Parcel.PARCELID, bean.getParcelid());
+        }
+        values.put(SqlParcelsHelper.Parcel.parcelName, bean.getParcelName());
+        values.put(SqlParcelsHelper.Parcel.parcelCount, bean.getParcelCount());
+        values.put(SqlParcelsHelper.Parcel.productprice, bean.getProductprice());
+        values.put(SqlParcelsHelper.Parcel.productdescription, bean.getProductdescription());
+        values.put(SqlParcelsHelper.Parcel.weight, bean.getWeight());
+        values.put(SqlParcelsHelper.Parcel.customeraddressid, bean.getCustomeraddressid());
+        values.put(SqlParcelsHelper.Parcel.customeraddress, bean.getCustomeraddress());
+        values.put(SqlParcelsHelper.Parcel.qty, bean.getQty());
+        values.put(SqlParcelsHelper.Parcel.shippingTitle, bean.getShippingTitle());
+        values.put(SqlParcelsHelper.Parcel.shippingmethodid, bean.getShippingmethodid());
+        values.put(SqlParcelsHelper.Parcel.image_num, bean.getImage_num());
+        values.put(SqlParcelsHelper.Parcel.wareHouseID, bean.getWareHouseID());
+        values.put(SqlParcelsHelper.Parcel.shippingFee, bean.getShippingFee());
+        values.put(SqlParcelsHelper.Parcel.images, bean.getImages());
+        values.put(SqlParcelsHelper.Parcel.imagePaths, bean.getImagePaths());
+        values.put(SqlParcelsHelper.Parcel.defaultWeight, bean.getDefaultWeight());
+        values.put(SqlParcelsHelper.Parcel.saved, bean.isSaved() ? 1 : 0);
+        values.put(SqlParcelsHelper.Parcel.currencyCode, bean.getCurrencyCode());
+        values.put(SqlParcelsHelper.Parcel.idCadInfo, bean.getIDCardInfo());
+        values.put(SqlParcelsHelper.Parcel.pureShippingFee, bean.getPureShippingFee());
+        values.put(SqlParcelsHelper.Parcel.ext1, bean.getExt1());
+        values.put(SqlParcelsHelper.Parcel.ext2, bean.getExt2());
+        values.put(SqlParcelsHelper.Parcel.ext3, bean.getExt3());
+        return values;
+    }
+
+
+}

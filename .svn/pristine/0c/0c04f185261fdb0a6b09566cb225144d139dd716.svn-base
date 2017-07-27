@@ -1,0 +1,531 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.PayResultBaen;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.ParcelAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.socks.library.KLog;
+
+import fksproto.CsCard;
+import fksproto.CsMy;
+import fksproto.CsUser;
+import fksproto.CsParcel;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2016/7/4.
+ */
+public class CardOrderDetailsActivity extends BaseActivity {
+
+    public static final String CURRENCY_CODE = "currency_code";
+    public static final String IS_ORDER_DETAILS = "is_order_details";
+
+    private View rootView;
+    private TextView numberTv;
+    private TextView dateTv;
+    private TextView grandTotalTv;
+    private TextView statusTv;
+    private TextView typeTv;
+    private Button cancelBtn;
+    private LinearLayout payLayout;
+    private TextView payTv;
+    private TextView useBalanceTv;
+    private TextView couponTv;
+    private TextView balanceTv;
+    private TextView needPayTv;
+    private TextView orderGrandTv;
+    private Button payBtn;
+    private ListView parcelListView;
+    private float balance = 0;
+    private TitleBarView titleBarView;
+    private LinearLayout bottomLayout;
+    private ImageView arrowIv;
+    private int giftCardOrderId;
+    private String paymentCode;
+    private TextView disCountTotalTv;
+    private LinearLayout couponLayout;
+    private boolean isGoToKRBank = false;
+
+    private String currencyCode;
+    private float needPay;
+    private int payType;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_order_detail, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.order_details_title_bar);
+        ImageView backIv = titleBarView.getIv_in_title_back();
+
+        numberTv = (TextView) rootView.findViewById(R.id.card_order_detail_order_number_tv);
+        dateTv = (TextView) rootView.findViewById(R.id.card_order_detail_date_tv);
+        grandTotalTv = (TextView) rootView.findViewById(R.id.card_order_detail_grand_total_tv);
+        statusTv = (TextView) rootView.findViewById(R.id.card_order_detail_state_tv);
+        typeTv = (TextView) rootView.findViewById(R.id.card_order_detail_type_tv);
+        cancelBtn = (Button) rootView.findViewById(R.id.card_order_detail_cancel_btn);
+        payLayout = (LinearLayout) rootView.findViewById(R.id.card_order_detail_payment_layout);
+        payTv = (TextView) rootView.findViewById(R.id.card_order_detail_payment_tv);
+        useBalanceTv = (TextView) rootView.findViewById(R.id.card_order_detail_balance_tv);
+        couponTv = (TextView) rootView.findViewById(R.id.card_order_detail_coupon_tv);
+        balanceTv = (TextView) rootView.findViewById(R.id.card_order_detail_balance_pay_tv);
+        needPayTv = (TextView) rootView.findViewById(R.id.card_order_detail_need_pay_tv);
+        orderGrandTv = (TextView) rootView.findViewById(R.id.card_order_detail_pay_grand_total_tv);
+        payBtn = (Button) rootView.findViewById(R.id.card_order_detail_pay_btn);
+        parcelListView = (ListView) rootView.findViewById(R.id.card_order_detail_list_view);
+        bottomLayout = (LinearLayout) rootView.findViewById(R.id.card_order_detail_pay_layout);
+        arrowIv = (ImageView) rootView.findViewById(R.id.card_order_detail_arrow_iv);
+        disCountTotalTv = (TextView) rootView.findViewById(R.id.card_order_detail_coupon_pay_tv);
+        couponLayout = (LinearLayout) rootView.findViewById(R.id.card_order_detail_coupon_layout);
+        currencyCode = getIntent().getStringExtra(CURRENCY_CODE);
+        initData();
+        payLayout.setOnClickListener(this);
+        payBtn.setOnClickListener(this);
+        backIv.setOnClickListener(this);
+        cancelBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+    public void initData() {
+        getAccountBalanceRequest();
+
+//            GetIntlPaymentListRequest2();
+        PaymentManager.getInstance(this).getFKDPaymentListRequest(currencyCode, new PaymentManager.OnFKDPaymentListener() {
+            @Override
+            public void onResult(final int paymentType, final String paymentString, final String payCode) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        payType = paymentType;
+                        paymentCode = payCode;
+                        payTv.setText(paymentString);
+                    }
+                });
+            }
+        });
+        int giftCardOrderState = getIntent().getIntExtra(Constants.GIFT_CARD_ORDER_STATE, -1);
+        giftCardOrderId = getIntent().getIntExtra(Constants.GIFT_CARD_ORDER_ID, -1);
+        switch (giftCardOrderState) {
+            case Constants.GIFT_CARD_ORDER_STATE_PENDING:
+                titleBarView.setTitleText(getString(R.string.card_order_details_pending));
+                cancelBtn.setVisibility(View.VISIBLE);
+                bottomLayout.setVisibility(View.VISIBLE);
+                arrowIv.setVisibility(View.VISIBLE);
+                payLayout.setEnabled(true);
+                break;
+            case Constants.GIFT_CARD_ORDER_STATE_PAID:
+                titleBarView.setTitleText(getString(R.string.card_order_details_paid));
+                cancelBtn.setVisibility(View.GONE);
+                bottomLayout.setVisibility(View.GONE);
+                arrowIv.setVisibility(View.GONE);
+                payLayout.setEnabled(false);
+                break;
+            case Constants.GIFT_CARD_ORDER_STATE_CANCELED:
+                titleBarView.setTitleText(getString(R.string.card_order_details_canceled));
+                cancelBtn.setVisibility(View.GONE);
+                bottomLayout.setVisibility(View.GONE);
+                arrowIv.setVisibility(View.GONE);
+                payLayout.setEnabled(false);
+                break;
+        }
+        getRechargeOrderDetailRequest(giftCardOrderId);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+
+        switch (v.getId()) {
+            case R.id.card_order_detail_payment_layout:
+                intent.setClass(this, PaymentActivity.class);
+//                intent.putExtra(ParcelPaymentAtivity.COUNT_BALANCE, balance);
+                int i = (int) SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + "paymentPos", 0);
+                LogUtils.d("------------------" + i);
+                intent.putExtra("paymentPos", i);
+                intent.putExtra("payType", payType);
+                intent.putExtra(PaymentActivity.CURRENCY_CODE, currencyCode);
+                intent.putExtra(IS_ORDER_DETAILS, true);
+                intent.putExtra("paymentString", payTv.getText().toString());
+                intent.putExtra("payCode", paymentCode);
+                startActivityForResult(intent, 1001);
+                break;
+            case R.id.card_order_detail_pay_btn:
+                if (isGoToKRBank) {
+                    intent.setClass(this, KrBankInfoActivity.class);
+                    intent.putExtra(KrBankInfoActivity.NEED_PAY_COUNT, needPay);
+                    startActivity(intent);
+                } else {
+                    payGiftCardOrderRequest(giftCardOrderId, paymentCode);
+                }
+                break;
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+            case R.id.card_order_detail_cancel_btn:
+                cancelGiftCardOrderRequest(giftCardOrderId);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Constants.PAYMENT_REQUEST_CODE) {
+            Bundle bundle = data.getExtras();
+            int payType = data.getIntExtra("payType", 1);
+            boolean isUseBalance = data.getBooleanExtra("isUseBalance", false);
+            float account = data.getFloatExtra("account", 0.00f);
+            CsUser.CouponList coupon = (CsUser.CouponList) bundle.getSerializable(CouponActivity.CODE_COUPON);
+            switch (payType) {
+                case Constants.PAYMENT_ALIPAY:
+                    paymentCode = "alipay";
+                    payTv.setText(getString(R.string.String_ali_pay));
+                    isGoToKRBank = false;
+                    break;
+                case Constants.PAYMENT_WECHAT:
+                    payTv.setText(getString(R.string.String_weixin_pay));
+                    paymentCode = "tenpay";
+                    isGoToKRBank = false;
+                    break;
+                case Constants.PAYMENT_ADYEN:
+                    payTv.setText(getString(R.string.String_adyen_pay));
+                    isGoToKRBank = false;
+                    break;
+                case Constants.PAYMENT_KRBANK:
+                    payTv.setText(getString(R.string.String_krbank_pay2));
+                    isGoToKRBank = true;
+                    break;
+            }
+            if (isUseBalance) {
+              //  useBalanceTv.setVisibility(View.VISIBLE);
+                useBalanceTv.setText(getString(R.string.package_use_balance_first) + UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, account));
+            }
+            if (coupon != null) {
+                couponTv.setVisibility(View.VISIBLE);
+                couponTv.setText(coupon.getShippingcouponname() + UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, coupon.getDiscountamount()));
+            }
+        }
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+//        if (event.getType() == BusEvent.PAYMENT_TYPE_CHANGE) {
+//            int type = (int) SPUtils.get(this, ParcelPaymentAtivity.THIRD_PAY_TYPE, 1);
+//            switch (type) {
+//                case 1:
+//                    paymentCode = "alipay";
+//                    payTv.setText(getString(R.string.String_ali_pay));
+//                    break;
+//                case 2:
+//                    payTv.setText(getString(R.string.String_weixin_pay));
+//                    paymentCode = "tenpay";
+//                    break;
+//            }
+//        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT) {
+            boolean isSuccess = event.getBooleanParam();
+            if (isSuccess) {
+                finish();
+            }
+        }
+    }
+
+    /**
+     * 获取订单信息
+     *
+     * @param orderId
+     */
+    public void getRechargeOrderDetailRequest(int orderId) {
+        KLog.i(" orderId ="+orderId);
+        showLoading();
+        CsCard.GetRechargeOrderDetailRequest.Builder builder = CsCard.GetRechargeOrderDetailRequest.newBuilder();
+        builder.setGiftCardOrderId(orderId);
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.GetRechargeOrderDetialResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.GetRechargeOrderDetialResponse response) {
+                LogUtils.d(response.toString());
+                closeLoading();
+                Message msg = Message.obtain();
+                msg.obj = response;
+                orderHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                KLog.i("ret = "+ret+" errMsg = "+errMsg);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomToast.makeText(CardOrderDetailsActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+                        closeLoading();
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler orderHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CsCard.GetRechargeOrderDetialResponse response = (CsCard.GetRechargeOrderDetialResponse) msg.obj;
+            CsCard.GiftCardOrderItem order = response.getGiftCardOrder();
+            needPay = order.getNeedPay();
+            numberTv.setText(order.getGiftCardOrderNo());
+            dateTv.setText(order.getGiftCardCreateTime());
+            grandTotalTv.setText(UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, order.getTotal()));
+            statusTv.setText(order.getStatusMsg());
+            if (order.getDiscountamounttotal() > 0) {
+                disCountTotalTv.setText(UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, order.getDiscountamounttotal()));
+                couponLayout.setVisibility(View.VISIBLE);
+            } else {
+                couponLayout.setVisibility(View.GONE);
+            }
+            switch (order.getOrderType()) {
+                case 1:
+                    typeTv.setVisibility(View.GONE);
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    typeTv.setVisibility(View.VISIBLE);
+                    typeTv.setText(getString(R.string.string_for_my_balance_title_02));
+                    break;
+            }
+            paymentCode = order.getPaymentCode();
+            if (TextUtils.equals(order.getPaymentCode(), "alipay")) {
+                payTv.setText(getString(R.string.String_ali_pay));
+            } else if (TextUtils.equals(order.getPaymentCode(), "tenpay") || TextUtils.equals(order.getPaymentCode(), "wxap")) {
+                payTv.setText(getString(R.string.wechat));
+            }
+            balanceTv.setText(UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, response.getGiftCardOrder().getAccountPay()));
+            needPayTv.setText(UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, response.getGiftCardOrder().getNeedPay()));
+            orderGrandTv.setText(UIUtils.getCurrency(CardOrderDetailsActivity.this, currencyCode, response.getGiftCardOrder().getNeedPay()));
+            ParcelAdapter adapter = new ParcelAdapter(CardOrderDetailsActivity.this, response.getParcellistdataList(), currencyCode);
+            parcelListView.setAdapter(adapter);
+        }
+    };
+
+    /**
+     * 获取余额
+     *
+     * @return
+     */
+    public float getAccountBalanceRequest() {
+        CsMy.GetAccountBalanceRequest.Builder builder = CsMy.GetAccountBalanceRequest.newBuilder();
+//        builder.setUin(AccountManager.getInstance().mUin);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetAccountBalanceResponse>() {
+            @Override
+            public void onSuccess(final CsMy.GetAccountBalanceResponse response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //CustomToast.makeText(CardOrderDetailsActivity.this, response.getHead().getErrmsg(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                balance = response.getFreeBalance();
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+        return balance;
+    }
+
+
+    public void payGiftCardOrderRequest(int orderId, final String paymentCode) {
+        showLoading();
+        CsParcel.PayGiftCardOrderRequest.Builder builder = CsParcel.PayGiftCardOrderRequest.newBuilder();
+        builder.setGiftCardOrderId(orderId);
+        builder.setPaymentCode(paymentCode);
+        builder.setCurrencycode(currencyCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.PayGiftCardOrderResponse response) {
+                LogUtils.d(response.toString());
+                closeLoading();
+                PaymentManager paymentManager = PaymentManager.getInstance(CardOrderDetailsActivity.this);
+                if (TextUtils.equals(paymentCode, "alipay")) {
+                    paymentManager.aliPay(response.getPayInfo(), new PaymentManager.OnAliPayListener() {
+                        @Override
+                        public void onSuccess(String resultStatus) {
+                            Intent intent = new Intent(CardOrderDetailsActivity.this, PickUpSuccessActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(String resultStatus, final String errorMsg) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CustomToast.makeText(CardOrderDetailsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                if (TextUtils.equals(paymentCode, "tenpay") || TextUtils.equals(paymentCode, "wxap")) {
+                    SysApplication app = (SysApplication) getApplication();
+                    app.setPaymentRequestCode(Constants.PAYMENT_REQUEST_CODE_PICK_UP);
+                    PaymentManager.getInstance(CardOrderDetailsActivity.this).wechatPay(response.getPayInfo());
+                }
+                if (TextUtils.equals(Constants.GIFT_CARD_PAYMENT_KRBANK, paymentCode)) {
+                    PaymentManager.getInstance(CardOrderDetailsActivity.this).adyenPay(giftCardOrderId + "", giftCardOrderId, Constants.PAYMENT_ADYEN, needPay, currencyCode, new PaymentManager.OnPayListener() {
+                        @Override
+                        public void onPay(Response response, PayResultBaen payResult) {
+                            String authCode = payResult.authCode;
+                            if(!TextUtils.isEmpty(authCode)){
+                                Intent intent = new Intent(CardOrderDetailsActivity.this, PickUpSuccessActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onError(final String errMsg) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CustomToast.makeText(CardOrderDetailsActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                closeLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomToast.makeText(CardOrderDetailsActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    public void cancelGiftCardOrderRequest(int orderId) {
+        showLoading();
+        CsCard.CancelGiftCardOrderRequest.Builder builder = CsCard.CancelGiftCardOrderRequest.newBuilder();
+        builder.setGiftCardOrderId(orderId);
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.CancelGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.CancelGiftCardOrderResponse response) {
+                LogUtils.d(response.toString());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeLoading();
+                        cancelBtn.setVisibility(View.GONE);
+                        bottomLayout.setVisibility(View.GONE);
+                        titleBarView.setTitleText(getString(R.string.card_order_details_canceled));
+                        statusTv.setText(getString(R.string.card_order_details_canceled));
+                        payLayout.setEnabled(false);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                closeLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomToast.makeText(CardOrderDetailsActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("CardOrderDetails Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
+}

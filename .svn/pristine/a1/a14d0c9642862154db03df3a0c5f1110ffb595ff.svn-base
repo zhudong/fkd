@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_bg"
+    tools:context="com.yiss.gyi.ui.activity.PlacesProductActivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/rlv_body"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

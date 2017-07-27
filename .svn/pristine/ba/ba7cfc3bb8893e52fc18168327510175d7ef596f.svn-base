@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ai.zhaoban.ydk.ui.activity.help_send.HelpSendFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_title_normal" />
+
+        <ListView
+            android:id="@+id/lv_body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@null" />
+
+        <RelativeLayout
+            android:id="@+id/rl_no_parcel_tips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/default_bg"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_tips_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingBottom="30dp"
+                android:text="@string/String_parcle_none"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/selectBtn"
+                android:layout_width="104dp"
+                android:layout_height="36dp"
+                android:layout_below="@id/tv_tips_none"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_for_btn_red"
+                android:gravity="center"
+                android:text="@string/package_to_append"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_tips_none"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="28dp"
+                android:src="@mipmap/package_none" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_buttom"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv_tips_estimate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="8dp"
+                android:text="@string/String_parcle_estimate_fee"
+                android:textColor="@color/black_parcel"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_estimate_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/tv_tips_estimate"
+                android:text=""
+                android:textColor="@color/the_red"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tips_estimate"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
+                android:text="@string/String_parcle_estimate_fee_tips"
+                android:textColor="@color/gray_999"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/title_bar_black"
+                android:gravity="center"
+                android:text="@string/String_parcle_submit"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

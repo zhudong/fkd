@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    >
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_bind_gc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/my_gift_card_tab_03"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_in_binding_gift_card_title_01"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:text="@string/my_gift_card_order_binding_balance"/>
+
+        <TextView
+            android:id="@+id/tv_in_binding_gift_card_can_use_money"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_toRightOf="@+id/tv_in_binding_gift_card_title_01"
+            android:singleLine="true"
+            android:text=""/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/default_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:padding="5dp">
+
+            <com.fuexpress.kr.ui.view.ClearEditText
+                android:id="@+id/ed_in_binding_gift_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:hint="@string/my_gift_card_order_binding_balance_hint"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="13sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btn_in_binding_gift_card_go_binding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_btn_bg"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/my_gift_card_order_binding_btn_text"
+                android:textColor="@color/selector_banding_gift_card_text"
+                android:textSize="13sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="8.6dp"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/member_note_string"/>
+
+        <Switch
+            android:id="@+id/sw_member"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13.8dp"/>
+    </RelativeLayout>
+
+    <ListView
+        android:layout_marginTop="1px"
+        android:id="@+id/lv_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/transparent"
+        android:dividerHeight="1px"
+        android:visibility="gone"/>
+</LinearLayout>

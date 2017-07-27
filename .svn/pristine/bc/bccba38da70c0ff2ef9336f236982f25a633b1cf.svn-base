@@ -1,0 +1,87 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import com.fuexpress.kr.R;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsParcel;
+import rx.Observable;
+
+/**
+ * Created by Longer on 2016/12/8.
+ * 给帮我收提供本地数据源的类,实现了帮我收数据源的一系列抽象接口
+ * 请注意该类只是提供本地数据,并不参与逻辑(绝大部分是数据库)
+ * 在本项目中,实际上使用不到(替代成内存)
+ */
+public class HelpSignedLocalDataSource implements HelpSignedDataSource {
+
+    private List<CsParcel.ProductDataList> mProductDataLists;
+
+    @Nullable
+    private List<Integer> mResIDList = null;
+
+
+    @Override
+    public List<CsParcel.ProductDataList> getHelpSignedDataList() {
+        if (mProductDataLists == null) {//当这个集合为空的情况下,代表初次进入,至少需要给予一个数据
+            mProductDataLists = new ArrayList<>();
+            CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+            CsParcel.ProductDataList build = builder.build();
+            mProductDataLists.add(build);
+        }
+        return mProductDataLists;
+    }
+
+    @Override
+    public CsParcel.ProductDataList getHelpSignedDataOnly(int index) {
+        return mProductDataLists.get(index);
+    }
+
+    @Override
+    public void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData) {
+        mProductDataLists.add(helpSignedData);
+    }
+
+    @Override
+    public void deleteHelpSignedData(int index) {
+        mProductDataLists.remove(index);
+    }
+
+    @Override
+    public void deletAllHelpSignedData() {
+        mProductDataLists = new ArrayList<>();
+    }
+
+    @Override
+    public void refreshHelpSignedData() {//目前暂时没用
+
+    }
+
+    @Override
+    public void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData) {
+        mProductDataLists.set(index, helpSignedData);
+    }
+
+    /**
+     * 获得需要显示的左边标题资源集合
+     *
+     * @return 返回左边标题的文字资源集合
+     */
+    public List<Integer> getResIDList() {
+        if (mResIDList != null) {
+            return mResIDList;
+        } else {
+            mResIDList = new ArrayList<>();
+            mResIDList.add(R.string.hm_item_desc);
+            mResIDList.add(R.string.hm_item_remark);
+            mResIDList.add(R.string.hm_item_ware_house);
+            mResIDList.add(R.string.hm_item_request_price);
+            mResIDList.add(R.string.hm_item_quantity);
+            return mResIDList;
+        }
+    }
+}

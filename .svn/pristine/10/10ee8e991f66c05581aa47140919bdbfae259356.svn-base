@@ -1,0 +1,255 @@
+import "cs_head.proto";
+import "cs_base.proto";
+import "cs_address.proto";
+import "cs_crowd.proto";
+
+package fksproto;
+
+//采购方案
+enum PurchaseScheme
+{
+	PURCHASE_SCHEME_STOCK = 1;//仅采购现货
+	PURCHASE_SCHEME_BOOK  = 2;//可预订
+}
+
+//配送方案
+enum ShippingScheme
+{
+	SHIPPING_SCHEME_DIRECT = 1;//直邮订单
+	SHIPPING_SCHEME_MERGE  = 2;//合并订单
+}
+
+//订单Tab
+enum SalesOrderTab
+{
+	SALES_ORDER_TAB_NONE     = 0;//全部
+	SALES_ORDER_TAB_PENDING  = 1;//待支付
+	SALES_ORDER_TAB_PAYED    = 2;//已支付
+	SALES_ORDER_TAB_CANCELED = 3;//已取消
+}
+
+//订单状态
+enum SalesOrderState
+{
+	SALES_ORDER_STATE_NONE            = 0;
+	SALES_ORDER_STATE_PENDING         = 1;//待支付
+	SALES_ORDER_STATE_AWAITING_CANCEL = 2;//等待取消
+	SALES_ORDER_STATE_CANCELED        = 3;//已取消
+	SALES_ORDER_STATE_PAYED           = 4;//已支付
+	SALES_ORDER_STATE_PART_SHIPPED    = 5;//部分发货
+	SALES_ORDER_STATE_SHIPPED         = 6;//全部发货
+	SALES_ORDER_STATE_CROWDING		  = 7;//拼单
+}
+
+//订单单品状态
+enum SalesOrderItemState
+{
+	SALES_ORDER_ITEM_STATE_NONE            = 0;
+	SALES_ORDER_ITEM_STATE_PENDING         = 1;//待付款
+	SALES_ORDER_ITEM_STATE_PROCESSING      = 2;//待处理
+	SALES_ORDER_ITEM_STATE_CHECKING        = 3;//验货中
+	SALES_ORDER_ITEM_STATE_PREORDERING     = 4;//入库中
+	SALES_ORDER_ITEM_STATE_PACKING         = 5;//已入库
+	SALES_ORDER_ITEM_STATE_NOTICED         = 6;//待发货
+	SALES_ORDER_ITEM_STATE_SHIPPED         = 7;//已发货
+	SALES_ORDER_ITEM_STATE_AWAITING_CANCEL = 8;//等待取消
+	SALES_ORDER_ITEM_STATE_CANCELED        = 9;//已取消
+	SALES_ORDER_ITEM_STATE_CROWDING        = 10;//拼单中
+}
+
+//订单
+message SalesOrder
+{
+	required int64  order_id         = 1; //订单id
+	required string order_number     = 2; //订单编号
+	optional int32  create_time      = 3; //订单创建时间
+	optional int32  state            = 4; //订单状态
+	optional int32  pay_method       = 5; //支付方式
+	optional int32  shipping_scheme  = 6; //配送方式
+	optional bool   use_gift_card    = 7; //使用礼品卡
+	optional float  grand_total      = 8; //订单总额
+	optional bool   is_crowd         = 9; //是否拼单
+	optional string currencycode     =10;//币种
+	optional float  total_paid       = 11;//支付总额
+	optional float  gift_card_amount  = 12;//已使用余额
+}
+
+//订单单品
+message SalesOrderItem
+{
+	required int64      order_item_id = 1; //订单单品id
+	required int64  	order_id      = 2; //订单id
+	required int64  	item_id       = 3; //单品id
+	optional int64  	parcel_id     = 4; //包裹id
+	optional string 	parcel_number = 5; //包裹编号
+	optional string 	order_number  = 6; //订单编号
+	optional string 	title         = 7; //标题
+	optional string 	url           = 8; //图片url
+	optional int32  	state         = 9; //订单单品状态
+	optional float  	unit_price    = 10;//单价
+	optional int32  	qty           = 11;//购买数量
+	optional int32  	qty_pack      = 12;//打包数量
+	optional int32  	qty_ship      = 13;//发货数量
+	optional int32  	qty_cancel    = 14;//取消数量
+	optional string 	buyfrom       = 15;//在哪儿买	
+	optional string 	extend_label  = 16;//变种信息
+	optional string 	cancel_reason = 17;//取消理由
+	optional string     prompt		  =	18;//提示
+	optional string     message       = 19;//订单单品留言
+	optional string     currencycode  = 20;//币种
+	optional string     korea_color   = 21;//韩文颜色
+	optional string     korea_order   = 22;//韩国公司方订单号
+	optional string     merchant_message = 23;
+}
+
+//订单物流
+message SalesOrderShipping
+{
+	optional string warehouse_name  = 1;//仓库名
+	optional string shipping_method = 2;//物流方式
+	optional float  shipping_fee    = 3;//运费
+}
+
+//提交订单请求
+message SubmitSalesOrderRequest
+{
+	required BaseRequest head                = 1;
+	optional BaseUserRequest userinfo        = 2;
+	optional int32       shipping_address_id = 3;//收货地址
+	optional bool        use_gift_card       = 4;//使用礼品卡
+	optional int32       pay_method          = 5;//支付方式
+	optional int32       purchase_scheme     = 6;//采购方案
+	optional int32       shipping_scheme     = 7;//托运方案
+	repeated PairIntInt  pairs               = 8;//当托运方案为直邮发货时，用户的选择，<仓库id，所选方式id>
+	optional string      localecode          = 9;//语种
+	optional string      currencycode        = 10;//币种
+	optional int32       currencyid          = 11;
+}
+
+message SubmitSalesOrderResponse
+{
+	required BaseResponse head     		= 1;
+	optional int64        order_id 		= 2;
+	optional string 	  order_number	= 3;
+	optional string       currencycode  = 4;
+	optional float        totalpaid     = 5;
+}
+
+//订单支付请求
+message ApplyForSalesOrderPayRequest
+{
+	required BaseRequest head          = 1;
+	optional BaseUserRequest userinfo  = 2;
+	required int64       order_id      = 3;//订单ID
+	required int32       pay_method    = 4;//支持方式,参考PayMethod
+	optional string      localecode    = 5;//语种
+	optional string      currencycode  = 6;//币种
+	optional int32       currencyid    = 7;
+}
+
+message ApplyForSalesOrderPayResponse
+{
+	required BaseResponse head     = 1;
+	optional string       pay_info = 2;//支付信息，以key=value形式，以&连接
+}
+
+//获取订单列表请求
+message GetSalesOrderListRequest
+{
+	required BaseRequest head   = 1;
+	optional BaseUserRequest userinfo = 2;
+	optional int32       tab    = 3;//筛选指定Tab的订单，见SalesOrderTab定义
+	optional int32       pageno = 4;//页码，从1开始
+}
+
+//获取订单列表应答
+message GetSalesOrderListResponse
+{
+	required BaseResponse head          = 1;
+	optional bool         more          = 2;
+	repeated SalesOrder   orders        = 3;
+	repeated PairIntStr   order_vs_urls = 4;//<订单, 商品url1,商品url2,商品url3,...>
+}
+
+//获取订单详情请求
+message GetSalesOrderDetailRequest
+{
+	required BaseRequest head          = 1;
+	optional BaseUserRequest userinfo  = 2;
+	optional int64       order_id      = 3;
+	optional string      localecode    = 4;//语种
+	optional string      currencycode  = 5;//币种
+	optional int32       currencyid    = 6;
+}
+
+//获取订单详情应答
+message GetSalesOrderDetailResponse
+{
+	required BaseResponse       head        = 1;
+	optional SalesOrder         order       = 2;//订单信息
+	repeated SalesOrderItem     order_items = 3;//订单单品列表
+	optional CustomerAddress    address     = 4;//订单地址(邮寄地址)
+	repeated SalesOrderShipping shippings   = 5;//物流信息
+	optional Crowd              crowd       = 6;//拼单信息
+}
+
+//取消订单请求
+message CancelSalesOrderRequest
+{
+	required BaseRequest head         = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int64       order_id     = 3;//订单id
+}
+
+//取消订单应答
+message CancelSalesOrderResponse
+{
+	required BaseResponse head = 1;
+}
+
+//修改订单请求
+message ModifySalesOrderRequest
+{
+	required BaseRequest head         = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int64       order_id     = 3;
+	optional int32       pay_method   = 4;
+}
+
+//修改订单应答
+message ModifySalesOrderResponse
+{
+	required BaseResponse head = 1;
+}
+
+//提交拼单订单
+message SubmitCrowdOrderRequest
+{
+	required BaseRequest head                = 1;
+	optional BaseUserRequest userinfo        = 2;
+	required int64       crowd_id            = 3; //拼单id
+	required int64       item_id             = 4; //单品id
+	required int32       qty                 = 5; //交易数量
+	optional string      note                = 6; //留言
+	repeated PairIntInt  attrs               = 7; //属性id:属性值id列表
+	optional int32       shipping_address_id = 8; //收货地址
+	optional bool        use_gift_card       = 9; //使用礼品卡
+	optional int32       pay_method          = 10; //支付方式
+	optional int32       purchase_scheme     = 11;//采购方案
+	optional int32       shipping_scheme     = 12;//托运方案
+	repeated PairIntInt  pairs               = 13;//当托运方案为直邮发货时，用户的选择，<仓库id，所选方式id>
+	optional string      localecode          = 14;//语种
+	optional string      currencycode        = 15;//币种
+	optional int32       currencyid          = 16;
+
+}
+
+message SubmitCrowdOrderResponse
+{
+	required BaseResponse head         = 1;
+	optional int64        order_id     = 2;//订单id
+	optional string 	  order_number = 3;
+	optional string       currency_code = 4; //币种code
+	optional float        total_paid    =5;  //网络支付金额
+
+}

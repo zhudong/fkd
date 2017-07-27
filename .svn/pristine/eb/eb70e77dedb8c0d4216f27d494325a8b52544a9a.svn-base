@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <com.fuexpress.kr.ui.view.RatioLayout
+        android:id="@+id/img_root"
+        android:visibility="gone"
+        app:picRatio="2.44"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_banner"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.fuexpress.kr.ui.view.RatioLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/white"
+        android:paddingLeft="10dp">
+
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/img_country"
+            android:layout_width="35dp"
+            android:visibility="gone"
+            android:layout_marginRight="8dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img_country"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:text="@string/string_please_select_country"/>
+
+        <TextView
+            android:id="@+id/tv_select_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_for_home_item_bg"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:text="@string/string_change"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_shipping_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

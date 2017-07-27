@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+    >
+
+
+    <TextView
+        android:id="@+id/warehouse_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/warehouse_cancel"
+        android:textColor="@color/progress_forecolor"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/select_warehouse"
+        android:textColor="@color/black_my_album"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/warehouse_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/warehouse_confirm"
+        android:textColor="@color/progress_forecolor"
+        android:textSize="14sp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/title"
+        android:background="#bbb"/>
+
+
+    <com.fuexpress.kr.ui.view.wheel.WheelView
+        android:id="@+id/wv_body"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:layout_below="@id/title"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>

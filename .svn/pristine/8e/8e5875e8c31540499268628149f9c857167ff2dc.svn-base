@@ -1,0 +1,86 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.socks.library.KLog;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by k550 on 2016/6/13.
+ */
+public class HelpCenterActivity extends BaseActivity {
+
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.webView)
+    WebView mWebView;
+    String url;
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_help_center, null);
+
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setText(getString(R.string.main_me_tab_string));
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvCenter.setText(getString(R.string.help_center));
+        url = Constants.WebWiewUrl.getH5Url() +"/m/help?decorator=empty&localeCode="+ AccountManager.getInstance().getLocaleCode();
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (!url.contains("decorator")) {
+                    url = url + "&decorator=empty";
+                }
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        mWebView.loadUrl(url);
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_center, R.id.title_tv_right, R.id.title_iv_right})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_center:
+                break;
+            case R.id.title_tv_right:
+                break;
+            case R.id.title_iv_right:
+                break;
+        }
+    }
+}

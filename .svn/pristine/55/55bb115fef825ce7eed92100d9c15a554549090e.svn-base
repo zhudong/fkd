@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="119dp"
+        android:background="@color/white"
+        android:minHeight="118dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/currency_in_preferences"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="13dp"
+                android:text="@string/string_for_preferences_currency"/>
+
+            <TextView
+                android:textSize="13sp"
+                android:id="@+id/tv_in_preferences_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="7dp"
+                android:layout_toLeftOf="@+id/iv_in_preferences_tab_02"
+                android:text="123123"
+                android:textColor="@color/text_color_666"/>
+
+            <ImageView
+                android:id="@+id/iv_in_preferences_tab_02"
+                android:layout_width="7dp"
+                android:layout_height="14dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/fill_5"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/default_bg"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="13dp"
+                android:text="@string/my_gift_card_account_can_use_money"/>
+
+            <TextView
+                android:id="@+id/tv_head_view_gift_card_account_canuse_money"
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="13dp"
+                android:text=""/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/system_Mytextsize_GRAY_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="2dp"
+                android:text="@string/my_gift_card_account_not_use_money"/>
+
+            <TextView
+                android:id="@+id/tv_head_view_gift_card_account_cannt_use_money"
+                style="@style/system_Mytextsize_GRAY_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="2dp"
+                android:text=""/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/default_bg"/>
+
+</LinearLayout>

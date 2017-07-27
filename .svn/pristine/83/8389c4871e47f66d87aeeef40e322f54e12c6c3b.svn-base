@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.NoteRadioGroup
+        android:id="@+id/rbg_my_gift_card_list_fragment_01"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl_cart"
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_wait_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:button="@null"
+                android:drawablePadding="3dp"
+                android:drawableTop="@drawable/selector_watting_pay"
+                android:gravity="center"
+                android:text="@string/string_for_my_balance_tab01"
+                android:textColor="@color/selector_rb_text_for_gift_card_order_list"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_red_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_cricle"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+
+        <RadioButton
+            android:id="@+id/rb_payed"
+            style="@style/gift_card_order_list_rb_style"
+            android:drawableTop="@drawable/selector_payed"
+            android:text="@string/string_for_my_balance_tab02"/>
+
+        <RadioButton
+            android:id="@+id/rb_cancled"
+            style="@style/gift_card_order_list_rb_style"
+            android:drawableTop="@drawable/selector_oder_cancle"
+            android:text="@string/string_for_my_balance_tab03"/>
+
+
+        <RadioButton
+            android:id="@+id/rb_all_order"
+            style="@style/gift_card_order_list_rb_style"
+            android:drawableTop="@drawable/selector_all_order"
+            android:text="@string/string_for_my_balance_tab04"/>
+    </com.fuexpress.kr.ui.view.NoteRadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/default_bg"/>
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/rfl_in_gift_card_order_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        >
+
+    </com.fuexpress.kr.ui.view.RefreshListView>
+
+
+</LinearLayout>

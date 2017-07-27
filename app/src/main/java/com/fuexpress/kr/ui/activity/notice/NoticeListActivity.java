@@ -1,0 +1,143 @@
+package com.fuexpress.kr.ui.activity.notice;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.SysNoticeBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.SysNoticeAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.socks.library.KLog;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsNotice;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class NoticeListActivity extends BaseActivity {
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.refresh_lv_package)
+    RefreshListView mRefreshLvPackage;
+
+    private List<SysNoticeBean> sysNoticeBeans;
+    private SysNoticeAdapter sysNoticeAdapter;
+    ;
+
+    private RefreshListView.OnRefreshListener mOnRefreshListener = new RefreshListView.OnRefreshListener() {
+        @Override
+        public void onRefresh(RefreshListView refreshListView) {
+            mRefreshLvPackage.stopRefresh();
+        }
+
+        @Override
+        public void onLoadMore(RefreshListView refreshListView) {
+            mRefreshLvPackage.setHasLoadMore(false);
+            mRefreshLvPackage.stopLoadMore(false);
+        }
+    };
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (sysNoticeBeans == null || sysNoticeAdapter == null) {
+                return;
+            }
+            int location = position - 1;
+            SysNoticeBean sysNoticeBean = (SysNoticeBean) sysNoticeAdapter.getItem(location);
+            sysNoticeBeans.get(location).isRead = 1;
+            sysNoticeAdapter.notifyDataSetChanged();
+            Intent intent = new Intent(NoticeListActivity.this, NoticeDetailActivity.class);
+            intent.putExtra(NoticeDetailActivity.CSID, sysNoticeBeans.get(location).coreMsgId);
+            startActivity(intent);
+        }
+    };
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_notice, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        // TODO: 2017/5/9 从首页幻灯片跳入的话,需要改变其返回的文字,因此改成需要上级页面传递返回标题并使用 --edit by longer
+        String backTitleExtra = getIntent().getStringExtra(Constants.RETURN_TITLE);
+        mTitleTvLeft.setText(TextUtils.isEmpty(backTitleExtra) ? getString(R.string.main_me_tab_string) : backTitleExtra);
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvCenter.setText(getString(R.string.notice));
+        mRefreshLvPackage.setOnItemClickListener(onItemClickListener);
+        mRefreshLvPackage.setOnRefreshListener(mOnRefreshListener);
+        mRefreshLvPackage.setHasLoadMore(false);
+        mRefreshLvPackage.stopLoadMore(false);
+        getSysNoticeList();
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+        }
+    }
+
+    private void getSysNoticeList() {
+        CsNotice.GetSysNoticeMsgRequest.Builder builder = CsNotice.GetSysNoticeMsgRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsNotice.GetSysNoticeMsgResponse>() {
+            @Override
+            public void onSuccess(CsNotice.GetSysNoticeMsgResponse response) {
+                KLog.i(response.toString());
+                sysNoticeBeans = ClassUtil.conventSysNotceList2SysNoticeBeanList(response.getMessageitemsList());
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (sysNoticeBeans != null) {
+                            if (sysNoticeAdapter == null) {
+                                sysNoticeAdapter = new SysNoticeAdapter(NoticeListActivity.this, sysNoticeBeans);
+                            }
+                        }
+                        mRefreshLvPackage.setAdapter(sysNoticeAdapter);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+}

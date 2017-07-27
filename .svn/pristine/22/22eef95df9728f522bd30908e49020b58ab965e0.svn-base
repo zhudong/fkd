@@ -1,0 +1,42 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.adapter.AdapterForHelp;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+
+public class HelpMeSignedActivity extends BaseActivity {
+
+    private View mRootView;
+    private TitleBarView mTitleBarView;
+    private ListView mLv_in_help_me_get_package;
+    private AdapterForHelp mAdapterForHelp;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_help_me_signed, null);
+        mTitleBarView = (TitleBarView) mRootView.findViewById(R.id.tl_in_help_get_package);
+        TextView tv_in_title_right = mTitleBarView.getTv_in_title_right();
+        tv_in_title_right.setText(getString(R.string.preview_delete_msg));
+        tv_in_title_right.setOnClickListener(this);
+        mLv_in_help_me_get_package = (ListView) mRootView.findViewById(R.id.lv_in_help_me_get_package);
+        mAdapterForHelp = new AdapterForHelp(this);
+        mLv_in_help_me_get_package.setAdapter(mAdapterForHelp);
+        return mRootView;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_in_title_right) {
+            LogUtils.e("可见的item个数:"+mLv_in_help_me_get_package.getChildCount());
+            //mLv_in_help_me_get_package.getChildAt()
+            mAdapterForHelp.doDeletAnimation();
+        }
+    }
+}

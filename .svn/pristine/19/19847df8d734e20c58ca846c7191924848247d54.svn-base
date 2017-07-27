@@ -1,0 +1,137 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.ActivityController;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.protobuf.GeneratedMessage;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsUser;
+
+/**
+ * Created by Administrator on 2016-12-29.
+ */
+
+public class PickUpKrbankInfoActivity extends BaseActivity {
+
+    public static final String CODE_SALES_REQUIRE_MAN_ID = "code_salesRequireManId";
+    public static final String CODE_TOTAL = "code_total";
+    public static final String CODE_PAY_TYPE = "code_pay_type";
+    public static final String CODE_BALANCE_PAY = "code_balance_pay";
+    public static final String CODE_NEED_PAY = "code_need_pay";
+
+    private View rootView;
+    private TitleBarView titleBarView;
+    private ImageView backIv;
+    private TextView payAmountTv;
+    private TextView payTypeTv;
+    private TextView balbanceTv;
+    private TextView needPayTv;
+    private TextView bankNameTv;
+    private TextView payeeTv;
+    private TextView bankIdTv;
+    private TextView amountTv;
+    private TextView noteNumberTv;
+    private Button goHomeBtn;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.krbank_order_info_layout, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.krbank_info_title_bar);
+        backIv = titleBarView.getIv_in_title_back();
+        ActivityController.addActivity(this);
+
+        payAmountTv = (TextView) rootView.findViewById(R.id.krbank_info_pay_amount_tv);
+        payTypeTv = (TextView) rootView.findViewById(R.id.krbank_info_pay_type_tv);
+        balbanceTv = (TextView) rootView.findViewById(R.id.krbank_info_balance_tv);
+        needPayTv = (TextView) rootView.findViewById(R.id.krbank_info_need_pay_tv);
+        bankNameTv = (TextView) rootView.findViewById(R.id.krbank_info_bank_name_tv);
+        payeeTv = (TextView) rootView.findViewById(R.id.krbank_info_payee_tv);
+        bankIdTv = (TextView) rootView.findViewById(R.id.krbank_info_bank_id_tv);
+        amountTv = (TextView) rootView.findViewById(R.id.krbank_info_amount_tv);
+        noteNumberTv = (TextView) rootView.findViewById(R.id.krbank_info_note_number_tv);
+        goHomeBtn = (Button) rootView.findViewById(R.id.krbank_info_go_home_btn);
+
+        String salesRequireManId = getIntent().getStringExtra(CODE_SALES_REQUIRE_MAN_ID);
+        String total = getIntent().getStringExtra(CODE_TOTAL);
+        int payType = getIntent().getIntExtra(CODE_PAY_TYPE, -1);
+        String balance = getIntent().getStringExtra(CODE_BALANCE_PAY);
+        String needPay = getIntent().getStringExtra(CODE_NEED_PAY);
+
+        payAmountTv.setText(total);
+        if(payType == Constants.PAYMENT_KRBANK){
+            payTypeTv.setText(getString(R.string.String_krbank_pay2));
+        }
+        balbanceTv.setText(balance);
+        needPayTv.setText(needPay);
+        amountTv.setText(needPay);
+        noteNumberTv.setText(salesRequireManId);
+
+        getKrBankInfoRequest();
+        backIv.setOnClickListener(this);
+        goHomeBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+            case R.id.krbank_info_go_home_btn:
+                ActivityController.finishActivityOutOfMainActivity();
+                EventBus.getDefault().post(new BusEvent(BusEvent.GO_HOME_PAGE, null));
+                break;
+        }
+    }
+
+    public void getKrBankInfoRequest(){
+        CsUser.GetKrBankInfoRequest.Builder builder = CsUser.GetKrBankInfoRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetKrBankInfoResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetKrBankInfoResponse response) {
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            SPUtils.saveObject(PickUpKrbankInfoActivity.this, EditRequireActivity.CODE_PICK_LIST, null);
+            SPUtils.saveObject(PickUpKrbankInfoActivity.this, EditRequireActivity.CODE_PRODUCT_LIST, null);
+            CsUser.GetKrBankInfoResponse response = (CsUser.GetKrBankInfoResponse) msg.obj;
+            bankNameTv.setText(response.getBankName());
+            payeeTv.setText(response.getAcountName());
+            bankIdTv.setText(response.getAcountNumber());
+        }
+    };
+}

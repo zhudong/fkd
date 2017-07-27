@@ -1,0 +1,180 @@
+package com.fuexpress.kr.bean;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by andy on 2016/12/7.
+ */
+public class ItemAppendBean implements Serializable {
+
+
+    int mItemID;
+    int mParcelId;
+    List<String> path;
+    Map<String, String> path_img;
+    List<String> imgs;
+    String info;
+    float price;
+    int num;
+    boolean appended;
+
+
+    public void formatPathImg(List<String> list) {
+        if (path_img == null) return;
+        list.clear();
+        for (String p : path) {
+            String s = path_img.get(p) == null ? "" : path_img.get(p);
+            list.add(p + "," + s);
+        }
+    }
+
+    public ItemAppendBean() {
+    }
+
+    public ItemAppendBean(int itemID, int parcelID, List<String> path, Map<String, String> path_img, List<String> imgs, String info, float price, int num, boolean appended) {
+        this.mItemID = itemID;
+        this.mParcelId = parcelID;
+        this.path = path;
+        this.path_img = path_img;
+        this.imgs = imgs;
+        this.info = info;
+        this.price = price;
+        this.num = num;
+        this.appended = appended;
+    }
+
+    public static void copy(ItemAppendBean formValue, ItemAppendBean result) {
+        result.setmItemID(formValue.getmItemID());
+        result.setmParcelId(formValue.getmParcelId());
+        result.setPath(formValue.getPath());
+        result.setPath_img(formValue.getPath_img());
+        result.setImgs(formValue.getImgs());
+        result.setInfo(formValue.getInfo());
+        result.setPrice(formValue.getPrice());
+        result.setNum(formValue.getNum());
+        result.setAppended(formValue.isAppended());
+    }
+
+
+    public ItemAppendBean(List<String> path, Map<String, String> path_img, List<String> imgs) {
+        this.path = path;
+        this.path_img = path_img;
+        this.imgs = imgs;
+    }
+
+    public int getmParcelId() {
+        return mParcelId;
+    }
+
+    public void setmParcelId(int mParcelId) {
+        this.mParcelId = mParcelId;
+    }
+
+    public int getmItemID() {
+        return mItemID;
+    }
+
+    public void setmItemID(int mItemID) {
+        this.mItemID = mItemID;
+    }
+
+    public List<String> getPath() {
+        return path;
+    }
+
+    public void setPath(List<String> path) {
+        this.path = path;
+    }
+
+    public boolean isAppended() {
+        return appended;
+    }
+
+    public void setAppended(boolean appended) {
+        this.appended = appended;
+    }
+
+    public Map<String, String> getPath_img() {
+        return path_img;
+    }
+
+    public void setPath_img(Map<String, String> path_img) {
+        this.path_img = path_img;
+    }
+
+    public List<String> getImgs() {
+        if (path_img == null) return null;
+        if (imgs == null) imgs = new ArrayList<>();
+        imgs.clear();
+        for (String p : path) {
+            String s = path_img.get(p);
+            imgs.add(s);
+        }
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemAppendBean{" +
+                "imgs=" + imgs +
+                ", info='" + info + '\'' +
+                ", price=" + price +
+                ", num=" + num +
+                ", appended=" + appended +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemAppendBean that = (ItemAppendBean) o;
+
+        if (Float.compare(that.price, price) != 0) return false;
+        if (num != that.num) return false;
+        if (!path.equals(that.path)) return false;
+        return info.equals(that.info);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = path.hashCode();
+        result = 31 * result + info.hashCode();
+        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
+        result = 31 * result + num;
+        return result;
+    }
+}

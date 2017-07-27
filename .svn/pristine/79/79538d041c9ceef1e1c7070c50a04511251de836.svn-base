@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="date">
+        <item>
+            China,86,CN
+        </item>
+        <item>
+          TaiWan,886,TW
+        </item>
+        <item>
+             Macao,853,MO
+        </item>
+        <item>
+            Hong Kong,852,HK
+        </item>
+        <item>
+            Australia,61,AU
+        </item>
+        <item>
+            America,1,US
+        </item>
+        <item>
+            Canada,1,CA
+        </item>
+        <item>
+           French,33,FR
+        </item>
+        <item>
+            Germany,49,DE
+        </item>
+        <item>
+         Japanese,81,JP
+        </item>
+        <item>
+            Korea,82,KR
+        </item>
+        <item>
+           Indonesia,62,ID
+        </item>
+        <item>
+           Malaysia,60,MY
+        </item>
+        <item>
+           Netherlands,31,NL
+        </item>
+        <item>
+          Philippines,36,PH
+        </item>
+        <item>
+          Russian,7,RU
+        </item>
+        <item>
+           Singapore,65,SG
+        </item>
+        <item>
+            Thailand,66,TH
+        </item>
+        <item>
+           Britain,44,UK
+        </item>
+
+        <item>
+            United Arab Emirates,971,AE
+        </item>
+        <item>
+            India,91,IND
+        </item>
+        <item>
+           Kuwait,965,KWT
+        </item>
+        <item>
+            New Zealand,64,NZ
+        </item>
+        <item>
+            Belarus,375,BLR
+        </item>
+    </string-array>
+</resources>

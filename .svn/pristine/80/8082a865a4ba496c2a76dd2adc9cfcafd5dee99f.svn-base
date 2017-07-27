@@ -1,0 +1,41 @@
+package com.fuexpress.kr.ui.adapter;
+
+import com.fuexpress.kr.ui.view.InputBoxView;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 用来给Adapter给调用的Activity交互的接口
+ */
+public interface HelpAdapterInterface {
+
+    /**
+     * 当点击了删除按钮
+     *
+     * @param index 被点击的集合下标
+     */
+    void deletData(int index);
+
+    /**
+     * 添加
+     */
+    void addData();
+
+    /**
+     * 修改数据
+     *
+     * @param inputBoxView 自定义的输入框控件,详细api请看InputBoxView
+     * @param index        被编辑的集合下标
+     */
+    void editData(InputBoxView inputBoxView, int index);
+
+
+    /**
+     * 点击了选择图片的按钮
+     * 被点击了添加图片,请自己调用打开图片选择器的方法并处理返回值
+     *
+     * @param index 被点击的数据在集合中的下标
+     */
+    void editImage(int index);
+
+
+}

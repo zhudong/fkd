@@ -1,0 +1,160 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//获取人气商户列表请求
+message GetHotMerchantList2Request
+{
+    required BaseRequest head         = 1;
+    required BaseUserRequest userinfo = 2;
+    required int32       pageno       = 3;
+    repeated PairIntInt	 conds	      = 4; //属性id:属性值id
+    optional string      currencyCode = 5;
+    optional string      localeCode   = 6;
+    optional int32       currencyID   = 7;
+    optional int32       bizType      = 8; //市场为1，商场为2，默认为1
+    optional int32       pagesize     = 9; //默认10
+}
+
+//获取人气商户列表应答
+message GetHotMerchantList2Response
+{
+    required BaseResponse     head      = 1;
+    optional bool             more      = 2;
+	repeated Merchant         merchants = 3;//商店列表
+	repeated Item             items     = 4;//单品列表
+	repeated PairIntInt       pairs     = 5;//<商品，单品>维护关系
+}
+
+//获取商户信息请求
+message GetMerchantDetailRequest
+{
+	required BaseRequest     head        = 1;
+	required BaseUserRequest userinfo    = 2;
+	required int64           merchant_id = 3;
+	optional string          localecode  = 4;
+};
+
+//获取商户信息应答
+message GetMerchantDetailResponse
+{
+	required BaseResponse 		head     	      = 1;
+	optional Merchant     		merchant 	      = 2;
+	repeated MerchantImage 		merchant_images   = 3;
+	optional MerchantBusiness 	merchant_business = 4;
+	optional string             status            = 5;//营业状态
+
+};
+
+//获取商户单品列表请求
+message GetMerchantItemListRequest
+{
+    required BaseRequest head     	          = 1;
+    required BaseUserRequest userinfo         = 2;
+	required int64 		 merchant_id          = 3;
+    required int32       pageno   	          = 4;
+	optional string      localecode           = 5;
+	optional string      currencycode         = 6;
+	optional int32       currencyid           = 7;
+
+}
+
+//获取商户单品列表应答
+message GetMerchantItemListResponse
+{
+	required BaseResponse head   = 1;
+	optional bool         more   = 2;
+	repeated Item         items  = 3;
+}
+
+message GetMerchantFollowerListRequest
+{
+    required BaseRequest head              = 1;
+    required BaseUserRequest userinfo      = 2;
+    required int64       merchant_id       = 3;
+    required int32       pageno            = 4;
+}
+
+//获取商户关注者列表应答
+message GetMerchantFollowerListResponse
+{
+    required BaseResponse  head      = 1;
+    optional bool          more      = 2;
+    repeated Follower      followers = 3;//关注者列表
+	repeated Item          items     = 4;//(所有)关注者的单品列表
+}
+
+//关注商户请求
+message FollowMerchantRequest
+{
+    required BaseRequest head            = 1;
+    required BaseUserRequest userinfo    = 2;
+	required int64       merchant_id     = 3;
+	required int32       opera           = 4;//1:关注，2:取消关注
+}
+
+//关注商户应答
+message FollowMerchantResponse
+{
+	required BaseResponse head  = 1;
+}
+
+//获取关注商户列表请求
+message GetFollowMerchantListRequest
+{
+    required BaseRequest head     = 1;
+    required BaseUserRequest userinfo    = 2;
+    required int32       author   = 3;//看谁关注的商户列表
+    required int32       pageno   = 4;
+    optional string      locale_code = 5;
+}
+
+//获取关注商户列表应答
+message GetFollowMerchantListResponse
+{
+    required BaseResponse head      = 1;
+    optional bool         more      = 2;
+	repeated Merchant     merchants = 3;//商店列表
+}
+
+//我的店铺－关注者
+message MatchRelateList
+{
+	optional string  matchid            = 1;//
+	optional string  isdisplayurl       = 2;//是否显示url
+	optional string  small9imageurl     = 3;//
+}
+
+
+message FollowerList
+{
+	optional string   			nickname            = 1;//
+	optional string  			iconsmall9          = 2;//
+	optional string  			regionname          = 3;//
+	repeated MatchRelateList    matchrelatelist     = 4;//
+
+}
+
+
+//商户关注者列表
+message FollowersRequest
+{
+	required BaseRequest       head           = 1;
+	optional BaseUserRequest   second         = 2;
+	optional int32             pagenum        = 3;
+	optional string            localeCode     = 4;
+}
+
+message FollowersReponse
+{
+	required BaseResponse             head                 = 1;
+	optional string                   status               = 2;   //more
+	optional int32                    merchantid           = 3;
+	optional string                   merchantname         = 4;
+	optional int32                    followcount          = 5;
+	repeated FollowerList             followerlist         = 6;
+	optional string                   isFollow             = 7;//是否关注 "0"或者"1"
+}
+
+

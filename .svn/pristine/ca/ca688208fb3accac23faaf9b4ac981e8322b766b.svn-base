@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">福快递</string>
+
+    <!-- main -->
+    <string name="main_home_tab_string">首页</string>
+    <string name="main_need_tab_string">我的需求</string>
+    <string name="main_package_tab_string">我的包裹</string>
+    <string name="main_me_tab_string">我</string>
+
+    <string name="String_back_toast" translatable="false">再按一下退出程序</string>
+
+    <string name="String_float_1" translatable="false">%1$.1f</string>
+    <string name="String_float_2" translatable="false">%1$.2f</string>
+
+    <string name="update_tip_title">升级新版本</string>
+    <string name="update_new_version">检测到新版本</string>
+
+    <string name="confirm" translatable="false">确定</string>
+    <string name="cancel" translatable="false">取消</string>
+
+
+    <!-- 首页相关 -->
+    <string name="home_fg_help_01">帮我取货</string>
+    <string name="home_fg_help_02">帮我收货</string>
+    <string name="home_fg_help_03">帮我补货</string>
+    <string name="home_fg_help_04">寄包裹</string>
+
+    <string name="string_my_need">我的需求</string>
+    <string name="string_my_need_to_pay">去付款</string>
+    <string name="string_need_in_storage">已入库</string>
+    <string name="string_neeed_cancel">已取消</string>
+    <string name="string_need_all">全部</string>
+    <string name="string_need_time">需求时间：</string>
+    <string name="string_need_type">需求类型：</string>
+    <string name="string_need_no_item">暂无需求单</string>
+
+    <string name="package_package_number">包裹号：</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="string_star">*</string>
+    <!--我相关-->
+    <string name="click_login" translatable="false">点击登录</string>
+    <string name="my_money" translatable="false">我的余额</string>
+    <string name="coupon" translatable="false">优惠券</string>
+    <string name="address_manager" translatable="false">地址管理</string>
+    <string name="connect_service" translatable="false">联系客服</string>
+    <string name="help_center" translatable="false">帮助中心</string>
+    <string name="notice" translatable="false">通知</string>
+    <string name="clean_cache" translatable="false">清理缓存</string>
+    <string name="version" translatable="false">版本号</string>
+
+    <!--支付方式-->
+    <string name="payment_title_msg">支付方式</string>
+    <string name="String_balance_first">优先使用账户余额：</string>
+    <string name="String_ali_pay">支付宝支付</string>
+    <string name="String_weixin_pay">微信支付</string>
+    <string name="coupon_title_msg">优惠券</string>
+
+    <string name="String_parcel_add_photo">请添加物品的图片</string>
+    <string name="String_parcel_photo_type">&#040;支持JPG,JPEG,GIF.PNG格式&#041;</string>
+</resources>

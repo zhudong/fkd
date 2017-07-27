@@ -1,0 +1,112 @@
+package com.fuexpress.kr.ui.activity.choose_category;
+
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.conf.Constants;
+
+public class ChooseCategoryActivity extends BaseActivity {
+
+
+    CategoryFatherFragment mCategoryFatherFragment;
+
+    CategorySubFragment mCategorySubFragment;
+
+    private static final String KEY_F_TAG = "F_TAG";
+
+    private static final String KEY_SUB_TAG = "SUB_TAG";
+
+    private String mParentText = "";
+
+    private int mParentID = -1;
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_choose_category, null);
+    }
+
+
+    @Override
+    public void initView() {
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        if (mCategoryFatherFragment == null) {
+            mCategoryFatherFragment = new CategoryFatherFragment();
+        }
+        mCategoryFatherFragment.setChoosePosition(getIntent().getIntExtra(Constants.KEY_PARENTID, -1));
+        fragmentTransaction.add(R.id.fl_container_in_category, mCategoryFatherFragment, KEY_F_TAG);
+        fragmentTransaction.commit();
+    }
+
+    public void setParentText(String parentText) {
+        mParentText = parentText;
+    }
+
+    public String getParentText() {
+        return mParentText;
+    }
+
+    public int getParentID() {
+        return mParentID;
+    }
+
+    public void setParentID(int parentID) {
+        mParentID = parentID;
+    }
+
+    /**
+     * 切换到子分类Fragment
+     *
+     * @param parentID 父分类的ID
+     */
+    public void changeToSubFragment(int parentID) {
+        setParentID(parentID);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(
+                R.anim.push_left_in,
+                R.anim.push_left_out,
+                R.anim.push_right_in,
+                R.anim.push_right_out);
+        if (mCategorySubFragment == null)
+            mCategorySubFragment = new CategorySubFragment();
+        mCategorySubFragment.setChooseID(getIntent().getIntExtra(Constants.KEY_SUBID, -1));
+        fragmentTransaction.replace(R.id.fl_container_in_category, mCategorySubFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+
+    @Override
+    public void finish() {
+        if (mCategoryFatherFragment != null && mCategorySubFragment != null) {
+            int chooseID = mCategoryFatherFragment.getChooseID();
+            int subID = mCategorySubFragment.getSubID();
+            if (chooseID != -1 && subID != -1) {
+                Intent intent = new Intent();
+                intent.putExtra(Constants.KEY_PARENTID, chooseID);
+                intent.putExtra(Constants.KEY_SUBID, subID);
+                setResult(123, intent);
+            }
+        }
+        super.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Pop fragment stack on back button
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            //return;
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    //public static class Cate
+
+}

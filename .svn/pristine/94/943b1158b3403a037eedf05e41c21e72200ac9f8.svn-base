@@ -1,0 +1,31 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+
+/**
+ * Created by Administrator on 2017-3-6.
+ */
+
+public class IntegralFragment extends BaseFragment {
+
+    private View rootView;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        rootView = View.inflate(getContext(), R.layout.fragment_integral, null);
+        return rootView;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+}

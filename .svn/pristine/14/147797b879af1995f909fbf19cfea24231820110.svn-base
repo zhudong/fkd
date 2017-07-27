@@ -1,0 +1,195 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.SimpleBaseAdapter;
+import com.fuexpress.kr.bean.ReParcelItemBean;
+import com.fuexpress.kr.ui.activity.ParcelSplitActivity;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+
+
+/**
+ * Created by yuan on 2016-5-6.
+ */
+public class ParcelSplitItemsApadter extends SimpleBaseAdapter<ReParcelItemBean> implements View.OnClickListener {
+    private int lastFocussedPosition = -1;
+    private Handler handler = new Handler();
+
+    private final ArrayMap<Integer, Float> mDeclarePrices;
+    private final String currencycode;
+
+    public ParcelSplitItemsApadter(Activity content, List<ReParcelItemBean> data, CsParcel.Parcel parcel) {
+        super(content, data);
+        mDeclarePrices = new ArrayMap<Integer, Float>();
+        currencycode = parcel.getCurrencycode();
+
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final Holder holder;
+        if (convertView == null) {
+            holder = new Holder();
+            convertView = View.inflate(mContent, R.layout.view_item_parcel_split, null);
+            holder.mTvCurrency = (TextView) convertView.findViewById(R.id.tv_currency);
+            holder.mRadioButton = (RadioButton) convertView.findViewById(R.id.rb_check_state);
+            holder.mIcon = (ImageView) convertView.findViewById(R.id.img_item_icon);
+            ViewGroup group = (ViewGroup) convertView.findViewById(R.id.ll_des_detail);
+            holder.mTitle = (TextView) group.getChildAt(0);
+            holder.mPrice = (TextView) group.getChildAt(1);
+            holder.mCount = (TextView) convertView.findViewById(R.id.tv_count);
+            holder.mDeclarePrice = (EditText) convertView.findViewById(R.id.ed_declare_price);
+            convertView.setTag(holder);
+        } else {
+            holder = (Holder) convertView.getTag();
+        }
+        holder.mDeclarePrice.setTag(position);
+
+        ReParcelItemBean item = getItem(position);
+        ImageLoader.getInstance().displayImage(item.getImagePath(), holder.mIcon, ImageLoaderHelper.getInstance(mContent).getDisplayOptions());
+        holder.mTitle.setText(item.getCaptionCutPrice());
+        holder.mCount.setText(mContent.getString(R.string.package_cheng) + item.getQtyPack());
+        holder.mTvCurrency.setText(UIUtils.getCurrency(mContent, currencycode));
+
+        if (mDeclarePrices.get(position) != null) {
+            String value = mContent.getString(R.string.package_double_decimals, (float) mDeclarePrices.get(position));
+            holder.mDeclarePrice.setText(value);
+        } else {
+            String declareValue = UIUtils.getCurrency(mContent, currencycode, item.getDeclaredValue()).replace( UIUtils.getCurrency(mContent,currencycode), "");
+            holder.mDeclarePrice.setText(declareValue);
+        }
+        if (item.isSelect()) {
+            holder.mRadioButton.setChecked(true);
+        } else {
+            holder.mRadioButton.setChecked(false);
+        }
+        holder.mPrice.setText(UIUtils.getCurrency(mContent, currencycode, item.getPrice()));
+        convertView.setTag(R.id.rb_check_state, position);
+        convertView.setOnClickListener(this);
+        holder.mDeclarePrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (lastFocussedPosition == -1 || lastFocussedPosition == position) {
+                                lastFocussedPosition = position;
+                                holder.mDeclarePrice.requestFocus();
+                                holder.mDeclarePrice.setSelection(holder.mDeclarePrice.getText().length());
+                            }
+                        }
+                    }, 200);
+
+                } else {
+                    if (lastFocussedPosition == position) {
+                        checkPrice(position, holder.mDeclarePrice);
+                    }
+                    lastFocussedPosition = -1;
+                }
+            }
+        });
+       /* holder.mDeclarePrice.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+//                int pov.getTag();
+                v.requestFocus();
+                return true;
+            }
+        });*/
+        return convertView;
+    }
+
+    int checkCount = 0;
+
+    @Override
+    public void onClick(View v) {
+        int postion = (int) v.getTag(R.id.rb_check_state);
+        ReParcelItemBean item = getItem(postion);
+        Holder holder = (Holder) v.getTag();
+        checkCount = 0;
+        for (ReParcelItemBean list : mData) {
+            if (list.isSelect()) {
+                checkCount++;
+            }
+        }
+        if (checkCount >= mData.size() - 1 && !item.isSelect()) {
+            Toast.makeText(mContent, R.string.package_toast_keep_one, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!item.isSelect()) {
+            item.setSelect(true);
+            holder.mRadioButton.setChecked(true);
+        } else {
+            item.setSelect(false);
+            holder.mRadioButton.setChecked(false);
+        }
+        mData.set(postion, item);
+        ParcelSplitActivity content = (ParcelSplitActivity) mContent;
+        content.showSelectItems();
+    }
+
+    public void hintInputMethod() {
+
+    }
+
+
+    private void checkPrice(int postion, EditText text) {
+        ReParcelItemBean itemList = mData.get(postion);
+        float maxValue = itemList.getQtyPack() * itemList.getPrice();
+        float value;
+        String strValue = text.getText().toString();
+        if (!TextUtils.isEmpty(strValue)) {
+            value = Float.valueOf(strValue);
+            if (value > maxValue) {
+                value = maxValue;
+            }
+        } else {
+            value = 0;
+        }
+        String sValue = mContent.getString(R.string.package_double_decimals, value);
+        text.setText(sValue);
+        mDeclarePrices.put(postion, value);
+        ((ParcelSplitActivity) mContent).showSelectItems();
+    }
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        mDeclarePrices.clear();
+    }
+
+    public ArrayMap getDeclarePrices() {
+        return mDeclarePrices;
+    }
+
+    static class Holder {
+        TextView mTvCurrency;
+        RadioButton mRadioButton;
+        ImageView mIcon;
+        TextView mTitle;
+        TextView mPrice;
+        TextView mCount;
+        EditText mDeclarePrice;
+    }
+}

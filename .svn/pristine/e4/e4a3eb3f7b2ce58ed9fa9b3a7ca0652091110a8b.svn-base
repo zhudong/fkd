@@ -1,0 +1,249 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AppendItemFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_imgs_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/ll_phote_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_append_photo"
+                    android:layout_width="73dp"
+                    android:layout_height="73dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/shape_bg_rectangle_"
+                    android:padding="20dp"
+                    android:src="@mipmap/add_add_photo"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/parcel_text_gray_99"
+                android:text="@string/String_parcel_add_photo"/>
+
+            <TextView
+                style="@style/parcel_text_gray_99"
+                android:layout_marginLeft="10dp"
+                android:text="@string/String_parcel_photo_type"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="14dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:id="@+id/tv_item_info"
+                    style="@style/parcel_text_gray_33_13"
+                    android:text="@string/String_parcel_item_info"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_item_info"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/tv_item_info"
+                    android:src="@mipmap/star"/>
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/edt_item_info"
+                style="@style/parcel_input_append_info"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="14dp"
+                android:background="@null"
+                android:hint="@string/String_parcel_item_info_tips"
+                android:maxLength="60"
+                android:text=""/>
+
+            <TextView
+                style="@style/parcel_divide_line"
+                android:layout_below="@id/edt_item_info"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/tv_item_declare_price"
+                    style="@style/parcel_text_gray_33_13"
+                    android:text="@string/String_parcel_declare_item"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_item_declare_price"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/tv_item_declare_price"
+                    android:src="@mipmap/star"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt_declare_price"
+                    style="@style/parcel_input_append_info"
+                    android:layout_width="0dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="85dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/String_parcel_declare_item_tips"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/tv_price_type"
+                    style="@style/parcel_text_gray_99_13"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/String_money_unit"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/parcel_divide_line"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/tv_item_count"
+                    style="@style/parcel_text_gray_33_13"
+                    android:text="@string/String_item_count"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_item_count"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/tv_item_count"
+                    android:src="@mipmap/star"/>
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/edt_item_counts"
+                style="@style/parcel_input_append_info"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="85dp"
+                android:background="@null"
+                android:hint="@string/String_item_count_tips"
+                android:inputType="number"/>
+
+            <TextView
+                style="@style/parcel_divide_line"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_continue"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_confirms_select"
+            android:gravity="center"
+            android:text="@string/string_append_continue"
+            android:textColor="@color/red"
+            />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_append_item_continue"
+            android:gravity="center"
+            android:text="@string/string_confirms"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+

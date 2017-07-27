@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title_normal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#ffffff">
+        <!--去付款-->
+        <RelativeLayout
+            android:id="@+id/gotoSendLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/gotoSendIv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/topay"/>
+
+            <TextView
+                android:id="@+id/gotoSendTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:text="@string/String_goto_pay"
+                android:textColor="@color/black_title"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:id="@+id/toPayCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginTop="12dp"
+                android:layout_toRightOf="@+id/gotoSendIv"
+                android:background="@drawable/shape_red_yiss"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#ffffff"
+                android:textSize="9sp"/>
+        </RelativeLayout>
+        <!--已付款-->
+        <RelativeLayout
+            android:id="@+id/waitingForSendLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/waitingForSendIv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/payed"/>
+
+            <TextView
+                android:id="@+id/waitingForSendTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:text="@string/String_payed"
+                android:textColor="@color/black_title"
+                android:textSize="13sp"
+                />
+        </RelativeLayout>
+        <!--已取消-->
+        <RelativeLayout
+            android:id="@+id/sendedLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/sendedIv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/canceled"/>
+
+            <TextView
+                android:id="@+id/sendedTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:text="@string/String_canceled"
+                android:textColor="@color/black_title"
+                android:textSize="13sp"
+                />
+        </RelativeLayout>
+        <!--全部-->
+        <RelativeLayout
+            android:id="@+id/allLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/allIv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/all_order"/>
+
+            <TextView
+                android:id="@+id/allTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:text="@string/all_order"
+                android:textColor="@color/black_title"
+                android:textSize="13sp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/default_bg"></LinearLayout>
+    <FrameLayout
+        android:id="@+id/fl_packages_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

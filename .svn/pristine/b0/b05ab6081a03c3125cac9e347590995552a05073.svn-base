@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    tools:context="com.yiss.gyi.ui.activity.ParcleSplitActivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/mptr_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/refresh_lv_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/divide_line"
+            android:dividerHeight="2px"
+            />
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/divide_line"/>
+
+        <TextView
+            android:id="@+id/tv_split_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/package_split_fee"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_split_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/tv_split_text"
+            android:text="$123"
+            android:textColor="@color/the_red"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_split"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_append_item_continue"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/package_split_btn"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+</LinearLayout>

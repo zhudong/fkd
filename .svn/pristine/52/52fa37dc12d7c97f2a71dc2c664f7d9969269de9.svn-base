@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/tl_in_help_get_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/help_me_get_package_title">
+
+    </com.fuexpress.kr.ui.view.TitleBarView>
+
+    <ListView
+        android:id="@+id/lv_in_help_me_get_package"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/default_bg"
+        android:dividerHeight="7dp">
+
+    </ListView>
+
+</LinearLayout>

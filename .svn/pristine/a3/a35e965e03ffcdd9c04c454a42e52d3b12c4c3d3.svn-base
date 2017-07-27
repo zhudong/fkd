@@ -1,0 +1,40 @@
+package com.fuexpress.kr.utils;
+
+import java.lang.reflect.Method;
+
+
+/**
+ * Created by k550 on 2016/6/12.
+ */
+public class ClassUtil {
+    public static Object invoke(Object object, String methodName) {
+        try {
+            Method method = object.getClass().getMethod(methodName);
+            return method.invoke(object);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object invoke(Object object, String methodName, Object arg) {
+        try {
+            Method method = object.getClass().getMethod(methodName, arg.getClass());
+            return method.invoke(object, arg);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object invoke(Class clazz, String methodName, Object arg) {
+        try {
+            Method method = clazz.getMethod(methodName, arg.getClass());
+            return method.invoke(null, arg);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+}

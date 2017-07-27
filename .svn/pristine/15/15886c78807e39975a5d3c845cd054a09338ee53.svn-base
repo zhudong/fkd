@@ -1,0 +1,209 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.OperaRequestListener;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.socks.library.KLog;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+
+import java.io.IOException;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/*import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;*/
+
+/**
+ * Created by root on 17-4-20.
+ */
+
+public class DaoUPayActivity extends BaseActivity {
+    @BindView(R.id.title_iv_left)
+    ImageView mIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTvCenter;
+    @BindView(R.id.webView)
+    WebView mWebView;
+    @BindView(R.id.title_tv_right)
+    TextView mTvRight;
+
+    public static final String F_ORDER_ID="order_id";
+    public static final String F_ORDER_TYPE="order_type";
+    public static final String F_AMOUNT="amount";
+
+    long orderId,orderType,amount;
+    private static OperaRequestListener mOperaRequestListener;
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_help_center, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        orderId=getIntent().getLongExtra(F_ORDER_ID,0);
+        orderType=(long)getIntent().getIntExtra(F_ORDER_TYPE,0);
+        amount=getIntent().getLongExtra(F_AMOUNT,1000);
+        WebSettings webSettings = mWebView.getSettings();
+        String daoUrl= Constants.DaoUPayString.getDaoUPayUrl(orderId,orderType,amount);
+        KLog.i("url = "+daoUrl);
+       // showLoading();
+        webSettings.setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                KLog.i("url = "+url);
+                if(mOperaRequestListener!=null){
+                    if(url.contains(Constants.DaoUPayString.S_SUCCESS_DAOUPAY)){
+                        mOperaRequestListener.onOperaSuccess();
+                    }else if(url.contains(Constants.DaoUPayString.S_FAIL_DAOUPAY)||url.contains(Constants.DaoUPayString.S_CLOSE_DAOUPAY)){
+                        mOperaRequestListener.onOperaFailure();
+                    }
+                }
+                view.loadUrl(url);
+                return true;
+            }
+           /* @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                //结束
+                super.onPageFinished(view, url);
+                closeLoading();
+            }
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon)
+            {
+                //开始
+                super.onPageStarted(view, url, favicon);
+
+            }*/
+        });
+        getStatue(daoUrl);
+    }
+
+    private String getUrl(String url){
+        return url;
+    }
+    private void getStatue(String url){
+        showLoading();
+        OkHttpClient okHttpClient=new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+        Call call=okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeLoading();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String string = response.body().string();
+                JsonObject obj=new JsonParser().parse(string).getAsJsonObject();
+                JsonObject url= obj.getAsJsonObject("data");
+                final String r=url.get("payUrl").getAsString();
+                if(!TextUtils.isEmpty(r)){
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            KLog.i("url = "+r);
+                            closeLoading();
+                            mWebView.loadUrl(r);
+                        }
+                    });
+                }
+
+            }
+        });
+    }
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left,R.id.title_tv_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                if(mOperaRequestListener!=null){
+                    mOperaRequestListener.onOperaFailure();
+                }
+                finish();
+                break;
+            case R.id.title_tv_left:
+                if(mOperaRequestListener!=null){
+                    mOperaRequestListener.onOperaFailure();
+                }
+                finish();
+                break;
+            case R.id.title_tv_right:
+                break;
+        }
+    }
+
+
+    public static class IntentBuilder extends Intent {
+        static IntentBuilder thisIntent;
+
+        private IntentBuilder(Context packageContext, Class<?> cls) {
+            super(packageContext, cls);
+        }
+        public IntentBuilder setListener(OperaRequestListener listener) {
+            checkNotNull(thisIntent, "please build first!");
+            mOperaRequestListener = listener;
+            return thisIntent;
+        }
+
+        public IntentBuilder setOrderID(long orderId) {
+            checkNotNull(thisIntent, "please build first!");
+            thisIntent.putExtra(F_ORDER_ID, orderId);
+            return thisIntent;
+        }
+
+        public IntentBuilder setOrderType(int orderType) {
+            checkNotNull(thisIntent, "please build first!");
+            thisIntent.putExtra(F_ORDER_TYPE, orderType);
+            return thisIntent;
+        }
+
+        public IntentBuilder setAmount(long amount) {
+            checkNotNull(thisIntent, "please build first!");
+            thisIntent.putExtra(F_AMOUNT, amount);
+            return thisIntent;
+        }
+
+        public static IntentBuilder build(Context context) {
+            if (thisIntent == null)
+                thisIntent = new IntentBuilder(context, DaoUPayActivity.class);
+            return thisIntent;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+
+/**
+ * Created by Longer on 2016/11/2.
+ */
+public class AddressManagerAdapter extends BaseAdapter {
+
+    private Context mContext;
+
+    public AddressManagerAdapter(Context context) {
+        mContext = context;
+    }
+
+    @Override
+    public int getCount() {
+        // TODO: 2016/11/2 暂时写死一些数据,后期还是要改回来
+        return 5;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_address_manager, null);
+            viewHolder.iv_is_selected_in_am_item = (ImageView) convertView.findViewById(R.id.iv_is_selected_in_am_item);
+            viewHolder.tv_in_am_item_address = (TextView) convertView.findViewById(R.id.tv_in_am_item_address);
+            viewHolder.tv_in_am_item_delete = (TextView) convertView.findViewById(R.id.tv_in_am_item_delete);
+            viewHolder.tv_in_am_item_edit = (TextView) convertView.findViewById(R.id.tv_in_am_item_edit);
+            viewHolder.tv_in_am_item_info = (TextView) convertView.findViewById(R.id.tv_in_am_item_info);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        // TODO: 2016/11/2 一系列的视图数据绑定操作
+
+        return convertView;
+    }
+
+    class ViewHolder {
+        TextView tv_in_am_item_info;
+        TextView tv_in_am_item_address;
+        ImageView iv_is_selected_in_am_item;
+        TextView tv_in_am_item_edit;
+        TextView tv_in_am_item_delete;
+    }
+}

@@ -1,0 +1,59 @@
+package com.fuexpress.kr.ui.activity.produ_source;
+
+import android.os.Bundle;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.view.RefreshListView;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2017/6/23.
+ * 货源旗下的子Fragment
+ */
+public class ProduSrcSubFragment extends BaseFragment {
+
+    public static final String KEY_ALL = "ALL";
+
+    public static final String KEY_HOT = "HOT";
+
+    private String mType = "";
+
+    private View mRootView;
+    private RefreshListView mRefreshListView;
+    private String mTitle;
+
+    public static ProduSrcSubFragment getProduSrcSubFragmentInstance(Bundle bundle) {
+        ProduSrcSubFragment produSrcSubFragment = new ProduSrcSubFragment();
+        produSrcSubFragment.setArguments(bundle);
+        return produSrcSubFragment;
+    }
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(getActivity(), R.layout.layout_produ_src_sub, null);
+        mRefreshListView = (RefreshListView) mRootView.findViewById(R.id.rfl_produ_src_sub);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        Bundle arguments = getArguments();
+        mType = arguments.getString("key");
+        checkNotNull(mType, "ProduSrcSubFragment :key not null");
+        mTitle = mType.equals(KEY_ALL) ? getString(R.string.title_produ_src_all) : getString(R.string.title_produ_src_hot);
+        // TODO: 2017/6/23 等待接口完成
+    }
+
+
+    public String getTitle() {
+        return mTitle;
+    }
+}

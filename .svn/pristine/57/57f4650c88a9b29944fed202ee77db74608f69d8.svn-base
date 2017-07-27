@@ -1,0 +1,405 @@
+package com.fuexpress.kr.ui.activity.package_detail;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Handler;
+import android.support.v4.util.ArrayMap;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.ParcelItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.ParcelPaymentAtivity;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsAddress;
+import fksproto.CsBase;
+import fksproto.CsMy;
+import fksproto.CsParcel;
+
+/**
+ * Created by yuan on 2016-6-16.
+ */
+public class PackageDeatilPresent extends PackageDetailContract.Presenter {
+    private long mParcelID;
+    private Handler mHandler = new Handler();
+    private fksproto.CsAddress mAddress;
+    private CsBase.Warehouse mWarehouse;
+    private float mGiftcardaccount;
+    private boolean mIsUserBalance;
+    private int mThirdPayType;
+    private CsParcel.Parcel mParcel;
+    private boolean mHasSelectShippingMethod;
+    private int mParcelshippingmethodid;
+    float fee;
+    String currencyCode;
+    private int mCouponsID = -1;
+
+    public PackageDeatilPresent(long parcelID) {
+        this.mParcelID = parcelID;
+    }
+
+    @Override
+    public void onStart() {
+        getParcelDetail(mParcelID);
+        initPayMethod();
+    }
+
+    public void initPayMethod() {
+        mIsUserBalance = (boolean) SPUtils.get(context, ParcelPaymentAtivity.USE_BALANCE_FIRST, true);
+        mThirdPayType = (int) SPUtils.get(context, ParcelPaymentAtivity.THIRD_PAY_TYPE, 1);
+        mView.showBalanceAndPayType(mGiftcardaccount, mIsUserBalance, mThirdPayType);
+    }
+
+    @Override
+    public void toPay() {
+        if (!mHasSelectShippingMethod) {
+            CustomToast.makeText(context, R.string.package_please_select_method, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        context.showLoading();
+        checkBalance();
+    }
+
+    @Override
+    public void switchPayType() {
+        Intent intent = new Intent(context, ParcelPaymentAtivity.class);
+        intent.putExtra(ParcelPaymentAtivity.COUNT_BALANCE, mGiftcardaccount);
+        // TODO: 2016-11-1 优惠券 相关
+//        intent.putExtra(ParcelPaymentAtivity.SHIPPING_FEE, fee);
+//        intent.putExtra(ParcelPaymentAtivity.CURRENCY_CODE, currencyCode);
+//        intent.putExtra(ParcelPaymentAtivity.CODE_COUPON_ID, mCouponsID);
+        context.startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void choiceAddress() {
+        // TODO: 2016-11-1  
+      /*  Intent intent = new Intent(context, PackageAddressActivity.class);
+        if (mAddress != null) {
+            intent.putExtra("addressID", "");
+        }
+        intent.putExtra("isShowTick", false);
+        ((Activity) mView).startActivityForResult(intent, Constants.ADDRESS_REQUEST_CODE);*/
+    }
+
+    @Override
+    public void selectShippingMethod(final CsParcel.MerchantParcelShippingMethodList method) {
+        mHasSelectShippingMethod = false;
+        CsParcel.SelectShippingMethodRequest.Builder builder = CsParcel.SelectShippingMethodRequest.newBuilder().
+                setParcelid((int) mParcelID).setSecond(AccountManager.getInstance().mBaseUserRequest).
+                setParcelshippingmethodid(method.getParcelshippingmethodid());
+        //    setSecond(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SelectShippingMethodReponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.SelectShippingMethodReponse response) {
+                mHasSelectShippingMethod = true;
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mParcelshippingmethodid = method.getParcelshippingmethodid();
+                        mView.showShippingMethodInsurance(response.getBondedalert(), response.getMaxdeclaredvalue(), response.getDeclaredtotal(), response.getPremiumrate(), response.getPremium(), mParcelshippingmethodid);
+                        mGiftcardaccount = response.getGiftcardaccount();
+                        mView.showBalanceAndPayType(mGiftcardaccount, mIsUserBalance, mThirdPayType);
+                        mView.showEstimatePrice(response.getShippingfee());
+                        fee = response.getShippingfee();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomToast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    void getParcelDetail(long parcelId) {
+        CsParcel.GetParcelDetailRequest.Builder builder = CsParcel.GetParcelDetailRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest).setParcelId(parcelId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.GetParcelDetailResponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.GetParcelDetailResponse response) {
+                mParcel = response.getParcel();
+                mParcelName = mParcel.getParcelNumber();
+                // TODO: 2016-11-1
+//                currencyCode = mParcel.getCurrencycode();
+                final CsAddress.CustomerAddress address = response.getAddress();
+                final CsParcel.ParcelShipping shipping = response.getShipping();
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        mWarehouse = response.getWarehouse();
+                        mView.showComment(response.getMessagesList());
+
+                        mView.showProductInfo(mParcel.getQty(), shipping.getDeclaration());
+                        showItem(mParcel);
+
+                        switch (mParcel.getState()) {
+                           /* PARCEL_STATE_SUBMITTED     = 0;//已提交
+                            PARCEL_STATE_PAYED         = 1;//待入库
+                            PARCEL_STATE_INSTORED      = 2;//已入库
+                            PARCEL_STATE_NOTICED       = 3;//待出库
+                            PARCEL_STATE_CHECKED       = 4;//已审核
+                            PARCEL_STATE_SHIPPED       = 5;//已发货*/
+//                            case CsParcel.ParcelState.PARCEL_STATE_PAYED_VALUE:
+                            case CsParcel.ParcelState.PARCEL_STATE_INSTORED_VALUE:
+                            case CsParcel.ParcelState.PARCEL_STATE_NOTICED_VALUE:
+                                mView.showHeader(mParcel, mWarehouse.getName(), false);
+                                mView.hintHeader();
+                                mView.showParcelAddress(response.getAddress());
+                                mView.showComment(response.getMessagesList());
+                                showShipping(shipping, 1);
+                                break;
+
+                            case CsParcel.ParcelState.PARCEL_STATE_CHECKED_VALUE:
+                            case CsParcel.ParcelState.PARCEL_STATE_SHIPPED_VALUE:
+                                mView.showHeader(mParcel, mWarehouse.getName(), true);
+                                showShipping(shipping, 0);
+                                mView.hintHeader();
+                                mView.showParcelAddress(response.getAddress());
+                                mView.showComment(response.getMessagesList());
+                                break;
+
+                            case CsParcel.ParcelState.PARCEL_STATE_SUBMITTED_VALUE:
+                                mView.showHeader(mParcel, mWarehouse.getName(), false);
+                                mView.hitFoot();
+//                                mView.showEstimateWeight(response.getShipping().getWeight());
+//                                mView.showShippingMethods(response.getMerchantparcelshippingmethodlistList());
+                                mView.showCustomerAddress(address);
+                                break;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+   /* @Override
+    public void setAddress(CsParcel.MerchantAddressList address) {
+        mAddress = address;
+        showShippingMethod(address.getCustomeraddressid() + "", mWarehouse);
+        mView.showCustomerAddress(address);
+    }
+*/
+
+    private void showAddress() {
+       /* AddressManager.getInstance().getMerchantCustomerAddress(new AddressManager.AddressListener() {
+            @Override
+            public void onAddressReceive(final CsParcel.MerchantAddressList address) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAddress = address;
+                        mView.showCustomerAddress(address);
+                        showShippingMethod(address.getCustomeraddressid() + "", mWarehouse);
+                    }
+                });
+            }
+        });*/
+    }
+
+    private void showShippingMethod(String addressID, CsBase.Warehouse warehouse) {
+        CsParcel.GetSelectAddressAjaxRequest.Builder builder = CsParcel.GetSelectAddressAjaxRequest.newBuilder().setWarehouseid(warehouse.getWarehouseId() + "").setCustomeraddressid(addressID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.GetSelectAddressAjaxReponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.GetSelectAddressAjaxReponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<CsParcel.MerchantParcelShippingMethodList> methodLists = response.getMerchantparcelshippintmethodlistList();
+                        mView.showShippingMethods(methodLists);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.d(errMsg);
+            }
+        });
+
+    }
+
+    public void setCouponsID(int id) {
+        this.mCouponsID = id;
+    }
+
+    private void checkBalance() {
+        // TODO: 2016-10-31
+        CsMy.CheckToPayRequest.Builder builder = CsMy.CheckToPayRequest.newBuilder();
+        int pay = (int) SPUtils.get(context, ParcelPaymentAtivity.THIRD_PAY_TYPE, 1);
+        String payCode = "";
+        switch (pay) {
+//            /(支付宝:alipay 微信:wxap)
+            case 1:
+                payCode = "alipay";
+                break;
+            case 2:
+                payCode = "wxap";
+                break;
+        }
+//        builder.setUin(AccountManager.getInstance().mUin).setPaymentcode(payCode).setParcelid(mParcelID + "").setShippingmethodid(mParcelshippingmethodid).setShippingcouponcustomerid(mCouponsID).setUin(AccountManager.getInstance().mUin);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.CheckToPayResponse>() {
+
+            @Override
+            public void onSuccess(final CsMy.CheckToPayResponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String redirecturl = response.getRedirecturl();
+                        if ("".equals(redirecturl)) {
+//                            直接扣除余额
+//                            mView.finishView();
+                            context.closeLoading();
+                            submitSucess(true);
+                        } else {
+//                            第三方支付
+                            String s1 = redirecturl.split("\\?")[1];
+                            String[] params = s1.split("\\&");
+                            ArrayMap map = new ArrayMap();
+                            for (int i = 0; i < params.length; i++) {
+                                String[] kv = params[i].split("=");
+                                map.put(kv[0], kv[1]);
+                            }
+                            doDirectPay(map);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                LogUtils.d(errMsg);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        context.closeLoading();
+                        CustomToast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void doDirectPay(ArrayMap<String, String> map) {
+//        type=4&appType=3&paymentCode=alipay&salesRequireMainId=452&total=56.84
+        CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder builder = CsParcel.PayDoDirectGiftCardAppSingleRequest.newBuilder();
+        int type = "".equals(map.get("type")) ? 0 : Integer.valueOf(map.get("type"));
+        int appType = "".equals(map.get("appType")) ? 0 : Integer.valueOf(map.get("appType"));
+        String paymentCode = map.get("paymentCode");
+        float total = "".equals(map.get("total")) ? 0 : Float.valueOf(map.get("total"));
+        builder.setType(type).setAppType(appType).setPaymentCode(paymentCode).setTotal(total).setUserinfo(AccountManager.getInstance().mBaseUserRequest).setParcelid((int) mParcelID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayDoDirectGiftCardAppSingleResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.PayDoDirectGiftCardAppSingleResponse response) {
+                getPayInfo(response.getOrderId(), response.getPaymentCode());
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    private void getPayInfo(int orderCode, final String payCode) {
+        CsParcel.PayGiftCardOrderRequest.Builder builder = CsParcel.PayGiftCardOrderRequest.newBuilder();
+        builder.setPaymentCode(payCode).setGiftCardOrderId(orderCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.PayGiftCardOrderResponse response) {
+                LogUtils.d(response.toString());
+                SysApplication.mCurrentRequestPayment = mParcelName;
+                String payInfo = response.getPayInfo();
+                PaymentManager paymentManager = PaymentManager.getInstance(context);
+                if ("alipay".equals(payCode)) {
+                    paymentManager.aliPay(payInfo);
+                } else if ("wxap".equals(payCode)) {
+                    paymentManager.wechatPay(payInfo);
+                }
+                // TODO: 2016-11-1  
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    private void showShipping(CsParcel.ParcelShipping shipping, int i) {
+        String[] split = shipping.getShippingMethodInfo().split(" ");
+        String detail = null;
+        String name = null;
+        if (split.length == 3) {
+            name = split[1];
+            detail = split[2];
+        } else if (split.length == 4) {
+            name = split[1] + " " + split[2];
+            detail = split[3];
+        }
+        Activity content = (Activity) mView;
+        if (1 == i) {
+            detail += "\n" + content.getString(R.string.package_forcecast_shipping_fee) + content.getString(R.string.String_price, shipping.getEstimateShippingFee() + shipping.getPremium());
+
+        } else {
+          /*  detail += "\n" + content.getString(R.string.package_realy_shipping_fee) + content.getString(R.string.String_price, shipping.getRealShippingFee())
+                    + "\n" + content.getString(R.string.package_realy_weight) + content.getString(R.string.package_weight, shipping.getWeight());*/
+        }
+        mView.showTransportInfo(name, detail);
+    }
+
+    private void showItem(CsParcel.Parcel parcel) {
+        List<ParcelItemBean> list = new ArrayList<>();
+        ParcelItemBean itemBean = new ParcelItemBean();
+//        itemBean.titel = parcel.getProductdescription();
+//        itemBean.img = parcel.getProductimg();
+        itemBean.count = parcel.getQty();
+        list.add(itemBean);
+        mView.setParcelsItme(list);
+    }
+
+    @Override
+    protected void submitSucess(boolean sucess) {
+        if (sucess) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //       AccountManager.getInstance().getRedPoint();
+                }
+            }).start();
+            Intent intent = new Intent(context, ParcelToSendActivity.class);
+            intent.putExtra(ParcelToSendActivity.TITLE, mParcel.getParcelNumber());
+            context.startActivity(intent);
+            context.finish();
+        }
+    }
+}

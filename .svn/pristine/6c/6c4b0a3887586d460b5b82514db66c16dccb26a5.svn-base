@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/shop_cart_item_warehouse_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:clickable="false"
+            android:id="@+id/cart_commodity_title_cb"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_cart_checkbox"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/shop_cart_item_warehouses_tv"
+            style="@style/system_Mytextsize_GRAY_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="@string/String_cart_commodity_list_titile"
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gary_e8e8"/>
+    <com.fuexpress.kr.ui.view.CustomListView
+        android:divider="@color/gary_e8e8"
+        android:dividerHeight="1dp"
+        android:id="@+id/shop_cart_item_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

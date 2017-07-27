@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 标题栏相关的自定义属性 -->
+    <declare-styleable name="mytitlebar">
+        <attr name="text" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="RatioLayout">
+        <attr name="relative" format="enum">
+            <enum name="width" value="0"></enum>
+            <enum name="height" value="1"></enum>
+        </attr>
+        <attr name="picRatio" format="float"/>
+    </declare-styleable>
+    <!-- 输入框相关的自定义属性 -->
+    <declare-styleable name="ipboxtext">
+        <!-- 输入框的左侧文字 -->
+        <attr name="ipText" format="string"/>
+        <!-- 输入框的底字 -->
+        <attr name="hintText" format="string"/>
+        <!--是否需要显示红色星星-->
+        <attr name="isShowStar" format="boolean"/>
+        <!-- 是否需要显示右边文字-->
+        <attr name="showRight" format="boolean"/>
+        <!-- 右边的文字(如需要显示) -->
+        <attr name="rightText" format="string"/>
+        <!-- 是否需要显示底下的文字-->
+        <attr name="showBelow" format="boolean"/>
+        <!-- 底下的文字(如果需要显示) -->
+        <attr name="belowText" format="string"/>
+        <!-- 是否显示右边的ImageView -->
+        <attr name="showRightImageView" format="boolean"/>
+        <!-- 右边ImageView的图片资源 -->
+        <attr name="rightImageViewSrc" format="integer"/>
+    </declare-styleable>
+</resources>

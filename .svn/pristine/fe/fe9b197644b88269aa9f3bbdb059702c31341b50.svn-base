@@ -1,0 +1,59 @@
+package com.fuexpress.kr.ui.activity.append_item;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.utils.ActivityUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class AppendItemActivity extends BaseActivity {
+
+    @BindView(R.id.title_iv_left)
+    ImageView titleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView titleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView titleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView titleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView titleIvRight;
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_append_item, null);
+    }
+
+    @Override
+    public void initView() {
+        titleTvCenter.setText(R.string.string_append_item);
+        titleIvLeft.setVisibility(View.VISIBLE);
+        titleTvLeft.setText(" ");
+        initFragment();
+    }
+
+    private void initFragment() {
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),AppendItemFragment.newInstance("",""),R.id.fl_container);
+    }
+
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                finish();
+                break;
+        }
+    }
+
+
+}

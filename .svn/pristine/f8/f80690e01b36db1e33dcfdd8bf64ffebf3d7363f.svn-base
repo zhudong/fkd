@@ -1,0 +1,139 @@
+package com.fuexpress.kr.model;
+
+import android.app.Activity;
+import android.util.Log;
+import android.widget.LinearLayout;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.NetworkImageHolderView;
+import com.fuexpress.kr.utils.CommonUtils;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import fksproto.CsCard;
+import fksproto.CsFeed;
+
+/**
+ * Created by Administrator on 2016-10-28.
+ */
+public class HeaderModel {
+    public static HeaderModel mInstance = new HeaderModel();
+    private List<CsFeed.Banner> mBannersList;
+    private ArrayList mNetworkImages;
+    android.os.Handler mHandler = new android.os.Handler();
+
+    private HeaderModel() {
+    }
+
+    public void cleanData() {
+      mBannersList=null;
+    }
+
+
+    public static HeaderModel getInstance() {
+        return mInstance;
+    }
+
+    public void initDta(Activity mContext, ConvenientBanner mConvenientBanner) {
+        mConvenientBanner.refreshDrawableState();
+        int screenWidthPixels = UIUtils.getScreenWidthPixels(mContext);
+        int height = (int) (screenWidthPixels / 2.35);
+        mConvenientBanner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
+        initPages(mContext, mConvenientBanner);
+    }
+
+    private void initPages(Activity mContext, ConvenientBanner mConvenientBanner) {
+        mConvenientBanner.refreshDrawableState();
+
+        if (mBannersList == null) {
+            getBannerList(mContext, mConvenientBanner);
+            return;
+        }
+        mNetworkImages = new ArrayList();
+        for (CsFeed.Banner banner : mBannersList) {
+            mNetworkImages.add(banner.getUrl());
+        }
+
+        if (mNetworkImages.size() <= 1) {
+            mConvenientBanner.stopTurning();
+            mConvenientBanner.setCanLoop(false);
+        } else {
+            mConvenientBanner.startTurning(5000);
+            mConvenientBanner.setCanLoop(true);
+            mConvenientBanner.setPageIndicator(new int[]{R.drawable.graypoint, R.drawable.redpoint});
+        }
+
+        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, mNetworkImages)
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+
+        mConvenientBanner.startTurning(5000);
+        mConvenientBanner.setOnItemClickListener(new ItemListener());
+    }
+
+    public void getBannerList(final Activity mContext, final ConvenientBanner mConvenientBanner) {
+
+//        Locale locale = mContext.getResources().getConfiguration().locale;
+        String lang = AccountManager.getInstance().getLocaleCode();
+        CsFeed.IndexAdImageRequest.Builder builder = CsFeed.IndexAdImageRequest.newBuilder();
+        int tiem = (int) (new Date().getTime() / 1000);
+        builder.setLocalecode(lang).setVersionNo(CommonUtils.getVersionName(mContext)).setApptype(2);
+        INetEngineListener<CsFeed.IndexAdImageResponse> listener = new INetEngineListener<CsFeed.IndexAdImageResponse>() {
+            @Override
+            public void onSuccess(CsFeed.IndexAdImageResponse response) {
+                mBannersList = response.getBannersList();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initPages(mContext, mConvenientBanner);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.d("fail", "fail");
+            }
+        };
+        NetEngine.postRequest(builder, listener);
+    }
+
+    class ItemListener implements OnItemClickListener {
+
+        @Override
+        public void onItemClick(int position) {
+            CsFeed.Banner banner = mBannersList.get(position);
+            String jump = banner.getUrl();
+            if ("".equals(jump)) {
+                return;
+            } else if (jump.contains("jump") && jump.contains("crowd-ordering")) {
+//                Intent intent = new Intent(mContext, CrowdListActivity.class);
+//                mContext.startActivity(intent);
+            } else if (jump.contains("jump") && jump.contains("http")) {
+//                EventBus.getDefault().post(new BusEvent(BusEvent.GO_STORE_PAGE, null));
+            } else if (jump.contains("jump")) {
+//                EventBus.getDefault().post(new BusEvent(BusEvent.GO_STORE_PAGE, null));
+            } else if (jump.contains("http")) {
+               /* Intent intent = new Intent(mContext, HomeWeblActivity.class);
+                intent.putExtra(HomeWeblActivity.URL, banner.getJump());
+                intent.putExtra(HomeWeblActivity.TITLE, banner.getTitle());
+                intent.putExtra(HomeWeblActivity.NAVIGATION, mContext.getString(R.string.String_home_page));
+                mContext.startActivity(intent);*/
+            }
+        }
+    }
+
+}

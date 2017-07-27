@@ -1,0 +1,611 @@
+package com.fuexpress.kr.model;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.alipay.sdk.app.PayTask;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.AdyenUserInfoBean;
+import com.fuexpress.kr.bean.CheckoutRequest;
+import com.fuexpress.kr.bean.CheckoutResponse;
+import com.fuexpress.kr.bean.PayResultBaen;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.OperaRequestListener;
+import com.fuexpress.kr.ui.activity.AdyenCheckoutListener;
+import com.fuexpress.kr.ui.activity.CardPaymentSuccessActivity;
+import com.fuexpress.kr.ui.activity.DaoUPayActivity;
+import com.fuexpress.kr.ui.activity.MyPayActivity;
+import com.fuexpress.kr.ui.activity.PaymentActivity;
+import com.fuexpress.kr.ui.activity.PickUpSuccessActivity;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.utils.CommonUtils;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.PayResult;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.gson.Gson;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsUser;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2016/5/10.
+ */
+public class PaymentManager implements AdyenCheckoutListener {
+
+    public static final String CODE_ALIPAY_RESULT_STATUS = "9000";
+
+    private static Context mCtx;
+    private static PaymentManager paymentManager = new PaymentManager();
+    private long orderId;
+    private int orderType;
+
+    private PaymentManager() {
+    }
+
+    public static PaymentManager getInstance(Context context) {
+        mCtx = context;
+        LogUtils.d(mCtx.getClass().getName() + "--------------------------");
+        return paymentManager;
+    }
+
+    public void aliPay(final String payInfo, OnAliPayListener onAliPayListener) {
+        this.onAliPayListener = onAliPayListener;
+        Runnable payRunnable = new Runnable() {
+            @Override
+            public void run() {
+                PayTask task = new PayTask((Activity) mCtx);
+                String result = task.pay(payInfo, true);
+                Message msg = new Message();
+                msg.obj = result;
+//                mHandler.sendMessage(msg);
+                Looper.prepare();
+                MyHandler handler = new MyHandler();
+                handler.sendMessage(msg);
+                Looper.loop();
+            }
+        };
+
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+
+    class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            PayResult payResult = new PayResult((String) msg.obj);
+            /**
+             * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+             * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+             * docType=1) 建议商户依赖异步通知
+             */
+            String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+
+            String resultStatus = payResult.getResultStatus();
+            // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
+            if (TextUtils.equals(resultStatus, "9000")) {
+                onAliPayListener.onSuccess(resultStatus);
+                EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, true, SysApplication.mCurrentRequestPayment));
+//                Intent intent = new Intent();
+//                SysApplication app = (SysApplication) ((Activity) mCtx).getApplication();
+//                if (app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_CARD_CART) {
+//                    intent.setClass(mCtx, CardPaymentSuccessActivity.class);
+//                    mCtx.startActivity(intent);
+//                }
+//                if (app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_SHOP_CART) {
+////                    intent.setClass(mCtx, PaymentSuccessActivity.class);
+//                    mCtx.startActivity(intent);
+//                }
+//                if (app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PARCEL_DETAIL_EMPTY) {
+//                }
+//                if (app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PACKAGE_DETAIL) {
+////                    intent.setClass(mCtx, PackageDetail.class);
+//                    intent.putExtra("parcle_id", app.getParcelId());
+//                    mCtx.startActivity(intent);
+////                    ActivityController.finishAll();
+//                }
+
+//                Toast.makeText(ConfirmPaymentActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+            } else {
+                // 判断resultStatus 为非"9000"则代表可能支付失败
+                // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
+                EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, false, SysApplication.mCurrentRequestPayment));
+                if (TextUtils.equals(resultStatus, "8000")) {
+                    onAliPayListener.onFailure(resultStatus, mCtx.getString(R.string.alipay_confirming_msg));
+                    //Toast.makeText(mCtx, "支付结果确认中", Toast.LENGTH_SHORT).show();
+
+                } else if (TextUtils.equals(resultStatus, "6001")) {
+                    //Toast.makeText(mCtx, "支付取消", Toast.LENGTH_SHORT).show();
+                    onAliPayListener.onFailure(resultStatus, mCtx.getString(R.string.alipay_canceled_msg));
+
+                } else {
+                    // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
+                    onAliPayListener.onFailure(resultStatus, mCtx.getString(R.string.alipay_failed_msg) + " errCode=" + resultStatus);
+                    //Toast.makeText(mCtx, "支付失败 errCode=" + resultStatus, Toast.LENGTH_SHORT).show();
+                }
+            }
+            if ("" == SysApplication.mCurrentRequestPayment) {
+                ((BaseActivity) mCtx).closeLoading();
+            }
+        }
+    }
+
+    public void wechatPay(String payInfo) {
+        if (!CommonUtils.isWeixinAvilible(mCtx)) {
+            ((BaseActivity) mCtx).closeLoading();
+            CustomToast.makeText(mCtx, "未安装微信，请更换支付方式", Toast.LENGTH_SHORT).show();
+            EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, false, SysApplication.mCurrentRequestPayment));
+            return;
+        }
+
+        IWXAPI api = WXAPIFactory.createWXAPI(mCtx, Constants.WX_APP_ID);
+        api.registerApp(Constants.WX_APP_ID);
+//        boolean isPaySupported = api.getWXAppSupportAPI() >= Build.PAY_SUPPORTED_SDK_INT;
+//        Toast.makeText(this, String.valueOf(isPaySupported), Toast.LENGTH_SHORT).show();
+        String[] newStr = payInfo.split("&");
+        Map<String, String> map = new HashMap<String, String>();
+        for (int i = 0; i < newStr.length; i++) {
+            String[] tStr = newStr[i].split("=");
+            if (tStr.length > 1) {
+                map.put(tStr[0], tStr[1]);
+            }
+        }
+        try {
+            PayReq req = new PayReq();
+            req.appId = map.get("appid");
+            req.partnerId = map.get("partnerid");
+            req.prepayId = map.get("prepayid");
+            req.nonceStr = map.get("noncestr");
+            req.timeStamp = map.get("timestamp");
+            req.packageValue = map.get("packageValue") + "=WXPay";
+            req.sign = map.get("sign");
+            req.extData = "app data";
+            api.sendReq(req);
+            ((BaseActivity) mCtx).closeLoading();
+        } catch (Exception e) {
+            Log.e("PAY_GET", "异常：" + e.getMessage());
+            ((BaseActivity) mCtx).closeLoading();
+            EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, false, SysApplication.mCurrentRequestPayment));
+
+            //Toast.makeText(ConfirmPaymentActivity.this, "异常："+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    /*public void recharge(float amount, final int payMethod, long parcelId, final float fee, final BaseActivity mCtontent) {
+        CsCard.SubmitDirectGiftCardOrderRequest.Builder builder = CsCard.SubmitDirectGiftCardOrderRequest.newBuilder();
+        builder.setAmount(amount).setPayMethod(payMethod).setParcelId(parcelId).setEstimateShippingFee(fee);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.SubmitDirectGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.SubmitDirectGiftCardOrderResponse response) {
+                applyForDirect(payMethod, response.getOrderId(), mCtontent);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Looper.prepare();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCtontent.closeLoading();
+                        Toast.makeText(mCtontent, "充值失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    public void applyForDirect(final int payMethod, long order, final BaseActivity mCtontent) {
+        CsCard.ApplyForDirectGiftCardOrderPayRequest.Builder builder = CsCard.ApplyForDirectGiftCardOrderPayRequest.newBuilder();
+        builder.setPayMethod(payMethod).setOrderId(order);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.ApplyForDirectGiftCardOrderPayResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.ApplyForDirectGiftCardOrderPayResponse response) {
+                String payInfo = response.getPayInfo();
+                switch (payMethod) {
+                    case CsBase.PayMethod.PAY_METHOD_ALIPAY_VALUE:
+                        aliPay(payInfo);
+                        break;
+                    case CsBase.PayMethod.PAY_METHOD_WXPAY_VALUE:
+                        wechatPay(payInfo);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Looper.prepare();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCtontent.closeLoading();
+                        Toast.makeText(mCtontent, "充值失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    public void payGiftCardOrder(final String payMethod, long order, final BaseActivity mCtontent) {
+        CsCard.PayGiftCardOrderRequest.Builder builder = CsCard.PayGiftCardOrderRequest.newBuilder();
+        builder.setPaymentCode(payMethod).setGiftCardOrderId((int) order);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.PayGiftCardOrderResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.PayGiftCardOrderResponse response) {
+                String payInfo = response.getPayInfo();
+                if ("alipay".equals(payMethod)) {
+                    aliPay(payInfo);
+                } else if ("wxap".equals(payMethod)) {
+                    wechatPay(payInfo);
+                }
+                Looper.prepare();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCtontent.closeLoading();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Looper.prepare();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCtontent.closeLoading();
+                        Toast.makeText(mCtontent, "fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+    }*/
+
+    /**
+     * @param orderNumber   订单号
+     * @param orderId       订单ID
+     * @param orderType     订单类型 0为购物车订单 1为充值卡订单
+     * @param amount        订单价格
+     * @param currency      订单货币种类
+     * @param onPayListener 支付的回调
+     */
+
+    public void adyenPay(String orderNumber, long orderId, int orderType, float amount, String currency, OnPayListener onPayListener) {
+
+        getAdyenUserInfo(Constants.URL_ADYEN_IS_SAVE_USER_INFO + "uin/" + AccountManager.getInstance().mUin, orderNumber, orderId, orderType, amount, currency, onPayListener);
+
+    }
+
+    public void daouPay(Context context, float needPay, int orderId,int type, OperaRequestListener listener) {
+        DaoUPayActivity.IntentBuilder intentBuilder = DaoUPayActivity.IntentBuilder.build(context)
+                .setAmount((int) needPay)
+                .setOrderID(orderId)
+                .setOrderType(type)
+                .setListener(listener);
+        context.startActivity(intentBuilder);
+    }
+
+    @Override
+    public void checkoutAuthorizedPayment(CheckoutResponse checkoutResponse, boolean isChecked) {
+        LogUtils.d(checkoutResponse.getPaymentData());
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            //这里要放oriderId
+            jsonObject.put("reference", orderId);
+            jsonObject.put("amount", checkoutResponse.getAmount());
+            jsonObject.put("currency", checkoutResponse.getCurrency());
+            jsonObject.put("paymentData", checkoutResponse.getPaymentData());
+            jsonObject.put("recurring", isChecked ? 1 : 0);
+            LogUtils.d(jsonObject.toString());
+
+            post(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void checkoutFailedWithError(String s, int errorType) {
+        if (onPayListener != null) {
+            onPayListener.onError(s);
+        }
+    }
+
+    @Override
+    public void checkoutFastPay(AdyenUserInfoBean adyenInfo, CheckoutResponse checkoutResponse) {
+        try {
+
+            JSONObject jsonObject = new JSONObject();
+
+            //这里要放oriderId
+            jsonObject.put("reference", orderId);
+            jsonObject.put("amount", checkoutResponse.getAmount());
+            jsonObject.put("currency", checkoutResponse.getCurrency());
+            jsonObject.put("paymentData", checkoutResponse.getPaymentData());
+            jsonObject.put("recurringDetailReference", adyenInfo.details.get(0).RecurringDetail.recurringDetailReference);
+            LogUtils.d(jsonObject.toString());
+
+            doFastPayPost(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getAdyenUserInfo(final String url, final String orderNumber, long orderId, int orderType, final float amount, final String currency, OnPayListener onPayListener) {
+//        ((BaseActivity) mCtx).showLoading();
+        this.onPayListener = onPayListener;
+        this.orderId = orderId;
+        this.orderType = orderType;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Looper.prepare();
+                        ((BaseActivity) mCtx).dissMissProgressDiaLog(500);
+                        Looper.loop();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        ((BaseActivity) mCtx).closeLoading();
+                        Gson gson = new Gson();
+                        AdyenUserInfoBean adyenInfo = gson.fromJson(response.body().string(), AdyenUserInfoBean.class);
+                        if (adyenInfo != null) {
+                            try {
+                                CheckoutRequest checkoutRequest = new CheckoutRequest();
+                                checkoutRequest.setBrandColor(R.color.black_0);
+                                checkoutRequest.setBrandLogo(R.mipmap.icon);
+//                              String s = "%1$.2f";
+//                              checkoutRequest.setCheckoutAmount(Float.parseFloat(String.format(s, 1.25)));
+                                checkoutRequest.setCheckoutAmount(amount);
+                                checkoutRequest.setCurrency(currency);
+                                checkoutRequest.setToken(Constants.CART_PAY_TOKEN);
+                                checkoutRequest.setTestBackend(true);//default is set to false. Set it to true if you want to use Adyen's test back-end.
+
+                                Intent intent = new MyPayActivity.PaymentActivityBuilder(checkoutRequest).build(PaymentManager.this, mCtx);
+                                intent.putExtra("orderNumber", orderNumber);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("userInfoBean", adyenInfo);
+                                intent.putExtras(bundle);
+                                mCtx.startActivity(intent);
+
+//            final CardPaymentData cardPaymentData = buildCardData();
+//            Adyen.getInstance().setToken("7614623465784315");
+//            Adyen.getInstance().setUseTestBackend(true);
+//            Adyen.getInstance().fetchPublicKey(new Adyen.CompletionCallback() {
+//                public void onSuccess(String result) {
+//                    try {
+//                        CheckoutResponse noPublicKeyExeption = new CheckoutResponse();
+//                        noPublicKeyExeption.setPaymentData(cardPaymentData.serialize());
+//                        noPublicKeyExeption.setAmount(10f);
+//                        noPublicKeyExeption.setCurrency(Currency.EUR);
+////                        PaymentActivity.adyenCheckoutListener.checkoutAuthorizedPayment(noPublicKeyExeption);
+//                    } catch (EncrypterException var3) {
+//                        var3.printStackTrace();
+//                    } catch (NoPublicKeyExeption var4) {
+//                        var4.printStackTrace();
+//                    }
+//
+//                }
+//
+//                public void onError(String error) {
+////                    PaymentActivity.adyenCheckoutListener.checkoutFailedWithError(error);
+//                }
+//            });
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        }
+
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void doFastPayPost(final String json) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody requestBody = RequestBody.create(JSON, json);
+                try {
+                    Request request = new Request.Builder().url(orderType == 0 ? Constants.CART_PAY_SAVED_URL : Constants.CARD_PAY_SAVED_URL).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    EventBus.getDefault().post(new BusEvent(BusEvent.CODE_ADYEN_PAY_END, true));
+                    if (response.isSuccessful()) {
+//                      LogUtils.d(response.body().string());
+                        Gson gson = new Gson();
+                        PayResultBaen payResult = gson.fromJson(response.body().string(), PayResultBaen.class);
+                        if (onPayListener != null) {
+                            onPayListener.onPay(response, payResult);
+                        }
+                    } else {
+                        onPayListener.onError(mCtx.getString(R.string.pay_error_msg));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                    Toast.makeText(mCtx, mCtx.getString(R.string.pay_error_msg), Toast.LENGTH_SHORT).show();
+                    onPayListener.onError(mCtx.getString(R.string.pay_error_msg));
+                }
+            }
+        }).start();
+    }
+
+    public void post(final String json) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody requestBody = RequestBody.create(JSON, json);
+                try {
+                    Request request = new Request.Builder().url(orderType == 0 ? Constants.CART_PAY_URL : Constants.CARD_PAY_URL).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    EventBus.getDefault().post(new BusEvent(BusEvent.CODE_ADYEN_PAY_END, true));
+                    if (response.isSuccessful()) {
+//                      LogUtils.d(response.body().string());
+                        Gson gson = new Gson();
+                        PayResultBaen payResult = gson.fromJson(response.body().string(), PayResultBaen.class);
+                        if (onPayListener != null) {
+                            onPayListener.onPay(response, payResult);
+                        }
+                    } else {
+                        onPayListener.onError(mCtx.getString(R.string.pay_error_msg));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                    Toast.makeText(mCtx, mCtx.getString(R.string.pay_error_msg), Toast.LENGTH_SHORT).show();
+                    onPayListener.onError(mCtx.getString(R.string.pay_error_msg));
+                }
+            }
+        }).start();
+
+    }
+
+    public OnPayListener onPayListener;
+
+    public void setOnPayListener(OnPayListener onPayListener) {
+        this.onPayListener = onPayListener;
+    }
+
+    public interface OnPayListener {
+        void onPay(Response response, PayResultBaen payResult);
+
+        void onError(String errMsg);
+    }
+
+    public OnAliPayListener onAliPayListener;
+
+    public interface OnAliPayListener {
+        void onSuccess(String resultStatus);
+
+        void onFailure(String resultStatus, String errorMsg);
+    }
+
+    public interface OnFKDPaymentListener {
+        /**
+         * 推荐支付方式的回调
+         *
+         * @param paymentType   支付方式 对应Constants中配置的值
+         * @param paymentString 支付方式的名称
+         */
+        void onResult(int paymentType, String paymentString, String payCode);
+    }
+
+    public void getFKDPaymentListRequest(String currencyCode, final OnFKDPaymentListener onFKDPaymentListener) {
+        CsUser.GetFKDPaymentListRequest.Builder builder = CsUser.GetFKDPaymentListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(currencyCode);
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetFKDPaymentListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetFKDPaymentListResponse response) {
+                LogUtils.d(response.toString());
+                List<CsUser.PaymentList> list = response.getPaymantlistList();
+                String payStringTemp = SPUtils.get(mCtx, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_NAME, "").toString();
+                int payType = 0;
+                String payString = "";
+                String payCode = "";
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getPayname().equals(payStringTemp)) {
+                        payType = (int) SPUtils.get(mCtx, AccountManager.getInstance().getCurrencyCode(), -1);
+                        payString = SPUtils.get(mCtx, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_NAME, "").toString();
+                        payCode = SPUtils.get(mCtx, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_CODE, "").toString();
+                        onFKDPaymentListener.onResult(payType, payString, payCode);
+                        return;
+                    } else {
+                        if (list.get(i).getSortorder().equals("1")) {
+                            if (TextUtils.equals(list.get(i).getPaycode(), Constants.GIFT_CARD_PAYMENT_KRBANK)) {
+                                payType = Constants.PAYMENT_KRBANK;
+//                                payString = mCtx.getString(R.string.String_krbank_pay);
+                            }
+                            if (TextUtils.equals(list.get(i).getPaycode(), Constants.GIFT_CARD_PAYMENT_ADYEN)) {
+                                payType = Constants.PAYMENT_ADYEN;
+//                                payString = mCtx.getString(R.string.String_adyen_pay);
+                            }
+                            if (TextUtils.equals(list.get(i).getPaycode(), Constants.GIFT_CARD_PAYMENT_ALIPAY)) {
+                                payType = Constants.PAYMENT_ALIPAY;
+//                                payString = mCtx.getString(R.string.String_ali_pay);
+                            }
+                            if (TextUtils.equals(list.get(i).getPaycode(), Constants.GIFT_CARD_PAYMENT_WXPAY)) {
+                                payType = Constants.PAYMENT_WECHAT;
+//                                payString = mCtx.getString(R.string.String_weixin_pay);
+                            }
+                            if (TextUtils.equals(list.get(i).getPaycode(), Constants.GIFT_CARD_PAYMENT_DAOUPAY)) {
+                                payType = Constants.PAYMENT_DAOUPAY;
+//                                payString = list.get(i).getPaycode();
+                            }
+                            payCode = list.get(i).getPaycode();
+                            payString = list.get(i).getPayname();
+                        }
+                    }
+                }
+                onFKDPaymentListener.onResult(payType, payString, payCode);
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                ((Activity) mCtx).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomToast.makeText(mCtx, mCtx.getString(R.string.request_payment_error_msg) + " " + errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+}

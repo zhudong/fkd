@@ -1,0 +1,133 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+/**
+ * Created by Administrator on 2017-2-27.
+ */
+
+public class InviteFriendsActivity extends BaseActivity {
+
+    private final String[] RESOURCES_NAME = {
+            getString(R.string.invite_resources_1),
+            getString(R.string.invite_resources_2),
+            getString(R.string.invite_resources_3),
+            getString(R.string.invite_resources_4),
+            getString(R.string.invite_resources_5),
+            getString(R.string.invite_resources_6),
+            getString(R.string.invite_resources_7),
+            getString(R.string.invite_resources_8),
+    };
+
+    private final int[] RESOURCES_LOGO = {
+            R.mipmap.invite_phonebook,
+            R.mipmap.invite_sms,
+            R.mipmap.invite_wechat_friend,
+            R.mipmap.invite_wechat,
+            R.mipmap.invite_qzone,
+            R.mipmap.invite_qq,
+            R.mipmap.invite_weibo,
+            R.mipmap.invite_facebook,
+    };
+
+    private View rootView;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private ImageView backIv;
+    private ListView listView;
+
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_invite_friends, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.invite_title_bar_view);
+        backIv = titleBarView.getIv_in_title_back();
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(R.string.integral_management_msg);
+
+        listView = (ListView) rootView.findViewById(R.id.invite_list_view);
+        MyAdapter adapter = new MyAdapter(this, RESOURCES_NAME);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
+        backTv.setOnClickListener(this);
+        backIv.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+        }
+    }
+
+    class MyAdapter extends BaseAdapter{
+
+        private String[] data;
+        private Context context;
+
+        public MyAdapter(Context context, String[] data){
+            this.data = data;
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return data.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if(convertView == null){
+                convertView = LayoutInflater.from(context).inflate(R.layout.invite_item, null);
+                holder = new ViewHolder();
+                holder.logoIv = (ImageView) convertView.findViewById(R.id.invite_item_logo_iv);
+                holder.nameTv = (TextView) convertView.findViewById(R.id.invite_item_name_tv);
+                convertView.setTag(holder);
+            }else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.logoIv.setImageResource(RESOURCES_LOGO[position]);
+            holder.nameTv.setText(RESOURCES_NAME[position]);
+            return convertView;
+        }
+
+        class ViewHolder{
+            ImageView logoIv;
+            TextView nameTv;
+        }
+    }
+}

@@ -1,0 +1,204 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckedTextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.PayMethodManager;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import fksproto.CsUser;
+
+/**
+ * Created by Administrator on 2016-10-28.
+ */
+public class ParcelPayMethodActivity extends BaseActivity {
+
+    public static final String SHIPPING_FEE = "shipping_fee";
+    public static final String CURRENCY_CODE = "currencyCode";
+    public static final String USE_COUPON = "use_coupon";
+    String currencyCode;
+    @BindView(R.id.payment_titile_bar)
+    TitleBarView titleBar;
+    @BindView(R.id.rb_use_balance)
+    CheckedTextView mChBalance;
+    @BindView(R.id.tv_balance)
+    TextView mTvBalance;
+    @BindView(R.id.ll_content)
+    LinearLayout mLlContent;
+    @BindView(R.id.payment_coupon_name_tv)
+    TextView mPaymentCouponNameTv;
+    @BindView(R.id.payment_coupon_layout)
+    LinearLayout mPaymentCouponLayout;
+    @BindView(R.id.btn_confirm)
+    Button mBtnConfirm;
+    private PayMethodManager mPayMethodManager;
+    private int mIndex = -1;
+    private boolean isUseBalance;
+    private float mShippingFee;
+    private CsUser.CouponList coupon;
+    private boolean mUseCoupon;
+
+
+    @Override
+    public View setInitView() {
+        View rootView = LayoutInflater.from(this).inflate(R.layout.activity_paymethod_activity, null);
+        return rootView;
+    }
+
+    @Override
+    public void initView() {
+//        mChBalance.setdrawselector_payment_checkbox
+        mPayMethodManager = PayMethodManager.getInstance(this);
+        currencyCode = getIntent().getStringExtra(CURRENCY_CODE);
+        mShippingFee = getIntent().getFloatExtra(SHIPPING_FEE, 0f);
+        mUseCoupon = getIntent().getBooleanExtra(USE_COUPON, true);
+        isUseBalance = mPayMethodManager.isUseBalance();
+        mChBalance.setChecked(isUseBalance);
+        titleBar.getIv_in_title_back().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mPayMethodManager.getPayMethodList(new PayMethodManager.PayMethodResultListener() {
+            @Override
+            public void onResult(String payCode, String result) {
+
+            }
+
+            @Override
+            public void onMethodList(final List<CsUser.PaymentList> paymantlistList, final String balance, final int couponCount) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvBalance.setText(balance);
+                        mLlContent.removeAllViews();
+                        mPaymentCouponNameTv.setText(getString(R.string.coupon_count_msg, couponCount));
+                        mPaymentCouponLayout.setVisibility(couponCount > 0 && mUseCoupon ? View.VISIBLE : View.GONE);
+                        View.OnClickListener listener = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+//                                mIndex = (int) v.getTag();
+                                int tag = (int) v.getTag();
+                                mIndex = -1;
+                                for (int i = 0; i < mLlContent.getChildCount(); i++) {
+                                    CheckedTextView child = (CheckedTextView) mLlContent.getChildAt(i).findViewById(R.id.payment_item_ct);
+                                    if (tag == i) {
+                                        if (mPayMethodManager.getNeedPay() > 0||!mChBalance.isChecked()) {
+                                            child.setChecked(true);
+                                        } else {
+                                            child.setChecked(!child.isChecked());
+                                        }
+                                    } else {
+                                        child.setChecked(false);
+                                    }
+                                    if (child.isChecked()) {
+                                        mIndex = tag;
+                                    }
+                                }
+                            }
+                        };
+                        for (int i = 0; i < paymantlistList.size(); i++) {
+                            CsUser.PaymentList item = paymantlistList.get(i);
+                            View convertView = LayoutInflater.from(ParcelPayMethodActivity.this).inflate(R.layout.payment_item, null);
+                            mLlContent.addView(convertView);
+                            convertView.setOnClickListener(listener);
+                            convertView.setTag(i);
+                            ImageView logoIv = (ImageView) convertView.findViewById(R.id.payment_item_logo_iv);
+                            TextView nameTv = (TextView) convertView.findViewById(R.id.payment_item_name_tv);
+                            CheckedTextView checkedTv = (CheckedTextView) convertView.findViewById(R.id.payment_item_ct);
+
+                            checkedTv.setCheckMarkDrawable(R.drawable.selector_payment_checkbox);
+                            if (i == mPayMethodManager.getMethodIndex()) {
+                                checkedTv.setChecked(true);
+                                mIndex = i;
+                            } else {
+                                checkedTv.setChecked(false);
+                            }
+                            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_ADYEN)) {
+//                                nameTv.setText(getString(R.string.String_adyen_pay));
+                                logoIv.setImageDrawable(ContextCompat.getDrawable(ParcelPayMethodActivity.this, R.mipmap.adyen_pay));
+                            }
+                            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_KRBANK)) {
+//                                nameTv.setText(getString(R.string.String_krbank_pay));
+                                logoIv.setImageDrawable(ContextCompat.getDrawable(ParcelPayMethodActivity.this, R.mipmap.krbank_pay));
+                            }
+                            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_ALIPAY)) {
+//                                nameTv.setText(getString(R.string.String_ali_pay));
+                                logoIv.setImageDrawable(ContextCompat.getDrawable(ParcelPayMethodActivity.this, R.mipmap.pay_alipay));
+                            }
+                            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_WXPAY)) {
+//                                nameTv.setText(getString(R.string.String_weixin_pay));
+                                logoIv.setImageDrawable(ContextCompat.getDrawable(ParcelPayMethodActivity.this, R.mipmap.pay_wechat));
+                            }
+                            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_DAOUPAY)) {
+//                                nameTv.setText(item.getPayname());
+                                logoIv.setImageDrawable(ContextCompat.getDrawable(ParcelPayMethodActivity.this, R.mipmap.daoupay));
+                            }
+                            nameTv.setText(item.getPayname());
+
+                        }
+                    }
+                });
+            }
+        }, mShippingFee, currencyCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                coupon = (CsUser.CouponList) data.getExtras().getSerializable(CouponActivity.CODE_COUPON);
+//                String s = AccountManager.getInstance().getCurrencyCode();
+                mPaymentCouponNameTv.setText(coupon.getShippingcouponname() + " " + UIUtils.getCurrency(this, currencyCode, coupon.getDiscountamount()));
+//                couponId = coupon.getShippingcouponcustomerid();
+            }
+        }
+    }
+
+
+    @OnClick({R.id.rb_use_balance, R.id.btn_confirm, R.id.payment_coupon_layout})
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.btn_confirm:
+                mPayMethodManager.setCurrentMethod(mIndex);
+                mPayMethodManager.setUseBalance(isUseBalance);
+                mPayMethodManager.setCurrentCoupon(coupon);
+                setResult(Constants.PAYMENT_REQUEST_CODE, intent);
+                finish();
+                break;
+            case R.id.payment_coupon_layout:
+                intent.setClass(ParcelPayMethodActivity.this, CouponActivity.class);
+                intent.putExtra(ParcelPayMethodActivity.SHIPPING_FEE, mShippingFee);
+                intent.putExtra(ParcelPayMethodActivity.CURRENCY_CODE, currencyCode);
+                startActivityForResult(intent, CouponActivity.CODE_RESULT_COUPON);
+                break;
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+            case R.id.rb_use_balance:
+                isUseBalance = !isUseBalance;
+                mChBalance.setChecked(isUseBalance);
+                if (mIndex == -1) mChBalance.setChecked(true);
+                break;
+        }
+    }
+}

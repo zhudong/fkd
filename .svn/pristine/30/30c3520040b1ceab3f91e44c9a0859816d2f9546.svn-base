@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:id="@+id/tv_item_info"
+            style="@style/parcel_text_gray_33_13"
+            android:text="@string/package_transport_type"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_item_info"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/tv_item_info"
+            android:src="@mipmap/star"/>
+    </RelativeLayout>
+
+    <TextView
+        style="@style/parcel_divide_line"/>
+
+    <LinearLayout
+        android:id="@+id/ll_shippings_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingLeft="10dp">
+
+        <TextView
+            style="@style/parcel_text_gray_33_13"
+            android:layout_centerVertical="true"
+            android:text="@string/String_parcel_yun_fee"/>
+
+        <TextView
+            android:id="@+id/tv_parcel_shipping_fee"
+            style="@style/parcel_text_gray_33_13"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/the_red"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_red_gb_corner_normal"
+        android:gravity="center"
+        android:text="@string/String_parcel_save"
+        android:textColor="@color/black"/>
+</LinearLayout>

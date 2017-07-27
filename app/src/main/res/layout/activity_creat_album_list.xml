@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_for_add_album_dialog"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_for_add_album_dialog_02">
+
+            <TextView
+                style="@style/system_Mytextsize_black_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/create_new_album"/>
+
+            <ImageView
+                android:id="@+id/iv_close_for_creat_albums_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/close"/>
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_for_creat_album_note_entername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:text="@string/String_enter_album_name"
+                android:textColor="@color/the_red"
+                android:textSize="12sp"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/ed_for_creat_album"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_bg_for_home_head"
+                android:hint="@string/String_enter_album_name"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textSize="12sp"/>
+
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/line_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:minHeight="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_for_creat_album_cancle"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_btn_gray"
+                android:text="@string/cancel"/>
+
+            <Button
+                android:id="@+id/btn_for_creat_album_save"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/selector_red_btn_drawable"
+                android:text="@string/package_save"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_for_fragment_home_02_creatalbum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_for_subject_button"
+        android:visibility="gone"
+        >
+
+        <ProgressBar
+            android:id="@+id/pb_for_fragment_home_02_creatalbum"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/tv_for_fragment_home_02_creatalbum"/>
+
+        <TextView
+            android:id="@+id/tv_for_fragment_home_02_creatalbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/creating_album"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+
+</FrameLayout>

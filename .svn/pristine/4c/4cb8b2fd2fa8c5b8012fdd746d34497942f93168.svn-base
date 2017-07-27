@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/payment_titile_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zhudong:text="@string/payment_title_msg" />
+
+    <LinearLayout
+        android:id="@+id/ll_use_balance"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/String_balance_first"
+            android:textColor="@color/gray_666"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/rb_use_balance"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:scaleType="center"
+            android:src="@mipmap/demand_selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        style="@style/layout_style"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/payment_gift_edit"
+            android:layout_weight="1"
+            android:hint="@string/my_gift_card_order_binding_balance_hint"
+            android:textSize="13sp"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/payment_bind_btn"
+            android:text="@string/my_gift_card_order_binding_btn_text"
+            android:textSize="14sp"
+            android:background="#f5f5f5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginTop="1dp"
+        android:id="@+id/rl_up_member"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/member_note_string"/>
+
+        <Switch
+            android:id="@+id/sw_member"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13.8dp"
+            />
+    </RelativeLayout>
+    <ListView
+        android:layout_marginTop="1dp"
+        android:id="@+id/payment_vip_listview"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:dividerHeight="1dp"
+        android:divider="@color/divide_line"
+        android:layout_height="wrap_content" />
+    <ListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/payment_listview"
+        android:layout_width="match_parent"
+        android:dividerHeight="1dp"
+        android:divider="@color/divide_line"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/payment_coupon_layout"
+        style="@style/layout_style"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="优惠券"
+            android:textColor="@color/gray_666"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/payment_coupon_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gary_e8e8"
+            android:paddingBottom="3dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="3dp"
+            android:text="0张可用"
+            android:textColor="@color/gray_666"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/arrow_right" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:textAllCaps="false"
+        android:background="@drawable/shape_btn_bg"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

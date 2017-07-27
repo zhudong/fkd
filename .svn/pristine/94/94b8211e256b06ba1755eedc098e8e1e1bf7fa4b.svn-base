@@ -1,0 +1,193 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.Manifest;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+/**
+ * Created by Administrator on 2017-2-27.
+ */
+
+public class InviteFriendsActivity extends BaseActivity {
+
+    private final int[] RESOURCES_NAME = {
+            R.string.invite_resources_1,
+            R.string.invite_resources_2,
+            R.string.invite_resources_3,
+            R.string.invite_resources_4,
+            R.string.invite_resources_5,
+            R.string.invite_resources_6,
+            R.string.invite_resources_7,
+            R.string.invite_resources_8
+    };
+
+    private final int[] RESOURCES_LOGO = {
+            R.mipmap.invite_phonebook,
+            R.mipmap.invite_sms,
+            R.mipmap.invite_wechat_friend,
+            R.mipmap.invite_wechat,
+            R.mipmap.invite_qzone,
+            R.mipmap.invite_qq,
+            R.mipmap.invite_weibo,
+            R.mipmap.invite_facebook
+    };
+
+    private static final int POSITION_INVITE_PHONEBOOK = 0;
+    private static final int POSITION_INVITE_SMS = 1;
+    private static final int POSITION_INVITE_WECHAT_FRIEND = 2;
+    private static final int POSITION_INVITE_WECHAT = 3;
+    private static final int POSITION_INVITE_QZONE = 4;
+    private static final int POSITION_INVITE_QQ = 5;
+    private static final int POSITION_INVITE_WEIBO = 6;
+    private static final int POSITION_INVITE_FACEBOOK = 7;
+
+    private View rootView;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private ImageView backIv;
+    private ListView listView;
+
+    private static final int REQUEST_CODE_CONTACT=2;
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_invite_friends, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.invite_title_bar_view);
+        backIv = titleBarView.getIv_in_title_back();
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(R.string.integral_management_msg);
+
+        listView = (ListView) rootView.findViewById(R.id.invite_list_view);
+        MyAdapter adapter = new MyAdapter(this, RESOURCES_NAME);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
+        backTv.setOnClickListener(this);
+        backIv.setOnClickListener(this);
+
+        return rootView;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position){
+            case POSITION_INVITE_PHONEBOOK:
+
+                //电话联系人
+                break;
+            case POSITION_INVITE_SMS:
+                //短信
+                break;
+            case POSITION_INVITE_WECHAT_FRIEND:
+                //微信朋友圈
+                break;
+            case POSITION_INVITE_WECHAT:
+                //微信
+                break;
+            case POSITION_INVITE_QZONE:
+                //QQ空间
+                break;
+            case POSITION_INVITE_QQ:
+                //QQ
+                break;
+            case POSITION_INVITE_WEIBO:
+                //新浪微博
+                break;
+            case POSITION_INVITE_FACEBOOK:
+                //Facebook
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+        }
+    }
+
+    class MyAdapter extends BaseAdapter{
+
+        private int[] data;
+        private Context context;
+
+        public MyAdapter(Context context, int[] data){
+            this.data = data;
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return data.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if(convertView == null){
+                convertView = LayoutInflater.from(context).inflate(R.layout.invite_item, null);
+                holder = new ViewHolder();
+                holder.logoIv = (ImageView) convertView.findViewById(R.id.invite_item_logo_iv);
+                holder.nameTv = (TextView) convertView.findViewById(R.id.invite_item_name_tv);
+                convertView.setTag(holder);
+            }else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.logoIv.setImageResource(RESOURCES_LOGO[position]);
+            holder.nameTv.setText(getString(RESOURCES_NAME[position]));
+            return convertView;
+        }
+
+        class ViewHolder{
+            ImageView logoIv;
+            TextView nameTv;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    @PermissionGrant(REQUEST_CODE_CONTACT)
+    public void requestSdcardSuccess()
+    {
+        Toast.makeText(this, "GRANT ACCESS SDCARD!", Toast.LENGTH_SHORT).show();
+    }
+
+    @PermissionDenied(REQUEST_CODE_CONTACT)
+    public void requestSdcardFailed()
+    {
+        Toast.makeText(this, "DENY ACCESS SDCARD!", Toast.LENGTH_SHORT).show();
+    }
+}

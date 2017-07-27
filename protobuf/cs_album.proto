@@ -1,0 +1,83 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+enum ALBUM_FLAG_MASK
+{
+	ALBUM_FLAG_MASK_SELECTED = 0x01;//默认图集
+};
+
+//专辑分类
+message AlbumCategory
+{
+	required int32  cate_id   = 1; //分类id
+	required string cate_name = 2; //分类名
+}
+
+//图集元素
+message AlbumElement
+{
+	required int64  element_id  = 1;//收录id(单品)
+	required string desc 		= 2;//描述信息
+}
+
+//简单图集
+message TinyAlbum
+{
+	required int64  album_id 	= 1;
+	required string title 		= 2;
+}
+
+//创建图集请求
+message CreateAlbumRequest
+{
+	required BaseRequest head      = 1;
+	optional BaseUserRequest userinfo  = 2;
+	required string      title     = 3; //图集标题
+	required int32       category  = 4; //图集分类
+}
+
+//创建图集应答
+message CreateAlbumResponse
+{
+	required BaseResponse head     = 1;
+	optional int64        album_id = 2; //图集ID
+}
+
+//添加图集元素请求
+message AddAlbumElementRequest
+{
+	required BaseRequest head          = 1;
+	optional BaseUserRequest userinfo  = 2;
+	required int64       album_id      = 3; //图集ID
+	required int64       element_id    = 4; //图集元素ID
+	required string      element_title = 5; //图集元素标题
+};
+
+//添加图集元素应答
+message AddAlbumElementResponse
+{
+	required BaseResponse head = 1;
+}
+
+//获取图集列表请求
+message GetAlbumListRequest
+{
+	required BaseRequest head    	  = 1;
+	optional BaseUserRequest userinfo  = 2;
+	required int32       author  	  = 3; //原创作者
+	optional int32	     pageno  	  = 4; //页数，从1开始
+	optional string      localecode   = 5;//语种
+	optional string      currencycode = 6;//币种
+	optional int32       currencyid   = 7;
+	optional int32	     pagesize  	  = 8; //每页的图集数，默认20
+}
+
+//获取图集列表应答
+message GetAlbumListResponse
+{
+	required BaseResponse head   = 1;
+	optional bool 		  more 	 = 2; //是否有下一页
+	repeated Album        albums = 3; //图集列表
+}

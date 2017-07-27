@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EF4213</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="title_bar_black">#EF4213</color>
+    <color name="title_bar_black_dark">#DF4213</color>
+
+    <color name="default_bg">#F1F1F1</color>
+    <color name="tv_color_gray_02">#949494</color>
+    <color name="black">#000</color>
+    <color name="black_0">#000</color>
+    <color name="white">#fff</color>
+    <color name="e3e3">#E3E3E3</color>
+    <color name="me_fragment_bg">#E1E1E1</color>
+    <color name="ff999">#FF999999</color>
+    <color name="progress_forecolor">#1985EC</color>
+    <color name="gray_999">#999999</color>
+    <color name="gray_666">#666666</color>
+    <color name="the_red">#FF0000</color>
+    <color name="gary_e8e8">#e8e8e8</color>
+    <color name="gray_fcfc">#FCFCFC</color>
+    <color name="blue_0047ff">#0047FF</color>
+    <color name="red_shape">#FFF20818</color>
+    <color name="btntextcolor">#ff1E90FF</color>
+    <color name="text_color_333">#333333</color>
+    <color name="gray_02">#666666</color>
+    <color name="divide_line">#E3E3E3</color>
+    <color name="title_color">#333333</color>
+    <color name="black_my_album">#d4d4d4</color>
+    <color name="gray_e4e4">#E4E4E4</color>
+    <color name="card_order_text_color_blank">#000000</color>
+    <color name="red_EF4213">#EF4213</color>
+
+    <color name="nespresso_grey">#252525</color>
+    <color name="navpage">#FFE1E8EB</color>
+    <color name="white_fefe">#FEFEFE</color>
+    <color name="blue_3A79BF">#3A79BF</color>
+    <color name="blue_0054B1">#0054B1</color>
+    <color name="green_3CAD43">#3CAD43</color>
+    <color name="gray_B5B5B5">#B5B5B5</color>
+
+    <!-- 图片选择器相关 -->
+    <!--<color name="green">#00FF00</color>-->
+    <color name="green_008b45">#008B45</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="red">#FF0000</color>
+    <color name="red_e80010">#E80010</color>
+    <color name="orange">#FF6600</color>
+    <color name="background">#181819</color>
+    <color name="text_gray">#FF999999</color>
+    <color name="photo_mask">#88000000</color>
+    <color name="separation">#FFDCDCDC</color>
+    <color name="text_black">#FF333333</color>
+    <color name="dark_gray">#FF343535</color>
+    <color name="yancy_green500">#259b24</color>
+    <color name="yancy_green700">#0a7e07</color>
+    <color name="gray_03">#E4E4E4</color>
+    <color name="back_151515">#151515</color>
+
+
+    <color name="black_title">#333333</color>
+    <!--帮我寄-->
+    <color name="tips_bg">#e0000000</color>
+    <color name="black_parcel">#333333</color>
+    <color name="bg_add">#F4F4F4</color>
+    <color name="transparent">#01000000</color>
+    <color name="point_gary">#504943</color>
+    <color name="point_red">#FE0000</color>
+    <color name="btn_red_bg_light">#e73838</color>
+    <color name="btn_red_bg">#F00000</color>
+    <color name="black_33">#333333</color>
+    <color name="bg_append_select">#DF4214</color>
+    <color name="bg_confirms_select">#bbFF0000</color>
+    <color name="stroke_id_up">#C8C8C8</color>
+    <color name="bg_id_up">#F7F7F7</color>
+    <color name="bg_dis_enable">#CECECE</color>
+    <color name="bg_card_cover">#66000000</color>
+
+
+
+    <color name="text_color_666">#666666</color>
+    <color name="text_color_999">#999999</color>
+    <color name="line_gray">#E3E3E3</color>
+
+    <color name="province_line_border">#C7C7C7</color>
+
+    <color name="gray_caca">#CACACA</color>
+    <color name="progress_finish_green">#17A400</color>
+    <color name="black_01">#010101</color>
+    <color name="brand_name">#0177E0</color>
+    <color name="hint_text_color">#979797</color>
+    <color name="lighter_grey_border">#B9B9B9</color>
+
+</resources>

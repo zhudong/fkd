@@ -1,0 +1,50 @@
+package com.fuexpress.kr.net;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import fksproto.CsCard;
+import fksproto.CsLogin;
+import fksproto.CsMsgid;
+import yssproto.CsPdu;
+
+
+/**
+ * Created by alick on 3/1/16.
+ */
+public class ProtoConfigManager {
+    private static ProtoConfigManager ourInstance = new ProtoConfigManager();
+    private List<ProtoConfig> mProtoConfigList;
+
+    public static ProtoConfigManager getInstance() {
+        return ourInstance;
+    }
+
+    public ProtoConfig getProtoConfig(Object object) {
+        for (ProtoConfig protoConfig : mProtoConfigList) {
+            if (object.getClass().isAssignableFrom(protoConfig.mRequestBuilderClazz)) {
+                return protoConfig;
+            }
+        }
+        return null;
+    }
+
+    private ProtoConfigManager() {
+        mProtoConfigList = new ArrayList<>();
+        // TODO: 3/1/16 put all Protocal HERE!
+        //登录
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_LOGIN_REQUEST, CsLogin.LoginRequest.Builder.class, CsLogin.LoginResponse.class, CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_REQUEST, CsCard.GiftCardBalanceListRequest.Builder.class, CsCard.GiftCardBalanceListRequest.class, true));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST, CsCard.GiftCardBalanceListAjaxRequest.Builder.class, CsCard.GiftCardBalanceListAjaxReponse.class, true));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST, CsCard.GetGiftCardOrderListRequest.Builder.class, CsCard.GetGiftCardOrderListReponse.class));
+
+
+    }
+}

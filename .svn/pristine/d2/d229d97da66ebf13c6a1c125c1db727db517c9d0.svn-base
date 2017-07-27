@@ -1,0 +1,127 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.BalanceManager;
+import com.fuexpress.kr.ui.adapter.BalanceAccountAdapter;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.StringUtils;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class BalanceAccountActivity extends BaseActivity implements RefreshListView.OnRefreshListener {
+
+
+    private View mRootView;
+    private RefreshListView mRfl_in_gift_card_account;
+    private View mHeadView;
+    private BalanceAccountAdapter mGiftCardAccountAdapter;
+    private boolean mIsHasMore = false;
+    private int mPageNum = 1;
+
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_balance_account, null);
+        TitleBarView title_in_my_balance_account = (TitleBarView) mRootView.findViewById(R.id.title_in_my_balance_account);
+        title_in_my_balance_account.getIv_in_title_back().setOnClickListener(this);
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+        mRfl_in_gift_card_account = (RefreshListView) mRootView.findViewById(R.id.rfl_in_gift_card_account);
+        mGiftCardAccountAdapter = new BalanceAccountAdapter(BalanceManager.getInstance().mGiftCardBalanceLists);
+        mRfl_in_gift_card_account.setAdapter(mGiftCardAccountAdapter);
+        mRfl_in_gift_card_account.setHasLoadMore(false);
+        mHeadView = View.inflate(this, R.layout.head_view_for_gift_card_account, null);
+        mRfl_in_gift_card_account.addHeaderView(mHeadView);
+        mRfl_in_gift_card_account.setHeaderViewHide();
+        mRfl_in_gift_card_account.setOnRefreshListener(this);
+        initData();
+    }
+
+    private void initData() {
+        if (AccountManager.isLogin) {
+            BalanceManager.getInstance().giftCardBalanceListRequest(AccountManager.getInstance().mUin);
+        } else {
+            // TODO: 2016/11/1 因为接口还没弄好,这里先注释一下
+            //AccountManager.getInstance().isUserLogin(this);
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+        mRfl_in_gift_card_account.stopRefresh();
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+        if (mIsHasMore) {
+            mPageNum = mPageNum + 1;
+            BalanceManager.getInstance().giftCardBalanceListAjaxRequest(AccountManager.getInstance().mUin, mPageNum);
+        } else {
+            return;
+        }
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_GIFT_CARD_BAN_LIST_INIT_SUCCESS:
+                boolean isSuccess = event.getBooleanParam();
+                if (isSuccess) {
+                    mGiftCardAccountAdapter = new BalanceAccountAdapter(BalanceManager.getInstance().mGiftCardBalanceLists);
+                    mRfl_in_gift_card_account.setAdapter(mGiftCardAccountAdapter);
+                    //mGiftCardAccountAdapter.notifyDataSetChanged();
+                    TextView textView = (TextView) mHeadView.findViewById(R.id.tv_head_view_gift_card_account_canuse_money);
+                    // DecimalFormat decimalFormat = new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+                    //String p = decimalFormat.format(GiftCardManager.getInstance().mGiftcardaccount);
+                    String p = StringUtils.changeFolatToString(BalanceManager.getInstance().mGiftcardaccount);
+                    textView.setText("¥ " + p);
+                    TextView textView1 = (TextView) mHeadView.findViewById(R.id.tv_head_view_gift_card_account_cannt_use_money);
+                    //String p2 = decimalFormat.format(GiftCardManager.getInstance().mFrozenamount);
+                    String p2 = StringUtils.changeFolatToString(BalanceManager.getInstance().mFrozenamount);
+                    textView1.setText("¥ " + p2);
+                    //int intParam = event.getIntValue();
+                    mIsHasMore = event.getBooleanParam02();
+                    mRfl_in_gift_card_account.setHasLoadMore(mIsHasMore);
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail));
+                    dissMissProgressDiaLog(1000);
+                }
+                break;
+            case BusEvent.GET_GIFT_CARD_LIST_MORE_COMPLETE:
+                mRfl_in_gift_card_account.stopLoadMore(true);
+                boolean isLoadMoreSuccess = event.getBooleanParam();
+                mIsHasMore = event.getBooleanParam02();
+                mRfl_in_gift_card_account.setHasLoadMore(mIsHasMore);
+                if (isLoadMoreSuccess) {
+                    mGiftCardAccountAdapter.notifyDataSetChanged();
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail));
+                    dissMissProgressDiaLog(1000);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_title_back:
+                finish();
+                break;
+        }
+    }
+
+}

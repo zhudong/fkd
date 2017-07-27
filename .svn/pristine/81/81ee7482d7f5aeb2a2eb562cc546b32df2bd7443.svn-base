@@ -1,0 +1,53 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.model.ActivityController;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+/**
+ * Created by Administrator on 2016-12-29.
+ */
+
+public class PickUpKrbankInfoActivity extends BaseActivity {
+
+    private View rootView;
+    private TitleBarView titleBarView;
+    private ImageView backIv;
+    private TextView payAmountTv;
+    private TextView payTypeTv;
+    private TextView balbanceTv;
+    private TextView needPayTv;
+    private TextView payNameTv;
+    private TextView payeeTv;
+    private TextView bankIdTv;
+    private TextView amountTv;
+    private TextView noteNumberTv;
+    private Button goHomeBtn;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.krbank_order_info_layout, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.krbank_info_title_bar);
+        backIv = titleBarView.getIv_in_title_back();
+        ActivityController.addActivity(this);
+
+        backIv.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+        }
+    }
+}

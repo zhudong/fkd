@@ -1,0 +1,110 @@
+package com.fuexpress.kr.ui.activity.append_parcel;
+
+
+import com.fuexpress.kr.base.BaseModel;
+import com.fuexpress.kr.base.BasePresenter;
+import com.fuexpress.kr.base.BaseView;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+
+public interface ParcelAppendContract {
+    interface Model extends BaseModel {
+        List<CsBase.ShippingMethod> getShippings();
+
+        float getShippingFee();
+    }
+
+
+    interface View extends BaseView {
+        void showAddress(String address);
+
+        void showShippingList(List<CsBase.ShippingMethod> shippingMethods);
+
+        void showShippingFee(float price);
+
+        void switchButtonState(boolean clickable);
+
+        void shoParcelName(String name);
+
+        void appendPhotos(List<String> urls);
+
+        void showProductInfo(String info);
+
+        void showDeclarePrice(float price);
+
+        void showPircelItemCount(int count);
+
+        void showPircelWeight(float weight);
+
+        void showAddress(CsParcel.AddressList address);
+
+        void showShippingMethods(List<CsParcel.MerchantParcelShippingMethodList> methods);
+
+        boolean getInfo(List<String> infos, boolean toast);
+
+        void selsetShippingMethod(int id);
+
+        void showParcleDialog(String messsage, String positiveString, String cancleText);
+
+        //        void addPhoto()
+        public void showWarehouse(List<CsBase.Warehouse> warehouse);
+    }
+
+    abstract class Presenter extends BasePresenter<Model, View> {
+        abstract void setmSave(boolean mSave);
+
+        abstract void setCompleteUpdate(boolean completeUpdate);
+
+        public abstract void getShippingList();
+
+        public abstract void getShippingFee();
+
+        abstract List<String> getPhotosPath();
+
+        abstract void setPhotosPath(List<String> photosPath);
+
+        abstract void setParcelBean(HelpSendParcelBean bean);
+
+        public abstract void selectAddress();
+
+        abstract void setWeight(float weight);
+
+        abstract void setItemCount(int count);
+
+        abstract void setDeclarePrice(float declarePrice);
+
+        abstract HelpSendParcelBean getParcelBean();
+
+        abstract void setAddress(String topText, String addressText, int id);
+
+        abstract int getShippingMethodId();
+
+        abstract void setShippingMethodId(int shippingMethodId);
+
+
+        abstract void upPhoto();
+
+        public abstract void addPhotoFile(String fileName);
+
+        abstract void selectShippingMethod(CsParcel.MerchantParcelShippingMethodList method);
+
+        abstract void delectParcel();
+
+        abstract void delectPhoto(List<String> photos);
+
+        abstract void preViewPhoto(int index);
+
+        public abstract void sava();
+        abstract void save2Db(List<String> imgs, boolean finsh);
+        public abstract void setmWarehouseid(int id);
+
+        public abstract void setDefaultWeight(double defaultWeight);
+
+        public abstract void saveItems(String serialize);
+    }
+}

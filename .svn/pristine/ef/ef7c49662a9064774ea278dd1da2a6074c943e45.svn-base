@@ -1,0 +1,32 @@
+package fksproto;
+
+enum NetType
+{
+	NET_WIFI     = 1;//wifi
+	NET_2G       = 2;//2G网络
+	NET_3G       = 3;//3G网络
+	NET_4G       = 4;//4G网络
+	NET_NOT_WIFI = 5;//非wifi
+}
+
+enum LANG
+{
+	LANG_ZH_CN   = 0;//简体中文
+	LANG_ZH_HANS = 1;//繁体中文
+	LANG_EN      = 2;//英文
+}
+
+message BaseRequest
+{
+	optional string ua        = 1;
+	optional int32  lang      = 2;
+	optional string uuid      = 3;
+	optional int32  net       = 4;
+	optional bool   auto_call = 5;
+}
+
+message BaseResponse
+{
+	required int32  ret    = 1;
+	optional string errmsg = 2;
+}

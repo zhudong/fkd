@@ -1,0 +1,100 @@
+package com.fuexpress.kr.ui.activity.append_item;
+
+import android.content.Intent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.ItemAppendBean;
+import com.fuexpress.kr.utils.ActivityUtils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class AppendItemActivity extends BaseActivity {
+    public static final String RESULT_ITEMS = "RESULT_ITEMS";
+    public static String ITEM_LIST = "ITEM_LIST";
+    public static String TYPE = "TYPE";
+    public static String POSITION = "POSITION";
+
+    @BindView(R.id.title_iv_left)
+    ImageView titleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView titleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView titleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView titleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView titleIvRight;
+    private List<ItemAppendBean> items;
+    private List<AppendItemFragment> fragmentList;
+    private int index;
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_append_item, null);
+    }
+
+    @Override
+    public void initView() {
+        titleTvCenter.setText(R.string.string_append_item);
+        titleIvLeft.setVisibility(View.VISIBLE);
+        titleTvLeft.setText(" ");
+        initFragment();
+    }
+
+    private void initFragment() {
+        initdata();
+        if (index != -1) {
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragmentList.get(index), R.id.fl_container);
+        } else {
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragmentList.get(fragmentList.size() - 1), R.id.fl_container);
+        }
+
+    }
+
+    private void initdata() {
+        Intent intent = getIntent();
+        items = (List<ItemAppendBean>) intent.getSerializableExtra(ITEM_LIST);
+        boolean appendNew = intent.getBooleanExtra(TYPE, false);
+        if (items == null)
+            items = new ArrayList<>();
+        if (appendNew) {
+            ItemAppendBean item = new ItemAppendBean(new ArrayList<String>(), new HashMap<String, String>(), new ArrayList<String>());
+            items.add(item);
+        } else {
+            index = intent.getIntExtra(POSITION, -1);
+        }
+        fragmentList = new ArrayList<>();
+        for (ItemAppendBean itemAppendBean : items) {
+            fragmentList.add(AppendItemFragment.newInstance(itemAppendBean));
+        }
+    }
+
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                finish();
+                break;
+        }
+    }
+
+
+    public void close() {
+        Intent data = new Intent();
+        data.putExtra(RESULT_ITEMS, (Serializable) items);
+        setResult(RESULT_OK, data);
+        finish();
+    }
+}

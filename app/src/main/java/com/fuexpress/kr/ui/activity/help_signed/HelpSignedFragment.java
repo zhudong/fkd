@@ -1,0 +1,358 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.HelpAdapterValueBean;
+import com.fuexpress.kr.ui.activity.PickUpActivity;
+import com.fuexpress.kr.ui.activity.PreviewMerchandiseActivity;
+import com.fuexpress.kr.ui.activity.help_send.WarehouseDialog;
+import com.fuexpress.kr.ui.adapter.AdapterForHelp;
+import com.fuexpress.kr.ui.adapter.AdapterForHelpSigned;
+import com.fuexpress.kr.ui.adapter.HelpAdapterInterface;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomDialog;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.InputBoxView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.fuexpress.kr.utils.UpLoadImageUtils;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.ArrayMap;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsUser;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/11.
+ * 帮我收的页面,View层
+ */
+public class HelpSignedFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.View {
+
+    private View mRootView;
+    private TitleBarView mTitleBarView;
+    private CustomListView mLv_in_help_me_get_package;
+    private AdapterForHelpSigned mAdapterForHelp;
+    private HelpSignedContract.Presenter mHelpSignedPresenter;
+    private ScrollView mSv_help_signed;
+    private final int mISRequestCode = 1000;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        mRootView = layoutInflater.inflate(R.layout.activity_help_me_signed, null);
+        mTitleBarView = (TitleBarView) mRootView.findViewById(R.id.tl_in_help_get_package);
+        TextView tv_in_title_right = mTitleBarView.getTv_in_title_right();
+        tv_in_title_right.setText(getString(R.string.preview_delete_msg));
+        tv_in_title_right.setOnClickListener(this);
+        mLv_in_help_me_get_package = (CustomListView) mRootView.findViewById(R.id.lv_in_help_me_get_package);
+        mSv_help_signed = (ScrollView) mRootView.findViewById(R.id.sv_help_signed);
+        Button btn_help_signed = (Button) mRootView.findViewById(R.id.btn_help_signed);
+        btn_help_signed.setOnClickListener(this);
+        /*mAdapterForHelp = new AdapterForHelp(mContext);
+        mLv_in_help_me_get_package.setAdapter(mAdapterForHelp);*/
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        HelpAdapterValueBean helpDataValueBean = mHelpSignedPresenter.getHelpDataValueBean(mContext, mHelpAdapterInterface);//从逻辑层中获取Adapter的参数对象
+        mAdapterForHelp = new AdapterForHelpSigned(helpDataValueBean);//新建一个Adapter
+        mAdapterForHelp.setPresenter(mHelpSignedPresenter);
+        mLv_in_help_me_get_package.setAdapter(mAdapterForHelp);//设置Adapter
+    }
+
+    public void scrollToBottom() {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mSv_help_signed.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    @Override
+    public void init() {
+        mHelpSignedPresenter.subscribe();
+    }
+
+    @Override
+    public void referListViewShow(final boolean isScrollToBottom) {
+        mContext.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAdapterForHelp.notifyDataSetChanged();
+                if (isScrollToBottom)
+                    scrollToBottom();
+            }
+        });
+    }
+
+    @Override
+    public void doDeleteAnimator() {
+        mAdapterForHelp.doDeletAnimation();
+    }
+
+    @Override
+    public void setPresenter(@NonNull HelpSignedContract.Presenter presenter) {
+        mHelpSignedPresenter = checkNotNull(presenter, "presenter is not null!");
+    }
+
+    @Override
+    public void showLoadingView(final int type, final String text) {
+        mContext.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mContext.getSweetAlertDialog() == null || !mContext.getSweetAlertDialog().isShowing())
+                    mContext.showProgressDiaLog(type, text);
+                else
+                    mContext.changeDiagLogAlertType(type, text);
+            }
+        });
+    }
+
+    @Override
+    public void dissMissLoadingView(long delay) {
+        if (mContext.getSweetAlertDialog() != null && mContext.getSweetAlertDialog().isShowing())
+            mContext.dissMissProgressDiaLog(delay);
+    }
+
+    @Override
+    public void showCustomToast(String text) {
+        CustomToast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getViewContext() {
+        return mContext;
+    }
+
+    @Override
+    public void showDeleteDialog(final int index) {
+        // TODO: 2016/12/11 显示删除确认对话框
+        CustomToast.makeText(mContext, "显示删除确认对话框", Toast.LENGTH_SHORT).show();
+        doDeleteAnimator();
+        CustomDialog.Builder dialog = new CustomDialog.Builder(mContext);
+        dialog.setMessage(getString(R.string.delete_demand_note));
+        dialog.setPositiveButton(getString(R.string.my_gift_card_order_binding_dialog_config), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                mHelpSignedPresenter.deleteDemand(index);
+
+            }
+        });
+        dialog.setNegativeButton(getString(R.string.my_gift_card_order_binding_dialog_cancle), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.create().show();
+    }
+
+    @Override
+    public void setAdapterWareHouseData(String wareHouseID, CsBase.Warehouse warehouse) {
+        mAdapterForHelp.setWareHouseData(wareHouseID, warehouse);
+    }
+
+    //帮我系列Adapter的回调接口,用来进行Adapter和调用Activity或者Fragment的交互
+    HelpAdapterInterface mHelpAdapterInterface = new HelpAdapterInterface() {
+        @Override
+        public void deletData(int index) {
+            //mHelpSignedPresenter.deleteDemand(index);
+            CustomToast.makeText(mContext, "删除需求", Toast.LENGTH_SHORT).show();
+            showDeleteDialog(index);
+        }
+
+        @Override
+        public void addData() {
+            mHelpSignedPresenter.addNewDeMand();
+            CustomToast.makeText(mContext, "添加需求", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void editData(EditText editText, int index, int key) {
+            mHelpSignedPresenter.editData(editText, index, key);
+            /*CustomToast.makeText(mContext, "编辑需求:" + editText.getText().toString().trim() + "位置" + index + "资源id:" + key, Toast.LENGTH_SHORT).show();
+            LogUtils.e("我被编辑了!");*/
+        }
+
+        @Override
+        public void editImage(int index, int position) {
+            // TODO: 2016/12/11 预览图片
+            CustomToast.makeText(mContext, "预览图片", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setClass(mContext, PreviewMerchandiseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("imgList", mHelpSignedPresenter.getItemImageList(index));
+            intent.putExtra("resourceType", PreviewMerchandiseActivity.RESOURCE_TYPE_ADD);
+            bundle.putInt("position", position);
+            intent.putExtra("itemIndex", index);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST);
+        }
+
+        @Override
+        public void addImage(int index) {
+            // TODO: 2016/12/11 启动图片选择器
+            CustomToast.makeText(mContext, "启动图片选择器", Toast.LENGTH_SHORT).show();
+            mHelpSignedPresenter.setChooseImageItemPosition(index);
+            MPermissions.requestPermissions(HelpSignedFragment.this, 3, Manifest.permission.WRITE_EXTERNAL_STORAGE);//请求权限
+        }
+
+        @Override
+        public void centerTvOnClick(InputBoxView inputBoxView, int index) {
+            // TODO: 2016/12/11 启动仓库选择器
+            CustomToast.makeText(mContext, "启动仓库选择器", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void centerTvOnClick(int index) {
+            // TODO: 2016/12/11 启动仓库选择器
+            CustomToast.makeText(mContext, "启动仓库选择器", Toast.LENGTH_SHORT).show();
+            showWarehouseDialog(index);
+        }
+    };
+
+
+    public void showWarehouseDialog(final int index) {
+
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        WarehouseDialog dialog = WarehouseDialog.newInstance(1);
+        dialog.setOnWarehouseSelectListener(new WarehouseDialog.OnWareSelectListener() {//处理仓库的返回结果
+            @Override
+            public void onSelect(CsBase.Warehouse warehouse) {
+                LogUtils.e("获得了仓库的返回值:" + warehouse.toString());
+                mHelpSignedPresenter.enterItemWareHouse(index, String.valueOf(warehouse.getWarehouseId()), warehouse);
+            }
+        });
+        dialog.show(ft, "dialog");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //mHelpSignedPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHelpSignedPresenter.unsubscribe();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO: 2016/12/12 处理好返回的图片
+        if (data != null) {
+            switch (requestCode) {
+                case mISRequestCode:
+                    ArrayList<String> returnImagePathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+                    //LogUtils.e("我是图片选择器,我被返回了!");
+                    List<String> shouldUpLoadImagePathList = mHelpSignedPresenter.handleImageSelectorReturn(mHelpSignedPresenter.getChooseImageItemPosition(), returnImagePathList);
+                    if (null != shouldUpLoadImagePathList)
+                        mHelpSignedPresenter.upLoadImageToUpYun(returnImagePathList, UpLoadImageUtils.ADD_PACKAGE, mHelpSignedPresenter.getPresenterUpLoadListener(), mHelpSignedPresenter.getChooseImageItemPosition());
+                    break;
+                case PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST:
+                    List<String> backList = (List<String>) data.getExtras().getSerializable("backImgList");
+                    int itemIndex = data.getIntExtra("itemIndex", 0);
+                    mHelpSignedPresenter.handleImageSelectorReturn(itemIndex, backList);
+                    LogUtils.e("返回的图片集合的ItemIndex:" + itemIndex);
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_in_title_right:
+                doDeleteAnimator();
+                break;
+            case R.id.btn_help_signed:
+                // TODO: 2016/12/11 提交到服务器的逻辑
+                //mHelpSignedPresenter.sub
+                CustomToast.makeText(mContext, "提交", Toast.LENGTH_LONG).show();
+                boolean isReady = mHelpSignedPresenter.checkItemParameter(mHelpSignedPresenter.getProductDataList());
+                if (isReady)
+                    mHelpSignedPresenter.submitItemToServer(mHelpSignedPresenter.getProductDataList());
+                break;
+        }
+
+
+    }
+
+    @PermissionGrant(3)
+    public void requestContactSuccess() {//请求了读写的权限之后
+        int chooseImageItemPosition = mHelpSignedPresenter.getChooseImageItemPosition();
+        if (-1 != chooseImageItemPosition) {
+            ArrayList<String> itemImageList = mHelpSignedPresenter.getItemImageList(chooseImageItemPosition);
+            UIUtils.startImageSelectorForAddItem(mISRequestCode, itemImageList, mContext, 4);
+        } else
+            throw new RuntimeException("start IS position == -1!");
+    }
+
+    @PermissionDenied(3)
+    public void requestContactFailed() {
+        CustomToast.makeText(mContext, "DENY ACCESS CONTACTS!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public int getISRequestCode() {
+        return mISRequestCode;
+    }
+
+    public ArrayMap<Integer, ArrayList<String>> getItemLoaclPathMap() {
+        return mHelpSignedPresenter.getItemLocalPathMap();
+    }
+}

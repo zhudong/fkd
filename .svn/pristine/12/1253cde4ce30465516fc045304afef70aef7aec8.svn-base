@@ -1,0 +1,150 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AddressManager;
+import com.fuexpress.kr.ui.adapter.AddressAdapter;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import staffproto.CsParcel;
+
+public class PackageAddressActivity extends BaseActivity implements RefreshListView.OnRefreshListener {
+
+    private View rootView;
+    private TextView confirmTv;
+    private Button addNewAddressBtn;
+    private RefreshListView addressListView;
+    private int mPageNum = 1;
+    private boolean mIsHasMore = false;
+
+    private AddressAdapter adapter;
+    private Intent intent;
+    private CsParcel.GetMerchantCustomerAddressListReponse response;
+    private boolean isShowTick;
+    private List<CsParcel.MerchantAddressList> mAddressList;
+    private AddressAdapter mAddressAdapter;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_package_address, null);
+        TitleBarView title_in_pa_address = (TitleBarView) rootView.findViewById(R.id.title_in_pa_address);
+        title_in_pa_address.getIv_in_title_back().setOnClickListener(this);
+        //TitleBarView titleBar = new TitleBarView(rootView);
+        //titleBar.setTitle("客户地址");
+        //confirmTv = titleBar.getConfirmOrderTv();
+        intent = getIntent();
+        addressListView = (RefreshListView) rootView.findViewById(R.id.address_listview);
+        addButtomButton();
+        isShowTick = getIntent().getBooleanExtra("isShowTick", true);
+        confirmTv.setOnClickListener(this);
+        addNewAddressBtn.setOnClickListener(this);
+        addressListView.setOnItemClickListener(this);
+        addressListView.setOnRefreshListener(this);
+        addressListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_send_parcel, new String[0]) {
+        });
+        addressListView.setHasLoadMore(false);
+        return rootView;
+    }
+
+    private void addButtomButton() {
+        View inflate = View.inflate(this, R.layout.item_package_address_foot, null);
+        addressListView.appendFoot(inflate);
+        addNewAddressBtn = (Button) inflate.findViewById(R.id.add_new_address_btn);
+    }
+
+    @Override
+    protected void onResume() {
+        //mPageNum = 1;
+        getCustomerAddress();
+        super.onResume();
+    }
+
+    public void getCustomerAddress() {
+        //AddressInfoManager.getInstance().getShippingAddressRequest(pageNum);
+        AddressManager.getInstance().getCustomerAddressListRequest();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.confirm_order_tv:
+                finish();
+                break;
+            case R.id.add_new_address_btn:
+                toAddNewAddressActivity();
+                break;
+        }
+    }
+
+    public void toAddNewAddressActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, AddNewAddressActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        /*//CsAddress.CustomerAddress address = response.getAddresses(position);
+        CsParcel.MerchantAddressList address = AddressInfoManager.getInstance().mMerchantaddresslistList.get(position - 1);
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("address", address);
+        intent.putExtras(bundle);
+        setResult(Constants.ADDRESS_REQUEST_CODE, intent);
+        finish();*/
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_SHIPPING_ADDRESS_COMPLETE:
+                if (event.getBooleanParam()) {
+                    addressListView.stopRefresh();
+                    addressListView.stopLoadMore(true);
+                    if (mPageNum == 1) {
+                        //mAddressAdapter = new AddressAdapter(this, AddressInfoManager.getInstance().mMerchantaddresslistList);
+                        addressListView.setAdapter(mAddressAdapter);
+                    } else {
+                        mAddressAdapter.notifyDataSetChanged();
+                    }
+                    mIsHasMore = event.getBooleanParam02();
+                    addressListView.setHasLoadMore(mIsHasMore);
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail));
+                    dissMissProgressDiaLog(1000);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+        mPageNum = 1;
+        //getCustomerAddress(mPageNum);
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+        if (mIsHasMore) {
+            mPageNum += 1;
+            //getCustomerAddress(mPageNum);
+        }
+    }
+}

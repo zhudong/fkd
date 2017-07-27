@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shape_circle_cover"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <com.fuexpress.kr.ui.view.RatioLayout
+            android:id="@+id/ratiorl_in_followed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:picRatio="0.84">
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/iv_in_item_in_choose_self_album"
+                android:layout_width="match_parent"
+                app:sriv_left_top_corner_radius="6dp"
+                app:sriv_right_top_corner_radius="6dp"
+                android:layout_height="match_parent" />
+        </com.fuexpress.kr.ui.view.RatioLayout>
+
+
+        <TextView
+            android:id="@+id/tv_in_item_in_choose_self_album_title"
+            style="@style/system_Mytextsize_black_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6.27dp"
+            android:gravity="center_horizontal"
+            android:singleLine="true" />
+
+        <!--<TextView
+            android:id="@+id/tv_in_item_in_choose_self_album_time"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            />-->
+        <!--<com.fuexpress.kr.ui.view.LikeOrFollowBtn
+            android:id="@+id/lofbtn_in_produ_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"/>-->
+        <RelativeLayout
+            android:id="@+id/rl_album_focuse"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4.43dp"
+
+            android:background="@drawable/shape_for_home_item_bg"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:id="@+id/img_album_focuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/focus" />
+
+            <TextView
+                android:id="@+id/tv_album_is_focuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/img_album_focuse"
+                android:text="@string/String_for_home_item_like"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_album_focuse_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_album_is_focuse"
+                android:text="100"
+                android:textColor="@color/gray_02"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--<ImageView
+        android:id="@+id/iv_in_item_in_choose_self_album_is_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/unselect"/>-->
+
+
+</FrameLayout>

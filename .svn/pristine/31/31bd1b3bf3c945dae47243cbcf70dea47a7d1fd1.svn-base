@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/gray_03">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_confirm_titlebar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gift_card_order_id_title"
+                android:textColor="@color/text_gray"/>
+
+            <TextView
+                android:id="@+id/confirm_payment_order_id_tv"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gift_card_payment_title"
+                android:textColor="@color/text_gray"/>
+
+            <TextView
+                android:id="@+id/confirm_payment_tv"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gift_card_count_title"
+                android:textColor="@color/text_gray"/>
+
+            <TextView
+                android:id="@+id/confirm_payment_count_tv"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gift_card_grandtotal_title"
+                android:textColor="@color/text_gray"/>
+
+            <TextView
+                android:id="@+id/confirm_payment_grandtotal_tv"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/confirm_payment_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/cart_confirm_title_bar_title"
+        android:textColor="@color/white" />
+</LinearLayout>

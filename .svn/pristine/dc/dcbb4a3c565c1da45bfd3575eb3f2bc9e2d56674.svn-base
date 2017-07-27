@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:longer="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_cpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/change_pwd_title">
+
+    </com.fuexpress.kr.ui.view.TitleBarView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:id="@+id/tv_in_change_password_title_01"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+
+            android:text="@string/change_pwd_ed_text_01"/>
+
+        <EditText
+            android:id="@+id/ed_in_change_password_01"
+            style="@style/ed_for_gravity_right_to_pwd_new"
+            android:layout_centerVertical="true"
+            android:hint="@string/change_pwd_ed_text_01_hint"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/default_bg"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+
+        >
+
+        <TextView
+            android:id="@+id/tv_in_change_password_title_02"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:text="@string/change_pwd_ed_text_02"/>
+
+        <EditText
+            android:id="@+id/ed_in_change_password_02"
+            style="@style/ed_for_gravity_right_to_pwd_new"
+            android:hint="@string/change_pwd_ed_text_02_hint"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/default_bg"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+
+        >
+
+        <TextView
+            android:id="@+id/tv_in_change_password_title_03"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:text="@string/change_pwd_ed_text_03"/>
+
+        <EditText
+            android:id="@+id/ed_in_change_password_03"
+            style="@style/ed_for_gravity_right_to_pwd_new"
+            android:layout_centerVertical="true"
+            android:hint="@string/change_pwd_ed_text_03_hint"
+            />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_in_change_password_save_btn"
+        style="@style/system_Mytextsize_white_14"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_for_login_btn"
+        android:gravity="center"
+        android:text="@string/String_parcel_save"
+        />
+
+</LinearLayout>

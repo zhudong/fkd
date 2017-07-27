@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/string_my_need" />
+
+    <com.fuexpress.kr.ui.view.NoteRadioGroup
+        android:id="@+id/rbg_my_need_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rb_to_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:button="@null"
+                android:drawablePadding="3dp"
+                android:drawableTop="@drawable/selector_tab_to_pay"
+                android:gravity="center"
+                android:text="@string/string_my_need_to_pay"
+                android:textColor="@drawable/selector_rb_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/toSendCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/shape_red_point"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="22"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <RadioButton
+            android:id="@+id/rb_instorage"
+            style="@style/content_rb_style"
+            android:drawableTop="@drawable/selector_tab_to_in_storage"
+            android:text="@string/string_need_in_storage" />
+
+        <RadioButton
+            android:id="@+id/rb_cancel"
+            style="@style/content_rb_style"
+            android:drawableTop="@drawable/selector_tab_to_cancel"
+            android:text="@string/string_neeed_cancel" />
+
+
+        <RadioButton
+            android:id="@+id/rb_all"
+            style="@style/content_rb_style"
+            android:drawableTop="@drawable/selector_tab_to_all"
+            android:text="@string/string_need_all" />
+    </com.fuexpress.kr.ui.view.NoteRadioGroup>
+
+
+    <FrameLayout
+        android:id="@+id/fl_need_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg" />
+
+
+</LinearLayout>

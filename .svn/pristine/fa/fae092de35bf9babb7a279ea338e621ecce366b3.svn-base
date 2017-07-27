@@ -1,0 +1,106 @@
+package com.fuexpress.kr.model;
+
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.NetworkImageHolderView;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+/**
+ * Created by Administrator on 2016-10-28.
+ */
+public class HeaderModel {
+    public static HeaderModel mInstance = new HeaderModel();
+    private String[] mBannersList;
+    private ArrayList mNetworkImages;
+
+    private HeaderModel() {
+    }
+
+    public static HeaderModel getInstance() {
+        return mInstance;
+    }
+
+    public void initDta(Activity mContext, ConvenientBanner mConvenientBanner) {
+        mConvenientBanner.refreshDrawableState();
+
+        if (mBannersList == null) {
+//            getBannerList();
+//            return;
+        }
+//        mRootView.setPicRatio((float) 2.53469);
+        int screenWidthPixels = UIUtils.getScreenWidthPixels(mContext);
+        int height = (int) (screenWidthPixels / 2.44);
+        mConvenientBanner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
+
+
+        mNetworkImages = new ArrayList();
+       /* for (CsMainpage.Banner banner : mBannersList) {
+            mNetworkImages.add(banner.getUrl());
+        }*/
+
+        for (int i = 0; i < 4; i++) {
+            mNetworkImages.add("http://car2.autoimg.cn/cardfs/product/g23/M0D/90/01/u_autohomecar__wKgFV1bSTEqAYEMEAAoYNQ1knhY263.jpg");
+        }
+
+        if (mNetworkImages.size() <= 1) {
+            mConvenientBanner.stopTurning();
+            mConvenientBanner.setCanLoop(false);
+        } else {
+            mConvenientBanner.startTurning(5000);
+            mConvenientBanner.setCanLoop(true);
+            mConvenientBanner.setPageIndicator(new int[]{R.drawable.graypoint, R.drawable.redpoint});
+        }
+
+        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+//                hasAdapter = true;
+                return new NetworkImageHolderView();
+            }
+        }, mNetworkImages)
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+
+        mConvenientBanner.startTurning(5000);
+//        mConvenientBanner.setOnItemClickListener(new ItemListener());
+    }
+
+    /*private void getBannerList() {
+
+        CsMainpage.IndexAdImageRequest.Builder builder = CsMainpage.IndexAdImageRequest.newBuilder();
+        int tiem = (int) (new Date().getTime() / 1000);
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode()).setVersionNo(CommonUtils.getVersionName(mContext)).setApptype(2);
+//        builder.setCversion(1);
+//        builder.setFlag(2);
+//        builder.setVersionno(1000000);
+        INetEngineListener<CsMainpage.IndexAdImageResponse> listener = new INetEngineListener<CsMainpage.IndexAdImageResponse>() {
+            @Override
+            public void onSuccess(CsMainpage.IndexAdImageResponse response) {
+                mBannersList = response.getBannersList();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initPages();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.d("fail", "fail");
+            }
+        };
+//        NetEngine.postRequest(builder, listener);
+        BaseProtocol.getInstance().loadData(builder, listener);
+    }*/
+
+}

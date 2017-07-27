@@ -1,0 +1,32 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import android.support.annotation.NonNull;
+
+import com.fuexpress.kr.bean.HelpSignedBean;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+import rx.Observable;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 帮我收货的数据源接口(用来定义需要实现这个接口的数据源类要必须实现的方法)
+ */
+public interface HelpSignedDataSource {
+
+    Observable<List<CsParcel.ProductDataList>> getHelpSignedDataList();//提供给外部用来获取全部Bean列表的接口
+
+    Observable<CsParcel.ProductDataList> getHelpSignedDataOnly(int ID);//提供给外部用来获取特定Bean的接口
+
+    void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData);//提供给外部用来保存Bean的接口
+
+    void deleteHelpSignedData(int ID);//提供给外部删除Bean的接口
+
+    void deletAllHelpSignedData();//删除全部数据
+
+    void refreshHelpSignedData();//刷新数据
+
+    void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData);//提供给外界改变数据的接口
+
+}

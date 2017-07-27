@@ -1,0 +1,107 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AddressManager;
+import com.fuexpress.kr.ui.adapter.AddressManagerAdapter;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsAddress;
+
+public class AddressManagerActivity extends BaseActivity implements RefreshListView.OnRefreshListener {
+
+
+    @BindView(R.id.rfl_in_address_manager)
+    RefreshListView mRflInAddressManager;
+    private View mRootView;
+    private AddressManagerAdapter mAddressManagerAdapter;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_address_manager, null);
+        TitleBarView title_in_address_manager = (TitleBarView) mRootView.findViewById(R.id.title_in_address_manager);
+        title_in_address_manager.getIv_in_title_back().setOnClickListener(this);
+        title_in_address_manager.getTv_in_title_right().setText(getString(R.string.string_for_address_manager_add));
+        title_in_address_manager.getTv_in_title_right().setOnClickListener(this);
+        initData();
+        return mRootView;
+    }
+
+    private void initData() {
+        // TODO: 2016/11/2 加载地址列表数据
+        AddressManager.getInstance().getCustomerAddressListRequest();
+
+    }
+
+
+    @Override
+    public void initView() {
+        //mRflInAddressManager.setAdapter(new AddressManagerAdapter(this));
+        mRflInAddressManager.setOnRefreshListener(this);
+        mRflInAddressManager.setHasLoadMore(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.tv_in_title_right:
+                // TODO: 2016/11/1 跳转到新增地址页面
+                startDDMActivity(AddNewAddressActivity.class, true);
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+        initData();
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+        return;
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_ADDRESS_LIST_COMPLETE:
+                if (event.getBooleanParam()) {
+                    mAddressManagerAdapter = new AddressManagerAdapter(this, AddressManager.getInstance().mAddressesList);
+                    mRflInAddressManager.setAdapter(mAddressManagerAdapter);
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail_02));
+                    dissMissProgressDiaLog(500);
+                }
+                mRflInAddressManager.stopRefresh();
+                break;
+            case BusEvent.DELET_ADDRESS_REQUEST:
+                if (event.getBooleanParam()) {
+                    initData();
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail_02));
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void finish() {
+        if (mAddressManagerAdapter.isCilckDefault)
+            AddressManager.getInstance().setAddressDefault(mAddressManagerAdapter.mData.get(mAddressManagerAdapter.oldDeafaultIndex), 0);
+        super.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        initData();
+        super.onResume();
+    }
+}

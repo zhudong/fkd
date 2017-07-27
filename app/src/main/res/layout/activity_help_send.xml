@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/default_bg">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title_normal"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_all_parcels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/string_all_parcels"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:id="@+id/img_show_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tv_all_parcels"
+            android:src="@mipmap/infro"/>
+
+        <TextView
+            android:id="@+id/btn_append_parcel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="8dp"
+            android:background="@mipmap/package_tips_button2"
+            android:gravity="center"
+            android:text="@string/String_parcle_add"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_third"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_second"
+        android:layout_marginBottom="44dp"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/rl_no_parcel_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingTop="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="28dp"
+                android:src="@mipmap/package_none"/>
+
+            <TextView
+                android:id="@+id/tv_tips_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/String_parcle_none"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@null"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_tips_estimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/String_parcle_estimate_fee"
+                    android:textColor="@color/black_parcel"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_estimate_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/tv_tips_estimate"
+                    android:text=""
+                    android:textColor="@color/the_red"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="120dp"
+                android:layout_marginTop="1dp"
+                android:text="@string/String_parcle_estimate_fee_tips"
+                android:textColor="@color/gray_999"
+                android:textSize="11sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/title_bar_black"
+            android:gravity="center"
+            android:text="@string/String_parcle_submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+</RelativeLayout>

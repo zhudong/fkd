@@ -1,0 +1,105 @@
+package com.fuexpress.kr.model;
+
+import com.fuexpress.kr.bean.SalesOrderBean;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.OperaRequestListener;
+import com.fuexpress.kr.net.RequestNetListener;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.socks.library.KLog;
+
+import java.util.List;
+
+import fksproto.CsOrder;
+
+/**
+ * Created by longer on 2017/7/6.
+ */
+
+public class SalesOrderManager {
+    public static final int STATUS_ALL=0;
+    public static final int STATUS_TO_PAY =1;
+    public static final int STATUS_PAYED =2;
+    public static final int STATUS_CANCELED =3;
+    public static boolean isAllHasMore=true;
+    public static boolean isPandingHasMore=true;
+    public static boolean isPayedHasMore=true;
+    public static boolean isCanceledHasMore=true;
+    public static int currentIndexAll=1;
+    public static int currentIndexPanding=1;
+    public static int currentIndexPayed=1;
+    public static int currentIndexCanceled=1;
+    public static List<SalesOrderBean> orderBeanAlls,orderBeanPendings,orderBeanPayeds,orderBeanCanceleds;
+    public static void getAllOrderList(final boolean refresh, final OperaRequestListener listener){
+        CsOrder.GetSalesOrderListRequest.Builder builder=CsOrder.GetSalesOrderListRequest.newBuilder();
+        builder.setTab(CsOrder.SalesOrderTab.SALES_ORDER_TAB_NONE_VALUE).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        if(refresh){
+            builder.setPageno(1);
+        }else {
+            builder.setPageno(currentIndexAll);
+        }
+        NetEngine.postRequest(builder, new INetEngineListener<CsOrder.GetSalesOrderListResponse>() {
+            @Override
+            public void onSuccess(CsOrder.GetSalesOrderListResponse response) {
+                KLog.i("onSuccess ", response.toString());
+                currentIndexAll++;
+                isAllHasMore=response.getMore();
+                if(orderBeanAlls==null){
+                    orderBeanAlls=ClassUtil.conventSalesOrderList2OrderBeanList(response.getOrdersList());
+                }else{
+                    for(CsOrder.SalesOrder salesOrder:response.getOrdersList()){
+                        orderBeanAlls.add(ClassUtil.conventSalesOrder2OrderBean(salesOrder));
+                    }
+                }
+                if(refresh){
+                    currentIndexAll=1;
+                    orderBeanAlls= ClassUtil.conventSalesOrderList2OrderBeanList(response.getOrdersList());
+                }
+
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onOperaSuccess();
+                    }
+                });
+            }
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onOperaFailure();
+                    }
+                });
+
+            }
+        });
+    }
+    public static void getSalesOrderDetail(long id,final RequestNetListener listener){
+        CsOrder.GetSalesOrderDetailRequest.Builder builder= CsOrder.GetSalesOrderDetailRequest.newBuilder();
+        builder.setOrderId(id).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        NetEngine.postRequest(builder,new INetEngineListener<CsOrder.GetSalesOrderDetailResponse>() {
+            @Override
+            public void onSuccess( final CsOrder.GetSalesOrderDetailResponse response) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onSuccess(response);
+                    }
+                });
+            }
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onFailure();
+                    }
+                });
+            }
+        });
+    }
+}

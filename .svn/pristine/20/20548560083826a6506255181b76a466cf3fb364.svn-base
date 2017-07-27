@@ -1,0 +1,102 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by kevin on 2016/12/19.
+ */
+
+public class DemandsActivity extends BaseActivity {
+
+    public static final String DEMAND_BEAN="demand_bean";
+
+    @BindView(R.id.title_iv_left)
+    ImageView titleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView titleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView titleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView titleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView titleIvRight;
+    @BindView(R.id.tv_demand_no)
+    TextView tvDemandNo;
+    @BindView(R.id.tv_demand_time)
+    TextView tvDemandTime;
+    @BindView(R.id.tv_demand_type)
+    TextView tvDemandType;
+    @BindView(R.id.tv_demand_state)
+    TextView tvDemandState;
+    @BindView(R.id.tv_demand_service_fee)
+    TextView tvDemandServiceFee;
+    @BindView(R.id.icon_01)
+    ImageView icon01;
+    @BindView(R.id.icon_02)
+    ImageView icon02;
+    @BindView(R.id.icon_03)
+    ImageView icon03;
+    @BindView(R.id.icon_04)
+    ImageView icon04;
+    @BindView(R.id.icon_05)
+    ImageView icon05;
+    @BindView(R.id.tv_item_name)
+    TextView tvItemName;
+    @BindView(R.id.tv_item_price)
+    TextView tvItemPrice;
+    @BindView(R.id.tv_item_count)
+    TextView tvItemCount;
+    @BindView(R.id.tv_item_notice)
+    TextView tvItemNotice;
+    @BindView(R.id.pick_up_balance_tv)
+    TextView pickUpBalanceTv;
+    @BindView(R.id.pick_up_payment_tv)
+    TextView pickUpPaymentTv;
+    @BindView(R.id.pick_up_payment_layout)
+    LinearLayout pickUpPaymentLayout;
+    @BindView(R.id.pick_up_grand_total_tv)
+    TextView pickUpGrandTotalTv;
+    @BindView(R.id.pick_up_submit_btn)
+    Button pickUpSubmitBtn;
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_demands, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.pick_up_payment_layout,R.id.pick_up_submit_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                break;
+            case R.id.title_tv_left:
+                break;
+            case R.id.pick_up_payment_layout:
+                break;
+            case R.id.pick_up_submit_btn:
+                break;
+        }
+    }
+
+
+}

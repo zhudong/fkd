@@ -1,0 +1,224 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.CouponCurrencyInfoData;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.CouponDataManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.CouponCurrencyDataAdapter;
+import com.fuexpress.kr.ui.fragment.CouponListFragment;
+import com.fuexpress.kr.ui.fragment.IntegralFragment;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.google.protobuf.GeneratedMessage;
+import com.socks.library.KLog;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsUser;
+
+/**
+ * Created by Administrator on 2017-2-14.
+ */
+
+public class IntegralActivity extends BaseActivity {
+
+    private View rootView;
+
+    private ImageView backIv;
+    private TextView backTv;
+    private TextView rightTv;
+    private TitleBarView titleBarView;
+    private SlidingTabLayout tabLayout;
+    private ViewPager viewPager;
+    public static String sCurrentCode = "";
+    private List<Fragment> mFragments = new ArrayList<>();
+    public static boolean loaded = false;
+    private CouponCurrencyDataAdapter adapter;
+
+    public String amount;
+    public int credits;
+    public List<CsUser.GetCreditsDetailResponse> creditList = new ArrayList<>();
+    public Map<String, CsUser.GetCreditsDetailResponse> creditMap = new HashMap<>();
+    private List<CsUser.CurrencyList> list;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_integral_layout, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.integral_titlebar);
+        backIv = titleBarView.getIv_in_title_back();
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(R.string.integral_management_msg);
+        rightTv = titleBarView.getTv_in_title_right();
+        rightTv.setText(getString(R.string.integral_titlebar_right_msg));
+
+        tabLayout = (SlidingTabLayout) rootView.findViewById(R.id.integral_tab_layout);
+        viewPager = (ViewPager) rootView.findViewById(R.id.integral_viewpager);
+
+        backIv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        rightTv.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getCreditsDetailRequest();
+        mFragments.clear();
+        creditList.clear();
+    }
+
+    private void setData(List<CsUser.CurrencyList> list) {
+        if (null == list || list.size() == 0) {
+            return;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            Bundle args = new Bundle();
+            args.putString(IntegralFragment.CURRENCY_CODE, list.get(i).getCurrencycode());
+            args.putString(IntegralFragment.CURRENCY_SIGN, list.get(i).getCurrencysign());
+            IntegralFragment c = IntegralFragment.newInstance(args);
+            if (null == mFragments) {
+                mFragments = new ArrayList<>();
+            }
+            mFragments.add(i, c);
+        }
+        adapter = new CouponCurrencyDataAdapter(getSupportFragmentManager(), this, list, true);
+        viewPager.setAdapter(adapter);
+        tabLayout.setTabTitleTextSize(12);
+        tabLayout.setTitleTextColor(Color.BLACK, Color.GRAY);
+        tabLayout.setSelectedIndicatorColors(Color.alpha(0));
+        if (list.size() < 4) {
+            tabLayout.setDistributeEvenly(true);
+        }
+        viewPager.setCurrentItem(getIndexByCode());
+        tabLayout.setViewPager(viewPager);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+            case R.id.tv_in_title_right:
+                if (loaded) {
+                    Intent intent = new Intent();
+                    intent.setClass(IntegralActivity.this, WithdrawActivity.class);
+                    Bundle bundle = new Bundle();
+                    CsUser.CurrencyList data = list.get(viewPager.getCurrentItem());
+                    bundle.putSerializable("couponCurrencyInfoData", data);
+                    CsUser.GetCreditsDetailResponse res = creditMap.get(data.getCurrencycode());
+                    bundle.putSerializable("currentGetCreditsDetailResponse", res);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                break;
+        }
+    }
+
+    private int getIndexByCode() {
+        if (TextUtils.isEmpty(sCurrentCode)) {
+            return 0;
+        }
+        List<CsUser.CurrencyList> datas = list;
+        if (null == datas) {
+            return 0;
+        }
+        for (int i = 0; i < datas.size(); i++) {
+            if (datas.get(i).getCurrencycode().equals(sCurrentCode)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (viewPager != null) {
+            int index = viewPager.getCurrentItem();
+            if (null != list && list.size() > 0) {
+                sCurrentCode = list.get(index).getCurrencycode();
+            }
+
+        }
+    }
+
+    public Fragment getFragment(int i) {
+        if (null == mFragments || mFragments.size() < i || i < 0) {
+            return null;
+        } else {
+            return mFragments.get(i);
+        }
+    }
+
+    public void getCreditsDetailRequest(){
+        showLoading();
+        CsUser.GetCreditsDetailRequest.Builder builder = CsUser.GetCreditsDetailRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        builder.setPagenum(1);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetCreditsDetailResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetCreditsDetailResponse response) {
+                Message msg = Message.obtain();
+                msg.obj =response;
+                mHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeLoading();
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            closeLoading();
+            CsUser.GetCreditsDetailResponse response = (CsUser.GetCreditsDetailResponse) msg.obj;
+            list = response.getCurrencylistList();
+            setData(list);
+        }
+    };
+//    public void onEventMainThread(BusEvent event) {
+//        super.onEventMainThread(event);
+//        if (event.getType() == BusEvent.GET_COUPON_CURRENCY_LIST_SUCCESS) {
+//            closeLoading();
+//            setData();
+//        }
+//    }
+}

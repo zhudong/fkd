@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    tools:context="ai.zhaoban.ydk.ui.activity.package_detail.ParcelToSendActivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <TextView
+            android:id="@+id/tv_tile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:drawableLeft="@mipmap/submit_success"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/package_to_send_submit"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="@string/package_send_notice"
+            android:textColor="@color/text_color_666"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_to_send_continue"
+            android:layout_width="100dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape_bg_package_to_send"
+            android:gravity="center"
+            android:text="@string/package_send_continue"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

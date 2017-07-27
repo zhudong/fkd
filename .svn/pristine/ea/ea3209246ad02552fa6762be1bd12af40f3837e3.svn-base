@@ -1,0 +1,255 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+import android.widget.EditText;
+
+import com.fuexpress.kr.R;
+
+import com.google.common.annotations.VisibleForTesting;
+
+import com.fuexpress.kr.ui.adapter.HelpAdapterInterface;
+import com.fuexpress.kr.ui.view.InputBoxView;
+import com.fuexpress.kr.utils.InPutBoxViewFactory;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/8.
+ * 用来管理帮我收数据的仓库类,是将远程和本地的数据源来整合储存的地方
+ * 其实就是将本地和网上的数据集中储存在内存中的仓库类
+ * 可以当这个就是MVP的Model层
+ * 这个仓库类需要实现数据源接口,来对现有的本地Or网络数据来进行管理(在本地中(更多是数据库),增删改查)
+ */
+public class HelpSingedDataRepository implements HelpSignedDataSource {
+
+    @NonNull
+    private final HelpSignedLocalDataSource mHelpSignedLocalDataSource;//本地数据源的实体对象,不可为空不可修改
+
+    @Nullable
+    private static HelpSingedDataRepository INSTANCE = null;
+
+    @VisibleForTesting
+    @Nullable
+    List<CsParcel.ProductDataList> mProductDataCacheLists;
+
+    @NonNull
+    List<Integer> mResIDList = new ArrayList<>();
+
+    /*@Nullable
+    List<InputBoxView> mInputBoxViewList = new ArrayList<>();*/
+
+    @Nullable
+    ArrayMap<Integer, ArrayList<String>> mImageIndexDataMap;//集合下标和图片本地路径的map集合
+
+    @Nullable
+    ArrayMap<Integer, ArrayMap<String, String>> mImageUpLoadUrlMap;//集合下标和图片上传完成后的url的map集合
+    //private List<InputBoxView> mInputBoxViews;
+    //private ArrayMap<Integer, InputBoxView> mIntegerInputBoxViewArrayMap;
+
+    @Nullable
+    ArrayMap<String, CsBase.Warehouse> mWarehouseArrayMap;//用来保存仓库信息的map,和仓库id一一对应
+
+    //该Map集合保存了所有已经上传好的图片的路径
+    private ArrayMap<String, String> mAddImageUpLoadUrlMap;
+
+    private ArrayMap<Integer, Boolean> mIsIndexCompleteUpLoadMap;//用来储存特定下标下上传图片是否完成的Map
+
+    private List<HelpMeSingleBean> mHelpSingleBeanList;//用来储存帮我寄系列参数的BeanList;
+
+
+    private HelpSingedDataRepository(@NonNull HelpSignedLocalDataSource helpSignedLocalDataSource) {//其实这里还需要一个远程数据源对象,因为这里的需求不涉及,所以就不需要了
+        mHelpSignedLocalDataSource = checkNotNull(helpSignedLocalDataSource, "Local Data Is NotNull!");
+        mResIDList.addAll(getResIDListData(helpSignedLocalDataSource));
+        //mInputBoxViewList.addAll(createHelpSingedInputBoxView(context, mResIDList));
+    }
+
+    private List<Integer> getResIDListData(HelpSignedLocalDataSource helpSignedLocalDataSource) {//获得要显示的文字资源集合
+        return checkNotNull(helpSignedLocalDataSource.getResIDList());
+    }
+
+    /*private List<InputBoxView> createHelpSingedInputBoxView(Context context, List<Integer> resIDList) {//生产对应InputBoxView,注意这里只生产适用于帮我收的InputBoxView
+        if (mInputBoxViews == null) {
+            mInputBoxViews = new ArrayList<>();
+            mInputBoxViews.add(InPutBoxViewFactory.getInstance(context).createNormalInputBoxView(context.getString(resIDList.get(0)), context.getString(R.string.string_hint_200_char)));
+            mInputBoxViews.add(InPutBoxViewFactory.getInstance(context).createNormalInputBoxView(context.getString(resIDList.get(1)), context.getString(R.string.string_hint_200_char)));
+            mInputBoxViews.add(InPutBoxViewFactory.getInstance(context).createWareHouseInputBoxView(context.getString(resIDList.get(2)), context.getString(R.string.hm_item_ware_house_hint)));
+            mInputBoxViews.add(InPutBoxViewFactory.getInstance(context).createPriceInputBoxView(context.getString(resIDList.get(3)), context.getString(R.string.hm_item_request_price_hint), "KRW"));
+            mInputBoxViews.add(InPutBoxViewFactory.getInstance(context).createNormalInputBoxView(context.getString(resIDList.get(4)), context.getString(R.string.hm_item_quantity_hint)));
+        }
+        return mInputBoxViews;
+    }*/
+
+    public static HelpSingedDataRepository getInstance(@NonNull HelpSignedLocalDataSource helpSignedLocalDataSource) {
+        if (INSTANCE == null)
+            INSTANCE = new HelpSingedDataRepository(helpSignedLocalDataSource);
+        return INSTANCE;
+    }
+
+
+    @Override
+    public List<CsParcel.ProductDataList> getHelpSignedDataList() {
+        if (mProductDataCacheLists != null) {
+            return mProductDataCacheLists;
+        } else {
+            mProductDataCacheLists = new ArrayList<>();
+            mProductDataCacheLists.addAll(mHelpSignedLocalDataSource.getHelpSignedDataList());
+        }
+        return mProductDataCacheLists;
+    }
+
+    @Override
+    public CsParcel.ProductDataList getHelpSignedDataOnly(int index) {
+        if (mProductDataCacheLists != null)
+            return mProductDataCacheLists.get(index);
+        else
+            return null;
+    }
+
+    @Override
+    public void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData) {
+        if (mProductDataCacheLists != null)
+            mProductDataCacheLists.add(helpSignedData);
+    }
+
+    @Override
+    public boolean deleteHelpSignedData(int index) {
+        boolean isSuccess = false;
+        if (mProductDataCacheLists != null) {
+            /*Iterator<CsParcel.ProductDataList> iterator = mProductDataCacheLists.iterator();
+            CsParcel.ProductDataList productDataList = mProductDataCacheLists.get(index);
+            int deleteHashCode = productDataList.hashCode();
+            while (iterator.hasNext()) {
+                if (iterator.next().hashCode() == deleteHashCode) {
+                    iterator.remove();
+                }
+            }*/
+            if (mProductDataCacheLists.size() != 1) {//至少需要一个需求单
+                mProductDataCacheLists.remove(index);//这里会产生一个隐患,就是在遍历中不能修改集合，又因这个集合在上传时才会遍历，所以这里我们在上传时进行限制操作即可
+                isSuccess = true;
+            }
+
+        }
+        //mProductDataCacheLists.remove(index);
+        return isSuccess;
+    }
+
+    @Override
+    public void deletAllHelpSignedData() {
+        Iterator<CsParcel.ProductDataList> iterator = checkNotNull(mProductDataCacheLists.iterator());
+        while (iterator.hasNext()) {
+            iterator.remove();
+        }
+        //mProductDataCacheLists = new ArrayList<>();
+        mImageIndexDataMap = new ArrayMap<>();
+        //mImageUpLoadUrlMap = new ArrayMap<>();
+        mProductDataCacheLists.add(CsParcel.ProductDataList.newBuilder().build());//清除完数据后再添加一个即可
+    }
+
+    @Override
+    public void refreshHelpSignedData() {//刷新数据,暂时没用
+
+    }
+
+    @Override
+    public void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData) {
+        if (mProductDataCacheLists != null)
+            mProductDataCacheLists.set(index, helpSignedData);
+    }
+
+    /**
+     * Used to force {@link #getInstance(HelpSignedLocalDataSource)}  to create a new
+     * instance
+     * next time it's called.
+     */
+    public static void destroyInstance() {
+        INSTANCE = null;
+    }
+
+
+    public ArrayMap<Integer, ArrayList<String>> getImageIndexArrayMap() {//获取图片本地路径和索引的Map集合,跟集合的索引一一对应
+        if (mImageIndexDataMap == null)
+            mImageIndexDataMap = new ArrayMap<>();
+        return mImageIndexDataMap;
+    }
+
+    public ArrayMap<Integer, ArrayMap<String, String>> getImageUpLoadUrlArrayMap() {//获取图片上传完成后的url和索引的Map集合,跟集合索引一一对应
+        if (mImageUpLoadUrlMap == null)
+            mImageUpLoadUrlMap = new ArrayMap<>();
+        return mImageUpLoadUrlMap;
+    }
+
+    public ArrayMap<String, String> getAllImageUpLoadUrlArrayMap() {//获取图片上传完成后的url和索引的Map集合
+        if (mAddImageUpLoadUrlMap == null)
+            mAddImageUpLoadUrlMap = new ArrayMap<>();
+        return mAddImageUpLoadUrlMap;
+    }
+
+    public void saveWareHouseData(String wareHouseID, CsBase.Warehouse warehouse) {//暂时保存仓库信息在本地
+        if (mWarehouseArrayMap == null)
+            mWarehouseArrayMap = new ArrayMap<>();
+        mWarehouseArrayMap.put(wareHouseID, warehouse);
+    }
+
+    public CsBase.Warehouse getWareHouseData(String wareHouseID) {//根据仓库ID获得仓库信息
+        if (!TextUtils.isEmpty(wareHouseID)) {
+            if (mWarehouseArrayMap != null)
+                return mWarehouseArrayMap.get(wareHouseID);
+            else
+                return null;
+        } else
+            return null;
+    }
+
+
+    public ArrayMap<Integer, Boolean> getIsIndexCompleteUpLoadMap() {//获得特定下标下图片是否上传完成的Map集合
+        if (mIsIndexCompleteUpLoadMap == null)
+            mIsIndexCompleteUpLoadMap = new ArrayMap<>();
+        return mIsIndexCompleteUpLoadMap;
+    }
+
+    public List<HelpMeSingleBean> getHelpSingleBeanList() {//获得Bean数据列表
+        if (mHelpSingleBeanList == null)
+            mHelpSingleBeanList = new ArrayList<>();
+        return mHelpSingleBeanList;
+    }
+
+    public void addHelpSingleBean(HelpMeSingleBean helpMeSingleBean) {//添加Bean数据到列表中
+        if (mHelpSingleBeanList == null)
+            mHelpSingleBeanList = new ArrayList<>();
+        mHelpSingleBeanList.add(helpMeSingleBean);
+    }
+
+    public void modifyHelpSingleBean(int index, HelpMeSingleBean helpMeSingleBean) {//修改Bean数据
+        if (mHelpSingleBeanList != null)
+            mHelpSingleBeanList.set(index, helpMeSingleBean);
+    }
+
+    public void reMoveHelpSingleBean(int index) {//删除
+        if (mHelpSingleBeanList != null)
+            mHelpSingleBeanList.remove(index);
+    }
+
+    public HelpMeSingleBean getHelpMeSingleBeanOnly(int index) {//获得单个Bean数据
+        if (mHelpSingleBeanList != null)
+            return mHelpSingleBeanList.get(index);
+        else
+            return null;
+    }
+
+    //清空所有的信息
+    public void clearAllHelpSingleBeanData() {
+        mHelpSingleBeanList.clear();
+    }
+
+}

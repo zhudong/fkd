@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_merfollows_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/lv_for_merchant_follows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:listSelector="#00000000">
+
+    </com.fuexpress.kr.ui.view.RefreshListView>
+
+</LinearLayout>

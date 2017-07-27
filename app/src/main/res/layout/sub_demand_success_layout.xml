@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:longer="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_sub_success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/sub_demand_success"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_sub_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="67.3dp"
+            android:layout_marginTop="33.7dp"
+            android:src="@mipmap/submit_success"/>
+
+        <TextView
+            style="@style/system_Mytextsize_black_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.7dp"
+            android:layout_marginTop="46dp"
+            android:layout_toRightOf="@+id/iv_sub_success"
+            android:text="@string/sub_demand_success_note"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_sub_success"
+            android:layout_marginTop="32.7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/system_Mytextsize_GRAY_13_666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:text="@string/sub_damand_success_note_p1"/>
+
+            <TextView
+                style="@style/system_Mytextsize_back_13_1515"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sub_demand_success_note_p2"/>
+
+            <TextView
+                style="@style/system_Mytextsize_GRAY_13_666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sub_demand_success_note_p3"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_back_home"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16.7dp"
+        android:background="@drawable/selector_btn_bg"
+        android:text="@string/String_parcel_back_to_home"
+        android:textColor="@drawable/selector_btn_back_text"
+        android:textSize="13sp"/>
+
+</LinearLayout>

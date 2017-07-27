@@ -1,0 +1,132 @@
+package com.fuexpress.kr.base;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class BusEvent {
+    public static final int TEST_MAX = Integer.MAX_VALUE;
+
+
+
+
+    //图片下载完成
+    //使用mTpye来区分来自不同接受者和发送者
+    private int mType = 0;
+    private Object mParam;
+    private String mStrParam;
+    private int mIntParam;
+    private long mLongParam;
+    private boolean mBooleanParam;
+    private boolean mBooleanParam02;
+    private int mIntValue;
+
+    public BusEvent(int type, long longparam) {
+        this.mType = type;
+        this.mLongParam = longparam;
+    }
+
+    public BusEvent(int type, int intParam) {
+        this.mType = type;
+        this.mIntParam = intParam;
+    }
+
+    public BusEvent(int type, Object param) {
+        mType = type;
+        mParam = param;
+    }
+
+    public BusEvent(int type, String str) {
+        mType = type;
+        mStrParam = str;
+    }
+
+
+    public BusEvent(int type, Object param, String str) {
+        mType = type;
+        mParam = param;
+        mStrParam = str;
+    }
+
+    public BusEvent(int type, boolean booleanParam, Object param) {
+        mType = type;
+        mParam = param;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, boolean booleanParam02) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+    }
+
+    public BusEvent(int type, boolean booleanParam, boolean booleanParam02, int intValue) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+        mIntValue = intValue;
+    }
+
+    public BusEvent(int type, boolean booleanParam, int intValue) {
+        mType = type;
+        mIntValue = intValue;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, String stringParam) {
+        mType = type;
+        mStrParam = stringParam;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, Object param, int intParam) {
+        mType = type;
+        mParam = param;
+        mIntParam = intParam;
+    }
+
+    public BusEvent(int type, long longParam, Object param) {
+        this.mType = type;
+        this.mLongParam = longParam;
+        this.mParam = param;
+    }
+
+    public int getType() {
+        return mType;
+    }
+
+    public Object getParam() {
+        return mParam;
+    }
+
+    public long getmLongParam() {
+        return mLongParam;
+    }
+
+    public String getStrParam() {
+        return mStrParam;
+    }
+
+    public int getIntParam() {
+        return mIntParam;
+    }
+
+    public boolean getBooleanParam() {
+        return mBooleanParam;
+    }
+
+    public int getIntValue() {
+        return mIntValue;
+    }
+
+    public boolean getBooleanParam02() {
+        return mBooleanParam02;
+    }
+}

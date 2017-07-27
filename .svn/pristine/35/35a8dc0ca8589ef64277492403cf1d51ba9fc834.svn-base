@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="title_bar_black">#FFC947</color>
+    <color name="title_bar_black_dark">#202020</color>
+    <color name="default_bg">#F1F1F1</color>
+    <color name="tv_color_gray_02">#949494</color>
+    <color name="black">#000</color>
+    <color name="black_0">#000</color>
+    <color name="white">#fff</color>
+    <color name="e3e3">#E3E3E3</color>
+    <color name="me_fragment_bg">#E1E1E1</color>
+    <color name="ff999">#FF999999</color>
+    <color name="progress_forecolor">#1985EC</color>
+    <color name="gray_999">#999999</color>
+    <color name="bg_add">#F4F4F4</color>
+    <color name="gray_666">#666666</color>
+    <color name="the_red">#FF0000</color>
+</resources>

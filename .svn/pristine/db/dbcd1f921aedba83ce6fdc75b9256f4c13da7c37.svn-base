@@ -1,0 +1,59 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.view.View;
+
+import com.fuexpress.kr.base.BaseFragment;
+
+import fksproto.CsBase;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 帮我收的单项详细Fragment
+ * 包含添加和编辑
+ */
+public class HSItemDetailFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.ItemView {
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void showDeleteDialog(int index) {
+
+    }
+
+    @Override
+    public void showWareHouseChoose() {
+
+    }
+
+    @Override
+    public void showWareHouseInfo(CsBase.Warehouse warehouse) {
+
+    }
+
+    @Override
+    public void referGridViewShow() {
+
+    }
+
+    @Override
+    public void clearItemView() {
+
+    }
+
+    @Override
+    public void setPresenter(HelpSignedContract.Presenter presenter) {
+
+    }
+}

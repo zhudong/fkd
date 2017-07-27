@@ -1,0 +1,746 @@
+package com.fuexpress.kr.ui.activity.append_parcel;
+
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseActivity;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.activity.PreviewParceldiseActivity;
+import com.fuexpress.kr.ui.activity.append_item.AppendItemActivity;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomDialog;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Presenter, ParcelAppendContract.Model> implements ParcelAppendContract.View, TextWatcher, View.OnFocusChangeListener {
+    public static final String BEAN = "bean";
+    public static final String WAREHOUSE_ID = "warehouse_id";
+    public static final String DEFAULT_WEIGHT = "default_weight";
+
+    @BindView(R.id.btn_save)
+    Button mBtnSave;
+    @BindView(R.id.tv_parcel_name)
+    TextView mTvParcelName;
+    @BindView(R.id.ll_phote_container)
+    LinearLayout mLlPhoteContainer;
+    @BindView(R.id.edt_item_info)
+    EditText mEdtItemInfo;
+    @BindView(R.id.edt_declare_price)
+    EditText mEdtDeclarePrice;
+    @BindView(R.id.tv_price_type)
+    TextView mTvPriceType;
+    @BindView(R.id.edt_item_counts)
+    EditText mEdtItemCounts;
+    @BindView(R.id.edt_parcel_weight)
+    EditText mEdtParcelWeight;
+    @BindView(R.id.tv_weight_type)
+    TextView mTvWeightType;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
+    @BindView(R.id.ll_shippings_container)
+    LinearLayout mLlShippingsContainer;
+    @BindView(R.id.tv_parcel_shipping_fee)
+    TextView mTvParcelShippingFee;
+    @BindView(R.id.sc_root)
+    ScrollView mScRoot;
+    @BindView(R.id.hsv_imgs_container)
+    HorizontalScrollView mHsvImgsContainer;
+    @BindView(R.id.img_append_photo)
+    ImageView mImgAppendPhoto;
+    private String mPath;
+    private int mItmeCount;
+    private Float mDeclarePrice;
+    private List<String> mPathList;
+    private List<String> mNewPathList;
+    private boolean isSave;
+
+    @Override
+    protected int getViewResId() {
+        return R.layout.activity_append_parcel;
+    }
+
+    @Override
+    public void initView() {
+        initTitle("", getString(R.string.String_parcle_add), getString(R.string.String_parcel_delete));
+        hintIVRight();
+        mPresenter = new AppendParcelPresent();
+        mModel = new AppendParcelModel();
+        Intent intent = getIntent();
+        int warehouseID = intent.getIntExtra(WAREHOUSE_ID, 0);
+        double defaultWeight = intent.getDoubleExtra(DEFAULT_WEIGHT, 0);
+        Bundle extra = intent.getBundleExtra(BEAN);
+        if (extra != null) {
+            HelpSendParcelBean item = (HelpSendParcelBean) extra.getSerializable(BEAN);
+            warehouseID = item.getWareHouseID();
+            defaultWeight = item.getDefaultWeight();
+            mPresenter.setParcelBean(item);
+        } else {
+            hintTVRight();
+        }
+        mPresenter.setDefaultWeight(defaultWeight);
+        mPresenter.setmWarehouseid(warehouseID);
+        mPresenter.setVM(this, mModel);
+        listenScrollView();
+        initEvent();
+        mTvPriceType.setText(AccountManager.getInstance().getCurrencyCode());
+    }
+
+    boolean isClicking;
+
+    private static final int DECIMAL_DIGITS = 2;
+
+    private void initEvent() {
+        InputFilter lengthfilter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                // 删除等特殊字符，直接返回
+                if ("".equals(source.toString())) {
+                    return null;
+                }
+                String dValue = dest.toString();
+                String[] splitArray = dValue.split("\\.");
+                if (splitArray.length > 1) {
+                    String dotValue = splitArray[1];
+                    int diff = dotValue.length() + 1 - DECIMAL_DIGITS;
+                    if (diff > 0) {
+                        return source.subSequence(start, end - diff);
+                    }
+                }
+                return null;
+            }
+        };
+//        mEdtItemInfo.addTextChangedListener(this);
+        mTvAddress.addTextChangedListener(this);
+        mEdtDeclarePrice.addTextChangedListener(this);
+        mEdtDeclarePrice.setFilters(new InputFilter[]{lengthfilter});
+        mEdtParcelWeight.addTextChangedListener(this);
+        mEdtItemCounts.addTextChangedListener(this);
+        mEdtParcelWeight.setOnFocusChangeListener(this);
+
+        mRootView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        int heightDiff = mRootView.getRootView().getHeight() - mRootView.getHeight();
+                        if (heightDiff > 300) { // 说明键盘是弹出状态
+                            Log.v("TAG", "键盘弹出状态");
+                            //                            Toast.makeText(AppendParcelActivity.this, "键盘弹出状态", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (mEdtParcelWeight.hasFocus()) {
+                                final String s = mEdtParcelWeight.getText().toString();
+                                float weight = "".equals(s) ? 0 : Float.valueOf(s);
+                                final float defaultWeight = mPresenter.getParcelBean().getDefaultWeight();
+                                if (weight < defaultWeight) {
+                                    final String msg = getString(R.string.package_deflaut_weight_tips, defaultWeight);
+                                    showParcleDialog(msg, getString(R.string.package_confirm), "");
+                                }
+                            }
+                            Log.v("TAG", "键盘收起状态");
+                            //                            Toast.makeText(AppendParcelActivity.this, "键盘收起状态", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void listenScrollView() {
+        mHsvImgsContainer.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                mHsvImgsContainer.scrollBy(right, top);
+            }
+        });
+    }
+
+
+    @Override
+    public void showShippingFee(float price) {
+        if (price > 0) {
+            mTvParcelShippingFee.setText(UIUtils.getCurrency(this, price));
+//                    getString(R.string.String_price, price));
+        } else {
+            mTvParcelShippingFee.setText("");
+        }
+
+    }
+
+    @Override
+    public void switchButtonState(boolean clickable) {
+        mBtnSave.setClickable(clickable);
+    }
+
+    @Override
+    public void shoParcelName(String name) {
+        mTvParcelName.setText(
+                getString(R.string.String_parcle_name) + name);
+    }
+
+    public void appendPhoto(String url, int type) {
+        int width = UIUtils.dip2px(73);
+        int padding = UIUtils.dip2px(1);
+        int margin = UIUtils.dip2px(8);
+        ImageView imageView = new ImageView(this);
+        imageView.setCropToPadding(true);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setBackground(getResources().getDrawable(R.drawable.shape_bg_rectangle_));
+        DisplayImageOptions options = ImageLoaderHelper.getInstance(this).getDisplayOptions();
+
+        if (type != 0) {
+            // TODO: 2016-10-31，后缀
+            ImageLoader.getInstance().displayImage(url, imageView, options);
+        } else {
+            ImageLoader.getInstance().displayImage(url, imageView, options);
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+        imageView.setPadding(padding, padding, padding, padding);
+        int index = mLlPhoteContainer.getChildCount() - 1 < 0 ? 0 : mLlPhoteContainer.getChildCount() - 1;
+        params.setMargins(0, 0, margin, 0);
+        mLlPhoteContainer.addView(imageView, index, params);
+        //        mHsvImgsContainer.smoothScrollTo(width+margin,0);
+        int position = 0;
+        for (int i = mLlPhoteContainer.getChildCount() - 1; i >= 0; i--) {
+            if (imageView.equals(mLlPhoteContainer.getChildAt(i))) {
+                position = i;
+            }
+        }
+        imageView.setTag(position);
+        imageView.setOnClickListener(new PhotoClickListener());
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        for (int i = 0; i < mLlShippingsContainer.getChildCount(); i++) {
+            View child = mLlShippingsContainer.getChildAt(i);
+            RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+            radioButton.setChecked(false);
+            mTvParcelShippingFee.setText("");
+        }
+        isSave = false;
+        mPresenter.setShippingMethodId(0);
+//        mPresenter.save2Db(null, false);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            final String s = ((EditText) v).getText().toString();
+            float weight = "".equals(s) ? 0 : Float.valueOf(s);
+            final float defaultWeight = mPresenter.getParcelBean().getDefaultWeight();
+            if (weight < defaultWeight) {
+                final String msg = getString(R.string.package_deflaut_weight_tips, defaultWeight);
+                showParcleDialog(msg, getString(R.string.package_confirm), "");
+            }
+        }
+    }
+
+    class PhotoClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            int postioin = (int) v.getTag();
+            mPresenter.preViewPhoto(postioin);
+        }
+    }
+
+    @Override
+    public void appendPhotos(List<String> urls) {
+        mLlPhoteContainer.removeAllViews();
+        mLlPhoteContainer.addView(mImgAppendPhoto);
+
+        for (int i = 0; i < urls.size(); i++) {
+            String[] split = urls.get(i).split(",");
+            if ("".equals(split[0]))
+                continue;
+            if (split.length > 1 && !"".equals(split[1])) {
+                appendPhoto(split[1], 1);
+            } else {
+                String s = "file://" + split[0];
+                appendPhoto(s, 0);
+            }
+        }
+        if (urls.size() >= 4) {
+            mImgAppendPhoto.setVisibility(View.GONE);
+        } else {
+            mImgAppendPhoto.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void showProductInfo(String info) {
+        mEdtItemInfo.setText(info);
+    }
+
+    public String getProductInfo() {
+        return mEdtItemInfo.getText().toString();
+    }
+
+    @Override
+    public void showDeclarePrice(float price) {
+        if (price == 0) {
+            mEdtDeclarePrice.setText("");
+        } else {
+            mEdtDeclarePrice.setText(getString(R.string.String_float_double, price));
+        }
+    }
+
+    public float getDeclarePrice() {
+        String s = mEdtDeclarePrice.getText().toString();
+        return Float.valueOf(s);
+    }
+
+    @Override
+    public void showPircelItemCount(int count) {
+        if (count == 0) {
+            mEdtItemCounts.setText("");
+        } else {
+            mEdtItemCounts.setText(count + "");
+        }
+    }
+
+    public int getPircelItemCount() {
+        String s = mEdtItemCounts.getText().toString();
+        return Integer.valueOf(s);
+    }
+
+    @Override
+    public void showPircelWeight(float weight) {
+        if (weight == 0) {
+            mEdtParcelWeight.setText("");
+        } else {
+            mEdtParcelWeight.setText(
+                    getString(R.string.String_float_double, weight));
+        }
+    }
+
+    public float getParcelWeight() {
+        String s = mEdtParcelWeight.getText().toString();
+        return Float.valueOf(s);
+    }
+
+    @Override
+    public void showAddress(CsParcel.AddressList address) {
+        String s = address.getName() + "," + address.getTelephone() + "\n";
+        String s2 = s + address.getStreet() + "," + address.getFullregionname();
+        showAddress(s2);
+    }
+
+    @Override
+    public void showAddress(String address) {
+        if ("".equals(address)) {
+            mTvAddress.setText(getString(R.string.String_parcel_item_address_tips));
+        } else {
+            mTvAddress.setText(address);
+        }
+    }
+
+    @Override
+    public void showShippingList(List<CsBase.ShippingMethod> shippingMethods) {
+        TransportClickListener listener = new TransportClickListener();
+        mLlShippingsContainer.removeAllViews();
+        if (shippingMethods != null) {
+            for (int i = 0; i < shippingMethods.size(); i++) {
+                ViewGroup inflate = (ViewGroup) View.inflate(this, R.layout.view_item_transport_type, null);
+                inflate.setOnClickListener(listener);
+                TextView child2 = (TextView) inflate.findViewById(R.id.tv_transport_des);
+                TextView child3 = (TextView) inflate.findViewById(R.id.tv_transport_detail);
+                CsBase.ShippingMethod shippingMethod = shippingMethods.get(i);
+                child2.setText(shippingMethod.getTitle());
+                String sDetail = shippingMethod.getInfo();
+                if (!shippingMethod.getAttention().equals("")) {
+                    sDetail += "\n" + getString(R.string.package_attention) + shippingMethod.getAttention();
+                }
+                child3.setText(sDetail);
+                inflate.setTag(shippingMethod);
+                mLlShippingsContainer.addView(inflate);
+                if (i == 0)
+                    inflate.callOnClick();
+            }
+        }
+    }
+
+    @Override
+    public void showShippingMethods(List<CsParcel.MerchantParcelShippingMethodList> methods) {
+        TransportClickListener listener = new TransportClickListener();
+        mLlShippingsContainer.removeAllViews();
+        if (methods != null) {
+            for (int i = 0; i < methods.size(); i++) {
+                ViewGroup inflate = (ViewGroup) View.inflate(this, R.layout.view_item_transport_type, null);
+                inflate.setOnClickListener(listener);
+                TextView child2 = (TextView) inflate.findViewById(R.id.tv_transport_des);
+                TextView child3 = (TextView) inflate.findViewById(R.id.tv_transport_detail);
+                CsParcel.MerchantParcelShippingMethodList shippingMethod = methods.get(i);
+                String shippingmethodstring = shippingMethod.getShippingmethodstring();
+                String[] split = shippingmethodstring.split("\n");
+                String title = "";
+                String content = "";
+                if (split.length >= 1) {
+                    title = split[0];
+                    if (split.length >= 2) {
+                        for (int j = 1; j < split.length; j++) {
+                            if (j == split.length - 1) {
+                                content += split[j];
+                            } else {
+                                content += split[j] + "\n";
+                            }
+                        }
+                    }
+                }
+                child2.setText(title);
+                child3.setText(content);
+                inflate.setTag(shippingMethod);
+                mLlShippingsContainer.addView(inflate);
+            }
+        }
+    }
+
+    @Override
+    public boolean getInfo(List<String> infos, boolean toast) {
+        infos.removeAll(infos);
+        String info = mEdtItemInfo.getText().toString();
+        String price = mEdtDeclarePrice.getText().toString();
+        String counts = mEdtItemCounts.getText().toString();
+        String weight = mEdtParcelWeight.getText().toString();
+        String address = mTvAddress.getText().toString();
+        int state = 0;
+
+        if (TextUtils.isEmpty(info)) {
+            state = 1;
+        }
+        infos.add(info);
+
+        if (TextUtils.isEmpty(price)) {
+            state = 2;
+        }
+        infos.add(price);
+
+        if (TextUtils.isEmpty(counts)) {
+            state = 3;
+        }
+        infos.add(counts);
+
+        if (TextUtils.isEmpty(weight)) {
+            state = 4;
+        }
+        infos.add(weight);
+
+        if (TextUtils.isEmpty(address)) {
+            state = 5;
+        }
+        infos.add(address);
+
+        if (toast) {
+            switch (state) {
+                case 1:
+                    CustomToast.makeText(this, getString(R.string.String_parcel_item_info_tips), Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    CustomToast.makeText(this, getString(R.string.String_parcel_declare_price_tips), Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    CustomToast.makeText(this, getString(R.string.String_parcel_item_count_tips), Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    CustomToast.makeText(this, getString(R.string.String_parcel_weight_tips), Toast.LENGTH_SHORT).show();
+                    break;
+                case 5:
+                    CustomToast.makeText(this, getString(R.string.String_parcel_item_address_tips), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+        if (state == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void save() {
+        if (mLlPhoteContainer.getChildCount() <= 1) {
+            CustomToast.makeText(this, getString(R.string.package_send_submit_no_photo), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (isSave) return;
+        isSave = true;
+        mPresenter.setmSave(true);
+        ArrayList<String> infos = new ArrayList<>();
+        if (!getInfo(infos, true)) {
+            isSave = false;
+            return;
+        }
+        if (mPresenter.getShippingMethodId() == 0) {
+            CustomToast.makeText(this, getString(R.string.package_plase_select_shipping_method), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mPresenter.sava();
+    }
+
+    @Override
+    public void selsetShippingMethod(int id) {
+        for (int i = 0; i < mLlShippingsContainer.getChildCount(); i++) {
+            View child = mLlShippingsContainer.getChildAt(i);
+            RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+            CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) child.getTag();
+            if (shippingMethod.getParcelshippingmethodid() == id) {
+                radioButton.setChecked(true);
+            } else {
+                radioButton.setChecked(false);
+            }
+        }
+        mRootView.postInvalidate();
+    }
+
+    class TransportClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            isSave = false;
+            if (!getInfo(new ArrayList<String>(), true))
+                return;
+            for (int i = 0; i < mLlShippingsContainer.getChildCount(); i++) {
+                View child = mLlShippingsContainer.getChildAt(i);
+                RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+                CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) v.getTag();
+                if (v == child) {
+                    radioButton.setChecked(true);
+                    mPresenter.selectShippingMethod(shippingMethod);
+                } else {
+                    radioButton.setChecked(false);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isClicking = false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.ALBUM_GET_BITMAP_REQUEST_CODE && resultCode == 100) {
+            String image = data.getStringExtra("image");
+            Uri data1 = Uri.parse(image);
+            mPath = data1.getPath();
+            mPresenter.addPhotoFile(mPath);
+        }
+        if (requestCode == PreviewParceldiseActivity.REQUEST_CODE_BACK_IMG_LIST) {
+            if (data != null) {
+                List<String> backList = (List<String>) data.getExtras().getSerializable("backImgList");
+                mPresenter.delectPhoto(backList);
+            }
+        }
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE && resultCode == Constants.ADDRESS_REQUEST_CODE) {
+            if (data != null) {
+              /*  CsParcel.MerchantAddressList address = (CsParcel.MerchantAddressList) data.getExtras().get("address");
+                mPresenter.setAddress(address);
+                isClicking = false;
+                mTvParcelShippingFee.setText("");*/
+            }
+        }
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE && resultCode == AddressManagerActivity.AddressresultCode) {
+            if (data != null) {
+                String topString = data.getStringExtra(AddressManagerActivity.topText1);
+                String addressString = data.getStringExtra(AddressManagerActivity.addressText);
+                int addressID = data.getIntExtra(AddressManagerActivity.addressId, 0);
+                mPresenter.setAddress(topString, addressString, addressID);
+                isClicking = false;
+                mTvParcelShippingFee.setText("");
+            }
+        }
+
+
+        if (requestCode == 1001 || resultCode == RESULT_OK || resultCode == RESULT_CANCELED) {
+            if (data != null) {
+                mNewPathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+                if (mNewPathList != null) {
+                    mPathList.clear();
+                    mPathList.addAll(mNewPathList);
+                    appendPhotos(mPathList);
+                    mPresenter.setPhotosPath(mPathList);
+                    mPresenter.upPhoto();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void showParcleDialog(String messsage, final String positiveString, final String cancleText) {
+        isSave = false;
+        final CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.create().setCanceledOnTouchOutside(false);
+        final String[] split1 = messsage.split("\\；");
+        String msg = "";
+        final boolean weightTip = messsage.contains("重量");
+        final boolean countTip = messsage.contains("件");
+        final boolean declareTip = messsage.contains("申报");
+        if (weightTip) {
+            String[] split = messsage.split("\\：");
+            if (split.length > 1) {
+                msg = split[1];
+            } else {
+                msg = messsage;
+            }
+        } else {
+            msg = messsage;
+        }
+        if (countTip) {
+            final int start = messsage.indexOf("数量为") + 2;
+            final int end = messsage.indexOf("件");
+            mItmeCount = Integer.valueOf(messsage.substring(start + 1, end));
+        }
+        if (declareTip) {
+            final int start = messsage.indexOf("价值为") + 2;
+            final int end = messsage.indexOf("元");
+            mDeclarePrice = Float.valueOf(messsage.substring(start + 1, end));
+        }
+
+        builder.setMessage(msg);
+        builder.setPositiveButton(positiveString, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (weightTip) {
+                    mPresenter.setWeight(mPresenter.getParcelBean().getDefaultWeight());
+                }
+                if (countTip) {
+                }
+                if (declareTip) {
+                }
+            }
+        });
+        if (!"".equals(cancleText)) {
+            builder.setNegativeButton(cancleText, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        CustomDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    public void showWarehouse(List<CsBase.Warehouse> warehouse) {
+        final CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setContentView(View.inflate(this, R.layout.warehouse_fragment_dialog, null));
+        builder.create().show();
+    }
+
+
+    @OnClick({R.id.tv_address, R.id.btn_save, R.id.img_append_photo, R.id.tv_parcel_name})
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.tv_address:
+                mPresenter.selectAddress();
+                break;
+            case R.id.btn_save:
+//                EventBus.getDefault().post(new BusEvent(BusEvent.GET_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+                save();
+                break;
+            case R.id.img_append_photo:
+                MPermissions.requestPermissions(this, 6, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                break;
+            case R.id.tv_parcel_name:
+                Intent intent = new Intent(this, AppendItemActivity.class);
+                startActivity(intent);
+                this.overridePendingTransition(R.anim.activity_translate_x_in, R.anim.activity_translate_x_out);
+                break;
+        }
+    }
+
+    /*适配6.0 权限检查*/
+    @PermissionGrant(6)
+    public void requestContactSuccess() {
+        mPathList = mPresenter.getPhotosPath();
+        UIUtils.startImageSelectorForAddItem(1001, (ArrayList) mPathList, this, 4);
+    }
+
+    @PermissionDenied(6)
+    public void requestContactFailed() {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    @Override
+    protected void onRightTVClick() {
+        mPresenter.delectParcel();
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        List<String> imgs = null;
+        if (event.getType() == BusEvent.UP_LOAD_IMAGE_COMPLETE2) {
+            imgs = (List<String>) event.getParam();
+        }
+        if (event.getType() == BusEvent.RETURN_CURRENT_UP_LOAD_IMAGE_LIST_PROGRESS) {
+            int intParam = event.getIntParam();
+            if (intParam < 100) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.SHOW_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+            } else {
+                save();
+            }
+        }
+    }
+}

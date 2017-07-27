@@ -1,0 +1,251 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.adapter.HelpHeadAdapter;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 帮我收的单项详细Fragment
+ * 包含添加和编辑
+ */
+public class HSItemDetailFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.ItemView, AdapterView.OnItemClickListener {
+
+    @BindView(R.id.tl_in_help_get_package)
+    TitleBarView mTlInHelpGetPackage;
+    @BindView(R.id.gv_help_head)
+    CustomGridView mGvHelpHead;
+    @BindView(R.id.ed_desc)
+    EditText mEdDesc;
+    @BindView(R.id.ed_remark)
+    EditText mEdRemark;
+    @BindView(R.id.tv_ware_house_show)
+    TextView mTvWareHouseShow;
+    @BindView(R.id.ll_choose_ware_house)
+    LinearLayout mLlChooseWareHouse;
+    @BindView(R.id.ll_ware_house_container)
+    LinearLayout mLlWareHouseContainer;
+    @BindView(R.id.ed_price)
+    EditText mEdPrice;
+    @BindView(R.id.tv_currency_code)
+    TextView mTvCurrencyCode;
+    @BindView(R.id.ed_quantity)
+    EditText mEdQuantity;
+    @BindView(R.id.tv_add_demand)
+    TextView mTvAddDemand;
+    @BindView(R.id.btn_confirm_demand)
+    Button mBtnConfirmDemand;
+    @BindView(R.id.tv_ip_address)
+    TextView mTvIpAddress;
+    @BindView(R.id.tv_ip_receiver)
+    TextView mTvIpReceiver;
+    @BindView(R.id.tv_ip_phone)
+    TextView mTvIpPhone;
+    @BindView(R.id.tv_ip_post_code)
+    TextView mTvIpPostCode;
+    @BindView(R.id.ll_in_normal_item)
+    LinearLayout mLlInNormalItem;
+
+    private View mRootView;
+
+    private ArrayList<String> mImagePathList;
+
+    private String mWareHouseID = "";
+
+    private HelpSignedContract.NewPresenter mPresenter;
+    private HelpHeadAdapter mHelpHeadAdapter;
+    private final static int mMaxImageSize = 4;//当前最大可添加图片数量
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.hs_item_detail_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        mTlInHelpGetPackage.getIv_in_title_back().setOnClickListener(this);
+        TextView title_back_tv = mTlInHelpGetPackage.getmTv_in_title_back_tv();
+        title_back_tv.setText(getString(R.string.home_fg_help_02));
+        title_back_tv.setOnClickListener(this);
+        mImagePathList = new ArrayList<>();
+        judgmentAndShowView(mPresenter.getItemOnclickPosition());
+    }
+
+    @Override
+    public void showDeleteDialog(int index) {
+        // TODO: 2016/12/22 显示删除的dialog
+    }
+
+    @Override
+    public void checkTextIsEnter() {
+        boolean isParameterRight = true;
+        String errText = "";
+        if (!(isParameterRight = mPresenter.checkImagePathList(mImagePathList)))
+            errText = getString(R.string.hs_note_image);
+        else if (!(isParameterRight = mPresenter.checkItemDescIsRight(mEdDesc.getText().toString().trim())))
+            errText = getString(R.string.hs_note_desc);
+        else if (!(isParameterRight = mPresenter.checkRemarkIsRight(mEdRemark.getText().toString().trim())))
+            errText = getString(R.string.hs_note_remark);
+        else if (!(isParameterRight = mPresenter.isChooseWareHouse(mWareHouseID)))
+            errText = getString(R.string.hs_note_warehouse);
+        else if (!(isParameterRight = mPresenter.checkPriceIsRight(mEdPrice.getText().toString().trim())))
+            errText = getString(R.string.hs_note_price);
+        else if (!(isParameterRight = mPresenter.checkItemQuantity(mEdQuantity.getText().toString().trim())))
+            errText = getString(R.string.hs_note_quantity);
+        if (!isParameterRight)
+            showRemindDialog(SweetAlertDialog.WARNING_TYPE, errText);
+        else {
+            CsParcel.ProductDataList.Builder builder = mPresenter.creatNewDeMand();
+            mPresenter.enterItemDesc(builder, mEdDesc.getText().toString().trim());
+            mPresenter.enterItemPrice(builder, mEdPrice.getText().toString());
+            mPresenter.enterItemQuantity(builder, mEdQuantity.getText().toString().trim());
+            mPresenter.enterItemRemarks(builder, mEdRemark.getText().toString().trim());
+            mPresenter.enterItemWareHouse(builder, mWareHouseID, mPresenter.getWareHouseInfo(mWareHouseID));
+            mPresenter.enterItemImageUrlList(builder, mPresenter.getItemUpLoadUrlList(mImagePathList));
+            mPresenter.addNewDeMand(builder.build());
+            clearItemView();
+        }
+    }
+
+    @Override
+    public void showWareHouseChoose() {
+        // TODO: 2016/12/22 显示仓库选择器
+    }
+
+    @Override
+    public void showRemindDialog(int type, String text) {
+        mContext.showProgressDiaLog(type, text);
+    }
+
+    @Override
+    public void showWareHouseInfo(CsBase.Warehouse warehouse, boolean isShow) {
+        mLlWareHouseContainer.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        if (warehouse != null) {
+            mTvWareHouseShow.setText(warehouse.getName());
+            mTvIpAddress.setText(warehouse.getFulladdress());
+            mTvIpPhone.setText(warehouse.getPhone());
+            mTvIpPostCode.setText(warehouse.getPostcode());
+            mTvIpReceiver.setText(warehouse.getReceiver());
+        }
+    }
+
+    @Override
+    public void referGridViewShow() {
+        mHelpHeadAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void clearItemView() {
+        showWareHouseInfo(null, false);
+        mImagePathList = new ArrayList<>();
+        mEdDesc.setText("");
+        mEdQuantity.setText("");
+        mEdPrice.setText("");
+        mEdRemark.setText("");
+        mTvWareHouseShow.setText(getString(R.string.hms_warehouse_text_hint));
+        referGridViewShow();
+    }
+
+    @Override
+    public void setPresenter(@NonNull HelpSignedContract.NewPresenter presenter) {
+        mPresenter = checkNotNull(presenter, "presenter is not null");
+    }
+
+    @Override
+    public void judgmentAndShowView(int position) {
+        if (position == mPresenter.getProductDataList().size()) {
+            mTlInHelpGetPackage.setTitleText(getString(R.string.parcel_append_item));
+        } else {
+            mTlInHelpGetPackage.getTv_in_title_right().setText(getString(R.string.preview_delete_msg));
+            mTlInHelpGetPackage.setTitleText(getString(R.string.string_edit_item));
+            mImagePathList.addAll(mPresenter.getItemImageList(position));
+            CsParcel.ProductDataList chooseData = mPresenter.getChooseData(position);
+            mEdDesc.setText(chooseData.getProductdescription());
+            mEdRemark.setText(chooseData.getProductremark());
+            mEdPrice.setText(chooseData.getPrice());
+            mEdQuantity.setText(chooseData.getNum());
+            if (!TextUtils.isEmpty(chooseData.getWarehouseid()))
+                showWareHouseInfo(mPresenter.getWareHouseInfo(chooseData.getWarehouseid()), true);
+            else
+                showWareHouseInfo(null, false);
+        }
+        mHelpHeadAdapter = new HelpHeadAdapter(mContext, mImagePathList, mMaxImageSize);
+        mGvHelpHead.setAdapter(mHelpHeadAdapter);
+    }
+
+    @Override
+    public Context getViewContext() {
+        return mContext;
+    }
+
+
+    @OnClick({R.id.ll_choose_ware_house, R.id.tv_add_demand, R.id.btn_confirm_demand})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_choose_ware_house:
+                // TODO: 2016/12/22 启动仓库选择器
+                showWareHouseChoose();
+                break;
+            case R.id.tv_add_demand:
+                // TODO: 2016/12/22 添加需求
+
+                break;
+            case R.id.btn_confirm_demand:
+                // TODO: 2016/12/22 确认当前需求单
+                break;
+            case R.id.tv_in_title_back_tv:
+            case R.id.iv_in_title_back:
+                mContext.onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (position == mImagePathList.size() + 1) {
+            // TODO: 2016/12/22 启动图片预览
+
+        } else {
+            // TODO: 2016/12/22 启动图片选择器
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {//处理好各种返回值
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}

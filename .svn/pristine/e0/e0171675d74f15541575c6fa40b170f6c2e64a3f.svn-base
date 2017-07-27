@@ -1,0 +1,262 @@
+package com.fuexpress.kr.ui.activity;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.UserInfoManager;
+import com.fuexpress.kr.model.UserManager;
+import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
+import com.fuexpress.kr.utils.BitMapUtils;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.socks.library.KLog;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.io.File;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import de.hdodenhof.circleimageview.CircleImageView;
+import fksproto.CsUser;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class AccountSettingActivity extends BaseActivity {
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView mTitleIvRight;
+    @BindView(R.id.profile_image)
+    CircleImageView mProfileImage;
+    @BindView(R.id.avatarLayout)
+    RelativeLayout mAvatarLayout;
+    @BindView(R.id.baseInfoLayout)
+    RelativeLayout mBaseInfoLayout;
+    @BindView(R.id.change_password_layout)
+    RelativeLayout mChangePasswordLayout;
+    @BindView(R.id.performLayout)
+    RelativeLayout mPerformLayout;
+    @BindView(R.id.logoutButton)
+
+    Button mLogoutButton;
+    private String mHeadIconUrl;
+    private PopupWindow mPopWindow;
+    private final DisplayImageOptions options = new DisplayImageOptions.Builder().resetViewBeforeLoading(true).displayer(new FadeInBitmapDisplayer(100)).cacheInMemory(true
+    ).cacheOnDisk(true).build();
+    final ImageLoader loader = ImageLoader.getInstance();
+
+    @Override
+    public View setInitView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_account_setting, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleTvLeft.setText(getString(R.string.main_me_tab_string));
+        mTitleTvCenter.setText(getString(R.string.account_setting));
+        if(!TextUtils.isEmpty(AccountManager.getInstance().nikename)){
+        //    mTvLogin.setText(AccountManager.getInstance().nikename);
+            loader.displayImage(AccountManager.getInstance().avater,mProfileImage, options);
+        }
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_center, R.id.profile_image, R.id.avatarLayout, R.id.baseInfoLayout, R.id.change_password_layout, R.id.performLayout, R.id.logoutButton})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+
+                break;
+            case R.id.title_tv_left:
+                break;
+            case R.id.title_tv_center:
+                break;
+            case R.id.profile_image:
+            case R.id.avatarLayout:
+                //修改头像
+                Intent intent2 = new Intent(AccountSettingActivity.this, Down2UpDialogActivity.class);
+                intent2.putExtra(Down2UpDialogActivity.GO_THIS_ACTIVITY_INTENT_KEY, Down2UpDialogActivity.CHANGE_HEAD_ICON_TYPE);
+                startActivityForResult(intent2, 1);
+                break;
+            case R.id.baseInfoLayout:
+                //跳转到基本信息界面:
+                startDDMActivity(UserDetailInfoActivity.class, true);
+                break;
+            case R.id.change_password_layout:
+                //修改密码:
+                startDDMActivity(ChangePassWordActivity.class, true);
+                break;
+            case R.id.performLayout:
+                //偏好:
+                startDDMActivity(PreferencesActivity.class, true);
+                break;
+            case R.id.logoutButton:
+                logout();
+                break;
+        }
+    }
+
+    private void cleanCache() {
+        KLog.i("清除数据");
+        EventBus.getDefault().post(new BusEvent(BusEvent.LOGOUT, null));
+        AccountManager.getInstance().logout(this);
+        toActivity(LoginByPhoneActivity.class);
+
+
+        //   finish();
+    }
+
+    private void logout() {
+        TextView logoutText, cancelText;
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.pop_logout:
+                        cleanCache();
+                        if (mPopWindow != null) {
+                            mPopWindow.dismiss();
+                        }
+                        break;
+                    case R.id.pop_cancel:
+                        if (mPopWindow != null) {
+                            mPopWindow.dismiss();
+                        }
+                        break;
+
+                }
+            }
+        };
+        //显示窗口
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_logout, null);
+        logoutText = (TextView) contentView.findViewById(R.id.pop_logout);
+        cancelText = (TextView) contentView.findViewById(R.id.pop_cancel);
+
+        cancelText.setOnClickListener(onClickListener);
+        logoutText.setOnClickListener(onClickListener);
+        mPopWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        View rootview = LayoutInflater.from(this).inflate(R.layout.activity_account_setting, null);
+        mPopWindow.setFocusable(true);
+        mPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
+        backgroundAlpha(0.6f);
+        mPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+    }
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case 1:
+                if (data != null) {
+                    Bundle extras = data.getBundleExtra("photo");
+                    Bitmap head = extras.getParcelable("data");
+                    BitMapUtils.setPicToView(head, AccountManager.getInstance().mUin + System.currentTimeMillis() + getString(R.string.head_icon_default_string));
+                    //mIv_in_account_setting_head_icon.setImageBitmap(head);
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        boolean isSuccess;
+        switch (event.getType()) {
+            case BusEvent.IMAGE_FILE_READY:
+                File headIconFile = (File) event.getParam();
+                UpLoadImageManager.getInstance().upLoaderToUpYun(headIconFile, null, UpLoadImageManager.HEAD_ICON_TYPE);
+                break;
+            case BusEvent.UP_LOAD_IMAGE_COMPLETE:
+                isSuccess = event.getBooleanParam();
+                if (isSuccess) {
+                    //UserInfoManager.getInstance().changeUserIconRequest(event.getStrParam());
+                    UserManager.getInstance().setUserInfo(CsUser.UserInfoFieldType.USER_INFO_FIELD_AVATAR_VALUE, event.getStrParam());
+                    AccountManager.getInstance().avater = event.getStrParam();
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.head_icon_upload_fail));
+                    dissMissProgressDiaLog(1000);
+                }
+                break;
+            case BusEvent.HEAD_ICON_UPLOADE_COMPLETE:
+                isSuccess = event.getBooleanParam();
+                if (isSuccess) {
+                    //UserInfoManager.getInstance().changeUserIconRequest(event.getStrParam());
+                    mHeadIconUrl = event.getStrParam();
+                    String headIconUrl = event.getStrParam();
+                    //LogUtils.e("这是上传了的图片的URL:" + headIconUrl);
+
+                    /*AccountManager.getInstance().avater = mHeadIconUrl;
+                    mInstance.displayImage(mHeadIconUrl, mIv_in_account_setting_head_icon, mDisplayOptions);*/
+                    Glide.with(this).load(mHeadIconUrl).error(R.mipmap.me_photo_white).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(mProfileImage);
+                    //loadImageSimpleTarget();
+                    showProgressDiaLog(SweetAlertDialog.SUCCESS_TYPE, getString(R.string.head_icon_upload_success));
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.head_icon_upload_fail));
+                }
+                dissMissProgressDiaLog(1000);
+                break;
+            case BusEvent.HEAD_ICON_UPLOADE_COMPLETE_NOTE:
+                isSuccess = event.getBooleanParam();
+                //if (isSuccess) {
+                    /*mInstance.displayImage(UserInfoManager.getInstance().mIconurl, mIv_in_account_setting_head_icon, mDisplayOptions);*/
+                    Glide.with(this).load(AccountManager.getInstance().avater).error(R.mipmap.me_photo_white).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(mProfileImage);
+                //}
+                /*if (UserInfoManager.getInstance().isNeedBindPhone) {
+                    mBindingPhoneLayout.setVisibility(View.VISIBLE);
+                } else {
+                    mBindingPhoneLayout.setVisibility(View.GONE);
+                }*/
+                break;
+        }
+    }
+}

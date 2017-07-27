@@ -1,0 +1,18 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+
+/**
+ * Created by kevin.xie on 2016/11/17.
+ */
+
+public class KrBankInfoActivity extends BaseActivity {
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_krbank_info, null);
+        return view;
+    }
+}

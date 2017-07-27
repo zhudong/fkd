@@ -1,0 +1,127 @@
+package com.fuexpress.kr.ui.activity.transport_address;
+
+import android.content.Context;
+import android.text.ClipboardManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.ui.activity.help_signed.data.WareHouseBean;
+import com.fuexpress.kr.ui.view.CustomToast;
+
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+/**
+ * Created by Longer on 2017/5/23.
+ */
+public class TranSportAddrAdapter extends BaseAdapter implements View.OnClickListener {
+
+    private List<WareHouseBean> mWareHouseBeanList;
+    private Context mContext;
+
+
+    public TranSportAddrAdapter(Context context, List<WareHouseBean> wareHouseBeans) {
+        mContext = context;
+        mWareHouseBeanList = wareHouseBeans;
+    }
+
+
+    @Override
+    public int getCount() {
+        return mWareHouseBeanList == null ? 0 : mWareHouseBeanList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mWareHouseBeanList == null ? null : mWareHouseBeanList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null || convertView.getTag() == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_tssa, null);
+            viewHolder.trs_copy_button = (Button) convertView.findViewById(R.id.trs_copy_button);
+            viewHolder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
+            viewHolder.tv_wh_name = (TextView) convertView.findViewById(R.id.tv_wh_name);
+            viewHolder.tv_phone = (TextView) convertView.findViewById(R.id.tv_phone);
+            viewHolder.tv_post_code = (TextView) convertView.findViewById(R.id.tv_post_code);
+            viewHolder.tv_uid = (TextView) convertView.findViewById(R.id.tv_uid);
+            viewHolder.tv_receiver = (TextView) convertView.findViewById(R.id.tv_receiver);
+            convertView.setTag(viewHolder);
+        } else
+            viewHolder = (ViewHolder) convertView.getTag();
+
+
+        WareHouseBean wareHouseBean = mWareHouseBeanList.get(position);
+
+        viewHolder.tv_wh_name.setText(wareHouseBean.getName());
+        viewHolder.tv_address.setText(mContext.getString(R.string.ip_text_address, wareHouseBean.getAddress()));
+        viewHolder.tv_receiver.setText(mContext.getString(R.string.ip_text_receiver, wareHouseBean.getReceiver()));
+        viewHolder.tv_phone.setText(mContext.getString(R.string.ip_text_phone, wareHouseBean.getPhone()));
+        viewHolder.tv_post_code.setText(mContext.getString(R.string.ip_text_post_code, wareHouseBean.getPostCode()));
+        viewHolder.tv_uid.setText(String.valueOf(AccountManager.getInstance().mUin));
+        viewHolder.trs_copy_button.setTag(position);
+        viewHolder.trs_copy_button.setOnClickListener(this);
+        return convertView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.trs_copy_button:
+                int index = (int) v.getTag();
+                copyText(index);
+                break;
+        }
+    }
+
+    private void copyText(int index) {
+        WareHouseBean wareHouseBean = mWareHouseBeanList.get(index);
+        String copyText = "";
+        StringBuffer sb = new StringBuffer();
+        sb.append(mContext.getString(R.string.ip_text_address, wareHouseBean.getAddress()));
+        sb.append("\n");
+        sb.append(mContext.getString(R.string.ip_text_receiver, wareHouseBean.getReceiver()));
+        sb.append(AccountManager.getInstance().mUin);
+        sb.append("\n");
+        sb.append(mContext.getString(R.string.ip_text_phone, wareHouseBean.getPhone()));
+        sb.append("\n");
+        sb.append(mContext.getString(R.string.ip_text_post_code, wareHouseBean.getPostCode()));
+        copyText = sb.toString();
+        ClipboardManager clip = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        clip.setText(copyText);
+        CustomToast.makeText(mContext, copyText, Toast.LENGTH_SHORT).show();
+        //CustomToast.makeText(mContext, mContext.getString(R.string.hs_note_copy_address), Toast.LENGTH_SHORT).show();
+    }
+
+    static class ViewHolder {
+
+        public TextView tv_wh_name;
+        public TextView tv_address;
+        public TextView tv_receiver;
+        public TextView tv_uid;
+        public TextView tv_phone;
+        public TextView tv_post_code;
+        public Button trs_copy_button;
+    }
+
+
+    public void addData(List<WareHouseBean> wareHouseBeans) {
+        if (mWareHouseBeanList != null)
+            mWareHouseBeanList.addAll(wareHouseBeans);
+    }
+}

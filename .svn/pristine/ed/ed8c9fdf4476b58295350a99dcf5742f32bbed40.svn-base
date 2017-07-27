@@ -1,0 +1,235 @@
+package com.fuexpress.kr.ui.activity.help_send;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseFragment;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.ui.activity.CouponActivity;
+import com.fuexpress.kr.ui.adapter.SendParcelAdapter;
+import com.fuexpress.kr.ui.view.CustomDialog;
+import com.fuexpress.kr.utils.SPUtils;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsBase;
+import fksproto.CsUser;
+
+
+public class HelpSendFragment extends MbaseFragment<HelpSendContract.Presenter, HelpSendContract.Model> implements HelpSendContract.View {
+    public static String SHOW_TIPS = "show_tips";
+    @BindView(R.id.rl_no_parcel_tips)
+    RelativeLayout mRlNoParcelTips;
+    @BindView(R.id.rl_buttom)
+    RelativeLayout mRlButtom;
+    @BindView(R.id.tv_estimate_price)
+    TextView mTvEstimatePrice;
+    @BindView(R.id.tv_use_balance)
+    TextView mTvUseBalance;
+    @BindView(R.id.tv_pay_type)
+    TextView mTvPayType;
+    @BindView(R.id.tv_use_coupon)
+    TextView tvUseCoupon;
+
+    private View mRlTips;
+    private ListView mBody;
+    private View mfootView;
+    private SendParcelAdapter mAdapter;
+    private boolean mMAppendable;
+    private TextView mTvRight;
+    private TextView mTvTitle;
+
+    @Override
+    protected void initTitleBar() {
+        mTvRight = (TextView) mRootView.findViewById(R.id.title_tv_right);
+        mTvRight.setOnClickListener(this);
+        mTvRight.setVisibility(View.VISIBLE);
+        mTvTitle = (TextView) mRootView.findViewById(R.id.title_tv_center);
+        mTvTitle.setText(getString(R.string.String_parcle_help_send));
+        mTvRight.setText(getString(R.string.String_parcle_add));
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.activity_help_send, null);
+        mBody = (ListView) mRootView.findViewById(R.id.lv_body);
+        mfootView = View.inflate(mContext, R.layout.item_help_send_foot, null);
+        mBody.addFooterView(mfootView);
+
+        mRlTips = mRootView.findViewById(R.id.rl_tips);
+        boolean showTips = (boolean) SPUtils.get(mContext, SHOW_TIPS, true);
+        if (showTips) {
+            final FrameLayout decorView = (FrameLayout) getActivity().getWindow().getDecorView();
+            final View tipsView = View.inflate(mContext, R.layout.package_tips, null);
+            decorView.addView(tipsView);
+            tipsView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decorView.removeView(tipsView);
+                    SPUtils.put(mContext, SHOW_TIPS, false);
+                }
+            });
+        }
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        mPresenter = new HelpSendPresent();
+        mModel = new HelpSendModel();
+        mPresenter.setVM(this, mModel);
+    }
+
+    @Override
+    public void showParcleList(List<HelpSendParcelBean> mParcels, boolean appendable) {
+        mMAppendable = appendable;
+        if (mMAppendable) {
+            mTvRight.setTextColor(getResources().getColor(R.color.white));
+        } else {
+            mTvRight.setTextColor(getResources().getColor(R.color.gray_999));
+        }
+        if (mParcels.size() == 0) {
+            mRlNoParcelTips.setVisibility(View.VISIBLE);
+            mRlButtom.setVisibility(View.GONE);
+        } else {
+            mRlNoParcelTips.setVisibility(View.GONE);
+            mRlButtom.setVisibility(View.VISIBLE);
+        }
+        if (mAdapter == null) {
+            mAdapter = new SendParcelAdapter(mContext, mParcels);
+            mBody.setAdapter(mAdapter);
+        } else {
+            mAdapter.setData(mParcels);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showPayType(float price, int payType, CsUser.CouponList mCoupon) {
+        if (price <= 0) {
+            mTvUseBalance.setVisibility(View.GONE);
+        } else {
+            mTvUseBalance.setVisibility(View.VISIBLE);
+            mTvUseBalance.setText(getString(R.string.String_balance_first) + getString(R.string.String_price, price));
+        }
+
+        if (mCoupon != null) {
+            tvUseCoupon.setVisibility(View.VISIBLE);
+            String text = getString(R.string.pr_use) + mCoupon.getShippingcouponname() + ": ￥" + mCoupon.getDiscountamount();
+            tvUseCoupon.setText(text);
+        } else {
+            tvUseCoupon.setVisibility(View.GONE);
+        }
+
+        switch (payType) {
+            case 1:
+                mTvPayType.setText(getString(R.string.String_parcel_ali_pay));
+                break;
+            case 2:
+                mTvPayType.setText(getString(R.string.String_parcel_weixin_pay));
+                break;
+        }
+    }
+
+    public void showWarehouseDialog(List<CsBase.Warehouse> warehouses ){
+        final CustomDialog.Builder builder = new CustomDialog.Builder(getContext());
+        builder.setContentView(View.inflate(getContext(), R.layout.warehouse_fragment_dialog, null));
+        builder.create().show();
+    }
+
+    void showDialog() {
+//        mStackLevel++;
+
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        WarehouseDialog dialog = WarehouseDialog.newInstance(0);
+        dialog.show(ft, "dialog");
+    }
+
+
+    @Override
+    public void showEstimatePrice(float price) {
+        mTvEstimatePrice.setText(getString(R.string.String_price, price));
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.Append_PARCEN_SUCESS) {
+            mPresenter.onStart();
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(HelpSendPresent.class.getSimpleName())) {
+            mPresenter.submitSuccess(event.getBooleanParam());
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && !event.getBooleanParam()) {
+            ((MainActivity) mContext).closeLoading();
+        }
+
+        if (event.getType() == BusEvent.PAYMENT_TYPE_CHANGE) {
+            mPresenter.initPayType();
+        }
+       /* if (event.getType() == BusEvent.CODE_COUPON_ID) {
+            mPresenter.setCouponsID((int) event.getParam());
+        }*/
+    }
+
+
+    @OnClick({R.id.btn_submit, R.id.rl_pay_foot, R.id.selectBtn})
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+          /*  case R.id.img_get_it:
+                mRlTips.setVisibility(View.GONE);
+                SPUtils.put(mContext, SHOW_TIPS, false);
+                break;*/
+            case R.id.btn_submit:
+                mPresenter.submit();
+                break;
+            case R.id.rl_pay_foot:
+                mPresenter.switchPayType();
+                break;
+            case R.id.title_tv_right:
+            case R.id.selectBtn:
+//                showDialog();
+//                if (!AccountManager.getInstance().isUserLogin(mContext)) return;
+                if (!mMAppendable) {
+                    Toast.makeText(mContext, R.string.package_append_count_tip, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mPresenter.toAppendActivity();
+                break;
+
+        }
+    }
+
+
+    public void setCoupons(CsUser.CouponList coupon) {
+        mPresenter.setCoupons(coupon);
+    }
+
+}

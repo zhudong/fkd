@@ -1,0 +1,232 @@
+package com.fuexpress.kr.net;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsAddress;
+import fksproto.CsCard;
+import fksproto.CsFeed;
+import fksproto.CsInfo;
+import fksproto.CsLogin;
+import fksproto.CsMsgid;
+import fksproto.CsMy;
+import fksproto.CsNotice;
+import fksproto.CsParcel;
+import fksproto.CsUser;
+import yssproto.CsPdu;
+
+
+/**
+ * Created by alick on 3/1/16.
+ */
+public class ProtoConfigManager {
+    private static ProtoConfigManager ourInstance = new ProtoConfigManager();
+    private List<ProtoConfig> mProtoConfigList;
+
+    public static ProtoConfigManager getInstance() {
+        return ourInstance;
+    }
+
+    public ProtoConfig getProtoConfig(Object object) {
+        for (ProtoConfig protoConfig : mProtoConfigList) {
+            if (object.getClass().isAssignableFrom(protoConfig.mRequestBuilderClazz)) {
+                return protoConfig;
+            }
+        }
+        return null;
+    }
+
+    private ProtoConfigManager() {
+        mProtoConfigList = new ArrayList<>();
+        // TODO: 3/1/16 put all Protocal HERE!
+        //登录
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_LOGIN_REQUEST, CsLogin.LoginRequest.Builder.class, CsLogin.LoginResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_ACCOUNT_REQUEST, CsLogin.AccountRequest.Builder.class, CsLogin.AccountResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_REQUEST, CsCard.GiftCardBalanceListRequest.Builder.class, CsCard.GiftCardBalanceListReponse.class, true));
+//        mProtoConfigList.add(new ProtoConfig(
+//                CsMsgid.FksCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST, CsCard.GiftCardBalanceListAjaxRequest.Builder.class, CsCard.GiftCardBalanceListAjaxReponse.class, true));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST, CsCard.GetGiftCardOrderListRequest.Builder.class, CsCard.GetGiftCardOrderListReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SET_USER_INFO_FIELD_REQUEST, CsUser.SetUserInfoFieldRequest.Builder.class, CsUser.SetUserInfoFieldResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_CUSTOMER_ADDRESS_LIST_REQUEST, CsAddress.GetCustomerAddressListRequest.Builder.class, CsAddress.GetCustomerAddressListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SET_USER_INFO_FIELD_REQUEST, CsUser.SetUserInfoFieldRequest.Builder.class, CsUser.SetUserInfoFieldResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_DEL_CUSTOMER_ADDRESS_REQUEST, CsAddress.DelCustomerAddressRequest.Builder.class, CsAddress.DelCustomerAddressResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_EDIT_CUSTOMER_ADDRESS_REQUEST, CsAddress.EditCustomerAddressRequest.Builder.class, CsAddress.EditCustomerAddressResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_ADD_CUSTOMER_ADDRESS_REQUEST, CsAddress.AddCustomerAddressRequest.Builder.class, CsAddress.AddCustomerAddressResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SIMPLE_USER_INFO_REQUEST, CsUser.GetSimpleUserInfoRequest.Builder.class, CsUser.GetSimpleUserInfoResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_THIRD_LOGIN_REQUEST, CsLogin.ThirdLoginRequest.Builder.class, CsLogin.ThirdLoginResponse.class, CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_USER_INFO_FIELD_REQUEST, CsUser.GetUserInfoFieldRequest.Builder.class, CsUser.GetUserInfoFieldResponse.class));
+
+
+//        需求列表
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_MY_REQUIRE_LIST_REQUEST, CsUser.GetMyRequireListRequest.Builder.class, CsUser.GetMyRequireListResponse.class));
+
+//        获取材质
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_MATERIALS_LIST_REQUEST, CsUser.GetMaterialsListRequest.Builder.class, CsUser.GetMaterialsListResponse.class));
+
+//        包裹
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_PARCEL_LIST_REQUEST, CsParcel.SendParcelListRequest.Builder.class, CsParcel.SendParcleListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SEND_INIT_REQUEST, CsParcel.SendInitRequest.Builder.class, CsParcel.SendInitReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SELECT_ADDRESS_AJAX_REQUEST, CsParcel.GetSelectAddressAjaxRequest.Builder.class, CsParcel.GetSelectAddressAjaxReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SHIPPING_INFO_REQUEST, CsParcel.GetShippingInfoRequest.Builder.class, CsParcel.GetShippingInfoReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SEND_SUBMIT_REQUEST, CsParcel.SendSubmitRequest.Builder.class, CsParcel.SendSubmitReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_DO_DIRECT_GIFT_CARD_REQUSET, CsParcel.DoDirectGiftCardRequest.Builder.class, CsParcel.DoDirectGiftCardResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_PAY_GIFT_CARD_ORDER_REQUEST, CsParcel.PayGiftCardOrderRequest.Builder.class, CsParcel.PayGiftCardOrderResponse.class));
+        /*提交多个包裹，多个单品的*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SEND_FOR_ITEM_REQUEST, CsParcel.SendForItemRequest.Builder.class, CsParcel.SendForItemResponse.class));
+        /*包裹单品操作*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_ADD_ITEM_REQUEST, CsParcel.AddItemRequest.Builder.class, CsParcel.AddItemResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SEND_EDITITEM_REQUEST, CsParcel.EditItemRequest.Builder.class, CsParcel.EditItemResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_DEL_ITEM_REQUEST, CsParcel.DelItemRequest.Builder.class, CsParcel.DelItemResponse.class));
+//        包裹详情
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GEG_PARCEL_DETAIL_REQREST, CsParcel.GetParcelDetailRequest.Builder.class, CsParcel.GetParcelDetailResponse.class));
+      /*  mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSG_SELECT_SHIPPING_METHOD_REQUEST, CsParcel.GetSelectAddressAjaxRequest.Builder.class, CsParcel.GetSelectAddressAjaxReponse.class));*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_CHECK_TO_PAY_REQUEST, CsMy.CheckToPayRequest.Builder.class, CsMy.CheckToPayResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_REQUEST, CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder.class, CsParcel.PayDoDirectGiftCardAppSingleResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SELECT_SHIPPING_METHOD_REQUEST, CsParcel.SelectShippingMethodRequest.Builder.class, CsParcel.SelectShippingMethodReponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_WAREHOUSELIST_REQUEST, CsUser.GetWarehouseListRequest.Builder.class, CsUser.GetWarehouseListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_PARCEL_NOTICE_SHIPPING_FEE_REQUEST, CsParcel.ParcelNoticeShippingFeeRequest.Builder.class, CsParcel.ParcelNoticeShippingFeeResponse.class));
+        /*订单包裹提交发货*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SUBMIT_PARCEL_NOTICE_REQUEST, CsParcel.SubmitParcelNoticeRequest.Builder.class, CsParcel.SubmitParcelNoticeResponse.class));
+
+//        拆分包裹初始化
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_INIT_REPARCEL_REQUEST, CsParcel.InitReparcelRequest.Builder.class, CsParcel.InitReparcelResponse.class));
+//        拆分包裹
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SAVE_REPARCEL_REQUEST, CsParcel.SaveReparcelRequest.Builder.class, CsParcel.SaveReparcelResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_REPARCEL_DO_DIRECT_GIFT_CARD_REQUSET, CsParcel.ReparcelDoDirectGiftCardRequest.Builder.class, CsParcel.ReparcelDoDirectGiftCardResponse.class));
+
+//保险申报
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_INIT_INSURANCE_DECLARATION_REQUEST, CsParcel.InitInsuranceDeclarationRequest.Builder.class, CsParcel.InitInsuranceDeclarationResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_SAVE_INSURANCE_DECLARATION_REQUEST, CsParcel.SaveInsuranceDeclarationRequest.Builder.class, CsParcel.SaveInsuranceDeclarationResponse.class));
+
+
+//       获取余额
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_ACCOUNT_BALANCE_REQUEST, CsMy.GetAccountBalanceRequest.Builder.class, CsMy.GetAccountBalanceResponse.class));
+//        首页跑马灯
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_INDEX_ADIMAGE_REQUEST, CsFeed.IndexAdImageRequest.Builder.class, CsFeed.IndexAdImageResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_RECHARGE_ORDER_DETAIL_REQUEST, CsCard.GetRechargeOrderDetailRequest.Builder.class, CsCard.GetRechargeOrderDetialResponse.class));
+
+        //优惠券
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_USEABLE_COUPONLIST_REQUEST, CsUser.UseableCouponListRequest.Builder.class, CsUser.UseableCouponListResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_MYSHIPPING_COUPONLIST_REQUEST, CsUser.MyShippingCouponListRequest.Builder.class, CsUser.MyShippingCouponListResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_EXCHANGE_SHIPPING_COUPON_REQUEST, CsUser.ExchangeShippingCouponRequest.Builder.class, CsUser.ExchangeShippingCouponResponse.class
+                /*,CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE*/));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CANCEL_GIFT_CARD_ORDER_REQUEST, CsCard.CancelGiftCardOrderRequest.Builder.class, CsCard.CancelGiftCardOrderResponse.class));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_SYS_NOTICE_MSG_REQUEST, CsNotice.GetSysNoticeMsgRequest.Builder.class, CsNotice.GetSysNoticeMsgResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_PAY_GIFT_CARD_ORDER_REQUEST, CsParcel.PayGiftCardOrderRequest.Builder.class, CsParcel.PayGiftCardOrderResponse.class));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CURRENCY_LIST_REQUEST, CsUser.GetCurrencyListRequest.Builder.class, CsUser.GetCurrencyListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CHANGE_LOCALE_REQUEST, CsUser.ChangeLocaleRequest.Builder.class, CsUser.ChangeLocaleResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CHANGE_CURRENCY_REQUEST, CsUser.ChangeCurrencyRequest.Builder.class, CsUser.ChangeCurrencyResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_FKDPAYMENT_LIST_REQUEST, CsUser.GetFKDPaymentListRequest.Builder.class, CsUser.GetFKDPaymentListResponse.class));
+        //获取友利银行信息
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_KRBANK_INFO_REQUEST, CsUser.GetKrBankInfoRequest.Builder.class, CsUser.GetKrBankInfoResponse.class));
+        //获取红点消息
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.FksCSProtoMsgId.MSGID_GET_MY_RED_POINT_REQUEST, CsUser.GetMyRedPointRequest.Builder.class, CsUser.GetMyRedPointResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_GET_INIT_REQUEST, CsParcel.HelpMyGetInitRequest.Builder.class, CsParcel.HelpMyGetInitResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SAVE_HELP_MY_GET_REQUEST, CsParcel.SaveHelpMyGetRequest.Builder.class, CsParcel.SaveHelpMyGetResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_RECEIVE_INIT_REQUEST, CsParcel.HelpMyReceiveInitRequest.Builder.class, CsParcel.HelpMyReceiveInitResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SAVE_HELP_RECEIVE_REQUEST, CsParcel.SaveHelpReceiveRequest.Builder.class, CsParcel.SaveHelpReceiveResponse.class));
+
+        //帮我补货详情
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_BUYINFO_REQUEST, CsUser.helpMyBuyInfoRequest.Builder.class, CsUser.helpMyBuyInfoResponse.class));
+        //帮我取货详情
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_GETINFO_REQUEST, CsUser.HelpMyGetInfoRequest.Builder.class, CsUser.HelpMyGetInfoResponse.class));
+        //帮我收货详情
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_RECEIVEINFO_REQUEST, CsUser.helpMyReceiveInfoRequest.Builder.class, CsUser.helpMyReceiveInfoResponse.class));
+
+        //帮我补货/买货初始化
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_HELP_MY_BUY_INIT_REQUEST, CsParcel.HelpMyBuyInitRequest.Builder.class, CsParcel.HelpMyBuyInitResponse.class));
+        //帮我补货/买货提交
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SAVE_HELP_MY_BUY_REQUEST, CsParcel.SaveHelpMyBuyRequest.Builder.class, CsParcel.SaveHelpMyBuyResponse.class));
+        //获取订单数量:
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_MYREQUIRE_PARCELNUM_REQUEST, CsUser.MyRequireParcelNumRequest.Builder.class, CsUser.MyRequireParcelNumResponse.class));
+        //请求检查支付
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CHECK_TO_PAY_IN_APPREQUIRE_REQUEST, CsCard.GetCheckToPayInApprequireRequest.Builder.class, CsCard.GetCheckToPayInApprequireResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_REQUEST, CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder.class, CsParcel.PayDoDirectGiftCardAppSingleResponse.class));
+        //取消申请
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CANCEL_REQUIRE_REQUEST, CsUser.CancelRequireRequest.Builder.class, CsUser.CancelRequireResponse.class));
+        //请求分类接口:
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CATEGORY_LIST_REQUEST, CsUser.GetCategoryListRequest.Builder.class, CsUser.GetCategoryListResponse.class));
+        //绑定充值卡:
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_BIND_GIFT_CARD_REQUEST, CsCard.BindGiftCardRequest.Builder.class, CsCard.BindGiftCardResponse.class));
+        //请求充值卡来源:
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_GIFT_CARD_STORESITE_REQUEST, CsCard.GetGiftCardStoresiteRequest.Builder.class, CsCard.GetGiftCardStoresiteResponse.class));
+
+        //切换语种
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CHANGE_LOCALE_REQUEST, CsUser.ChangeLocaleRequest.Builder.class, CsUser.ChangeLocaleResponse.class));
+        //更新地址数据
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_UPDATE_COUNTRY_AND_REGION_REQUEST, CsCard.GetUpdateCountryAndRegionRequest.Builder.class, CsCard.GetUpdateCountryAndRegionResponse.class));
+
+        //获取积分详情
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CREDITS_DETAIL_REQUEST, CsUser.GetCreditsDetailRequest.Builder.class, CsUser.GetCreditsDetailResponse.class));
+        //获取邀请的好友列表
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_INVITEES_LIST_REQUEST, CsUser.GetInviteesListRequest.Builder.class, CsUser.GetInviteesListResponse.class));
+        //获取分享的连接
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_INVITE_CONFIG_REQUEST, CsUser.GetInviteConfigRequest.Builder.class, CsUser.GetInviteConfigResponse.class));
+        //切换城市
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_WAREHOUSE_REGION_REQUEST, CsAddress.GetWarehouseRegionRequest.Builder.class, CsAddress.GetWarehouseRegionResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SAVE_WAREHOUSE_REGION_REQUEST, CsAddress.SaveWarehouseRegionRequest.Builder.class, CsAddress.SaveWarehouseRegionResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_ACCOUNTINFO_REQUEST, CsUser.GetAccountInfoRequest.Builder.class, CsUser.GetAccountInfoResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_VERSION_INFO_REQUEST, CsInfo.GetVersionInfoRequest.Builder.class, CsInfo.GetVersionInfoResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_CREDIT_SWITHDRAW_REQUEST, CsMy.CreditsWithdrawRequest.Builder.class, CsMy.CreditsWithdrawResponse.class));
+
+    }
+}

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:longer="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:id="@+id/ll_in_normal_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <include layout="@layout/help_item_head_view"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:background="@color/white"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="7dp"
+                      android:gravity="center_vertical"
+                      android:layout_height="47dp">
+            <TextView
+                    android:text="@string/hms_desc_text"
+                    style="@style/input_box_style"
+                    />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:textSize="13sp"
+                      android:id="@+id/ed_desc"
+                      android:background="@null"
+                      android:layout_marginLeft="20dp"
+                      android:hint="@string/hms_desc_text_hint"
+                    />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:background="@color/white"
+                      android:layout_marginTop="1dp"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_height="47dp">
+            <TextView
+                    android:text="@string/hms_remarks_text"
+                    style="@style/input_box_style"
+                    />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:textSize="13sp"
+                      android:id="@+id/ed_remark"
+                      android:background="@null"
+                      android:layout_marginLeft="20dp"
+                      android:hint="@string/hms_desc_text_hint"
+                    />
+
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:background="@color/white"
+                      android:layout_marginTop="1dp"
+                      android:id="@+id/ll_choose_ware_house"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_height="47dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="1.1"
+                      android:gravity="right"
+                      android:text="@string/hm_item_ware_house"
+                      android:textSize="13sp"
+                      android:textColor="@color/black"
+                      android:layout_marginLeft="7dp"
+                    />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="5.3"
+                      android:id="@+id/tv_ware_house_show"
+                      android:textSize="13sp"
+                      android:layout_marginLeft="20dp"
+                      android:textColor="@color/gray_999"
+                      android:text="@string/hm_item_ware_house_hint"
+                    />
+            <ImageView android:layout_width="0dp" android:layout_height="wrap_content"
+                       android:layout_weight="0.6"
+                       android:src="@mipmap/arrow_down"
+                    />
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/ll_ware_house_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="visible">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/dotted_line"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/tv_ip_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_999"
+                        android:textSize="11sp"/>
+
+                <TextView
+                        android:id="@+id/tv_ip_receiver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_999"
+                        android:layout_marginTop="4dp"
+                        android:textSize="11sp"/>
+
+                <TextView
+                        android:id="@+id/tv_ip_phone"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/gray_999"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="11sp"/>
+
+                <TextView
+                        android:id="@+id/tv_ip_post_code"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/gray_999"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="11sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:background="@color/white"
+                      android:layout_marginTop="1dp"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_height="47dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="1.2"
+                      android:text="@string/hms_price_text"
+                      android:textSize="13sp"
+                      android:textColor="@color/black"
+                      android:gravity="right"
+                      android:layout_marginLeft="7dp"
+                    />
+            <EditText android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="5.5"
+                      android:textSize="13sp"
+                      android:inputType="numberDecimal"
+                      android:id="@+id/ed_price"
+                      android:background="@null"
+                      android:layout_marginLeft="20dp"
+                      android:hint="@string/hms_price_text_hint"
+                    />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="0.8"
+                      android:text="KRW"
+                      android:textColor="@color/gray_999"
+                      android:id="@+id/tv_currency_code"
+                    />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:background="@color/white"
+                      android:layout_marginTop="1dp"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_height="47dp">
+            <TextView style="@style/input_box_style"
+                      android:text="@string/hm_item_quantity"
+
+                    />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:textSize="13sp"
+                      android:id="@+id/ed_quantity"
+                      android:background="@null"
+                      android:layout_marginLeft="20dp"
+                      android:hint="@string/hm_item_quantity_hint"
+                    />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/iv_in_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="120dp"
+            android:src="@mipmap/demand_delete"
+            android:visibility="gone"/>
+</RelativeLayout>

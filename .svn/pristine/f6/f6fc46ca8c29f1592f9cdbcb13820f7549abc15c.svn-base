@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.fuexpress.kr"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:name=".base.SysApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/SplashThem" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.activity.HelpMeGetPackageActivity"/>
+        <activity android:name=".ui.activity.CouponActivity"/>
+        <activity android:name=".ui.activity.MyNeedActivity"/>
+        <activity android:name=".ui.activity.append_parcel.AppendParcelActivity"/>
+        <activity android:name=".ui.activity.ParcelSubmitSucessActivity"/>
+        <activity android:name=".ui.activity.help_send.ToHelpSendActivity"/>
+        <activity
+            android:name=".ui.activity.Down2UpDialogActivity"
+            android:theme="@style/dialog_down_2_up"/>
+        <activity android:name=".ui.activity.ParcelPaymentAtivity"/>
+        <activity android:name=".ui.view.imageselector.ImageSelectorActivity"/>
+        <activity android:name=".ui.activity.AccountSettingActivity" />
+        <activity android:name=".ui.activity.login_register.LoginByPhoneActivity" />
+        <activity android:name=".ui.activity.login_register.RegisterByPhoneActivity" />
+        <activity android:name=".ui.activity.login_register.FindPasswordActivity" />
+        <activity android:name=".ui.activity.login_register.BindThirdPlatformActivity" />
+        <activity android:name=".ui.activity.login_register.ThirdPlatformLoginActivity" />
+        <activity android:name=".ui.activity.ChooseCountryActivity" />
+        <activity android:name=".ui.activity.coupon.CouponsActivity" />
+        <activity android:name=".ui.activity.HelpCenterActivity" />
+        <activity android:name=".ui.activity.notice.NoticeDetailActivity" />
+        <activity android:name=".ui.activity.notice.NoticeListActivity" />
+        <activity android:name=".ui.activity.PreviewParceldiseActivity" />
+        <activity android:name=".ui.activity.package_detail.PackageDetailActivity" />
+        <activity android:name=".ui.activity.package_detail.ParcelToSendActivity" />
+        <activity android:name=".ui.activity.UserDetailInfoActivity">
+        </activity>
+        <activity
+            android:name=".ui.activity.TImePickerActivity"
+            android:theme="@style/dialog_down_2_up_no_bg">
+        </activity>
+        <activity
+            android:name=".ui.activity.AddressDialogActivity"
+            android:theme="@style/dialog_down_2_up_no_bg">
+        </activity>
+        <activity
+            android:name=".ui.activity.GenderDialogActivity"
+            android:theme="@style/dialog_down_2_up_no_bg">
+        </activity>
+        <activity
+            android:name=".ui.activity.ChangeEmailActivity"
+            android:theme="@style/dialog_down_2_up">
+        </activity>
+        <activity android:name=".ui.activity.ChangePassWordActivity">
+        </activity>
+        <activity android:name=".ui.activity.PreferencesActivity">
+        </activity>
+        <activity android:name=".ui.activity.ChooseLanguageActivity">
+        </activity>
+        <activity android:name=".ui.activity.ChooseCurrencyActivity">
+        </activity>
+        <activity android:name=".ui.activity.MyBalanceActivity">
+        </activity>
+        <activity android:name=".ui.activity.BalanceAccountActivity">
+        </activity>
+        <activity android:name=".ui.activity.FillingOrderQueryActiviry">
+        </activity>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105716549" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"/>
+        <activity android:name=".ui.activity.AddressManagerActivity">
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id"/>
+
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.AddNewAddressActivity">
+        </activity>
+        <activity android:name=".ui.activity.CardOrderDetailActivity"/>
+        <activity android:name=".ui.activity.CouponExchangeActivity"/>
+    </application>
+
+</manifest>

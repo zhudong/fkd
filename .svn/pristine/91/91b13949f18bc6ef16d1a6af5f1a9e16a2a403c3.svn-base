@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_bg"
+    tools:context="ai.zhaoban.ydk.ui.activity.append_parcel.AppendParcelActivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <ScrollView
+        android:id="@+id/sc_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@color/default_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_parcel_append_header"/>
+
+            <include layout="@layout/item_parcel_append_info"/>
+
+            <include layout="@layout/item_parcel_append_foot"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

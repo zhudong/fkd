@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical"
+              tools:context="com.fuexpress.kr.ui.activity.append_parcel.IdCardActivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/tv_item_info"
+                style="@style/parcel_text_gray_33_13"
+                android:text="@string/String_id_card_num"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_item_info"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_item_info"
+                android:src="@mipmap/star"/>
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/edt_input_id_info"
+            style="@style/parcel_input_append_info"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="14dp"
+            android:background="@null"
+            android:hint="@string/String_please_input_id_card_num"
+            android:maxLength="60"
+            android:text=""/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_append_idcard_front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:paddingBottom="30dp"
+                android:paddingTop="30dp"
+                >
+
+                <FrameLayout
+                    android:id="@+id/fl_front"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/shape_id_card_up">
+
+                    <ImageView
+                        android:id="@+id/img_uping_card_front"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                    <View
+                        android:id="@+id/view_card_front_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/bg_card_cover"
+                        android:visibility="gone"/>
+
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_card_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/package_upload"
+                    android:text="身份证正面照"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_append_idcard_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:paddingBottom="30dp"
+                android:paddingTop="30dp"
+                >
+
+                <FrameLayout
+                    android:id="@+id/fl_back"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/shape_id_card_up">
+
+                    <ImageView
+                        android:id="@+id/img_uping_card_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                    <View
+                        android:id="@+id/view_card_back_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/bg_card_cover"
+                        android:visibility="gone"/>
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_card_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/package_upload"
+                    android:text="身份证反面照"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tv_sample"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="示例"
+                android:textSize="13sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/tv_sample"
+                android:background="@color/divide_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@id/tv_sample"
+                android:background="@color/divide_line"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="30dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/package_idcard1"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="30dp"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/package_idcard2"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/id_card_notice"
+            android:textColor="@color/text_color_666"
+            android:textSize="11sp"/>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_id_card"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:enabled="false"
+        android:layout_height="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_append_item_continue"
+        android:gravity="center"
+        android:text="@string/String_parcel_save"
+        android:textColor="@color/black"/>
+
+
+</LinearLayout>

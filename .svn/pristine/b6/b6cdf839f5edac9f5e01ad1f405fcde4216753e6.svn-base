@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/coupon_titlebarview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zhudong:text="@string/coupon_title_msg" />
+    <TextView
+        android:id="@+id/coupon_top_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:textColor="@color/black_0"
+        android:text="人民币(3)"/>
+
+    <ListView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/coupon_listview"
+        android:layout_width="match_parent"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:fadeScrollbars="false"
+        android:scrollbars="none"
+        android:layout_height="wrap_content" />
+</LinearLayout>

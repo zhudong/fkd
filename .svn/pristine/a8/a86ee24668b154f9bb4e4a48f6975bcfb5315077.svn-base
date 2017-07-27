@@ -1,0 +1,119 @@
+package com.fuexpress.kr.ui.activity.help_signed.data;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.google.common.annotations.VisibleForTesting;
+
+import com.fuexpress.kr.ui.view.InputBoxView;
+import com.fuexpress.kr.utils.InPutBoxViewFactory;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/8.
+ * 用来管理帮我收数据的仓库类,是将远程和本地的数据源来整合储存的地方
+ * 其实就是将本地和网上的数据集中储存在内存中的仓库类
+ * 可以当这个就是MVP的Model层
+ * 这个仓库类需要实现数据源接口,来对现有的本地Or网络数据来进行管理(在本地中(数据库),增删改查)
+ */
+public class HelpSingedDataRepository implements HelpSignedDataSource {
+
+    @NonNull
+    private final HelpSignedLocalDataSource mHelpSignedLocalDataSource;//本地数据源的实体对象,不可为空不可修改
+
+    @Nullable
+    private static HelpSingedDataRepository INSTANCE = null;
+
+    @VisibleForTesting
+    @Nullable
+    List<CsParcel.ProductDataList> mProductDataCacheLists;
+
+
+    private HelpSingedDataRepository(@NonNull HelpSignedLocalDataSource helpSignedLocalDataSource, Context context) {//其实这里还需要一个远程数据源对象,因为这里的需求不涉及,所以就不需要了
+        mHelpSignedLocalDataSource = checkNotNull(helpSignedLocalDataSource, "Local Data Is NotNull!");
+        createHelpSingedInputBoxView(context);
+    }
+
+    private void createHelpSingedInputBoxView(Context context) {
+        List<InputBoxView> inputBoxViews = new ArrayList<>();
+        inputBoxViews.add(InPutBoxViewFactory.getInstance(context).createNormalInputBoxView("单品描述", "您还可以输入200字符"));
+        inputBoxViews.add(InPutBoxViewFactory.getInstance(context).createNormalInputBoxView("备注说明", "您还可以输入200字符"));
+        // TODO: 2016/12/8 这里还需要继续创建InputBox
+
+    }
+
+    public static HelpSingedDataRepository getInstance(@NonNull HelpSignedLocalDataSource helpSignedLocalDataSource, Context context) {
+        if (INSTANCE == null)
+            INSTANCE = new HelpSingedDataRepository(helpSignedLocalDataSource, context);
+        return INSTANCE;
+    }
+
+
+    @Override
+    public List<CsParcel.ProductDataList> getHelpSignedDataList() {
+        if (mProductDataCacheLists != null) {
+            return mProductDataCacheLists;
+        } else if (mProductDataCacheLists == null) {
+            mProductDataCacheLists = new ArrayList<>();
+        }
+        mProductDataCacheLists.addAll(mHelpSignedLocalDataSource.getHelpSignedDataList());
+        return mProductDataCacheLists;
+    }
+
+    @Override
+    public CsParcel.ProductDataList getHelpSignedDataOnly(int index) {
+        if (mProductDataCacheLists != null)
+            return mProductDataCacheLists.get(index);
+        else
+            return null;
+    }
+
+    @Override
+    public void saveHelpSignedData(@NonNull CsParcel.ProductDataList helpSignedData) {
+        if (mProductDataCacheLists != null)
+            mProductDataCacheLists.add(helpSignedData);
+    }
+
+    @Override
+    public void deleteHelpSignedData(int index) {
+        if (mProductDataCacheLists != null)
+            mProductDataCacheLists.remove(index);
+    }
+
+    @Override
+    public void deletAllHelpSignedData() {
+        Iterator<CsParcel.ProductDataList> iterator = mProductDataCacheLists.iterator();
+        while (iterator.hasNext()) {
+            iterator.remove();
+        }
+    }
+
+    @Override
+    public void refreshHelpSignedData() {//刷新数据,暂时没用
+
+    }
+
+    @Override
+    public void editHelpSignedData(int index, @NonNull CsParcel.ProductDataList helpSignedData) {
+        if (mProductDataCacheLists != null)
+            mProductDataCacheLists.set(index, helpSignedData);
+    }
+
+    /**
+     * Used to force {@link #getInstance(HelpSignedLocalDataSource)}  to create a new instance
+     * next time it's called.
+     */
+    public static void destroyInstance() {
+        INSTANCE = null;
+    }
+
+
+}

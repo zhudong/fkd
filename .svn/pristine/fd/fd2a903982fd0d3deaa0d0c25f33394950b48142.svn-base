@@ -1,0 +1,248 @@
+package com.fuexpress.kr.ui.activity.produ_source;
+
+import android.os.Bundle;
+import android.support.v4.util.LongSparseArray;
+import android.view.View;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.model.MerChantBean;
+import com.fuexpress.kr.ui.activity.merchant_detail.MerchantDetailManager;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.RefreshListView;
+
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2017/6/23.
+ * 货源旗下的子Fragment,提供给货源的MainViewPager
+ */
+public class ProduSrcSubFragment extends BaseFragment implements RefreshListView.OnRefreshListener {
+
+    public static final String KEY_ALL = "ALL";
+
+    public static final String KEY_HOT = "HOT";
+
+    public static final String KEY_FOLLOWED = "FOLLOWED";
+
+    private int mPageNum = 1;
+
+    private String mType = "";
+
+    private boolean mIsHasMore = false;
+
+    private View mRootView;
+    private RefreshListView mRefreshListView;
+    private String mTitle;
+    private ProduSrcMyFollowAdapter mProduSrcMyFollowAdapter;
+    private ProduSrcAdapter produSrcAdapter;
+
+
+    public static ProduSrcSubFragment getProduSrcSubFragmentInstance(Bundle bundle) {
+        ProduSrcSubFragment produSrcSubFragment = new ProduSrcSubFragment();
+        produSrcSubFragment.setArguments(bundle);
+        return produSrcSubFragment;
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(getActivity(), R.layout.layout_produ_src_sub, null);
+        mRefreshListView = (RefreshListView) mRootView.findViewById(R.id.rfl_produ_src_sub);
+        mRefreshListView.setOnRefreshListener(this);
+
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        Bundle arguments = getArguments();
+        mType = arguments.getString("key");
+        checkNotNull(mType, "ProduSrcSubFragment :key not null");
+        mTitle = getDataByType(mType, 1);
+    }
+
+    public String geFollowedTitleAndData(int page) {
+        ProduSrcDataManager.getInstance().getProductSourceFollowed(page, mType);
+        return getString(R.string.title_produ_src_focus);
+    }
+
+    public String getAllTitleAndData(int page) {
+
+        ProduSrcDataManager.getInstance().getProductSourceAll(mType, page);
+        return getString(R.string.title_produ_src_all);
+    }
+
+    public String getHotTitleAndData(int page) {
+
+        ProduSrcDataManager.getInstance().getProductSourceHot(mType, page);
+        return getString(R.string.title_produ_src_hot);
+    }
+
+    public String getDataByType(String type, int page) {
+        return type.equals(KEY_FOLLOWED) ? geFollowedTitleAndData(page) : mType.equals(KEY_ALL)
+                ? getAllTitleAndData(page) : getHotTitleAndData(page);
+    }
+
+
+    public String getTitle() {
+        if (null == mTitle) {
+            Bundle arguments = getArguments();
+            mType = arguments.getString("key");
+            checkNotNull(mType, "ProduSrcSubFragment :key not null");
+            mTitle = KEY_FOLLOWED.equals(mType) ? SysApplication.getContext().getResources().getString(R.string.title_produ_src_focus)
+                    : KEY_ALL.equals(mType) ? SysApplication.getContext().getResources().getString(R.string.title_produ_src_all) : SysApplication.getContext().getResources().getString(R.string.title_produ_src_hot);
+        }
+        return mTitle;
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+        getDataByType(mType, mPageNum = 1);
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+        if (mIsHasMore)
+            getDataByType(mType, ++mPageNum);
+    }
+
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_PRODUSRC_ALL_COMPETE:
+            case BusEvent.GET_PRODUSRC_HOT_COMPETE:
+
+                if (event.getBooleanParam()) {
+                    if (event.getStrParam().equals(mType)) {
+                        mIsHasMore = event.getBooleanParam02();
+                        // TODO: 2017/6/26 等待接口处理
+                        operateAdapterByType(mIsHasMore, mType, event.getStrParam());
+                    }
+                } else
+                    CustomToast.makeText(getActivity(), event.getStrParam(), Toast.LENGTH_SHORT).show();
+
+
+                break;
+            case BusEvent.GET_PRODUSRC_FOLLOWED_COMPETE:
+                if (mType.equals(event.getStrParam()))
+                    if (event.getBooleanParam()) {
+                        mIsHasMore = event.getBooleanParam02();
+                        // TODO: 2017/6/26 等待接口处理
+                        operateAdapterByType(mIsHasMore, mType, event.getStrParam());
+                    } else
+                        CustomToast.makeText(getActivity(), event.getStrParam(), Toast.LENGTH_SHORT).show();
+
+                break;
+            case BusEvent.REQUEST_FAIL:
+                CustomToast.makeText(getActivity(), event.getStrParam(), Toast.LENGTH_SHORT).show();
+                break;
+            case BusEvent.OPERA_MERCHANT_SUCCESS://关注了商户成功
+                MerChantBean merChantBean = (MerChantBean) event.getParam();
+                String type = event.getStrParam();
+                accordTypeToOpera(merChantBean, type);
+                break;
+
+        }
+    }
+
+    private void accordTypeToOpera(MerChantBean merChantBean, String operaType) {
+
+        List<MerChantBean> operaMerChantBeans;
+        int position;
+        MerChantBean wantOperaMB;
+
+        if (KEY_FOLLOWED.equals(operaType)) {
+            /*operaMerChantBeans = ProduSrcDataManager.getInstance().mFollowedMerchantBeans;
+            position = mProduSrcMyFollowAdapter.getmCurrPosition();
+            operaMerChantBean = operaMerChantBeans.get(position);
+            if (!(merChantBean == operaMerChantBean)) {
+                ProduSrcDataManager.getInstance().mFollowedMerchantBeans.set(position, merChantBean);
+            }
+            mProduSrcMyFollowAdapter.notifyDataSetChanged();*/
+        } else {
+            if (mType.equals(operaType)) {
+                operaMerChantBeans = KEY_ALL.equals(operaType) ? ProduSrcDataManager.getInstance().mAllMerChantBeanList
+                        : ProduSrcDataManager.getInstance().mHotMerChantBeanList;
+                position = produSrcAdapter.mPosition;
+                wantOperaMB = operaMerChantBeans.get(position);
+                if (!(merChantBean == wantOperaMB)) {
+                    //ProduSrcDataManager.getInstance().mFollowedMerchantBeans.set(position, merChantBean);
+                    if (KEY_ALL.equals(operaType)) {
+                        ProduSrcDataManager.getInstance().mAllMerChantBeanList.set(position, merChantBean);
+                    } else {
+                        ProduSrcDataManager.getInstance().mHotMerChantBeanList.set(position, merChantBean);
+                    }
+                }
+                produSrcAdapter.notifyDataSetChanged();
+            }
+        }
+
+          /*mHotStoreAdapter.mPosition;
+          StoreManager.getInstance().mMerChantBeanList.get(position);
+        if (!(merChantBean == merChantBean1)) {
+            StoreManager.getInstance().mMerChantBeanList.set(position, merChantBean);
+        }
+        mHotStoreAdapter.notifyDataSetChanged();*/
+    }
+
+    public void operateAdapterByType(boolean hasMore, String type, String typeName) {
+        if (KEY_FOLLOWED.equals(type)) {
+            if (mProduSrcMyFollowAdapter == null || mPageNum == 1) {
+                mProduSrcMyFollowAdapter = new ProduSrcMyFollowAdapter(getActivity(), ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
+                mRefreshListView.setAdapter(mProduSrcMyFollowAdapter);
+            } else {
+                //mProduSrcMyFollowAdapter.setData(ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
+                mProduSrcMyFollowAdapter.notifyDataSetChanged();
+            }
+            mRefreshListView.stopRefresh();
+            mRefreshListView.stopLoadMore(true);
+            mRefreshListView.setHasLoadMore(hasMore);
+        } else {
+            // TODO: 2017/6/26 全部品牌和热门品牌的Adapter 处理
+            List<MerChantBean> merchantsLocalList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMerChantBeanList
+                    : ProduSrcDataManager.getInstance().mHotMerChantBeanList;
+            LongSparseArray<ItemBean> localMapForItems = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mLocalMapForAllItems
+                    : ProduSrcDataManager.getInstance().mLocalMapForHotItems;
+            LongSparseArray<List<Long>> pairsList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMapForPairsProcessed
+                    : ProduSrcDataManager.getInstance().mHotMapForPairsProcessed;
+            if (mType.equals(typeName)) {
+                if (produSrcAdapter == null || mPageNum == 1) {
+                    produSrcAdapter = new ProduSrcAdapter(getActivity(), merchantsLocalList
+                            , localMapForItems
+                            , pairsList);
+                    produSrcAdapter.setmType(mType);
+                    mRefreshListView.setAdapter(produSrcAdapter);
+                } else
+                    produSrcAdapter.notifyDataSetChanged();
+
+                mRefreshListView.stopRefresh();
+                mRefreshListView.stopLoadMore(true);
+                mRefreshListView.setHasLoadMore(hasMore);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //mRefreshListView.autoRefresh();
+    }
+}

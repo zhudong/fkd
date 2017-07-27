@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:orientation="vertical">
+    <TextView android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/gray_e4e4"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_height="30dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/tv_in_adress_dialog_config_btn"
+                  android:text="@string/confirm"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="10dp"
+                  android:textColor="@color/btntextcolor"
+            />
+    </RelativeLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/gray_e4e4"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.fuexpress.kr.ui.view.wheel.WheelView
+            android:id="@+id/wv_in_adress_dialog"
+            android:layout_width="0dip"
+            android:layout_height="170dp"
+            android:layout_weight="1"/>
+
+        <com.fuexpress.kr.ui.view.wheel.WheelView
+            android:id="@+id/wv_in_adress_dialog_02"
+            android:layout_width="0dip"
+            android:layout_height="170dp"
+            android:layout_weight="1"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

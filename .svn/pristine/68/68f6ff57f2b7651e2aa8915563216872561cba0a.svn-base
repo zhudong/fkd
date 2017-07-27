@@ -1,0 +1,522 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.socks.library.KLog;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.io.File;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+import fksproto.CsUser;
+
+import static com.fuexpress.kr.base.SysApplication.mContext;
+
+
+/**
+ * Created by kevin on 2016/12/20.
+ * 这里用来处理编辑商品好新增商品两个功能
+ */
+
+public class AddReplenishActivity extends BaseActivity {
+
+    public static final String PRODUCTDATA_INDEX="product_index";
+    public static final String PRODUCTDATA_BEAN="product_bean";
+
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView mTitleIvRight;
+    @BindView(R.id.add_require_gv)
+    CustomGridView mAddRequireGv;
+    @BindView(R.id.tv1)
+    TextView mTv1;
+    @BindView(R.id.add_require_note_et)
+    EditText mAddRequireNoteEt;
+    @BindView(R.id.tv2)
+    TextView mTv2;
+    @BindView(R.id.add_require_address_et)
+    EditText mAddRequireAddressEt;
+    @BindView(R.id.price_tv)
+    TextView mPriceTv;
+    @BindView(R.id.tv3)
+    TextView mTv3;
+    @BindView(R.id.add_require_price_et)
+    EditText mAddRequirePriceEt;
+    @BindView(R.id.pick_up_item_currency_code_tv)
+    TextView mPickUpItemCurrencyCodeTv;
+    @BindView(R.id.tv4)
+    TextView mTv4;
+    @BindView(R.id.add_require_count_et)
+    EditText mAddRequireCountEt;
+    @BindView(R.id.pick_up_content_layout)
+    LinearLayout mPickUpContentLayout;
+    @BindView(R.id.add_require_add_layout)
+    LinearLayout mAddRequireAddLayout;
+    @BindView(R.id.add_require_confirm_btn)
+    Button mAddRequireConfirmBtn;
+    @BindView(R.id.add_require_sv)
+    ScrollView mAddRequireSv;
+    private int itemPos;
+
+
+    CsParcel.ProductDataList.Builder mBuilder = CsParcel.ProductDataList.newBuilder();
+
+    private List<PickUpItemBean> pickUpItemlist = new ArrayList<PickUpItemBean>();
+    private String payCode;
+    private int itemCount = 0;
+    private List<String> mUpLoadCompletelist;
+    private List<List<String>> mUpLoadlist;
+
+    //变量，用来标记当前是否处于编辑已有商品
+    private boolean isEdit=false;
+    //变量，标记如果是编辑的话，则记录编辑的商品在商品列表里的ID；
+    private int mIndex=0;
+    //变量，储存操作完备的数据
+    private CsParcel.ProductDataList mProductDataList;
+
+    private boolean isClickSub = false;
+    private AddReplenishActivity.MyAdapter adapter;
+    private List<PickUpItemBean> itemlist;
+    private ArrayList<String> imgList;
+    private List<String> mPathList;
+
+    //除了描述，其他都不能为空
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_add_replenish, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        mTitleTvLeft.setText(getString(R.string.home_fg_help_03));
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleIvLeft.setVisibility(View.VISIBLE);
+        mTitleTvRight.setText(getString(R.string.String_parcel_delete));
+        mTitleTvRight.setVisibility(View.VISIBLE);
+        mTitleTvCenter.setText(getString(R.string.add_item));
+
+        mIndex=getIntent().getIntExtra(PRODUCTDATA_INDEX,-1);
+        mProductDataList = (CsParcel.ProductDataList) getIntent().getSerializableExtra(PRODUCTDATA_BEAN);
+        if(mProductDataList==null){
+            isEdit=false;
+            setDefault(CsParcel.ProductDataList.newBuilder().build());
+        }else {
+            setDefault(mProductDataList);
+            isEdit=true;
+        }
+
+    }
+
+    private CsParcel.ProductDataList createProductData() {
+        //商品名称
+        mBuilder=CsParcel.ProductDataList.newBuilder();
+        String itemName=mAddRequireNoteEt.getText().toString();
+        if(TextUtils.isEmpty(itemName)){
+            mViewUtils.toast(getString(R.string.item_name)+getString(R.string.can_not_be_empty));
+            return null;
+        }else {
+            mBuilder.setProductname(itemName);
+        }
+        String itemDes=mAddRequireAddressEt.getText().toString();
+        if(!TextUtils.isEmpty(itemDes)){
+            mBuilder.setProductdescription(itemDes);
+        }
+        String itemPrice=mAddRequirePriceEt.getText().toString();
+        if(TextUtils.isEmpty(itemPrice)){
+            mViewUtils.toast(getString(R.string.pick_up_commodity_price)+getString(R.string.can_not_be_empty));
+            return null;
+        }else {
+            mBuilder.setPrice(itemPrice);
+        }
+        String itemCount=mAddRequireCountEt.getText().toString();
+        if(TextUtils.isEmpty(itemCount)){
+            mViewUtils.toast(getString(R.string.confirm_payment_commodity_count_msg)+getString(R.string.can_not_be_empty));
+            return  null;
+        }else {
+            mBuilder.setNum(itemCount);
+        }
+        if(mUpLoadCompletelist==null||mUpLoadCompletelist.size()==0){
+            mViewUtils.toast(getString(R.string.pick_up_add_item_adapter_msg));
+            return  null;
+        }
+        mBuilder.setImageNum(mUpLoadCompletelist.size());
+        for(String url:mUpLoadCompletelist){
+            mBuilder.setImageNum(mUpLoadCompletelist.size());
+            CsBase.ItemImage.Builder builder=CsBase.ItemImage.newBuilder();
+            builder.setImageUrl(url);
+            mBuilder.addExtra(builder.build());
+        }
+        //CsParcel.ProductDataList 构建完毕
+        EventBus.getDefault().post(new BusEvent(BusEvent.ADD_REPLENISH_DATA_LIST_SUCCESS,mBuilder.build()));
+        return mBuilder.build();
+
+    }
+    private void deleteProductData(){
+        if(mIndex>=0){
+            EventBus.getDefault().post(new BusEvent(BusEvent.DELETE_REPLENISH_DATA_LIST_SUCCESS,mIndex));
+        }
+
+    }
+    public void requestFocus(EditText editText) {
+        editText.requestFocus();
+    }
+
+    //初始化界面
+    private void setDefault(CsParcel.ProductDataList productDataList) {
+        if(productDataList==null||TextUtils.isEmpty(productDataList.getPrice())){
+            //新建商品
+            mUpLoadCompletelist = new ArrayList<>();
+            mUpLoadlist = new ArrayList<List<String>>();
+            itemlist = new ArrayList<PickUpItemBean>();
+            PickUpItemBean bean = new PickUpItemBean();
+            imgList = new ArrayList<String>();
+            bean.setItemUrlList(imgList);
+            itemlist.add(bean);
+
+            adapter = new MyAdapter(this, itemlist.get(itemPos).getItemUrlList(), itemPos);
+            mAddRequireGv.setAdapter(adapter);
+            requestFocus(mAddRequireNoteEt);
+        }else {
+
+        }
+
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_right, R.id.add_require_confirm_btn,R.id.add_require_add_layout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                if(isEdit){
+                    onBackPressed();
+                }else {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.ADD_REPLENISH_DATA_LIST_SUCCESS,createProductData()));
+                    onBackPressed();
+                }
+                break;
+            case R.id.title_tv_left:
+                if(isEdit){
+                    onBackPressed();
+                }else {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.ADD_REPLENISH_DATA_LIST_SUCCESS,createProductData()));
+                    onBackPressed();
+                }
+                break;
+            case R.id.title_tv_right:
+                deleteProductData();
+                onBackPressed();
+                break;
+            case R.id.add_require_confirm_btn:
+                //确认添加
+                createProductData();
+                finish();
+                break;
+            case R.id.add_require_add_layout:
+                //继续添加
+                EventBus.getDefault().post(new BusEvent(BusEvent.ADD_REPLENISH_DATA_LIST_SUCCESS,createProductData()));
+                setDefault(null);
+                break;
+        }
+    }
+
+    class MyAdapter extends BaseAdapter {
+
+        private Context mCtx;
+        private List<String> list;
+        private int parentPosition;
+        private ImageLoader imageLoader;
+        private DisplayImageOptions options;
+
+        public MyAdapter(Context context, List<String> list, int position) {
+            this.mCtx = context;
+            this.list = list;
+            this.parentPosition = position;
+            this.imageLoader = ImageLoader.getInstance();
+            this.options = ImageLoaderHelper.getInstance(mCtx).getDisplayOptions();
+        }
+
+        @Override
+        public int getCount() {
+            if (list == null || list.size() == 0) {
+                return 1;
+            } else if (list.size() == 4) {
+                return 4;
+            } else {
+                return list.size() + 1;
+            }
+
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            Holder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mCtx).inflate(R.layout.merchandise_item, null);
+                holder = new Holder();
+                holder.merchandiseIv = (ImageView) convertView.findViewById(R.id.merchandise_iv);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+            int width = UIUtils.getScreenWidthPixels((Activity) mCtx) / 4 - 30;
+            holder.merchandiseIv.setLayoutParams(new LinearLayout.LayoutParams(width, width));
+
+            if (position == list.size() || list == null || list.size() == 0) {
+                if (position == 4) {
+                    convertView.setVisibility(View.GONE);
+                } else {
+                    holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER);
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    holder.merchandiseIv.setImageResource(R.mipmap.demand_addimage);
+                    holder.merchandiseIv.setBackgroundResource(R.drawable.add_merchandise_shape);
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            itemPos = parentPosition;
+                            MPermissions.requestPermissions(AddReplenishActivity.this, 3, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                        }
+                    });
+                }
+
+            } else {
+                if (position == parent.getChildCount()) {
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    try {
+                        holder.merchandiseIv.setCropToPadding(true);
+                        holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+                        Uri uri = Uri.fromFile(new File(list.get(position)));
+                        Glide.with(AddReplenishActivity.this).load(uri.toString()).into(holder.merchandiseIv);
+                        holder.merchandiseIv.setLayoutParams(params);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(mCtx, AddRequireActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("imgList", (Serializable) itemlist.get(itemPos).getItemUrlList());
+                            intent.putExtra("resourceType", PreviewMerchandiseActivity.RESOURCE_TYPE_ADD);
+                            bundle.putInt("position", position);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent, PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST);
+                        }
+                    });
+                }
+            }
+            return convertView;
+        }
+
+        class Holder {
+            ImageView merchandiseIv;
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        KLog.d("----requestCode " + requestCode);
+
+        if (requestCode == PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST) {
+            if (data != null) {
+                List<String> backList = (List<String>) data.getExtras().getSerializable("backImgList");
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(backList);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == 1000 || resultCode == -1 || resultCode == 0) {
+            if (data != null) {
+                mPathList = new ArrayList<>();
+                mPathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(mPathList);
+                adapter.notifyDataSetChanged();
+                uploadImages();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void uploadImages() {
+        UpLoadImageManager.getInstance().zoomImageAndUpLoad(itemlist.get(itemPos).getItemUrlList(), this);
+    }
+    @PermissionGrant(3)
+    public void requestContactSuccess() {
+        UIUtils.startImageSelectorForAddItem(1000, (ArrayList<String>) itemlist.get(itemPos).getItemUrlList(), AddReplenishActivity.this, 4);
+        UpLoadImageManager.getInstance().setUpLoadProgressEmpty();
+    }
+
+    @PermissionDenied(3)
+    public void requestContactFailed() {
+        Toast.makeText(AddReplenishActivity.this, "DENY ACCESS CONTACTS!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public static void setGridViewHeightBasedOnChildren(GridView gridView) {
+        // 获取GridView对应的Adapter
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int rows;
+        int columns = 0;
+        int horizontalBorderHeight = 0;
+        Class<?> clazz = gridView.getClass();
+        try {
+            //利用反射，取得每行显示的个数
+            Field column = clazz.getDeclaredField("mRequestedNumColumns");
+            column.setAccessible(true);
+            columns = (Integer) column.get(gridView);
+            //利用反射，取得横向分割线高度
+            Field horizontalSpacing = clazz.getDeclaredField("mRequestedHorizontalSpacing");
+            horizontalSpacing.setAccessible(true);
+            horizontalBorderHeight = (Integer) horizontalSpacing.get(gridView);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        //判断数据总数除以每行个数是否整除。不能整除代表有多余，需要加一行
+        if (listAdapter.getCount() % columns > 0) {
+            rows = listAdapter.getCount() / columns + 1;
+        } else {
+            rows = listAdapter.getCount() / columns;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < rows; i++) { //只计算每项高度*行数
+            View listItem = listAdapter.getView(i, null, gridView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = totalHeight + horizontalBorderHeight * (rows - 1);//最后加上分割线总高度
+        gridView.setLayoutParams(params);
+    }
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.UP_LOAD_IMAGE_COMPLETE2) {
+            if (event.getBooleanParam()) {
+                mUpLoadCompletelist.clear();
+                mUpLoadCompletelist.addAll((List<String>) event.getParam());
+                mUpLoadlist.add((List<String>) event.getParam());
+                if (isClickSub) {
+                    upLoadInfo();
+                }
+                for(String str:mUpLoadCompletelist){
+                    KLog.i("upload url",str);
+                }
+            } else {
+                int failIndex = event.getIntValue();
+                //closeLoading();
+                CustomToast.makeText(mContext, getString(R.string.upload_failed_msg), Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (event.getType() == BusEvent.RETURN_CURRENT_UP_LOAD_IMAGE_LIST_PROGRESS) {
+            int intParam = event.getIntParam();
+            if (intParam < 100) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.SHOW_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+            } else {
+                upLoadInfo();
+            }
+        }
+    }
+
+    private void upLoadInfo(){
+        //List<String> list = (List<String>) event.getParam();
+        if (mUpLoadCompletelist == null) {
+
+        } else {
+            if (mSweetAlertDialog != null) {
+                if (!mSweetAlertDialog.isShowing()) {
+                    showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "上传中");
+                }
+            } else {
+                showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "上传中");
+            }
+            List<Map<String, String>> mapList = new ArrayList<>();
+            Map<String, String> map = new HashMap<String, String>();
+            for (int h = 0; h < mUpLoadCompletelist.size(); h++) {
+                String[] str = mUpLoadCompletelist.get(h).split(",");
+                map.put(str[1], str[0]);
+                mapList.add(map);
+            }
+
+            CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+            CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+
+
+        }
+    }
+}

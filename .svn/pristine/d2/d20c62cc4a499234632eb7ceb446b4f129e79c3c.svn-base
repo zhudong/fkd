@@ -1,0 +1,33 @@
+package com.fuexpress.kr.net;
+
+
+import staffproto.CsMsgid;
+import yssproto.CsPdu;
+
+/**
+ * Created by chenyuelong on 3/1/16.
+ */
+public class ProtoConfig {
+    public CsMsgid.StaffCSProtoMsgId mMsgId;
+    public Class mRequestBuilderClazz;
+    public Class mResponseClazz;
+    public CsPdu.CSPDUCompressMethod mCompressMethod;
+    public CsPdu.CSPDUEncryptMethod mEncryptMethod;
+
+    public ProtoConfig(CsMsgid.StaffCSProtoMsgId msgId, Class requestBuilderClazz, Class responseClazz) {
+        mMsgId = msgId;
+        mRequestBuilderClazz = requestBuilderClazz;
+        mResponseClazz = responseClazz;
+
+        mCompressMethod = CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE;
+        mEncryptMethod = CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_AES;
+    }
+
+    public ProtoConfig(CsMsgid.StaffCSProtoMsgId msgId, Class requestBuilderClazz, Class responseClazz, CsPdu.CSPDUCompressMethod compressMethod, CsPdu.CSPDUEncryptMethod encryptMethod) {
+        mRequestBuilderClazz = requestBuilderClazz;
+        mMsgId = msgId;
+        mResponseClazz = responseClazz;
+        mCompressMethod = compressMethod;
+        mEncryptMethod = encryptMethod;
+    }
+}

@@ -1,0 +1,26 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.view.View;
+
+import com.fuexpress.kr.base.BaseFragment;
+
+/**
+ * Created by root on 17-3-23.
+ */
+
+public class CityListFragment extends BaseFragment {
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+}

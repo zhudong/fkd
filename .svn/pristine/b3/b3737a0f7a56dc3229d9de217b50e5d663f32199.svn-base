@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    >
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/title_in_choose_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        longer:text="@string/string_for_preferences_language"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_in_change_language_default"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/string_for_language_default"/>
+
+        <ImageView
+            android:id="@+id/iv_in_choose_language_tab_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/small_select1"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_in_choose_language"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:divider="@color/default_bg"
+        android:dividerHeight="1dp">
+
+    </ListView>
+
+
+</LinearLayout>

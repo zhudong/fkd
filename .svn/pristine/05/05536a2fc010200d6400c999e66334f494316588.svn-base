@@ -1,0 +1,90 @@
+package com.fuexpress.kr.ui;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListPopupWindow;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.bean.BrandBean;
+import com.fuexpress.kr.model.BrandManager;
+import com.fuexpress.kr.ui.activity.package_detail.AutoEditText;
+import com.fuexpress.kr.ui.view.MyAutoCompleteView;
+
+import java.util.List;
+
+public class TestActivity extends AppCompatActivity {
+
+    private AutoEditText mSpinner;
+    private BrandManager mInstance;
+    private ListPopupWindow mListPop;
+    private List<String> mBrands;
+    private ArrayAdapter mAdapter;
+    private ArrayAdapter<String> mAdapter1;
+    private MyAutoCompleteView autoCompleteTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
+//        mSpinner = (AutoEditText) findViewById(R.id.spinner);
+//        autoCompleteTextView = (MyAutoCompleteView) findViewById(R.id.auto_text);
+//        mBrands = BrandManager.getInstance(this).getBrands("");
+//        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mBrands);
+//        autoCompleteTextView.setAdapter(mAdapter);
+
+
+
+       /* mInstance = BrandManager.getInstance(this);
+
+
+        mBrands = mInstance.getBrands();
+        mSpinner = (EditText) findViewById(R.id.spinner);
+
+        mListPop = new ListPopupWindow(this);
+        mAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mBrands);
+        mListPop.setAdapter(mAdapter1);
+        mListPop.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mListPop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mListPop.setAnchorView(mSpinner);//设置ListPopupWindow的锚点，即关联PopupWindow的显示位置和这个锚点
+        mListPop.setModal(true);//设置是否是模式
+        mListPop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(TestActivity.this, mBrands.get(position), Toast.LENGTH_SHORT).show();
+            }
+        });*/
+//        mListPop.show();
+    }
+
+
+    /*  public void append(View v) {
+          String s = mSpinner.getText().toString();
+          BrandBean brand = mInstance.getBrand(s);
+          if (brand != null) {
+              mInstance.updateBrand(s);
+          } else {
+              BrandManager.getInstance(this).appendBrand(s);
+          }
+      }
+  */
+   /* public void show(View v) {
+        mAutoEditText.show();
+    }
+
+    public void append(View v) {
+        mAutoEditText.show();
+        mSpinner.append();
+    }*/
+}

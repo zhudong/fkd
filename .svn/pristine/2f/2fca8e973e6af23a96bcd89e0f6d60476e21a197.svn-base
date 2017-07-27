@@ -1,0 +1,391 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckedTextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.protobuf.GeneratedMessage;
+import com.socks.library.KLog;
+
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsMy;
+import fksproto.CsUser;
+
+/**
+ * Created by Administrator on 2016-10-28.
+ */
+public class PaymentActivity extends BaseActivity {
+
+    public static final String SHIPPING_FEE = "shipping_fee";
+    public static final String CURRENCY_CODE = "currencyCode";
+
+    public static final String CODE_COUPON_NAME = "code_coupon_name";
+    public static final String CODE_COUPON_ID = "code_coupon_id";
+
+    private View rootView;
+    private Button confirmBtn;
+    private TextView couponNameTv;
+    private LinearLayout couponLayout;
+    private TextView freeBalanceTv;
+    private ImageView balanceCheckedIv;
+    private TitleBarView titleBar;
+    private ImageView backIv;
+
+    private String currencyCode;
+    private float fee;
+    private CsUser.UseableCouponListResponse resp;
+
+    private float account;
+    private int paymentType;
+    private String paymentString;
+    private boolean isUseBalance;
+    private int paymentPos;
+    private CsUser.CouponList coupon;
+    private int couponId = -1;
+    private ListView payListView;
+
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_payment_activity, null);
+        confirmBtn = (Button) rootView.findViewById(R.id.btn_confirm);
+        couponNameTv = (TextView) rootView.findViewById(R.id.payment_coupon_name_tv);
+        couponLayout = (LinearLayout) rootView.findViewById(R.id.payment_coupon_layout);
+        freeBalanceTv = (TextView) rootView.findViewById(R.id.tv_balance);
+        balanceCheckedIv = (ImageView) rootView.findViewById(R.id.rb_use_balance);
+        titleBar = (TitleBarView) rootView.findViewById(R.id.payment_titile_bar);
+        backIv = titleBar.getIv_in_title_back();
+        payListView = (ListView) rootView.findViewById(R.id.payment_listview);
+
+        fee = getIntent().getFloatExtra(SHIPPING_FEE, 0.00f);
+//        currencyCode = getIntent().getStringExtra(CURRENCY_CODE);
+        currencyCode = AccountManager.getInstance().getCurrencyCode();
+        int couponId = getIntent().getIntExtra(CODE_COUPON_ID, -1);
+        if (couponId >= 0) {
+            couponNameTv.setText(SPUtils.get(this, CODE_COUPON_NAME, "").toString());
+        } else {
+            SPUtils.put(PaymentActivity.this, CODE_COUPON_ID, -1);
+            useableCouponListRequest(currencyCode, fee);
+        }
+
+        getAccountBalanceRequest(currencyCode);
+        getFKDPaymentListRequest(currencyCode);
+
+        paymentType = getIntent().getIntExtra("payType", Constants.PAYMENT_ALIPAY);
+        paymentPos = getIntent().getIntExtra("paymentPos", 0);
+
+        backIv.setOnClickListener(this);
+        confirmBtn.setOnClickListener(this);
+        couponLayout.setOnClickListener(this);
+        return rootView;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                coupon = (CsUser.CouponList) data.getExtras().getSerializable(CouponActivity.CODE_COUPON);
+                String s = AccountManager.getInstance().getCurrencyCode();
+                couponNameTv.setText(coupon.getShippingcouponname() + " " + getString(R.string.String_price, (float) coupon.getDiscountamount()));
+                couponId = coupon.getShippingcouponcustomerid();
+            }
+        }
+    }
+
+    //    private void saveSp() {
+//        SPUtils.put(this, ParclePaymentActivity.PAY_TYPE, paymentType);
+//        SPUtils.putString(this, ParclePaymentActivity.PAY_TYPE_NAME, paymentString);
+//        SPUtils.put(this, ParclePaymentActivity.PAY_TYPE_POSITION, paymentPos);
+//    }
+//
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.btn_confirm:
+//                saveSp();
+                intent.putExtra("payType", paymentType);
+                intent.putExtra("paymentString", paymentString);
+                intent.putExtra("paymentPos", paymentPos);
+                intent.putExtra("isUseBalance", isUseBalance);
+                intent.putExtra("account", account);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(CouponActivity.CODE_COUPON, coupon);
+                intent.putExtras(bundle);
+                setResult(Constants.PAYMENT_REQUEST_CODE, intent);
+                EventBus.getDefault().post(new BusEvent(BusEvent.PAYMENT_TYPE_CHANGE, ""));
+                EventBus.getDefault().post(new BusEvent(BusEvent.CODE_COUPON_ID,
+                        ((Integer) SPUtils.get(PaymentActivity.this, CODE_COUPON_ID, -1)) != -1
+                                ? SPUtils.get(PaymentActivity.this, CODE_COUPON_ID, -1)
+                                : couponId));
+                if (coupon != null) {
+                    SPUtils.put(PaymentActivity.this, CODE_COUPON_NAME, coupon.getShippingcouponname());
+                    SPUtils.put(PaymentActivity.this, CODE_COUPON_ID, coupon.getShippingcouponcustomerid());
+
+                }
+                finish();
+                break;
+            case R.id.payment_coupon_layout:
+                intent.setClass(PaymentActivity.this, CouponActivity.class);
+                intent.putExtra(PaymentActivity.SHIPPING_FEE, fee);
+                startActivityForResult(intent, CouponActivity.CODE_RESULT_COUPON);
+                break;
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+        }
+    }
+
+    public void getAccountBalanceRequest(String currencyCode) {
+        CsMy.GetAccountBalanceRequest.Builder builder = CsMy.GetAccountBalanceRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(currencyCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.GetAccountBalanceResponse>() {
+
+            @Override
+            public void onSuccess(final CsMy.GetAccountBalanceResponse response) {
+                LogUtils.d(response.toString());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        freeBalanceTv.setText(getString(R.string.String_price2, UIUtils.getCurrency(PaymentActivity.this), response.getFreeBalance()));
+                        account = response.getFreeBalance();
+                        if (response.getFreeBalance() > 0) {
+                            balanceCheckedIv.setEnabled(true);
+                            balanceCheckedIv.setImageResource(R.mipmap.demand_selected);
+                            isUseBalance = true;
+                        } else {
+                            balanceCheckedIv.setEnabled(false);
+                            balanceCheckedIv.setImageResource(R.mipmap.select_enable);
+                            isUseBalance = false;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        if (event.getType() == BusEvent.CODE_COUPON_EXCHANGE_SUCCESS) {
+            useableCouponListRequest(TextUtils.isEmpty(currencyCode) ? "CNY" : currencyCode, fee);
+        }
+    }
+
+    public void useableCouponListRequest(String currencyCode, float shippingFee) {
+        showLoading();
+        CsUser.UseableCouponListRequest.Builder builder = CsUser.UseableCouponListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(currencyCode);
+        builder.setShippingfee(shippingFee);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.UseableCouponListResponse>() {
+
+            @Override
+            public void onSuccess(final CsUser.UseableCouponListResponse response) {
+                closeLoading();
+                LogUtils.d(response.toString());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        couponNameTv.setText(getString(R.string.coupon_count_msg, response.getCount()));
+                        resp = response;
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                closeLoading();
+            }
+        });
+    }
+
+    public void getFKDPaymentListRequest(String currencyCode) {
+        CsUser.GetFKDPaymentListRequest.Builder builder = CsUser.GetFKDPaymentListRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(currencyCode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetFKDPaymentListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetFKDPaymentListResponse response) {
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                paymentHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        confirmBtn.setEnabled(false);
+                        confirmBtn.setBackgroundResource(R.drawable.shape_btn_bg_red_more_radius_unenable);
+                    }
+                });
+            }
+        });
+    }
+
+    private Handler paymentHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            CsUser.GetFKDPaymentListResponse response = (CsUser.GetFKDPaymentListResponse) msg.obj;
+            List<CsUser.PaymentList> list = response.getPaymantlistList();
+            final PaymentAdapter adapter = new PaymentAdapter(PaymentActivity.this, list);
+            payListView.setAdapter(adapter);
+            adapter.setCheckedAtPosition(paymentPos);
+            paymentString = list.get(0).getPayname();
+            String payCode = list.get(0).getPaycode();
+            KLog.i("payCode = " + payCode);
+            if (TextUtils.equals(payCode, "adyen")) {
+                paymentType = Constants.PAYMENT_ADYEN;
+            }
+            if (TextUtils.equals(payCode, "krbank")) {
+                paymentType = Constants.PAYMENT_KRBANK;
+            }
+            if (TextUtils.equals(payCode, "wxap")) {
+                paymentType = Constants.PAYMENT_WECHAT;
+            }
+            if (TextUtils.equals(payCode, "alipay")) {
+                paymentType = Constants.PAYMENT_ALIPAY;
+            }
+            payListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    adapter.setCheckedAtPosition(position);
+                    adapter.notifyDataSetChanged();
+                    paymentPos = position;
+                    paymentString = ((CsUser.PaymentList) parent.getAdapter().getItem(position)).getPayname();
+                    String payCode = ((CsUser.PaymentList) parent.getAdapter().getItem(position)).getPaycode();
+                    KLog.i("payCode = " + payCode);
+                    if (TextUtils.equals(payCode, "adyen")) {
+                        paymentType = Constants.PAYMENT_ADYEN;
+                    }
+                    if (TextUtils.equals(payCode, "krbank")) {
+                        paymentType = Constants.PAYMENT_KRBANK;
+                    }
+                    if (TextUtils.equals(payCode, "wxap")) {
+                        paymentType = Constants.PAYMENT_WECHAT;
+                    }
+                    if (TextUtils.equals(payCode, "alipay")) {
+                        paymentType = Constants.PAYMENT_ALIPAY;
+                    }
+                }
+            });
+        }
+    };
+
+    class PaymentAdapter extends BaseAdapter {
+
+        private Context ctx;
+        private List<CsUser.PaymentList> list;
+        private int pos;
+
+        public PaymentAdapter(Context ctx, List<CsUser.PaymentList> list) {
+            this.ctx = ctx;
+            this.list = list;
+        }
+
+        @Override
+        public int getCount() {
+            return list != null ? list.size() : 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(ctx).inflate(R.layout.payment_item, null);
+                holder = new ViewHolder();
+                holder.logoIv = (ImageView) convertView.findViewById(R.id.payment_item_logo_iv);
+                holder.nameTv = (TextView) convertView.findViewById(R.id.payment_item_name_tv);
+                holder.checkedTv = (CheckedTextView) convertView.findViewById(R.id.payment_item_ct);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            CsUser.PaymentList item = list.get(position);
+            holder.nameTv.setText(item.getPayname());
+            holder.checkedTv.setCheckMarkDrawable(R.drawable.selector_payment_checkbox);
+            if (pos == position) {
+                holder.checkedTv.setChecked(true);
+            } else {
+                holder.checkedTv.setChecked(false);
+            }
+            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_ADYEN)) {
+                holder.logoIv.setImageDrawable(ContextCompat.getDrawable(ctx, R.mipmap.adyen_pay));
+            }
+            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_KRBANK)) {
+                holder.logoIv.setImageDrawable(ContextCompat.getDrawable(ctx, R.mipmap.krbank_pay));
+            }
+            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_ALIPAY)) {
+                holder.logoIv.setImageDrawable(ContextCompat.getDrawable(ctx, R.mipmap.pay_alipay));
+            }
+            if (TextUtils.equals(item.getPaycode(), Constants.GIFT_CARD_PAYMENT_WXPAY)) {
+                holder.logoIv.setImageDrawable(ContextCompat.getDrawable(ctx, R.mipmap.pay_wechat));
+            }
+//            if (TextUtils.equals(item.getPaycode(), Constants.PAYMENT_DEFAULT)) {
+//                holder.checkedTv.setChecked(true);
+//            }
+
+            return convertView;
+        }
+
+        public void setCheckedAtPosition(int pos) {
+            this.pos = pos;
+        }
+
+        class ViewHolder {
+            ImageView logoIv;
+            TextView nameTv;
+            CheckedTextView checkedTv;
+        }
+    }
+}

@@ -1,0 +1,145 @@
+package com.fuexpress.kr.utils;
+
+
+import android.text.TextUtils;
+
+import java.util.regex.Pattern;
+
+/**
+ * Created by xiekaihua on 2016/5/23.
+ * 校对手机号,使用手机注册，绑定手机，使用手机号登陆三个地方需要校对手机号
+ */
+public class CountryNumberUtils {
+    public static boolean isNumberCurrect(String countryNumber,String number){
+      return   isNumberCurrect(Integer.valueOf(countryNumber),number);
+    }
+    public static boolean isNumberCurrect(int countryNumber,String number){
+        if(TextUtils.isEmpty(number)) {
+            return  false;
+        }
+        if(number.length()>11||number.length()<8||number.length()==9){
+            return false;
+        }
+        if(!isNumeric(number)){
+            return false;
+        }
+        switch (countryNumber){
+            case 86:
+                return isChina(number);
+            case 886:
+                return isTaiWan(number);
+            case 852:
+                return isHongKong(number);
+            case 853:
+                return isMacao(number);
+            case 66:
+                return isThailand(number);
+            case 65:
+                return isSingapore(number);
+            case 60:
+                return isMalaysia(number);
+            case 44:
+                return isUK(number);
+            case 1:
+                return isUSA(number);
+            case 7:
+                return isRussia(number);
+            case 49:
+                return isGermany(number);
+            case 81:
+                return isJapan(number);
+            case 82:
+                return isKorea(number);
+        }
+        return false;
+    }
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(str).matches();
+    }
+    public static boolean isChina(String number){
+        if(number.length()==11&&number.startsWith("1")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isTaiWan(String number){
+        if(number.length()==10&&number.startsWith("0")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isHongKong(String number){
+        if(number.length()==8){
+            if(number.startsWith("5")||number.startsWith("6")||number.startsWith("9")){
+                return true;
+            }
+        }
+        return  false;
+    }
+    public static boolean isMacao(String number){
+        if(number.length()==8&&number.startsWith("6")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isThailand(String number){
+        if(number.length()==10&&number.startsWith("0")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isSingapore(String number){
+        if(number.length()==8){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isMalaysia(String number){
+        if(number.length()==10&&number.startsWith("0")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isUK(String number){
+        if(number.length()==11&&number.startsWith("0")){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isUSA(String number){
+        if(number.length()==10){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isRussia(String number){
+        if(number.length()==11){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isGermany(String number){
+        if(number.length()==11){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isJapan(String number){
+        if(number.length()==11&&(number.startsWith("080")||number.startsWith("090"))){
+            return true;
+        }
+        return  false;
+    }
+    public static boolean isKorea(String number){
+        if(number.length()==11&&(number.startsWith("010")||number.startsWith("011")||number.startsWith("016")||number.startsWith("017")
+        ||number.startsWith("018")||number.startsWith("019"))){
+            return true;
+        }
+        return  false;
+    }
+
+
+
+
+}

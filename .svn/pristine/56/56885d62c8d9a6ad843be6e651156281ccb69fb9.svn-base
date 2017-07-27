@@ -1,0 +1,51 @@
+package com.fuexpress.kr.bean;
+
+/**
+ * Created by Longer on 2017/1/17.
+ * 选择分类的Bean
+ */
+public class CategoryBean {
+
+    private String parentName;
+
+    private int parentID;
+
+    private String subName;
+
+    private int subID;
+
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public int getParentID() {
+        return parentID;
+    }
+
+    public void setParentID(int parentID) {
+        this.parentID = parentID;
+    }
+
+    public String getSubName() {
+        return subName;
+    }
+
+    public void setSubName(String subName) {
+        this.subName = subName;
+    }
+
+    public int getSubID() {
+        return subID;
+    }
+
+    public void setSubID(int subID) {
+        this.subID = subID;
+    }
+
+
+}

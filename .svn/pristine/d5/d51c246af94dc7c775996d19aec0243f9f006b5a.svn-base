@@ -1,0 +1,277 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.base.BasePresenterRx;
+import com.fuexpress.kr.base.BaseView;
+import com.fuexpress.kr.base.BaseViewGeneric;
+import com.fuexpress.kr.bean.HelpAdapterValueBean;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpMeSingleBean;
+import com.fuexpress.kr.ui.activity.help_signed.data.WareHouseBean;
+import com.fuexpress.kr.ui.adapter.HelpAdapterInterface;
+import com.fuexpress.kr.ui.view.InputBoxView;
+import com.fuexpress.kr.utils.UpLoadImageUtils;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 帮我收货的Contract类
+ * 这个类的目的其实是把我们在mvp层需要做的操作都统一以接口形式写到这里来了
+ * 这样就能方便管理,易于维护
+ */
+public interface HelpSignedContract {
+
+    interface View extends BaseViewGeneric<Presenter> {//这里是有关视图层需要实现的一些操作接口汇总
+
+
+        void referListViewShow(boolean isScrollToBottom);//在每次修改了数据之后,进行视图的刷新
+
+        void doDeleteAnimator();//执行删除的动画
+
+        void setPresenter(@NonNull HelpSignedContract.Presenter presenter);//将逻辑层和视图层绑定到一起的方法
+
+        void showLoadingView(int type, String text);//显示加载框的方法
+
+        void dissMissLoadingView(long delay);//消失加载框的方法(如需延迟传进来即可)
+
+        void showCustomToast(String text);//显示一个黑色底纹的吐司
+
+        Context getViewContext();//获得view层的Context对象
+
+        void showDeleteDialog(int index);//显示是否删除需求单的提示框
+
+        void setAdapterWareHouseData(String wareHouseID, CsBase.Warehouse warehouse);
+
+
+    }
+
+
+    interface HSPreView extends BaseViewGeneric<PreViewPresenter> {//这里是列表处Fragment的视图层接口方法
+
+        void refreshLiistViewShow();//刷新ListView
+
+        void showLoadingView(int type, int stringID);
+
+        void dissMissLoadingView(long delay);
+
+        void transformationFragment(int position);//告诉主Activity变换Fragment的方法
+
+        void setIsCilckSub(boolean isCilckSub);//设置是否点击了上传
+
+        void changeSuccessView();//切换到成功界面
+
+    }
+
+
+    interface ItemView extends BaseViewGeneric<NewPresenter> {//这里是有关编辑或者添加的视图层需要实现的方法
+
+        void showDeleteDialog(int index);//显示是否删除需求单的提示框
+
+        void checkTextIsEnter(boolean isConfirm);//检查是否有输入东西
+
+        void showWareHouseChoose();//显示仓库的选择界面
+
+        void showRemindDialog(int type, String text);//显示提醒框的方法
+
+        void showToastMethod(int stringID);//显示吐司
+
+        void dissMissLoadingView(long delay);//消失加载框的方法(如需延迟传进来即可)
+
+        void showWareHouseInfo(@Nullable CsBase.Warehouse warehouse, boolean isShow);//显示仓库的信息
+
+        void showWareHouseInfoByBean(@NonNull WareHouseBean wareHouseBean, boolean isShow);//显示仓库的信息
+
+        void referGridViewShow();//刷新显示图片的GV视图
+
+        void setPresenter(@NonNull HelpSignedContract.NewPresenter presenter);//将逻辑层和视图层绑定到一起的方法
+
+        void judgmentAndShowView();//判断当前需要显示的视图,是添加还是编辑
+
+        Context getViewContext();
+
+        boolean getIsClickSub();//获得是否点击了提交按钮
+
+        boolean getLoadingDialogIsShowing();//获得当前进度框是否有显示
+
+        void setActivityCurrentIndex(int index);//告诉Activity知道当前的是哪个Index下的Item
+
+        void finishThisView();//结束当前视图
+    }
+
+    interface NewPresenter extends BasePresenterRx {//这里是有关逻辑层需要实现的一些操作接口汇总
+
+        HelpMeSingleBean getShouldShowData();//获得需要显示的数据
+
+        int getChooseItemIndex();//获得被点击的数据下标
+
+        boolean getIsAddType();//获得是否是添加模式
+
+        void addAndReplaceDeMand();//追加新建需求单
+
+        void addNewDeMand(HelpMeSingleBean productDataList);//添加需求单(作用于所有参赛填写完毕的情况)
+
+        void setDeMand(int index, HelpMeSingleBean helpMeSingleBean);//修改需求单
+
+        void deleteDemand(int index);//删除需求单
+
+        HelpMeSingleBean creatNewDeMand();//新建一个需求单(作用于开始填写新的需求参赛时)
+
+        List<CsParcel.ProductDataList> getProductDataList();//获得需要上传的单品List
+
+        String transformPrice(String currencyCode, String price);//根据不同国家来进行货币单位的转换
+
+        void setWareHouseInfo(String wareHouseID, CsBase.Warehouse warehouse);//保存选择好的仓库对象
+
+        void setWareHouseToBean(String wareHouseID, HelpMeSingleBean houseToBean);//把需要保存的仓库对象塞进Bean中
+
+        CsBase.Warehouse getWareHouseInfo(String wareHouseID);//获得仓库对象
+
+        String getWareHouseID();//获得仓库ID
+
+        void setTHisPositionIsUpLoadImageComplete(int index, boolean isComplete);//设置该下标是否完成了上传图片
+
+        boolean IsUpLoadImageComplete(int index);//获得该下标的图片是否完成了上传
+
+        ArrayList<String> getItemImageList(int position);//获得要开启图片选择器的Item的图片列表
+
+        ArrayList<String> getItemUpLoadUrlList(List<String> pathList);//根据本地路径获得上传的图片地址
+
+        UpLoadImageUtils.UpLaodUtilsListener getPresenterUpLoadListener();//获得上传的回调接口
+
+        List<String> handleImageSelectorReturn(int index, ArrayList<String> list);//处理图片选择器的返回值
+
+        void upLoadImageToUpYun(List<String> imagePathList, int type, UpLoadImageUtils.UpLaodUtilsListener upLaodUtilsListener, int index);//把图片上传到upyun
+
+        ArrayMap<String, String> addImageUrlIntoRepository(String url);//把上传完的图片添加到内存仓库中
+
+        void editItemImage(List<String> urlList, int index);//编辑需求单的图片
+
+        CsParcel.ProductDataList enterItemImageUrlList(CsParcel.ProductDataList.Builder builder, List<String> urlList);//把上传好的url添加到item中
+
+        boolean checkItemDescIsRight(String desc);//检查需求的描述是否正确
+
+        boolean checkRemarkIsRight(String remark);//检查需求的备注是否正确
+
+        boolean isChooseWareHouse(String wareHouseID);//检查是否选中了仓库
+
+        boolean checkPriceIsRight(String price);//检查价格是否输入正确
+
+        boolean checkItemQuantity(String quantity);//检查单品数量是否符合标准
+
+        boolean checkItemImageUrl(List<CsBase.ItemImage> list);//检查需求是否添加了图片
+
+        boolean checkImagePathList(List<String> list);//检查是否选择了图片
+
+        CsParcel.ProductDataList setItemData(int index);//设置好数据并返回
+
+        void saveDataToLoacl();//把数据保存到本地
+
+        void saveUrlToBean(HelpMeSingleBean helpMeSingleBean);//把上传好的图片url保存到Bean中
+
+        void setItemDataToRepository(int position, CsParcel.ProductDataList productDataList);//把数据保存好在仓库
+
+
+    }
+
+    interface PreViewPresenter extends BasePresenterRx {//预览帮我收界面的逻辑层
+
+        //void
+
+        void submitItemToServer(List<CsParcel.ProductDataList> productDataLists);//把需求单提交到服务器
+
+        boolean checkBeanIsReady();//检查参数是否都已经准备好了
+
+        List<CsParcel.ProductDataList> fillDataFromRepository();//把在仓库里面的数据填充起来
+
+        List<CsParcel.ProductDataList> getProductDataList();//获得需要上传的单品List
+
+        CsParcel.ProductDataList getChooseData(int position);//获取被点击的数据
+
+        boolean isCanAddDemand();//获取是否还能继续添加单品
+
+        void clearRepositoryData();//清除数据
+
+        List<HelpMeSingleBean> getHelpMeBeanDataList();//获得Bean数据的集合
+
+        void saveDataToLoacl();//把数据保存到本地
+    }
+
+    interface Presenter extends BasePresenterRx {//这里是有关逻辑层需要实现的一些操作接口汇总
+
+        void initPresenterData();
+
+        void addNewDeMand();//添加需求单
+
+        int getItemOnclickPosition();//获得第几个需求被点击了(添加或者默认的情况下为-1)
+
+        void setItemOnclickPosition(int position);//设置第几个需求被点击了
+
+        String transformPrice(String currencyCode, String price);//根据不同国家来进行货币单位的转换
+
+        List<String> handleImageSelectorReturn(int index, List<String> list);//处理图片选择器的返回值
+
+        void upLoadImageToUpYun(List<String> imagePathList, int type, UpLoadImageUtils.UpLaodUtilsListener upLaodUtilsListener, int index);//把图片上传到upyun
+
+        void enterItemDesc(int index, String itemDesc);//处理单品的描述
+
+        void enterItemRemarks(int index, String itemReMarks);//处理单品的备注
+
+        void enterItemWareHouse(int index, String wareHouseID, CsBase.Warehouse warehouse);//处理单品的入库仓库
+
+        void enterItemPrice(int index, String price);//处理单品的价格
+
+        void enterItemQuantity(int index, String itemQuantity);//处理单品的数量
+
+        void submitItemToServer(List<CsParcel.ProductDataList> productDataLists);//把需求单提交到服务器
+
+        void editData(EditText editText, int index, int resKey);//对处理的数据进行分类判断并交给相应的处理方法
+
+        void editItemImage(ArrayMap<String, String> pathUrlMap, int index);//编辑需求单的图片
+
+        ArrayMap<String, String> addImageUrlIntoRepository(String url, int index);//把上传完的图片添加到内存仓库中
+
+        boolean checkItemParameter(List<CsParcel.ProductDataList> lists);//检查每个准备提交的参数是否正确
+
+        boolean checkItemDescIsRight(String desc);//检查需求的描述是否正确
+
+        boolean checkRemarkIsRight(String remark);//检查需求的备注是否正确
+
+        boolean isChooseWareHouse(String wareHouseID);//检查是否选中了仓库
+
+        boolean checkPriceIsRight(String price);//检查价格是否输入正确
+
+        boolean checkItemQuantity(String quantity);//检查单品数量是否符合标准
+
+        boolean checkItemImageUrl(List<CsBase.ItemImage> list);//检查需求是否添加了图片
+
+        void deleteDemand(int index);//删除需求单
+
+        void clearAllDatas();//清除所有内存数据
+
+        //ArrayMap<Integer, InputBoxView> getInputBoxViewArrayMap();
+
+        HelpAdapterValueBean getHelpDataValueBean(Context context, HelpAdapterInterface helpAdapterInterface);//获得初始化的AdapterBean
+
+        void setChooseImageItemPosition(int position);//设置开启图片选择器的ItemPosition
+
+        int getChooseImageItemPosition();//获得当前需要开启图片选择器的position
+
+        ArrayList<String> getItemImageList(int position);//获得要开启图片选择器的Item的图片列表
+
+        ArrayMap<Integer, ArrayList<String>> getItemLocalPathMap();//获得需求单的本地图片路径集合
+
+        UpLoadImageUtils.UpLaodUtilsListener getPresenterUpLoadListener();//获得上传的回调接口
+
+        List<CsParcel.ProductDataList> getProductDataList();//获得需要上传的单品List
+
+    }
+}

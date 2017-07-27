@@ -1,0 +1,80 @@
+package com.fuexpress.kr.ui.view;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+
+/**
+ * Created by Longer on 2016/10/27.
+ */
+public class InputBoxView extends LinearLayout {
+
+    private EditText mEd_in_ip;
+
+    public InputBoxView(Context context) {
+        this(context, null);
+    }
+
+    public InputBoxView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public InputBoxView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater.inflate(R.layout.inputbox_layout, this);
+        TextView tv_in_ip = (TextView) findViewById(R.id.tv_in_ip);
+        TextView star_in_ip = (TextView) findViewById(R.id.star_in_ip);
+        mEd_in_ip = (EditText) findViewById(R.id.ed_in_ip);
+        TextView tv_in_ip_right = (TextView) findViewById(R.id.tv_in_ip_right);
+
+        //取出定义好在arrt文件中的自定义属性
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ipboxtext, defStyleAttr, 0);
+        String ipText = typedArray.getString(R.styleable.ipboxtext_ipText);
+        String hintText = typedArray.getString(R.styleable.ipboxtext_hintText);
+        boolean isShow = typedArray.getBoolean(R.styleable.ipboxtext_isShowStar, false);
+        boolean showRight = typedArray.getBoolean(R.styleable.ipboxtext_showRight, false);
+        if (showRight) {
+            String rightText = typedArray.getString(R.styleable.ipboxtext_rightText);
+            tv_in_ip_right.setText(rightText);
+        }
+        typedArray.recycle();//取出完毕之后要回收资源
+
+        tv_in_ip.setText(ipText);
+        mEd_in_ip.setHint(hintText);
+        if (isShow) {
+            star_in_ip.setVisibility(VISIBLE);
+        }
+    }
+
+    public boolean edIsEmpty() {
+        return TextUtils.isEmpty(mEd_in_ip.getText().toString().trim());
+    }
+
+
+    public String getEdStringText() {
+        return mEd_in_ip.getText().toString().trim();
+    }
+
+    /**
+     * 设置其输入方式的方法，具体类型参见EditInfo
+     *
+     * @param inputType EditText的输入类型
+     */
+    public void setEd_in_ipInputType(int inputType) {
+        mEd_in_ip.setInputType(inputType);
+    }
+
+    public EditText getEd_in_ip() {
+        return mEd_in_ip;
+    }
+}

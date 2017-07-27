@@ -1,0 +1,376 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.CouponDataManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.RequestNetListenerWithMsg;
+import com.fuexpress.kr.ui.adapter.CityAdapter;
+import com.fuexpress.kr.ui.fragment.CityListFragment;
+import com.fuexpress.kr.ui.fragment.CouponListFragment;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.protobuf.GeneratedMessage;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import fksproto.CsAddress;
+import fksproto.CsParcel;
+
+/**
+ * Created by root on 17-3-23.
+ */
+
+public class ChooseCityActivity extends BaseActivity {
+
+    public static final String F_RECENT_CITY="s_recent_city";
+    public static final String F_RECENT_CITY_LIST="s_most_used_cities";
+
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.first_btn)
+    Button mFirstBtn;
+    @BindView(R.id.second_btn)
+    Button mSecondBtn;
+    @BindView(R.id.third_btn)
+    Button mThirdBtn;
+    @BindView(R.id.forth_btn)
+    Button mForthBtn;
+    @BindView(R.id.fifth_btn)
+    Button mFifthBtn;
+    @BindView(R.id.tab)
+    SlidingTabLayout mTab;
+    @BindView(R.id.pager)
+    ViewPager mPager;
+
+    Button[] mButtons=new Button[5];
+    Map<String,Integer> mCityMap=new HashMap<>();
+    CsAddress.GetWarehouseRegionResponse mResponse;
+    private CityAdapter mCityAdapter;
+    private List<Fragment> mFragments = new ArrayList<>();
+    private String recentCity="";
+    private List<String> mCities;
+    public Fragment getFragment(int i) {
+        if (null == mFragments || mFragments.size() < i || i < 0) {
+            return null;
+        } else {
+            return mFragments.get(i);
+        }
+    }
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_choose_city, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        init();
+        getCityInfo();
+    }
+    private void init(){
+        mButtons[0]=mFirstBtn;
+        mButtons[1]=mSecondBtn;
+        mButtons[2]=mThirdBtn;
+        mButtons[3]=mForthBtn;
+        mButtons[4]=mFifthBtn;
+        for(int i=0;i<mButtons.length;i++){
+            mButtons[i].setVisibility(View.GONE);
+        }
+        mTitleTvLeft.setText(getString(R.string.cancel));
+        mTitleTvLeft.setVisibility(View.VISIBLE);
+        mTitleIvLeft.setVisibility(View.INVISIBLE);
+        mTitleTvCenter.setText(getString(R.string.select_city));
+        mTitleTvCenter.setVisibility(View.VISIBLE);
+        String citiesStr= SPUtils.getString(ChooseCityActivity.this,F_RECENT_CITY_LIST,"");
+        mCities=convertList(citiesStr);
+        setButton();
+    }
+    public void setCityList(String str){
+        if(mCities==null){
+            mCities=new ArrayList<>();
+        }
+        if(mCities.contains(str)){
+            mCities.remove(str);
+        }
+        mCities.add(0, str);
+        saveCityList();
+        setButton();
+    }
+    private  void saveCityList(){
+        if(mCities==null){
+            SPUtils.putString(ChooseCityActivity.this,F_RECENT_CITY_LIST,"");
+        }
+        String str="";
+        for(int i=0;i<mCities.size();i++){
+            if(i>5){
+                break;
+            }
+            if(!str.contains(mCities.get(i))){
+                str=str+mCities.get(i)+",";
+            }
+
+        }
+        SPUtils.putString(ChooseCityActivity.this,F_RECENT_CITY_LIST,str);
+    }
+    private void setButton(){
+        for(int i=0;i<mCities.size();i++){
+            if(i>4){
+                return;
+            }
+            mButtons[i].setText(mCities.get(i));
+            mButtons[i].setVisibility(View.VISIBLE);
+        }
+    }
+    public static List<String> convertList(String str){
+        List<String> list=new ArrayList<>();
+        if(TextUtils.isEmpty(str)){
+            return list;
+        }else {
+            String[] citys=str.split(",");
+            for(int i=0;i<citys.length;i++){
+                if(!TextUtils.isEmpty(citys[i])){
+                    list.add(citys[i]);
+                }
+            }
+        }
+        return list;
+    }
+    //创建数据列表
+    private void setData(){
+        if(mResponse==null||mResponse.getCountryRegionListCount()<1){
+            return;
+        }else {
+            setCityMap();
+            checkCityAvailable();
+            for(int i = 0; i<mResponse.getCountryRegionListCount(); i++){
+                Bundle args=new Bundle();
+                args.putString(CityListFragment.S_COUNTRY_CODE,mResponse.getCountryRegionList(i).getCountryCode());
+                CityListFragment c=CityListFragment.newInstance(args);
+                if(null==mFragments){
+                    mFragments=new ArrayList<>();
+                }
+                mFragments.add(i,c);
+            }
+            mCityAdapter=new CityAdapter(getSupportFragmentManager(),ChooseCityActivity.this,getCitiesFromResponse(mResponse));
+            mPager.setAdapter(mCityAdapter);
+            mTab.setTabTitleTextSize(12);
+            mTab.setTitleTextColor(Color.BLACK, Color.GRAY);
+            mTab.setBackgroundColor(Color.WHITE);
+            mTab.setSelectedIndicatorColors(Color.alpha(0));
+            if(mResponse.getCountryRegionListCount()<3){
+                mTab.setDistributeEvenly(true);
+            }
+            mTab.setViewPager(mPager);
+            mPager.setCurrentItem(getIndexByCountry());
+        }
+    }
+    private void checkCityAvailable(){
+        String city=mResponse.getRegionName();
+        SPUtils.putString(this,ChooseCityActivity.F_RECENT_CITY,city);
+        mCities.remove(city);
+        mCities.add(0,city);
+        for(int i=0;i<mCities.size();i++){
+            String s=mCities.get(i);
+            if(mCityMap.get(s)==null){
+                mCities.remove(s);
+            }
+        }
+        for(String s:mCities){
+
+        }
+        setButton();
+    }
+    private void setCityMap(){
+        List<CsAddress.CountryRegionInfo> countryRegionInfos=mResponse.getCountryRegionListList();
+        for(int i=0;i<countryRegionInfos.size();i++){
+            List<CsAddress.RegionInfo> regionInfos=countryRegionInfos.get(i).getRegionInfoListList();
+            for(int j=0;j<regionInfos.size();j++){
+                List<CsAddress.RegionCityInfo> regionCityInfos=regionInfos.get(j).getRegionCityInfoListList();
+                for(int k=0;k<regionCityInfos.size();k++){
+                    CsAddress.RegionCityInfo info=regionCityInfos.get(k);
+                    mCityMap.put(info.getRegionName(),Integer.valueOf(info.getRegionId()));
+                }
+            }
+        }
+    }
+    private List<String> getCitiesFromResponse(CsAddress.GetWarehouseRegionResponse regionResponse){
+        List<String> cities=new ArrayList<>();
+        for(int i=0;i<regionResponse.getCountryRegionListCount();i++){
+            cities.add(regionResponse.getCountryRegionList(i).getCountryName());
+        }
+        return cities;
+    }
+
+    private void getCityInfo(){
+        showLoading();
+        CsAddress.GetWarehouseRegionRequest.Builder builder=CsAddress.GetWarehouseRegionRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetWarehouseRegionResponse>() {
+            @Override
+            public void onSuccess (CsAddress.GetWarehouseRegionResponse response) {
+                mResponse=response;
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeLoading();
+                        setData();
+                    }
+                });
+                KLog.i("getCityList",response.toString());
+
+
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(errMsg);
+                        closeLoading();
+                    }
+                });
+            }
+        });
+    }
+    @OnClick({R.id.title_tv_left, R.id.first_btn, R.id.second_btn, R.id.third_btn, R.id.forth_btn, R.id.fifth_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_tv_left:
+                finish();
+                break;
+            case R.id.first_btn:
+                setCity(0);
+                break;
+            case R.id.second_btn:
+                setCity(1);
+                break;
+            case R.id.third_btn:
+                setCity(2);
+                break;
+            case R.id.forth_btn:
+                setCity(3);
+                break;
+            case R.id.fifth_btn:
+                setCity(4);
+                break;
+        }
+    }
+    private void setCity(int i){
+        if(mCities==null){
+            return;
+        }
+        String str=mCities.get(i);
+        SPUtils.putString(ChooseCityActivity.this,ChooseCityActivity.F_RECENT_CITY,str);
+        if(mCityMap.get(str)!=null){
+            saveWareHouse(mCityMap.get(str),null);
+        }
+        mCities.remove(str);
+        mCities.add(0,str);
+        setButton();
+        saveCityList();
+
+        finish();
+    }
+
+    public CsAddress.CountryRegionInfo getRegionInfoListByCode(String code){
+        if(TextUtils.isEmpty(code)||mResponse==null){
+            return null;
+        }
+        List<CsAddress.RegionInfo> infos=new ArrayList<>();
+        for(int i=0;i<mResponse.getCountryRegionListCount();i++){
+            if(code.equals(mResponse.getCountryRegionList(i).getCountryCode())){
+                return mResponse.getCountryRegionList(i);
+            }
+        }
+        return null;
+    }
+    public void saveWareHouse(int id, final RequestNetListenerWithMsg listenerWithMsg){
+        if(listenerWithMsg==null){
+            showLoading();
+        }
+        CsAddress.SaveWarehouseRegionRequest.Builder builder=CsAddress.SaveWarehouseRegionRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().getBaseUserRequest());
+        builder.setRegionid(id);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.SaveWarehouseRegionResponse>() {
+            @Override
+            public void onSuccess(final CsAddress.SaveWarehouseRegionResponse response) {
+                KLog.i("saveCity ",response.toString());
+                EventBus.getDefault().post(new BusEvent(BusEvent.SWITCH_CITY_SUCCESS,null));
+               /* SPUtils.saveObject(UIUtils.getContext(), EditRequireActivity.CODE_PICK_LIST, null);
+                SPUtils.saveObject(UIUtils.getContext(), EditRequireActivity.CODE_PRODUCT_LIST, null);
+                SPUtils.saveObject(ChooseCityActivity.this, EditReplenishActivity.CODE_PICK_LIST, null);*/
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(listenerWithMsg!=null){
+                            listenerWithMsg.onSuccess(response);
+                        }else {
+                            closeLoading();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(final int ret, final String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(listenerWithMsg!=null){
+                            listenerWithMsg.onFailure(ret,errMsg);
+                        }else {
+                            closeLoading();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+    private int  getIndexByCountry(){
+        if(mResponse==null||TextUtils.isEmpty(mResponse.getCountryCode())){
+            return 0;
+        }else {
+            String code=mResponse.getCountryCode();
+            List<CsAddress.CountryRegionInfo> infos=mResponse.getCountryRegionListList();
+            for(int i=0;i<infos.size();i++){
+                if(code.equals(infos.get(i).getCountryCode())){
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
+}

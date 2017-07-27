@@ -1,0 +1,707 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.DemandDetailBean;
+import com.fuexpress.kr.bean.PayResultBaen;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.help_signed.HelpMeSignedActivity;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSignedRemoteDataSource;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.SPUtils;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.socks.library.KLog;
+
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsCard;
+import fksproto.CsParcel;
+import fksproto.CsUser;
+import okhttp3.Response;
+
+/**
+ * Created by kevin on 2016/12/19.
+ */
+
+public class DemandsDetailActivity extends BaseActivity {
+    private static final int CODE_PAYMENT_REQUEST = 0x1001;
+    public static final String CREATE_ANOTHER_ORDRE_ID = "create_order_id";
+    public static final String DEMAND_BEAN = "demand_bean";
+    public static final int GetItem = 1;//取货
+    public static final int FindItem = 2;//找
+    public static final int BuyItem = 3;//买
+    public static final int Receive = 4;//收货
+
+
+    @BindView(R.id.title_iv_left)
+    ImageView titleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView titleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView titleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView titleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView titleIvRight;
+    @BindView(R.id.tv_demand_no)
+    TextView tvDemandNo;
+    @BindView(R.id.tv_demand_time)
+    TextView tvDemandTime;
+    @BindView(R.id.tv_demand_type)
+    TextView tvDemandType;
+    @BindView(R.id.tv_demand_state)
+    TextView tvDemandState;
+    @BindView(R.id.tv_demand_service_fee)
+    TextView tvDemandServiceFee;
+    @BindView(R.id.icon_01)
+    ImageView icon01;
+    @BindView(R.id.icon_02)
+    ImageView icon02;
+    @BindView(R.id.icon_03)
+    ImageView icon03;
+    @BindView(R.id.icon_04)
+    ImageView icon04;
+    @BindView(R.id.icon_05)
+    ImageView icon05;
+    @BindView(R.id.tv_item_name)
+    TextView tvItemName;
+    @BindView(R.id.tv_item_price)
+    TextView tvItemPrice;
+    @BindView(R.id.tv_item_count)
+    TextView tvItemCount;
+    @BindView(R.id.tv_item_notice)
+    TextView tvItemNotice;
+    @BindView(R.id.pick_up_balance_tv)
+    TextView pickUpBalanceTv;
+    @BindView(R.id.pick_up_payment_tv)
+    TextView pickUpPaymentTv;
+    @BindView(R.id.pick_up_payment_layout)
+    LinearLayout pickUpPaymentLayout;
+    @BindView(R.id.pick_up_grand_total_tv)
+    TextView pickUpGrandTotalTv;
+    @BindView(R.id.pick_up_submit_btn)
+    Button pickUpSubmitBtn;
+    @BindView(R.id.submitLayout)
+    RelativeLayout submitLayout;
+    @BindView(R.id.address_1)
+    TextView mAddress1;
+    @BindView(R.id.address_2)
+    TextView mAddress2;
+    @BindView(R.id.address_layout)
+    LinearLayout mAddressLayout;
+    @BindView(R.id.payment_iv)
+    ImageView mPaymentIv;
+    @BindView(R.id.merchant_message_tv)
+    TextView mMerchantMessageTv;
+    @BindView(R.id.message_1_layout)
+    RelativeLayout mMessage1Layout;
+    @BindView(R.id.create_order_btn)
+    Button mCreateOrderBtn;
+    @BindView(R.id.warehouse_tv)
+    TextView mWarehouseTv;
+
+
+    private int mId;
+    private int mType;
+    private DemandDetailBean mBean;
+    private ImageView[] mImageViews;
+    //用来标记当前请求的需求
+    CsUser.Require mRequire;
+    //用来标记当前的余额
+    private double mGiftBalance = 0.0;
+    private String defaultPaymentString = "";
+    private String defaultPayCode = "";
+
+    private final DisplayImageOptions options = new DisplayImageOptions.Builder().resetViewBeforeLoading(true).displayer(new FadeInBitmapDisplayer(100)).cacheInMemory(true
+    ).cacheOnDisk(true).build();
+    final ImageLoader loader = ImageLoader.getInstance();
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_demands_detail, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        titleIvLeft.setVisibility(View.VISIBLE);
+        titleTvLeft.setVisibility(View.VISIBLE);
+        titleTvLeft.setText(getString(R.string.my_demand));
+        mImageViews = new ImageView[4];
+        mImageViews[0] = icon01;
+        mImageViews[1] = icon02;
+        mImageViews[2] = icon03;
+        mImageViews[3] = icon04;
+        mRequire = (CsUser.Require) getIntent().getSerializableExtra(DEMAND_BEAN);
+        KLog.i(mRequire.toString());
+        mId = mRequire.getSalesRequireId();
+        if (mRequire != null) {
+            mType = mRequire.getType();
+        } else {
+            return;
+        }
+        if (mId != 0 && mType != 0 && AccountManager.getInstance().getBaseUserRequest() != null) {
+            switch (mType) {
+                case BuyItem:
+                    getBuyInfo();
+                    break;
+                case GetItem:
+                    getGetInfo();
+                    break;
+                case Receive:
+                    getReceiveInfo();
+                    /*//如果是帮我收,则请求一下数据(以防其点击在下一单)
+                    HelpSignedRemoteDataSource.getInstance().getHelpSignedDataRemote(mId);*/
+                    break;
+            }
+        }
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.pick_up_payment_layout, R.id.pick_up_submit_btn, R.id.create_order_btn, R.id.title_tv_right})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_tv_left:
+                onBackPressed();
+                break;
+            case R.id.pick_up_payment_layout:
+                //修改支付方式
+                if (null != mBean && Constants.DemandStatus.STATUS_PENDING.equals(mBean.status)) {
+                    changePayment();
+                }
+                break;
+            case R.id.pick_up_submit_btn:
+                gotoPay();
+                break;
+            case R.id.create_order_btn:
+                toCreateOrder();
+                break;
+            case R.id.title_tv_right:
+                cancel_demand();
+                break;
+        }
+    }
+
+    //取消申请
+    private void cancel_demand() {
+        CsUser.CancelRequireRequest.Builder builder = CsUser.CancelRequireRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setSalesrequireid(mId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.CancelRequireResponse>() {
+            @Override
+            public void onSuccess(CsUser.CancelRequireResponse response) {
+                KLog.i(response.toString());
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(getString(R.string.you_cancel_require_have_commit));
+                        mBean.status = Constants.DemandStatus.STATUS_AWAITINGCANCEL;
+                        titleTvCenter.setText(getString(R.string.awaitingcancel));
+                        tvDemandState.setText(getString(R.string.awaitingcancel));
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("Demands", errMsg + " ret = " + ret);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(getString(R.string.string_for_send_requset_fail_02));
+                    }
+                });
+            }
+        });
+    }
+
+    private void toCreateOrder() {
+        Intent intent = null;
+        switch (mType) {
+            case BuyItem:
+                intent = new Intent(this, AddReplenishActivity.class);
+                List<PickUpItemBean> itemList = (List<PickUpItemBean>) SPUtils.readObject(this, EditReplenishActivity.CODE_PICK_LIST);
+                if (itemList != null && itemList.size() == 4) {
+                    //满了4天，提示
+                    mViewUtils.toast(getString(R.string.pick_up_add_item_max_msg));
+                    return;
+                }
+                break;
+            case GetItem:
+                intent = new Intent(this, AddRequireActivity.class);
+                break;
+            case Receive:
+                intent = new Intent(this, HelpMeSignedActivity.class);
+                // TODO: 2017/1/4 设置跳转状态 -longer
+                intent.putExtra(HelpMeSignedActivity.HMS_STATE_KEY, HelpMeSignedActivity.ADD_DEMAND_AGAIN);
+                break;
+        }
+        if (null != intent) {
+            intent.putExtra(CREATE_ANOTHER_ORDRE_ID, mId);
+            this.startActivity(intent);
+        }
+
+    }
+
+    private void changePayment() {
+        if (mBean == null) {
+            return;
+        }
+        Intent intent = new Intent(this, PaymentActivity.class);
+        int i = (int) SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + "paymentPos", 0);
+        intent.putExtra("paymentPos", i);
+        intent.putExtra(PaymentActivity.CURRENCY_CODE, mBean.currencycode);
+        intent.putExtra("payType", Constants.getTyptByCode(mBean.paymentcode));
+        intent.putExtra("payCode", mBean.paymentcode);
+        intent.putExtra(PaymentActivity.IS_SEND_PACKAGE, false);
+        intent.putExtra("paymentString", pickUpPaymentTv.getText().toString());
+        startActivityForResult(intent, CODE_PAYMENT_REQUEST);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        KLog.d("----requestCode " + requestCode);
+        if (resultCode == Constants.PAYMENT_REQUEST_CODE) {
+            String payString = SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_NAME, "").toString();
+
+            mBean.paymentcode = SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_CODE, "").toString();
+            KLog.i(payString + " payString" + "code = " + mBean.paymentcode);
+            pickUpPaymentTv.setText(payString.replace("adyen", getString(R.string.String_adyen_pay)));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //去付款
+    private void gotoPay() {
+        if (TextUtils.isEmpty(mBean.paymentcode) || TextUtils.isEmpty(mBean.currencycode) || AccountManager.getInstance().mUin == 0 || mBean.salesrequireid == 0) {
+            mViewUtils.toast(getString(R.string.data_is_worng));
+            return;
+        }
+
+        if (Constants.GIFT_CARD_PAYMENT_KRBANK.equals(mBean.paymentcode)) {
+            //如果为银行付款，则请求KR
+            Intent intent = new Intent(this, KrBankInfoActivity.class);
+            intent.putExtra(KrBankInfoActivity.COUNT, UIUtils.getCurrency(this, mBean.currencycode, Float.valueOf(mBean.totalpay + "")));
+            intent.putExtra(KrBankInfoActivity.TOTAL, mBean.totalpay);
+
+            intent.putExtra(KrBankInfoActivity.PAYMENT, pickUpPaymentTv.getText());
+            intent.putExtra(KrBankInfoActivity.BALANCE, mBean.giftcardaccount);
+            intent.putExtra(KrBankInfoActivity.PAY_CURRENCY_CODE, mBean.currencycode);
+            this.startActivity(intent);
+            return;
+        }
+        CsCard.GetCheckToPayInApprequireRequest.Builder builder = CsCard.GetCheckToPayInApprequireRequest.newBuilder();
+        builder.setPaymentcode(mBean.paymentcode);
+        builder.setUin(AccountManager.getInstance().mUin);
+        builder.setSalesrequireld(mBean.salesrequireid);
+        builder.setCurrencycode(mBean.currencycode);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.GetCheckToPayInApprequireResponse>() {
+            @Override
+            public void onSuccess(final CsCard.GetCheckToPayInApprequireResponse response) {
+                KLog.i(response.toString());
+                if (TextUtils.isEmpty(response.getRedirecturl())) {
+                    //直接支付成功
+
+                } else {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            payDirectCard(response.getRedirecturl());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("ret = " + ret + " errMsg = " + errMsg);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(getString(R.string.string_for_send_requset_fail));
+                    }
+                });
+            }
+        });
+    }
+
+    //生成直冲订单
+    private void payDirectCard(String url) {
+        try {
+            Map<String, String> map = Constants.getPayInfoFromDirectUrl(url);
+            CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder builder = CsParcel.PayDoDirectGiftCardAppSingleRequest.newBuilder();
+            builder.setType(Integer.valueOf(map.get(Constants.PayGift.TYPE)));
+            builder.setAppType(Integer.valueOf(map.get(Constants.PayGift.APPTYPE)));
+            builder.setPaymentCode(map.get(Constants.PayGift.PAYMENTCODE));
+            builder.setTotal(Float.valueOf(map.get(Constants.PayGift.TOTAL)));
+            builder.setParcelid(Integer.valueOf(map.get(Constants.PayGift.SALESREQIREID)));
+            builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+            builder.setCurrencycode(mBean.currencycode);
+            NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayDoDirectGiftCardAppSingleResponse>() {
+                @Override
+                public void onSuccess(final CsParcel.PayDoDirectGiftCardAppSingleResponse response) {
+                    KLog.i(response.toString());
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            payOrder(response.getPaymentCode(), response.getOrderId());
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(int ret, String errMsg) {
+                    KLog.i("ret = " + ret + " errMsg = " + errMsg);
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            mViewUtils.toast(getString(R.string.string_for_send_requset_fail));
+                        }
+                    });
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void payOrder(String paymentCode, int id) {
+        CsParcel.PayGiftCardOrderRequest.Builder builder = CsParcel.PayGiftCardOrderRequest.newBuilder();
+        builder.setCurrencycode(mBean.currencycode);
+        builder.setPaymentCode(paymentCode);
+        builder.setGiftCardOrderId(id);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.PayGiftCardOrderResponse>() {
+            @Override
+            public void onSuccess(final CsParcel.PayGiftCardOrderResponse response) {
+                KLog.i(response.toString());
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Constants.GIFT_CARD_PAYMENT_ADYEN.equals(mBean.paymentcode)) {
+                            //adyen支付
+                            PaymentManager.getInstance(DemandsDetailActivity.this).adyenPay(mBean.salesrequireid + "", mBean.salesrequireid, 1, Float.valueOf(mBean.totalpay + "")
+                                    , mBean.currencycode, new PaymentManager.OnPayListener() {
+                                        @Override
+                                        public void onPay(Response response, PayResultBaen payResult) {
+                                            UIUtils.postTaskSafely(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mViewUtils.toast(UIUtils.getString(R.string.card_payment_success_title_bar_title));
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onError(String errMsg) {
+                                            KLog.i(errMsg + "+errMsg");
+                                            UIUtils.postTaskSafely(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mViewUtils.toast(getString(R.string.string_for_send_requset_fail));
+                                                }
+                                            });
+                                        }
+                                    });
+                        }
+                        if (Constants.GIFT_CARD_PAYMENT_ALIPAY.equals(mBean.paymentcode)) {
+                            //阿里支付
+                            PaymentManager.getInstance(DemandsDetailActivity.this).aliPay(response.getPayInfo(), new PaymentManager.OnAliPayListener() {
+                                @Override
+                                public void onSuccess(String resultStatus) {
+                                    UIUtils.postTaskSafely(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mViewUtils.toast(UIUtils.getString(R.string.card_payment_success_title_bar_title));
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailure(String resultStatus, String errorMsg) {
+                                    KLog.i(errorMsg + "+errMsg");
+                                    UIUtils.postTaskSafely(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mViewUtils.toast(getString(R.string.string_for_send_requset_fail));
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+                        if (Constants.GIFT_CARD_PAYMENT_WXPAY.equals(mBean.paymentcode)) {
+                            //微信支付
+                            PaymentManager.getInstance(DemandsDetailActivity.this).wechatPay(response.getPayInfo());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("ret = " + ret + " errMsg = " + errMsg);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(getString(R.string.string_for_send_requset_fail));
+                    }
+                });
+            }
+        });
+    }
+
+    private void setData() {
+        pickUpBalanceTv.setVisibility(View.GONE);
+        if (TextUtils.isEmpty(mBean.paymentcode)) {
+            PaymentManager.getInstance(this).getFKDPaymentListRequest(mBean.currencycode, new PaymentManager.OnFKDPaymentListener() {
+                @Override
+                public void onResult(int paymentType, final String pString, final String pCode) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            KLog.i("code = " + pCode + " string = " + pString);
+                            mBean.paymentcode = pCode;
+                            pickUpPaymentTv.setText(pString.replace("adyen", UIUtils.getString(R.string.String_adyen_pay)));
+
+                        }
+                    });
+                }
+            });
+        }
+
+        if (null != mBean) {
+            tvDemandNo.setText(getString(R.string.demand_no) + mBean.salesrequireid);
+            tvDemandTime.setText(getString(R.string.demand_time) + mBean.createtime);
+            if (0 <= mBean.requiretype && mBean.requiretype <= 4) {
+                tvDemandType.setText(getString(R.string.demand_type) + Constants.REQUIRETYPE[mBean.requiretype]);
+            }
+
+            tvDemandState.setText(getString(R.string.demand_state) + Constants.getStatusString(mBean.status));
+            if (mType != Receive) {
+                tvDemandServiceFee.setText(getString(R.string.service_fee) + UIUtils.getCurrency(this, mBean.currencycode, Float.valueOf(mBean.servicefee.replace(",", ""))));
+
+            } else {
+                tvDemandServiceFee.setVisibility(View.GONE);
+            }
+
+            tvItemName.setText(getString(R.string.item_name) + "：" + mBean.description);
+            tvItemPrice.setText(getString(R.string.pick_up_commodity_price) + "：" + UIUtils.getCurrency(this, mBean.pricecurrencycode, Float.valueOf(mBean.price.replace(",", ""))));
+            tvItemCount.setText(getString(R.string.pick_up_commodity_count) + "：" + mBean.qty);
+            tvItemNotice.setText(getString(R.string.hms_remarks_text) + "：" + mBean.remark);
+            pickUpPaymentTv.setText(Constants.getPaymentString(mBean.paymentcode));
+
+            if (mBean.imagesurl != null && mBean.imagesurl.size() > 0) {
+                for (int i = 0; i < 4; i++) {
+                    if (i >= mBean.imagesurl.size()) {
+                        break;
+                    }
+                    loader.displayImage(mBean.imagesurl.get(i).getImage(), mImageViews[i], options);
+                }
+            }
+            titleTvCenter.setText("" + Constants.getStatusString(mBean.status));
+            if (Constants.DemandStatus.STATUS_SHIPPED.equals(mBean.status)) {
+                //已发货就显示地址
+                mAddressLayout.setVisibility(View.VISIBLE);
+                mAddress1.setText(mBean.shippingname + "," + mBean.shippingphone);
+                mAddress2.setText(mBean.shippingaddress);
+            } else {
+                mAddressLayout.setVisibility(View.GONE);
+            }
+
+            if (Constants.DemandStatus.STATUS_PENDING.equals(mBean.status)) {
+                //如果为待付款状态则支付提交按钮可见
+                submitLayout.setVisibility(View.VISIBLE);
+                pickUpGrandTotalTv.setText(mBean.subtotal);
+                mPaymentIv.setVisibility(View.VISIBLE);
+                pickUpBalanceTv.setText(getString(R.string.pick_up_payment_balance) + UIUtils.getCurrency(this, mBean.currencycode, Float.parseFloat(mBean.giftcardaccount + "")));
+
+            } else {
+                //隐藏显示与余额位置
+                pickUpBalanceTv.setVisibility(View.GONE);
+                //隐藏选择支付方式按钮
+                mPaymentIv.setVisibility(View.GONE);
+                submitLayout.setVisibility(View.GONE);
+            }
+            if (TextUtils.isEmpty(mBean.merchantmessage)) {
+                mMessage1Layout.setVisibility(View.GONE);
+            } else {
+                mMessage1Layout.setVisibility(View.VISIBLE);
+                mMerchantMessageTv.setText(mBean.merchantmessage + "");
+            }
+            if (mType == Receive) {
+                //帮我收货特殊处理
+                tvDemandServiceFee.setVisibility(View.GONE);
+            }
+            if (Constants.DemandStatus.STATUS_PENDING.equals(mBean.status)) {
+                //如果待付款，则不显示“再下一单”
+                mCreateOrderBtn.setVisibility(View.GONE);
+            } else {
+                mCreateOrderBtn.setVisibility(View.VISIBLE);
+            }
+            if ((mBean.status.equals(Constants.DemandStatus.STATUS_ALLOCATING) || mBean.status.equals(Constants.DemandStatus.STATUS_PROCESSING)) && mBean.requiretype == 1) {
+                titleTvRight.setVisibility(View.VISIBLE);
+                titleTvRight.setText(getString(R.string.cancel_apply));
+            }
+            switch (mType){
+                case GetItem:
+                    //帮我取货
+                    tvItemName.setText(getString(R.string.String_parcel_item_info) + "：" + mBean.description);
+                    tvItemPrice.setText(getString(R.string.item_price) + "：" + UIUtils.getCurrency(this, mBean.pricecurrencycode, Float.valueOf(mBean.price.replace(",", ""))));
+                    tvItemCount.setText(getString(R.string.String_item_count) + "：" + mBean.qty);
+                    tvItemNotice.setVisibility(View.GONE);
+                    mWarehouseTv.setVisibility(View.VISIBLE);
+                    mWarehouseTv.setText(getString(R.string.pick_up_commodity_address)+"："+mBean.shippingaddress);
+                    pickUpPaymentTv.setText(Constants.getPaymentString(mBean.paymentcode));
+                    break;
+                case BuyItem:
+                    //帮我买货
+                    tvItemName.setText(getString(R.string.String_parcel_item_info) + "：" + mBean.description);
+                    tvItemPrice.setText(getString(R.string.item_price) + "：" + UIUtils.getCurrency(this, mBean.pricecurrencycode, Float.valueOf(mBean.price.replace(",", ""))));
+                    tvItemCount.setText(getString(R.string.String_item_count) + "：" + mBean.qty);
+                    tvItemNotice.setText(getString(R.string.hms_remarks_text) + "：" + mBean.remark);
+                    pickUpPaymentTv.setText(Constants.getPaymentString(mBean.paymentcode));
+                    break;
+                case Receive:
+                    //帮我收货
+                    pickUpPaymentLayout.setVisibility(View.GONE);
+                    tvItemName.setText(getString(R.string.String_parcel_item_info) + "：" + mBean.description);
+                    tvItemPrice.setText(getString(R.string.item_price) + "：" + UIUtils.getCurrency(this, mBean.pricecurrencycode, Float.valueOf(mBean.price.replace(",", ""))));
+                    tvItemCount.setText(getString(R.string.String_item_count) + "：" + mBean.qty);
+                    tvItemNotice.setText(getString(R.string.hms_remarks_text) + "：" + mBean.remark);
+                    mWarehouseTv.setVisibility(View.VISIBLE);
+                    mWarehouseTv.setText(getString(R.string.hms_warehouse_text)+mBean.fulladdress);
+                    tvDemandServiceFee.setVisibility(View.GONE);
+                    break;
+            }
+        }
+
+    }
+
+    private void getBuyInfo() {
+        CsUser.helpMyBuyInfoRequest.Builder builder = CsUser.helpMyBuyInfoRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setSalesrequireid(mId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.helpMyBuyInfoResponse>() {
+            @Override
+            public void onSuccess(CsUser.helpMyBuyInfoResponse response) {
+                KLog.i("Demand", response.toString());
+                mBean = ClassUtil.conventhelpMyBuyInfoResponse2DemandDetailBean(response);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("Demands", errMsg + " ret = " + ret);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(myActivity().getString(R.string.get_message_failed));
+                    }
+                });
+            }
+        });
+    }
+
+    private void getGetInfo() {
+        CsUser.HelpMyGetInfoRequest.Builder builder = CsUser.HelpMyGetInfoRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setSalesrequireid(mId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.HelpMyGetInfoResponse>() {
+            @Override
+            public void onSuccess(CsUser.HelpMyGetInfoResponse response) {
+                KLog.i("Demand", response.toString());
+                mBean = ClassUtil.conventHelpMyGetInfoResponse2DemandDetailBean(response);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("Demands", errMsg + " ret = " + ret);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(myActivity().getString(R.string.get_message_failed));
+                    }
+                });
+            }
+        });
+    }
+
+    private void getReceiveInfo() {
+        CsUser.helpMyReceiveInfoRequest.Builder builder = CsUser.helpMyReceiveInfoRequest.newBuilder();
+        builder.setUserHead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setSalesrequireid(mId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.helpMyReceiveInfoResponse>() {
+            @Override
+            public void onSuccess(CsUser.helpMyReceiveInfoResponse response) {
+                KLog.i("Demand", response.toString());
+                mBean = ClassUtil.conventhelpMyReceiveInfoResponse2DemandDetailBean(response);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData();
+                    }
+                });
+                //把请求回来的数据添加到帮我收中,以防其点击再下一单,免得再次请求: add by longer
+                HelpSignedRemoteDataSource.getInstance().processResponseData(response);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                KLog.i("Demands", errMsg + " ret = " + ret);
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(myActivity().getString(R.string.get_message_failed));
+                    }
+                });
+            }
+        });
+    }
+
+
+}

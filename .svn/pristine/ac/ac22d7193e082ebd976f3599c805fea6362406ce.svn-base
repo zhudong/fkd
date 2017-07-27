@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_bg"
+    tools:context="ai.zhaoban.ydk.ui.activity.ParcelPaymentAtivity">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <LinearLayout
+        android:id="@+id/ll_use_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:textSize="13sp"
+            android:textColor="@color/gray_666"
+            android:text="@string/String_balance_first"/>
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="￥100.00"/>
+
+        <RadioButton
+            android:id="@+id/rb_use_balance"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/parcel_checkbutton_bg"
+            android:button="@null"
+            android:checked="true"
+            android:layout_marginRight="10dp"
+            android:clickable="false"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@mipmap/pay_alipay"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:textSize="13sp"
+            android:textColor="@color/gray_666"
+            android:text="@string/String_parcel_ali_pay"/>
+
+        <RadioButton
+            android:id="@+id/rb_alipay"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/parcel_checkbutton_bg"
+            android:button="@null"
+            android:layout_marginRight="10dp"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/parcel_divide_line"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_weixin_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@mipmap/pay_wechat"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/String_parcel_weixin_pay"/>
+
+        <RadioButton
+            android:id="@+id/rb_weixin_pay"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/parcel_checkbutton_bg"
+            android:button="@null"
+            android:layout_marginRight="10dp"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parcel_payment_coupon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        style="@style/layout_style"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_666"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="优惠券"/>
+
+        <TextView
+            android:id="@+id/parcel_payment_coupon_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gary_e8e8"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/gray_666"
+            android:textSize="11sp"
+            android:text="3张可用"/>
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrow_right"/>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:text="@string/confirm"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/shape_red_gb_corner_normal"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_confirm"/>
+
+</LinearLayout>

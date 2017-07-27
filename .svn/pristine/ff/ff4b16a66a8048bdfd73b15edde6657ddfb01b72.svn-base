@@ -1,0 +1,583 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.HelpItemViewBean;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.AdapterForHelp;
+import com.fuexpress.kr.ui.uiutils.AnimationUtils;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.google.protobuf.GeneratedMessage;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.io.File;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsParcel;
+
+/**
+ * Created by Administrator on 2016-12-5.
+ */
+
+public class PickUpActivity extends BaseActivity {
+
+    private View rootView;
+    //    private View itemView;
+//    private GridView pickItemGv;
+//    private LinearLayout commoditysLayout;
+    private MyAdapter adapter;
+    private LinearLayout addLayout;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private TextView rightTv;
+    private ImageView backIv;
+    private CustomListView pickListView;
+    private List<PickUpItemBean> itemlist;
+    private ItemAdapter itemAdapter;
+    private ScrollView pickUpSv;
+    private ArrayList<String> imgList;
+    private List<String> mPathList;
+    private String mImage;
+    private int itemPos;
+
+    private TextView balanceTv;
+
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_pick_up, null);
+//        itemView = LayoutInflater.from(this).inflate(R.layout.pick_up_item, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.pick_up_titlebar);
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(getString(R.string.main_home_tab_string));
+        rightTv = titleBarView.getTv_in_title_right();
+        rightTv.setText(getString(R.string.pick_up_right_delete));
+        backIv = titleBarView.getIv_in_title_back();
+        addLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_add_layout);
+        pickUpSv = (ScrollView) rootView.findViewById(R.id.pick_up_sv);
+        pickListView = (CustomListView) rootView.findViewById(R.id.pick_up_listview);
+        balanceTv = (TextView) rootView.findViewById(R.id.pick_up_balance_tv);
+
+        init();
+
+        backIv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        rightTv.setOnClickListener(this);
+        addLayout.setOnClickListener(this);
+        return rootView;
+    }
+
+
+    public void init() {
+
+        helpMyGetInitRequest();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+            case R.id.tv_in_title_right:
+                itemAdapter.doDeletAnimation();
+                break;
+            case R.id.pick_up_add_layout:
+                PickUpItemBean bean = new PickUpItemBean();
+                List<String> imgList = new ArrayList<String>();
+                bean.setItemUrlList(imgList);
+                itemlist.add(bean);
+                itemAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(pickListView);
+                scrollToBottom();
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.d("----requestCode " + requestCode);
+        if (requestCode == Constants.ALBUM_GET_BITMAP_REQUEST_CODE) {
+            if (data != null) {
+                mImage = data.getStringExtra("image");
+                Uri uri = Uri.parse(mImage);
+                String path = uri.getPath();
+                //                try {
+                //                    Bitmap bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(uri));
+                //                    bmpList.add(bitmap);
+                imgList.add(path);
+                adapter.notifyDataSetChanged();
+
+                //                } catch (FileNotFoundException e) {
+                //                    e.printStackTrace();
+                //                }
+            }
+        }
+
+        if (requestCode == PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST) {
+            if (data != null) {
+                List<String> backList = (List<String>) data.getExtras().getSerializable("backImgList");
+//                imgList.clear();
+//                imgList.addAll(backList);
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(backList);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == 1000 || resultCode == -1 || resultCode == 0) {
+            if (data != null) {
+                mPathList = new ArrayList<>();
+                mPathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(mPathList);
+                for (int i = 0; i < pickListView.getChildCount(); i++) {
+                    GridView view = (GridView) pickListView.getChildAt(itemPos).findViewById(R.id.pick_up_item_gv);
+                    view.setAdapter(new MyAdapter(this, itemlist.get(itemPos).getItemUrlList(), itemPos));
+                    if(pickListView.getChildCount() > 1 && itemlist.get(itemPos).getItemUrlList().size() >= 4){
+                        setListViewHeightBasedOnChildren2(pickListView);
+                    }
+                }
+//                adapter.notifyDataSetChanged();
+                uploadImages();
+                /*for (String path : mPathList) {
+                    LogUtils.e("ImagePathList", path);//返回了一个图片路径的集合
+                }*/
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void uploadImages() {
+
+        UpLoadImageManager.getInstance().zoomImageAndUpLoad(itemlist.get(itemPos).getItemUrlList(), this);
+    }
+
+    public void helpMyGetInitRequest(){
+        showLoading();
+        CsParcel.HelpMyGetInitRequest.Builder builder = CsParcel.HelpMyGetInitRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencyCode(AccountManager.getInstance().getCurrencyCode());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.HelpMyGetInitResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.HelpMyGetInitResponse response) {
+                closeLoading();
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                initHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                closeLoading();
+            }
+        });
+    }
+
+    private Handler initHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            CsParcel.HelpMyGetInitResponse response = (CsParcel.HelpMyGetInitResponse) msg.obj;
+            balanceTv.setText(getString(R.string.pick_up_payment_balance, response.getGiftCardAccount()));
+            itemlist = new ArrayList<PickUpItemBean>();
+            PickUpItemBean bean = new PickUpItemBean();
+            imgList = new ArrayList<String>();
+            bean.setItemUrlList(imgList);
+            itemlist.add(bean);
+            itemAdapter = new ItemAdapter(PickUpActivity.this, itemlist, response.getCurrencyCode());
+            pickListView.setAdapter(itemAdapter);
+        }
+    };
+
+    public void scrollToBottom(){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                pickUpSv.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        if (listView == null)
+            return;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
+    public static void setListViewHeightBasedOnChildren2(ListView listView) {
+        if (listView == null)
+            return;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1))+ 50;
+        listView.setLayoutParams(params);
+    }
+
+    class ItemAdapter extends BaseAdapter {
+
+        private Context mContext;
+        private List<PickUpItemBean> list;
+        private List<ViewHolder> mViewHolderList;
+        private float oldX;
+        private float currentX;
+        private boolean mIsShowingAni = false;
+        private boolean mIsClickAni = false;
+        private String currencyCode;
+
+        public ItemAdapter(Context context, List<PickUpItemBean> list, String currencyCode) {
+            this.mContext = context;
+            this.list = list;
+            this.currencyCode = currencyCode;
+        }
+
+        @Override
+        public int getCount() {
+            return list != null ? list.size() : 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (mViewHolderList == null) {
+                mViewHolderList = new ArrayList<>();
+            }
+            final ViewHolder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.pick_up_item, null);
+                holder = new ViewHolder();
+                holder.contentLayout = (LinearLayout) convertView.findViewById(R.id.pick_up_content_layout);
+                holder.itemGv = (CustomGridView) convertView.findViewById(R.id.pick_up_item_gv);
+                holder.noteEt = (EditText) convertView.findViewById(R.id.pick_up_item_note_et);
+                holder.addressEt = (EditText) convertView.findViewById(R.id.pick_up_item_address_et);
+                holder.priceEt = (EditText) convertView.findViewById(R.id.pick_up_item_price_et);
+                holder.currencyCodeTv = (TextView) convertView.findViewById(R.id.pick_up_item_currency_code_tv);
+                holder.countEt = (EditText) convertView.findViewById(R.id.pick_up_item_count_et);
+                holder.deleteIv = (ImageView) convertView.findViewById(R.id.pick_up_delete_iv);
+                convertView.setTag(holder);
+                mViewHolderList.add(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            PickUpItemBean item = list.get(position);
+            MyAdapter myAdapter = new MyAdapter(mContext, item.getItemUrlList(), position);
+            holder.itemGv.setAdapter(myAdapter);
+            holder.currencyCodeTv.setText(currencyCode);
+            /*convertView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction() == MotionEvent.ACTION_DOWN){
+                        oldX = event.getX();
+                    }
+                    if(event.getAction() == MotionEvent.ACTION_MOVE){
+                        currentX = event.getX();
+                        LogUtils.d("------------- " + oldX + " --- " + currentX);
+                        if(currentX < oldX){
+                            doDeletAnimationPlus(holder, 200, mIsClickAni);
+                        }
+                    }
+                    return true;
+                }
+            });*/
+            return convertView;
+        }
+
+        class ViewHolder {
+            LinearLayout contentLayout;
+            CustomGridView itemGv;
+            EditText noteEt;
+            EditText addressEt;
+            EditText priceEt;
+            TextView currencyCodeTv;
+            EditText countEt;
+            ImageView deleteIv;
+        }
+
+        public void doDeletAnimation(){
+            if (mIsShowingAni) return;
+            mIsClickAni = !mIsClickAni;
+            for (ViewHolder viewHolder : mViewHolderList) {
+                doDeletAnimationPlus(viewHolder, 200, mIsClickAni);
+            }
+        }
+
+        private void doDeletAnimationPlus(ViewHolder viewHolder, long time, final boolean isOpen) {
+
+            AnimationUtils.doDeletAnimation(HelpItemViewBean.create().setLLView(viewHolder.contentLayout).setImageView(viewHolder.deleteIv).setDuration(time).setAnimatiorAdapter(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    mIsShowingAni = true;
+                    if(isOpen){
+                        rightTv.setText(getString(R.string.pick_up_right_confrim));
+                    }else {
+                        rightTv.setText(getString(R.string.pick_up_right_delete));
+                    }
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mIsShowingAni = false;
+                }
+            }), isOpen);
+
+
+        }
+    }
+
+    class MyAdapter extends BaseAdapter {
+
+        private Context mCtx;
+        private List<String> list;
+        private int parentPosition;
+        private ImageLoader imageLoader;
+        private DisplayImageOptions options;
+
+        public MyAdapter(Context context, List<String> list, int position) {
+            this.mCtx = context;
+            this.list = list;
+            this.parentPosition = position;
+            this.imageLoader = ImageLoader.getInstance();
+            this.options = ImageLoaderHelper.getInstance(mCtx).getDisplayOptions();
+        }
+
+        @Override
+        public int getCount() {
+            if (list == null || list.size() == 0) {
+                return 1;
+            } else if (list.size() == 9) {
+                return 9;
+            } else {
+                return list.size() + 1;
+            }
+
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            Holder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mCtx).inflate(R.layout.merchandise_item, null);
+                holder = new Holder();
+                holder.merchandiseIv = (ImageView) convertView.findViewById(R.id.merchandise_iv);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+            int width = UIUtils.getScreenWidthPixels((Activity) mCtx) / 4 - 30;
+            holder.merchandiseIv.setLayoutParams(new LinearLayout.LayoutParams(width, width));
+            LogUtils.d("----position " + position + " size " + list.size());
+
+            if (position == list.size() || list == null || list.size() == 0) {
+                if (position == 9) {
+                    convertView.setVisibility(View.GONE);
+                } else {
+                    holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER);
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    holder.merchandiseIv.setImageResource(R.mipmap.demand_addimage);
+                    holder.merchandiseIv.setBackgroundResource(R.drawable.add_merchandise_shape);
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            /*Intent intent = new Intent();
+                            intent.setClass(mCtx, Down2UpDialogActivity.class);
+                            intent.putExtra(Down2UpDialogActivity.GO_THIS_ACTIVITY_INTENT_KEY, Down2UpDialogActivity.ADD_MERCHANT_ITEM_TYPE);
+                            startActivityForResult(intent, Constants.ALBUM_GET_BITMAP_REQUEST_CODE);*/
+                            itemPos = parentPosition;
+                            MPermissions.requestPermissions(PickUpActivity.this, 3, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//                            UIUtils.startImageSelectorForAddItem(1000, imgList, PickUpActivity.this, 6);
+                        }
+                    });
+                }
+
+            } else {
+                if (position == parent.getChildCount()) {
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    //                imageLoader.displayImage(imageList.get(position).toString(), holder.merchandiseIv, options);
+                    try {
+                        //                        FileInputStream fis = new FileInputStream(list.get(position));
+                        //                        Bitmap bmp = BitmapFactory.decodeFile(list.get(position));
+
+
+                        //                    holder.merchandiseIv.setImageBitmap(BitMapUtils.getResizedBitmap(bmp, width, width));
+                        holder.merchandiseIv.setCropToPadding(true);
+                        holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+                        Uri uri = Uri.fromFile(new File(list.get(position)));
+                        //ImageLoader.getInstance().displayImage(uri.toString(), holder.merchandiseIv, options);
+                        Glide.with(PickUpActivity.this).load(uri.toString()).into(holder.merchandiseIv);
+                        holder.merchandiseIv.setLayoutParams(params);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(mCtx, PickUpActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("imgList", (Serializable) itemlist.get(itemPos).getItemUrlList());
+                            intent.putExtra("resourceType", PreviewMerchandiseActivity.RESOURCE_TYPE_ADD);
+                            bundle.putInt("position", position);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent, PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST);
+                        }
+                    });
+                }
+            }
+            return convertView;
+        }
+
+        class Holder {
+            ImageView merchandiseIv;
+        }
+    }
+
+    @PermissionGrant(3)
+    public void requestContactSuccess() {
+        UIUtils.startImageSelectorForAddItem(1000, (ArrayList<String>) itemlist.get(itemPos).getItemUrlList(), PickUpActivity.this, 4);
+        UpLoadImageManager.getInstance().setUpLoadProgressEmpty();
+    }
+
+    @PermissionDenied(3)
+    public void requestContactFailed() {
+        Toast.makeText(PickUpActivity.this, "DENY ACCESS CONTACTS!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public static void setGridViewHeightBasedOnChildren(GridView gridView) {
+        // 获取GridView对应的Adapter
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int rows;
+        int columns=0;
+        int horizontalBorderHeight=0;
+        Class<?> clazz=gridView.getClass();
+        try {
+            //利用反射，取得每行显示的个数
+            Field column=clazz.getDeclaredField("mRequestedNumColumns");
+            column.setAccessible(true);
+            columns=(Integer)column.get(gridView);
+            //利用反射，取得横向分割线高度
+            Field horizontalSpacing=clazz.getDeclaredField("mRequestedHorizontalSpacing");
+            horizontalSpacing.setAccessible(true);
+            horizontalBorderHeight=(Integer)horizontalSpacing.get(gridView);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        //判断数据总数除以每行个数是否整除。不能整除代表有多余，需要加一行
+        if(listAdapter.getCount()%columns>0){
+            rows=listAdapter.getCount()/columns+1;
+        }else {
+            rows=listAdapter.getCount()/columns;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < rows; i++) { //只计算每项高度*行数
+            View listItem = listAdapter.getView(i, null, gridView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = totalHeight+horizontalBorderHeight*(rows-1);//最后加上分割线总高度
+        gridView.setLayoutParams(params);
+    }
+
+}

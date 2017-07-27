@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/parcel_text_gray_99"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/String_pay_fee" />
+
+        <ImageView
+            android:id="@+id/img_arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/arrow_right" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/img_arrow_right"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_use_balance"
+                style="@style/parcel_text_gray_33"
+                android:text="@string/String_balance_first" />
+
+            <TextView
+                android:id="@+id/tv_use_coupon"
+                style="@style/parcel_text_gray_33"
+                android:text=""
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_pay_type"
+                style="@style/parcel_text_gray_33"
+                android:text="@string/String_parcel_ali_pay" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

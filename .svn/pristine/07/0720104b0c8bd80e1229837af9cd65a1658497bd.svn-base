@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl_tips"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tips_bg">
+
+    <View
+        android:id="@+id/achor"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/img_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="34dp"
+        android:src="@mipmap/button_tips_add"/>
+
+    <ImageView
+        android:id="@+id/img_get_it"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/achor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:src="@mipmap/button_get_it"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/img_add"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/package_arrow"/>
+
+
+    <TextView
+        android:id="@+id/tv_tip1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/achor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-70dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:text="@string/string_append_parcel_tip1"/>
+
+
+    <TextView
+        android:id="@+id/tv_tip2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_tip1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-40dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="@string/string_append_parcel_tip2"/>
+
+    <TextView
+        android:id="@+id/tv_tip3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_tip2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-58dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="@string/string_append_parcel_tip4"/>
+
+
+    <ImageView
+        android:id="@+id/img_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/achor"
+        android:layout_marginBottom="-28dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/package_text2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/img_text2"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:text="@string/string_append_parcel_tip3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+       />
+
+</RelativeLayout>

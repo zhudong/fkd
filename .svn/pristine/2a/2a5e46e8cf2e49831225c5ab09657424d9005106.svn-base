@@ -1,0 +1,92 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.CustomGridView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by kevin on 2016/12/20.
+ */
+
+public class AddReplenishActivity extends BaseActivity {
+    @BindView(R.id.title_iv_left)
+    ImageView mTitleIvLeft;
+    @BindView(R.id.title_tv_left)
+    TextView mTitleTvLeft;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.title_tv_right)
+    TextView mTitleTvRight;
+    @BindView(R.id.title_iv_right)
+    ImageView mTitleIvRight;
+    @BindView(R.id.pick_up_delete_iv)
+    ImageView mPickUpDeleteIv;
+    @BindView(R.id.pick_up_item_gv)
+    CustomGridView mPickUpItemGv;
+    @BindView(R.id.tv1)
+    TextView mTv1;
+    @BindView(R.id.pick_up_item_note_et)
+    EditText mPickUpItemNoteEt;
+    @BindView(R.id.tv2)
+    TextView mTv2;
+    @BindView(R.id.pick_up_item_address_et)
+    EditText mPickUpItemAddressEt;
+    @BindView(R.id.price_tv)
+    TextView mPriceTv;
+    @BindView(R.id.tv3)
+    TextView mTv3;
+    @BindView(R.id.pick_up_item_price_et)
+    EditText mPickUpItemPriceEt;
+    @BindView(R.id.pick_up_item_currency_code_tv)
+    TextView mPickUpItemCurrencyCodeTv;
+    @BindView(R.id.tv4)
+    TextView mTv4;
+    @BindView(R.id.pick_up_item_count_et)
+    EditText mPickUpItemCountEt;
+    @BindView(R.id.pick_up_content_layout)
+    LinearLayout mPickUpContentLayout;
+    @BindView(R.id.add_require_add_layout)
+    LinearLayout mAddRequireAddLayout;
+    @BindView(R.id.add_require_confirm_btn)
+    Button mAddRequireConfirmBtn;
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_add_replenish, null);
+        return view;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    //    mPickUpItemGv.setAdapter();
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.add_require_add_layout, R.id.add_require_confirm_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+                break;
+            case R.id.title_tv_left:
+                break;
+            case R.id.add_require_add_layout:
+                break;
+            case R.id.add_require_confirm_btn:
+                break;
+        }
+    }
+}

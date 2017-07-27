@@ -1,0 +1,159 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//???????
+message SalesCartItem
+{
+	required int64      cart_item_id = 1;
+	required int64      item_id      = 2; //??id
+	required int32      warehouse_id = 3; //??id
+	required string     title        = 4; //??
+	required string     subtitle     = 5; //???
+	required string     image_url    = 6; //????URL
+	required int32      qty          = 7; //????
+	required float      unit_price   = 8; //????????
+	optional int32      stock        = 9; //??
+	optional string     note         = 10;//??
+	optional string     seller       = 11;//??
+	optional string     buyfrom      = 12;//?????
+	repeated ItemExtend extends      = 13;//?????????
+	optional bool       is_selected  = 14;//????
+	optional bool       cannot_buyit = 15;//?????
+	optional int32 		min_qty_allow= 16;//????????
+	optional int32 		max_qty_allow= 17;//????????
+}
+
+//???????
+message GetSalesCartListRequest
+{
+	required BaseRequest     head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional string          localecode   = 3;//??
+	optional string          currencycode = 4;//??
+	optional int32           currencyid   = 5;//??id
+
+}
+
+//???????
+message GetSalesCartListResponse
+{
+	required BaseResponse  head       = 1;
+	optional float         subtotal   = 2;//??
+	optional float         grandtotal = 3;//??
+	repeated SalesCartItem items      = 4;//?????
+	repeated Warehouse     warehouses = 5;//????
+}
+
+//???????
+message AppendSalesCartRequest
+{
+	required BaseRequest 	 head         = 1;
+	optional BaseUserRequest userinfo 	  = 2;
+	required int64       	 item_id 	  = 3;//??id
+	required int32       	 qty     	  = 4;//????
+	optional string      	 note    	  = 5;//??
+	repeated PairIntInt  	 attrs   	  = 6;//??id:???id??
+	optional string      	 currencycode = 7;//??
+	optional string      	 localecode   = 8;//??
+}
+
+//???????
+message AppendSalesCartResponse
+{
+	required BaseResponse head = 1;
+}
+
+//???????
+message RemoveSalesCartRequest
+{
+	required BaseRequest     head 	      = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional int64 		     cart_item_id = 3;
+	optional string      	 localecode   = 4;//??
+	optional string      	 currencycode = 5;//??
+	optional int32       	 currencyid   = 6;//??id
+}
+
+//???????
+message RemoveSalesCartResponse
+{
+	required BaseResponse head 		 = 1;
+	optional float        subtotal   = 2;//??
+	optional float        grandtotal = 3;//??
+}
+
+//???????
+message ModifySalesCartRequest
+{
+	required BaseRequest     head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional int64 		 	 cart_item_id = 3;
+	optional int32		 	 qty	      = 4;
+	optional string 	 	 note		  = 5;
+	optional string      	 localecode   = 6;//??
+	optional string      	 currencycode = 7;//??
+	optional int32       	 currencyid   = 8;//??id
+}
+
+//???????
+message ModifySalesCartResponse
+{
+	required BaseResponse head 		 = 1;
+	optional float        subtotal   = 2;//??
+	optional float        grandtotal = 3;//??
+}
+
+//?????(??)??
+message SelectedSalesCartRequest
+{
+	required BaseRequest     head          = 1;
+	optional BaseUserRequest userinfo      = 2;
+	repeated int64 		     cart_item_ids = 3;
+	optional int32           action        = 4;//??Action??
+	optional string          currencycode  = 5;//??
+
+}
+
+//?????(??)??
+message SelectedSalesCartResponse
+{
+	required BaseResponse head 		 = 1;
+	optional float        subtotal   = 2;//??
+	optional float        grandtotal = 3;//??
+}
+
+//???????
+message ApplyCouponRequest
+{
+	required BaseRequest     head     = 1;
+	optional BaseUserRequest userinfo = 2;
+	required string          coupon   = 3;
+}
+
+//???????
+message ApplyCouponResponse
+{
+	required BaseResponse head     = 1;
+	optional float        discount = 2;//????
+
+}
+
+//?????????
+message RemoveBatchSalesCartRequest
+{
+	required BaseRequest     head 	       = 1;
+	optional BaseUserRequest userinfo      = 2;
+	repeated int64 		     cart_item_ids = 3;
+	optional string          currencycode  = 4;//??
+
+}
+
+//?????????
+message RemoveBatchSalesCartResponse
+{
+	required BaseResponse head 		 = 1;
+	optional float        subtotal   = 2;//??
+	optional float        grandtotal = 3;//??
+}

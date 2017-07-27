@@ -1,0 +1,103 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.HelpItemViewBean;
+import com.fuexpress.kr.ui.uiutils.AnimationUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Longer on 2016/10/28.
+ * 帮我系列的Adapter
+ */
+public class AdapterForHelp<T extends BaseActivity> extends BaseAdapter {
+    private T mContext;
+    private List<ViewHolder> mViewHolderList;
+    private boolean mIsClickAni = false;
+
+    private boolean mIsShowingAni = false;
+
+    /**
+     * 泛型是用来指定好特定Activity的(不同Activity调用不同的onActivityResult,用来获取图片)
+     *
+     * @param context
+     */
+    public AdapterForHelp(T context) {
+        mContext = context;
+    }
+
+    @Override
+    public int getCount() {
+        return 7;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (mViewHolderList == null) {
+            mViewHolderList = new ArrayList<>();
+        }
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_normal_layout, null);
+            viewHolder.iv_in_item_delete = (ImageView) convertView.findViewById(R.id.iv_in_item_delete);
+            viewHolder.ll_in_normal_item = (LinearLayout) convertView.findViewById(R.id.ll_in_normal_item);
+            convertView.setTag(viewHolder);
+            mViewHolderList.add(viewHolder);
+            doDeletAnimationPlus(viewHolder, 1, mIsClickAni);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        return convertView;
+    }
+
+
+    public void doDeletAnimation() {
+        if (mIsShowingAni) return;
+        mIsClickAni = !mIsClickAni;
+        for (ViewHolder viewHolder : mViewHolderList) {
+            doDeletAnimationPlus(viewHolder, 500, mIsClickAni);
+        }
+    }
+
+    private void doDeletAnimationPlus(ViewHolder viewHolder, long time, boolean isOpen) {
+        AnimationUtils.doDeletAnimation(HelpItemViewBean.create().setLLView(viewHolder.ll_in_normal_item).setImageView(viewHolder.iv_in_item_delete).setDuration(time).setAnimatiorAdapter(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mIsShowingAni = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mIsShowingAni = false;
+            }
+        }), isOpen);
+    }
+
+    class ViewHolder {
+        LinearLayout ll_in_normal_item;
+        ImageView iv_in_item_delete;
+    }
+}

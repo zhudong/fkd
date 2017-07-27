@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_single_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:clickable="true"
+            android:textColor="@drawable/selectot_switcher_text"
+            android:textSize="17sp" />
+
+        <View
+            android:id="@+id/view_line_item"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_album_coll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="2dp"
+            android:textColor="@drawable/selectot_switcher_text"
+            android:textSize="17sp" />
+        <View
+            android:id="@+id/view_line_album"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+</LinearLayout>

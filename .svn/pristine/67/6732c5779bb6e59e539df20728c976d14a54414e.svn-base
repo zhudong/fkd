@@ -1,0 +1,14 @@
+package com.fuexpress.kr.ui.activity.my_package.content;
+
+import fksproto.CsParcel;
+
+/**
+ * Created by yuan on 2016-6-15.
+ */
+public class PackageAll extends PackageToSendNow {
+    @Override
+    protected int getTab() {
+//        return "";
+        return CsParcel.ParcelTab.PARCEL_TAB_NONE_VALUE;
+    }
+}

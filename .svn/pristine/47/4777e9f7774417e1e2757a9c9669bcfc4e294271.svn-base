@@ -1,0 +1,464 @@
+package com.fuexpress.kr.model;
+
+import android.graphics.Region;
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.RegionBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.RegionBeanFactory;
+import com.fuexpress.kr.utils.SPUtils;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsAddress;
+import fksproto.CsCard;
+
+/**
+ * Created by Longer on 2016/11/7.
+ * 地址数据相关的Manager
+ */
+public class AddressManager {
+    public static final String OBSERVER_TYPE = "observer_type";
+    public static final String FOLLOW_TYPE = "follow_type";
+    public static final String ADDRESS_TYPE = "address_type";
+    public static final String EDIT_ADDRESS_TYPE = "edit_address_type";
+    public static final String COUNTRY_TYPE = "country_type";
+    public static final String USER_TYPE = "user_type";
+    private static AddressManager sAddressManager = new AddressManager();
+    public List<CsAddress.CustomerAddress> mAddressesList;
+    public List<RegionBean> mCountryList;
+    public ArrayMap<String, RegionBean> mCodeCountryMap;
+    public ArrayMap<String, RegionBean> mCodeProvinceMap;
+    public ArrayMap<String, RegionBean> mCodeCityMap;
+    public ArrayMap<String, List<RegionBean>> mCountryProvinceMap;
+    public ArrayMap<String, List<RegionBean>> mProvinceCityMap;
+    private boolean mIsRAMDataReady = false;
+
+    private AddressManager() {
+    }
+
+    public static AddressManager getInstance() {
+        return sAddressManager;
+    }
+
+    public ArrayMap<String, RegionBean> getCodeCountryMap() {
+        if (mCodeCountryMap == null)
+            mCodeCountryMap = new ArrayMap<>();
+        return mCodeCountryMap;
+    }
+
+    public ArrayMap<String, List<RegionBean>> getProvinceCityMap() {
+        if (mProvinceCityMap == null)
+            mProvinceCityMap = new ArrayMap<>();
+        return mProvinceCityMap;
+    }
+
+    public ArrayMap<String, List<RegionBean>> getCountryProvinceMap() {
+        if (mCountryProvinceMap == null)
+            mCountryProvinceMap = new ArrayMap<>();
+        return mCountryProvinceMap;
+    }
+
+    public List<RegionBean> getCountryList() {
+        if (mCountryList == null)
+            mCountryList = new ArrayList<>();
+        return mCountryList;
+    }
+
+    public String getPleaseChooseString() {//获得请选择的字符串
+        return SysApplication.getContext().getResources().getString(R.string.user_info_drtail_please_choose);
+    }
+
+    public void prepareAddressData() {//准备好地址数据
+        boolean isDBReady = (boolean) SPUtils.get(SysApplication.getContext(),
+                Constants.KEY_IS_ADDRESS_DB_READY, false);//判断地址数据库是否已经准备完毕
+        if (isDBReady) {//假如是,我们就把其数据全部拉取出来
+            readDataFromDB();
+        } else
+            readDataAndInsertDB();
+    }
+
+    public void readDataAndInsertDB() {//初次读取,解析本地文件并保存到数据库
+        try {
+            InputStreamReader in = new InputStreamReader(SysApplication.getContext().getAssets().open("ybregioncode.txt"));
+            BufferedReader bufReader = new BufferedReader(in);
+            String line = "";
+            while ((line = bufReader.readLine()) != null) {
+                if (!TextUtils.isEmpty(line)) {
+                    handleAddressRegionData(line);
+                }
+            }
+            LogUtils.e("文件-内存读取完毕");
+            mIsRAMDataReady = true;
+            insertToDB();//插入到数据库
+            /*for (RegionBean countryBean : mCountryList) {//把国家数据以code-Bean的形式保存起来
+                if (mCodeCountryMap == null)
+                    mCodeCountryMap = new ArrayMap<>();
+                mCodeCountryMap.put(countryBean.getRegionCode(), countryBean);
+            }*/
+
+            //AddressDao.getInstance(SysApplication.getContext()).getAllCountryData();
+            //AddressDao.getInstance(SysApplication.getContext()).getProvincesData("CN");
+            //AddressDao.getInstance(SysApplication.getContext()).getCitysData("CN_Anhui");
+            //AddressDao.getInstance(SysApplication.getContext()).getRegionCode("安徽");
+            //AddressDao.getInstance(SysApplication.getContext()).getRegionNameByCode("CN_Anhui_Anqing");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //处理读取的每一行数据
+    private void handleAddressRegionData(String line) {
+        AddressDao addressDao = AddressDao.getInstance(SysApplication.getContext());
+        String[] split = line.split("\\|");
+        String regionCode = split[1];
+        String[] regionCodeStrings = regionCode.split("\\_");
+        if (regionCodeStrings.length == 1) {//说明是国家
+            RegionBean countryBean = RegionBeanFactory.getInstance().createCountryBean(regionCodeStrings[0],
+                    split[split.length - 1]);
+            if (mCountryList == null) {
+                mCountryList = new ArrayList<>();
+                mCountryList.add(new RegionBean(getPleaseChooseString()));
+            }
+            mCountryList.add(countryBean);
+            if (mCodeCountryMap == null)
+                mCodeCountryMap = new ArrayMap<>();
+            mCodeCountryMap.put(countryBean.getRegionCode(), countryBean);
+            // TODO: 2017/2/28 插入到数据库
+            //addressDao.insertCountry(regionCodeStrings[0], split[split.length - 1]);//插入到国表
+        } else if (regionCodeStrings.length == 2) {//说明是省
+            if (mCountryProvinceMap == null)
+                mCountryProvinceMap = new ArrayMap<>();
+            List<RegionBean> provinceBeans = mCountryProvinceMap.get(regionCodeStrings[0]);
+            if (provinceBeans == null) {
+                provinceBeans = new ArrayList<>();
+                provinceBeans.add(new RegionBean(getPleaseChooseString()));
+            }
+            RegionBean provinceBean = RegionBeanFactory.getInstance().createProvinceBean(regionCodeStrings[0],
+                    split[1], split[split.length - 1]);
+            if (!provinceBeans.contains(provinceBean)) {
+                provinceBeans.add(provinceBean);
+                if (mCodeProvinceMap == null) mCodeProvinceMap = new ArrayMap<>();
+                mCodeProvinceMap.put(provinceBean.getRegionCode(), provinceBean);
+                mCountryProvinceMap.put(regionCodeStrings[0], provinceBeans);
+                if (mProvinceCityMap == null)
+                    mProvinceCityMap = new ArrayMap<>();
+                ArrayList<RegionBean> cityBeans = new ArrayList<>();
+                cityBeans.add(new RegionBean(getPleaseChooseString()));
+                mProvinceCityMap.put(provinceBean.getRegionCode(), cityBeans);//新建一个空的List集合给该省
+                // TODO: 2017/2/28 插入到数据库
+                //addressDao.insertProvince(regionCodeStrings[0], split[1], split[split.length - 1]);//插入到省表
+            }
+        } else if (regionCodeStrings.length == 3) {//城市
+            String provinceCode = regionCodeStrings[0] + "_" + regionCodeStrings[1];
+            List<RegionBean> cityBeans = mProvinceCityMap.get(provinceCode);
+            RegionBean cityBean = RegionBeanFactory.getInstance().createCityBean(provinceCode,
+                    regionCode, split[split.length - 1]);
+            if (cityBeans != null && !cityBeans.contains(cityBean)) {
+                // TODO: 2017/2/28 插入到数据库
+                /*addressDao.insertCity(regionCodeStrings[0], provinceCode,
+                        regionCode, split[split.length - 1]);//插入到市表*/
+                cityBeans.add(cityBean);
+                if (mCodeCityMap == null) mCodeCityMap = new ArrayMap<>();
+                mCodeCityMap.put(cityBean.getRegionCode(), cityBean);
+                mProvinceCityMap.put(provinceCode, cityBeans);
+            }
+        }
+    }
+
+    public void insertToDB() {//插入到数据库的方法
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (RegionBean countryBean : mCountryList) {
+                    AddressDao addressDao = AddressDao.getInstance(SysApplication.getContext());
+                    if (!TextUtils.isEmpty(countryBean.getRegionCode()))
+                        addressDao.insertCountry(countryBean.getRegionCode(), countryBean.getRegionName());//插入到国表
+                    List<RegionBean> provinceBeans = mCountryProvinceMap.get(countryBean.getRegionCode());
+                    if (provinceBeans != null) {
+                        for (RegionBean provinceBean : provinceBeans) {
+                            if (!TextUtils.isEmpty(provinceBean.getRegionCode()))
+                                addressDao.insertProvince(provinceBean.getCountryCode(),
+                                        provinceBean.getRegionCode(), provinceBean.getRegionName());//插入到省表
+                            List<RegionBean> cityBeans = mProvinceCityMap.get(provinceBean.getRegionCode());
+                            if (cityBeans != null) {
+                                for (RegionBean cityBean : cityBeans) {
+                                    if (!TextUtils.isEmpty(cityBean.getRegionCode()))
+                                        addressDao.insertCity(provinceBean.getCountryCode(), cityBean.getProvinceCode(),
+                                                cityBean.getRegionCode(), cityBean.getRegionName());//插入到市表
+                                }
+                            }
+                        }
+                    }
+                }
+                LogUtils.e("地址数据库多线程插入完毕");
+                SPUtils.put(SysApplication.getContext(), Constants.KEY_IS_ADDRESS_DB_READY, true);
+            }
+        }).start();
+    }
+
+    public void readDataFromDB() {//从数据库中拉取数据
+        mCountryList = AddressDao.getInstance(SysApplication.getContext()).getAllCountryData();//国家数据
+        for (RegionBean countryBean : mCountryList) {//把国家数据以code-Bean的形式保存起来
+            if (mCodeCountryMap == null)
+                mCodeCountryMap = new ArrayMap<>();
+            mCodeCountryMap.put(countryBean.getRegionCode(), countryBean);
+        }
+        for (RegionBean regionBean : mCountryList) {//遍历并获取省份数据
+            List<RegionBean> provincesData = AddressDao.getInstance(SysApplication.getContext()).getProvincesData(regionBean.getRegionCode());
+            for (RegionBean provinceBean : provincesData) {//得到省份列表之后,我们再去拉出其下的城市数据
+                List<RegionBean> citysData = AddressDao.getInstance(SysApplication.getContext()).getCitysData(provinceBean.getRegionCode());
+                if (mProvinceCityMap == null)
+                    mProvinceCityMap = new ArrayMap<>();
+                mProvinceCityMap.put(provinceBean.getRegionCode(), citysData);//保存起来
+                if (mCodeProvinceMap == null) mCodeProvinceMap = new ArrayMap<>();
+                mCodeProvinceMap.put(provinceBean.getRegionCode(), provinceBean);
+                for (RegionBean cityBean : citysData) {//把这些数据以code-实体Bean的形式保存起来
+                    if (mCodeCityMap == null) mCodeCityMap = new ArrayMap<>();
+                    mCodeCityMap.put(cityBean.getRegionCode(), cityBean);
+                }
+            }
+            if (mCountryProvinceMap == null)
+                mCountryProvinceMap = new ArrayMap<>();
+            mCountryProvinceMap.put(regionBean.getRegionCode(), provincesData);
+        }
+        LogUtils.e("从数据库中拉取完毕");
+        mIsRAMDataReady = true;
+    }
+
+    /**
+     * 在初次启动之时，数据库还没有准备完毕，这里我们就要从你内存中读取
+     *
+     * @param regionCode 地址code
+     * @param type       类型
+     * @return 格式化好的地址信息
+     */
+    public String getRegionTextByRAM(@NonNull String regionCode, @NonNull String type) {
+        String text = "";
+        boolean isProvince = false;
+        String[] codeSplit = regionCode.split("\\_");
+        if (codeSplit.length < 3)
+            isProvince = true;
+        String countryString = mCodeCountryMap.get(codeSplit[0]).getRegionName();
+        String provinceString = mCodeProvinceMap.get(codeSplit[0] + "_" + codeSplit[1]).getRegionName();
+        String cityString = "";
+        if (!isProvince) {
+            cityString = mCodeCityMap.get(regionCode).getRegionName();
+        }
+        if (!type.equals(COUNTRY_TYPE))
+            text = getRegionStringMethod(countryString, provinceString, cityString, isProvince, type);
+        else text = countryString;
+        return text;
+    }
+
+
+    /**
+     * 根据传进来的rCode和类型返回其地址信息拼接字符串
+     *
+     * @param regionCode 地址Code
+     * @param type       类型(不同类型需要的格式不一样)
+     * @return 格式化好的地址信息
+     */
+    public String getRegionStringByCode(@NonNull String regionCode, @NonNull String type) {
+        String regionString = "";
+        boolean isReady = (boolean) SPUtils.get(SysApplication.getContext(), Constants.KEY_IS_ADDRESS_DB_READY, false);
+        if (!isReady || mIsRAMDataReady)
+            regionString = getRegionTextByRAM(regionCode, type);
+        else {
+            // TODO: 2017/3/1 查找功能的实现
+            RegionBean regionNameByCode = AddressDao.getInstance(SysApplication.getContext()).getRegionNameByCode(regionCode);
+            if (type.equals(COUNTRY_TYPE)) {
+                if (regionNameByCode.isProvince())
+                    regionString = mCodeCountryMap.get(regionNameByCode.getCountryCode()).getRegionName();
+                else {
+                    String provinceCode = regionNameByCode.getProvinceCode();
+                    String[] codeSplit = provinceCode.split("\\_");
+                    RegionBean regionBean = mCodeCountryMap.get(codeSplit[0]);
+                    regionString = regionBean.getRegionName();
+                }
+            } else {
+                if (regionNameByCode.isProvince()) {
+                    String countryString = mCodeCountryMap.get(regionNameByCode.getCountryCode()).getProvinceName();
+                    regionString = getRegionStringMethod(countryString, regionNameByCode.getProvinceName(), "", true, type);
+                } else {
+                    String provinceCode = regionNameByCode.getProvinceCode();
+                    String[] codeSplit = provinceCode.split("\\_");
+                    String countryString = mCodeCountryMap.get(codeSplit[0]).getRegionName();
+                    regionString = getRegionStringMethod(countryString, regionNameByCode.getProvinceName(), regionNameByCode.getRegionName(), false, type);
+                }
+            }
+        }
+        return regionString;
+    }
+
+
+    /**
+     * 根据传入的信息来进行类型判断拼接
+     *
+     * @param coStr      国家的字符串
+     * @param pStr       省字符串
+     * @param ciStr      城市字符串
+     * @param isProvince 是否为省
+     * @param type       类型
+     * @return 格式好的地址字符串
+     */
+    public String getRegionStringMethod(String coStr, String pStr, String ciStr, boolean isProvince, String type) {
+        String regionString = "";
+        switch (type) {
+            case EDIT_ADDRESS_TYPE:
+                regionString = isProvince ? pStr : ciStr + " " + pStr;
+                break;
+            case FOLLOW_TYPE:
+                regionString = isProvince ? coStr + " " + pStr : pStr + " " + ciStr;
+                break;
+            case USER_TYPE:
+                regionString = isProvince ? pStr + "," + coStr : pStr + " " + ciStr + "," + coStr;
+                break;
+            default:
+                regionString = isProvince ? pStr + "," + coStr : ciStr + "," + pStr + "," + coStr;
+                break;
+        }
+        return regionString;
+    }
+
+    public RegionBean getRegionByCode(String code) {
+        boolean isDBReady = (boolean) SPUtils.get(SysApplication.getContext(), Constants.KEY_IS_ADDRESS_DB_READY, false);
+        RegionBean regionBean;
+        if (!mIsRAMDataReady)
+            regionBean = AddressDao.getInstance(SysApplication.getContext()).getRegionNameByCode(code);
+        else {
+            String[] codeSplit = code.split("\\_");
+            if (codeSplit.length == 2) {//说明是省code
+                String provinceCode = codeSplit[0] + "_" + codeSplit[1];
+                regionBean = mCodeProvinceMap.get(provinceCode);
+            } else if (codeSplit.length == 3) {//说明是市code
+                regionBean = mCodeCityMap.get(code);
+            } else {//说明是国家code
+                regionBean = mCodeCountryMap.get(code);
+            }
+        }
+        return regionBean;
+    }
+
+
+    /**
+     * 获得用户的地址列表
+     */
+    public void getCustomerAddressListRequest() {
+        mAddressesList = new ArrayList<>();
+        CsAddress.GetCustomerAddressListRequest.Builder builder = CsAddress.GetCustomerAddressListRequest.newBuilder();
+        builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetCustomerAddressListResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.GetCustomerAddressListResponse response) {
+                List<CsAddress.CustomerAddress> addressesList = response.getAddressesList();
+                LinkedList<CsAddress.CustomerAddress> dataList = new LinkedList<CsAddress.CustomerAddress>();
+                for (int i = 0; i < addressesList.size(); i++) {
+                    CsAddress.CustomerAddress customerAddress = addressesList.get(i);
+                    boolean isDefault = customerAddress.getIsDefault();
+                    if (isDefault)
+                        dataList.addFirst(customerAddress);
+                    else
+                        dataList.add(customerAddress);
+                }
+                mAddressesList.addAll(dataList);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_ADDRESS_LIST_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_ADDRESS_LIST_COMPLETE, false));
+            }
+        });
+    }
+
+    public void deletAddressRequest(int addressID) {
+        CsAddress.DelCustomerAddressRequest.Builder builder = CsAddress.DelCustomerAddressRequest.newBuilder();
+        builder.setAddressId(addressID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.DelCustomerAddressResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.DelCustomerAddressResponse response) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.DELET_ADDRESS_REQUEST, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.DELET_ADDRESS_REQUEST, false));
+            }
+        });
+    }
+
+    /**
+     * 设置该地址为默认
+     */
+    public void setAddressDefault(CsAddress.CustomerAddress address) {
+        /*CsAddress.CustomerAddress.Builder builder = address.toBuilder();
+        builder.setIsDefault(true);
+        CsAddress.CustomerAddress build = builder.build();*/
+        CsAddress.EditCustomerAddressRequest.Builder builder1 = CsAddress.EditCustomerAddressRequest.newBuilder();
+        builder1.setAddress(address);
+        builder1.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder1, new INetEngineListener<CsAddress.EditCustomerAddressResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.EditCustomerAddressResponse response) {
+                LogUtils.e("我是请求是否默认成功");
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_ADDRESS_IS_DEFAULT_COMPETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.SET_ADDRESS_IS_DEFAULT_COMPETE, false));
+            }
+        });
+    }
+
+
+    /**
+     * 请求更新的地址选择数据
+     */
+    public void getUpdateCountryAndRegionRequest() {
+        CsCard.GetUpdateCountryAndRegionRequest.Builder builder = CsCard.GetUpdateCountryAndRegionRequest.newBuilder();
+        String updateTime = SPUtils.getString(SysApplication.getContext(), Constants.KEY_ADDRESS_UPDATE_TIME, "2017-02-23 17:00:00");
+        builder.setTime(updateTime);
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsCard.GetUpdateCountryAndRegionResponse>() {
+
+            @Override
+            public void onSuccess(CsCard.GetUpdateCountryAndRegionResponse response) {
+                LogUtils.e("请求更新地址数据成功:" + response.toString());
+                List<CsCard.CountryAndRegionInfo> countryAndRegionList = response.getCountryAndRegionList();
+                String updateTime = response.getUpdateTime();
+                for (CsCard.CountryAndRegionInfo countryAndRegionInfo : countryAndRegionList) {
+                    handleAddressRegionData(countryAndRegionInfo.getStrCountryAndRegion());
+                }
+                SPUtils.putString(SysApplication.getContext(), Constants.KEY_ADDRESS_UPDATE_TIME, updateTime);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("请求更新地址数据失败" + ret + "  " + errMsg);
+            }
+        });
+    }
+
+
+}

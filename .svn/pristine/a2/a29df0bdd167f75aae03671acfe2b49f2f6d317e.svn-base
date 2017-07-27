@@ -1,0 +1,33 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+/**
+ * Created by Administrator on 2017-2-14.
+ */
+
+public class IntegralActivity extends BaseActivity {
+
+    private View rootView;
+
+    private TitleBarView titleBarView;
+    private SlidingTabLayout tabLayout;
+    private ViewPager viewPager;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_integral_layout, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.integral_titlebar);
+        tabLayout = (SlidingTabLayout) rootView.findViewById(R.id.integral_tab_layout);
+        viewPager = (ViewPager) rootView.findViewById(R.id.integral_viewpager);
+
+        return rootView;
+    }
+}

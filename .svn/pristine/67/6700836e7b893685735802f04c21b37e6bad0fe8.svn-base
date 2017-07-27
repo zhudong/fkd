@@ -1,0 +1,246 @@
+package com.fuexpress.kr.utils;
+
+import android.support.v4.util.ArrayMap;
+
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.UpLoadImageValueBean;
+import com.fuexpress.kr.bean.UpLoadImgBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.google.gson.Gson;
+
+import com.upyun.library.common.UploadManager;
+import com.upyun.library.listener.UpCompleteListener;
+import com.upyun.library.utils.UpYunUtils;
+
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import fksproto.CsAddress;
+import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
+/**
+ * Created by Longer on 2016/12/9.
+ */
+public class UpLoadImageUtils {
+
+    private static UpLoadImageUtils sUpLoadImageUtils = new UpLoadImageUtils();
+    //private List<String> mPathTempList;
+    //private List<String> mUpLoadCompleteList;
+    //private ArrayMap<String, String> mQueueMap;
+    //你需要上传的图片类型，不同类型后缀都不一样
+    public static final int HEAD_ICON = 0;
+    public static final int ADD_PACKAGE = 1;
+    public static final int ORDER_SHOW = 2;
+
+    private ArrayMap<Integer, Boolean> mIndexSwitchMap;//用来保存每个index下的是否需要上传状态
+
+    private UpLoadImageUtils() {
+    }
+
+    public static UpLoadImageUtils getInstance() {
+        return sUpLoadImageUtils;
+    }
+
+    public interface UpLaodUtilsListener {
+        void upLoadStateListener(boolean isSuccess, int progress, int index, String url);//是否成功，当前的进度，第几个item，成功后的url(失败则是失败的相关信息)
+    }
+
+
+    public void zoomImageAndUpLoadToYun(UpLoadImageValueBean upLoadImageValueBean, UpLaodUtilsListener upLaodUtilsListener) {
+        zoomImageAndUpLoad(upLoadImageValueBean, new ArrayMap<String, String>(), upLaodUtilsListener);
+    }
+
+    public void zoomImageAndUpLoadToYunSwitch(UpLoadImageValueBean upLoadImageValueBean, UpLaodUtilsListener upLaodUtilsListener) {
+        zoomImageAndUpLoadSwitch(upLoadImageValueBean, new ArrayMap<String, String>(), upLaodUtilsListener);
+    }
+
+    /**
+     * 这是把需要上传的图片路径集合上传到upyun的方法,参数含义看下面
+     *
+     * @param upLoadImageValueBean 上传图片的ValueBean
+     * @param upLaodUtilsListener  上传的进度回调(包含url)
+     */
+    private void zoomImageAndUpLoadSwitch(final UpLoadImageValueBean upLoadImageValueBean, final ArrayMap<String, String> pathMap, final UpLaodUtilsListener upLaodUtilsListener) {
+        /*mPathTempList = new ArrayList<>();
+        mQueueMap = new ArrayMap<>();*/
+        final List<String> imagePathList = upLoadImageValueBean.getImagePathList();
+        //mUpLoadCompleteList = new ArrayList<>();
+        Observable.from(imagePathList).map(new Func1<String, File>() {
+            @Override
+            public File call(String path) {
+                File file = BitMapUtils.saveImage(BitMapUtils.efficientZoomBitMapByPath(path));
+                pathMap.put(file.getName(), path);
+                return file;
+            }
+        }).subscribeOn(Schedulers.io()).takeWhile(new Func1<File, Boolean>() {
+            @Override
+            public Boolean call(File file) {
+                return mIndexSwitchMap.get(upLoadImageValueBean.getIndex());
+            }
+        }).subscribe(new Action1<File>() {
+            @Override
+            public void call(File file) {
+                upLoadImage(file, upLoadImageValueBean, pathMap, upLaodUtilsListener);
+            }
+        });
+    }
+
+    /**
+     * 这是把需要上传的图片路径集合上传到upyun的方法,参数含义看下面
+     *
+     * @param upLoadImageValueBean 上传图片的ValueBean
+     * @param upLaodUtilsListener  上传的进度回调(包含url)
+     */
+    private void zoomImageAndUpLoad(final UpLoadImageValueBean upLoadImageValueBean, final ArrayMap<String, String> pathMap, final UpLaodUtilsListener upLaodUtilsListener) {
+        /*mPathTempList = new ArrayList<>();
+        mQueueMap = new ArrayMap<>();*/
+        final List<String> imagePathList = upLoadImageValueBean.getImagePathList();
+        //mUpLoadCompleteList = new ArrayList<>();
+        Observable.from(imagePathList).map(new Func1<String, File>() {
+            @Override
+            public File call(String path) {
+                File file = BitMapUtils.saveImage(BitMapUtils.efficientZoomBitMapByPath(path));
+                pathMap.put(file.getName(), path);
+                return file;
+            }
+        }).subscribeOn(Schedulers.io()).subscribe(new Action1<File>() {
+            @Override
+            public void call(File file) {
+                upLoadImage(file, upLoadImageValueBean, pathMap, upLaodUtilsListener);
+            }
+        });
+
+        //rxjava嵌套(封装)异步操作
+        /*Observable.from(imagePathList).flatMap(new Func1<String, Observable<CsAddress.AddCustomerAddressResponse>>() {
+            @Override
+            public Observable<CsAddress.AddCustomerAddressResponse> call(final String s) {
+
+                return Observable.create(new Observable.OnSubscribe<CsAddress.AddCustomerAddressResponse>() {
+                    @Override
+                    public void call(final Subscriber<? super CsAddress.AddCustomerAddressResponse> subscriber) {
+                        CsAddress.AddCustomerAddressRequest.Builder builder = CsAddress.AddCustomerAddressRequest.newBuilder();
+                        CsAddress.CustomerAddress.Builder builder1 = CsAddress.CustomerAddress.newBuilder();
+                        builder1.setPhone(s);
+                        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.AddCustomerAddressResponse>() {
+                            @Override
+                            public void onSuccess(CsAddress.AddCustomerAddressResponse response) {
+                                subscriber.onNext(response);
+                            }
+
+                            @Override
+                            public void onFailure(int ret, String errMsg) {
+
+                            }
+                        });
+                    }
+                });
+            }
+        }).subscribe(new Subscriber<CsAddress.AddCustomerAddressResponse>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(CsAddress.AddCustomerAddressResponse addCustomerAddressResponse) {
+
+            }
+        });*/
+
+
+    }
+
+    public void setContinue(int index, boolean isContinue) {//设置是否需要继续上传
+        if (mIndexSwitchMap == null)
+            mIndexSwitchMap = new ArrayMap<>();
+        mIndexSwitchMap.put(index, isContinue);
+    }
+
+    private void upLoadImage(final File file, final UpLoadImageValueBean upLoadImageValueBean, final ArrayMap<String, String> pathMap, final UpLaodUtilsListener upLaodUtilsListener) {
+        Map baseParamMap = new ArrayMap<>();//用来储存单张图片基础参数的map集合
+        Map upLoadParamMap = new ArrayMap<>();//用来存储上传参数的map集合
+        int type = upLoadImageValueBean.getType();
+        final List<String> imagePathList = upLoadImageValueBean.getImagePathList();
+        final int index = upLoadImageValueBean.getIndex();
+
+        int blockNum = UpYunUtils.getBlockNum(file, 1024);//获得块大小
+        long length = file.length();//获得文件长度(大小)
+        String file_hex = UpYunUtils.md5Hex(file);//获得文件哈希值
+        long expiration = TimeUtils.getTodayTimeLongValue() + 518400;//获得超时时间(一个月)
+        baseParamMap.put(UpLoadIamgeUtils.Params.FILE_SIZE, length);//设置文件信息
+        baseParamMap.put(UpLoadIamgeUtils.Params.BLOCK_NUM, blockNum);
+        baseParamMap.put(UpLoadIamgeUtils.Params.FILE_MD5, file_hex);
+        baseParamMap.put(UpLoadIamgeUtils.Params.EXPIRATION, expiration);
+        final String add_pack_string = Constants.UPLOAD_IMG_FOR_ADD_ITEM + SysApplication.getRandoomUUID() + ".jpg";
+        final String head_up_load_string = Constants.UPLOAD_IMG_FOR_MERCHANT_USERINFO + AccountManager.getInstance().mUin + "_" + SysApplication.getRandoomUUID() + ".jpg";
+        final String order_show_string = Constants.UPLOAD_IMG_FOR_ORDER_SHOW + SysApplication.getRandoomUUID() + ".jpg";
+        /*switch (type) {
+            case HEAD_ICON:
+                baseParamMap.put(UpLoadIamgeUtils.Params.PATH, head_up_load_string);
+                break;
+            case ADD_PACKAGE:
+                baseParamMap.put(UpLoadIamgeUtils.Params.PATH, add_pack_string);
+                break;
+            case ORDER_SHOW:
+                baseParamMap.put(UpLoadIamgeUtils.Params.PATH, order_show_string);
+                break;
+        }*/
+
+        if (HEAD_ICON == type) {
+            baseParamMap.put(UpLoadIamgeUtils.Params.PATH, head_up_load_string);
+        } else if (ADD_PACKAGE == type) {
+            baseParamMap.put(UpLoadIamgeUtils.Params.PATH, add_pack_string);
+        } else if (ORDER_SHOW == type) {
+            baseParamMap.put(UpLoadIamgeUtils.Params.PATH, order_show_string);
+        }
+
+        String signature = UpYunUtils.getSignature(baseParamMap, Constants.secret);
+        String policy = UpYunUtils.getPolicy(baseParamMap);
+
+        if (HEAD_ICON == type) {
+            upLoadParamMap.put(UpLoadIamgeUtils.Params.SAVE_KEY, head_up_load_string);
+        } else if (ADD_PACKAGE == type) {
+            upLoadParamMap.put(UpLoadIamgeUtils.Params.SAVE_KEY, add_pack_string);
+        } else if (ORDER_SHOW == type) {
+            upLoadParamMap.put(UpLoadIamgeUtils.Params.SAVE_KEY, order_show_string);
+        }
+
+        upLoadParamMap.put(UpLoadIamgeUtils.Params.SIGNATURE, signature);
+        upLoadParamMap.put(UpLoadIamgeUtils.Params.POLICY, policy);
+        upLoadParamMap.put(UpLoadIamgeUtils.Params.BUCKET, Constants.bucket);
+
+        UploadManager.getInstance().blockUpload(file, upLoadParamMap, Constants.secret, new UpCompleteListener() {
+            @Override
+            public void onComplete(boolean isSuccess, String result) {
+                if (isSuccess) {
+                    Gson gson = new Gson();
+                    UpLoadImgBean upLoadImgBean = gson.fromJson(result, UpLoadImgBean.class);
+                    upLoadImageValueBean.getTempCompleteList().add(upLoadImgBean.getPath());
+                    String path = upLoadImgBean.getPath() + "," + pathMap.get(file.getName());//注意这里是用了url和原本的路径以","逗号拼接的,这样就能方便排序
+                    upLaodUtilsListener.upLoadStateListener(true,
+                            new BigDecimal(((double) upLoadImageValueBean
+                                    .getTempCompleteList().size() / (double) imagePathList.size()) * 100)
+                                    .setScale(0, BigDecimal.ROUND_HALF_UP).intValue(), index, path);
+                } else {
+                    upLaodUtilsListener.upLoadStateListener(false, 0, index, result);
+                }
+            }
+        }, null);
+    }
+}

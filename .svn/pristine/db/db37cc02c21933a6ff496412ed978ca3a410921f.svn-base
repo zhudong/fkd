@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:longer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:layout_width="match_parent"
+        android:id="@+id/title_in_filling_order"
+        android:layout_height="wrap_content"
+        longer:text="@string/string_for_my_balance_title_02"/>
+
+    <FrameLayout
+        android:id="@+id/fl_in_filling_order_query"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</LinearLayout>

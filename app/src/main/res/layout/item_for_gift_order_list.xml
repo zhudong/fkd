@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_in_item_for_gift_card_order_list_number"
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_in_item_for_gift_card_order_list_time"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="7dp"
+            android:text="订单编号"/>
+
+        <TextView
+            android:id="@+id/tv_in_item_for_gift_card_order_list_time"
+            style="@style/system_Mytextsize_GRAY_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:text="订单日期"/>
+
+        <TextView
+            android:id="@+id/tv_in_item_for_gift_card_order_list_total"
+            style="@style/system_Mytextsize_GRAY_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_in_item_for_gift_card_order_list_time"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:text="订单总额"/>
+
+        <TextView
+            android:id="@+id/tv_in_item_for_gift_card_order_list_status"
+            style="@style/system_Mytextsize_GRAY_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/iv_in_item_for_gift_card_order_list_go"
+            android:text="待付款"/>
+
+        <ImageView
+            android:id="@+id/iv_in_item_for_gift_card_order_list_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:src="@mipmap/arrow_right_for_uid"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_in_item_for_gift_card_order_list_line"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/default_bg"/>
+
+</LinearLayout>

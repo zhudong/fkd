@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhudong="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_03"
+    android:orientation="vertical">
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/card_payment_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zhudong:text=""
+        />
+
+    <!--<LinearLayout
+        android:id="@+id/card_order_payment_alipay_layout"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/alipay"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_weight="1"
+                android:text="@string/String_ali_pay"/>
+            <ImageView
+                android:id="@+id/card_order_payment_alipay_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@mipmap/select_icon"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/card_order_payment_wechat_layout"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/wechat"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_gray"
+            android:layout_weight="1"
+            android:text="@string/String_wechat_pay"/>
+        <ImageView
+            android:id="@+id/card_order_payment_wechat_iv"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@mipmap/unselect_icon"/>
+    </LinearLayout>-->
+
+    <ListView
+        android:id="@+id/card_order_payment_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+    <Button
+        android:id="@+id/card_order_payment_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/confirm"
+        android:textColor="@color/white" />
+</LinearLayout>

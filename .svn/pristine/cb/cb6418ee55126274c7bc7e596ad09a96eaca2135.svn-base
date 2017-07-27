@@ -1,0 +1,48 @@
+package fksproto;
+
+/*
+* protocol format
+*
+* dwLength(4bytes) + wVersion(2bytes) + wPBHeadLen(2bytes) + PB(CSPDUPBHead) + PB(Request)
+*
+*/
+enum CSPDUEncryptMethod
+{
+    ENCRYPT_METHOD_NONE = 0; //不加密
+    ENCRYPT_METHOD_AES  = 1; //AES对称加密
+    ENCRYPT_METHOD_RSA  = 2; //RSA非对称加密
+}
+
+enum CSPDUCompressMethod
+{
+    COMPRESS_METHOD_NONE = 0; //不压缩
+    COMPRESS_METHOD_GZIP = 1; //gzip压缩
+}
+
+enum CSPDUAuthType
+{
+    AUTH_TYPE_NONE   = 0;
+    AUTH_TYPE_SSO    = 1; //sso
+    AUTH_TYPE_WXAUTH = 2; //wxauth
+    AUTH_TYPE_QQAUTH = 3; //qqauth
+}
+
+message CSPDUPBHeadBase
+{
+	required int32 msgid = 1;
+	required int32 encrypt_method  = 2;//please look at enum CSPDUEncryptMethod
+	required int32 compress_method = 3;//please look at enum CSPDUCompressMethod
+	optional int32 result = 4;
+}
+
+message CSPDUPBHeadExt
+{
+	required int32  uin    = 1;
+	required string ticket = 2;
+}
+
+message CSPDUPBHead
+{
+	required CSPDUPBHeadBase base = 1;
+	optional CSPDUPBHeadExt  ext  = 2;
+}

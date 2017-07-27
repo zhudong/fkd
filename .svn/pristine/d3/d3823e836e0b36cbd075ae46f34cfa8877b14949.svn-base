@@ -1,0 +1,101 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.fuexpress.kr.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Longer on 2016/10/28.
+ */
+public class AdapterForNormal extends BaseAdapter {
+    private Context mContext;
+    private ViewHolder mViewHolder;
+    private List<ViewHolder> mViewHolderList;
+    private int mOldListSize = 0;
+    private boolean mIsClickAni = false;
+
+    public AdapterForNormal(Context context) {
+        mContext = context;
+    }
+
+    @Override
+    public int getCount() {
+        return 7;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (mViewHolderList == null) {
+            mViewHolderList = new ArrayList<>();
+        }
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.item_for_normal_layout, null);
+            viewHolder.iv_in_item_delete = (ImageView) convertView.findViewById(R.id.iv_in_item_delete);
+            viewHolder.ll_in_normal_item = (LinearLayout) convertView.findViewById(R.id.ll_in_normal_item);
+            convertView.setTag(viewHolder);
+            mViewHolderList.add(viewHolder);
+            if (mIsClickAni) {
+                doDeletAnimationPlus(viewHolder, 1);
+            }
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        return convertView;
+    }
+
+
+    public void doDeletAnimation(boolean open) {
+        mIsClickAni = true;
+        for (ViewHolder viewHolder : mViewHolderList) {
+            doDeletAnimationPlus(viewHolder, 500);
+        }
+
+
+    }
+
+    private void doDeletAnimationPlus(ViewHolder viewHolder, long time) {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(viewHolder.ll_in_normal_item, View.TRANSLATION_X, 0, -50);
+        objectAnimator.setDuration(time);
+        objectAnimator.start();
+
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(viewHolder.iv_in_item_delete, "rotation", 0f, 180f);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(viewHolder.iv_in_item_delete, "alpha", 0f, 1f);
+        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(viewHolder.iv_in_item_delete, View.SCALE_X, 0, 1);
+        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(viewHolder.iv_in_item_delete, View.SCALE_Y, 0, 1);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(objectAnimator1, objectAnimator2, rotation);
+        animatorSet.setDuration(time);
+        viewHolder.iv_in_item_delete.setVisibility(View.VISIBLE);
+        animatorSet.start();
+    }
+
+    class ViewHolder {
+        LinearLayout ll_in_normal_item;
+        ImageView iv_in_item_delete;
+        boolean isDoAnimation = false;
+
+    }
+}

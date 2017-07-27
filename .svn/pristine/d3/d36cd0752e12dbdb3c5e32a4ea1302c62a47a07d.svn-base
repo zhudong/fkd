@@ -1,0 +1,143 @@
+package com.fuexpress.kr.model;
+
+import android.content.Context;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
+
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.CartCommodityBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.utils.LogUtils;
+
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsCart;
+
+
+
+public class ShopCartManager {
+    private static final String TAG = "ShopCartManager";
+    private static Context mCtx;
+    private static int cartCount;
+//    private static SweetAlertDialog dialog;
+
+    private static ShopCartManager instance = new ShopCartManager();
+    private static SysApplication mApp;
+    public int mShopCartCount = 0;
+
+    private ShopCartManager() {
+
+    }
+
+    public static ShopCartManager getInstance(Context context, SysApplication app) {
+        mCtx = context;
+        mCtx.getMainLooper();
+        cartCount = 0;
+        mApp = app;
+//        dialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+//        dialog.getProgressHelper().setBarColor(Color.WHITE);
+//        dialog.setCancelable(false);
+        return instance;
+    }
+
+    public void addToShopCart(final CartCommodityBean cartCommodityBean) {
+//        dialog.show();
+        CsCart.AppendSalesCartRequest.Builder builder = CsCart.AppendSalesCartRequest.newBuilder();
+        if (cartCommodityBean != null) {
+            builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+            builder.setItemId(cartCommodityBean.getItemID());
+            builder.setQty(cartCommodityBean.getQty());
+            builder.setNote(cartCommodityBean.getNote());
+            builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+            builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+            List<CsBase.PairIntInt> extendAttrs = cartCommodityBean.getExtendAttrs();
+            for (CsBase.PairIntInt pairIntInt : extendAttrs) {
+                builder.addAttrs(pairIntInt);
+            }
+        }
+        NetEngine.postRequest(builder, new INetEngineListener<CsCart.AppendSalesCartResponse>() {
+            @Override
+            public void onSuccess(CsCart.AppendSalesCartResponse response) {
+                Looper.prepare();
+                //                mCtx.runOnUiThread(new Runnable() {
+                //                    @Override
+                //                    public void run() {
+                //                        dialog.setTitleText("添加购物车成功");
+                //                    }
+                //                });
+                //    LogUtils.d(response.toString());
+
+                Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_success_msg), Toast.LENGTH_SHORT).show();
+                int count = mApp.getQtyCount();
+                Log.d(TAG, "------------------------ShopCartManager count: " + count);
+                sendCartQty(cartCommodityBean.getQty() + count);
+                try {
+                    Thread.sleep(500);
+//                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Looper.loop();
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Looper.prepare();
+//                dialog.setTitle("添加购物车失败");
+                try {
+                    Thread.sleep(500);
+//                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (ret == Constants.CODE_ADD_TO_CART_ERROR) {
+                    Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_error_msg) + ret, Toast.LENGTH_SHORT).show();
+
+                }
+                Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_failed_msg) + ret, Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        });
+    }
+
+    public void getSaleCartCount() {
+
+        CsCart.GetSalesCartListRequest.Builder builder = CsCart.GetSalesCartListRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsCart.GetSalesCartListResponse>() {
+
+            @Override
+            public void onSuccess(CsCart.GetSalesCartListResponse response) {
+                //    LogUtils.d(TAG, "response: " + response.toString());
+                List<CsCart.SalesCartItem> list = response.getItemsList();
+                int count = 0;
+                for (int i = 0; i < list.size(); i++) {
+                    count += list.get(i).getQty();
+                }
+                sendCartQty(count);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.d(TAG, "ErrorMsg: " + errMsg);
+            }
+        });
+    }
+
+    public void sendCartQty(int count) {
+        mShopCartCount = count;
+        EventBus.getDefault().post(new BusEvent(BusEvent.SHOP_CART_COMMODITY_COUNT, count));
+    }
+
+}

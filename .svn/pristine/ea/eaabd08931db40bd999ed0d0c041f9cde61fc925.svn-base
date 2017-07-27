@@ -1,0 +1,24 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+
+// 帮我寄单个操作请求
+message CheckToPayRequest
+{
+    required BaseRequest head                       = 1;
+    required string   parcelid                      = 2;//
+    required string   paymentcode                   = 3;//支付方式
+    required BaseUserRequest  baseuser              = 4;//用户id
+    optional int32    shippingmethodid              = 5;//物流方式id
+    required int32    shippingcouponcustomerid      = 6;//该用户的优惠券ID
+
+}
+
+//帮我寄单个操作应答
+message CheckToPayResponse
+{
+    required BaseResponse    head               = 1;
+    optional string          redirecturl        = 2;//url地址
+}

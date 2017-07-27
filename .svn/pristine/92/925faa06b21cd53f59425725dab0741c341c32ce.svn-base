@@ -1,0 +1,39 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.app.Activity;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.fuexpress.kr.base.SimpleBaseAdapter;
+import com.fuexpress.kr.bean.ParcelItemBean;
+import com.fuexpress.kr.ui.view.ParceOrderItemView;
+import com.fuexpress.kr.ui.view.ParcelItemView;
+
+import java.util.List;
+
+
+/**
+ * Created by yuan on 2016-6-15.
+ */
+public class ParcelItemOrderAdapter extends SimpleBaseAdapter<ParcelItemBean> {
+
+    public ParcelItemOrderAdapter(Activity content, List<ParcelItemBean> data) {
+        super(content, data);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+      /*  convertView = View.inflate(mContent, R.layout.item_parcel_item, null);
+        TextView title = (TextView) convertView.findViewById(R.id.tv_parcle_tiel);
+        ImageView icon = (ImageView) convertView.findViewById(R.id.iv_parcel_icon);
+        icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        TextView count = (TextView) convertView.findViewById(R.id.tv_parcle_items);*/
+        if (convertView == null) {
+            convertView = new ParceOrderItemView(mContent);
+        }
+        ParcelItemBean item = getItem(position);
+        ParceOrderItemView parcelItemView = (ParceOrderItemView) convertView;
+        parcelItemView.initData(item);
+        return convertView;
+    }
+}

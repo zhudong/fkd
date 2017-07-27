@@ -1,0 +1,317 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+enum GIFT_CARD_STORESITE_ID
+{
+	GIFT_CARD_STORESITE_DDM 	= 1;
+	GIFT_CARD_STORESITE_SEOURL	= 2;
+}
+
+
+enum GIFT_CARD_ORDER_TYPE
+{
+	GIFT_CARD_ORDER_COMMON = 1;  //一般的充值卡类型
+	GIFT_CARD_ORDER_DIRECT = 2;  //直充值卡类型
+}
+
+enum GIFT_CARD_ORDER_STATUS
+{
+	GIFT_CARD_ORDER_ALL     = 0;  //充值卡订单-全部
+	GIFT_CARD_ORDER_PENDING = 1;  //充值卡订单-待付款
+	GIFT_CARD_ORDER_PAYED   = 2;  //充值卡订单-已支付
+	GIFT_CARD_ORDER_CANCELED= 3;  //充值卡订单-已取消
+}
+
+
+
+//充值卡订单信息 
+message GiftCardOrderItem
+{
+	required int64  gift_card_order_id    = 1;    //充值卡订单id         48178 
+	required string gift_card_order_no    = 2;    //充值卡订单no         "132016032609082048178"
+	required string gift_card_create_time = 3;    //充值卡订单创建时间   "2016-03-26"
+	required float  total                 = 4;    //充值卡订单total
+	required int32  status                = 5;    //充值卡订单状态       1:"pending", 2:"payed", 3:"canceled"
+	required string status_msg            = 6;    //充值卡订单状态提示   "待支付"   "已支付" "已取消"
+	optional int32  order_type            = 7;    //充值类型(1:非直充 2:直充(包裹通知) 3:直充(拆分包裹) 4:直充(需求单))
+	optional string payment_code          = 8;    //支付方式  alipay-支付宝，netpay-银联支付，tenpay-微信支付,fastpay-快钱支付
+	optional float  payment_amount        = 9;    //需要支付金额
+	optional float  account_pay           = 10;   //账户余额支付
+	optional float  need_pay              = 11;   //还需支付        //end add by jaingh 20160517
+	optional string currencycode          = 12;   //币种
+	optional string currencysign          = 13;   //货币符号
+	optional float  discountamounttotal   = 14;
+}
+
+message ParcelListData
+{
+    optional int64  parcel_id             = 1;   //包裹id          //add by jiangh 20160517 处理直充订单详情中的 订单类型
+	optional string parcel_name           = 2;   //包裹名称,如果是拆分包裹或者发货通知直充单，则显示包裹名称
+	optional float  estimate_shipping_fee = 3;   //预估运费
+	optional float  split_fee             = 4;   //拆包服务费
+	optional float  dicountamount         = 5;   //包裹运费折扣
+}
+
+//充值卡信息
+message GiftCardInfoItem
+{
+	optional string   recipiment_email = 1; //充值卡收件人邮箱
+	required float    face_amount      = 2; //面值
+	required float    amount           = 3; //价格
+	required int32    qty              = 4; //数量
+	optional string   recipient_name   = 5; //充值卡收件人姓名
+	optional string   email_template   = 6; //充值卡图片模板路径
+	optional string   message          = 7; //留言
+}
+
+
+
+//获得充值卡订单列表
+message GetGiftCardOrderListRequest
+{
+	required BaseRequest     head             = 1;
+	optional BaseUserRequest user_head        = 2;
+	required int32           order_type       = 3;  // 1:一般的充值卡类型;    2:直充值卡类型
+	required int32           status_type      = 4;  // 0:充值卡订单-全部;  1: 充值卡订单-待付款; 2: 充值卡订单-已支付;  3: 充值卡订单-已取消
+	required int32		 pageno           = 5;  // 页码编号
+	optional string          currencycode     = 6;
+	optional string          localecode       = 7;
+}
+
+message GetGiftCardOrderListReponse
+{
+	required BaseResponse      head              = 1;
+	optional bool 		   more 	     = 2; //是否有下一页
+	optional int32             pending_order_num = 3; //代付款订单数量
+	repeated GiftCardOrderItem giftcarditems     = 4; //充值卡订单信息
+}
+
+
+
+//获得充值卡订单详情
+message GetGiftCardOrderDetailRequest
+{
+	required BaseRequest     head                   = 1;
+	optional BaseUserRequest user_head              = 2;
+	required int32           gift_card_order_id     = 3;  //充值卡订单id
+	optional string          currencycode           = 4;
+	optional string          localecode             = 5;
+}
+
+message GetGiftCardOrderDetialResponse
+{
+	required BaseResponse       head                 = 1;
+	optional GiftCardOrderItem  gift_card_order_base = 2; //订单基本信息
+	repeated GiftCardInfoItem   gift_card_item       = 3; //订单中充值卡列表
+	optional string             currencycode         = 4;//币种
+
+}
+
+//账户直充订单详情
+message GetRechargeOrderDetailRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	required int32           gift_card_order_id = 3;  //充值卡订单id
+	optional string          localecode         = 4;
+}
+
+message GetRechargeOrderDetialResponse
+{
+	required BaseResponse      head            = 1;
+	optional GiftCardOrderItem gift_card_order = 2; //直充订单基本信息
+	repeated ParcelListData    parcellistdata  = 3;
+}
+
+
+
+//取消充值卡订单
+message CancelGiftCardOrderRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	required int32           gift_card_order_id = 3;  //充值卡订单id
+}
+
+message CancelGiftCardOrderResponse
+{
+	required BaseResponse    head   = 1;
+}
+
+
+//数据格式
+
+message GiftItem
+{
+
+	optional int32       amount                  = 1;  //面值
+	optional string      emailTemplate           = 2;  //email 模板
+	optional int32       faceAmount              = 3;  //礼品卡面值
+	optional int64       giftCardCartId          = 4;  //礼品卡id
+	optional int64       giftCardCartItemId      = 5;  //礼品卡单品id
+	optional string      message                 = 6;  //消息内容
+	optional int64       qty                     = 7;  //数量
+	optional string      recallerName            = 8 ; //发件人姓名
+	optional string      recipientEmail          = 9;  //收件人email
+	optional string      recipientName           = 10; // 收件人名字
+	optional string      checked                 = 11; //是否选中
+}
+
+message GiftCardCart
+{
+	optional string      baseCurrency                 = 1;//基础货币
+	optional int32       baseToOrderRate              = 2;   //汇率
+	optional string      createTime                   = 3;   //充值卡订单编号
+	optional int64       customerId                   = 4;    //用户id
+	optional string      customerIsGuest              = 5;   //登录状态
+	optional int64       giftCardCartId               = 6;   //礼品卡id
+	optional string      giftCardCode                 = 7;   //
+	optional string      giftCardOrderId              = 8 ;  //礼品卡订单id
+	optional int64       grandTotal                   = 9;   //总计金额
+	optional string      paymentMethod                = 10;  //支付方式
+	optional string      shoppingGiftCardOrderAddress = 11 ; //商品礼品卡订单地址
+	optional int32       status                       = 12;   //状态
+	optional int32       subtotal                     = 13 ;  //
+	optional int64       totalNum                     = 14 ;//
+	optional string      updateTime                   = 15;//
+	optional  string     orderCurrency                = 16; //支付货币
+	repeated GiftItem    giftitem                     = 17 ; //礼品单品
+}
+
+
+
+
+//*************** 充值卡购物车结算 ****************
+//数据结构
+message GiftItemplay
+{
+	optional int32       amount                  = 1;  //面值
+	optional string      emailTemplate           = 2;  //email 模板
+	optional int32       faceAmount              = 3;  //礼品卡面值
+	optional string      message                 = 4;  //消息内容
+	optional int32       qty                     = 5;  //数量
+	optional string      recipientEmail          = 6;  //收件人email
+	optional string      recipientName           = 7; // 收件人名字
+}
+
+message GiftCardCartplay
+{
+	optional int32         grandTotal                = 1;   //总计金额
+	repeated GiftItemplay  giftitemplay              = 2; //礼品单品
+}
+
+
+
+//充值卡模板信息
+message GiftCardTemplateList
+{
+	required int64  gift_card_template_id    = 1;    //充值卡模板id         17
+	required string email_template           = 2;    //电子邮箱模板   "http://dimage.yissimg.com/stage/giftTemplate/17.jpg!small9"
+	required string label                    = 3;    //充值卡标签   "中文"
+}
+
+//绑定充值卡请求
+message BindGiftCardRequest
+{
+	required BaseRequest head                    = 1;
+	optional BaseUserRequest user_head           = 2;
+	required string      gift_card               = 3;
+}
+
+//绑定充值卡应答
+message BindGiftCardResponse
+{
+	required BaseResponse head = 1;
+}
+
+
+
+//充值卡账户明细
+message GiftCardBalanceList
+{
+	optional string  time  =  1;//160413
+	optional string  desc  =  2; //订单付款(8320160413130042330288)
+	optional string  price =  3;//-￥966"
+}
+
+
+message GiftCardBalanceListRequest
+{
+	required BaseRequest     head                = 1;
+	optional BaseUserRequest user_head           = 2;
+	optional string          localecode          = 3;//语种
+	optional string          currencycode        = 4;//币种
+	optional int32           currencyid          = 5;
+	optional int32           page                = 6;
+}
+
+message GiftCardBalanceListReponse
+{
+	required BaseResponse             head                   = 1;
+	optional float                    giftcardaccount        = 2;   //3947.92
+	optional float                    frozenamount           = 3;//冻结金额
+	optional int32                    list_num               = 4;//充值卡账户明细数量
+	optional string                   status                 = 5;
+	repeated GiftCardBalanceList      list                   = 6;//充值卡账户明细
+}
+
+//检查支付请求 单个需求单操作钱够直接扣款，钱不够调用直充url
+message GetCheckToPayInApprequireRequest
+{
+	required BaseRequest     head               = 1;
+	optional int32               uin                 = 2;               //用户id
+	optional int32               salesrequireld                 = 3;//销售id
+	optional string              paymentcode                 = 4;//支付方式
+	optional string              currencycode                 = 5;//币种
+}
+//检查支付  单个需求单操作钱够直接扣款，钱不够调用直充url
+message GetCheckToPayInApprequireResponse
+{
+	required BaseResponse     head               = 1;
+	optional string           redirecturl               =2;
+}
+
+//获取充值卡的购买来源
+message GetGiftCardStoresiteRequest
+{
+	required BaseRequest 	head 		= 1;
+	required string 		gift_card	= 2;
+	optional string       localecode    = 3;
+
+}
+
+message GetGiftCardStoresiteResponse
+{
+	required BaseResponse head 			= 1;
+	optional int32 		  storesite_id 	= 2;
+    optional string       currencycode  = 3;
+}
+
+
+message CountryAndRegionInfo
+{
+	optional string      strCountryAndRegion        = 1;
+}
+
+//获取更新的国家和地区数据请求
+message GetUpdateCountryAndRegionRequest
+{
+	required BaseRequest          head              = 1;
+	required BaseUserRequest      userinfo          = 2;
+	optional string       		  time              = 3;
+}
+
+//获取更新的国家和地区数据应答
+message GetUpdateCountryAndRegionResponse
+{
+	required BaseResponse         head       		= 1;
+	repeated CountryAndRegionInfo countryAndRegion  = 2;
+	optional string               updateTime 		= 3;
+}
+
+
+
+
+

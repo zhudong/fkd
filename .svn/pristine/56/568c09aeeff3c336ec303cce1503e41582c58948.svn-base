@@ -1,0 +1,244 @@
+package com.fuexpress.kr.model;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.socks.library.KLog;
+
+import de.greenrobot.event.EventBus;
+import staffproto.CsMy;
+
+/**
+ * Created by Longer on 2016/11/3.
+ */
+public class UserInfoManager {
+
+    private static UserInfoManager sUserInfoManager = new UserInfoManager();
+
+    public String mIconurl;
+    public String mNickname;
+    public String mMerchantname;
+    public String mAddress1;
+    public String mAddress2;
+    public String mPostcode;
+    public String mTelephone;
+    public String mWebsite;
+    public String mIntro;
+    public String mDirectorycountrycode;
+    public String mDirectorycountryname;
+    public boolean isNeedBindPhone = false;
+    public String mProvinceandcity;
+    public String mFinalAddredd;
+    public String mTrueLocationString;
+
+    private UserInfoManager() {
+
+    }
+
+    public static UserInfoManager getInstance() {
+        return sUserInfoManager;
+    }
+
+
+    /**
+     * 上传头像
+     *
+     * @param headIconUrl 头像的url
+     */
+    public void changeUserIconRequest(final String headIconUrl) {
+        CsMy.SaveMyCustomerIconRequest.Builder builder = CsMy.SaveMyCustomerIconRequest.newBuilder();
+        //builder.setBaseuserinfo(AccountManager.getInstance().mBaseUserRequest);
+        builder.setIconUrl(headIconUrl);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.SaveMyCustomerIconResponse>() {
+            @Override
+            public void onSuccess(CsMy.SaveMyCustomerIconResponse response) {
+                //LogUtils.e("我是上传头像,我成功了,这是头像的地址:" + headIconUrl);
+                AccountManager.getInstance().avater = "";
+                EventBus.getDefault().post(new BusEvent(BusEvent.HEAD_ICON_UPLOADE_COMPLETE, true, headIconUrl));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("失败!:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.HEAD_ICON_UPLOADE_COMPLETE, false));
+            }
+        });
+    }
+
+
+    /**
+     * 获得用户头像
+     */
+    public void getUserIconRequest() {
+        CsMy.MyCustomerIconRequest.Builder builder = CsMy.MyCustomerIconRequest.newBuilder();
+        //builder.setBaseuserinfo(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.MyCustomerIconResponse>() {
+            @Override
+            public void onSuccess(CsMy.MyCustomerIconResponse response) {
+                isNeedBindPhone = (response.getIsbind()).equals("0");//为1已经绑定,为0需要绑定
+                mIconurl = response.getIconurl() + Constants.ImgUrlSuffix.small_9;
+                AccountManager.getInstance().avater = response.getIconurl() + Constants.ImgUrlSuffix.small_9;
+                KLog.i(response.toString());
+                //LogUtils.e("我是请求头像的方法,我成功了!" + mIconurl);
+                EventBus.getDefault().post(new BusEvent(BusEvent.HEAD_ICON_GET_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("失败!:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.HEAD_ICON_GET_COMPLETE, false));
+            }
+        });
+    }
+
+    /*public void getUserDetailInfoRequest() {
+        *//*optional string                  nickname                    = 2;   //尼克名
+        optional string                  merchantname                = 3;//
+        optional string                  address1                    = 4;
+        optional string                  address2                    = 5;
+        optional string                  postcode                    = 6;//邮编
+        optional string                  telephone                   = 7;
+        optional string                  website                     = 8;
+        optional string                  intro                       = 9;
+        optional int32                   directorycountryregionid    = 10;//目录的国家地区id
+        optional string                  directorycountrycode        = 11;//目录的国家码
+        optional int32                   mid                         = 12;*//*
+
+        CsMyOrder.MerchantFormRequest.Builder builder = CsMyOrder.MerchantFormRequest.newBuilder();
+
+        builder.setSecond(AccountManager.getInstance().mBaseUserRequest);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsMyOrder.MerchantFormReponse>() {
+
+
+            @Override
+            public void onSuccess(CsMyOrder.MerchantFormReponse response) {
+                //LogUtils.e("我是请求商户的详细信息的方法,我成功了:" + response.toString());
+                mNickname = response.getNickname();
+                mMerchantname = response.getMerchantname();
+                mAddress1 = response.getAddress1();
+                mAddress2 = response.getAddress2();
+                mFinalAddredd = mAddress1 + mAddress2;
+                mPostcode = response.getPostcode();
+                mTelephone = response.getTelephone();
+                mWebsite = response.getWebsite();
+                mIntro = response.getIntro();
+                mProvinceandcity = response.getProvinceandcity();
+                mDirectorycountrycode = response.getDirectorycountrycode();
+                mDirectorycountryname = response.getDirectorycountryname();
+                mTrueLocationString = AssetFileManager.getInstance().readFilePlus(response.getDirectorycountryregioncode(), AssetFileManager.EDIT_ADDRESS_TYPE);
+                *//*if (!"CN".equals(mDirectorycountrycode)) {
+                    mProvinceandcity = mDirectorycountryname + " " + mProvinceandcity;
+                }*//*
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_DETAIL_INFO_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                //LogUtils.e("失败!:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_USER_DETAIL_INFO_COMPLETE, false));
+            }
+        });
+    }*/
+
+
+    /*public void saveUserInfoRequest(ArrayMap<Integer, String> paramMap) {
+        *//*optional string                  nickname                    = 3;   //尼克名
+        optional string                  merchantname                = 4;//
+        optional string                  address1                    = 5;
+        optional string                  address2                    = 6;
+        optional string                  regionid1                   = 7;
+        optional string                  regionid2                   = 8;
+        optional string                  postcode                    = 9;//邮编
+        optional string                  telephone                   = 10;
+        optional string                  website                     = 11;
+        optional string                  intro                       = 12;
+        optional string                  longitude                   = 13;//经度
+        optional string                  latitude                    = 14;//纬度*//*
+        CsMyOrder.SaveMerchantRequest.Builder builder = CsMyOrder.SaveMerchantRequest.newBuilder();
+        builder.setSecond(AccountManager.getInstance().mBaseUserRequest);
+        for (Integer key : paramMap.keySet()) {
+            switch (key) {
+                case 3:
+                    builder.setNickname(paramMap.get(key));
+                    break;
+                case 4:
+                    builder.setMerchantname(paramMap.get(key));
+                    break;
+                case 5:
+                    builder.setAddress1(paramMap.get(key));
+                    break;
+                case 6:
+                    builder.setAddress2(paramMap.get(key));
+                    break;
+                case 7:
+                    builder.setRegionid1(paramMap.get(key));
+                    break;
+                case 8:
+                    builder.setRegionid2(paramMap.get(key));
+                    break;
+                case 9:
+                    builder.setPostcode(paramMap.get(key));
+                    break;
+                case 10:
+                    builder.setTelephone(paramMap.get(key));
+                    break;
+                case 11:
+                    builder.setWebsite(paramMap.get(key));
+                    break;
+                case 12:
+                    builder.setIntro(paramMap.get(key));
+                    break;
+                case 13:
+                    builder.setLongitude(paramMap.get(key));
+                    break;
+                case 14:
+                    builder.setLatitude(paramMap.get(key));
+                    break;
+            }
+        }
+
+        LogUtils.e("这是设定好的build值:" + builder.toString());
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsMyOrder.SaveMerchantReponse>() {
+
+            @Override
+            public void onSuccess(CsMyOrder.SaveMerchantReponse response) {
+                //LogUtils.e("我是设置用户字段的方法,我成功了");
+                EventBus.getDefault().post(new BusEvent(BusEvent.SAVE_USER_DETAIL_INFO_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("我是设置用户字段的方法,我失败了" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.SAVE_USER_DETAIL_INFO_COMPLETE, false));
+            }
+        });
+    }*/
+
+
+    /*public void changUserPassWordRequest(String oldPassWord, String newPassWord, String newPassWordAgain) {
+        CsMy.SaveMyCustomerPswRequest.Builder builder = CsMy.SaveMyCustomerPswRequest.newBuilder();
+
+        builder.setBaseuserinfo(AccountManager.getInstance().mBaseUserRequest);
+        builder.setOldPsw(oldPassWord);
+        builder.setNewPsw(newPassWord);
+        builder.setConfirmPsw(newPassWordAgain);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsMy.SaveMyCustomerPswResponse>() {
+
+            @Override
+            public void onSuccess(CsMy.SaveMyCustomerPswResponse response) {
+                LogUtils.e("我是设置用户密码的方法,我成功了!");
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_PASS_WORD_COMPLETE, true));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("我是设置用户密码的方法,我失败了:" + ret + " " + errMsg);
+                EventBus.getDefault().post(new BusEvent(BusEvent.CHANGE_PASS_WORD_COMPLETE, false));
+            }
+        });
+    }*/
+}

@@ -1,0 +1,241 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.activity.ChooseCityActivity;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpMeSingleBean;
+import com.fuexpress.kr.ui.adapter.AdapterForHsSmall;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/20.
+ * 帮我收货列表预览界面的Fragment
+ */
+public class HSPreviewFragment extends BaseFragment<HelpMeSignedActivity> implements HelpSignedContract.HSPreView, AdapterView.OnItemClickListener {
+
+    @BindView(R.id.tl_in_help_get_package)
+    TitleBarView mTlInHelpGetPackage;
+    @BindView(R.id.btn_add_demand)
+    Button mBtnAddDemand;
+    @BindView(R.id.lv_hs_preview)
+    ListView mLvHsPreview;
+    @BindView(R.id.tv_total)
+    TextView mTvTotal;
+    @BindView(R.id.tv_demand_submit)
+    TextView mTvDemandSubmit;
+    private View mRootView;
+
+    private HelpSignedContract.PreViewPresenter mPresenter;
+
+    private AdapterForHsSmall mAdapterForHsSmall;
+
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.hs_preview_fg_layout, null);
+        boolean isShowTips = (boolean) SPUtils.get(mContext, Constants.KEY_IS_SHOW_HS_MASK, true);
+        //isShowTips = true;
+        if (isShowTips) {
+            final FrameLayout decorView = (FrameLayout) mContext.getWindow().getDecorView();
+            final View tipsView = View.inflate(mContext, R.layout.hs_tips_mask, null);
+            decorView.addView(tipsView);
+            initTip(tipsView);
+            tipsView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decorView.removeView(tipsView);
+                    SPUtils.put(mContext, Constants.KEY_IS_SHOW_HM_MASK, false);
+                }
+            });
+        }
+        return mRootView;
+    }
+
+    private void initTip(View tipsView) {
+        TextView child1 = (TextView) tipsView.findViewById(R.id.child_1);
+        TextView child2 = (TextView) tipsView.findViewById(R.id.child_2);
+        TextView child3 = (TextView) tipsView.findViewById(R.id.child_3);
+        String string = SPUtils.getString(getContext(), ChooseCityActivity.F_RECENT_CITY, "");
+        if (string.contains("Seoul")) {
+            child1.setText(getString(R.string.string_hs_text_01_default));
+            child2.setText(getString(R.string.string_hs_text_02_default));
+            child3.setText(getString(R.string.string_hs_text_03_default));
+        } else {
+            child1.setText(getString(R.string.string_hs_text_01));
+            child2.setText(getString(R.string.string_hs_text_02));
+            child3.setText(getString(R.string.string_hs_text_03));
+        }
+    }
+
+    @Override
+    public void initData() {
+        mTlInHelpGetPackage.getIv_in_title_back().setOnClickListener(this);
+        TextView title_back_tv = mTlInHelpGetPackage.getmTv_in_title_back_tv();
+        title_back_tv.setText(getString(R.string.main_home_tab_string));
+        title_back_tv.setOnClickListener(this);
+        List<HelpMeSingleBean> helpMeBeanDataList = mPresenter.getHelpMeBeanDataList();
+        mAdapterForHsSmall = new AdapterForHsSmall(mContext, helpMeBeanDataList);
+        mLvHsPreview.setAdapter(mAdapterForHsSmall);
+        mLvHsPreview.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void refreshLiistViewShow() {
+        mContext.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mAdapterForHsSmall != null)
+                    mAdapterForHsSmall.notifyDataSetChanged();
+                List<HelpMeSingleBean> helpMeBeanDataList = mPresenter.getHelpMeBeanDataList();
+                int toal = 0;
+                for (HelpMeSingleBean helpMeSingleBean : helpMeBeanDataList) {
+                    toal += Integer.valueOf(helpMeSingleBean.getItemNum());
+                }
+                mTvTotal.setText(getString(R.string.hs_item_total, String.valueOf(toal)));
+                if (mPresenter.getHelpMeBeanDataList().size() == 0) {
+                    mTvDemandSubmit.setBackgroundColor(getResources().getColor(R.color.bg_dis_enable));
+                    mTvDemandSubmit.setTextColor(getResources().getColor(R.color.white_fefe));
+                    mTvDemandSubmit.setClickable(false);
+                } else {
+                    mTvDemandSubmit.setBackgroundColor(getResources().getColor(R.color.title_bar_black));
+                    mTvDemandSubmit.setTextColor(getResources().getColor(R.color.white));
+                    mTvDemandSubmit.setClickable(true);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshLiistViewShow();
+    }
+
+    @Override
+    public void showLoadingView(final int type, final int stringID) {
+        mContext.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mContext.showProgressDiaLog(type, getString(stringID));
+            }
+        });
+
+    }
+
+    @Override
+    public void showLoadingView(final int type, final String text) {
+        mContext.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mContext.showProgressDiaLog(type, text);
+            }
+        });
+    }
+
+
+    @Override
+    public void dissMissLoadingView(long delay) {
+        mContext.dissMissProgressDiaLog(delay);
+    }
+
+    @Override
+    public void transformationFragment(int position) {
+        mContext.changeDetailFragmentShow(position);
+    }
+
+    @Override
+    public void setIsCilckSub(boolean isCilckSub) {
+        mContext.setIsClickSub(isCilckSub);
+    }
+
+    @Override
+    public void changeSuccessView() {
+        mContext.changeDetailFragmentShow(-1);
+    }
+
+
+    @Override
+    public void setPresenter(@NonNull HelpSignedContract.PreViewPresenter presenter) {
+        mPresenter = checkNotNull(presenter, "Presenter is Not Null!");
+    }
+
+    @Override
+    public void onDestroy() {
+        //mPresenter.saveDataToLoacl();
+        super.onDestroy();
+    }
+
+    @OnClick({R.id.btn_add_demand, R.id.tv_demand_submit})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_add_demand:
+                if (mPresenter.isCanAddDemand())
+                    transformationFragment(mPresenter.getHelpMeBeanDataList().size());
+                else {
+                    // TODO: 2017/1/4 提示用户不能添加了
+                    /*showLoadingView(SweetAlertDialog.WARNING_TYPE, getString(R.string.demand_full_note));
+                    dissMissLoadingView(1000);*/
+                    CustomToast.makeText(mContext, getString(R.string.demand_full_note), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.tv_demand_submit:
+                //boolean isReady = mPresenter.checkItemParameter(mPresenter.getProductDataList());
+                //if (isReady)
+                //CustomToast.makeText(mContext, "上传操作开发中", Toast.LENGTH_SHORT).show();
+                mContext.setIsClickSub(true);//将是否点击上传状态设置好
+                //mPresenter.submitItemToServer(mPresenter.getProductDataList());
+                boolean isReady = mPresenter.checkBeanIsReady();
+                LogUtils.e("参数是否准备完成:" + isReady);
+                if (isReady) {
+                    List<CsParcel.ProductDataList> productDataLists = mPresenter.fillDataFromRepository();
+                    mPresenter.submitItemToServer(productDataLists);
+                }
+                break;
+            case R.id.tv_in_title_back_tv:
+            case R.id.iv_in_title_back:
+                mPresenter.saveDataToLoacl();
+                mContext.finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        transformationFragment(position);
+    }
+}

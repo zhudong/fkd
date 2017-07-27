@@ -1,0 +1,51 @@
+package com.fuexpress.kr.ui.activity.transport_address;
+
+import android.graphics.Color;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+public class TranSportAddressActivity extends BaseActivity {
+
+    private View mRootView;
+    private SlidingTabLayout mTab;
+    private ViewPager mPager;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_tran_sport, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+        TitleBarView title = (TitleBarView) mRootView.findViewById(R.id.title);
+        mTab = (SlidingTabLayout) mRootView.findViewById(R.id.tab);
+        mPager = (ViewPager) mRootView.findViewById(R.id.pager);
+
+        title.getIv_in_title_back().setOnClickListener(this);
+        TextView textView = title.getmTv_in_title_back_tv();
+        textView.setText(getString(R.string.main_me_tab_string));
+        textView.setOnClickListener(this);
+
+        mTab.setTabTitleTextSize(12);
+        mTab.setTitleTextColor(Color.BLACK, Color.GRAY);
+        mTab.setSelectedIndicatorColors(Color.alpha(0));
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+        }
+    }
+}

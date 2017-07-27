@@ -1,0 +1,55 @@
+package com.fuexpress.kr.bean;
+
+import java.util.List;
+
+/**
+ * Created by andy on 2016/12/7.
+ */
+public class ItemAppendBean {
+    List<String> imgs;
+    String info;
+    float price;
+    int num;
+
+    public List<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemAppendBean{" +
+                "imgs=" + imgs +
+                ", info='" + info + '\'' +
+                ", price=" + price +
+                ", num=" + num +
+                '}';
+    }
+}

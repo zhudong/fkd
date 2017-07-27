@@ -1,0 +1,20 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//add by jack.zuoquan
+message GetVersionInfoRequest
+{
+	required BaseRequest head          = 1;
+	optional int32       apptype       = 2;
+	optional string      localecode    = 3;//语种
+}
+
+message GetVersionInfoResponse
+{
+	required BaseResponse head      = 1;
+	optional string       version   = 2;//版本信息
+	optional string       downloadurl =3;//下载url
+	optional string       description =4;// 信息描述
+}

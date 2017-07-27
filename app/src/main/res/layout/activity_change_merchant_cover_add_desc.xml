@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/activity_title_bar"/>
+
+
+    <ImageView
+        android:id="@+id/iv_in_change_merchant_cover_add_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp">
+
+            <TextView
+                android:id="@+id/tv_in_user_info_title_01"
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/change_merchant_cover_add_desc_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/tv_in_user_info_title_01"
+                android:text="*"
+                android:textColor="@color/the_red"
+                />
+
+        </RelativeLayout>
+
+        <ai.zhaoban.ydk.ui.view.ClearEditText
+            android:id="@+id/ed_in_change_merchant_cover_desc"
+            style="@style/system_Mytextsize_GRAY_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:layout_marginRight="7dp"
+            android:background="@null"
+            android:hint="@string/change_merchant_cover_add_desc_ed_hinnt"
+            android:singleLine="true"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_in_merchant_change_cover_add_desc_save"
+        style="@style/system_Mytextsize_white_14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_btn_bg_red"
+        android:gravity="center"
+        android:padding="9dp"
+        android:text="保存"/>
+
+</LinearLayout>

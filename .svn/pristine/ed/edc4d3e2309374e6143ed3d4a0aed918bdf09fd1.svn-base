@@ -1,0 +1,153 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.AddressManager;
+import com.fuexpress.kr.model.AssetFileManager;
+import com.fuexpress.kr.ui.adapter.AddressManagerAdapter;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import fksproto.CsAddress;
+
+public class AddressSearchActivity extends BaseActivity implements RefreshListView.OnRefreshListener, AdapterView.OnItemClickListener {
+
+    private View mRootView;
+
+    public static final String KEY_SEARCH_KEY = "SEARCH_KEY";
+    public static final String KEY_IS_CHOOSE = "IS_CHOOSE";
+    private boolean mIsChooseType = false;
+    private RefreshListView mRfl_in_search_result;
+    private TextView mTv_in_search_result_item_head_query;
+    private TextView mTv_in_search_result_item_head_total;
+    private int mPageNum = 1;
+    private String mSearchKey = "";
+    private boolean mIsHaseMore = false;
+    private AddressManagerAdapter mAddressManagerAdapter;
+    public static final int AddressresultCode = 100;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_address_search, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+        TitleBarView titleBarView = (TitleBarView) mRootView.findViewById(R.id.title_in_search_result);
+        titleBarView.getIv_in_title_back().setOnClickListener(this);
+        TextView textView = titleBarView.getmTv_in_title_back_tv();
+        textView.setText(getString(R.string.address_manager));
+        textView.setOnClickListener(this);
+        mRfl_in_search_result = (RefreshListView) mRootView.findViewById(R.id.rfl_in_search_result);
+        mRfl_in_search_result.setOnRefreshListener(this);
+        mRfl_in_search_result.setOnItemClickListener(this);
+        mTv_in_search_result_item_head_query = (TextView) mRootView.findViewById(R.id.tv_in_search_result_item_head_query);
+        mTv_in_search_result_item_head_total = (TextView) mRootView.findViewById(R.id.tv_in_search_result_item_head_total);
+        initData();
+    }
+
+    private void initData() {
+        showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, null);
+        mSearchKey = getIntent().getStringExtra(KEY_SEARCH_KEY);
+        mIsChooseType = getIntent().getBooleanExtra(KEY_IS_CHOOSE, false);
+        mTv_in_search_result_item_head_query.setText(getString(R.string.search_result_head_title, mSearchKey));
+        mRfl_in_search_result.autoRefresh();
+        //AddressManager.getInstance().getCustomerAddressListRequest(mPageNum, mSearchKey);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+        mPageNum = 1;
+        AddressManager.getInstance().getCustomerAddressListRequest(mPageNum, mSearchKey);
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+        if (mIsHaseMore)
+            AddressManager.getInstance().getCustomerAddressListRequest(++mPageNum, mSearchKey);
+    }
+
+    public static final String topText1 = "topText";
+    public static final String addressText = "addressText";
+    public static final String addressId = "addressId";
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        CsAddress.CustomerAddress customerAddress = AddressManager.getInstance().mAddressesList.get(position - 1);
+        Intent intent = new Intent();
+        if (mIsChooseType) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("address", customerAddress);
+            intent.putExtras(bundle);
+            setResult(AddressresultCode, intent);
+            finish();
+        } else {
+            intent = new Intent(this, AddNewAddressActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("address", customerAddress);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_ADDRESS_LIST_COMPLETE:
+                mRfl_in_search_result.stopRefresh();
+                mRfl_in_search_result.stopLoadMore(true);
+                mIsHaseMore = event.getBooleanParam02();
+                mRfl_in_search_result.setHasLoadMore(mIsHaseMore);
+                if (event.getBooleanParam()) {
+                    mAddressManagerAdapter = new AddressManagerAdapter(this, AddressManager.getInstance().mAddressesList);
+                    mRfl_in_search_result.setAdapter(mAddressManagerAdapter);
+                    mTv_in_search_result_item_head_total.setText("(" + event.getIntValue() + ")");
+                } else {
+                    changeDiagLogAlertType(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail_02));
+                }
+                dissMissProgressDiaLog(600);
+                break;
+            case BusEvent.DELET_ADDRESS_REQUEST:
+                if (event.getBooleanParam()) {
+                    //AddressManager.getInstance().getCustomerAddressListRequest();
+                    initData();
+                } else {
+                    showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail_02));
+                    dissMissProgressDiaLog(500);
+                }
+                break;
+            case BusEvent.SET_ADDRESS_IS_DEFAULT_COMPETE:
+                //AddressManager.getInstance().getCustomerAddressListRequest();
+                if (this.getClass().getName().equals(event.getStrParam()))
+                    if (event.getBooleanParam()) {
+                        initData();
+                    } else {
+                        changeDiagLogAlertType(SweetAlertDialog.ERROR_TYPE, getString(R.string.home_page_dialog_request_fail_02));
+                        dissMissProgressDiaLog(500);
+                    }
+                break;
+        }
+    }
+}

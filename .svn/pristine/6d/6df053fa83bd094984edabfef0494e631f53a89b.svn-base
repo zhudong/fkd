@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_detail_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.fuexpress.kr.ui.view.ViewPagerFixed
+            android:id="@+id/vp_item_imgs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/fl_pointer_positon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dip"
+            android:layout_marginRight="8dp">
+
+            <LinearLayout
+                android:id="@+id/ll_vp_graypoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/v_guid_redpoint"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/redpoint"
+                android:visibility="gone" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,88 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSingedDataRepository;
+
+import android.support.annotation.NonNull;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 这个是具体实现合同类中的方法的实体类,在这里我们将对各种方法进行实现
+ */
+public class HelpSignedPresenter implements HelpSignedContract.Presenter {
+
+    @NonNull
+    private final HelpSingedDataRepository mHelpSingedDataRepository;//数据仓库对象,不可改且私有
+
+    @NonNull
+    private final HelpSignedContract.View mHelpSingedView;
+
+
+    public HelpSignedPresenter(@NonNull HelpSingedDataRepository helpSingedDataRepository, @NonNull HelpSignedContract.View helpSingedView) {
+        mHelpSingedDataRepository = checkNotNull(helpSingedDataRepository, "repository is not Null");
+        mHelpSingedView = helpSingedView;
+
+
+    }
+
+
+    @Override
+    public void addNewDeMand() {
+
+    }
+
+    @Override
+    public String transformPrice(String price) {
+        return null;
+    }
+
+    @Override
+    public void handleImageSelectorReturn(int index, List<String> list) {
+
+    }
+
+    @Override
+    public void enterItemDesc(int index, String itemDesc) {
+
+    }
+
+    @Override
+    public void enterItemRemarks(int index, String itemReMarks) {
+
+    }
+
+    @Override
+    public void enterItemWareHouse(int index, int wareHouseID) {
+
+    }
+
+    @Override
+    public void enterItemPrice(int index, String price) {
+
+    }
+
+    @Override
+    public void enterItemQuantity(int index, String itemQuantity) {
+
+    }
+
+    @Override
+    public void submitItemToServer(List<CsParcel.ProductDataList> productDataLists) {
+
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+
+    }
+}

@@ -1,0 +1,120 @@
+/*
+ * Copyright 2016 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.fuexpress.kr.ui.activity.product_detail;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.fuexpress.kr.R;
+
+
+/**
+ * A fragment that shows all Remixes for the current activity. It's very easy to use:
+ * <p/>
+ * <pre><code>
+ * class MyActivity extends FragmentActivity {
+ *   // ...
+ * <p/>
+ *   protected void onCreate(Bundle savedInstanceState) {
+ *     // ...
+ *     ButtomFragment remixerFragment = ButtomFragment.newInstance();
+ *     // Attach it to a button.
+ *     remixerFragment.attachToButton(this, button);
+ *     // Have remixer show up on 3 finger swipe up.
+ *     remixerFragment.attachToGesture(this, Direction.UP, 3);
+ *   }
+ * }
+ * </code></pre>
+ */
+public class ButtomFragment
+        extends MyBottomSheetDialogFragment {
+
+    public static final String REMIXER_TAG = "Remixer";
+
+
+    public static ButtomFragment newInstance() {
+        return new ButtomFragment();
+    }
+
+    private boolean isAddingFragment = false;
+    private final Object syncLock = new Object();
+
+
+    /**
+     * Attach this instance to {@code button}'s OnClick, so that clicking the button shows this
+     * fragment.
+     * <p/>
+     * <p><b>Notice this will replace the button's OnClickListener</b>
+     */
+    public void attachToButton(final FragmentActivity activity, View button) {
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                showRemixer(activity.getSupportFragmentManager(), REMIXER_TAG);
+            }
+        });
+    }
+
+    /**
+     * @param manager
+     * @param tag
+     * @return whether the fragment was shown or not.
+     */
+
+    public void showRemixer(FragmentManager manager, String tag) {
+        synchronized (syncLock) {
+            if (!isAddingFragment && !isAdded()) {
+                isAddingFragment = true;
+                show(manager, tag);
+            }
+        }
+    }
+
+/*
+    @Override
+    public void onStart() {
+        super.onStart();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams windowParams = window.getAttributes();
+        windowParams.dimAmount = 0.0f;
+        window.setAttributes(windowParams);
+    }*/
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_remixer_list, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        isAddingFragment = false;
+        super.onResume();
+    }
+}

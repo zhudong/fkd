@@ -1,0 +1,197 @@
+package com.fuexpress.kr.ui.activity.choose_address;
+
+import android.support.annotation.NonNull;
+
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsAddress;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2017/4/27.
+ */
+public class RegionDataManager {
+    private static RegionDataManager sRegionDataManager;
+    private List<CsAddress.DirectoryCountryInfo> mCountryInfoListList;
+    private List<CsAddress.DirectoryRegionInfo> mRegionInfoListList;
+    private List<CsAddress.DirectoryRegionInfo> mSubRegionInfoListList;
+    private boolean isSubDataReady = false;
+    private AddressResponBean mSubAddressResponBean;
+
+    public AddressResponBean getSubAddressResponBean() {
+        return mSubAddressResponBean;
+    }
+
+    private RegionDataManager() {
+    }
+
+    public static RegionDataManager getInstance() {
+        if (sRegionDataManager == null)
+            sRegionDataManager = new RegionDataManager();
+        return sRegionDataManager;
+    }
+
+
+    /**
+     * 获得国家列表信息
+     *
+     * @param addressBundleBean 数据的封装Bean
+     */
+    public void getCountryListData(@NonNull final AddressBundleBean addressBundleBean) {
+        checkNotNull(addressBundleBean, "dataBean not null!");
+        CsAddress.GetCountryListRequest.Builder builder = CsAddress.GetCountryListRequest.newBuilder();
+        //setAddressRemoteBuilder(builder, addressBundleBean);
+        builder.setPage(addressBundleBean.getPage());
+        String couSntryCode = addressBundleBean.getCouSntryCode();
+        if (couSntryCode != null)
+            builder.setCountryCode(couSntryCode);
+        builder.setLocaleCode(addressBundleBean.getLocaleCode());
+        builder.setNum(addressBundleBean.getNum());
+        if (addressBundleBean.getSortBy() == 1) {
+            builder.setSortBy(1);
+        }
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetCountryListResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.GetCountryListResponse response) {
+                if (addressBundleBean.getPage() == 1)
+                    mCountryInfoListList = new ArrayList<CsAddress.DirectoryCountryInfo>();
+                mCountryInfoListList.addAll(response.getCountryInfoListList());
+                String drop = response.getDrop();
+                boolean isMore = drop.equals("more");
+                String currentCountryCode = response.getCurrentCountryCode();
+                String currentCountryName = response.getCurrentCountryName();
+                AddressResponBean addressResponBean = new AddressResponBean();
+                addressResponBean.setDirectoryCountryInfos(mCountryInfoListList);
+                addressResponBean.setHasMore(isMore);
+                addressResponBean.setCurrentRegionId(currentCountryCode);
+                addressResponBean.setCurrentRegionName(currentCountryName);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_REGION_COMPLETE, true, addressResponBean));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_REGION_COMPLETE, false, ret + errMsg));
+            }
+        });
+    }
+
+    /**
+     * 获得国家地址的下一级联动
+     *
+     * @param addressBundleBean 封装的数据Bean
+     */
+    public void getRegionListData(@NonNull final AddressBundleBean addressBundleBean) {
+        checkNotNull(addressBundleBean, "dataBean not null!");
+        CsAddress.GetRegionListRequest.Builder builder = CsAddress.GetRegionListRequest.newBuilder();
+        //setAddressRemoteBuilder(builder, addressBundleBean);
+        builder.setPage(addressBundleBean.getPage());
+        String couSntryCode = addressBundleBean.getCouSntryCode();
+        if (couSntryCode != null)
+            builder.setCountryCode(couSntryCode);
+        builder.setLocaleCode(addressBundleBean.getLocaleCode());
+        //builder.setRegionId(addressBundleBean.getRegionId());
+        builder.setNum(addressBundleBean.getNum());
+        String regionId = addressBundleBean.getRegionId();
+        if (regionId != null) builder.setRegionId(regionId);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetRegionListResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.GetRegionListResponse response) {
+                //mCountryInfoListList = response.getCountryInfoListList();
+                if (addressBundleBean.getPage() == 1)
+                    mRegionInfoListList = new ArrayList<CsAddress.DirectoryRegionInfo>();
+                mRegionInfoListList.addAll(response.getRegionInfoListList());
+                String drop = response.getDrop();
+                boolean isMore = drop.equals("more");
+                String currentRegionId = response.getCurrentRegionId();
+                String currentRegionName = response.getCurrentRegionName();
+                AddressResponBean addressResponBean = new AddressResponBean();
+                addressResponBean.setRegionInfoList(mRegionInfoListList);
+                addressResponBean.setHasMore(isMore);
+                addressResponBean.setCurrentRegionId(currentRegionId);
+                addressResponBean.setCurrentRegionName(currentRegionName);
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_REGION_COMPLETE, true, addressResponBean));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_REGION_COMPLETE, false));
+            }
+        });
+    }
+
+
+    /**
+     * 三级地址联动
+     *
+     * @param addressBundleBean 数据的封装Bean
+     */
+    public void getRegionListByRegionData(@NonNull final AddressBundleBean addressBundleBean, final String className) {
+        checkNotNull(addressBundleBean, "dataBean not null!");
+        CsAddress.GetRegionListByRegionRequest.Builder builder = CsAddress.GetRegionListByRegionRequest.newBuilder();
+        //setAddressRemoteBuilder(builder, addressBundleBean);
+        builder.setPage(addressBundleBean.getPage());
+        //builder.setCountryCode(addressBundleBean.getCouSntryCode());
+        builder.setLocaleCode(addressBundleBean.getLocaleCode());
+        builder.setNum(addressBundleBean.getNum());
+        String regionId = addressBundleBean.getRegionId();
+        if (regionId != null)
+            builder.setRegionId(regionId);
+        String parentId = addressBundleBean.getParentId();
+        if (parentId != null)
+            builder.setParentId(parentId);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetRegionListByRegionResponse>() {
+
+
+            @Override
+            public void onSuccess(CsAddress.GetRegionListByRegionResponse response) {
+                if (addressBundleBean.getPage() == 1)
+                    mSubRegionInfoListList = new ArrayList<CsAddress.DirectoryRegionInfo>();
+                mSubRegionInfoListList.addAll(response.getRegionInfoListList());
+                String drop = response.getDrop();
+                boolean isMore = drop.equals("more");
+                String currentRegionId = response.getCurrentRegionId();
+                String currentRegionName = response.getCurrentRegionName();
+                AddressResponBean addressResponBean = new AddressResponBean();
+                addressResponBean.setRegionInfoList(mSubRegionInfoListList);
+                addressResponBean.setHasMore(isMore);
+                addressResponBean.setCurrentRegionId(currentRegionId);
+                addressResponBean.setCurrentRegionName(currentRegionName);
+                mSubAddressResponBean = addressResponBean;
+                boolean isJump = response.getRegionInfoListList().size() > 0;
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_SUB_REGION_COMPLETE, true, addressResponBean, className, isJump));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_SUB_REGION_COMPLETE, false));
+            }
+        });
+    }
+
+    public List<CsAddress.DirectoryCountryInfo> getCountryInfoListList() {
+        return mCountryInfoListList;
+    }
+
+    public List<CsAddress.DirectoryRegionInfo> getRegionInfoListList() {
+        return mRegionInfoListList;
+    }
+
+    public boolean isSubDataReady() {
+        return isSubDataReady;
+    }
+
+    public List<CsAddress.DirectoryRegionInfo> getSubRegionInfoListList() {
+        return mSubRegionInfoListList;
+    }
+}

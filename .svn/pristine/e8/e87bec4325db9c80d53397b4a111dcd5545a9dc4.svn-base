@@ -1,0 +1,80 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSignedLocalDataSource;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSingedDataRepository;
+import com.fuexpress.kr.ui.adapter.AdapterForHelp;
+import com.fuexpress.kr.ui.uiutils.ActivityUtils;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.LogUtils;
+
+public class HelpMeSignedActivity extends BaseActivity {
+
+    private View mRootView;
+    private FrameLayout mFrameLayout;
+    private FragmentManager mSupportFragmentManager;
+    private HSPreviewFragment mHSPreviewFragment;
+    private HSItemDetailFragment mHSItemDetailFragment;
+    private final static String HS_PR_TAG = "hs_pr_tag";
+    private final static String HS_ITEM_TAG = "hs_item_tag";
+
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.layout_for_help_signed, null);
+        mFrameLayout = (FrameLayout) findViewById(R.id.fl_help_signed_contair);
+        return mRootView;
+    }
+
+
+    @Override
+    public void initView() {
+        mSupportFragmentManager = getSupportFragmentManager();
+        HelpSignedFragment helpSignedFragment = (HelpSignedFragment) mSupportFragmentManager.findFragmentById(R.id.fl_help_signed_contair);
+        if (helpSignedFragment == null) {
+            helpSignedFragment = new HelpSignedFragment();
+            HelpSignedContract.Presenter presenter = new HelpSignedPresenter(HelpSingedDataRepository.getInstance(new HelpSignedLocalDataSource(), this), helpSignedFragment);
+            helpSignedFragment.setPresenter(presenter);
+            ActivityUtils.addFragmentToActivity(mSupportFragmentManager, helpSignedFragment, R.id.fl_help_signed_contair);
+        }
+    }
+
+    /**
+     * 让列表Fragment和详情(添加)Fragment之间进行切换的方法
+     *
+     * @param isChange t为转换到详情,f为转换到列表
+     */
+    public void changeToDetailFragment(boolean isChange) {
+        Fragment shouldShowFragment = null;
+        if (isChange) {
+            shouldShowFragment = mSupportFragmentManager.findFragmentByTag(HS_ITEM_TAG);
+        } else {
+            shouldShowFragment = mSupportFragmentManager.findFragmentByTag(HS_PR_TAG);
+        }
+    }
+
+
+    public Context getHelpSignedContext() {
+        return this;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        HelpSignedFragment helpSignedFragment = (HelpSignedFragment) supportFragmentManager.findFragmentById(R.id.fl_help_signed_contair);
+        helpSignedFragment.onActivityResult(requestCode, resultCode, data);
+    }
+}

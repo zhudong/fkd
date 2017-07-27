@@ -1,0 +1,117 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.base.BasePresenterRx;
+import com.fuexpress.kr.base.BaseView;
+import com.fuexpress.kr.base.BaseViewGeneric;
+import com.fuexpress.kr.bean.HelpAdapterValueBean;
+import com.fuexpress.kr.ui.adapter.HelpAdapterInterface;
+import com.fuexpress.kr.ui.view.InputBoxView;
+import com.fuexpress.kr.utils.UpLoadImageUtils;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 帮我收货的Contract类
+ * 这个类的目的其实是把我们在mvp层需要做的操作都统一以接口形式写到这里来了
+ * 这样就能方便管理,易于维护
+ */
+public interface HelpSignedContract {
+
+    interface View extends BaseViewGeneric<Presenter> {//这里是有关视图层需要实现的一些操作接口汇总
+
+
+        void referListViewShow(boolean isScrollToBottom);//在每次修改了数据之后,进行视图的刷新
+
+        void doDeleteAnimator();//执行删除的动画
+
+        void setPresenter(@NonNull HelpSignedContract.Presenter presenter);//将逻辑层和视图层绑定到一起的方法
+
+        void showLoadingView(int type, String text);//显示加载框的方法
+
+        void dissMissLoadingView(long delay);//消失加载框的方法(如需延迟传进来即可)
+
+        void showCustomToast(String text);//显示一个黑色底纹的吐司
+
+        Context getViewContext();//获得view层的Context对象
+
+        void showDeleteDialog(int index);//显示是否删除需求单的提示框
+
+        void setAdapterWareHouseData(String wareHouseID, CsBase.Warehouse warehouse);
+    }
+
+    interface Presenter extends BasePresenterRx {//这里是有关逻辑层需要实现的一些操作接口汇总
+
+        void initPresenterData();
+
+        void addNewDeMand();//添加需求单
+
+        String transformPrice(String currencyCode, String price);//根据不同国家来进行货币单位的转换
+
+        List<String> handleImageSelectorReturn(int index, List<String> list);//处理图片选择器的返回值
+
+        void upLoadImageToUpYun(List<String> imagePathList, int type, UpLoadImageUtils.UpLaodUtilsListener upLaodUtilsListener, int index);//把图片上传到upyun
+
+        void enterItemDesc(int index, String itemDesc);//处理单品的描述
+
+        void enterItemRemarks(int index, String itemReMarks);//处理单品的备注
+
+        void enterItemWareHouse(int index, String wareHouseID, CsBase.Warehouse warehouse);//处理单品的入库仓库
+
+        void enterItemPrice(int index, String price);//处理单品的价格
+
+        void enterItemQuantity(int index, String itemQuantity);//处理单品的数量
+
+        void submitItemToServer(List<CsParcel.ProductDataList> productDataLists);//把需求单提交到服务器
+
+        void editData(EditText editText, int index, int resKey);//对处理的数据进行分类判断并交给相应的处理方法
+
+        void editItemImage(ArrayMap<String, String> pathUrlMap, int index);//编辑需求单的图片
+
+        ArrayMap<String, String> addImageUrlIntoRepository(String url, int index);//把上传完的图片添加到内存仓库中
+
+        boolean checkItemParameter(List<CsParcel.ProductDataList> lists);//检查每个准备提交的参数是否正确
+
+        boolean checkItemDescIsRight(String desc);//检查需求的描述是否正确
+
+        boolean checkRemarkIsRight(String remark);//检查需求的备注是否正确
+
+        boolean isChooseWareHouse(String wareHouseID);//检查是否选中了仓库
+
+        boolean checkPriceIsRight(String price);//检查价格是否输入正确
+
+        boolean checkItemQuantity(String quantity);//检查单品数量是否符合标准
+
+        boolean checkItemImageUrl(List<CsBase.ItemImage> list);//检查需求是否添加了图片
+
+        void deleteDemand(int index);//删除需求单
+
+        void clearAllDatas();//清除所有内存数据
+
+        //ArrayMap<Integer, InputBoxView> getInputBoxViewArrayMap();
+
+        HelpAdapterValueBean getHelpDataValueBean(Context context, HelpAdapterInterface helpAdapterInterface);//获得初始化的AdapterBean
+
+        void setChooseImageItemPosition(int position);//设置开启图片选择器的ItemPosition
+
+        int getChooseImageItemPosition();//获得当前需要开启图片选择器的position
+
+        ArrayList<String> getItemImageList(int position);//获得要开启图片选择器的Item的图片列表
+
+        ArrayMap<Integer, ArrayList<String>> getItemLocalPathMap();//获得需求单的本地图片路径集合
+
+        UpLoadImageUtils.UpLaodUtilsListener getPresenterUpLoadListener();//获得上传的回调接口
+
+        List<CsParcel.ProductDataList> getProductDataList();//获得需要上传的单品List
+
+    }
+}

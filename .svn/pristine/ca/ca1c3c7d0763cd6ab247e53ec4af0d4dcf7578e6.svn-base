@@ -1,0 +1,282 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSingedDataRepository;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.StringUtils;
+import com.fuexpress.kr.utils.UpLoadImageUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/22.
+ * 帮我收的新逻辑层
+ */
+public class HelpSignedNewPresenter implements HelpSignedContract.NewPresenter {
+
+    @NonNull
+    private final HelpSingedDataRepository mHelpSingedDataRepository;//数据仓库对象,不可改且私有
+
+    @NonNull
+    private HelpSignedContract.ItemView mHelpSingedItemView;//视图层对象,也是不可改且私有
+
+    @NonNull
+    private final HelpSignedContract.HSPreView mHelpSingedPreView;//视图层对象,也是不可改且私有
+
+    private boolean mIsCilckSub = false;//判断是否点击了提交
+
+    private final int mMaxDeMand = 5;//当前最大需求单数量为5个
+
+    private ArrayMap<Integer, Boolean> mWantUpLoadIndexMap;//想上传图片的Index集合
+
+    private int mClickPosition = -1;
+
+    public HelpSignedNewPresenter(@NonNull HelpSingedDataRepository helpSingedDataRepository, HelpSignedContract.HSPreView helpSingedPreView) {
+        mHelpSingedDataRepository = checkNotNull(helpSingedDataRepository, "repository is not Null");
+        mHelpSingedPreView = helpSingedPreView;
+    }
+
+    @Override
+    public void setHelpSingedItemView(@NonNull HelpSignedContract.ItemView helpSingedItemView) {
+        mHelpSingedItemView = helpSingedItemView;
+    }
+
+
+    @Override
+    public void addNewDeMand(CsParcel.ProductDataList productDataList) {
+        mHelpSingedDataRepository.saveHelpSignedData(productDataList);
+    }
+
+    @Override
+    public CsParcel.ProductDataList.Builder creatNewDeMand() {
+        return CsParcel.ProductDataList.newBuilder();
+    }
+
+    @Override
+    public CsParcel.ProductDataList getChooseData(int position) {
+        return mHelpSingedDataRepository.getHelpSignedDataOnly(position);
+    }
+
+    @Override
+    public List<CsParcel.ProductDataList> getProductDataList() {
+        return mHelpSingedDataRepository.getHelpSignedDataList();
+    }
+
+    @Override
+    public int getItemOnclickPosition() {
+        return mClickPosition;
+    }
+
+    @Override
+    public void setItemOnclickPosition(int position) {
+        mClickPosition = position;
+    }
+
+    @Override
+    public String transformPrice(String currencyCode, String price) {
+        String changePrice = price;
+        if ("KRW".equals(currencyCode))
+            if (TextUtils.isEmpty(price))
+                changePrice = StringUtils.changeFolatToString(Float.parseFloat(price));
+
+        return changePrice;
+    }
+
+    @Override
+    public void setWareHouseInfo(String wareHouseID, CsBase.Warehouse warehouse) {
+        mHelpSingedDataRepository.saveWareHouseData(wareHouseID, warehouse);
+    }
+
+    @Override
+    public CsBase.Warehouse getWareHouseInfo(String wareHouseID) {
+        return mHelpSingedDataRepository.getWareHouseData(wareHouseID);
+    }
+
+    @Override
+    public List<String> getTempImagePathList() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getItemImageList(int position) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getItemUpLoadUrlList(List<String> pathList) {
+        return null;
+    }
+
+    @Override
+    public List<String> handleImageSelectorReturn(int index, List<String> list) {
+        return null;
+    }
+
+    @Override
+    public void upLoadImageToUpYun(List<String> imagePathList, int type, UpLoadImageUtils.UpLaodUtilsListener upLaodUtilsListener, int index) {
+
+    }
+
+    @Override
+    public ArrayMap<String, String> addImageUrlIntoRepository(String url) {
+        return null;
+    }
+
+    @Override
+    public void enterItemDesc(CsParcel.ProductDataList.Builder builder, String itemDesc) {
+        if (!itemDesc.equals(builder.getProductdescription()))
+            builder.setProductdescription(itemDesc);
+    }
+
+    @Override
+    public void enterItemRemarks(CsParcel.ProductDataList.Builder builder, String itemReMarks) {
+        if (!itemReMarks.equals(builder.getProductremark()))
+            builder.setProductremark(itemReMarks);
+    }
+
+    @Override
+    public void enterItemWareHouse(CsParcel.ProductDataList.Builder builder, String wareHouseID, CsBase.Warehouse warehouse) {
+        if (!wareHouseID.equals(builder.getWarehouseid())) {
+            builder.setWarehouseid(wareHouseID);
+            setWareHouseInfo(wareHouseID, warehouse);
+        }
+    }
+
+    @Override
+    public void enterItemPrice(CsParcel.ProductDataList.Builder builder, String price) {
+        if (!price.equals(builder.getPrice()))
+            builder.setPrice(price);
+    }
+
+    @Override
+    public void enterItemQuantity(CsParcel.ProductDataList.Builder builder, String itemQuantity) {
+        if (!itemQuantity.equals(builder.getNum()))
+            builder.setNum(itemQuantity);
+    }
+
+    @Override
+    public void editItemImage(ArrayMap<String, String> pathUrlMap, CsParcel.ProductDataList.Builder builder) {
+
+    }
+
+    @Override
+    public void enterItemImageUrlList(CsParcel.ProductDataList.Builder builder, List<String> urlList) {
+        CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+        for (String url : urlList) {
+            imgBuilder.setImageUrl(url);
+            builder.addExtra(imgBuilder);
+        }
+        builder.setImageNum(urlList.size());
+    }
+
+    @Override
+    public boolean checkItemParameter(CsParcel.ProductDataList productDataList) {
+        boolean isParameterRight = true;
+        String errText = "";
+        if (!(isParameterRight = checkItemImageUrl(productDataList.getExtraList())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_image);
+        else if (!(isParameterRight = checkItemDescIsRight(productDataList.getProductdescription())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_desc);
+        else if (!(isParameterRight = checkRemarkIsRight(productDataList.getProductremark())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_remark);
+        else if (!(isParameterRight = isChooseWareHouse(productDataList.getWarehouseid())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_warehouse);
+        else if (!(isParameterRight = checkPriceIsRight(productDataList.getPrice())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_price);
+        else if (!(isParameterRight = checkItemQuantity(productDataList.getNum())))
+            errText = mHelpSingedItemView.getViewContext().getString(R.string.hs_note_quantity);
+        if (!isParameterRight)
+            mHelpSingedItemView.showRemindDialog(SweetAlertDialog.WARNING_TYPE, errText);
+        return isParameterRight;
+    }
+
+    @Override
+    public boolean checkItemDescIsRight(String desc) {
+        return !TextUtils.isEmpty(desc);
+    }
+
+    @Override
+    public boolean checkRemarkIsRight(String remark) {
+        return !TextUtils.isEmpty(remark);
+    }
+
+    @Override
+    public boolean isChooseWareHouse(String wareHouseID) {//判断是否为空
+        return !TextUtils.isEmpty(wareHouseID);
+    }
+
+    @Override
+    public boolean checkPriceIsRight(String price) {//申报价格这里的需求按照实际情况来,目前只是判断是否为空
+        return !TextUtils.isEmpty(price);
+    }
+
+    @Override
+    public boolean checkItemQuantity(String quantity) {//单品数量这里按照实际情况来,目前只是判断是否为空
+        return !TextUtils.isEmpty(quantity);
+    }
+
+    @Override
+    public boolean checkItemImageUrl(List<CsBase.ItemImage> list) {
+        return list.size() > 0;
+    }
+
+    @Override
+    public boolean checkImagePathList(List<String> list) {
+        return list.size() > 0;
+    }
+
+    @Override
+    public void submitItemToServer(List<CsParcel.ProductDataList> productDataLists) {
+        mHelpSingedPreView.showLoadingView(SweetAlertDialog.PROGRESS_TYPE, "上传中");
+        mIsCilckSub = true;
+        // TODO: 2016/12/11 提交到服务器
+        LogUtils.e("提交到服务器");
+        CsParcel.SaveHelpReceiveRequest.Builder builder = CsParcel.SaveHelpReceiveRequest.newBuilder();
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setSumcount(String.valueOf(productDataLists.size()));
+        builder.addAllProductlist(productDataLists);
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        LogUtils.e("上传的参数:" + builder.toString());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SaveHelpReceiveResponse>() {
+            @Override
+            public void onSuccess(CsParcel.SaveHelpReceiveResponse response) {
+                LogUtils.e("成功:" + response.toString());
+                mHelpSingedPreView.showLoadingView(SweetAlertDialog.SUCCESS_TYPE, "提交成功");
+                mHelpSingedPreView.dissMissLoadingView(1000);
+                /*clearAllDatas();
+                mHelpSingedPreView.referListViewShow(false);*/
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("失败:" + "  " + ret + "  " + errMsg);
+                mHelpSingedPreView.showLoadingView(SweetAlertDialog.ERROR_TYPE, "提交失败:" + ret);
+                mHelpSingedPreView.dissMissLoadingView(1000);
+            }
+        });
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+
+    }
+}

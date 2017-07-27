@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_item_declare_price"
+                style="@style/parcel_text_gray_33_13"
+                android:text="@string/String_parcel_declare_price" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_item_declare_price"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_item_declare_price"
+                android:src="@mipmap/star" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_declare_price"
+                style="@style/parcel_input_append_info"
+                android:layout_width="0dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="85dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:focusable="false"
+                android:hint="@string/String_parcel_declare_price_tips"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tv_price_type"
+                style="@style/parcel_text_gray_99_13"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/String_money_unit" />
+
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/parcel_divide_line"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_item_count"
+                style="@style/parcel_text_gray_33_13"
+                android:text="@string/String_parcel_item_count" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_item_count"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_item_count"
+                android:src="@mipmap/star" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/edt_item_counts"
+            style="@style/parcel_input_append_info"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="85dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="@string/String_parcel_item_count_tips"
+            android:inputType="number" />
+
+        <TextView
+            style="@style/parcel_divide_line"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_item_weight"
+                style="@style/parcel_text_gray_33_13"
+                android:text="@string/String_parcel_weight" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_item_weight"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_item_weight"
+                android:src="@mipmap/star" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/edt_parcel_weight"
+                style="@style/parcel_input_append_info"
+                android:layout_width="0dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="85dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/String_parcel_weight_tips"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tv_weight_type"
+                style="@style/parcel_text_gray_99_13"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="KG" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/parcel_divide_line"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_item_address"
+                style="@style/parcel_text_gray_33_13"
+                android:text="@string/String_parcel_item_address" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_item_address"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_item_address"
+                android:src="@mipmap/star" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_select_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/parcel_input_append_info"
+                android:layout_width="0dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="85dp"
+                android:layout_weight="1"
+                android:background="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/arrow_right" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

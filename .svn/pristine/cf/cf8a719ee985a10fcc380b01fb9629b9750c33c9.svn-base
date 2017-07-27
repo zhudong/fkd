@@ -1,0 +1,691 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.HelpItemViewBean;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.uiutils.AnimationUtils;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CurrencyEditText;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.io.File;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.fuexpress.kr.base.SysApplication.mContext;
+
+/**
+ * Created by Administrator on 2016-12-5.
+ */
+
+public class AddRequireActivity extends BaseActivity {
+
+    private static final int ITEM_SIZE = 4;
+    private static final int CODE_PAYMENT_REQUEST = 0x1001;
+    public static final String CODE_PRODUCT_LIST = "productList";
+    public static final String CODE_PICK_LIST = "pickItemList";
+    public static final String CODE_ITEM_COUNT = "code_item_count";
+
+    private CustomGridView itemGv;
+
+    private View rootView;
+    private MyAdapter adapter;
+    private LinearLayout addLayout;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private TextView rightTv;
+    private ImageView backIv;
+    private List<PickUpItemBean> itemlist;
+    private ArrayList<String> imgList;
+    private List<String> mPathList;
+    private int itemPos;
+
+    private EditText noteEt;
+    private EditText addressEt;
+    private CurrencyEditText priceEt;
+    private EditText countEt;
+
+
+    private List<PickUpItemBean> pickUpItemlist = new ArrayList<PickUpItemBean>();
+    private String payCode;
+    private int itemCount = 0;
+    private List<String> mUpLoadCompletelist;
+    private List<List<String>> mUpLoadlist;
+    private boolean isClickSub = false;
+    private Button confirmBtn;
+    private ScrollView contentSv;
+    private List<CsParcel.ProductDataList> productList;
+    private List<PickUpItemBean> pickList;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_add_require, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.pick_up_titlebar);
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(getString(R.string.pick_up_title));
+        rightTv = titleBarView.getTv_in_title_right();
+        rightTv.setText(getString(R.string.pick_up_right_delete));
+        rightTv.setVisibility(View.GONE);
+        backIv = titleBarView.getIv_in_title_back();
+        addLayout = (LinearLayout) rootView.findViewById(R.id.add_require_add_layout);
+        confirmBtn = (Button) rootView.findViewById(R.id.add_require_confirm_btn);
+        itemGv = (CustomGridView) rootView.findViewById(R.id.add_require_gv);
+        noteEt = (EditText) rootView.findViewById(R.id.add_require_note_et);
+        addressEt = (EditText) rootView.findViewById(R.id.add_require_address_et);
+        priceEt = (CurrencyEditText) rootView.findViewById(R.id.add_require_price_et);
+        countEt = (EditText) rootView.findViewById(R.id.add_require_count_et);
+        contentSv = (ScrollView) rootView.findViewById(R.id.add_require_sv);
+        String currencyCode = getIntent().getStringExtra(PaymentActivity.CURRENCY_CODE);
+        priceEt.setCurrency(currencyCode);
+
+        init();
+        itemCount = getIntent().getIntExtra(CODE_ITEM_COUNT, 1);
+        backIv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        rightTv.setOnClickListener(this);
+        addLayout.setOnClickListener(this);
+        confirmBtn.setOnClickListener(this);
+//        paymentLayout.setOnClickListener(this);
+//        submitBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+
+    public void init() {
+        productList = new ArrayList<CsParcel.ProductDataList>();
+        pickList = new ArrayList<PickUpItemBean>();
+        mUpLoadCompletelist = new ArrayList<>();
+        mUpLoadlist = new ArrayList<List<String>>();
+        itemlist = new ArrayList<PickUpItemBean>();
+        PickUpItemBean bean = new PickUpItemBean();
+        imgList = new ArrayList<String>();
+        bean.setItemUrlList(imgList);
+        itemlist.add(bean);
+
+        adapter = new MyAdapter(this, itemlist.get(itemPos).getItemUrlList(), itemPos);
+        itemGv.setAdapter(adapter);
+        requestFocus(noteEt);
+//        scrollToBottom(contentSv);
+//        helpMyGetInitRequest();
+    }
+
+    @Override
+    public void finish() {
+        Hidekeyboard(countEt);
+        super.finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+            case R.id.tv_in_title_right:
+                break;
+            case R.id.add_require_add_layout:
+                itemCount++;
+                if (itemCount > ITEM_SIZE) {
+                    CustomToast.makeText(this, getString(R.string.pick_up_add_item_max_msg), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!checkItemStaus()) {
+                    return;
+                }
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+
+                clearData();
+                break;
+            case R.id.add_require_confirm_btn:
+                if (itemCount > ITEM_SIZE) {
+                    CustomToast.makeText(this, getString(R.string.pick_up_add_item_max_msg), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!checkItemStaus()) {
+                    return;
+                }
+                isClickSub = true;
+                EventBus.getDefault().post(new BusEvent(BusEvent.GET_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+                break;
+//            case R.id.pick_up_submit_btn:
+//                isClickSub = true;
+//                EventBus.getDefault().post(new BusEvent(BusEvent.GET_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+//                break;
+        }
+    }
+
+    public void scrollToBottom(final ScrollView scrollView) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                contentSv.fullScroll(ScrollView.FOCUS_DOWN);
+
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.d("----requestCode " + requestCode);
+//        if (requestCode == Constants.ALBUM_GET_BITMAP_REQUEST_CODE) {
+//            if (data != null) {
+//                mImage = data.getStringExtra("image");
+//                Uri uri = Uri.parse(mImage);
+//                String path = uri.getPath();
+//                //                try {
+//                //                    Bitmap bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(uri));
+//                //                    bmpList.add(bitmap);
+//                imgList.add(path);
+//                adapter.notifyDataSetChanged();
+//
+//                //                } catch (FileNotFoundException e) {
+//                //                    e.printStackTrace();
+//                //                }
+//            }
+//        }
+
+        if (requestCode == PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST) {
+            if (data != null) {
+                List<String> backList = (List<String>) data.getExtras().getSerializable("backImgList");
+//                imgList.clear();
+//                imgList.addAll(backList);
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(backList);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == 1000 || resultCode == -1 || resultCode == 0) {
+            if (data != null) {
+                mPathList = new ArrayList<>();
+                mPathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+                itemlist.get(itemPos).getItemUrlList().clear();
+                itemlist.get(itemPos).getItemUrlList().addAll(mPathList);
+                adapter.notifyDataSetChanged();
+//                for (int i = 0; i < pickListView.getChildCount(); i++) {
+//                    GridView view = (GridView) pickListView.getChildAt(itemPos).findViewById(R.id.pick_up_item_gv);
+//                    view.setAdapter(new MyAdapter(this, itemlist.get(itemPos).getItemUrlList(), itemPos));
+//                    if (pickListView.getChildCount() > 1 && itemlist.get(itemPos).getItemUrlList().size() >= 4) {
+//                        setListViewHeightBasedOnChildren2(pickListView);
+//                    }
+//                }
+//                adapter.notifyDataSetChanged();
+                uploadImages();
+                /*for (String path : mPathList) {
+                    LogUtils.e("ImagePathList", path);//返回了一个图片路径的集合
+                }*/
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void uploadImages() {
+
+        UpLoadImageManager.getInstance().zoomImageAndUpLoad(itemlist.get(itemPos).getItemUrlList(), this);
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        if (event.getType() == BusEvent.UP_LOAD_IMAGE_COMPLETE2) {
+            if (event.getBooleanParam()) {
+                mUpLoadCompletelist.clear();
+                mUpLoadCompletelist.addAll((List<String>) event.getParam());
+                mUpLoadlist.add((List<String>) event.getParam());
+                if (isClickSub) {
+                    upLoadInfo();
+                }
+            } else {
+                int failIndex = event.getIntValue();
+                //closeLoading();
+                CustomToast.makeText(mContext, getString(R.string.upload_failed_msg), Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (event.getType() == BusEvent.RETURN_CURRENT_UP_LOAD_IMAGE_LIST_PROGRESS) {
+            int intParam = event.getIntParam();
+            if (intParam < 100) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.SHOW_UP_LOAD_IMAGE_LIST_PROGRESS, null));
+            } else {
+                upLoadInfo();
+            }
+        }
+    }
+
+    public void upLoadInfo() {
+        //List<String> list = (List<String>) event.getParam();
+        if (mUpLoadCompletelist == null) {
+
+        } else {
+            if (mSweetAlertDialog != null) {
+                if (!mSweetAlertDialog.isShowing()) {
+                    showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "上传中");
+                }
+            } else {
+                showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "上传中");
+            }
+            List<Map<String, String>> mapList = new ArrayList<>();
+            Map<String, String> map = new HashMap<String, String>();
+            for (int h = 0; h < mUpLoadCompletelist.size(); h++) {
+//                for (int i = 0; i < mUpLoadCompletelist.get(h).size(); i++) {
+                String[] str = mUpLoadCompletelist.get(h).split(",");
+                map.put(str[1], str[0]);
+                mapList.add(map);
+//                }
+            }
+            CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+            CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+            builder.setProductdescription(noteEt.getText().toString());
+            builder.setAddressinfo(addressEt.getText().toString());
+            builder.setPrice(priceEt.getmText().toString());
+            builder.setNum(countEt.getText().toString());
+            builder.setImageNum(mUpLoadCompletelist.size());
+            for (int k = 0; k < imgList.size(); k++) {
+//                        imgBuilder.setImageUrl(map.get(item.getItemUrlList().get(k)));
+                imgBuilder.setImageUrl(map.get(imgList.get(k)));
+                builder.addExtra(imgBuilder);
+            }
+//                    imgBuilder.setImageUrl(item.getItemUrlList().get(k));
+            productList.add(builder.build());
+
+            PickUpItemBean bean = new PickUpItemBean();
+            bean.setItemNote(noteEt.getText().toString());
+            bean.setItemAddress(addressEt.getText().toString());
+            bean.setItemPrice(priceEt.getmText().toString());
+            bean.setItemCount(countEt.getText().toString());
+            bean.setImageCount(mUpLoadCompletelist.size());
+            bean.getMap().putAll(map);
+            for (int k = 0; k < imgList.size(); k++) {
+//                        imgBuilder.setImageUrl(map.get(item.getItemUrlList().get(k)));
+                imgBuilder.setImageUrl(map.get(imgList.get(k)));
+            }
+            bean.getPathList().clear();
+            bean.getPathList().addAll(imgList);
+            pickList.add(bean);
+
+            if (isClickSub) {
+                LogUtils.d("123");
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(CODE_PICK_LIST, (Serializable) pickList);
+                bundle.putSerializable(CODE_PRODUCT_LIST, (Serializable) productList);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            mSweetAlertDialog.dismiss();
+            CustomToast.makeText(AddRequireActivity.this, getString(R.string.add_require_success_msg), Toast.LENGTH_SHORT).show();
+
+           /* if (imgList.size() > 1) {
+                for (int i = 1; i < imgList.size(); i++) {
+                    CsBase.ItemImage.Builder builder = CsBase.ItemImage.newBuilder();
+                    builder.setImageUrl(map.get(imgList.get(i)));
+                    itemList.add(builder.build());
+                }
+                addItemSaveRequest(albumId, subMatchItem.getMatchitemcategoryid(),
+                        map.get(imgList.get(0)), captionEt.getText().toString(),
+                        Float.parseFloat(priceEt.getText().toString()), itemList);
+            } else {
+                for (int i = 0; i < imgList.size(); i++) {
+                    CsBase.ItemImage.Builder builder = CsBase.ItemImage.newBuilder();
+                    builder.setImageUrl(map.get(imgList.get(i)));
+                    itemList.add(builder.build());
+                }
+                addItemSaveRequest(albumId, subMatchItem.getMatchitemcategoryid(),
+                        map.get(imgList.get(0)), captionEt.getText().toString(),
+                        Float.parseFloat(priceEt.getText().toString()), null);
+            }*/
+        }
+
+    }
+
+    public void setResult() {
+        LogUtils.d("123");
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CODE_PRODUCT_LIST, (Serializable) productList);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
+        saveHelpMyGetRequest(payCode, pickUpItemlist.size() + "", productList);
+    }
+
+    public void saveHelpMyGetRequest(String payCode, String sumcount, List<CsParcel.ProductDataList> productList) {
+        CsParcel.SaveHelpMyGetRequest.Builder builder = CsParcel.SaveHelpMyGetRequest.newBuilder();
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setPaymentcode(payCode);
+        builder.setSumcount(sumcount);
+        builder.addAllProductlist(productList);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SaveHelpMyGetResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.SaveHelpMyGetResponse response) {
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                saveHanlder.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (mSweetAlertDialog != null) {
+            mSweetAlertDialog.dismiss();
+        }
+    }
+
+    private Handler saveHanlder = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_save_success_msg), Toast.LENGTH_SHORT).show();
+//            clearData();
+            mSweetAlertDialog.dismiss();
+//            EventBus.getDefault().post(new BusEvent(BusEvent.CODE_GO_MERCHAND, true));
+        }
+    };
+
+    public void clearData() {
+        isClickSub = false;
+        imgList.clear();
+//        itemList.clear();
+//        bmpList.clear();
+        adapter.notifyDataSetChanged();
+        noteEt.setText("");
+        addressEt.setText("");
+        priceEt.setText("");
+        countEt.setText("");
+        Hidekeyboard(countEt);
+//        subMatchItem = null;
+//        classifyMsg.setText(getString(R.string.add_merchandise_classify_msg));
+//        albumId = -1;
+//        albumNameTv.setText(getString(R.string.add_merchandise_album_msg));
+    }
+
+    public boolean checkItemStaus() {
+
+        if (adapter.getCount() <= 1) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_item_adapter_msg), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(noteEt.getText().toString())) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_item_note_msg), Toast.LENGTH_SHORT).show();
+            requestFocus(noteEt);
+            Showkeyboard(noteEt);
+            itemCount = 0;
+            return false;
+        }
+        if (TextUtils.isEmpty(addressEt.getText().toString())) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_item_address_msg), Toast.LENGTH_SHORT).show();
+            requestFocus(addressEt);
+            Showkeyboard(addressEt);
+            itemCount = 0;
+            return false;
+        }
+        if (TextUtils.isEmpty(priceEt.getText().toString())) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_item_price_msg), Toast.LENGTH_SHORT).show();
+            requestFocus(priceEt);
+            Showkeyboard(priceEt);
+            itemCount = 0;
+            return false;
+        }
+        if (TextUtils.isEmpty(countEt.getText().toString())) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_item_count_msg), Toast.LENGTH_SHORT).show();
+            requestFocus(countEt);
+            Showkeyboard(countEt);
+            itemCount = 0;
+            return false;
+        }
+        scrollToBottom(contentSv);
+        return true;
+    }
+
+    public void requestFocus(EditText editText) {
+        editText.requestFocus();
+    }
+
+    class MyAdapter extends BaseAdapter {
+
+        private Context mCtx;
+        private List<String> list;
+        private int parentPosition;
+        private ImageLoader imageLoader;
+        private DisplayImageOptions options;
+
+        public MyAdapter(Context context, List<String> list, int position) {
+            this.mCtx = context;
+            this.list = list;
+            this.parentPosition = position;
+            this.imageLoader = ImageLoader.getInstance();
+            this.options = ImageLoaderHelper.getInstance(mCtx).getDisplayOptions();
+        }
+
+        @Override
+        public int getCount() {
+            if (list == null || list.size() == 0) {
+                return 1;
+            } else if (list.size() == 4) {
+                return 4;
+            } else {
+                return list.size() + 1;
+            }
+
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            Holder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mCtx).inflate(R.layout.merchandise_item, null);
+                holder = new Holder();
+                holder.merchandiseIv = (ImageView) convertView.findViewById(R.id.merchandise_iv);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+            int width = UIUtils.getScreenWidthPixels((Activity) mCtx) / 4 - 30;
+            holder.merchandiseIv.setLayoutParams(new LinearLayout.LayoutParams(width, width));
+
+            if (position == list.size() || list == null || list.size() == 0) {
+                if (position == 4) {
+                    convertView.setVisibility(View.GONE);
+                } else {
+                    holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER);
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    holder.merchandiseIv.setImageResource(R.mipmap.demand_addimage);
+                    holder.merchandiseIv.setBackgroundResource(R.drawable.add_merchandise_shape);
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            /*Intent intent = new Intent();
+                            intent.setClass(mCtx, Down2UpDialogActivity.class);
+                            intent.putExtra(Down2UpDialogActivity.GO_THIS_ACTIVITY_INTENT_KEY, Down2UpDialogActivity.ADD_MERCHANT_ITEM_TYPE);
+                            startActivityForResult(intent, Constants.ALBUM_GET_BITMAP_REQUEST_CODE);*/
+                            itemPos = parentPosition;
+                            MPermissions.requestPermissions(AddRequireActivity.this, 3, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//                            UIUtils.startImageSelectorForAddItem(1000, imgList, PickUpActivity.this, 6);
+                        }
+                    });
+                }
+
+            } else {
+                if (position == parent.getChildCount()) {
+                    holder.merchandiseIv.setVisibility(View.VISIBLE);
+                    //                imageLoader.displayImage(imageList.get(position).toString(), holder.merchandiseIv, options);
+                    try {
+                        //                        FileInputStream fis = new FileInputStream(list.get(position));
+                        //                        Bitmap bmp = BitmapFactory.decodeFile(list.get(position));
+
+
+                        //                    holder.merchandiseIv.setImageBitmap(BitMapUtils.getResizedBitmap(bmp, width, width));
+                        holder.merchandiseIv.setCropToPadding(true);
+                        holder.merchandiseIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+                        Uri uri = Uri.fromFile(new File(list.get(position)));
+                        //ImageLoader.getInstance().displayImage(uri.toString(), holder.merchandiseIv, options);
+                        Glide.with(AddRequireActivity.this).load(uri.toString()).into(holder.merchandiseIv);
+                        holder.merchandiseIv.setLayoutParams(params);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    holder.merchandiseIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(mCtx, PreviewMerchandiseActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("imgList", (Serializable) itemlist.get(itemPos).getItemUrlList());
+                            intent.putExtra("resourceType", PreviewMerchandiseActivity.RESOURCE_TYPE_ADD);
+                            bundle.putInt("position", position);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent, PreviewMerchandiseActivity.REQUEST_CODE_BACK_IMG_LIST);
+                        }
+                    });
+                }
+            }
+            return convertView;
+        }
+
+        class Holder {
+            ImageView merchandiseIv;
+        }
+    }
+
+    @PermissionGrant(3)
+    public void requestContactSuccess() {
+        UIUtils.startImageSelectorForAddItem(1000, (ArrayList<String>) itemlist.get(itemPos).getItemUrlList(), AddRequireActivity.this, 4);
+        UpLoadImageManager.getInstance().setUpLoadProgressEmpty();
+    }
+
+    @PermissionDenied(3)
+    public void requestContactFailed() {
+        Toast.makeText(AddRequireActivity.this, "DENY ACCESS CONTACTS!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public static void setGridViewHeightBasedOnChildren(GridView gridView) {
+        // 获取GridView对应的Adapter
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int rows;
+        int columns = 0;
+        int horizontalBorderHeight = 0;
+        Class<?> clazz = gridView.getClass();
+        try {
+            //利用反射，取得每行显示的个数
+            Field column = clazz.getDeclaredField("mRequestedNumColumns");
+            column.setAccessible(true);
+            columns = (Integer) column.get(gridView);
+            //利用反射，取得横向分割线高度
+            Field horizontalSpacing = clazz.getDeclaredField("mRequestedHorizontalSpacing");
+            horizontalSpacing.setAccessible(true);
+            horizontalBorderHeight = (Integer) horizontalSpacing.get(gridView);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        //判断数据总数除以每行个数是否整除。不能整除代表有多余，需要加一行
+        if (listAdapter.getCount() % columns > 0) {
+            rows = listAdapter.getCount() / columns + 1;
+        } else {
+            rows = listAdapter.getCount() / columns;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < rows; i++) { //只计算每项高度*行数
+            View listItem = listAdapter.getView(i, null, gridView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = totalHeight + horizontalBorderHeight * (rows - 1);//最后加上分割线总高度
+        gridView.setLayoutParams(params);
+    }
+
+}

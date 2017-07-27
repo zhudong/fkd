@@ -1,0 +1,100 @@
+package com.fuexpress.kr.ui.activity.produ_source;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.ui.activity.transport_address.TraSpoAddrPageAdapter;
+import com.fuexpress.kr.ui.view.SlidingTabLayout;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Longer on 2017/6/23.
+ */
+public class ProduSrcMainFragment extends BaseFragment {
+
+    private View mRootView;
+    private TextView mTv_title_cart_amount_note;
+    private SlidingTabLayout mTab;
+    private ViewPager mPager;
+    private List<ProduSrcSubFragment> mProduSrcSubFragments;
+
+    @Override
+    protected void initTitleBar() {
+        TitleBarView titleBarView = (TitleBarView) mRootView.findViewById(R.id.title);
+        //titleBarView.getFl_title_cart().setOnClickListener(this);
+        mTv_title_cart_amount_note = titleBarView.getTv_title_cart_amount_note();
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(getActivity(), R.layout.layout_produ_src_main, null);
+        mTab = (SlidingTabLayout) mRootView.findViewById(R.id.tab);
+        mPager = (ViewPager) mRootView.findViewById(R.id.pager);
+        mPager.setOffscreenPageLimit(2);
+
+        mTab.setTabTitleTextSize(15);
+        mTab.setTheTextAllCaps(false);
+        mTab.setTitleTextColor(Color.BLACK, Color.GRAY);
+        mTab.setSelectedIndicatorColors(Color.alpha(0));
+        mTab.setDistributeEvenly(true);
+        mTab.setTheTextAllCaps(false);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        initFragment();
+    }
+
+    private void initFragment() {
+        Bundle bundle = new Bundle();
+        bundle.putString("key", ProduSrcSubFragment.KEY_ALL);
+        ProduSrcSubFragment produSrcSubFragmentInstanceAll = ProduSrcSubFragment.getProduSrcSubFragmentInstance(bundle);
+        if (mProduSrcSubFragments == null) mProduSrcSubFragments = new ArrayList<>();
+        mProduSrcSubFragments.add(produSrcSubFragmentInstanceAll);
+        bundle = new Bundle();
+        bundle.putString("key", ProduSrcSubFragment.KEY_HOT);
+        ProduSrcSubFragment produSrcSubFragmentInstanceHot = ProduSrcSubFragment.getProduSrcSubFragmentInstance(bundle);
+        mProduSrcSubFragments.add(produSrcSubFragmentInstanceHot);
+
+        bundle = new Bundle();
+        bundle.putString("key", ProduSrcSubFragment.KEY_FOLLOWED);
+        ProduSrcSubFragment produSrcSubFragmentInstanceFollowed = ProduSrcSubFragment.getProduSrcSubFragmentInstance(bundle);
+        mProduSrcSubFragments.add(produSrcSubFragmentInstanceFollowed);
+
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ProduSrcMainViewPagerAdapter traSpoAddrPageAdapter = new ProduSrcMainViewPagerAdapter(getChildFragmentManager(), mProduSrcSubFragments);
+                mPager.setAdapter(traSpoAddrPageAdapter);
+                mTab.setViewPager(mPager);
+            }
+        });
+    }
+
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_PRODUSRC_ALL_COMPETE:
+
+                break;
+            case BusEvent.GET_PRODUSRC_HOT_COMPETE:
+                break;
+            case BusEvent.GET_PRODUSRC_FOLLOWED_COMPETE:
+                break;
+        }
+    }
+}

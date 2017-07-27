@@ -1,0 +1,21 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.base.BasePresenterRx;
+import com.fuexpress.kr.base.BaseView;
+import com.fuexpress.kr.base.BaseViewGeneric;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 帮我收货的Contract类
+ */
+public interface HelpSignedContract {
+
+    interface View extends BaseViewGeneric<Presenter> {
+
+    }
+
+    interface Presenter extends BasePresenterRx {
+
+
+    }
+}

@@ -1,0 +1,311 @@
+package com.fuexpress.kr.net;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import staffproto.CsAddress;
+import staffproto.CsAlbum;
+import staffproto.CsCard;
+import staffproto.CsFeed;
+import staffproto.CsItem;
+import staffproto.CsMsgid;
+import staffproto.CsMy;
+import staffproto.CsMyOrder;
+import staffproto.CsMyShop;
+import staffproto.CsParcel;
+import staffproto.CsRegionalLinkage;
+import staffproto.CsUser;
+import yssproto.CsPdu;
+
+
+/**
+ * Created by alick on 3/1/16.
+ */
+public class ProtoConfigManager {
+    private static ProtoConfigManager ourInstance = new ProtoConfigManager();
+    private List<ProtoConfig> mProtoConfigList;
+
+    public static ProtoConfigManager getInstance() {
+        return ourInstance;
+    }
+
+    public ProtoConfig getProtoConfig(Object object) {
+        for (ProtoConfig protoConfig : mProtoConfigList) {
+            if (object.getClass().isAssignableFrom(protoConfig.mRequestBuilderClazz)) {
+                return protoConfig;
+            }
+        }
+        return null;
+    }
+
+    private ProtoConfigManager() {
+        mProtoConfigList = new ArrayList<>();
+        // TODO: 3/1/16 put all Protocal HERE!
+        //登录
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SET_LOGDO_MERCHANT_REQUEST, CsMy.GetLogDoMerchantRequest.Builder.class, CsMy.GetLogDoMerchantResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SET_LOGDO_MERCHANT_PHONE_REQUEST, CsMy.GetLogDoMerchantPhoneRequest.Builder.class, CsMy.GetLogDoMerchantPhoneResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_FIND_PSW_REQUEST, CsMy.GetPswByEmailRequest.Builder.class, CsMy.GetPswByEmailResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_REGISTER_VERIFY_CODE_REQUEST, CsMy.SendRegisterVerifyCodeRequest.Builder.class, CsMy.SendRegisterVerifyCodeResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        //手机找回密码请求验证码
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_REQUEST, CsMy.GetPswByPhoneVerifyCodeRequest.Builder.class, CsMy.GetPswByPhoneVerifyCodeResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        //手机找回密码
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_REST_PASSWORD_BY_PHONE_REQUEST, CsMy.GetVerifyPswByPhoneRequest.Builder.class, CsMy.GetVerifyPswByPhoneResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        //手机是否存在
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_IS_EXIST_PHONE_REQUEST, CsMy.GetIsExistPhoneRequest.Builder.class, CsMy.GetIsExistPhoneResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        //邮箱是否存在
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_IS_EXIST_EMAIL_REQUEST, CsMy.GetIsExistEmailRequest.Builder.class, CsMy.GetIsExistEmailResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //获取用户红点信息
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_MY_ACCOUNT_HINT_REQUEST, CsFeed.MyAccountHintRequest.Builder.class, CsFeed.MyAccountHintResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        //手机注册
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_REDO_MERCHANT_BY_PHONE_REQUEST, CsMy.GetRegdoMechantRequest.Builder.class, CsMy.GetRegdoMechantResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_MY_NOTICE_LIST_REQUEST, CsMy.MyNoticeListRequest.Builder.class, CsMy.MyNoticeListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //商品管理相关
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_MERCHANT_ALBUM_LIST_REQUEST, CsItem.GetMerchantAlbumListRequest.Builder.class, CsItem.GetMerchantAlbumListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_MERCHANT_ITEM_LIST_REQUSET, CsItem.GetMerchantItemListRequest.Builder.class, CsItem.GetMerchantItemListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_ALBUM_ITEM_LIST_REQUEST, CsAlbum.GetAlbumItemListRequest.Builder.class, CsAlbum.GetAlbumItemListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_INIT_ADD_ITEM_REQREST, CsAlbum.InitAddAlbumRequest.Builder.class, CsAlbum.InitAddAlbumResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_ALBUM_CATEGORY_LIST_REQUEST, CsAlbum.GetAlbumCategoryListRequest.Builder.class, CsAlbum.GetAlbumCategoryListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //完成绑定手机请求
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_MY_PHONE_BIND_REQUEST, CsMy.SendMyPhoneBindequest.Builder.class, CsMy.SendMyPhoneBindResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //用户登录注册相关
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUEST, CsMy.SendMyPhoneBindVerifyCodeRequest.Builder.class, CsMy.SendMyPhoneBindVerifyCodeResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //地址
+        /*mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST, CsAddress.GetCustomerAddressListRequest.Builder.class, CsAddress.GetCustomerAddressListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));*/
+
+        //我的订单相关
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_MY_ORDER_ITEM_REQUEST, CsMyOrder.MyOrderItemRequest.Builder.class, CsMyOrder.MyOrderItemReponse.class, CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_MERCHANT_SALES_STATISTICS_LIST_REQUEST, CsMyOrder.MerchantSalesStatisticsListRequest.Builder.class,
+                CsMyOrder.MerchantSalesStatisticsListReponse.class, CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //添加商品
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_ADD_ITEM_SAVE_REQUEST, CsAlbum.AddItemSaveRequest.Builder.class, CsAlbum.AddItemSaveResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSG_GET_COLLECTION_LIST_REQUEST, CsAlbum.GetCollectionListRequest.Builder.class, CsAlbum.GetCollectionListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_MATCH_ITEM_CATEGORY_REQUEST, CsItem.GetMatchItemCategoryRequest.Builder.class, CsItem.GetMatchItemCategoryReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_ALBUM_ITEM_LIST_REQUEST, CsAlbum.GetAlbumCategoryListRequest.Builder.class, CsAlbum.GetAlbumCategoryListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //新建专辑
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_ADD_ALBUM_SAVE_REQUEST, CsAlbum.AddAlbumRequest.Builder.class, CsAlbum.AddAlbumResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        /*首页幻灯片*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_INDEX_ADIMAGE_REQUEST, CsFeed.IndexAdImageRequest.Builder.class, CsFeed.IndexAdImageResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        /*获取用余额*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_GET_ACCOUNT_BALANCE_REQUEST, CsMy.GetAccountBalanceRequest.Builder.class, CsMy.GetAccountBalanceResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        /*直冲支付*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_DO_DIRECT_GIFT_CARD_REQUSET, CsParcel.DoDirectGiftCardRequest.Builder.class, CsParcel.DoDirectGiftCardResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_REQUEST, CsParcel.PayDoDirectGiftCardAppSingleRequest.Builder.class, CsParcel.PayDoDirectGiftCardAppSingleResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+         /*支付*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_PAY_GIFT_CARD_ORDER_REQUEST, CsParcel.PayGiftCardOrderRequest.Builder.class, CsParcel.PayGiftCardOrderResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_SUBMIT_REQUEST, CsParcel.SendSubmitRequest.Builder.class, CsParcel.SendSubmitReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_CHECK_TO_PAY_REQUEST, CsMy.CheckToPayRequest.Builder.class, CsMy.CheckToPayResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        /*包裹列表*/
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_PARCEL_LIST_REQUEST, CsParcel.SendParcelListRequest.Builder.class, CsParcel.SendParcleListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GEG_PARCEL_DETAIL_REQREST, CsParcel.GetParcelDetailRequest.Builder.class, CsParcel.GetParcelDetailResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST, CsParcel.GetMerchantCustomerAddressListRequest.Builder.class, CsParcel.GetMerchantCustomerAddressListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_GET_SELECT_ADDRESS_AJAX_REQUEST, CsParcel.GetSelectAddressAjaxRequest.Builder.class, CsParcel.GetSelectAddressAjaxReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_SELECT_SHIPPING_METHOD_REQUEST, CsParcel.SelectShippingMethodRequest.Builder.class, CsParcel.SelectShippingMethodReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SEND_INIT_REQUEST, CsParcel.SendInitRequest.Builder.class, CsParcel.SendInitReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_SHIPPING_INFO_REQUEST, CsParcel.GetShippingInfoRequest.Builder.class, CsParcel.GetShippingInfoReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        //商店详情相关:
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_ITEMS_REQUEST, CsMyShop.ItemsRequest.Builder.class, CsMyShop.ItemsReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_MERCHANT_INTRO_REQUEST, CsMyShop.MerchantIntroRequest.Builder.class, CsMyShop.MerchantIntroReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_IMAGES_REQUEST, CsMyShop.ImagesRequest.Builder.class, CsMyShop.ImagesReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_FOLLOWERS_REQUEST, CsMyShop.FollowersRequest.Builder.class, CsMyShop.FollowersReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_INIT_EDIT_ITEM_REQUEST, CsItem.InitEditItemRequest.Builder.class, CsItem.InitEditItemResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_GET_MY_CUSTOMER_ICON_REQUEST, CsMy.MyCustomerIconRequest.Builder.class, CsMy.MyCustomerIconResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST, CsMy.SaveMyCustomerIconRequest.Builder.class, CsMy.SaveMyCustomerIconResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_MERCHANT_FORM_REQUEST, CsMyOrder.MerchantFormRequest.Builder.class, CsMyOrder.MerchantFormReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_EDIT_ITEM_SAVE_REQUEST, CsItem.EditItemSaveRequest.Builder.class, CsItem.EditItemSaveResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SAVE_MERCHANT_REQUEST, CsMyOrder.SaveMerchantRequest.Builder.class, CsMyOrder.SaveMerchantReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_DELETE_ALBUM_ITEM_REQUSET, CsItem.DeleteAlbumItemRequest.Builder.class, CsItem.DeleteAlbumItemResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SAVE_MERCHANT_IMAGE_REQUEST, CsMyShop.SaveMerchantImageRequest.Builder.class, CsMyShop.SaveMerchantImageReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SAVE_MERCHANT_INDEX_IMAGE_REQUEST, CsMyShop.SaveMerchantIndexImageRequest.Builder.class, CsMyShop.SaveMerchantIndexImageReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST, CsParcel.GetMerchantCustomerAddressListRequest.Builder.class, CsParcel.GetMerchantCustomerAddressListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_ADD_CUSTOMER_ADDRESS_REQUEST, CsAddress.AddCustomerAddressRequest.Builder.class, CsAddress.AddCustomerAddressResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_DEL_CUSTOMER_ADDRESS_REQUEST, CsAddress.DelCustomerAddressRequest.Builder.class, CsAddress.DelCustomerAddressResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_EDIT_CUSTOMER_ADDRESS_REQUEST, CsAddress.EditCustomerAddressRequest.Builder.class, CsAddress.EditCustomerAddressResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        mProtoConfigList.add(new ProtoConfig(
+                CsMsgid.StaffCSProtoMsgId.MSGID_SET_MY_SAVE_CUSTOMER_PSW_REQUEST, CsMy.SaveMyCustomerPswRequest.Builder.class, CsMy.SaveMyCustomerPswResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_INIT_EDIT_ALBUM_REQUEST, CsAlbum.InitEditAlbumRequest.Builder.class, CsAlbum.InitEditAlbumResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_EDIT_ALBUM_SAVE_REQUEST, CsAlbum.EditAlbumSaveRequest.Builder.class, CsAlbum.EditAlbumSaveResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_DELETE_ALBUM_REQUEST, CsAlbum.DeleteAlbumRequest.Builder.class, CsAlbum.DeleteAlbumResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_COUNTRY_LIST_REQUEST, CsRegionalLinkage.CountryListRequest.Builder.class, CsRegionalLinkage.CountryListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_REGION_LIST_REQUEST, CsRegionalLinkage.RegionListRequest.Builder.class, CsRegionalLinkage.RegionListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_REGION_LIST_BY_REGION_REQUEST, CsRegionalLinkage.GetRegionListByRegionRequest.Builder.class, CsRegionalLinkage.GetRegionListByRegionReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSG_GET_ACCOUNT_BALANCE_REQUEST, CsMy.GetAccountBalanceRequest.Builder.class, CsMy.GetAccountBalanceResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_REQUEST, CsCard.GiftCardBalanceListRequest.Builder.class, CsCard.GiftCardBalanceListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST, CsCard.GiftCardBalanceListAjaxRequest.Builder.class, CsCard.GiftCardBalanceListAjaxReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_RECHARGE_ORDER_DETAIL_REQUEST, CsCard.GetRechargeOrderDetailRequest.Builder.class, CsCard.GetRechargeOrderDetialResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST, CsCard.GetGiftCardOrderListRequest.Builder.class, CsCard.GetGiftCardOrderListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_CANCEL_GIFT_CARD_ORDER_REQUEST, CsCard.CancelGiftCardOrderRequest.Builder.class, CsCard.CancelGiftCardOrderResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_RECEIPT_LIST_REQUEST, CsMyOrder.ReceiptListRequest.Builder.class, CsMyOrder.ReceiptListReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_SET_EDIT_QTY_REQUEST, CsItem.SetEditQtyRequest.Builder.class, CsItem.SetEditQtyReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_SET_SOLD_OUT_REQUEST, CsItem.SetSoldOutRequest.Builder.class, CsItem.SetSoldOutReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_SET_MERCHANT_MESSAGE_REQUEST, CsItem.SetMerchantMessageRequest.Builder.class, CsItem.SetMerchantMessageReponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_REQUEST, CsMy.GetMerchantSubAccountPermissionRequest.Builder.class, CsMy.GetMerchantSubAccountPermissionResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_REQUEST, CsMy.GetMerchantSubAccountListRequest.Builder.class, CsMy.GetMerchantSubAccountListResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        //添加子账号
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST,CsMy.AddMerchantSubAccountRequest.Builder.class,CsMy.AddMerchantSubAccountResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_ENABLE_MERCHANT_CUSTOMER_REQUEST,CsMy.EnableMerchantCustomerRequest.Builder.class,CsMy.EnableMerchantCustomerResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST,CsMy.DisableMerchantCustomerRequest.Builder.class,CsMy.DisableMerchantCustomerResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_INIT_PERMISSIONS_REQUEST, CsUser.InitPermissionsRequest.Builder.class,CsUser.InitPermissionsResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.StaffCSProtoMsgId.MSGID_SAVE_PERMISSIONS_REQUEST, CsUser.SavePermissionsRequest.Builder.class,CsUser.SavePermissionsResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_NONE));
+
+    }
+}

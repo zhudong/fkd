@@ -1,0 +1,62 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.view.View;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.model.AddressDao;
+import com.fuexpress.kr.model.HeaderModel;
+import com.fuexpress.kr.ui.activity.PickUpActivity;
+import com.fuexpress.kr.ui.activity.ReplenishActivity;
+import com.fuexpress.kr.ui.activity.help_send.ToHelpSendActivity;
+import com.fuexpress.kr.ui.activity.help_signed.HelpMeSignedActivity;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class HomeFragment extends BaseFragment<MainActivity> {
+
+    @BindView(R.id.convenientBanner)
+    ConvenientBanner convenientBanner;
+    private View mRootView;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.home_fragment_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        HeaderModel.getInstance().initDta(mContext, convenientBanner);
+    }
+
+
+    @OnClick({R.id.rl_in_hf_help_get, R.id.rl_in_hf_help_take, R.id.rl_in_hf_help_buy, R.id.rl_in_hf_help_send})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_in_hf_help_get:
+                mContext.startDDMActivity(PickUpActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_take:
+                mContext.startDDMActivity(HelpMeSignedActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_buy:
+                mContext.startDDMActivity(ReplenishActivity.class, true);
+                break;
+            case R.id.rl_in_hf_help_send:
+                mContext.startDDMActivity(ToHelpSendActivity.class, true);
+                break;
+        }
+    }
+}

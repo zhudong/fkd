@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:background="@color/white"
+                android:minHeight="68dp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_in_head_for_merchant_follows_lv_name"
+            style="@style/system_Mytextsize_black_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="商店名字"/>
+
+        <TextView
+            android:id="@+id/tv_in_head_for_merchant_follows_lv_followsnum"
+            style="@style/system_Mytextsize_gray_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_in_head_for_merchant_follows_lv_name"
+            android:layout_marginLeft="10dp"
+
+            android:text="关注者  11"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_in_head_for_merchant_follows_lv_attention"
+        style="@style/system_Mytextsize_white_12"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_btn_bg_red"
+        android:gravity="center"
+        android:text="关注"/>
+
+
+</RelativeLayout>

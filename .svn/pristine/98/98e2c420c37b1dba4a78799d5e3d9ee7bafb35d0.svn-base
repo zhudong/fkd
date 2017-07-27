@@ -1,0 +1,187 @@
+package com.fuexpress.kr.conf;
+
+import com.fuexpress.kr.utils.FileUtils;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.TimeUtils;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class Constants {
+    //正式环境
+    public final static String POST_URL_OFFICIAL = "http://122.226.207.12:80";
+    //    public final static String POST_URL_OFFICIAL = "http://122.226.44.113:7010";
+    //public final static String POST_URL_OFFICIAL = "http://122.226.207.12:80";
+    public final static String POST_URL_TEST = "http://122.226.44.113:7010";
+    public static String POST_URL = POST_URL_TEST;
+    //public static String POST_URL = POST_URL_OFFICIAL;
+    public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;
+
+
+    //上传头像需要用到的
+    public static String secret = "ZlE6f4O/uns7eMyHjvsizqyj/Ac=";
+    public static String bucket = "dongimage";
+    public static String IMAGE_URL_OFFICIAL = "http://dimage.yissimg.com";
+    public static final String UPLOAD_IMG_FOR_ADD_ITEM = "/merchantapp/item/" + FileUtils.getTimeFileSuffix(TimeUtils.getDateStyleStringEndHour());
+    public static final String UPLOAD_IMG_FOR_ADD_PACKAGE = "/merchantapp/parcel/" + FileUtils.getTimeFileSuffix(TimeUtils.getDateStyleStringEndHour());
+    public static final String UPLOAD_IMG_FOR_MERCHANT_USERINFO = "/merchantapp/userinfo/";
+    public static final String UPLOAD_IMG_FOR_MERCHANT_COVER = "/merchantapp/merchant/";
+
+    //充值卡id的key
+    public static final String GIFT_CARD_ORDER_ID = "gift_card_order_id";
+
+    //充值卡状态的key
+    public static final String GIFT_CARD_ORDER_STATE = "gift_card_order_state";
+    //充值卡状态  待付款的标记
+    public static final int GIFT_CARD_ORDER_STATE_PENDING = 0x1019;
+    //充值卡状态  已取消的标记
+    public static final int GIFT_CARD_ORDER_STATE_CANCELED = 0x1020;
+    //充值卡状态  已支付的标记
+    public static final int GIFT_CARD_ORDER_STATE_PAID = 0x1021;
+
+    public class LOGIN_TYPE {
+        public static final String LOGIN_TYPE = "login_type";
+        public static final String LOGIN_ENAME = "login_name";
+        public static final String LOGIN_PASSWORD = "login_password";
+
+    }
+
+    public static final int ADDRESS_REQUEST_CODE = 0x1012;
+
+    public interface ImgUrlSuffix {
+        //用户头像
+        String small_9 = "!small9";
+        //单品列表
+        String dp_tall = "!dptall";
+
+        //单品列表 正方形
+        String dp_list = "!dplist";
+        //详情大图
+        String small = "!small";
+        //图集小图
+        String dp_small = "!dpsmall";
+        //拼单列表
+        String crowd_list = "!crowdlist";
+        //feed列表:
+        String feed_list = "!feedlist";
+        //moblist:
+        String mob_list = "!moblist";
+
+        //bizlist
+        String biz_list = "!bizlist";
+
+        //crowd_order
+        String crowd_order = "!crowdorder";
+    }
+
+
+    public class USER_INFO {
+        public static final int PHONE = 2;
+        public static final int EMAIL = 1;
+        public static final String USER_MID = "user_mid";
+        public static final String USER_MUIN = "user_muin";
+        public static final String USER_H5TICKET = "user_h5ticket";
+        public static final String USER_ITCKET = "user_ticket";
+        public static final String USER_ACCOUNT = "user_account";
+        public static final String USER_PWD = "user_pwd";
+        public static final String USER_ACCOUNT_TYPE = "user_account_type";
+        public static final String USER_ACCOUNT_EXTRA = "account_extra_phone";
+
+        public static final String USER_IS_OPEN_ORDER = "user_is_open_order";
+        public static final String USER_IS_OPEN_CAM = "user_is_open_CAM";
+
+        public static final String USER_PERMISSIONS="user_permissions";
+    }
+
+
+    //我的订单请求类型
+    public static final String ORDER_STATUS_PROCESSING = "Processing";
+    public static final String ORDER_STATUS_PREORDER = "Preorder";
+    public static final int ALBUM_RESULT_CODE = 0x1000;
+    public static final int ALBUM_GET_BITMAP_REQUEST_CODE = 0x1001;
+
+    public static final int CREATE_ALBUM_CLASSIFY_REQUEST_CODE = 0x1002;
+    public static final int CREATE_ALBUM_REQUEST_CODE = 0x1003;
+
+    //商品分类的来源ID
+    public static final int CLASSIFY_FROM_EDIT = 0x1005;
+    public static final int CLASSIFY_FROM_ADD = 0x1006;
+    //编辑商品页面  Intent key
+    public static final String KEY_EDIT_MATCH_ITEM = "matchitemid";
+    public static final String KEY_EDIT_ALBUM_ID = "albumId";
+    public static final int EDIT_GET_BITMAP_REQUEST_CODE = 0x1004;
+
+    public static class WebWiewUrl {
+        public static String H5_URL;
+        public static String H5_URL_OFFICIAL = "http://p.yiss.com";
+        public static String H5_TEST = "http://122.226.100.91";
+        public static String IMAGE_URL_OFFICIAL = "http://dimage.yissimg.com";
+        //        static String H5_TEST = "http://115.231.94.200:8080";
+
+        public static String ITEM_DETAIL = "/app/item/";
+        public static String CROWD_PRODUCT_DETAIL = "/crowdProductDetail/";
+        public static String CROWD_DETAIL = "/crowdDetail/";
+        public static String SHOW_CART = "/onepage/delivery/";
+        public static String ADD_ADDRESS = "/app/addCustomerAddress";
+        public static String EDIT_ADDRESS = "/app/editCustomerAddress";
+        public static String GIFT_CARD_TERMS_AND_CONDITIONS = "/m/gift-card-terms-and-conditions";
+
+
+        public static String SHARE_ITEM = "/items/1%/2%";
+        public static String SHARE_ALBUM = "/collections/1%";
+        public static String SHARE_CROWD_DETAIL = "/crowdorders/1%";
+        public static String SHARE_CROWD_ATTEND = "/crowdorders/1%";
+        public static String SHARE_SHOP = "/bizs/1%";
+        public static String SHARE_URL_SUFFIX = "?in=";
+
+        public static String NO_TITLE = "?decorator=empty";
+        public static String NO_NAV = "&isAppH5=1";
+
+
+        public static String getH5Url() {
+            H5_URL = WebWiewUrl.H5_TEST;
+            return H5_URL;
+        }
+
+    }
+
+    //美洽APP Key
+    public static final String MEIQIA_APP_KEY = "2edb7d1e1ac0416d3303f397309b0abb";
+    public static final String MEIQIA_APP_GROUP = "cacac65641a7b92ca94d99c5dfc202e3";
+
+    //微信第三方登录、分享配置
+    public class WeiXin {
+        //        public static final String WX_APPID = "wx8482c8a405dc6a5f";
+        public static final String WX_APPID = "wx08e5dd1abb287713";
+    }
+
+    //微信支付失败
+    public static final int CODE_WECHAT_PAY_FAILED = -1;
+    //微信支付成功
+    public static final int CODE_WECHAT_PAY_SUCCESS = 0;
+    //微信支付取消
+    public static final int CODE_WECHAT_PAY_CANCEL = -2;
+
+    public static class SHARE_CLEINT_NAME {
+        //QQ分享
+        public static final String QQ_SHARE_PACKAGE_NAME = "com.tencent.mobileqq";
+        public static final String QQ_SHARE_ACTIVITY_NAME = "com.tencent.mobileqq.activity.JumpActivity";
+        //QQ空间分享
+        public static final String QQ_ZONE_SHARE_PACKAGE_NAME = "com.qzone";
+        public static final String QQ_ZONE_SHARE_ACTIVITY_NAME = "com.qzonex.module.operation.ui.QZonePublishMoodActivity";
+        //QQ收藏
+        public static final String QQ_ADD_SHARE_PACKAGE_NAME = "com.tencent.mobileqq";
+        public static final String QQ_ADD_SHARE_ACTIVITY_NAME = "cooperation.qqfav.widget.QfavJumpActivity";
+        //微信好友分享
+        public static final String WX_FRIEND_SHARE_PACKAGE_NAME = "com.tencent.mm";
+        public static final String WX_FRIEND_SHARE_ACTIVITY_NAME = "com.tencent.mm.ui.tools.ShareImgUI";
+        //微信朋友圈分享
+        public static final String WX_TIMELINE_SHARE_PACKAGE_NAME = "com.tencent.mm";
+        public static final String WX_TIMELINE_SHARE_ACTIVITY_NAME = "com.tencent.mm.ui.tools.ShareToTimeLineUI";
+        //微信收藏
+        public static final String WX_ADD_SHARE_PACKAGE_NAME = "com.tencent.mm";
+        public static final String WX_ADD_SHARE_ACTIVITY_NAME = "com.tencent.mm.ui.tools.AddFavoriteUI";
+
+
+    }
+}

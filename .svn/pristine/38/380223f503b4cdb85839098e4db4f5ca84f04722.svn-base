@@ -1,0 +1,487 @@
+package com.fuexpress.kr.ui.activity.package_detail;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseActivity;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.ParcelItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.activity.CouponActivity;
+import com.fuexpress.kr.ui.adapter.ParcelItemAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsAddress;
+import fksproto.CsParcel;
+import fksproto.CsUser;
+
+public class PackageDetailActivity extends MbaseActivity<PackageDetailContract.Presenter, PackageDetailContract.Model> implements PackageDetailContract.View {
+
+
+    public static final String PARCEL_ID = "parcel_id";
+    public static final String PARCEL_BEAN = "parcel_beal";
+    /*foot*/
+    @BindView(R.id.tv_transport_type)
+    TextView mTvTransportType;
+    @BindView(R.id.tv_transport_detail)
+    TextView mTvTransportDetail;
+    @BindView(R.id.tv_address_name)
+    TextView mTvAddressName;
+    @BindView(R.id.tv_address_detail_foot)
+    TextView mTvAddressDetailFoot;
+    @BindView(R.id.ll_comment_container)
+    LinearLayout mLlCommentContainer;
+    @BindView(R.id.ll_comment_all)
+    LinearLayout mLlCommentAll;
+    /*header*/
+    @BindView(R.id.tv_package_number)
+    TextView mTvPackageNumber;
+    @BindView(R.id.tv_package_type)
+    TextView mTvPackageType;
+    @BindView(R.id.tv_in_storage_time)
+    TextView mTvInStorageTime;
+    @BindView(R.id.tv_out_storage_time)
+    TextView mTvOutStorageTime;
+    @BindView(R.id.tv_storage_name)
+    TextView mTvStorageName;
+    @BindView(R.id.tv_is_default)
+    TextView mTvIsDefault;
+    @BindView(R.id.tv_person_name)
+    TextView mTvPersonName;
+    @BindView(R.id.tv_address_detail)
+    TextView mTvAddressDetail;
+    @BindView(R.id.ll_transport_container)
+    LinearLayout mLlTransportContainer;
+    @BindView(R.id.tv_apply_price_text)
+    TextView mTvApplyPriceText;
+    @BindView(R.id.tv_apply_price_notice)
+    TextView mTvApplyPriceNotice;
+    @BindView(R.id.tv_apply_price)
+    TextView mTvApplyPrice;
+    @BindView(R.id.tv_transport_insurance_text)
+    TextView mTvTransportInsuranceText;
+    @BindView(R.id.tv_transport_insurance_notice)
+    TextView mTvTransportInsuranceNotice;
+    @BindView(R.id.tv_transport_insurance)
+    TextView mTvTransportInsurance;
+    @BindView(R.id.rl_insurance)
+    RelativeLayout mRlInsurance;
+    @BindView(R.id.ll_transport_all)
+    LinearLayout mLlTransportAll;
+    @BindView(R.id.tv_account_balance)
+    TextView mTvAccountBalance;
+    @BindView(R.id.tv_account_balance_pay_type)
+    TextView mTvAccountBalancePayType;
+    @BindView(R.id.img_is_choice)
+    ImageView mImgIsChoice;
+    @BindView(R.id.ll_balance_container)
+    RelativeLayout mLlBalanceContainer;
+    @BindView(R.id.rl_counter)
+    RelativeLayout mRlCounter;
+    @BindView(R.id.tv_pavkage_item_count)
+    TextView mTvPavkageItemCount;
+    @BindView(R.id.tv_pavkage_apply_price)
+    TextView mTvPavkageApplyPrice;
+    @BindView(R.id.rl_customer_address)
+    RelativeLayout mRlCustomerAddress;
+    @BindView(R.id.tv_forecast_carriage)
+    TextView mTvForecastCarriage;
+    @BindView(R.id.tv_prospect_price)
+    TextView mTvProspectPrice;
+    @BindView(R.id.tv_prospect_price_des)
+    TextView mTvProspectPriceDes;
+    @BindView(R.id.tv_forecast_weight)
+    TextView mTvForecastWeight;
+    @BindView(R.id.tv_prospect_weight)
+    TextView mTvProspectWeight;
+    @BindView(R.id.tv_commint_send_package)
+    TextView mTvCommintSendPackage;
+    @BindView(R.id.rl_parcle_detail_bottom)
+    RelativeLayout mRlParcleDetailBottom;
+    @BindView(R.id.tv_Coupon)
+    TextView tvCoupon;
+
+    private ListView mBody;
+    private View mFoot;
+    private String sWaitReceive;
+    private String sSended;
+    private String sToSend;
+    private String sWaitOut;
+
+    @Override
+    protected int getViewResId() {
+        return R.layout.activity_package_detail;
+    }
+
+    @Override
+    public View setInitView() {
+        super.setInitView();
+        mBody = (ListView) mRootView.findViewById(R.id.lv_body);
+        mBody.addHeaderView(View.inflate(this, R.layout.view_package_detail_header, null));
+        mFoot = View.inflate(this, R.layout.view_parcel_detail_foot, null);
+        mBody.addFooterView(mFoot);
+
+        ArrayList<ParcelItemBean> data = new ArrayList<>();
+        data.add(new ParcelItemBean());
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+        initTitle("", "", "");
+        hintIVRight();
+        long parcelId = getIntent().getLongExtra(PARCEL_ID, 0);
+        Bundle bundleExtra = getIntent().getBundleExtra(PARCEL_BEAN);
+        String title = "";
+        sWaitReceive = getString(R.string.String_waite_receive);
+        sWaitOut = getString(R.string.String_waite_out);
+        sSended = getString(R.string.String_sended);
+        sToSend = getString(R.string.String_goto_send);
+        if (bundleExtra != null) {
+            CsParcel.Parcel parcel = (CsParcel.Parcel) bundleExtra.getSerializable(PARCEL_BEAN);
+//            String status = parcel.getStatus();
+            String status = "Submitted";
+            if ("Submitted".equals(status)) {
+                title = sToSend;
+                mRlParcleDetailBottom.setVisibility(View.VISIBLE);
+            } else if ("Payed".equals(status)) {
+                title = sWaitReceive;
+            } else if ("Instore".equals(status)) {
+                title = sWaitReceive;
+            } else if ("Notice".equals(status)) {
+                title = sWaitOut;
+            } else if ("Checked".equals(status)) {
+                title = sWaitOut;
+            } else if ("Shipped".equals(status)) {
+                title = sSended;
+            }
+            initTitle("", title, "");
+            hintIVRight();
+        }
+
+        mPresenter = new PackageDeatilPresent(parcelId);
+        mModel = new PackageDetailModel();
+        mPresenter.setVM(this, mModel);
+    }
+
+    public void hintHeader() {
+        mRlCustomerAddress.setVisibility(View.GONE);
+        mLlTransportAll.setVisibility(View.GONE);
+        mRlCounter.setVisibility(View.GONE);
+        mRlParcleDetailBottom.setVisibility(View.GONE);
+    }
+
+    public void hitFoot() {
+      /*  int height = UIUtils.dip2px(this, 8);
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(height, ViewGroup.LayoutParams.MATCH_PARENT);
+        mFoot.setLayoutParams(layoutParams);
+        mFoot.setVisibility(View.GONE);*/
+        mRlParcleDetailBottom.setVisibility(View.VISIBLE);
+        mBody.removeFooterView(mFoot);
+        TextView textView = new TextView(this);
+        textView.setBackgroundColor(getResources().getColor(R.color.default_bg));
+        int height = UIUtils.dip2px(10);
+        textView.setHeight(height);
+        mBody.addFooterView(textView);
+    }
+
+    public void showComment(List<CsParcel.ParcelMessage> comments) {
+        if (comments == null || comments.size() <= 0) {
+            mLlCommentAll.setVisibility(View.GONE);
+            return;
+        } else {
+            mLlCommentAll.setVisibility(View.VISIBLE);
+        }
+        mLlCommentContainer.removeAllViews();
+        for (int i = 0; i < comments.size(); i++) {
+            CsParcel.ParcelMessage message = comments.get(i);
+            View commentView = View.inflate(this, R.layout.item_parcel_comment, null);
+            TextView name = (TextView) commentView.findViewById(R.id.tv_comment_name);
+            TextView time = (TextView) commentView.findViewById(R.id.tv_comment_time);
+            TextView content = (TextView) commentView.findViewById(R.id.tv_comment_content);
+            name.setText(message.getFromRole());
+            time.setText(message.getCreateTime());
+            content.setText(message.getContent());
+            mLlCommentContainer.addView(commentView);
+        }
+    }
+
+    public void showHeader(CsParcel.Parcel parcel, String wareHouse, boolean outStore) {
+
+    /*    PARCEL_TYPE_NONE       = 0;
+        PARCEL_TYPE_ORDER      = 1;//订单包裹
+        PARCEL_TYPE_TRANSPORT  = 2;//转运包裹
+        PARCEL_TYPE_DIRECT     = 3;//直邮包裹
+*/
+        String parcleType = "";
+        if (parcel != null) {
+            mTvPackageNumber.setText(getString(R.string.package_number) + parcel.getParcelNumber());
+
+            switch (parcel.getType()) {
+                case CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE:
+                    parcleType = getString(R.string.package_type_order);
+                    break;
+                case CsParcel.ParcelType.PARCEL_TYPE_TRANSPORT_VALUE:
+                    parcleType = getString(R.string.package_type_transport);
+                    break;
+                case CsParcel.ParcelType.PARCEL_TYPE_DIRECT_VALUE:
+                    parcleType = getString(R.string.package_type_direct);
+                    break;
+            }
+            mTvPackageType.setText(getString(R.string.package_type) + parcleType);
+//            final String instoreTime = parcel.getInstoreTime();
+            final String instoreTime = "";
+            if ("".equals(instoreTime)) {
+                mTvInStorageTime.setVisibility(View.GONE);
+            }
+
+            if (outStore) {
+                mTvInStorageTime.setVisibility(View.VISIBLE);
+                mTvInStorageTime.setText(getString(R.string.package_out_house_time) + parcel.getOutstoreTime());
+            } else {
+                mTvInStorageTime.setText(getString(R.string.package_in_house_time) + instoreTime);
+            }
+
+            if (wareHouse != null) {
+                mTvStorageName.setText(getString(R.string.package_house_location) + wareHouse);
+            }
+        }
+    }
+
+
+    public void showCustomerAddress(String topText, String addressText, int id) {
+        mTvPersonName.setText(topText);
+//        String region = AssetFileManager.getInstance().readFile(this, address.getRegioncode(), AssetFileManager.ADDRESS_TYPE);
+//        String detail = (region + "," + address.getStreet());
+        mTvAddressDetail.setText(addressText);
+    }
+
+    public void showCustomerAddress(CsAddress.CustomerAddress address) {
+        mTvPersonName.setText(address.getName() + "," + address.getPhone());
+        String detail = address.getStreet() + "," + (address.getRegion());
+        mTvAddressDetail.setText(detail);
+
+    }
+
+    public void showShippingMethods(List<CsParcel.MerchantParcelShippingMethodList> methods) {
+        TransportClickListener listener = new TransportClickListener();
+        mLlTransportContainer.removeAllViews();
+        if (methods != null) {
+            for (int i = 0; i < methods.size(); i++) {
+                ViewGroup inflate = (ViewGroup) View.inflate(this, R.layout.view_item_transport_type, null);
+                inflate.setOnClickListener(listener);
+                TextView child2 = (TextView) inflate.findViewById(R.id.tv_transport_des);
+                TextView child3 = (TextView) inflate.findViewById(R.id.tv_transport_detail);
+                CsParcel.MerchantParcelShippingMethodList shippingMethod = methods.get(i);
+                String shippingmethodstring = shippingMethod.getShippingmethodstring();
+                String[] split = shippingmethodstring.split("\n");
+                String title = "";
+                String content = "";
+                if (split.length >= 1) {
+                    title = split[0];
+                    if (split.length >= 2) {
+                        for (int j = 1; j < split.length; j++) {
+                            if (j == split.length - 1) {
+                                content += split[j];
+                            } else {
+                                content += split[j] + "\n";
+                            }
+                        }
+                    }
+                }
+                child2.setText(title);
+                child3.setText(content);
+                inflate.setTag(shippingMethod);
+                mLlTransportContainer.addView(inflate);
+                if (i == 0)
+                    inflate.callOnClick();
+            }
+        }
+    }
+
+    public void showBalanceAndPayType(float balance, boolean useBalance, int type, CsUser.CouponList mCoupon) {
+        mTvAccountBalance.setText(
+                getString(R.string.String_balance_first) + UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), balance)
+        );
+        if (balance > 0) {
+            mTvAccountBalance.setVisibility(View.VISIBLE);
+        } else {
+            mTvAccountBalance.setVisibility(View.GONE);
+        }
+
+        if (mCoupon != null) {
+            tvCoupon.setVisibility(View.VISIBLE);
+            String text = getString(R.string.pr_use) + mCoupon.getShippingcouponname() + ": " + UIUtils.getCurrency(this, mCoupon.getDiscountamount());
+            tvCoupon.setText(text);
+        } else {
+            tvCoupon.setVisibility(View.GONE);
+        }
+        switch (type) {
+            case Constants.PAYMENT_ALIPAY:
+                mTvAccountBalancePayType.setText(getString(R.string.String_parcel_ali_pay));
+                break;
+            case Constants.PAYMENT_WECHAT:
+                mTvAccountBalancePayType.setText(getString(R.string.String_parcel_weixin_pay));
+                break;
+            case Constants.PAYMENT_ADYEN:
+                mTvAccountBalancePayType.setText("adyen");
+                break;
+            case Constants.PAYMENT_KRBANK:
+                mTvAccountBalancePayType.setText("krbank");
+                break;
+        }
+    }
+
+
+    public void showProductInfo(int count, float declarePrice) {
+        mTvPavkageApplyPrice.setText(
+                getString(R.string.package_declare_price) + UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), declarePrice));
+        if (count != 0) {
+            mTvPavkageItemCount.setText(
+                    getString(R.string.package_product_count, count));
+        }
+    }
+
+    public void showTransportInfo(String name, String detail) {
+        mTvTransportType.setText(name);
+        mTvTransportDetail.setText(detail);
+    }
+
+    @Override
+    public void setParcelsItme(List<ParcelItemBean> itemBeans) {
+        mBody.setAdapter(new ParcelItemAdapter(this, itemBeans));
+    }
+
+    public void showParcelAddress(CsAddress.CustomerAddress address) {
+        mTvAddressName.setText(address.getName() + "," + address.getPhone());
+        String detail = (address.getRegion()) + address.getStreet();
+        mTvAddressDetailFoot.setText(detail);
+    }
+
+
+    public void showEstimatePrice(float price) {
+        mTvProspectPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), price));
+    }
+
+    public void showEstimateWeight(float weight) {
+        mTvProspectWeight.setText(
+                getString(R.string.package_weight, weight) + getString(R.string.package_weight_tips));
+    }
+
+
+    @OnClick(R.id.rl_customer_address)
+    public void pickAddress() {
+        mPresenter.choiceAddress();
+    }
+
+    @OnClick(R.id.tv_commint_send_package)
+    public void sendPackage() {
+        mPresenter.toPay();
+    }
+
+    @OnClick(R.id.rl_counter)
+    public void pickPayType() {
+        mPresenter.switchPayType();
+    }
+
+    class TransportClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) v.getTag();
+            mPresenter.selectShippingMethod(shippingMethod);
+        }
+    }
+
+    public void showShippingMethodInsurance(int isShow, float maxdeclaredvalue, float declareValue, float premiumrate, float premium, float shippingid) {
+
+        for (int i = 0; i < mLlTransportContainer.getChildCount(); i++) {
+            View child = mLlTransportContainer.getChildAt(i);
+            RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+            radioButton.setChecked(false);
+            CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) child.getTag();
+
+            if (shippingid == shippingMethod.getParcelshippingmethodid()) {
+                radioButton.setChecked(true);
+            }
+        }
+        if (isShow == 1) {
+            mRlInsurance.setVisibility(View.VISIBLE);
+            mTvApplyPriceNotice.setText(getString(R.string.package_apply_price_detail, maxdeclaredvalue));
+            mTvApplyPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), declareValue));
+            mTvTransportInsuranceNotice.setText(getString(R.string.package_shipping_insurance_detail, premiumrate));
+            mTvTransportInsurance.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), premium));
+        } else {
+            mRlInsurance.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE && resultCode == Constants.ADDRESS_REQUEST_CODE) {
+            if (data != null) {
+//                CsParcel.MerchantAddressList address = (CsParcel.MerchantAddressList) data.getExtras().get("address");
+//                mPresenter.setAddress(address);
+            }
+        }
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE && resultCode == AddressManagerActivity.AddressresultCode) {
+            if (data != null) {
+                String topString = data.getStringExtra(AddressManagerActivity.topText1);
+                String addressString = data.getStringExtra(AddressManagerActivity.addressText);
+                int addressID = data.getIntExtra(AddressManagerActivity.addressId, 0);
+//                mPresenter.setAddress(topString,addressString,addressID);
+//                isClicking = false;
+//                mTvParcelShippingFee.setText("");
+                mPresenter.setAddress(topString, addressString, addressID);
+            }
+        }
+        if (requestCode == 0 && resultCode == Constants.PAYMENT_REQUEST_CODE && data != null) {
+            {
+                CsUser.CouponList coupon = (CsUser.CouponList) data.getSerializableExtra(CouponActivity.CODE_COUPON);
+                setPayInfor(data.getIntExtra("payType", -1),
+                        data.getStringExtra("paymentString"),
+                        data.getIntExtra("paymentPos", 0),
+                        data.getBooleanExtra("isUseBalance", false), data.getFloatExtra("account", 0f),
+                        coupon);
+            }
+        }
+    }
+
+    private void setPayInfor(int payType, String paymentString, int paymentPos, boolean isUseBalance, float account, CsUser.CouponList coupon) {
+        showBalanceAndPayType(account, isUseBalance, payType, coupon);
+        mPresenter.setCoupons(coupon, payType, paymentPos);
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(PackageDetailContract.Presenter.mParcelName)) {
+            closeLoading();
+            mPresenter.submitSucess(event.getBooleanParam());
+            SysApplication.mCurrentRequestPayment = "";
+        }
+        if (event.getType() == BusEvent.PAYMENT_TYPE_CHANGE) {
+            mPresenter.initPayMethod();
+        }
+        if (event.getType() == BusEvent.CODE_COUPON_ID) {
+            mPresenter.setCouponsID(event.getIntParam());
+        }
+    }
+}

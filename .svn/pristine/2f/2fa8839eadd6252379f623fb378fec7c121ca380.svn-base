@@ -1,0 +1,10 @@
+package com.fuexpress.kr.bean;
+
+/**
+ * Created by yuan on 2016-6-15.
+ */
+public class ParcelItemBean {
+    public String img;
+    public String titel;
+    public int count;
+}

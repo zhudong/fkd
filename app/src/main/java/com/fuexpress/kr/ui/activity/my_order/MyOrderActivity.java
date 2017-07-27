@@ -1,0 +1,239 @@
+package com.fuexpress.kr.ui.activity.my_order;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.model.RedPointCountManager;
+import com.fuexpress.kr.model.SalesOrderManager;
+import com.fuexpress.kr.ui.activity.order_detail.OrderDetailPayedActivity;
+import com.socks.library.KLog;
+
+import java.util.List;
+
+public class MyOrderActivity extends BaseActivity {
+    private final static String TAG = "MyOrderActivity";
+    private static String TO_SEND = "to_send";
+    private static String WAIT_SEND = "wait_send";
+    private static String SENDED = "sended";
+    private static String ALL = "all";
+    private TextView leftTv, centerTv, rigthTv;
+    private ImageView leftIv, rightIv;
+    public static final String STATE = "state";
+    private TextView toSendTv, waitSendTv, sendedTv, allTv, toPayCountTv;
+    private ImageView toSendIv, waitSendIv, sendedIv, allIv;
+    private RelativeLayout toSendLayout, waitForSendingLayout, sendedLayout, allLayout;
+    private int status = 0;
+    private FragmentManager mFragmentManager;
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.title_tv_left:
+                    onBackPressed();
+                    break;
+                case R.id.title_iv_left:
+                    onBackPressed();
+                    break;
+                case R.id.sendedLayout:
+                    status = SalesOrderManager.STATUS_CANCELED;
+                    switchState();
+                    break;
+                case R.id.gotoSendLayout:
+                    status = SalesOrderManager.STATUS_TO_PAY;
+                    switchState();
+                    break;
+                case R.id.waitingForSendLayout:
+                    status = SalesOrderManager.STATUS_PAYED;
+                    switchState();
+                    break;
+                case R.id.allLayout:
+                    status = SalesOrderManager.STATUS_ALL;
+                    switchState();
+                    break;
+
+
+            }
+        }
+    };
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_my_order, null);
+        status = getIntent().getIntExtra(STATE, 0);
+        leftIv = (ImageView) view.findViewById(R.id.title_iv_left);
+        rightIv = (ImageView) view.findViewById(R.id.title_iv_right);
+        leftTv = (TextView) view.findViewById(R.id.title_tv_left);
+        centerTv = (TextView) view.findViewById(R.id.title_tv_center);
+        rigthTv = (TextView) view.findViewById(R.id.title_tv_right);
+
+        rightIv.setVisibility(View.GONE);
+        rigthTv.setVisibility(View.GONE);
+
+        leftIv.setOnClickListener(onClickListener);
+        leftTv.setOnClickListener(onClickListener);
+
+        leftTv.setText(getString(R.string.integral_management_back_msg));
+        centerTv.setText(getString(R.string.all_order));
+
+        toSendLayout = (RelativeLayout) view.findViewById(R.id.gotoSendLayout);
+        waitForSendingLayout = (RelativeLayout) view.findViewById(R.id.waitingForSendLayout);
+        sendedLayout = (RelativeLayout) view.findViewById(R.id.sendedLayout);
+        allLayout = (RelativeLayout) view.findViewById(R.id.allLayout);
+        toSendIv = (ImageView) view.findViewById(R.id.gotoSendIv);
+        toSendTv = (TextView) view.findViewById(R.id.gotoSendTv);
+        waitSendIv = (ImageView) view.findViewById(R.id.waitingForSendIv);
+        waitSendTv = (TextView) view.findViewById(R.id.waitingForSendTv);
+        sendedIv = (ImageView) view.findViewById(R.id.sendedIv);
+        sendedTv = (TextView) view.findViewById(R.id.sendedTv);
+        allIv = (ImageView) view.findViewById(R.id.allIv);
+        allTv = (TextView) view.findViewById(R.id.allTv);
+        toSendLayout.setOnClickListener(onClickListener);
+        waitForSendingLayout.setOnClickListener(onClickListener);
+        sendedLayout.setOnClickListener(onClickListener);
+        allLayout.setOnClickListener(onClickListener);
+        toPayCountTv = (TextView) view.findViewById(R.id.toPayCountTV);
+        if (RedPointCountManager.redPointOrderCount != 0) {
+            toPayCountTv.setText("" + RedPointCountManager.redPointOrderCount);
+            toPayCountTv.setVisibility(View.VISIBLE);
+        } else {
+            toPayCountTv.setVisibility(View.INVISIBLE);
+        }
+        mFragmentManager = getSupportFragmentManager();
+        switchState();
+        //   getList();
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            /*case R.id.img_title_back:
+                onBackPressed();
+                break;*/
+        }
+
+    }
+
+    private void reset() {
+        sendedTv.setTextColor(Color.BLACK);
+        sendedIv.setImageResource(R.mipmap.canceled);
+        waitSendTv.setTextColor(Color.BLACK);
+        waitSendIv.setImageResource(R.mipmap.payed);
+        toSendTv.setTextColor(Color.BLACK);
+        toSendIv.setImageResource(R.mipmap.topay);
+        allTv.setTextColor(Color.BLACK);
+        allIv.setImageResource(R.mipmap.all_order);
+
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.GET_MY_RED_POINT_COUNT_SUCCESS:
+                if (RedPointCountManager.redPointOrderCount != 0) {
+                    toPayCountTv.setText("" + RedPointCountManager.redPointOrderCount);
+                    toPayCountTv.setVisibility(View.VISIBLE);
+                } else {
+                    toPayCountTv.setVisibility(View.INVISIBLE);
+                }
+                break;
+        }
+    }
+
+    private void switchState() {
+        Log.i(TAG, "click " + status);
+        reset();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        switch (status) {
+            case SalesOrderManager.STATUS_ALL:
+                allTv.setTextColor(Color.RED);
+                allIv.setImageResource(R.mipmap.all_order_r);
+                centerTv.setText(getString(R.string.all_order));
+                commintFragment(transaction);
+
+                break;
+            case SalesOrderManager.STATUS_TO_PAY:
+                toSendTv.setTextColor(Color.RED);
+                toSendIv.setImageResource(R.mipmap.waitpay_r);
+                centerTv.setText(getString(R.string.String_goto_pay));
+                commintFragment(transaction);
+                break;
+            case SalesOrderManager.STATUS_PAYED:
+                waitSendTv.setTextColor(Color.RED);
+                waitSendIv.setImageResource(R.mipmap.payed_r);
+                commintFragment(transaction);
+                centerTv.setText(getString(R.string.String_payed));
+                break;
+            case SalesOrderManager.STATUS_CANCELED:
+                sendedTv.setTextColor(Color.RED);
+                sendedIv.setImageResource(R.mipmap.canceled_r);
+                commintFragment(transaction);
+                centerTv.setText(R.string.String_canceled);
+                break;
+
+        }
+        transaction.commitAllowingStateLoss();
+    }
+
+    private void commintFragment(FragmentTransaction transaction) {
+        List<Fragment> fragments = mFragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment frg : fragments) {
+                transaction.hide(frg);
+            }
+        }
+        transaction.show(getFragment(transaction));
+    }
+
+    private Fragment getFragment(FragmentTransaction transaction) {
+        Fragment fragment = null;
+        switch (status) {
+
+            case SalesOrderManager.STATUS_ALL:
+                KLog.i("all");
+                fragment = mFragmentManager.findFragmentByTag(ALL);
+                if (fragment == null) {
+                    fragment = new OrderAll();
+                    transaction.add(R.id.fl_packages_container, fragment, ALL);
+                }
+                break;
+            case SalesOrderManager.STATUS_TO_PAY:
+                fragment = mFragmentManager.findFragmentByTag(TO_SEND);
+                if (fragment == null) {
+                    fragment = new OrderPanding();
+                    transaction.add(R.id.fl_packages_container, fragment, TO_SEND);
+                }
+
+                break;
+            case SalesOrderManager.STATUS_PAYED:
+                fragment = mFragmentManager.findFragmentByTag(WAIT_SEND);
+                if (fragment == null) {
+                    fragment = new OrderPayed();
+                    transaction.add(R.id.fl_packages_container, fragment, WAIT_SEND);
+                }
+                break;
+            case SalesOrderManager.STATUS_CANCELED:
+                fragment = mFragmentManager.findFragmentByTag(SENDED);
+                if (fragment == null) {
+                    fragment = new OrderCanceled();
+                    transaction.add(R.id.fl_packages_container, fragment, SENDED);
+                }
+                break;
+        }
+        return fragment;
+    }
+
+}

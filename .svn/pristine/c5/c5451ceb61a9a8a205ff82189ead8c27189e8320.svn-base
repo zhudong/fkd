@@ -1,0 +1,262 @@
+package com.fuexpress.kr.ui.activity.help_send;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseFragment;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.adapter.SendParcelAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.utils.SPUtils;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import fksproto.CsUser;
+
+
+public class HelpSendFragment extends MbaseFragment<HelpSendContract.Presenter, HelpSendContract.Model> implements HelpSendContract.View {
+    public static String SHOW_TIPS = "show_tips";
+    @BindView(R.id.rl_no_parcel_tips)
+    RelativeLayout mRlNoParcelTips;
+    @BindView(R.id.rl_buttom)
+    RelativeLayout mRlButtom;
+    @BindView(R.id.tv_estimate_price)
+    TextView mTvEstimatePrice;
+    @BindView(R.id.tv_use_balance)
+    TextView mTvUseBalance;
+    @BindView(R.id.tv_pay_type)
+    TextView mTvPayType;
+    @BindView(R.id.tv_use_coupon)
+    TextView tvUseCoupon;
+
+    private View mRlTips;
+    private ListView mBody;
+    private View mfootView;
+    private SendParcelAdapter mAdapter;
+    private boolean mIDAppend;
+    private boolean mNoIDAppend;
+    private TextView mTvRight;
+    private TextView mTvTitle;
+    private float mPureFee;
+
+    @Override
+    protected void initTitleBar() {
+        mTvRight = (TextView) mRootView.findViewById(R.id.title_tv_right);
+        mRootView.findViewById(R.id.title_iv_left).setOnClickListener(this);
+        mTvRight.setOnClickListener(this);
+        mTvRight.setVisibility(View.VISIBLE);
+        mTvTitle = (TextView) mRootView.findViewById(R.id.title_tv_center);
+        TextView leftTv = (TextView) mRootView.findViewById(R.id.title_tv_left);
+        leftTv.setText(getString(R.string.main_home_tab_string));
+        leftTv.setVisibility(View.VISIBLE);
+        leftTv.setOnClickListener(this);
+        mTvTitle.setText(getString(R.string.String_parcle_help_send));
+        mTvRight.setText(getString(R.string.String_parcle_add));
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.activity_help_send, null);
+        mBody = (ListView) mRootView.findViewById(R.id.lv_body);
+        mfootView = View.inflate(mContext, R.layout.item_help_send_foot, null);
+        mBody.addFooterView(mfootView);
+
+        mRlTips = mRootView.findViewById(R.id.rl_tips);
+        boolean showTips = (boolean) SPUtils.get(mContext, SHOW_TIPS, true);
+        if (showTips) {
+            final FrameLayout decorView = (FrameLayout) getActivity().getWindow().getDecorView();
+            final View tipsView = View.inflate(mContext, R.layout.package_tips, null);
+            decorView.addView(tipsView);
+            tipsView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decorView.removeView(tipsView);
+                    SPUtils.put(mContext, SHOW_TIPS, false);
+                }
+            });
+        }
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        mPresenter = new HelpSendPresent();
+        mModel = new HelpSendModel();
+        mPresenter.setVM(this, mModel);
+    }
+
+    @Override
+    public void showParcleList(List<HelpSendParcelBean> mParcels, boolean hasid, boolean noid) {
+        mIDAppend = hasid;
+        mNoIDAppend = noid;
+        if (!mIDAppend || !mNoIDAppend) {
+            mTvRight.setTextColor(getResources().getColor(R.color.gray_999));
+        } else {
+            mTvRight.setTextColor(getResources().getColor(R.color.white));
+        }
+        if (mParcels.size() == 0) {
+            mRlNoParcelTips.setVisibility(View.VISIBLE);
+            mRlButtom.setVisibility(View.GONE);
+        } else {
+            mRlNoParcelTips.setVisibility(View.GONE);
+            mRlButtom.setVisibility(View.VISIBLE);
+        }
+        if (mAdapter == null) {
+            mAdapter = new SendParcelAdapter(mContext, mParcels);
+            mBody.setAdapter(mAdapter);
+        } else {
+            mAdapter.setData(mParcels);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public float getPureFee() {
+        return mPureFee;
+    }
+
+    @Override
+    public void showPayType(float price, float shippingFee, int payType, CsUser.CouponList mCoupon) {
+        mPureFee = shippingFee;
+        if (price <= 0) {
+            mTvUseBalance.setVisibility(View.GONE);
+        } else {
+            mTvUseBalance.setVisibility(View.VISIBLE);
+            mTvUseBalance.setText(getString(R.string.String_balance_first) + UIUtils.getCurrency(getContext(), price));
+            mPureFee -= price;
+        }
+
+        if (mCoupon != null) {
+            tvUseCoupon.setVisibility(View.VISIBLE);
+            String text = getString(R.string.pr_use) + mCoupon.getShippingcouponname() + "：" + UIUtils.getCurrency(getContext(), mCoupon.getDiscountamount());
+            tvUseCoupon.setText(text);
+            mPureFee -= mCoupon.getDiscountamount();
+        } else {
+            tvUseCoupon.setVisibility(View.GONE);
+        }
+     /*   public static final int PAYMENT_ALIPAY = 1;
+        public static final int PAYMENT_WECHAT = 2;
+        public static final int PAYMENT_ADYEN = 4;
+        public static final int PAYMENT_KRBANK = 5;*/
+
+
+        String payMethod = "";
+        switch (payType) {
+            case Constants.PAYMENT_ALIPAY:
+                payMethod = getString(R.string.String_parcel_ali_pay);
+                break;
+            case Constants.PAYMENT_WECHAT:
+                payMethod = getString(R.string.String_parcel_weixin_pay);
+                break;
+            case Constants.PAYMENT_ADYEN:
+                payMethod = getString(R.string.String_adyen_pay);
+                break;
+            case Constants.PAYMENT_KRBANK:
+                payMethod = getString(R.string.String_krbank_pay2);
+                break;
+        }
+
+        if (mPureFee < 0) {
+            mPureFee = 0;
+            mTvPayType.setVisibility(View.GONE);
+        } else {
+            mTvPayType.setVisibility(View.VISIBLE);
+            mTvPayType.setText(getString(R.string.String_pure_pay, payMethod, UIUtils.getCurrency(getContext(), (float) Math.ceil(mPureFee))));
+        }
+    }
+
+
+    public void showWarehouseDialog() {
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        WarehouseDialog dialog = WarehouseDialog.newInstance();
+        dialog.show(ft, "dialog");
+    }
+
+
+    @Override
+    public void showEstimatePrice(float price) {
+        mTvEstimatePrice.setText(UIUtils.getCurrency(getContext(), price));
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.Append_PARCEN_SUCESS) {
+            mPresenter.onStart();
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(HelpSendPresent.class.getSimpleName())) {
+            mPresenter.submitSuccess(event.getBooleanParam());
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && !event.getBooleanParam()) {
+            ((MainActivity) mContext).closeLoading();
+        }
+    }
+
+
+    @OnClick({R.id.btn_submit, R.id.rl_pay_foot, R.id.selectBtn, R.id.title_iv_left})
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.btn_submit:
+                mPresenter.submit();
+                break;
+            case R.id.rl_pay_foot:
+                mPresenter.switchPayType();
+                break;
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                getActivity().finish();
+                break;
+            case R.id.title_tv_right:
+            case R.id.selectBtn:
+                boolean b = !mIDAppend || !mNoIDAppend;
+                if (b) {
+                    if (!mIDAppend) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip, Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (!mNoIDAppend) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip2, Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (!mIDAppend && !mNoIDAppend) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip3, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    showWarehouseDialog();
+                    mPresenter.reSet();
+                }
+                break;
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        mPresenter.onStart();
+    }
+
+    public void setPayInfor(int payType, String paymentString, int paymentPos, boolean isUseBalance, float account, CsUser.CouponList coupon) {
+        showPayType(account, mPresenter.getShippingFee(), payType, coupon);
+        mPresenter.setCoupons(coupon, payType, paymentPos);
+    }
+}

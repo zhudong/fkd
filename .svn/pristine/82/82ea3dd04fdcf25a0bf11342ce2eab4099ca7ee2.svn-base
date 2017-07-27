@@ -1,0 +1,210 @@
+package com.fuexpress.kr.ui.adapter;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v4.util.ArrayMap;
+import android.support.v4.view.PagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.BitMapUtils;
+import com.fuexpress.kr.utils.CropImageResultListener;
+import com.fuexpress.kr.utils.LogUtils;
+import com.steelkiwi.cropiwa.AspectRatio;
+import com.steelkiwi.cropiwa.CropIwaView;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+//import com.steelkiwi.cropiwa.CropIwaView;
+//import com.steelkiwi.cropiwa.config.CropIwaSaveConfig;
+//import com.theartofdev.edmodo.cropper.CropImageView;
+
+/**
+ * Created by longer on 2017/7/5.
+ */
+
+public class CropViewAdapter extends PagerAdapter {
+
+    private Activity mContent;
+    List<String> mImages;
+    List<CropImageView> mAllCopImageView;
+    CropImageView.OnCropImageCompleteListener mOnCropImageCompleteListener;
+    CropImageResultListener mCropImageResultListener;
+    ArrayMap<Integer, CropImageView> mIndexAndCropView;
+    private int mTruePositin = 0;
+
+    public CropViewAdapter(Activity content, List<String> imgs) {
+        this.mContent = content;
+        this.mImages = imgs;
+    }
+
+    public CropViewAdapter(Activity content, List<String> imgs, CropImageView.OnCropImageCompleteListener listener) {
+        this.mContent = content;
+        this.mImages = imgs;
+        mOnCropImageCompleteListener = listener;
+    }
+
+    public CropViewAdapter(Activity content, List<String> imgs, CropImageResultListener listener) {
+        this.mContent = content;
+        this.mImages = imgs;
+        mCropImageResultListener = listener;
+        //checkImageData();
+    }
+
+
+    @Override
+    public int getCount() {
+        if (mImages != null) {
+            if (mImages.size() > 1) {
+                return 10000 - 1000 % mImages.size();
+            } else {
+                return 1;
+            }
+        }
+        return 0;
+
+    }
+
+    @Override
+    public View instantiateItem(ViewGroup container, int position) {
+        if (mAllCopImageView == null) mAllCopImageView = new ArrayList<>();
+        position = position % mImages.size();
+        View cropperView = View.inflate(container.getContext(), R.layout.view_for_cropper, null);
+        int screenWidthPixels = UIUtils.getScreenWidthPixels(mContent);
+        int screenHighPixels = UIUtils.getScreenHighPixels(mContent);
+        /*File file = new File(mImages.get(position));
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 1;
+        opts.inJustDecodeBounds = false;
+        Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath(), opts);*/
+        Bitmap bm = BitMapUtils.efficientZoomBitMapByPath(mImages.get(position));
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        int minus = width - height;
+        int size;
+        if (minus < 0) {
+            size = width;
+        } else {
+            size = height;
+        }
+        //Bitmap isRotatedBitMap = null;
+        /*if (minus < 0) {//说明宽小于高，以宽为准
+            size = width;
+        } else if (minus > 0) {//说明宽大于高，以高为准
+            //在宽大于高的情况下，我们需要检查一下是否被旋转了
+            int bitmapDegree = BitMapUtils.getBitmapDegree(mImages.get(position));
+            if (bitmapDegree < 90)
+                size = height;
+            else {//假如被旋转了，我们需要旋转回去然后再继续操作
+                //int bitmapDegree = BitMapUtils.getBitmapDegree(mImages.get(position));
+
+                Matrix matrix = new Matrix();
+                matrix.postRotate(bitmapDegree);
+                isRotatedBitMap = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+                size = isRotatedBitMap.getWidth();
+            }
+        } else {
+            size = width;
+        }*/
+        CropImageView crop_view = (CropImageView) cropperView.findViewById(R.id.crop_view);
+        /*if (null == isRotatedBitMap)
+            crop_view.setImageUriAsync(Uri.fromFile(new File(mImages.get(position))));
+        else*/
+        crop_view.setImageBitmap(bm);
+
+        crop_view.setMaxCropResultSize(size, size);
+        crop_view.setMinCropResultSize(size, size);
+        //crop_view.setOnCropImageCompleteListener(mOnCropImageCompleteListener);
+        //crop_view.setMultiTouchEnabled(true);
+        //crop_view.setAspectRatio(1, 1);
+
+        CropIwaView crop_view_02 = (CropIwaView) cropperView.findViewById(R.id.crop_view_02);
+        crop_view_02.setImageUri(Uri.fromFile(new File(mImages.get(position))));
+        crop_view_02.configureOverlay().setAspectRatio(new AspectRatio(1, 1)).apply();
+        crop_view_02.configureImage().setImageScaleEnabled(true).apply();
+        crop_view_02.configureImage().setImageTranslationEnabled(true).apply();
+        float scale = crop_view_02.configureImage().getScale();
+        float minScale = crop_view_02.configureImage().getMinScale();
+        float maxScale = crop_view_02.configureImage().getMaxScale();
+        LogUtils.e("TEST", "这是获取回来的miniScale：" + minScale);
+        LogUtils.e("TEST", "这是获取回来的maxScale：" + maxScale);
+        LogUtils.e("这是获取回来的scale：" + scale);
+        crop_view_02.configureImage().setMinScale((float) 0.01);
+        //crop_view_02.configureImage().setScale((float) 0.01).apply();
+        //crop_view_02.setImage(bm);
+        /*crop_view.crop(new CropIwaSaveConfig.Builder(Uri.fromFile(file))
+                .setCompressFormat(Bitmap.CompressFormat.PNG)
+                .setSize(size, size) //Optional. If not specified, SRC dimensions will be used
+                .setQuality(100) //Hint for lossy compression formats
+                .build());*/
+
+        container.addView(cropperView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (mIndexAndCropView == null) mIndexAndCropView = new ArrayMap<>();
+        if (!mIndexAndCropView.containsKey(position))
+            mIndexAndCropView.put(position, crop_view);
+        //mAllCopImageView.add(crop_view);
+        return cropperView;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
+
+    public void rotationCropperView(int index) {
+        View view = mAllCopImageView.get(index);
+        CropImageView crop_view = (CropImageView) view.findViewById(R.id.crop_view);
+        crop_view.rotateImage(90);
+    }
+
+    public void getCropPhoto(List<Bitmap> bitmaps, int i) {
+        View view = mAllCopImageView.get(i);
+        CropImageView crop_view = (CropImageView) view.findViewById(R.id.crop_view);
+        Bitmap croppedImage = crop_view.getCroppedImage();
+    }
+
+    public void getCropPhotoBitMap(final int i) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                View view = mAllCopImageView.get(i);
+                CropImageView crop_view = (CropImageView) view.findViewById(R.id.crop_view);
+                Bitmap croppedImage = crop_view.getCroppedImage();
+                mCropImageResultListener.onSuccessByBitMap(i, croppedImage);
+            }
+        }).start();
+
+    }
+
+    public void getCropPhotoFliePath(final int i) {
+        CropImageView crop_view = mIndexAndCropView.get(i);
+        final Bitmap croppedImage = crop_view.getCroppedImage();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //CropImageView crop_view = mIndexAndCropView.get(i);
+                //CropImageView crop_view = (CropImageView) view.findViewById(R.id.crop_view);
+                //Bitmap croppedImage = crop_view.getCroppedImage();
+                File file = BitMapUtils.saveImage(croppedImage, true);
+                if (file != null)
+                    mCropImageResultListener.onSuccessByPath(i, file.getPath());
+                else
+                    mCropImageResultListener.onFail("save image fail");
+            }
+        }).start();
+
+    }
+
+
+}

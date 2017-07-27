@@ -1,0 +1,224 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.style.ImageSpan;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.CheckoutRequest;
+import com.fuexpress.kr.bean.MaterialsBean;
+import com.fuexpress.kr.model.MaterialsManager;
+import com.fuexpress.kr.ui.adapter.MaterialsAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.MaterialItemLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adyen.com.adyenpaysdk.exceptions.CheckoutRequestException;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class MaterialsSearchActivity extends BaseActivity {
+
+    @BindView(R.id.img_back)
+    ImageView mImgBack;
+    @BindView(R.id.img_delete_input)
+    ImageView mImgDeleteInput;
+    @BindView(R.id.tv_cancel)
+    TextView mTvCancel;
+    @BindView(R.id.ed_search_input)
+    EditText mEdSearchInput;
+    @BindView(R.id.lv_body)
+    ListView mLvBody;
+    @BindView(R.id.rl_title_root)
+    RelativeLayout mRlTitleRoot;
+    private ArrayList<MaterialsBean> mData;
+    private MaterialsAdapter mAdapter;
+
+    private static iMaterialsSelectListener mListener;
+
+
+    public interface iMaterialsSelectListener {
+        void select(boolean select, MaterialsBean bean);
+    }
+
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_materials_search, null);
+    }
+
+
+    @Override
+    public void initView() {
+//        super.initView();
+        Drawable d = getResources().getDrawable(R.mipmap.search_small);
+        d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+        //用这个drawable对象代替字符串easy
+        SpannableString ss = new SpannableString(" 搜索材质");
+        ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+        //包括0但是不包括"easy".length()即：4。[0,4)。值得注意的是当我们复制这个图片的时候，实际是复制了"easy"这个字符串。
+        ss.setSpan(span, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+//        append(ss);
+        mEdSearchInput.setHint(ss);
+        mData = new ArrayList<>();
+        mAdapter = new MaterialsAdapter(this, mData, mCheckedID);
+        mLvBody.setAdapter(mAdapter);
+        getMaterials("");
+        initEvent();
+    }
+
+    private void initEvent() {
+
+        mLvBody.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MaterialsBean item = mAdapter.getItem(position);
+                if (mListener != null) {
+                    mListener.select(true, item);
+                }
+                ((MaterialItemLayout) view).setSelect(true);
+                MaterialsSearchActivity.this.finish();
+            }
+        });
+
+
+        mEdSearchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                String key = s.toString();
+                if (TextUtils.isEmpty(key)) {
+                    mImgDeleteInput.setVisibility(View.GONE);
+                } else {
+                    mImgDeleteInput.setVisibility(View.VISIBLE);
+                }
+                if ("all".equals(key)) {
+                    getMaterials("");
+                } else {
+                    getMaterials(key);
+                }
+
+            }
+        });
+
+        mEdSearchInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    scalEdit(false);
+                }
+            }
+        });
+    }
+
+
+    private void scalEdit(boolean open) {
+//        12 52dp
+        int start = UIUtils.dip2px(12);
+        int stop = UIUtils.dip2px(52);
+        final int right = UIUtils.dip2px(36);
+        final int top = UIUtils.dip2px(4);
+        ValueAnimator animator;
+
+        if (open) {
+            mEdSearchInput.clearFocus();
+            animator = ValueAnimator.ofInt(stop, start);
+
+        } else {
+            animator = ValueAnimator.ofInt(start, stop);
+        }
+        animator.setCurrentPlayTime(500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mEdSearchInput.getLayoutParams());
+                params.setMargins(right, top, value, top);
+                params.addRule(RelativeLayout.CENTER_VERTICAL);
+                mRlTitleRoot.updateViewLayout(mEdSearchInput, params);
+            }
+        });
+        animator.start();
+    }
+
+
+    @OnClick({R.id.tv_cancel, R.id.img_delete_input,R.id.img_back})
+    public void OnClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_cancel:
+                scalEdit(true);
+                break;
+            case R.id.img_delete_input:
+                mEdSearchInput.setText("");
+                break;
+            case R.id.img_back:
+//                mEdSearchInput.setText("");
+                onBackPressed();
+                break;
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (mListener != null) {
+            mListener.select(false, null);
+        }
+    }
+
+    public void getMaterials(String key) {
+        List<MaterialsBean> search = MaterialsManager.getInstance().search(key);
+        mData.clear();
+        mData.addAll(search);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    static private int mCheckedID;
+
+    public static class IntentBuilder {
+        Bundle arguments = new Bundle();
+
+        public IntentBuilder(int checkedID) {
+            mCheckedID = checkedID;
+        }
+
+        public Intent build(Context context, iMaterialsSelectListener listener) {
+            Intent intent = new Intent(context, MaterialsSearchActivity.class);
+//            context.startActivity(intent);
+            mListener = listener;
+            return intent;
+        }
+    }
+}

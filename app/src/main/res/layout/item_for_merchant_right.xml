@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="5dp"
+    android:background="@color/default_bg">
+
+    <LinearLayout
+        android:id="@+id/ll_album_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_circle_cover"
+        android:orientation="vertical">
+
+
+        <com.fuexpress.kr.ui.view.RatioLayout
+            android:id="@+id/ratiorl_in_followed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:picRatio="0.84">
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/img_album_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:sriv_left_top_corner_radius="6dp"
+                app:sriv_right_top_corner_radius="6dp"/>
+
+
+        </com.fuexpress.kr.ui.view.RatioLayout>
+
+        <TextView
+            android:id="@+id/tv_album_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="test"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            />
+
+
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/rl_album_focuse"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/shape_for_home_item_bg"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_album_focuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/focus"/>
+
+            <TextView
+                android:id="@+id/tv_album_is_focuse"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/img_album_focuse"
+                android:text="@string/String_for_home_item_like"/>
+
+            <TextView
+                android:id="@+id/tv_album_focuse_count"
+                android:textSize="12sp"
+                android:textColor="@color/gray_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_album_is_focuse"
+                android:text="100"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

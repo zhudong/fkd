@@ -1,0 +1,223 @@
+package com.fuexpress.kr.ui.fragment;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.DbConfig;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.CouponDataManager;
+import com.fuexpress.kr.model.MeiqiaManager;
+import com.fuexpress.kr.model.RedPointCountManager;
+import com.fuexpress.kr.ui.activity.AccountSettingActivity;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.activity.HelpCenterActivity;
+import com.fuexpress.kr.ui.activity.KrBankInfoActivity;
+import com.fuexpress.kr.ui.activity.MyBalanceActivity;
+import com.fuexpress.kr.ui.activity.PreferencesActivity;
+import com.fuexpress.kr.ui.activity.coupon.CouponsActivity;
+import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
+import com.fuexpress.kr.ui.activity.notice.NoticeListActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.DataCleanManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+/**
+ * Created by Longer on 2016/10/26.
+ */
+public class MeFragment extends BaseFragment<MainActivity> {
+
+    @BindView(R.id.title_in_me)
+    TitleBarView mTitleInMe;
+    @BindView(R.id.profile_image)
+    CircleImageView mProfileImage;
+    @BindView(R.id.tv_login)
+    TextView mTvLogin;
+    @BindView(R.id.myMoneyLayout)
+    RelativeLayout mMyMoneyLayout;
+    @BindView(R.id.couponLayout)
+    RelativeLayout mCouponLayout;
+    @BindView(R.id.addressManagerLayout)
+    RelativeLayout mAddressManagerLayout;
+    @BindView(R.id.connectServiceLayout)
+    RelativeLayout mConnectServiceLayout;
+    @BindView(R.id.helpCenterLayout)
+    RelativeLayout mHelpCenterLayout;
+    @BindView(R.id.noticesRedPoint)
+    ImageView mNoticesRedPoint;
+    @BindView(R.id.noticeLayout)
+    RelativeLayout mNoticeLayout;
+    @BindView(R.id.cleanCacheLayout)
+    RelativeLayout mCleanCacheLayout;
+    @BindView(R.id.tv_versionName)
+    TextView mTvVersionName;
+    private View mRootView;
+
+    private final DisplayImageOptions options = new DisplayImageOptions.Builder().resetViewBeforeLoading(true).displayer(new FadeInBitmapDisplayer(100)).cacheInMemory(true
+    ).cacheOnDisk(true).build();
+    final ImageLoader loader = ImageLoader.getInstance();
+
+    @Override
+    protected void initTitleBar() {
+        TitleBarView titleBarView = (TitleBarView) mRootView.findViewById(R.id.title_in_me);
+        ImageView iv_in_title_right = titleBarView.getIv_in_title_right();
+        iv_in_title_right.setImageResource(R.mipmap.me_setting);
+        iv_in_title_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.toActivity(AccountSettingActivity.class);
+            }
+        });
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.me_fragment_layout, null);
+        return mRootView;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        mTvVersionName.setText(mContext.getString(R.string.version) + "  " + getVersionName(mContext));
+        if (!TextUtils.isEmpty(AccountManager.getInstance().nikename)) {
+            mTvLogin.setText(AccountManager.getInstance().nikename);
+            loader.displayImage(AccountManager.getInstance().avater, mProfileImage, options);
+        }
+        //   CouponDataManager.getInstance().getCouponDataList(1);
+        setRedPoint();
+        return rootView;
+
+    }
+    private  void testTicket(){
+        AccountManager.getInstance().mTicket="error";
+    }
+    @OnClick({R.id.title_in_me, R.id.profile_image, R.id.tv_login, R.id.myMoneyLayout, R.id.couponLayout,
+            R.id.addressManagerLayout, R.id.connectServiceLayout, R.id.helpCenterLayout, R.id.noticeLayout,
+            R.id.cleanCacheLayout,R.id.frequently_used_currency_layout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.title_in_me:
+                break;
+            case R.id.profile_image:
+                break;
+            case R.id.tv_login:
+              //  mContext.toActivity(KrBankInfoActivity.class);
+                /**测试ticket失效方法**/
+               // testTicket();
+                break;
+            case R.id.myMoneyLayout:
+                Intent intent = new Intent(mContext, MyBalanceActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.couponLayout:
+                mContext.toActivity(CouponsActivity.class);
+                break;
+            case R.id.addressManagerLayout:
+                Intent intent1 = new Intent(mContext, AddressManagerActivity.class);
+                intent1.putExtra(AddressManagerActivity.BACK_TITLE, getString(R.string.main_me_tab_string));
+                startActivity(intent1);
+                break;
+            case R.id.connectServiceLayout:
+                MeiqiaManager.getInstance(mContext).contactCustomerService();
+                break;
+            case R.id.helpCenterLayout:
+                mContext.toActivity(HelpCenterActivity.class);
+                break;
+            case R.id.noticeLayout:
+                mContext.toActivity(NoticeListActivity.class);
+                break;
+            case R.id.cleanCacheLayout:
+                cleanCache();
+                break;
+            case R.id.frequently_used_currency_layout:
+                mContext.toActivity(PreferencesActivity.class);
+                break;
+        }
+    }
+
+    private void cleanCache() {
+        DataCleanManager.cleanApplicationData(mContext);
+        mContext.showProgressDiaLog(SweetAlertDialog.SUCCESS_TYPE, getString(R.string.clean_success));
+        /*Realm realm = DbConfig.getInstance(UIUtils.getContext()).getRealm();
+        realm.beginTransaction();
+        RealmResults<HelpSendParcelBean> all = realm.where(HelpSendParcelBean.class).findAll();
+        all.deleteAllFromRealm();
+        realm.commitTransaction();*/
+        mContext.dissMissProgressDiaLog(1000);
+    }
+
+    //版本名
+    public static String getVersionName(Context context) {
+        return getPackageInfo(context).versionName;
+    }
+
+    private static PackageInfo getPackageInfo(Context context) {
+        PackageInfo pi = null;
+
+        try {
+            PackageManager pm = context.getPackageManager();
+            pi = pm.getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+
+            return pi;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pi;
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.HEAD_ICON_UPLOADE_COMPLETE_NOTE:
+
+                Glide.with(this).load(AccountManager.getInstance().avater).error(R.mipmap.me_photo_white).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(mProfileImage);
+                break;
+            case BusEvent.GET_MY_RED_POINT_COUNT_SUCCESS:
+                setRedPoint();
+                break;
+        }
+    }
+    public void setRedPoint(){
+        if (RedPointCountManager.redPointNotifyCount != 0) {
+            mNoticesRedPoint.setVisibility(View.VISIBLE);
+        } else {
+            mNoticesRedPoint.setVisibility(View.GONE);
+        }
+    }
+}

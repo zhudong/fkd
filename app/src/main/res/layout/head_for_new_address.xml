@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_in_change_language_default"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="6.93dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_selected_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="17.73dp"
+            android:text="深圳"
+            android:textColor="@color/red"/>
+
+        <TextView
+            android:id="@+id/iv_in_choose_language_tab_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="@string/selected_address_title_right"
+            android:textColor="@color/gray_999"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/default_bg"/>
+</LinearLayout>

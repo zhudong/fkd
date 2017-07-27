@@ -1,0 +1,724 @@
+package com.fuexpress.kr.ui.activity.product_detail;
+
+import android.animation.Animator;
+import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.CartCommodityBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.model.OperaRequestManager;
+import com.fuexpress.kr.model.ShareManager;
+import com.fuexpress.kr.model.ShopCartManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.ItemDetailActivity;
+import com.fuexpress.kr.ui.activity.PlacesProductActivity;
+import com.fuexpress.kr.ui.activity.merchant_detail.MerChantDetailActivity02;
+import com.fuexpress.kr.ui.activity.shopping_cart.ShopCartActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.AlbumListDialog;
+import com.fuexpress.kr.ui.view.LikeButton;
+import com.fuexpress.kr.ui.view.MyNumberCounter;
+import com.fuexpress.kr.ui.view.ProductExtendView;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.WeakHandler;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsItem;
+import fksproto.CsMerchant;
+
+public class ProductDetailActivity extends BaseActivity {
+    public static final String TAG = "ProductDetailActivity";
+    public static final String ITEM_ID = "item_id";
+
+    @BindView(R.id.sc_item_content)
+    ScrollView mScItemContent;
+    @BindView(R.id.rl_header_img_container)
+    RelativeLayout mRlHeaderImgContainer;
+    @BindView(R.id.tv_store_name)
+    TextView mTvStoreName;
+    @BindView(R.id.tv_store_location)
+    TextView mTvStoreLocation;
+    @BindView(R.id.tv_item_name)
+    TextView mTvItemName;
+    @BindView(R.id.tv_item_price2_final)
+    TextView mTvItemPrice2Final;
+    @BindView(R.id.tv_item_price2)
+    TextView mTvItemPrice2;
+    @BindView(R.id.ll_likers)
+    LinearLayout mLlLikers;
+    @BindView(R.id.ll_extends)
+    LinearLayout mLlExtends;
+    @BindView(R.id.tv_liker_count)
+    TextView mTvLikerCount;
+    @BindView(R.id.tv_rate_words)
+    TextView mTvRateWorld;
+    @BindView(R.id.tv_services_detail)
+    TextView mTvServicesDetail;
+    @BindView(R.id.buttom_view)
+    ProductButtomView mButtomView;
+    @BindView(R.id.rl_comment_container)
+    RelativeLayout mRlCommentContainer;
+    @BindView(R.id.rl_loading)
+    RelativeLayout mRlLoading;
+    @BindView(R.id.middle_info)
+    ProductInfoMiddleView mMiddleInfo;
+    @BindView(R.id.ll_comfirm_info)
+    LinearLayout mLlComfirmInfo;
+    @BindView(R.id.nu_count)
+    MyNumberCounter mNuCount;
+    @BindView(R.id.btn_add_cart)
+    TextView mBtnAddCart;
+    @BindView(R.id.tv_ware_house_detail)
+    TextView mTvWareHouseDetail;
+    @BindView(R.id.et_order_message)
+    EditText mEtOrderMessage;
+    @BindView(R.id.tv_number_count)
+    TextView mTvNumberCount;
+    @BindView(R.id.tv_red_point)
+    TextView mTvRedPoint;
+
+    private WeakHandler mHandler = new WeakHandler();
+    private ProductDetailHead mDetailHead;
+    private long mItemID = 1900220;//1940354;//1900224
+    private CsBase.ItemLink mItemLink;
+    private CsBase.ItemPlace mItemPlace;
+    private List<CsBase.ItemImage> mItemImagesList;
+    private ItemBean mItem;
+    private AccountManager mAccountManage;
+    private boolean isLiking;
+    private ProductDetailCommentHolder mProductDetailCommentHolder;
+    private ProductManage mProductManage;
+    private boolean mIsOpenButtom;
+    private boolean mIsOperaing;
+    private FrameLayout mRootView;
+    private CsBase.ItemOffer mItemOffer;
+    private CsBase.Warehouse mWarehouse;
+    private List<CsBase.ItemOfferGroup> mItemOfferGroupsList;
+    private CsBase.Seller mSeller;
+    private CsBase.ItemProduct mItemProduct;
+    private CsBase.Merchant mLinksMerchant;
+    private CsBase.Merchant mPlaceMerchant;
+    private List<CsBase.ItemExtend> mItemExtendsList;
+
+    @Override
+    public View setInitView() {
+        mRootView = (FrameLayout) View.inflate(this, R.layout.activity_product_deails, null);
+        return mRootView;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+        initData();
+            /*解决editedText抢焦点*/
+        mScItemContent.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+        mScItemContent.setFocusable(true);
+        mScItemContent.setFocusableInTouchMode(true);
+        mScItemContent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.requestFocusFromTouch();
+                return false;
+            }
+        });
+    }
+
+    private void initData() {
+        mItemID = getIntent().getLongExtra(ITEM_ID, 0);
+        mAccountManage = AccountManager.getInstance();
+        initComments();
+        initHeaderView();
+        getItemBase();
+        getItemLikerList();
+        initEvent();
+        ShopCartManager.getInstance().getSaleCartCount();
+    }
+
+    private void initEvent() {
+        mMiddleInfo.getBtnBuyNow().setOnClickListener(this);
+        mButtomView.getImgAddCart().setOnClickListener(this);
+        mButtomView.getBtnLikeItem().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeItem();
+            }
+        });
+        mButtomView.getBtnAddAlbum().setOnClickListener(this);
+        initEtOrder();
+    }
+
+    private int mWordsCount = 200;
+
+    private void initEtOrder() {
+        mTvNumberCount.setText(String.format(ProductDetailActivity.this.getResources().getString(R.string.String_word_number), mWordsCount));
+
+        mEtOrderMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTvNumberCount.setText(String.format(ProductDetailActivity.this.getResources().getString(R.string.String_word_number), mWordsCount - s.length()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 200) {
+                    mEtOrderMessage.setText(s.subSequence(0, 200));
+                    mEtOrderMessage.setSelection(200);
+                }
+            }
+        });
+    }
+
+
+    private void initComments() {
+        mProductDetailCommentHolder = new ProductDetailCommentHolder(this);
+        mRlCommentContainer.addView(mProductDetailCommentHolder.getRootView());
+    }
+
+    private void initButtomView() {
+        List<String[]> salePrices = mProductManage.getSalePrices();
+        mTvItemName.setText(mItem.getTitle());
+        String[] prices = salePrices.get(1);
+        mTvItemPrice2Final.setTextColor(Color.BLACK);
+        if (prices.length > 1) {
+            mTvItemPrice2.setText(prices[0]);
+            mTvItemPrice2.setVisibility(View.VISIBLE);
+            mTvItemPrice2.setTextColor(ProductDetailActivity.this.getResources().getColor(R.color.text_color_999));
+            mTvItemPrice2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            mTvItemPrice2.getPaint().setAntiAlias(true);
+            mTvItemPrice2Final.setText(prices[1]);
+        } else {
+            mTvItemPrice2Final.setText(prices[0]);
+            mTvItemPrice2.setVisibility(View.GONE);
+        }
+
+        String userCurrency = AccountManager.getInstance().getCurrencyCode();
+        String itemCurrency = mItem.getCurrency_code();
+        String sRate = getResources().getString(R.string.String_exchange_rate);
+        String priceRate = UIUtils.getCurrency(this, userCurrency, 1f, 1, 0) + " = " + UIUtils.getCurrency(this, itemCurrency, 1 / mItem.getExchangeRate(), 1, -1) + "  " +
+                UIUtils.getCurrency(this, itemCurrency, 1f, 1, 0) + " = " + UIUtils.getCurrency(this, userCurrency, mItem.getExchangeRate(), 1, -1);
+
+        SpannableStringBuilder sRateDetail = new SpannableStringBuilder();
+        sRateDetail.append(sRate);
+        sRateDetail.append(priceRate);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLACK);
+        sRateDetail.setSpan(colorSpan, 0, sRate.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        mTvRateWorld.setText(sRateDetail);
+        if (mItem.getCurrency_code().equals(AccountManager.getInstance().getCurrencyCode())) {
+            mTvRateWorld.setVisibility(View.GONE);
+        }
+        getProductManage().getServiceDes(mTvServicesDetail);
+        mTvServicesDetail.setLineSpacing(6, 1);
+
+        mNuCount.init(mProductManage.getMinQty(), mProductManage.getMaxQty());
+        mBtnAddCart.setEnabled(mProductManage.isBuyNow());
+        mMiddleInfo.getBtnBuyNow().setEnabled(mProductManage.isBuyNow());
+
+        if (mItemExtendsList != null && mItemExtendsList.size() > 0) {
+            mLlExtends.removeAllViews();
+            for (int i = 0; i < mItemExtendsList.size(); i++) {
+                CsBase.ItemExtend itemExtend = mItemExtendsList.get(i);
+                ProductExtendView extendView = new ProductExtendView(ProductDetailActivity.this);
+                extendView.showOption(itemExtend);
+                mLlExtends.addView(extendView);
+            }
+        }
+
+        showHouse();
+    }
+
+    private void initHeaderView() {
+        mDetailHead = new ProductDetailHead(this);
+        mRlHeaderImgContainer.addView(mDetailHead.getRootView());
+    }
+
+    @OnClick({R.id.rl_store_root, R.id.title_iv_left, R.id.title_iv_right, R.id.title_iv_right_home, R.id.ll_other, R.id.tv_product_detail, R.id.btn_add_cart, R.id.rl_cart})
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.rl_store_root:
+                goShopping();
+                break;
+            case R.id.title_iv_left:
+                onBackPressed();
+                break;
+            case R.id.title_iv_right:
+                ShareManager.init(mItem.itemid, this);
+                break;
+            case R.id.img_add_cart:
+                ShareManager.init(mItem.itemid, this);
+                break;
+            case R.id.ll_other:
+                switchBottomState();
+                break;
+            case R.id.btn_buy_now:
+                switchBottomState();
+                break;
+            case R.id.tv_product_detail:
+                start2ProductDetail();
+                break;
+            case R.id.title_iv_right_home:
+                EventBus.getDefault().post(new BusEvent(BusEvent.GO_HOME_PAGE, null));
+                break;
+            case R.id.btn_add_cart:
+                addCart();
+                break;
+            case R.id.rl_cart:
+                intent = new Intent(ProductDetailActivity.this, ShopCartActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_add_album:
+                AlbumListDialog albumListDialog = new AlbumListDialog(this, mItem);
+                albumListDialog.show();
+                break;
+        }
+    }
+
+    public void getItemBase() {
+        CsItem.GetItemBasicDetailRequest.Builder builder = CsItem.GetItemBasicDetailRequest.newBuilder();
+        builder.setItemId(mItemID).setCurrencycode(mAccountManage.getCurrencyCode()).setLocalecode(mAccountManage.getLocaleCode()).setCurrencyid(mAccountManage.getCurrencyId());
+        NetEngine.postRequest(builder, new INetEngineListener<CsItem.GetItemBasicDetailResponse>() {
+
+            @Override
+            public void onSuccess(CsItem.GetItemBasicDetailResponse response) {
+                mItemLink = response.getItemLink();
+                mItemPlace = response.getItemPlace();
+                mItemImagesList = response.getItemImagesList();
+                mItem = ClassUtil.convertItem2ItemBean(response.getItem());
+                mMiddleInfo.setmItemBean(mItem);
+//                mHandler.sendEmptyMessage(SHOW_BASE);
+//                getMerchantByLinkID();
+                getItemPurchaseDetail();
+
+                mProductManage = new ProductManage(ProductDetailActivity.this, mItem);
+//                mProductManage.test;
+                mProductManage.getSalePrices();
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDetailHead.setImageSize(mItem.getImageRatio());
+                        mDetailHead.initData(mItemImagesList);
+                        showItemIsLike();
+                        mProductDetailCommentHolder.initData(mItem);
+                        formatStoreName();
+                        mRlLoading.setVisibility(View.GONE);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.d(TAG, errMsg);
+            }
+        });
+    }
+
+
+    private void formatStoreName() {
+        if (mItemPlace.getPlaceId() > 0) {
+            if (mItemPlace.getPlaceMarket() != null) {
+                mTvStoreLocation.setVisibility(View.VISIBLE);
+                mTvStoreLocation.setText(mItemPlace.getPlaceMarket());
+            }
+            mTvStoreName.setText(mItemPlace.getPlaceName());
+        } else {
+            if (mItemLink.getWebsiteMarket() != null) {
+                mTvStoreLocation.setVisibility(View.VISIBLE);
+                mTvStoreLocation.setText(mItemLink.getWebsiteMarket());
+            }
+            String name = mItemLink.getWebsiteName() != null ? mItemLink.getWebsiteName() : mItemLink.getWebsiteUrl();
+            mTvStoreName.setText(name);
+        }
+    }
+
+
+    public void getItemPurchaseDetail() {
+        CsItem.GetItemPurchaseDetailRequest.Builder builder = CsItem.GetItemPurchaseDetailRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setItemId(mItemID).setCurrencycode(mAccountManage.getCurrencyCode()).setCurrencyid(mAccountManage.getCurrencyId()).setLocalecode(mAccountManage.getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsItem.GetItemPurchaseDetailResponse>() {
+            @Override
+            public void onSuccess(CsItem.GetItemPurchaseDetailResponse response) {
+//                int itemExtendsCount = response.getItemExtendsCount();
+                mItemExtendsList = response.getItemExtendsList();
+                mItemOffer = response.getItemOffer();
+                mWarehouse = response.getWarehouse();
+                mItemOfferGroupsList = response.getItemOfferGroupsList();
+                mSeller = response.getSeller();
+//
+//                获取商品数量
+                mItemProduct = response.getItemProduct();
+                getProductManage().setItemOffer(mItemOffer).setItemProduct(mItemProduct).setSeller(mSeller).setItemOfferGroupsList(mItemOfferGroupsList);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMiddleInfo.notifyDataChange();
+                        initButtomView();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.d("product", errMsg);
+
+            }
+        });
+    }
+
+
+    public void getItemLikerList() {
+        CsItem.GetItemLikerListRequest.Builder builder = CsItem.GetItemLikerListRequest.newBuilder();
+        builder.setItemId(mItemID).setCurrencycode(mAccountManage.getCurrencyCode()).setCurrencyid(mAccountManage.getCurrencyId()).setLocalecode(mAccountManage.getLocaleCode()).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setPageno(1);
+        NetEngine.postRequest(builder, new INetEngineListener<CsItem.GetItemLikerListResponse>() {
+            @Override
+            public void onSuccess(CsItem.GetItemLikerListResponse response) {
+                final List<CsItem.Liker> likersList = response.getLikersList();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (CsItem.Liker liker : likersList) {
+                            ProductFollowerView followerView = new ProductFollowerView(ProductDetailActivity.this);
+                            followerView.setLiker(liker);
+                            mLlLikers.addView(followerView);
+                            followerView.notifyDataChange();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                Log.d(TAG, errMsg);
+            }
+        });
+    }
+
+
+    private void likeItem() {
+        boolean userLogin = AccountManager.getInstance().isUserLogin(this);
+        if (!userLogin) return;
+        if (isLiking) return;
+        isLiking = true;
+        if (mItem.is_like) {
+            mButtomView.getBtnLikeItem().switchState(LikeButton.STATE_UNLIKING);
+        } else {
+            mButtomView.getBtnLikeItem().switchState(LikeButton.STATE_LIKING);
+        }
+        OperaRequestManager.operateLikeItem(mItemID, mItem, this, null);
+    }
+
+
+    private void showItemIsLike() {
+        int count = mItem.getLikeCount();
+        if (count > 0) {
+            mTvLikerCount.setVisibility(View.VISIBLE);
+            String sCount = getString(R.string.String_liker_count, count);
+            mTvLikerCount.setText(sCount);
+        } else {
+            mTvLikerCount.setVisibility(View.GONE);
+        }
+        if (mItem.hasIsLike()) {
+            mButtomView.getBtnLikeItem().switchState(LikeButton.STATE_LIKE);
+        } else {
+            mButtomView.getBtnLikeItem().switchState(LikeButton.STATE_UNLIKE);
+        }
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        //更改购物车的数量显示
+        if (event.getType() == BusEvent.SHOP_CART_COMMODITY_COUNT) {
+            showCartsItemCount(event.getIntParam());
+        }
+
+        //        及时跟新item
+        if (event.getType() == BusEvent.OPERA_ITEM_SUCCESS) {
+            isLiking = false;
+            ItemBean param = (ItemBean) event.getParam();
+            if (mItem.itemid == param.getItemid()) {
+                mItem.is_like = param.is_like;
+                mItem.like_count = param.like_count;
+                showItemIsLike();
+            }
+        }
+        if (event.getType() == BusEvent.OPERA_ITEM_FAIL) {
+            isLiking = false;
+            showItemIsLike();
+        }
+        if (event.getType() == BusEvent.REVIEW_IMG_SUCESS & event.getIntParam() == mItem.getItemid()) {
+            mProductDetailCommentHolder.refreshComments();
+        }
+        if (event.getType() == BusEvent.GET_INFO_SUCCESS) {
+            mProductDetailCommentHolder.getProductShipping();
+        }
+    }
+
+    private void showCartsItemCount(int count) {
+        if (count > 0) {
+            mTvRedPoint.setText(count + "");
+            mTvRedPoint.setVisibility(View.VISIBLE);
+        } else {
+            mTvRedPoint.setVisibility(View.GONE);
+        }
+    }
+
+    public ProductManage getProductManage() {
+        return mProductManage;
+    }
+
+    public void switchBottomState() {
+        int height = ProductDetailActivity.this.getWindowManager().getDefaultDisplay().getHeight();
+        if (!mIsOpenButtom && !mIsOperaing) {
+            mScItemContent.smoothScrollTo(0, 0);
+            startAnima(0, height);
+            mIsOpenButtom = true;
+        } else if (mIsOpenButtom && !mIsOperaing) {
+            startAnima(height, 0);
+            mIsOpenButtom = false;
+        }
+    }
+
+    public void startAnima(int fromWhere, int toPlace) {
+        ValueAnimator animator = ValueAnimator.ofInt(fromWhere, toPlace);
+        animator.setDuration(200);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int height = (int) animation.getAnimatedValue();
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLlComfirmInfo.getLayoutParams();
+                params.height = height;
+                mRootView.updateViewLayout(mLlComfirmInfo, params);
+            }
+        });
+
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mIsOperaing = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mIsOperaing = false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                mIsOperaing = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsOpenButtom) {
+            switchBottomState();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+
+    public void getMerchantByLinkID() {
+        CsMerchant.GetMerchantDetailRequest.Builder builder = CsMerchant.GetMerchantDetailRequest.newBuilder();
+        builder.setMerchantId(mItemLink.getMerchantId()).setLocalecode(AccountManager.getInstance().getLocaleCode()).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsMerchant.GetMerchantDetailResponse>() {
+            @Override
+            public void onSuccess(CsMerchant.GetMerchantDetailResponse response) {
+                mLinksMerchant = response.getMerchant();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mLinksMerchant != null) {
+                            goMerchantDetail(mLinksMerchant);
+                        } else {
+                            String name = mItemLink.getWebsiteName() != null ? mItemLink.getWebsiteName() : mItemLink.getWebsiteUrl();
+                            goSerchItemByID(mItemLink.getWebsiteId(), PlacesProductActivity.FROM_LINK, name);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mLinksMerchant != null) {
+                            goMerchantDetail(mLinksMerchant);
+                        } else {
+                            String name = mItemLink.getWebsiteName() != null ? mItemLink.getWebsiteName() : mItemLink.getWebsiteUrl();
+                            goSerchItemByID(mItemLink.getWebsiteId(), PlacesProductActivity.FROM_LINK, name);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    public void getMerchantByPlaceID() {
+        CsMerchant.GetMerchantDetailRequest.Builder builder = CsMerchant.GetMerchantDetailRequest.newBuilder();
+        builder.setMerchantId(mItemPlace.getMerchantId()).setLocalecode(mAccountManage.getLocaleCode()).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsMerchant.GetMerchantDetailResponse>() {
+            @Override
+            public void onSuccess(CsMerchant.GetMerchantDetailResponse response) {
+                mPlaceMerchant = response.getMerchant();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPlaceMerchant != null) {
+                            goMerchantDetail(mPlaceMerchant);
+                        } else {
+                            goSerchItemByID(mItemPlace.getPlaceId(), PlacesProductActivity.FROM_PLACE, mItemPlace.getPlaceName());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPlaceMerchant != null) {
+                            goMerchantDetail(mPlaceMerchant);
+                        } else {
+                            goSerchItemByID(mItemPlace.getPlaceId(), PlacesProductActivity.FROM_PLACE, mItemPlace.getPlaceName());
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    private void goShopping() {
+        if (mItemPlace == null)
+            return;
+        if (mItemPlace.getPlaceId() > 0) {
+            getMerchantByPlaceID();
+        } else {
+            getMerchantByLinkID();
+        }
+    }
+
+    private void goSerchItemByID(int id, int where, String name) {
+        Intent intent;
+        intent = new Intent(this, PlacesProductActivity.class);
+        intent.putExtra(PlacesProductActivity.ID, id);
+        intent.putExtra(PlacesProductActivity.FROM_WHERE, where);
+        intent.putExtra(PlacesProductActivity.NAME, name);
+        startActivity(intent);
+    }
+
+
+    private void goMerchantDetail(CsBase.Merchant merchant) {
+        Intent intent;
+        intent = new Intent(ProductDetailActivity.this, MerChantDetailActivity02.class);
+        long merchantid = merchant.getMerchantid();//只需要传id即可
+        //MerchantDetailManager.getInstance().getMerChantDetailRequest(merchantid);
+        intent.putExtra("merchantId", merchantid);
+        startActivity(intent);
+    }
+
+    private void showHouse() {
+//        mTvMessageDelivery.setText(mWarehouse.getName());
+        String sDelive = getResources().getString(R.string.String_delivery_method);
+        String name = mWarehouse.getName();
+        String hosedes = "";
+        sDelive += "\n";
+        if (AccountManager.getInstance().getLocaleCode().contains("en")) {
+            sDelive += "Shipped out from";
+            hosedes = sDelive + name + "\n";
+        } else {
+            hosedes = sDelive + name + " " + getString(R.string.String_Direct_Mail) + "\n";
+        }
+        hosedes = hosedes + mWarehouse.getDesc().replace("<p>", "");
+        hosedes = hosedes.replace("</p>", "\n");
+        SpannableString msp = new SpannableString(hosedes);
+        msp.setSpan(new ForegroundColorSpan(Color.BLACK), 0, sDelive.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        msp.setSpan(new StyleSpan(Typeface.BOLD), hosedes.indexOf(name), hosedes.indexOf(name) + name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvWareHouseDetail.setText(msp);
+    }
+
+    public void start2ProductDetail() {
+        Intent intent;
+        intent = new Intent(ProductDetailActivity.this, ItemDetailActivity.class);
+        String url = Constants.WebWiewUrl.getUrl(Constants.WebWiewUrl.ITEM_DETAIL) + mItem.getItemid() + "/detail" + "?decorator=empty" + "&localeCode=" + AccountManager.getInstance().getLocaleCode();
+        intent.putExtra(ItemDetailActivity.URL, url);
+        startActivity(intent);
+    }
+
+
+    private void addCart() {
+        boolean userLogin = AccountManager.getInstance().isUserLogin(this);
+        if (!userLogin)
+            return;
+
+        int number = mNuCount.getCurrentNumber();
+        CartCommodityBean bean = new CartCommodityBean();
+        bean.setQty(number);
+        bean.setItemID(mItemID);
+        bean.setNote(mEtOrderMessage.getText().toString());
+
+        bean.getExtendAttrs().clear();
+        for (int i = 0; i < mLlExtends.getChildCount(); i++) {
+            ProductExtendView chile = (ProductExtendView) mLlExtends.getChildAt(i);
+            CsBase.PairIntInt currentOptionValue = chile.getCurrentOptionValue();
+            if (currentOptionValue != null) {
+                bean.addAttrs(currentOptionValue);
+            }
+        }
+        ShopCartManager.getInstance(this, (SysApplication) getApplication()).addToShopCart(bean);
+    }
+}

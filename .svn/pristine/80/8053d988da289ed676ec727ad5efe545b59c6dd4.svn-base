@@ -1,0 +1,16 @@
+package com.fuexpress.kr.ui.activity.notice;
+
+import android.view.View;
+
+import com.fuexpress.kr.base.BaseActivity;
+
+/**
+ * Created by kevin.xie on 2016/10/31.
+ */
+
+public class NoticeListActivity extends BaseActivity {
+    @Override
+    public View setInitView() {
+        return null;
+    }
+}

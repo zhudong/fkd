@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.fuexpress.kr"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <application
+        android:name=".base.SysApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,name">
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5896f35ea40fa37500001150"/>
+
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/SplashThem">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".ui.activity.help_signed.HelpMeSignedActivity"/>
+        <activity android:name=".ui.activity.CouponActivity"/>
+        <activity android:name=".ui.activity.MyNeedActivity"/>
+        <activity android:name=".ui.activity.append_parcel.AppendParcelActivity"/>
+        <activity android:name=".ui.activity.ParcelSubmitSucessActivity"/>
+        <activity android:name=".ui.activity.help_send.ToHelpSendActivity"/>
+        <activity
+            android:name=".ui.activity.Down2UpDialogActivity"
+            android:theme="@style/dialog_down_2_up"/>
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity android:name=".ui.activity.ParcelPaymentAtivity"/>
+        <activity android:name=".ui.view.imageselector.ImageSelectorActivity"/>
+        <activity android:name=".ui.activity.AccountSettingActivity"/>
+        <activity android:name=".ui.activity.login_register.LoginByPhoneActivity"/>
+        <activity android:name=".ui.activity.login_register.RegisterByPhoneActivity"/>
+        <activity android:name=".ui.activity.login_register.FindPasswordActivity"/>
+        <activity android:name=".ui.activity.login_register.BindThirdPlatformActivity"/>
+        <activity android:name=".ui.activity.login_register.ThirdPlatformLoginActivity"/>
+        <activity android:name=".ui.activity.ChooseCountryActivity"/>
+        <activity android:name=".ui.activity.coupon.CouponsActivity"/>
+        <activity android:name=".ui.activity.HelpCenterActivity"/>
+        <activity android:name=".ui.activity.notice.NoticeDetailActivity"/>
+        <activity android:name=".ui.activity.notice.NoticeListActivity"/>
+        <activity android:name=".ui.activity.PreviewParceldiseActivity"/>
+        <activity android:name=".ui.activity.package_detail.PackageDetailActivity"/>
+        <activity android:name=".ui.activity.package_detail.ParcelToSendActivity"/>
+        <activity android:name=".ui.activity.UserDetailInfoActivity"/>
+        <activity
+            android:name=".ui.activity.TImePickerActivity"
+            android:theme="@style/dialog_down_2_up_no_bg"/>
+        <activity
+            android:name=".ui.activity.AddressDialogActivity"
+            android:theme="@style/dialog_down_2_up_no_bg"/>
+        <activity
+            android:name=".ui.activity.GenderDialogActivity"
+            android:theme="@style/dialog_down_2_up_no_bg"/>
+        <activity
+            android:name=".ui.activity.ChangeEmailActivity"
+            android:theme="@style/dialog_down_2_up"/>
+        <activity android:name=".ui.activity.ChangePassWordActivity"/>
+        <activity android:name=".ui.activity.PreferencesActivity"/>
+        <activity android:name=".ui.activity.ChooseLanguageActivity"/>
+        <activity android:name=".ui.activity.ChooseCurrencyActivity"/>
+        <activity android:name=".ui.activity.MyBalanceActivity"/>
+        <activity android:name=".ui.activity.BalanceAccountActivity"/>
+        <activity android:name=".ui.activity.FillingOrderQueryActiviry"/>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1105716549"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"/>
+        <activity android:name=".ui.activity.AddressManagerActivity"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id"/>
+
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.AddNewAddressActivity"/>
+        <activity android:name=".ui.activity.CardOrderDetailActivity"/>
+        <activity android:name=".ui.activity.CouponExchangeActivity"/>
+        <activity android:name=".ui.activity.PaymentActivity"/>
+        <activity
+            android:name="adyen.com.adyenuisdk.PaymentActivity"
+            android:screenOrientation="locked"/>
+        <activity android:name=".ui.activity.KrBankInfoActivity"/>
+        <activity
+            android:name=".ui.activity.PickUpActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.append_item.AppendItemActivity"/>
+        <activity android:name=".ui.activity.ReplenishActivity"/>
+        <activity android:name=".ui.activity.append_parcel.IdCardActivity"/>
+        <activity
+            android:name=".ui.activity.AddRequireActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden"/>
+        <activity android:name=".ui.activity.PreviewMerchandiseActivity"/>
+        <activity android:name=".ui.activity.DemandsDetailActivity"/>
+        <activity android:name=".ui.activity.AddReplenishActivity"/>
+        <activity android:name=".ui.activity.EditRequireActivity"/>
+        <activity android:name=".ui.activity.PickUpSuccessActivity"/>
+        <activity android:name=".ui.activity.EditReplenishActivity"/>
+        <activity android:name=".ui.activity.PickUpKrbankInfoActivity"/>
+        <activity
+            android:name=".ui.activity.MyPayActivity"
+            android:screenOrientation="locked"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity android:name=".ui.activity.choose_category.ChooseCategoryActivity"/>
+        <activity android:name=".ui.activity.MaterialsSearchActivity"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="wx9bbbc9ca8d6fe854"/>
+                <!-- <data android:scheme="wxf3a036628fd49f65"/> -->
+                <!-- 注意这里，似乎对程序有影响，要加上 -->
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.BindingGiftCardActivity"/>
+        <activity android:name=".ui.activity.QueryShippingActivity"/>
+        <activity android:name=".ui.activity.IntegralManagementActivity"/>
+        <activity android:name=".ui.activity.IntegralActivity"/>
+        <activity android:name=".ui.activity.FriendsActivity"/>
+        <activity android:name=".ui.activity.ParcelSplitActivity"/>
+        <activity android:name=".ui.activity.InviteFriendsActivity"/>
+        <activity
+            android:name=".ui.activity.ChooseUserPhoneActivity"
+            android:theme="@style/dialog_down_2_up"/>
+        <activity android:name=".ui.activity.package_detail.InsuranceDeclarationActivity"/>
+        <activity android:name=".ui.TestActivity"/>
+        <activity android:name=".ui.activity.AddressSearchActivity"/>
+        <activity android:name=".ui.activity.ChooseCityActivity"/>
+        <activity android:name=".ui.activity.ParcelPayMethodActivity"/>
+        <activity android:name=".ui.activity.PayDemandSuccessActivity"/>
+        <activity android:name=".ui.activity.WithdrawActivity"/>
+        <activity android:name=".ui.activity.address_new.ChooseAddressActivity"/>
+        <activity android:name=".ui.activity.DaoUPayActivity"/>
+        <activity android:name=".ui.activity.choose_address.ChooseRegionActivity"/>
+        <activity android:name=".ui.activity.choose_address.SubRegionActivity"/>
+        <activity android:name=".ui.activity.ContractServiceActivity"/>
+        <activity android:name=".ui.activity.HomeWeblActivity"/>
+        <activity
+            android:name=".ui.activity.GiftCardActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".ui.activity.ShopCartForCardActivity"/>
+        <activity android:name=".ui.activity.CardTOUActivity"/>
+        <activity android:name=".ui.activity.CardCartOderActivity"/>
+        <activity android:name=".ui.activity.CardConfirmPaymentActivity"/>
+        <activity android:name=".ui.activity.transport_address.TranSportAddressActivity"/>
+        <activity android:name=".ui.activity.CardPaymentSuccessActivity"/>
+        <activity android:name=".ui.activity.giftcard_order.MyGiftCardOrderActivity"/>
+        <activity android:name=".ui.activity.merchant_detail.MerChantDetailActivity02"/>
+        <activity android:name=".ui.activity.merchant_detail.MerChantImageActivity02"/>
+        <activity android:name=".ui.activity.merchant_detail.MerchantBusinessActivity02"/>
+        <activity android:name=".ui.activity.merchant_detail.MerChantFollowsActivity02"/>
+        <activity android:name=".ui.activity.PhotoViewActivity"/>
+        <activity android:name=".ui.activity.shopping_cart.ShopCartActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden"/>
+<!--
+        <activity android:name=".ui.activity.shopping_cart.CartOrderActivity" />
+-->
+        <activity
+            android:name=".ui.activity.ShareActivity"
+            android:theme="@style/dialog"/>
+        <activity
+            android:name=".ui.activity.ShareSelectActiviy"
+            android:theme="@style/dialog_down_3_up"/>
+        <activity android:name=".ui.activity.order_show.OrderShowActivity" />
+        <activity android:name=".ui.activity.product_detail.ProductDetailActivity"/>
+        <activity android:name=".ui.activity.product_detail.ProductShippingActivity"/>
+        <activity android:name=".ui.activity.product_detail.CountryListActivity"/>
+        <activity android:name=".ui.activity.PlacesProductActivity"/>
+        <activity android:name=".ui.activity.ItemDetailActivity"/>
+        <activity android:name=".utils.CropPhotoListActivity"></activity>
+    </application>
+
+</manifest>

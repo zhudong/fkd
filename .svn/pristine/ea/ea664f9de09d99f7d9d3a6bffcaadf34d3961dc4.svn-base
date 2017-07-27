@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_root"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="10dp"
+    android:paddingBottom="1dp">
+
+    <TextView
+        android:id="@+id/tv_start_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/black"
+        android:textSize="12sp"/>
+
+    <com.yiss.gyi.ui.view.CrowdProgressBar
+        android:id="@+id/progress_crowd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_start_percent"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginRight="-2dp"
+        android:layout_marginTop="6dp"/>
+
+    <TextView
+        android:id="@+id/tv_start_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_crowd"
+        android:gravity="left"
+        android:textColor="@color/text_color_999"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_middle_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_crowd"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/text_color_999"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_end_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/progress_crowd"
+        android:gravity="right"
+        android:text="asdf"
+        android:textColor="@color/text_color_999"
+        android:textSize="13sp"/>
+</RelativeLayout>

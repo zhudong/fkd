@@ -1,0 +1,425 @@
+package com.fuexpress.kr.base;
+
+/**
+ * Created by k550 on 2016/3/18.
+ */
+public class BusEvent {
+
+    public static final int TEST_MAX = Integer.MAX_VALUE;
+    //登陆成功
+    public static final int LOGIN_SUCCESS = 10;
+    //获取用户信息成功
+    public static final int GET_INFO_SUCCESS = 9;
+    //登录失败
+    //退出登录
+    public static final int LOGOUT = 12;
+
+    public static final int LOGIN_FAILURE = 11;
+
+
+    //跳转到添加商品的Flag
+    public static final int GO_ADD_MERCHAND_CODE = 17;
+
+
+    //上传图片完成:
+    public static final int UP_LOAD_IMAGE_COMPLETE = 18;
+
+    //上传头像相关:
+    public static final int HEAD_ICON_GET_COMPLETE = 21;
+    public static final int IMAGE_FILE_READY = 19;
+    public static final int HEAD_ICON_UPLOADE_COMPLETE = 20;
+
+    //用户的详情信息相关:
+    public static final int GET_USER_DETAIL_INFO_COMPLETE = 22;
+    public static final int SAVE_USER_DETAIL_INFO_COMPLETE = 23;
+
+    //
+    public static final int Append_PARCEN_SUCESS = 24;
+
+    //跳转到编辑商品的Flag
+    public static final int GO_EDIT_MERHAND_CODE = 25;
+    //删除商品成功的Flag
+    public static final int DELETE_MERCHAND_SUCCESS = 26;
+    public static final int SAVE_MERCHAND_SUCCESS = 27;
+
+    //上传图片完成:
+    public static final int UP_LOAD_IMAGE_COMPLETE2 = 28;
+
+
+    //获得收货地址的请求:
+    public static final int GET_SHIPPING_ADDRESS_COMPLETE = 31;
+
+    //修改用户密码:
+    public static final int CHANGE_PASS_WORD_COMPLETE = 32;
+
+    //获取分享图集列表成功
+    public static final int GET_SHARE_IMAGE_LIST_SUCCESS = 33;
+
+    //返回 主页
+    public static final int GO_HOME_CODE = 34;
+
+    //付款成功
+    public static final int PAY_MENT_RESULT = 35;
+
+    //刷新去发货包裹
+    public static final int REFRESH_TOSEND_PARCEL = 36;
+
+    // 添加包裹
+    public static final int PARCEL_APPEND = 37;
+
+    //删除专辑
+    public static final int DELETE_ALBUM_SUCCESS = 38;
+    //保存专辑
+    public static final int SAVE_ALBUM_SUCCESS = 39;
+    //成功获取红点消息
+    public static final int GET_REDPOINT_SUCCESS = 40;
+    //新建专辑
+    public static final int CREATE_ALBUM_SUCCESS = 41;
+    //添加商品
+    public static final int CREATE_MERCHAND_SUCCESS = 42;
+    //订单的总数量
+    public static final int CODE_ORDER_COUNT = 43;
+
+    public static final int GET_ORDER_COUNT_COMPLETE = 44;
+
+    public static final int ADD_TO_MAP_COMPLETE = 45;
+    public static final int GET_COUNTRY_COMPLETE = 46;
+
+    //余额相关:
+    public static final int GET_GIFT_CARD_BAN_LIST_INIT_SUCCESS = 47;
+    public static final int GET_GIFT_CARD_LIST_MORE_COMPLETE = 48;
+    public static final int PAYMENT_TYPE_CHANGE = 49;
+    public static final int GET_GIFT_CARD_LIST_REQUEST_COMPLETE = 50;
+
+    //订单页面刷新请求
+    public static final int CODE_ORDER_REFRESH = 51;
+
+    //跳转到商品管理-商品节界面
+    public static final int CODE_GO_MERCHAND = 52;
+    //获取当前图片集的上传进度：
+    public static final int GET_UP_LOAD_IMAGE_LIST_PROGRESS = 53;
+    //要求显示当前的图片上传进度：
+    public static final int SHOW_UP_LOAD_IMAGE_LIST_PROGRESS = 54;
+    //返回当前图片的上传进度：
+    public static final int RETURN_CURRENT_UP_LOAD_IMAGE_LIST_PROGRESS = 55;
+    //发送当前下载图片的进度
+    public static final int SEND_DOWNLOAD_IMAGES_PROGRESS = 56;
+    //    订单状态改变
+    public static final int ORDER_STATE_CHANGE = 57;
+    //获得子账号的列表请求
+    public static final int GET_MER_SUB_ACCOUNT_COMPLETE = 58;
+    //启用子账号的请求:
+    public static final int ENABLE_CA_COMPLETE = 59;
+    //停用子账号请求:
+    public static final int DISABLE_CA_COMPLETE = 60;
+    //添加子账号成功：
+    public static final int ADD_CHILD_ACCOUNT_SUCCESS = 61;
+    //初始化子账号设置页面:
+    public static final int INIT_CA_PR_COMPLETE = 62;
+    //保存子账号的权限请求:
+    public static final int SAVE_CA_PR_CPMPLETE = 63;
+    //获取第三方账号信息
+    public static final int GET_THIRD_ACCOUNT_INFO = 64;
+    //优惠券
+    public static final int CODE_COUPON_ID = 65;
+    //上传图片成功
+    public static final int HEAD_ICON_UPLOADE_COMPLETE_NOTE = 66;
+    //更换邮箱成功
+    public static final int CHANGE_EMAIL_COMPLETE = 67;
+    //请求币种列表成功:
+    public static final int GET_CURRENCY_COMPLETE = 68;
+    //转换语言成功:
+    public static final int CHANGE_LUANGAGUE_COMPLETE = 69;
+    //change currency
+    public static final int CHANGE_CURRENCY_COMPLETE = 70;
+    //change currency and change data
+    public static final int REFRESH_CURRENCY_COMPLETE = 71;
+    //
+    public static final int GET_USER_DETAIL_INFO_FILED_COMPLETE = 72;
+    //
+    public static final int SET_USER_INFO_FILED_COMPLETE = 73;
+
+    //优惠券兑换成功
+    public static final int CODE_COUPON_EXCHANGE_SUCCESS = 74;
+    //获取优惠券币种列表成功
+    public static final int GET_COUPON_CURRENCY_LIST_SUCCESS = 75;
+    //获取地址列表成功:
+    public static final int GET_ADDRESS_LIST_COMPLETE = 76;
+    //删除地址:
+    public static final int DELET_ADDRESS_REQUEST = 77;
+
+    //设置该地址是否默认完成:
+    public static final int SET_ADDRESS_IS_DEFAULT_COMPETE = 78;
+    //获取红点数量成功
+    public static final int GET_MY_RED_POINT_COUNT_SUCCESS = 79;
+    //    去发货的支付状态
+    public static final int GO_HOME_PAGE = 42;
+
+    //Adyen支付的结果
+    public static final int CODE_ADYEN_PAY_END = 96;
+    public static final int GO_STORE_PAGE = 97;
+
+    public static final int ADD_REPLENISH_DATA_LIST_SUCCESS = 98;
+    public static final int EDIT_REPLENISH_DATA_LIST_SUCCESS = 99;
+    public static final int DELETE_REPLENISH_DATA_LIST_SUCCESS = 100;
+
+    //获取首页小红点
+    public static final int GET_DEMAND_AND_PACKAGE_COUNT_COMPLETE = 101;
+
+    //跳转帮我取
+    public static final int GO_PICK_UP = 102;
+
+    //继续添加帮我补货
+    public static final int ADD_OTHER_REPLENISH_ITEM = 103;
+
+    //刷新需求列表
+    public static final int REFRESH_NEED_LIST = 104;
+
+    //获取用户的充值卡账户余额
+    public static final int GET_GIFT_CARD_BALANCE_COMPLETE = 105;
+    //获取用户的充值卡的来源:
+    public static final int GET_GIFT_CARD_STORESITE_COMPLETE = 106;
+    //绑定充值卡的请求:
+    public static final int BINDING_GIFT_CARD_REQUEST_COMPLETE = 107;
+
+    //成功获取到材质
+    public static final int GET_MATERIALS_RESULT = 108;
+    //成功切换了城市
+    public static final int SWITCH_CITY_SUCCESS = 109;
+
+    //获得一级地址数据完成:
+    public static final int GET_REGION_COMPLETE = 110;
+
+    //获得二级地址数据完成:
+    public static final int GET_SUB_REGION_COMPLETE = 111;
+
+    //请求用户的simple信息完成:
+    public static final int GET_SIMPLE_USER_INFO_COMPETE = 112;
+    public static final int GO_TO_WITHDRAW = 113;
+    public static final int GO_SUBMIT_PARCEL = 114;
+
+    public static final int GO_MY_NEED = 115;
+
+    //绑定充值卡初始化请求完成:
+    public static final int REDEEM_GIFT_CARD_COMPETE = 116;
+
+    //获得会员组信息的请求完成:
+    public static final int GET_MEMBER_NAME_CONPLETE = 117;
+
+    //关注商户成功:
+    public static final int OPERA_MERCHANT_COMPLETE = 118;
+
+    //关注单品成功:
+    public static final int OPERA_ITEM_SUCCESS = 119;
+
+    //关注单品失败:
+    public static final int OPERA_ITEM_FAIL = 120;
+
+    //获取商户详情成功:
+    public static final int GET_MERCHANT_DETAIL_SUCCESS = 121;
+
+    //请求接口失败:
+    public static final int REQUEST_FAIL = 122;
+
+    //获取商户关注者列表成功
+    public static final int GET_MERCHANT_FOLLOWS_SUCCESS = 123;
+
+    //获取商户关注者列表更多成功:
+    public static final int GET_MERCHANT_FOLLOWS_SUCCESS_MORE = 124;
+
+    //获取商户单品列表成功:
+    public static final int GET_MERCHANT_ITEMS_LIST_SUCCESS = 125;
+
+    //获取商品的单品列表更多成功:
+    public static final int GET_MERCHANT_ITEMS_LIST_SUCCESS_MORE = 126;
+
+    //操作商户成功
+    public static final int OPERA_MERCHANT_SUCCESS = 127;
+
+    //获取货源信息全部品牌完成:
+    public static final int GET_PRODUSRC_ALL_COMPETE = 128;
+
+    //获取货源信息热门品牌完成:
+    public static final int GET_PRODUSRC_HOT_COMPETE = 129;
+
+    //获取货源信息我关注的完成:
+    public static final int GET_PRODUSRC_FOLLOWED_COMPETE = 130;
+
+    //获取关注着列表成功（JAVA接口）
+    public static final int GET_MERCHANT_FOLLOWS_LIST_COMPLETE = 131;
+
+
+    //图片下载完成
+    //使用mTpye来区分来自不同接受者和发送者
+    private int mType = 0;
+    private Object mParam;
+    private String mStrParam;
+    private String mStrParam02;
+    private int mIntParam;
+    private long mLongParam;
+    private boolean mBooleanParam;
+    private boolean mBooleanParam02;
+    private int mIntValue;
+    private int mIntValue02;
+
+    public BusEvent(int type, long longparam) {
+        this.mType = type;
+        this.mLongParam = longparam;
+    }
+
+    public BusEvent(int type, int intParam) {
+        this.mType = type;
+        this.mIntParam = intParam;
+    }
+
+    public BusEvent(int type, Object param) {
+        mType = type;
+        mParam = param;
+    }
+
+    public BusEvent(int type, String str) {
+        mType = type;
+        mStrParam = str;
+    }
+
+
+    public BusEvent(int type, Object param, String str) {
+        mType = type;
+        mParam = param;
+        mStrParam = str;
+    }
+
+    public BusEvent(int type, boolean booleanParam, Object param) {
+        mType = type;
+        mParam = param;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, Object param, String strValue) {
+        mType = type;
+        mParam = param;
+        mBooleanParam = booleanParam;
+        mStrParam = strValue;
+    }
+
+    public BusEvent(int type, boolean booleanParam) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, boolean booleanParam02) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+    }
+
+    public BusEvent(int type, boolean booleanParam, boolean booleanParam02, int intValue) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+        mIntValue = intValue;
+    }
+
+    public BusEvent(int type, boolean booleanParam, boolean booleanParam02, String strValue) {
+        mType = type;
+
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+        mStrParam = strValue;
+    }
+
+    public BusEvent(int type, boolean booleanParam, int intValue) {
+        mType = type;
+        mIntValue = intValue;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, int intValue, int intValue02) {
+        mType = type;
+        mIntValue = intValue;
+        mBooleanParam = booleanParam;
+        mIntValue02 = intValue02;
+    }
+
+    public BusEvent(int type, boolean booleanParam, String stringParam, String strParam02) {
+        mType = type;
+        mStrParam = stringParam;
+        mBooleanParam = booleanParam;
+        mStrParam02 = strParam02;
+    }
+
+    public BusEvent(int type, boolean booleanParam, String stringParam) {
+        mType = type;
+        mStrParam = stringParam;
+        mBooleanParam = booleanParam;
+    }
+
+    public BusEvent(int type, Object param, int intParam) {
+        mType = type;
+        mParam = param;
+        mIntParam = intParam;
+    }
+
+    public BusEvent(int type, long longParam, Object param) {
+        this.mType = type;
+        this.mLongParam = longParam;
+        this.mParam = param;
+    }
+
+    public BusEvent(int type, int intParam, String strParam) {
+        this.mType = type;
+        this.mIntValue = intParam;
+        this.mStrParam = strParam;
+    }
+
+    public BusEvent(int type, boolean booleanParam, Object param, String className, boolean booleanParam02) {
+        mType = type;
+        mParam = param;
+        mStrParam = className;
+        mBooleanParam = booleanParam;
+        mBooleanParam02 = booleanParam02;
+    }
+
+    public int getType() {
+        return mType;
+    }
+
+    public Object getParam() {
+        return mParam;
+    }
+
+    public long getmLongParam() {
+        return mLongParam;
+    }
+
+    public String getStrParam() {
+        return mStrParam;
+    }
+
+    public String getStrParam02() {
+        return mStrParam02;
+    }
+
+    public int getIntParam() {
+        return mIntParam;
+    }
+
+    public boolean getBooleanParam() {
+        return mBooleanParam;
+    }
+
+    public int getIntValue() {
+        return mIntValue;
+    }
+
+    public boolean getBooleanParam02() {
+        return mBooleanParam02;
+    }
+
+    public int getIntValue02() {
+        return mIntValue02;
+    }
+}

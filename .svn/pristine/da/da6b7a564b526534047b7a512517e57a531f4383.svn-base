@@ -1,0 +1,56 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//兼容老版本保留，新版本一律用ShippingMethod
+//定义的较早，词不达意
+message Shipping
+{
+	required int32  shipping_id = 1;
+	required string title       = 2;
+	required string info        = 3;
+	optional double fee         = 4;//运费
+	optional bool   is_need_duty= 5;//是否需要关税
+	optional int32  parcel_subtotal_quota = 6;//包裹商品实际价格限额
+	optional float  duty_rate   = 7;//关税率
+	optional float  shipping_duty         = 8;//运费关税
+}
+
+message GetShippingListRequest
+{
+	required BaseRequest head                = 1;
+	optional BaseUserRequest userinfo        = 2;
+	required int32       shipping_address_id = 3;//收货地址
+	repeated int32       warehouse_ids       = 4;//仓库列表
+	optional string      currencycode        = 5;//币种
+	optional string      localecode          = 6;//语种
+}
+
+message GetShippingListResponse
+{
+	required BaseResponse head      = 1;
+	repeated PairIntInt   pairs     = 2;//<仓库id，托运id>
+	repeated Shipping     shippings = 3;//托运列表
+}
+
+//获取拼单物流列表
+message GetCrowdShippingMethodListRequest
+{
+	required BaseRequest head                = 1;
+	optional BaseUserRequest userinfo        = 2;
+	required int64       crowd_id            = 3;//拼单id
+	required int64       item_id             = 4;//单品id
+	required int32       qty                 = 5;//交易数量
+	optional int32       shipping_address_id = 6;//收货地址
+	optional int32       warehouse_id        = 7;//仓库列表
+	optional string      localecode          = 8;
+	optional string      currencycode        = 9;
+	optional int32       currencyid          = 10;
+}
+
+message GetCrowdShippingMethodListResponse
+{
+	required BaseResponse head      = 1;
+	repeated Shipping     shippings = 2;//物流列表
+}

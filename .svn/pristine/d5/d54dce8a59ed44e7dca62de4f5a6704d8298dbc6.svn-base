@@ -1,0 +1,643 @@
+import "cs_head.proto";
+import "cs_base.proto";
+import "cs_address.proto";
+
+package fksproto;
+
+
+enum ParcelState
+{
+	PARCEL_STATE_SUBMITTED     = 0;//已提交
+	PARCEL_STATE_PAYED         = 1;//待入库
+	PARCEL_STATE_INSTORED      = 2;//已入库
+	PARCEL_STATE_NOTICED       = 3;//待出库
+	PARCEL_STATE_CHECKED       = 4;//已审核
+	PARCEL_STATE_SHIPPED       = 5;//已发货
+}
+
+
+
+enum TimeChoice
+{
+	TIME_CHOICE_TODAY 		= 1;
+	TIME_CHOICE_YESTERDAY 	= 2;
+	TIME_CHOICE_EARLIER		= 3;
+}
+
+//包裹类型
+enum ParcelType
+{
+	PARCEL_TYPE_NONE       = 0;
+	PARCEL_TYPE_ORDER      = 1;//订单包裹
+	PARCEL_TYPE_TRANSPORT  = 2;//转运包裹
+	PARCEL_TYPE_DIRECT     = 3;//直邮包裹
+}
+
+message Images
+{	
+	optional string  image          = 1;//图片路径
+}
+
+message InfoList
+{	
+	optional int32   parcelid                    = 1;//包裹id	
+	optional string  productdescription          = 2;//物品信息	
+	optional float   productprice                = 3;//申报价	
+	optional float   weight                      = 4;//总重量	
+	optional int32   customeraddressid           = 5;//地址id	
+	optional int32   qty                         = 6;//数量	
+	optional int32   shippingmethodid            = 7;//物流id	
+	optional int32   image_num                   = 8;//图片数量	
+	optional int32   warehouseid                 = 9;//仓库id
+	repeated Images  images                      = 10;//图片路径结构体数组
+	
+}
+
+//提交帮我寄信息  add by tianz
+message SendSubmitRequest
+{	
+	required BaseRequest             head               = 1;	
+	optional BaseUserRequest         second             = 2;	
+	optional int32                   sumcount           = 3;  //包裹数量	
+	repeated InfoList      		     infolist           = 4;//包裹列表	
+	required string                  paymentcode        = 5;//(支付宝:alipay 微信:wxap)	
+	optional string                  localecode         = 6;
+	optional int32                   shippingcouponcustomerid = 7;//该用户的优惠券ID
+	optional string                  currencycode       = 8;//币种
+	optional string                  idcard             = 9;//身份证号
+	optional string                  idcardfrontimage   = 10;//身份证正面
+	optional string                  idcardbackimage    = 11;//身份证反面
+}
+
+message SendSubmitReponse
+{
+	required BaseResponse            head                = 1;	
+	optional int32                   salesrequiremainid  = 2;   //帮我寄主单id	
+	optional string                  status              = 3;//状态,Pending:待付款,Payed:已付款	
+	optional string                  redirecturl         = 4;//直冲url	
+	optional string                  message             = 5;//提示信息
+}
+
+
+//提交包裹发货通知
+message SubmitParcelNoticeRequest
+{
+	required BaseRequest        head                = 1;
+	optional BaseUserRequest    second              = 2;
+	required int64              parcel_id           = 3;//包裹id
+	optional int32              shipping_address_id = 4;//包裹邮寄地址
+	optional int32              shipping_method_id  = 5;//物流方式
+	optional string             idcard              = 6;//身份证
+	optional string             localecode          = 7;//语种
+	optional string             currencycode        = 8;//币种
+	optional int32              currencyid          = 9;//币种id
+	optional string             idcardfrontimage    = 10;//身份证正面图片
+	optional string             idcardbackimage     = 11;//身份证反面图片
+	optional string             shippingcouponcustomerid = 12;//优惠券id
+	
+}
+
+message SubmitParcelNoticeResponse
+{
+	required BaseResponse head = 1;
+}
+
+message ShippingMethodIds
+{
+	optional int32                   shippingmethodid = 1;
+}
+
+message ParcelNoticeShippingFeeRequest
+{
+	required BaseRequest             head                = 1;
+	optional BaseUserRequest         second              = 2;
+	optional int32                   parcelid            = 3;//包裹id
+	optional int32                   shippingmethodidsnum= 4;//物流数量
+	repeated ShippingMethodIds       shippingmethodids   = 5;
+}
+
+message ParcelNoticeShippingFeeResponse
+{
+	required BaseResponse   head      		= 1;
+	repeated ShippingMethod shippings 		= 2;
+	optional float          estimate_weight = 3;
+}
+
+
+//帮我寄包裹初始化    add by tianz 
+message AddressList
+{	
+	optional int32   customeraddressid                = 1;//地址id	
+	optional string  name                             = 2;//客户名	
+	optional string  company                          = 3;//客户公司	
+	optional string  street                           = 4;//街道	
+	optional string  fullregionname                   = 5;//详细地区名	
+	optional string  postcode                         = 6;//邮编	
+	optional string  telephone                        = 7;//电话	
+	optional string  isdefaultship                    = 8;//默认值
+}
+
+message SendInitRequest
+{	
+	required BaseRequest       		 head                = 1;	
+	optional BaseUserRequest         second              = 2;
+	optional string                  currencycode        = 3;
+}
+
+message SendInitReponse
+{	
+	required BaseResponse            head               = 1;	
+	optional string                  parcelname         = 2;   //包裹名	
+	optional int32                   parcelid           = 3;//包裹id	
+	optional int32                   warehouseid        = 4;//仓库id	
+	optional string                  defaultparcelweight= 5;//转运仓库包裹最小重量	
+	repeated AddressList             addresslist        = 6;//地址列表	
+	optional string                  currencycode       = 7;//包裹币种
+	//repeated Warehouse               warehouselist      = 8;//仓库列表
+}
+
+//物流方式列表
+message MerchantParcelShippingMethodList
+{	
+	optional int32   parcelshippingmethodid 	  = 1;//物流方式id	
+	optional string  shippingmethodstring     	  = 2;//物流方式描述字
+	optional int32   isneedidcard 	              = 3;//是否要身份证 1 要，0不要
+	optional int32   isneedduty 	              = 4;//是否要关税 1 要，0不要
+	optional float   dutyrate 	                  = 5;//关税率
+	optional float   premiumrate 	              = 6;//保险率
+	optional int32   parcelsubtotalquota 	      = 7;//关税限额包裹商品总价
+	optional int32   bondedalert 	              = 8;//是否要保险 1 要，0不要
+	optional int32   declaredvalue                = 9;//最高申报价
+}
+
+message ParcelItemList
+{
+	optional int32   parcelid 	  = 1;//包裹id
+	optional int32   parcelitemid = 2;//包裹单品id
+	optional string  name     	  = 3;//物品标题
+	optional float   price 	      = 4;//加价格
+	optional float   imageheight  = 5;//高
+	optional string  imageurl     = 6;//url
+	optional float   imagewidth   = 7;//宽
+	optional int32   qty 	      = 8;//数量
+}
+
+//获取配送方式请求    add by tianz
+message GetSelectAddressAjaxRequest
+{	
+	required BaseRequest             head               = 1;	
+	required string                  customeraddressid  = 2;//用户地址id	
+	required string                  warehouseid        = 3;//仓库id
+	optional string  		         currency_code      = 4;//
+}
+
+message GetSelectAddressAjaxReponse
+{	
+	required BaseResponse             head              = 1;	
+	optional string                   name              = 2;	
+	optional string                   warehousename     = 3;	
+	optional string                   unit              = 4;
+	optional string                   idcard            = 5;
+	optional string                   idcardfrontimage  = 6;
+	optional string                   idcardbackimage   = 7;
+	repeated MerchantParcelShippingMethodList merchantparcelshippintmethodlist = 8;	
+}
+
+//包裹
+message Parcel
+{
+	optional int64  parcel_id            = 1; //包裹id
+	optional string parcel_name          = 2; //包裹名称
+	optional string parcel_number        = 3; //包裹名称
+	optional int32  qty                  = 4; //包裹中的单品数量
+	optional int32  state                = 5; //包裹state, 参见 ParcelState
+	optional int32  type                 = 6; //包裹类型,  参见 ParcelType
+	optional float  weight               = 7; //包裹重量
+    	optional float  subtotal             = 8; //实际价值
+    	optional string instore_time         = 9; //入库时间
+    	optional string outstore_time        = 10; //出库时间
+	optional string productdescription   = 11;//转运包裹的物品信息
+	optional string productimg           = 12;//转运包裹的物品图片路径
+    	repeated string image_list           = 13;//包裹中的单品图片，数组格式：[url1,url2,url3]
+	optional string status               = 14;//状态,{Submitted: 已提交,Payed: 待入库,Instore： 已入库,Notice：待出库,Checked: 已审核,Shipped: 已发货}
+	optional string currencycode         = 15;//包裹币种
+}
+
+//包裹物流
+message ParcelShipping
+{
+	optional string shipping_method_title 		= 1;//物流方式
+	optional string shipping_method_info  		= 2;//物流信息
+	optional float  estimate_shipping_fee		= 3;//预估运费
+	optional float  real_shipping_fee    		= 4;//实际运费
+	optional string shipping_company_code 		= 5;//物流公司代码
+	repeated string shipping_numbers      		= 6;//物流编号
+	optional float  declaration           		= 7;//保险申报总价
+	optional float  premium               		= 8;//保险费用
+	optional float  weight		                = 9;//重量
+	optional float  dutyrate		            = 10;
+	optional float  productduty		            = 11;//
+	optional float  shippingduty		        = 12;//
+}
+
+//包裹留言
+message ParcelMessage
+{
+	optional string content     		= 1;//留言内容
+	optional string  create_time 		= 2;//留言时间
+	optional string from_role   		= 3;//留言人昵称
+}
+
+//帮我寄包裹列表
+message SendParcelListRequest
+{
+	required BaseRequest     head              = 1;
+ 	optional BaseUserRequest user_head         = 2;	
+ 	optional int32           page_no           = 3;//请求的页编号，从1开始
+	optional string          status            = 4;//状态(查全部状态，不传此参，去发货status=Submitted,//待收货status=Payed,已发货status=Shipped)
+	optional string          type              = 5;
+												   
+};
+
+message SendParcleListResponse
+{
+	required BaseResponse    head              = 1;
+	optional bool            more              = 2; //0:没有下一页; 1:有下一页
+	optional int32           toshipnum         = 3;//去发货的包裹数量
+	repeated Parcel          items             = 4; //包裹列表
+};
+
+
+//根据配送方式计算运费    add by tianz 
+message GetShippingInfoRequest
+{	
+	required BaseRequest       head                    = 1;	
+	optional BaseUserRequest   second                  = 2;	
+	optional int32             parcelshippingmethodid  = 3;//物流方式id	
+	optional float             weight                  = 4;//重量	
+	optional float             price                   = 5;//申报总价	
+	optional int32             qty                     = 6;//数量
+}
+	
+message GetShippingInfoReponse
+{	
+	required BaseResponse      head                    = 1;	
+	optional string            total                   = 2;   //总价
+	optional string            shippingduty            = 3;// 运费关税
+}
+
+//支付充值卡订单
+message PayGiftCardOrderRequest
+{	
+	required BaseRequest  head               = 1;	
+	optional int32        gift_card_order_id = 2;  //充值卡订单id	
+	optional string       payment_code       = 3;  //支付方式(alipay,wxap)
+	optional string       currencycode       = 4;
+}
+
+message PayGiftCardOrderResponse
+{	
+	required BaseResponse    head     = 1;	
+	optional string          pay_info = 2;//支付信息，以key=value形式，以&连接
+}
+
+//拆分包裹去支付
+message DoDirectGiftCardRequest
+{	
+	required BaseRequest     head                = 1;	
+	optional int32           type                = 2;  //充值类型(1:非直充 2:直充(包裹通知) 3:直充(拆分包裹) 4:直充(需求单))	
+	optional int32           app_type            = 3;  //操作系统(安卓:3 IOS:4)	
+	optional string          payment_code        = 4;  //支付方式(支付宝:alipay 微信:wxap)	
+	optional float           total               = 5;  //充值金额	
+	optional int32           salesrequiremainid  = 6;  //	
+	required BaseUserRequest  userinfo           = 7;   //用户信息
+	optional string          currencycode        = 8;  
+    optional int32       shippingcouponcustomerid  = 9;//优惠券ID
+	optional float       shippingfee           = 10;//预计运费纯运费
+}
+
+message DoDirectGiftCardResponse
+{	
+	required BaseResponse head               	 = 1;	
+	optional string payment_code             	 = 2;//支付方式	
+	optional int32  order_id                 	 = 3;//订单id
+}
+
+//包裹详情里选中配送方式    add by tianz 
+message SelectShippingMethodRequest
+{	
+	required BaseRequest       head                    = 1;	
+	optional BaseUserRequest   second                  = 2;	
+	optional int32             parcelid                = 3;//包裹id	
+	optional int32             parcelshippingmethodid  = 4;//配送方式id
+}
+
+message SelectShippingMethodReponse
+{	
+	required BaseResponse      head                    = 1;	
+	optional int32             bondedalert             = 2;//申报价限制，物流的Albert是yes时 显示，为NO时不显示	
+	optional float             maxdeclaredvalue        = 3;//配送方式允许的最大申报价	
+	optional float             declaredtotal           = 4;//包裹的实际申报价	
+	optional float             premiumrate             = 5;//保险费率	
+	optional float             premium                 = 6;//保险费	
+	optional float             shippingfee             = 7;//运费
+	optional float             giftcardaccount         = 8;//礼品卡账户余额	
+	optional float             needpay                 = 9;//还需要支付金额	
+	optional string            message                 = 10;//提示消息
+	optional float             duty     	           = 11;//
+	optional float             productduty		       = 12;//
+	optional float             shippingduty		       = 13;//
+}
+
+//我的包裹详情
+message GetParcelDetailRequest
+{
+	required BaseRequest head          = 1;
+	optional BaseUserRequest baseuser  = 2;//
+	optional int64       parcel_id     = 3;//包裹id
+}
+
+message GetParcelDetailResponse
+{
+	required BaseResponse    head              = 1;
+	optional Parcel          parcel            = 2;//包裹信息
+	optional Warehouse       warehouse 	   = 3;//仓库信息
+	optional CustomerAddress address   	   = 4;//包裹地址
+	optional ParcelShipping  shipping  	   = 5;//物流信息
+	repeated ParcelMessage   messages 	   = 6;//留言信息
+	repeated MerchantParcelShippingMethodList merchantparcelshippingmethodlist = 7; 
+	repeated ParcelItemList parcelitemlist = 8; 
+};
+
+message ProductDataList
+{
+	optional string           productname   = 1;//产品名称
+	optional string           productdescription   = 2;//产品描述
+	optional string           productremark = 3;//产品备注
+	optional string           warehouseid   = 4;//仓库id
+	optional string           addressinfo   = 5;//取货地址
+	optional string           price         = 6;//单价
+    optional string           num           = 7;//数量
+    optional int32            image_num     = 8;//图片数量
+    repeated ItemImage        extra         = 9; //多图路径串
+    optional string           brandname     = 10;//品牌名称
+    optional int32            matchtagid    = 11;//材质ID
+    optional int32            matchcategoryid   = 12;//分类ID
+}
+
+//帮我买提交
+message SaveHelpMyBuyRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userhead       = 2;  //
+	optional string           currencycode   = 3;  //币种
+	optional string           paymentcode    = 4;  //支付方式
+	optional string           sumcount       = 5;//需求单数量
+	repeated ProductDataList  productlist    = 6;//用到字段productname、productdescription、price、num、image_num、extra
+
+}
+
+message SaveHelpMyBuyResponse
+{
+	required BaseResponse head               = 1;
+	optional string salesrequiremainid       = 2;//主键ID
+	optional string redirecturl              = 3;//需要去调用的直充接口链接
+}
+
+//帮我收提交
+message SaveHelpReceiveRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userhead       = 2;  //
+	optional string           currencycode   = 3;  //币种
+	optional string           paymentcode    = 4;  //支付方式
+	optional string           sumcount       = 5;//需求单数量
+	repeated ProductDataList  productlist    = 6;//用到字段productremark、productdescription、warehouseid、price、num、image_num、extra
+}
+
+message SaveHelpReceiveResponse
+{
+	required BaseResponse head               = 1;
+	optional string salesrequiremainid       = 2;//主键ID
+}
+
+//帮我取提交
+message SaveHelpMyGetRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userhead       = 2;  //
+	optional string           currencycode   = 3;  //币种
+	optional string           paymentcode    = 4;  //支付方式
+	optional string           sumcount       = 5;//需求单数量
+	repeated ProductDataList  productlist    = 6;//用到字段addressinfo、productdescription、price、num、image_num、extra
+}
+
+message SaveHelpMyGetResponse
+{
+	required BaseResponse head               = 1;
+	optional string salesrequiremainid       = 2;//主键ID
+	optional string redirecturl              = 3;//需要去调用的直充接口链接
+}
+
+
+message initEditItemRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userhead       = 2;
+	optional int32            parcelitemid   = 3;//物品id
+}
+
+message initEditItemResponse
+{
+	required BaseResponse head               = 1;
+	optional int32        image_num          = 2;//图片数量
+    repeated ItemImage    extra              = 3; //图片路径,多张图用逗号分隔
+	optional string       name               = 4;//物品信息
+	optional double       price              = 5;//申报单价
+	optional int32          qty                = 6;//物品数量
+
+}
+
+message EditItemRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userhead       = 2;
+    optional int32            parcelid       = 3;//包裹id
+    optional int32            parcelitemid   = 4;//物品id
+    optional int32            image_num      = 5;//图片数量
+    repeated ItemImage        extra          = 6;//多图路径串
+    optional string           name           = 7;//物品信息
+    optional string           price          = 8;//申报单价
+    optional int32            qty            = 9;//物品数量
+}
+
+message EditItemResponse
+{
+	required BaseResponse head               = 1;
+	optional int32        parcelitemid       = 2;//物品id
+
+}
+
+
+//帮我寄去直充(单个直充)
+message PayDoDirectGiftCardAppSingleRequest
+{
+	required BaseRequest      head           = 1;
+	optional int32            type           = 2;  //充值类型(1:非直充 2:直充(包裹通知) 3:直充(拆分包裹) 4:直充(需求单))
+	optional int32            app_type       = 3;  //操作系统(安卓:3 IOS:4)
+	optional string           payment_code   = 4;  //支付方式(支付宝:alipay 微信:wxap)
+	optional float            total          = 5;  //充值金额
+	optional int32            parcelid       = 6;  //包裹id
+	required BaseUserRequest  userinfo       = 7;   //用户信息
+	optional string           currencycode   = 8;
+	optional float            estimateshippingfee = 9;//预估运费
+	optional int32       shippingcouponcustomerid  = 10;//优惠券ID
+	optional float       shippingfee           = 11;//预计运费纯运费
+}
+
+message PayDoDirectGiftCardAppSingleResponse
+{
+	required BaseResponse head               = 1;
+	optional string payment_code             = 2;//支付方式
+	optional int32  order_id                 = 3;//订单id
+}
+
+message RateList
+{
+	optional int32  member_group_id          = 1;
+	optional int32  qty          			 = 2;
+	optional double service_rate             = 3;
+}
+
+//帮我买初始化
+message HelpMyBuyInitRequest
+{
+	required BaseRequest      head           = 1;
+	required BaseUserRequest  userinfo       = 2;   //用户信息
+	optional string           currency_code  = 3;   //币种
+}
+
+message HelpMyBuyInitResponse
+{
+	required BaseResponse head               = 1;
+	optional double       gift_card_account  = 2;   //账户余额
+	optional int32        rate_type  		 = 3;   //费率类型(0定值、1百分比)
+	optional double       service_fee        = 4;   //服务费
+	repeated RateList     rate_list		     = 5;   //费率列表
+	optional int32        free  			 = 6;   //是否免费(0是,1否)
+	optional double       exchange_rate      = 7;   //汇率
+	optional double       exchange_rate_back = 8;   //反汇率
+	optional string       currency_code      = 9;   //币种code
+	optional string       currency_sign      = 10;  //币种符号
+	optional string       currency_name      = 11;  //币种名称
+}
+
+//帮我收初始化
+message HelpMyReceiveInitRequest
+{
+	required BaseRequest      head           = 1;
+	required BaseUserRequest  userinfo       = 2;   //用户信息
+	optional string           currency_code  = 3;   //币种
+	optional string           locale_code  	 = 4;   //语种
+}
+
+message HelpMyReceiveInitResponse
+{
+	required BaseResponse head               = 1;
+	repeated Warehouse    warehouse_list     = 2;//仓库列表
+}
+
+//帮我取初始化
+message HelpMyGetInitRequest
+{
+	required BaseRequest      head           = 1;
+	required BaseUserRequest  userinfo       = 2;   //用户信息
+	optional string           currency_code  = 3;   //币种
+	optional string           locale_code  	 = 4;   //语种
+}
+
+message HelpMyGetInitResponse
+{
+	required BaseResponse head               = 1;
+	optional double       gift_card_account  = 2;   //账户余额
+	optional int32        rate_type  		 = 3;   //费率类型(0定值、1百分比)
+	optional double       service_fee        = 4;   //服务费
+	repeated RateList     rate_list		     = 5;   //费率列表
+	optional int32        free  			 = 6;   //是否免费(0是,1否)
+	optional double       exchange_rate      = 7;   //汇率
+	optional double       exchange_rate_back = 8;   //反汇率
+	optional string       currency_code      = 9;   //币种code
+	optional string       currency_sign      = 10;  //币种符号
+	optional string       currency_name      = 11;  //币种名称
+}
+
+//添加物品
+message AddItemRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userinfo       = 2;   //用户信息
+	optional int32            parcelid       = 3;   //
+    optional string           name           = 4;
+    optional float            price          = 5;
+    optional int32            qty            = 6;
+    optional string           images         = 7;
+}
+
+message AddItemResponse
+{
+	required BaseResponse head               = 1;
+	optional int32        parcelitemid       = 2;
+}
+
+//删除物品
+message DelItemRequest
+{
+	required BaseRequest      head           = 1;
+	optional BaseUserRequest  userinfo       = 2;   //用户信息
+	optional int32            parcelitemid   = 3;
+
+}
+
+message DelItemResponse
+{
+	required BaseResponse head               = 1;
+}
+
+//帮我寄批量操作(钱够直接扣款,钱不够调用直充url)
+
+message SendForParcelList
+{
+	optional int32    warehouseid         = 1;//仓库id
+	optional int32    parcelid            = 2;//包裹id
+	optional float    weight              = 3;//总重量
+	optional int32    customeraddressid   = 4;//地址id
+	optional int32    shippingmethodid    = 5;//物流id
+	optional float    declaredtotal       = 6;//申报总价
+	optional int32    qty                 = 7;//物品数量
+	optional string   idcard              = 8;//身份证号
+	optional string   idcardfrontimage    = 9;//身份证正面图片
+	optional string   idcardbackimage     = 10;//身份证反面图片
+}
+
+message SendForItemRequest
+{
+	required BaseRequest           head                       = 1;
+	optional BaseUserRequest       userinfo                   = 2;   //用户信息
+	optional string                paymentcode                = 3;//支付方式(支付宝:alipay 微信:wxap)
+	optional int32                 sumcount                   = 4;//包裹数量
+	optional string                localecode                 = 5;//语种(中文:zh_CN 韩文:ko_KR)
+	optional int32                 shippingcouponcustomerid   = 6;//优惠劵Id
+	repeated SendForParcelList     sendforparcellist          = 7;
+
+}
+
+message SendForItemResponse
+{
+	required BaseResponse head               = 1;
+	optional int32          salesrequiremainid = 2;//帮我寄主单id
+	optional string       status             = 3;//状态,Pending:待付款,Payed:已付款
+	optional string       redirecturl        = 4;//直充url
+}
+
+
+

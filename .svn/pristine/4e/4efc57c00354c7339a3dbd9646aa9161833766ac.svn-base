@@ -1,0 +1,50 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by Longer on 2016/12/26.
+ */
+public class HSSuccessFragment extends BaseFragment<HelpMeSignedActivity> {
+    @BindView(R.id.btn_back_home)
+    Button mBtnBackHome;
+
+    @Override
+    protected void initTitleBar() {
+
+    }
+
+    @Override
+    public View initView() {
+        View rootView = View.inflate(mContext, R.layout.sub_demand_success_layout, null);
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @OnClick(R.id.btn_back_home)
+    public void onClick() {
+    }
+}

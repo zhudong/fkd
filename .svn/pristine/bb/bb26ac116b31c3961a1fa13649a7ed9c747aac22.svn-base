@@ -1,0 +1,166 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.help_signed.HelpSignedContract.PreViewPresenter;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpMeSingleBean;
+import com.fuexpress.kr.ui.activity.help_signed.data.HelpSingedDataRepository;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * Created by Longer on 2016/12/23.
+ * 预览界面的逻辑层
+ */
+public class HelpSignedPVPresenter implements PreViewPresenter {
+
+    @NonNull
+    private final HelpSingedDataRepository mHelpSingedDataRepository;//数据仓库对象,不可改且私有
+
+    @NonNull
+    private final HelpSignedContract.HSPreView mHelpSingedPreView;//视图层对象,也是不可改且私有
+
+    private int mMaxSize = 4;
+    private boolean mIsCilckSub = false;
+
+    public HelpSignedPVPresenter(@NonNull HelpSingedDataRepository helpSingedDataRepository, HelpSignedContract.HSPreView helpSingedPreView) {
+        mHelpSingedDataRepository = checkNotNull(helpSingedDataRepository, "repository is not Null");
+        mHelpSingedPreView = helpSingedPreView;
+    }
+
+    @Override
+    public void submitItemToServer(List<CsParcel.ProductDataList> productDataLists) {//吧需求单提交到服务器
+        //mHelpSingedPreView.showLoadingView(SweetAlertDialog.PROGRESS_TYPE, R.string.uploading_string);
+        mIsCilckSub = true;
+        // TODO: 2016/12/11 提交到服务器
+        LogUtils.e("提交到服务器");
+        CsParcel.SaveHelpReceiveRequest.Builder builder = CsParcel.SaveHelpReceiveRequest.newBuilder();
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setSumcount(String.valueOf(productDataLists.size()));
+        builder.addAllProductlist(productDataLists);
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        LogUtils.e("上传的参数:" + builder.toString());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SaveHelpReceiveResponse>() {
+            @Override
+            public void onSuccess(CsParcel.SaveHelpReceiveResponse response) {
+                LogUtils.e("成功:" + response.toString());
+                //mHelpSingedPreView.showLoadingView(SweetAlertDialog.SUCCESS_TYPE, R.string.submit_demand_success);
+                clearRepositoryData();
+                mHelpSingedPreView.dissMissLoadingView(0);
+                mHelpSingedPreView.setIsCilckSub(false);//重置上传状态
+                mHelpSingedPreView.changeSuccessView();
+                SPUtils.putString(SysApplication.getContext(), Constants.USER_INFO.HELP_SIGNED_DATA, "");
+                /*clearAllDatas();
+                mHelpSingedPreView.referListViewShow(false);*/
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                LogUtils.e("失败:" + "  " + ret + "  " + errMsg);
+                mHelpSingedPreView.showLoadingView(SweetAlertDialog.ERROR_TYPE, errMsg);
+                mHelpSingedPreView.dissMissLoadingView(1000);
+                mHelpSingedPreView.setIsCilckSub(false);//重置上传状态
+            }
+        });
+    }
+
+    @Override
+    public boolean checkBeanIsReady() {//判断数据是否准备完成了
+        boolean isReady = true;
+        List<HelpMeSingleBean> helpSingleBeanList = mHelpSingedDataRepository.getHelpSingleBeanList();
+        for (HelpMeSingleBean helpMeSingleBean : helpSingleBeanList) {
+            isReady = isReady && helpMeSingleBean.isReady();
+        }
+        return isReady;
+    }
+
+    @Override
+    public List<CsParcel.ProductDataList> fillDataFromRepository() {//把在仓库中的数据填充起来
+        mHelpSingedPreView.showLoadingView(SweetAlertDialog.PROGRESS_TYPE, R.string.uploading_string);
+        List<CsParcel.ProductDataList> productDataLists = new ArrayList<>();
+        ArrayMap<String, String> allImageUpLoadUrlArrayMap = mHelpSingedDataRepository.getAllImageUpLoadUrlArrayMap();
+        List<HelpMeSingleBean> helpSingleBeanList = mHelpSingedDataRepository.getHelpSingleBeanList();
+        CsBase.ItemImage.Builder imgBuilder = CsBase.ItemImage.newBuilder();
+        for (HelpMeSingleBean helpSingleBean : helpSingleBeanList) {
+            CsParcel.ProductDataList.Builder builder = CsParcel.ProductDataList.newBuilder();
+            builder.setProductdescription(helpSingleBean.getDesc());
+            builder.setProductremark(helpSingleBean.getRemark());
+            builder.setWarehouseid(helpSingleBean.getWareHouseID());
+            builder.setPrice(helpSingleBean.getPrice());
+            builder.setNum(helpSingleBean.getItemNum());
+            builder.setMatchcategoryid(helpSingleBean.getCategoryBean().getSubID());
+            builder.setMatchtagid(helpSingleBean.getMaterialsBean().getId());
+            builder.setBrandname(helpSingleBean.getBrandName());
+            ArrayMap<String, String> pathUrlMap = helpSingleBean.getPathUrlMap();
+            for (String path : helpSingleBean.getShowImgList()) {
+                if (TextUtils.isEmpty(pathUrlMap.get(path)))
+                    imgBuilder.setImageUrl(allImageUpLoadUrlArrayMap.get(path));
+                else
+                    imgBuilder.setImageUrl(pathUrlMap.get(path));
+                builder.addExtra(imgBuilder);
+            }
+            builder.setImageNum(helpSingleBean.getShowImgList().size());
+            productDataLists.add(builder.build());
+        }
+        return productDataLists;
+    }
+
+    @Override
+    public List<CsParcel.ProductDataList> getProductDataList() {//获取需求单列表
+        return mHelpSingedDataRepository.getHelpSignedDataList();
+    }
+
+    @Override
+    public CsParcel.ProductDataList getChooseData(int position) {//获取特定的数据
+        return mHelpSingedDataRepository.getHelpSignedDataOnly(position);
+    }
+
+    @Override
+    public boolean isCanAddDemand() {//判断是否能继续添加需求单
+        return mHelpSingedDataRepository.getHelpSingleBeanList().size() < 4;
+    }
+
+    @Override
+    public void clearRepositoryData() {
+        mHelpSingedDataRepository.clearAllHelpSingleBeanData();
+        mHelpSingedPreView.refreshLiistViewShow();
+    }
+
+    @Override
+    public List<HelpMeSingleBean> getHelpMeBeanDataList() {
+        return mHelpSingedDataRepository.getHelpSingleBeanList();
+    }
+
+    @Override
+    public void saveDataToLoacl() {//把数据保存到本地的方法:
+        mHelpSingedDataRepository.saveBeanDataToLoacl();
+    }
+
+    @Override
+    public void subscribe() {//初始化操作
+
+    }
+
+    @Override
+    public void unsubscribe() {//释放资源的操作
+
+    }
+}

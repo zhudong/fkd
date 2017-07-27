@@ -1,0 +1,115 @@
+/*
+* 一些约定，请认真阅读
+*
+* 1、关于命名空间
+*		所有的协议请以proto命名
+* 2、关于required/optional
+*		为了避免在兼容上的困惑，请尽量使用optional或者repeated
+* 3、关于命名规范
+*       message结构体名以骆驼形式命名，即单词首字母大写，其余小写
+*		messgae结构体字段名格式为"全部小写+下划线分隔"。
+*		enum命名格式同message。enum字段命名格式为"全部大写+下划线分隔"。(枚举值初值为0)
+* 4、支持的类型
+*		double、float、int32、int64、uint32、uint64、sint32、sint64、fixed32、fixed64、sfixed32、sfixed64、bool、string、bytes
+*       当整数有符号(可以为负数时)，用sint32，sint64效率更好!!!
+*
+* 更多信息请阅读Protocol Buffer官方文档
+* https://developers.google.com/protocol-buffers/docs/overview
+*/
+package fksproto;
+
+enum FksCSProtoMsgId
+{
+	MSGID_ACCOUNT_REQUEST         	          		= 1; //账号请求
+	MSGID_ACCOUNT_RESPONSE        	          		= 2; //账号应答
+	MSGID_LOGIN_REQUEST           	          		= 3; //登录请求
+	MSGID_LOGIN_RESPONSE          	          		= 4; //登录应答
+	MSGID_THIRD_LOGIN_REQUEST     	          		= 5; //第三方登录请求
+	MSGID_THIRD_LOGIN_RESPONSE    	          		= 6; //第三方登录应答
+	
+	MSGID_SET_USER_INFO_FIELD_REQUEST   	  		= 7; //设置用户信息字段请求
+	MSGID_SET_USER_INFO_FIELD_RESPONSE  	  		= 8; //设置用户信息字段应答
+	MSGID_GET_USER_INFO_FIELD_REQUEST   	  		= 9; //获取用户信息字段请求
+	MSGID_GET_USER_INFO_FIELD_RESPONSE        		= 10;//获取用户信息字段应答	
+
+	MSGID_GET_GIFT_CARD_ORDER_LIST_REQUEST          = 11;//获取充值卡订单列表请求
+	MSGID_GET_GIFT_CARD_ORDER_LIST_REPONSE          = 12;//获取充值卡订单列表应答
+
+	MSGID_GET_GIFT_CARD_ORDER_DETAIL_REQUEST        = 13;
+	MSGID_GET_GIFT_CARD_ORDER_DETAIL_RESPONSE       = 14;
+
+	MSGID_GET_RECHARGE_ORDER_DETAIL_REQUEST         = 15;//获取直充卡订单详情请求
+	MSGID_GET_RECHARGE_ORDER_DETAIL_REPONSE         = 16;//获取直充卡订单详情应答
+
+	MSGID_CANCEL_GIFT_CARD_ORDER_REQUEST            = 17;//取消充值卡订单请求
+	MSGID_CANCEL_GIFT_CARD_ORDER_RESPONSE           = 18;//取消充值卡订单应答
+
+	MSGID_GIFT_CARD_BALANCE_LIST_REQUEST            = 19;//充值卡账户明细请求
+	MSGID_GIFT_CARD_BALANCE_LIST_RESPONSE           = 20;//充值卡账户明细应答
+
+	MSGID_GIFT_CARD_BALANCE_LIST_AJAX_REQUEST       = 21;//充值卡账户明细下拉请求
+	MSGID_GIFT_CARD_BALANCE_LIST_AJAX_RESPONSE      = 22;//充值卡账户明细下拉应答
+
+	MSGID_GET_PARCEL_LIST_REQUEST                   = 23;//获取包裹列表请求
+	MSGID_GET_PARCEL_LIST_RESPONSE                  = 24;//获取包裹列表应答
+
+	MSGID_GET_SIMPLE_USER_INFO_REQUEST   	  		= 25; //获取用户简单信息请求  by jack.zuoquan
+	MSGID_GET_SIMPLE_USER_INFO_RESPONSE        		= 26;//获取用户简单信息应答
+
+	MSGID_EXCHANGE_SHIPPING_COUPON_REQUEST  		= 27;//兑换运费优惠劵请求
+	MSGID_EXCHANGE_SHIPPING_COUPON_RESPONSE 		= 28;//兑换运费优惠劵应答
+
+	MSGID_MYSHIPPING_COUPONLIST_REQUEST  			= 29;//我的优惠劵列表请求
+	MSGID_MYSHIPPING_COUPONLIST_RESPONSE 			= 30;//我的优惠劵列表应答
+
+	MSGID_USEABLE_COUPONLIST_REQUEST  				= 31;//支付时可用优惠劵列表请求
+	MSGID_USEABLE_COUPONLIST_RESPONSE 				= 32;//支付时可用优惠劵列表应答
+
+	MSGID_SEND_SUBMIT_REQUEST   	  		   	    = 33; //提交帮我寄信息请求
+	MSGID_SEND_SUBMIT_RESPONSE        		        = 34;//提交帮我寄信息应答
+
+	MSGID_SEND_INIT_REQUEST   	  		    		= 35; //帮我寄包裹初始化请求
+	MSGID_SEND_INIT_RESPONSE        				= 36;//帮我寄包裹初始化应答
+
+	MSG_GET_SELECT_ADDRESS_AJAX_REQUEST             = 37;//获取配送方式请求
+	MSG_GET_SELECT_ADDRESS_AJAX_RESPONSE            = 38;//获取配送方式应答
+
+	MSGID_GET_SHIPPING_INFO_REQUEST   	  		    = 39; //根据配送方式计算运费请求
+	MSGID_GET_SHIPPING_INFO_RESPONSE        	    = 40;//根据配送方式计算运费应答
+
+	MSGID_PAY_GIFT_CARD_ORDER_REQUEST               = 41;//支付充值卡订单请求
+	MSGID_PAY_GIFT_CARD_ORDER_RESPONSE              = 42;//支付充值卡订单应答
+
+	MSGID_DO_DIRECT_GIFT_CARD_REQUSET               = 43; //拆分包裹去支付请求
+	MSGID_DO_DIRECT_GIFT_CARD_RESPONSE              = 44; //拆分包裹去支付应答
+
+	MSG_SELECT_SHIPPING_METHOD_REQUEST              = 45;//包裹详情里选中配送方式请求
+	MSG_SELECT_SHIPPING_METHOD_RESPONSE             = 46;//包裹详情里选中配送方式应答
+
+	MSGID_GEG_PARCEL_DETAIL_REQREST         		= 47; //我的包裹详情 请求
+	MSGID_GET_PARCEL_DETAIL_RESPONSE        		= 48; //我的包裹详情 应答
+
+	//帮我寄单个操作
+	MSGID_CHECK_TO_PAY_REQUEST   	  		        = 49; //帮我寄单个操作请求
+	MSGID_CHECK_TO_PAY_RESPONSE        		    	= 50;//帮我寄单个操作应答
+
+	MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_REQUEST  = 51;
+	MSGID_PAY_DO_DIRECT_GIFT_CARD_APP_SINGLE_RESPONSE = 52;
+
+	MSGID_ADD_CUSTOMER_ADDRESS_REQUEST   	  		= 53; //新增收货地址请求
+	MSGID_ADD_CUSTOMER_ADDRESS_RESPONSE             = 54;//新增收货地址应答
+
+	MSGID_EDIT_CUSTOMER_ADDRESS_REQUEST   	  	    = 55; //编辑收货地址请求
+	MSGID_EDIT_CUSTOMER_ADDRESS_RESPONSE      	    = 56;//编辑收货地址应答
+
+	MSGID_DEL_CUSTOMER_ADDRESS_REQUEST   	  	    = 57; //删除收货地址请求
+	MSGID_DEL_CUSTOMER_ADDRESS_RESPONSE             = 58;//删除收货地址应答
+
+	MSGID_GET_CUSTOMER_ADDRESS_LIST_REQUEST         = 59; //获取用户地址列表请求
+	MSGID_GET_CUSTOMER_ADDRESS_LIST_RESPONSE        = 60; //获取用户地址列表应答
+
+	MSGID_CHANGE_CURRENCY_REQUEST                   = 61;
+	MSGID_CHANGE_CURRENCY_RESPONSE                  = 62;
+
+}
+

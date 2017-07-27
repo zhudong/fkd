@@ -1,0 +1,53 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+message FeedImageList
+{
+    optional string  imagepath                       = 1; //图片地址
+    optional string  url                             = 2;  //图片上挂的链接
+}
+
+message Banner
+{
+    required string title = 1;
+    required string url   = 2;//图片url
+    required string jump  = 3;//跳转链接
+    required int64    pictime = 4;//图片时间
+}
+
+//首页图片跑马灯请求
+message IndexAdImageRequest
+{
+    required BaseRequest      head                  = 1;
+    optional BaseUserRequest  baseuserinfo          = 2;  //用户ticket等信息
+    optional string           localecode            = 3;
+    required string           version_no            = 4;//客户端版本号
+    required int32            apptype               = 5;
+}
+
+//首页图片跑马灯应答
+message IndexAdImageResponse
+{
+    required BaseResponse    head                     = 1;
+    repeated Banner          banners                  = 2;//banner列表
+}
+
+
+//获取我的红点请求
+message MyAccountHintRequest
+{
+    required BaseRequest      head                       = 1;
+    optional BaseUserRequest  baseuserinfo               = 2;  //用户ticket等信息
+    repeated int32 		      types 	                 = 3;  //订单 = 1,消息 = 2,包裹 = 3
+}
+
+//获取我的红点应答
+message MyAccountHintResponse
+{
+    required BaseResponse    head                     = 1;
+    repeated PairIntInt      pairs                    = 2;
+}
+
+

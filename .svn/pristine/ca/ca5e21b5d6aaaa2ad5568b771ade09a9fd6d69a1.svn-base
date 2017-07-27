@@ -1,0 +1,47 @@
+package com.fuexpress.kr.bean;
+
+import java.util.List;
+
+import fksproto.CsUser;
+
+/**
+ * Created by kevin on 2016/12/20.
+ */
+
+public class DemandDetailBean {
+    public int salesrequireid;          //需求单id
+    public String createtime;           //需求时间
+    public int requiretype;            //需求类型
+    public String status;               //需求状态
+    public String description;          //需求描述
+    public String price;                //商品价格,币种符号+价格
+    public String remark;               //备注说明
+    public String servicefee;           //服务费,币种符号+服务费
+    public String address;              //取货地址
+    public int qty;                    //数量
+    public String paymentcode;          //支付方式
+    public String subtotal;             //总计金额,字符串,币种符号+金额
+
+    public String shippingname;         //收货人姓名
+    public String shippingphone;        //收货人手机号
+    public String shippingaddress;      //收货地址
+    public List<CsUser.ImagesUrl> imagesurl;  //图片
+    //帮我收货
+    public int warehouseid;             //入库仓库id
+    public String warehousename ;        //入库仓库名称
+
+    public String currencycode="";         //货币符号
+    public float totalpay=0f;             //需要支付总金额
+    public String merchantmessage="";      //店铺留言
+    public double giftcardaccount=0.0;      //礼品卡余额
+
+    //帮我补货
+    public String paymentname="";           //支付方式
+    //帮我收货
+    public String pricecurrencycode="";     //单价币种
+    public String fulladdress="";     //仓库地址
+    public String receiver="";      //收货人
+    public String phone="";     //仓库电话
+    public String postcode="";     //邮编
+
+}

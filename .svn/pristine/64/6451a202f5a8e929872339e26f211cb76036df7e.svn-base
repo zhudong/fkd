@@ -1,0 +1,292 @@
+import "cs_head.proto";
+
+package fksproto;
+
+//报价枚举
+enum OfferType
+{
+	OFFER_TYPE_BUYNOW = 1;//购买价格计算公式为: 原价*(1-service_rate)
+	OFFER_TYPE_BUY4U  = 2;//购买价格计算公式为: 原价*(1+service_rate)
+	OFFER_TYPE_CROWD  = 3;//拼单
+}
+
+enum Action
+{
+	ACTION_CHECK   = 1;//勾选
+	ACTION_UNCHECK = 2;//取消勾选
+}
+
+//支付方式定义
+enum PayMethod
+{
+	PAY_METHOD_NONE     = 0;
+	PAY_METHOD_ALIPAY   = 1;//支付宝支付
+	PAY_METHOD_WXPAY    = 2;//微信支付
+	PAY_METHOD_GIFTCARD = 3;//使用礼品卡支付
+	PAY_METHOD_ADYEN    = 4;//使用国际支付
+	PAY_METHOD_KRBANK   = 5;//友利银行
+}
+
+//基础数据结构KV
+message PairIntInt
+{
+	required int64  k = 1;
+	required int64  v = 2;	
+}
+
+message PairIntStr
+{
+	required int64  k = 1;
+	required string v = 2;	
+}
+
+message PairStrStr
+{
+	required string k = 1;
+	required string v = 2;	
+}
+
+message PairIntFloat
+{
+	required int64 	k = 1;
+	required float 	v = 2;
+}
+
+message PairStrFloat
+{
+	required string k = 1;
+	required float  v = 2;
+}
+
+//单品基础信息
+message Item
+{
+	required int64  itemid           = 1; //单品id
+	required string name             = 2; //单品名称
+	required string title            = 3; //单品标题
+	required string image_url        = 4; //单品图片url
+	optional int32  default_currency = 5; //单品默认货币
+	optional float  default_price    = 6; //单品默认价格
+	optional string desc             = 7; //单品描述
+	optional int32  like_count       = 8; //单品喜欢数
+	optional bool   is_like          = 9; //单品是否喜欢
+	optional float  exchange_rate    = 10;//对RMB汇率
+	optional int64  album_id         = 11;//原创或者转采的图集ID
+	optional float  image_ratio      = 12;//单品small格式图片宽高比
+	optional bool   cannot_buyit     = 13;//是否能购买如果为1表示不能购买
+	optional int64  crowd_id         = 14;//拼单Id
+	optional string place			 = 15;//在哪儿买
+	optional int64  crowd_product_id = 16;//拼单产品id
+	optional int64  product_id		 = 17;//产品id
+	optional int32  alert_type		 = 18;
+	optional int32  is_crowd         = 19;//1不显示按钮，2参加拼单，3、发起拼单
+	optional int64  crowd_order_id   = 20;// 参与拼单id add by jack.zuoquan
+	optional int64  create_id		 = 21;//创建者id add by jack.zuoquan
+	optional string buyfrom			 = 22;//在哪儿买（拼单）
+}
+
+//单品多图信息
+message ItemImage
+{
+	required string image_url   = 1;//图片URL
+	optional float  image_ratio = 2;//图片长宽比例
+}
+
+//单品Tag
+message ItemTag
+{
+	required int32  tag_id   = 1;//tag id
+	required int32  tag_type = 2;//tag类型
+	required string tag_name = 3;//tag名
+}
+
+//单品采集信息
+message ItemLink
+{
+	required string website_name = 1;//站点名
+	required string website_url  = 2;//站点URL
+	optional int32  website_id   = 3;//站点ID
+	optional int64  merchant_id  = 4;//来源网站对应的商户
+	optional string website_market = 5;//来源网站省市
+}
+
+//描述信息(国际化)
+message ItemLocale
+{
+	required string title      = 1;//标题，产品名称
+	required string desc       = 2;//对应商品详情
+}
+
+//单品报价信息
+message ItemOffer
+{
+	required int32 offer_type  = 1;//报价类型
+	required int32 rate_type   = 2;//0:定值，1:比率
+	required float rate        = 3;//定值或比率值
+	optional int64 qty         = 4; //库存值
+}
+
+//单品报价组信息
+message ItemOfferGroup
+{
+	optional int32 rate_type = 1;
+	optional float rate      = 2;
+	optional int32 qty		 = 3;
+}
+
+message ItemExtendAttr
+{
+	required int32 	attr_id	  = 1;
+	required string attr_name = 2;
+}
+
+message ItemExtendOption
+{
+	required int32 	option_id 	= 1;
+	required string option_name = 2;
+}
+
+message ItemExtend
+{
+	required ItemExtendAttr 	attr	= 1;
+	repeated ItemExtendOption	options	= 2;
+}
+
+message ItemPlace
+{
+	required int32  place_id     = 1;
+	optional string place_name   = 2;
+	optional int64  merchant_id  = 3;
+	optional string place_market = 4;
+}
+
+message ItemProduct
+{
+	optional int32 min_qty 		= 1;
+	optional int32 max_qty 		= 2;
+	optional int32          item_stock 	 = 3	;//现存库存量
+}
+
+//商店图片信息
+message MerchantImage
+{
+	required string image_url 	= 1;
+	required string image_name  = 2;
+	required int32  create_time	= 3;
+}
+
+//商店业务及经营时间
+message MerchantShopTime
+{
+	required int32 week			= 1;
+	required int32 open_hour	= 2;
+	required int32 open_min		= 3;
+	required int32 close_hour	= 4;
+	required int32 close_min	= 5;
+}
+
+message MerchantBusiness
+{
+	required string 			main_business	= 1;
+	repeated MerchantShopTime	shop_times		= 2;
+}
+
+//商户店基本信息
+message Merchant
+{
+	required int64  merchantid  = 1;  //商户ID
+	required int32  author      = 2;  //商户uin
+	required string name        = 3;  //商户名称
+	required string title       = 4;  //商户标题
+	required string cover       = 5;  //商户封面
+	optional string address     = 6;  //商户地址
+	optional string contact     = 7;  //联系方式
+	optional string desc        = 8;  //商户介绍
+	optional int32  follow_num  = 9;  //商户关注数
+	optional bool   is_follow   = 10; //商户是否关注	
+	optional string url			= 11; //商户的url
+	optional float  longitude   = 12; //商户经度
+	optional float  latitude    = 13; //商户纬度
+	optional string place       = 14; //商户位置
+}
+
+message UserInfo
+{
+	required int32 	uin          = 1;
+	required string avatar	     = 2;//头像
+	required string nickname     = 3;//昵称
+	required int32  gender       = 4;//性别
+	required string region       = 5;//地区
+	required int32  member_group = 6;//会员组
+	optional string intro		 = 7;//个人简介
+}
+
+message CreatorInfo
+{
+	required int32 	uin          = 1; //创建者id
+	required string avatar	     = 2;//头像
+	required string nickname     = 3;//昵称
+}
+
+//卖家信息
+message Seller
+{
+	required int32  uin      = 1;
+	required string nickname = 2;//昵称
+}
+
+//仓库
+message Warehouse
+{
+	optional int32  warehouse_id = 1;//仓库id
+	optional string name         = 2;//仓库名称
+	optional string desc         = 3;//仓库描述
+}
+
+//关注者
+message Follower
+{
+	required UserInfo 	   user     = 1;//用户信息
+	repeated PairIntInt    pairids  = 2;//k为单品id,v为专辑id
+}
+
+//图集
+message Album
+{
+	required int64  album_id     		= 1; //图集ID
+	required string title        		= 2; //图集标题
+	required int32  author       		= 3; //图集作者
+	required int32  category     		= 4; //图集分类
+	required string desc 		 		= 5; //图集描述
+	required int32  total        		= 6; //图集收录总数
+	required int32  flag         		= 7; //图集Flag，见ALBUM_FLAG_MASK
+	optional string cover        		= 8; //图集封面
+	optional int32  is_follow	 		= 9; //是否关注
+	optional int32 	follow_count 		= 10;//关注数
+	optional string detail_image_url	= 11;//推荐专辑封面
+}
+
+//物流方式
+message ShippingMethod
+{
+	required int32  shipping_method_id = 1;//物流方式id
+	required string title              = 2;//物流方式标题
+	required string info               = 3;//物流方式详细信息
+	optional double fee                = 4;//运费
+	optional bool   need_idcard        = 5;//是否需要身份证号
+	optional bool   need_insurance     = 6;//是否需要申报
+	optional float  max_declaration    = 7;//最高保价金额
+	optional float  premium_rate       = 8;//保险费用比例
+	optional string attention		   = 9;//注意
+	optional int32  qty				   = 10;//商品个数限制
+}
+
+message BaseUserRequest
+{
+	optional int32  uin        = 1;
+	optional int32  mid        = 2;
+	optional string ticket     = 3;
+}
+
+
+

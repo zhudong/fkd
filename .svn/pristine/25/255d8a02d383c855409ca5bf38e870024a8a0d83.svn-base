@@ -1,0 +1,78 @@
+package com.fuexpress.kr.model;
+
+import android.util.Log;
+
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.MaterialsBean;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.google.protobuf.GeneratedMessage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsUser;
+
+/**
+ * Created by andy on 2017/1/17.
+ */
+public class MaterialsManager {
+
+    public static MaterialsManager mInstance = new MaterialsManager();
+    private final MaterialsDao mDao;
+
+    private MaterialsManager() {
+        mDao = MaterialsDao.getInstance(SysApplication.getContext());
+    }
+
+
+    public static MaterialsManager getInstance() {
+        return mInstance;
+    }
+
+
+    public void getMaterials() {
+        getMaterialsNet();
+    }
+
+
+    private void getMaterialsNet() {
+        CsUser.GetMaterialsListRequest.Builder builder = CsUser.GetMaterialsListRequest.newBuilder();
+        AccountManager instance = AccountManager.getInstance();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest())
+                .setLocaleCode(instance.getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsUser.GetMaterialsListResponse>() {
+
+            @Override
+            public void onSuccess(CsUser.GetMaterialsListResponse response) {
+                List<CsUser.MatchTag> matchTagListList = response.getMatchTagListList();
+                List<MaterialsBean> list = new ArrayList<MaterialsBean>();
+                for (CsUser.MatchTag tag : matchTagListList) {
+                    list.add(new MaterialsBean(tag.getMatchTagId(), tag.getMatchTagName()));
+                }
+                mDao.insert(list);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    public void getLocalMaterials() {
+        List<MaterialsBean> all = mDao.getAll();
+
+        for (MaterialsBean bean : all) {
+            Log.d(MaterialsManager.class.getSimpleName(), bean.getName());
+        }
+    }
+
+    public void search(String key) {
+        List<MaterialsBean> all = mDao.search(key);
+        for (MaterialsBean bean : all) {
+            Log.d(MaterialsManager.class.getSimpleName(), bean.getName());
+        }
+    }
+
+}

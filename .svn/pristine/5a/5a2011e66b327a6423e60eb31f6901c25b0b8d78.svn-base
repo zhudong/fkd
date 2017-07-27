@@ -1,0 +1,288 @@
+package com.fuexpress.kr.ui.activity.help_send;
+
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.MainActivity;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseFragment;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PayMethodManager;
+import com.fuexpress.kr.ui.activity.ChooseCityActivity;
+import com.fuexpress.kr.ui.adapter.SendParcelAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import fksproto.CsUser;
+
+
+public class HelpSendFragment extends MbaseFragment<HelpSendContract.Presenter, HelpSendContract.Model> implements HelpSendContract.View {
+    public static String SHOW_TIPS = "show_tips";
+    @BindView(R.id.rl_no_parcel_tips)
+    LinearLayout mRlNoParcelTips;
+    @BindView(R.id.rl_buttom)
+    RelativeLayout mRlButtom;
+    @BindView(R.id.tv_estimate_price)
+    TextView mTvEstimatePrice;
+    @BindView(R.id.tv_use_balance)
+    TextView mTvUseBalance;
+    @BindView(R.id.tv_pay_type)
+    TextView mTvPayType;
+    @BindView(R.id.tv_use_coupon)
+    TextView tvUseCoupon;
+    @BindView(R.id.btn_append_parcel)
+    TextView mBtnAppenParcel;
+
+    private ListView mBody;
+    private SendParcelAdapter mAdapter;
+    private boolean mParcelCountOut;
+    private boolean mParcelNoShipping;
+    //    private TextView mTvRight;
+    private PayMethodManager mPayMethodManager;
+
+    @Override
+    protected void initTitleBar() {
+//        mTvRight = (TextView) mRootView.findViewById(R.id.title_tv_right);
+        mRootView.findViewById(R.id.title_iv_left).setOnClickListener(this);
+//        mTvRight.setOnClickListener(this);
+//        mTvRight.setVisibility(View.VISIBLE);
+        TextView mTvTitle = (TextView) mRootView.findViewById(R.id.title_tv_center);
+        TextView leftTv = (TextView) mRootView.findViewById(R.id.title_tv_left);
+        leftTv.setText(getString(R.string.main_home_tab_string));
+        leftTv.setVisibility(View.VISIBLE);
+        leftTv.setOnClickListener(this);
+        mTvTitle.setText(getString(R.string.home_fg_help_04));
+//        mTvRight.setText(getString(R.string.String_parcle_add));
+//        mTvRight.setVisibility(View.GONE);
+    }
+
+    @Override
+    public View initView() {
+        mRootView = View.inflate(mContext, R.layout.activity_help_send, null);
+        mBody = (ListView) mRootView.findViewById(R.id.lv_body);
+        mBody.addFooterView(View.inflate(mContext, R.layout.item_help_send_foot, null));
+
+//        mRlTips = mRootView.findViewById(R.id.rl_tips);
+        boolean showTips = (boolean) SPUtils.get(mContext, SHOW_TIPS, true);
+        if (showTips) {
+            showtips();
+        }
+        return mRootView;
+    }
+
+    private void showtips() {
+        final FrameLayout decorView = (FrameLayout) getActivity().getWindow().getDecorView();
+        final View tipsView = View.inflate(mContext, R.layout.package_tips, null);
+        initTip(tipsView);
+        decorView.addView(tipsView);
+        tipsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decorView.removeView(tipsView);
+                SPUtils.put(mContext, SHOW_TIPS, false);
+            }
+        });
+    }
+
+    private void initTip(View tipsView) {
+//        TextView child1 = (TextView) tipsView.findViewById(R.id.img_text2);
+        TextView child1 = (TextView) tipsView.findViewById(R.id.tv_tip1);
+        TextView child2 = (TextView) tipsView.findViewById(R.id.tv_tip2);
+        TextView child3 = (TextView) tipsView.findViewById(R.id.tv_tip3);
+        TextView child4 = (TextView) tipsView.findViewById(R.id.tv_tip4);
+        String string = SPUtils.getString(getContext(), ChooseCityActivity.F_RECENT_CITY_ID, "");
+        if (string.contains("2103")) {
+//            _2103
+            child1.setText(getString(R.string.string_append_parcel_tip1_2103));
+            child2.setText(getString(R.string.string_append_parcel_tip2_2103));
+            child3.setText(getString(R.string.string_append_parcel_tip3_2103));
+            child4.setText(getString(R.string.string_append_parcel_tip4_2103));
+        } else {
+//            _1130
+            child1.setText(getString(R.string.string_append_parcel_tip1_1130));
+            child2.setText(getString(R.string.string_append_parcel_tip2_1130));
+            child3.setText(getString(R.string.string_append_parcel_tip3_1130));
+            child4.setText(getString(R.string.string_append_parcel_tip4_1130));
+        }
+    }
+
+    @Override
+    public void initData() {
+        mPresenter = new HelpSendPresent();
+        mModel = new HelpSendModel();
+        mPayMethodManager = PayMethodManager.getInstance(getContext());
+        mPayMethodManager.setFreshBalance(false);
+        mPayMethodManager.setCurrentCoupon(null);
+        mPresenter.setVM(this, mModel);
+    }
+
+    @Override
+    public void showParcleList(List<HelpSendParcelBean> mParcels, boolean hasid, boolean noid) {
+        mParcelCountOut = hasid;//包裹数量是否超过3
+        mParcelNoShipping = noid;// 是否有没有选择物流的包裹
+/*        if (!mParcelCountOut || !mParcelNoShipping) {
+//            mTvRight.setTextColor(getResources().getColor(R.color.gray_999));
+            mBtnAppenParcel.setEnabled(false);
+        } else {
+//            mTvRight.setTextColor(getResources().getColor(R.color.white));
+            mBtnAppenParcel.setEnabled(true);
+
+        }*/
+        if (mParcels.size() == 0) {
+            mRlNoParcelTips.setVisibility(View.VISIBLE);
+            mRlButtom.setVisibility(View.GONE);
+            mBody.setVisibility(View.GONE);
+        } else {
+            mRlNoParcelTips.setVisibility(View.GONE);
+            mRlButtom.setVisibility(View.VISIBLE);
+            mBody.setVisibility(View.VISIBLE);
+        }
+        if (mAdapter == null) {
+            mAdapter = new SendParcelAdapter(mContext, mParcels);
+            mBody.setAdapter(mAdapter);
+        } else {
+            mAdapter.setData(mParcels);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    @Override
+    public void showPayType(float shippingFee) {
+        mPayMethodManager.getCurrentPayMethod(new PayMethodManager.PayMethodResultListener() {
+            @Override
+            public void onResult(final String payCode, final String result) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvUseBalance.setText(result);
+                        mPresenter.setPayCode(payCode);
+                    }
+                });
+            }
+
+            @Override
+            public void onMethodList(List<CsUser.PaymentList> paymantlistList, String balance, int couponCount) {
+
+            }
+        }, shippingFee, AccountManager.getInstance().getCurrencyCode());
+    }
+
+
+    public void showWarehouseDialog() {
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        WarehouseDialog dialog = WarehouseDialog.newInstance();
+        dialog.show(ft, "dialog");
+    }
+
+
+    @Override
+    public void showEstimatePrice(float price) {
+        mTvEstimatePrice.setText(UIUtils.getCurrency(getContext(), price));
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.Append_PARCEN_SUCESS) {
+            mPresenter.onStart();
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(HelpSendPresent.class.getSimpleName())) {
+            SysApplication.mCurrentRequestPayment = "";
+            mPresenter.submitSuccess(event.getBooleanParam());
+        }
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && !event.getBooleanParam()) {
+            ((MainActivity) mContext).closeLoading();
+        }
+    }
+
+
+    private boolean submited;
+
+    static Handler mHandler = new Handler();
+
+    @OnClick({R.id.btn_submit, R.id.rl_pay_foot, R.id.btn_append_parcel, R.id.img_show_tip, R.id.title_iv_left})
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.btn_submit:
+                if (!submited) {
+                    LogUtils.d("submit>>>>");
+                    submited = true;
+                    mPresenter.submit();
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            submited = false;
+                        }
+                    }, 1000);
+                }
+                break;
+            case R.id.rl_pay_foot:
+                mPresenter.switchPayType();
+                break;
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                getActivity().finish();
+                break;
+            case R.id.btn_append_parcel:
+                boolean b = !mParcelCountOut || !mParcelNoShipping;
+                if (b) {
+                    if (!mParcelCountOut) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip, Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (!mParcelNoShipping) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip2, Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (!mParcelCountOut && !mParcelNoShipping) {
+                        CustomToast.makeText(getContext(), R.string.package_append_count_tip3, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    showWarehouseDialog();
+                    mPresenter.reSet();
+                    mPayMethodManager.setFreshBalance(false);
+                    mPayMethodManager.setCurrentCoupon(null);
+                }
+                break;
+
+            case R.id.img_show_tip:
+                showtips();
+                break;
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        mPresenter.onStart();
+    }
+
+    public void setPayInfor(boolean useCoupon) {
+        showPayType(mPresenter.getShippingFee());
+    }
+}

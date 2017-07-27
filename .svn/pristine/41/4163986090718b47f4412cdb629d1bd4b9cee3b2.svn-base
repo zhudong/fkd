@@ -1,0 +1,43 @@
+package com.fuexpress.kr.ui.view;
+
+import android.content.Context;
+import android.text.InputType;
+import android.util.AttributeSet;
+import android.widget.EditText;
+
+import com.fuexpress.kr.model.AccountManager;
+
+/**
+ * Created by andy on 2016/12/28.
+ */
+public class CurrencyEditText extends EditText {
+    public CurrencyEditText(Context context) {
+        this(context, null);
+    }
+
+    public CurrencyEditText(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public CurrencyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        setCurrency(AccountManager.getInstance().getCurrencyCode());
+    }
+
+    public void setCurrency(String currencyCode) {
+        if (currencyCode.contains("CNY")) {
+            this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        } else if (currencyCode.contains("KRW") || currencyCode.contains("TWD")) {
+            this.setInputType(InputType.TYPE_CLASS_NUMBER );
+        } else {
+            this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        }
+    }
+
+}

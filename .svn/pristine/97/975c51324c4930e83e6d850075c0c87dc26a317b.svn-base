@@ -1,0 +1,48 @@
+package com.fuexpress.kr.ui.activity.transport_address;
+
+import com.fuexpress.kr.ui.activity.help_signed.data.WareHouseBean;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Longer on 2017/5/22.
+ * 转运地址的数据请求管理类
+ */
+public class TranSportAdManager {
+
+    private static TranSportAdManager sTranSportAdManager;
+    private ArrayList<WareHouseBean> mWareHouseBeanArrayList;
+
+
+    public static TranSportAdManager getInstance() {
+        if (sTranSportAdManager == null)
+            sTranSportAdManager = new TranSportAdManager();
+        return sTranSportAdManager;
+    }
+
+
+    public void getTransportAddressDataRemote(int pageNme, TranSportSubAdFragment.RemoteListener listener) {
+        testMethod(listener);
+    }
+
+    void testMethod(TranSportSubAdFragment.RemoteListener listener) {
+        mWareHouseBeanArrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            //WareHouseBean wareHouseBean = new WareHouseBean("福快递仓库1","韩国首尔市钟路区钟路266号","Fu-Experess","");
+            WareHouseBean wareHouseBean = new WareHouseBean();
+            wareHouseBean.setName("福快递仓库1");
+            wareHouseBean.setAddress("韩国首尔市钟路区钟路266号");
+            wareHouseBean.setReceiver("Fu-Experess");
+            wareHouseBean.setPhone("123456789");
+            wareHouseBean.setPostCode("123456789");
+            mWareHouseBeanArrayList.add(wareHouseBean);
+        }
+        listener.success(mWareHouseBeanArrayList,false);
+    }
+
+    public ArrayList<WareHouseBean> getWareHouseBeanArrayList() {
+        if (mWareHouseBeanArrayList == null)
+            mWareHouseBeanArrayList = new ArrayList<>();
+        return mWareHouseBeanArrayList;
+    }
+}

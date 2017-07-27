@@ -1,0 +1,99 @@
+package com.fuexpress.kr.wxapi;
+
+
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.ActivityController;
+import com.fuexpress.kr.ui.activity.EditRequireActivity;
+import com.fuexpress.kr.ui.activity.PickUpActivity;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.tencent.mm.sdk.constants.ConstantsAPI;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import de.greenrobot.event.EventBus;
+
+public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler {
+	
+	private static final String TAG = "MicroMsg.SDKSample.WXPayEntryActivity";
+	
+    private IWXAPI api;
+	private View view;
+
+
+	
+	@Override
+	public View setInitView() {
+		view = LayoutInflater.from(this).inflate(R.layout.pay_result, null);
+		api = WXAPIFactory.createWXAPI(this, Constants.WeiXin.WX_APPID);
+		api.handleIntent(getIntent(), this);
+		finish();
+		return view;
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+        api.handleIntent(intent, this);
+	}
+
+	@Override
+	public void onReq(BaseReq req) {
+		LogUtils.d("-----onReq");
+	}
+
+	@Override
+	public void onResp(BaseResp resp) {
+//		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
+		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+			switch (resp.errCode){
+				case Constants.CODE_WECHAT_PAY_FAILED:
+					EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, false, SysApplication.mCurrentRequestPayment));
+					Toast.makeText(this, "支付失败 errCode=" + resp.errCode, Toast.LENGTH_SHORT).show();
+					finish();
+					break;
+				case Constants.CODE_WECHAT_PAY_SUCCESS:
+					Intent intent = new Intent();
+					EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, true, SysApplication.mCurrentRequestPayment));
+					SysApplication app = (SysApplication) getApplication();
+					if(app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PICK_UP){
+						SPUtils.remove(WXPayEntryActivity.this, EditRequireActivity.CODE_PICK_LIST);
+						SPUtils.remove(WXPayEntryActivity.this, EditRequireActivity.CODE_PRODUCT_LIST);
+						intent.setClass(this, PickUpActivity.class);
+						startActivity(intent);
+					}
+					if(app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_CARD_CART){
+//						intent.setClass(this, CardPaymentSuccessActivity.class);
+//						startActivity(intent);
+					}
+					if(app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PARCEL_DETAIL_EMPTY){}
+					if(app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PARCEL_DETAIL_EMPTY){}
+					if (app.getPaymentRequestCode() == Constants.PAYMENT_REQUEST_CODE_PACKAGE_DETAIL){
+//						intent.setClass(this, PackageDetail.class);
+						intent.putExtra("parcle_id", app.getParcelId());
+						startActivity(intent);
+						ActivityController.finishAll();
+					}
+					break;
+				case Constants.CODE_WECHAT_PAY_CANCEL:
+					Toast.makeText(this, "取消支付", Toast.LENGTH_SHORT).show();
+					EventBus.getDefault().post(new BusEvent(BusEvent.PAY_MENT_RESULT, false, SysApplication.mCurrentRequestPayment));
+					finish();
+					break;
+			}
+		}
+	}
+}

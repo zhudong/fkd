@@ -1,0 +1,72 @@
+package com.fuexpress.kr.ui.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+/**
+ * Created by andy on 2016/12/9.
+ */
+public class ParcelItemView extends RelativeLayout {
+
+    //    private int type;// 1:详情里面  0：添加包裹里面
+    private ImageView IvIcon;
+    private TextView mTitle;
+    private TextView mPrice;
+    private TextView mCount;
+    private DisplayImageOptions options;
+    private ImageLoader imageLoader;
+
+    public ParcelItemView(Context context, int type) {
+        this(context, null, type);
+    }
+
+    public ParcelItemView(Context context, AttributeSet attrs, int type) {
+        this(context, attrs, 0, type);
+    }
+
+    public ParcelItemView(Context context, AttributeSet attrs, int defStyleAttr, int type) {
+        super(context, attrs, defStyleAttr);
+        initView(type);
+    }
+
+    private void initView(int type) {
+        if (type == 1) {
+            inflate(getContext(), R.layout.view_transferparcel_item, this);
+        } else {
+            inflate(getContext(), R.layout.view_parcel_item, this);
+        }
+        IvIcon = (ImageView) findViewById(R.id.img_icon);
+        mTitle = (TextView) findViewById(R.id.tv_title);
+        mPrice = (TextView) findViewById(R.id.tv_price);
+        mCount = (TextView) findViewById(R.id.tv_count);
+        options = ImageLoaderHelper.getInstance(getContext()).getDisplayOptions();
+        imageLoader = ImageLoader.getInstance();
+
+    }
+
+    public void setIvIcon(String url) {
+        IvIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageLoader.displayImage(url + Constants.ImgUrlSuffix.dp_list, IvIcon, options);
+    }
+
+    public void setTitle(String title) {
+        mTitle.setText(title);
+    }
+
+    public void setPrice(String price) {
+        mPrice.setText(price);
+    }
+
+    public void setCount(String count) {
+        mCount.setText(count);
+    }
+}

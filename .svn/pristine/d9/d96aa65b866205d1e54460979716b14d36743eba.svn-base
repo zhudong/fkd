@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.fuexpress.kr"
+        minSdkVersion 16
+        targetSdkVersion 23
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+    }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('F:/projectfile_all/yiss.keystore')
+            keyAlias 'dongdaemun'
+            keyPassword 'yshow110'
+            storePassword 'yshow110'
+        }
+        release {
+            storeFile file('C:/DDM//yiss1.0.2/yiss.keystore')
+            keyAlias 'dongdaemun'
+            keyPassword 'yshow110'
+            storePassword 'yshow110'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+
+        }
+    }
+    productFlavors {
+//      gradlew  assembleUmengRelease
+        yingyongbao {}
+        baidu {}
+        yiss {}
+        xiaomi {}
+        huawei {}
+        googleplay {}
+        umeng {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+        flavor1 {
+            applicationId = "adyen.com.adyenpaysdk.controllers.NetworkController"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile(name: 'library_progress-release', ext: 'aar')
+    compile files('libs/universal-image-loader-1.9.5.jar')
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    apt 'com.zhy:mpermission-compiler:1.0.0'
+    compile files('libs/okhttp-2.6.0.jar')
+    compile project(':adyenpaysdk-1.0.0')
+    compile project(':adyenuisdk-1.0.0')
+    compile project(':volley-release')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.pnikosis:materialish-progress:1.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.zhaokaiqiang.klog:library:0.0.1'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.upyun:upyun-android-sdk:1.0.2'
+    compile 'com.zhy:mpermission-api:1.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.meiqia:meiqiasdk:3.3.0@aar'
+    compile 'com.squareup.okio:okio:1.8.0'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'com.google.guava:guava:20.0'
+}

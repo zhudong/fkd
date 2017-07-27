@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_title_normal_two"/>
+    <include layout="@layout/krbank_receiver_info"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="right"
+        android:text="@string/confirm_payment_waring_msg"
+        android:textColor="@color/gray_02"
+        android:textSize="11sp"/>
+
+    <Button
+        android:id="@+id/payment_confirm_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_red_btn_drawable"
+        android:text="@string/keep_on_selecting"
+        android:textColor="@color/black"/>
+    <include layout="@layout/krbank_notice"/>
+</LinearLayout>

@@ -1,0 +1,930 @@
+<resources>
+    <string name="app_name">Fu Express</string>
+
+    <!-- main -->
+    <string name="main_home_tab_string">首页</string>
+    <string name="main_need_tab_string">帮我</string>
+    <string name="main_package_tab_string">包裹</string>
+    <string name="main_me_tab_string">我</string>
+
+    <string name="String_back_toast" translatable="false">再按一下退出程序</string>
+
+    <string name="String_float_1" translatable="false">%1$.1f</string>
+    <string name="String_float_2" translatable="false">%1$.2f</string>
+
+    <string name="update_tip_title">升级新版本</string>
+    <string name="update_new_version">检测到新版本</string>
+
+    <string name="confirm" translatable="false">确定</string>
+    <string name="cancel" translatable="false">取消</string>
+    <string name="dismiss">取消</string>
+
+
+    <!-- 首页相关 -->
+    <string name="home_fg_help_01">帮我取货</string>
+    <string name="home_fg_help_02">帮我收货</string>
+    <string name="home_fg_help_03">帮我补货</string>
+    <string name="home_fg_help_04">寄包裹</string>
+    <string name="help_me_find">帮我找货</string>
+    <string name="string_my_need">帮我</string>
+    <string name="string_my_need_to_pay">去付款</string>
+    <string name="string_need_in_storage">已入库</string>
+    <string name="string_neeed_cancel">已取消</string>
+    <string name="string_need_all">全部</string>
+    <string name="string_need_time">需求时间：</string>
+    <string name="string_need_type">需求类型：</string>
+    <string name="string_need_no_item">暂无需求单</string>
+
+    <string name="package_package_number">包裹号：</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="string_star">*</string>
+    <!--我相关-->
+    <string name="click_login" translatable="false">点击登录</string>
+    <string name="my_money" translatable="false">我的余额</string>
+    <string name="coupon" translatable="false">优惠券</string>
+    <string name="address_manager" translatable="false">地址管理</string>
+    <string name="connect_service" translatable="false">在线客服</string>
+    <string name="help_center" translatable="false">帮助中心</string>
+    <string name="notice" translatable="false">通知</string>
+    <string name="clean_cache" translatable="false">清理缓存</string>
+    <string name="version" translatable="false">版本号</string>
+
+    <!-- 帮我取货相关 -->
+    <string name="help_me_get_package_title">帮我取货</string>
+
+    <!--支付方式-->
+    <string name="payment_title_msg">选择支付方式</string>
+    <string name="String_balance_first">账户余额：</string>
+    <string name="String_ali_pay">支付宝支付</string>
+    <string name="String_weixin_pay">微信支付</string>
+    <string name="String_krbank_pay">友利银行</string>
+    <string name="String_adyen_pay">信用卡支付</string>
+    <string name="coupon_title_msg">优惠券</string>
+
+    <!--需求列表     1取2找3买4收-->
+    <string name="String_need_get">帮我取</string>
+    <string name="String_need_find">帮我找</string>
+    <string name="String_need_buy">帮我买</string>
+    <string name="String_need_receive">帮我收</string>
+
+
+    <!--帮我寄-->
+    <string name="String_parcle_none">您目前还没有包裹，请添加包裹。</string>
+    <string name="String_parcle_add">添加包裹</string>
+    <string name="String_parcle_help_send">寄包裹</string>
+    <string name="String_parcle_submit">提交</string>
+    <string name="String_parcle_estimate_fee">预估运费&#058;</string>
+    <string name="String_parcle_estimate_fee_tips">&#040;多出的运费将返还到您的账户余额中&#041;</string>
+    <string name="String_parcle_name">包裹名称：</string>
+    <string name="String_shipping_info">物流信息</string>
+    <string name="String_pay_fee">运费支付</string>
+    <string name="String_pure_pay">还需使用%1$s充值：%2$s</string>
+    <string name="String_parcel_ali_pay">支付宝</string>
+    <string name="String_parcel_weixin_pay">微信</string>
+    <string name="String_parcel_pay_method">支付方式</string>
+    <string name="String_parcel_weight_count">总重量：</string>
+    <string name="String_parcel_shipping_fee">运费：</string>
+    <string name="String_parcel_submit_sucess">成功提交订单</string>
+    <string name="String_parcel_submit_sucess_title">您的包裹已成功提交！</string>
+    <string name="String_parcel_my_parcel_number">您的包裹号：</string>
+    <string name="String_parcel_submit_sucess_info1">您可以在</string>
+    <string name="String_parcel_submit_sucess_info2">“我-我的包裹”</string>
+    <string name="String_parcel_submit_sucess_info3">中查询相关信息。</string>
+    <string name="String_parcel_back_to_home">返回首页</string>
+    <string name="back_to_demands_list">返回我的需求列表</string>
+    <string name="package_to_send_submit">您的包裹%1$s已经成功提交发货！</string>
+    <string name="package_send_notice">包裹的实际运费若少于预估运费，多出的运费将返还到您的充值卡账户中，请注意查收！您可以在已发货包裹中查询实际运费。</string>
+    <string name="package_send_continue">继续去发包裹</string>
+    <string name="package_send_submit_sucess">成功提交</string>
+    <string name="package_send_submit_no_photo">请最少添加1张图片</string>
+
+    <string name="edit_ablum_msg">编辑专辑</string>
+    <string name="edit_album_dialog_title_msg">提示</string>
+    <string name="edit_album_dialog_msg">你确定删除该专辑吗？</string>
+    <string name="preview_album_dialog_msg">你确定删除该图片吗？</string>
+    <string name="preview_album_tip_msg">请输入专辑标题</string>
+    <string name="warehouse_cancel">取消</string>
+    <string name="warehouse_confirm">确定</string>
+
+    <!--添加包裹-->
+    <string name="String_parcel_delete">删除</string>
+    <string name="String_parcel_add_photo">请添加您的物品的图片</string>
+    <string name="String_parcel_photo_type">&#040;支持JPG,JPEG,GIF.PNG格式&#041;</string>
+    <string name="String_parcel_item_info">物品名称</string>
+    <string name="String_parcel_item_info_tips">请输入物品名称</string>
+    <string name="String_parcel_item_info_warn">请输入物品名称</string>
+    <string name="String_parcel_declare_price">申报价值</string>
+    <string name="String_parcel_declare_price_tips">请输入申报价值</string>
+    <string name="String_parcel_declare_price_warn">请填写申报价值</string>
+    <string name="String_parcel_item_count">物品总数</string>
+    <string name="String_parcel_item_count_tips">请输入物品总数</string>
+    <string name="String_parcel_item_count_warn">请输入物品总数</string>
+    <string name="String_parcel_weight">总重量</string>
+    <string name="String_parcel_weight_tips">请输入物品总重量</string>
+    <string name="String_parcel_item_address">收货地址</string>
+    <string name="String_parcel_item_address_tips">请选择收货地址</string>
+    <string name="String_parcel_yun_fee">预估运费</string>
+    <string name="String_parcel_save">保存</string>
+    <string name="String_float_double">%1$.2f</string>
+    <string name="package_plase_select_shipping_method">请选择物流方式</string>
+    <string name="package_no_photo_tips">请添加图片</string>
+    <string name="package_confirm">知道了</string>
+    <string name="package_deflaut_weight_tips">包裹默认最低重量为%1$.2fkg,运费将多退少补</string>
+    <string name="parcel_item_all">所有物品</string>
+    <string name="parcel_append_item">添加物品</string>
+    <string name="String_loading">正在加载中...</string>
+    <string name="item_please_input_img">请添加物品图片</string>
+    <string name="item_please_input_materials">请选择材质</string>
+    <string name="item_please_input_category">请选择分类</string>
+    <string name="item_please_input_price">请输入物品价格</string>
+    <string name="item_input_price_less">物品价格必须大于0</string>
+    <string name="item_please_input_num">请输入物品数量</string>
+    <string name="item_input_num_less">物品数量必须大于0</string>
+    <string name="item_append_success">添加成功</string>
+    <string name="item_edit_sucess">修改成功</string>
+    <string name="string_confirm_del_parcel">确认删除此包裹？</string>
+    <string name="string_append_parcel_tip1">1.化妆品，请选择EMS仓库发货；</string>
+    <string name="string_append_parcel_tip2">2.顺丰&#038;福快递空运，只发服装、鞋、包、配饰；</string>
+    <string name="string_append_parcel_tip3">从今天开始，轻松发货，省事省钱！</string>
+    <string name="string_append_parcel_tip4">3.顺丰空运，限制发海外大品牌商品，\n 如：耐克、MCM。</string>
+    <string name="string_append_parcel_tip5">发货包裹量大的用户，\n请联系在线客服，申请VIP运费！</string>
+
+
+    <!--包裹-->
+    <string name="String_parcel">包裹</string>
+    <string name="String_money_unit">CNY</string>
+    <string name="String_parcel_goto_send">去发货</string>
+    <string name="String_parcel_goto_pay">去支付</string>
+    <string name="String_waite_receive">待收货</string>
+    <string name="String_waite_out">待出库</string>
+    <string name="String_sended">已发货</string>
+    <string name="String_all">全部</string>
+    <string name="String_goto_send" translatable="false">去发货</string>
+    <string name="package_has_no">暂无包裹</string>
+    <string name="package_to_append">添加包裹</string>
+    <string name="package_forcecast_shipping_fee">预估运费：</string>
+    <string name="package_forcecast_weight">预估重量：</string>
+    <string name="package_carriage_dsc">&#040;多出的运费将返还到您的账户余额中&#041;</string>
+    <string name="package_default" translatable="false">默认</string>
+    <string name="package_transport_type" translatable="false">物流方式</string>
+    <string name="package_apply_price_text" translatable="false">申报价值</string>
+    <string name="package_apply_price_detail" translatable="false">
+        &#040;包裹申报价值需&#060;%1$s&#041;</string>
+    <string name="package_shipping_insurance_text" translatable="false">快递保险</string>
+    <string name="package_shipping_insurance_detail" translatable="false">&#040;保险费率&#160;%1$.2f%%&#041;</string>
+    <string name="package_transport_chargge_pay_type_text" translatable="false">运费支付</string>
+    <string name="package_product_info" translatable="false">物品信息</string>
+    <string name="package_transport_infor" translatable="false">物流信息</string>
+    <string name="package_comment_text" translatable="false">包裹备注</string>
+    <string name="package_number" translatable="false">包裹号：</string>
+    <string name="package_type" translatable="false">包裹类型：</string>
+    <string name="package_in_house_time" translatable="false">入库时间：</string>
+    <string name="package_out_house_time" translatable="false">出库时间：</string>
+    <string name="package_house_location" translatable="false">所在仓库：</string>
+    <string name="package_to_pay" translatable="false">去支付</string>
+    <string name="package_weight" translatable="false">%1$.2fkg</string>
+    <string name="package_weight_tips" translatable="false">&#040;以实际重量为准&#041;</string>
+    <string name="package_attention" translatable="false">注意：</string>
+    <string name="package_use_balance_first">优先使用账户余额：</string>
+    <string name="package_declare_price">申报总价：</string>
+    <string name="package_product_count">物品数量：%1$d</string>
+    <string name="package_type_order">订单包裹</string>
+    <string name="package_type_transport">转运包裹</string>
+    <string name="package_type_direct">直邮包裹</string>
+    <string name="package_realy_shipping_fee">实际运费：</string>
+    <string name="package_realy_weight">实际重量：</string>
+    <string name="package_please_select_method">请选择物流方式</string>
+    <string name="package_append_count_tip">最多只能添加3个包裹</string>
+    <string name="package_append_count_tip2">有一个包裹没有选择物流方式请选择</string>
+    <string name="package_append_count_tip3">最多只能添加3个包裹</string>
+    <string name="String_price" translatable="false">￥%1$.2f</string>
+    <string name="String_price2" translatable="false">%1$s%2$.2f</string>
+    <string name="String_package_address" translatable="false">客户地址</string>
+    <string name="String_package_wait_receive" translatable="false">待收货</string>
+    <string name="package_product_realy_price" translatable="false">实际价值</string>
+    <string name="package_product_realy_price_note" translatable="false">&#040;包裹实际价值需&#060;%1$s&#041;</string>
+    <string name="package_product_tarrif" translatable="false">商品税费</string>
+    <string name="package_product_tarrif_note" translatable="false">&#040;海关关税%1$.2f%%&#041;</string>
+    <string name="package_shipping_tarrif" translatable="false">运费税费</string>
+    <string name="package_shipping_tarrif_note" translatable="false">&#040;海关关税%1$.2f%%，预估值&#041;</string>
+    <string name="package_item_need_number" translatable="false">需求单号：%1$d</string>
+    <string name="package_item_state" translatable="false">状态：%1$s</string>
+    <string name="package_item_note" translatable="false">备注说明：%1$s</string>
+    <string name="package_item_pick_address" translatable="false">取货地址：%1$s</string>
+    <string name="package_query_parcel" translatable="false">追踪包裹</string>
+    <string name="package_split_parcel" translatable="false">拆分包裹</string>
+    <string name="package_shipping_warn" translatable="false">您选择的物流方式限定了包裹最大申报价值为%1$s</string>
+    <string name="package_declare_to_much" translatable="false">申报价值过大</string>
+
+    <string name="package_split_fee" translatable="false">拆包服务费：</string>
+    <string name="package_split_btn" translatable="false">拆分包裹</string>
+    <string name="package_split_balance_first" translatable="false">优先使用余额：%1$s</string>
+    <string name="package_re_declaration" translatable="false">重新申报</string>
+    <string name="package_cheng" translatable="false">×</string>
+    <string name="String_cart_buyfrom" translatable="false">在哪儿买:</string>
+    <string name="package_item_count" translatable="false">已选商品数量：&#160;%1$d</string>
+    <string name="package_price_realy" translatable="false">实际价值：&#160;%1$s</string>
+    <string name="package_toast_keep_one" translatable="false">至少保留一件商品，请取消其他商品后再选</string>
+    <string name="package_pay_text_only" translatable="false">支付</string>
+    <string name="package_toast_split_sucess" translatable="false">拆分包裹成功</string>
+    <string name="package_no_shipping_msg" translatable="false">物流单暂无结果</string>
+
+
+    <!--添加单品-->
+    <string name="string_append_item">添加物品</string>
+    <string name="string_edit_item">编辑物品</string>
+    <string name="string_append_continue">继续添加</string>
+    <string name="string_confirms">确认</string>
+    <string name="string_confirm_del_item">确认删除此物品？</string>
+    <string name="String_parcel_declare_item">申报单价</string>
+    <string name="String_parcel_declare_item_tips">请输入申报单价</string>
+    <string name="String_item_count">物品数量</string>
+    <string name="String_item_count_tips">请输入数量</string>
+    <string name="String_item_count_warn">请输入数量</string>
+    <string name="parcel_apped_item_max">最多只能添加4个物品！</string>
+    <string name="text_materials">材 &#160; &#160;&#160; &#160;质</string>
+    <string name="select_materials">请选择材质，顺丰发货必填项！</string>
+    <string name="text_category">分 &#160; &#160;&#160; &#160;类</string>
+    <string name="select_category">请选择分类</string>
+    <string name="text_brand_name">品牌名称</string>
+    <string name="hint_brand_text">请输入品牌名称，顺丰发货必填项！</string>
+    <string name="string_deleting">正在删除 &#8230;</string>
+    <string name="stirng_item_saving">保存中&#8230;</string>
+    <string name="string_img_uploading">正在上传:</string>
+    <string name="string_img_uploading1">正在上传&#8230;</string>
+
+
+    <!--账号设置-->
+    <string name="avatar" translatable="false">头像</string>
+    <string name="base_info" translatable="false">基本信息</string>
+    <string name="change_password" translatable="false">修改密码</string>
+    <string name="perform" translatable="false">偏好</string>
+    <string name="account_setting" translatable="false">帐号设置</string>
+    <string name="safely_logout" translatable="false">安全退出</string>
+
+    <!-- 用户信息详情页 -->
+    <string name="user_info_drtail_title" translatable="false">个人资料</string>
+    <string name="user_info_drtail_string_right" translatable="false">保存</string>
+    <string name="user_info_drtail_dialog_for_nick_name" translatable="false">昵称输入不能为空!</string>
+    <string name="user_info_drtail_dialog_address" translatable="false">请选择国家或者地区!</string>
+    <string name="user_info_drtail_if_info_not_change_dialog" translatable="false">信息未修改</string>
+    <string name="user_info_drtail_dialog_get_user_info_fail" translatable="false">请求用户信息失败</string>
+    <string name="user_info_drtail_dialog_change_user_info_success" translatable="false">修改成功
+    </string>
+    <string name="user_info_drtail_dialog_change_user_info_fail" translatable="false">修改用户信息失败
+    </string>
+    <string name="user_info_drtail_member_super" translatable="false">超级会员</string>
+    <string name="user_info_drtail_member_vip" translatable="false">VIP会员</string>
+    <string name="user_info_drtail_member_normal" translatable="false">普通会员</string>
+    <string name="user_info_drtail_member_end_01" translatable="false">(有效期至</string>
+    <string name="user_info_drtail_member_end_02" translatable="false">)</string>
+    <string name="user_info_drtail_gender_male" translatable="false">男</string>
+    <string name="user_info_drtail_gender_female" translatable="false">女</string>
+    <string name="user_info_drtail_please_choose" translatable="false">请选择</string>
+    <string name="user_info_drtail_nick_name_title" translatable="false">昵称</string>
+    <string name="user_info_drtail_member_title" translatable="false">会员组</string>
+    <string name="user_info_drtail_phone_title" translatable="false">手机号</string>
+    <string name="user_info_drtail_email_title" translatable="false">邮箱</string>
+    <string name="user_info_drtail_gender_title" translatable="false">性别</string>
+    <string name="user_info_drtail_briday_title" translatable="false">生日</string>
+    <string name="user_info_drtail_country_title" translatable="false">国家地区</string>
+    <string name="user_info_drtail_location_title" translatable="false">所在地</string>
+    <string name="user_info_drtail_home_page_title" translatable="false">个人主页</string>
+    <string name="user_info_drtail_self_desc_title" translatable="false">自我介绍</string>
+    <string name="user_info_drtail_self_desc_edit_text_hinnt" translatable="false">写下一段话,描述下你自己...
+    </string>
+    <string name="user_info_drtail_clear_edittext_hint" translatable="false">请输入个人主页</string>
+    <!--登录注册-->
+    <string name="register" translatable="false">注册</string>
+    <string name="country_region" translatable="false">国家/地区</string>
+    <string name="default_country" translatable="false">中国</string>
+    <string name="default_number" translatable="false">+86</string>
+    <string name="please_enter_phone_number" translatable="false">请输入手机号码</string>
+    <string name="password" translatable="false">密码</string>
+    <string name="please_enter_password" translatable="false">请输入6-12位字符密码</string>
+    <string name="login">登录</string>
+    <string name="forget_password" translatable="false">忘记密码？</string>
+    <string name="you_can_use_other_login_account" translatable="false">您可以用以下方式登录</string>
+    <string name="qq" translatable="false">QQ</string>
+    <string name="wechat" translatable="false">微信</string>
+    <string name="facebook" translatable="false">Facebook</string>
+    <string name="phone_login" translatable="false">手机登录</string>
+    <string name="phone_register" translatable="false">手机注册</string>
+    <string name="verification_code" translatable="false">验证码</string>
+    <string name="please_enter_phone_verification_code" translatable="false">请输入短信验证码</string>
+    <string name="get_verification_code" translatable="false">获取验证码</string>
+    <string name="third_platform_login" translatable="false">第三方登录</string>
+    <string name="third_notice_01" translatable="false">您好，欢迎来到福快递。</string>
+    <string name="third_notice_02" translatable="false">为了个您更贴心的服务，请关联一个福快递账号。</string>
+    <string name="no_fkd_account" translatable="false">还没有福快递账号?</string>
+    <string name="register_now" translatable="false">立即注册</string>
+    <string name="have_fkd_account" translatable="false">已有福快递账号</string>
+    <string name="bind_account" translatable="false">关联账号</string>
+    <string name="check_login" translatable="false">确认并登录</string>
+    <string name="country_default" translatable="false">中国大陆</string>
+    <string name="login_success" translatable="false">登录成功</string>
+    <!--错误提醒-->
+    <string name="String_phone_error" translatable="false">输入的手机号不合法，请重新输入</string>
+    <string name="phone_is_empty" translatable="false">您输入的手机号为空，请重新输入</string>
+    <string name="find_password_by_email" translatable="false">邮箱找回密码</string>
+    <string name="find_password" translatable="false">找回密码</string>
+    <string name="email_is_empty" translatable="false">您输入的邮箱为空，请重新输入</string>
+    <string name="String_email_empty" translatable="false">邮箱为空</string>
+    <string name="email_is_illegal" translatable="false">输入的邮箱不合法，请重新输入</string>
+    <string name="login_error" translatable="false">用户名或者密码为空，请重新输入</string>
+    <string name="password_empty" translatable="false">密码为空，请重新输入</string>
+    <string name="login_failure" translatable="false">登录失败，用户名或者密码错误</string>
+    <string name="String_logout_notice" translatable="false">退出后账号数据将会在本地删除，下次需要重新登录</string>
+    <string name="String_bind_phone" translatable="false">关联手机账号</string>
+    <string name="bind_phone" translatable="false">关联手机账号</string>
+    <string name="String_get_code" translatable="false">获取验证码</string>
+    <string name="register_and_bind" translatable="false">注册并绑定</string>
+    <string name="register_success" translatable="false">注册成功</string>
+    <string name="String_enter_phone" translatable="false">请输入手机号</string>
+    <string name="String_bind_success" translatable="false">绑定成功</string>
+    <string name="String_please_get_code" translatable="false">请先获取验证码</string>
+    <string name="String_choose_country" translatable="false">选择国家或地区</string>
+    <string name="String_find_email_password" translatable="false">邮箱找回密码</string>
+    <string name="String_phone_email_password" translatable="false">手机找回密码</string>
+    <string name="String_email_is_empty" translatable="false">邮箱为空，请重新输入</string>
+    <string name="String_email_is_illegal" translatable="false">邮箱不符合规则，请重新输入</string>
+    <string name="enter_password" translatable="false">请输入密码</string>
+    <string name="password_is_illegal" translatable="false">密码长度不符合规则，请重新输入</string>
+    <string name="change_password_success" translatable="false">修改密码成功</string>
+    <string name="enter_code" translatable="false">请输入验证码</string>
+    <string name="String_error_notice" translatable="false">用户名或者密码为空，请重新输入</string>
+    <!--  一些常用的字符串  -->
+    <string name="strng_confirm" translatable="false">确定</string>
+    <string name="String_cart_price_space" translatable="false">￥&#160;</string>
+    <string name="string_for_send_requset_fail">加载数据失败</string>
+    <string name="string_for_send_requset_fail_02">请求失败</string>
+    <string name="cancel_fail">取消支付</string>
+
+    <!--  修改头像  -->
+    <string name="head_icon_default_string" translatable="false">headIcon!140</string>
+    <string name="head_icon_upload_success" translatable="false">上传成功</string>
+    <string name="head_icon_upload_fail" translatable="false">上传失败</string>
+
+    <!--  添加店招的描述  -->
+    <string name="change_merchant_cover_add_desc_title" translatable="false">图片描述</string>
+    <string name="change_merchant_cover_add_desc_ed_hinnt" translatable="false">请输入图片描述</string>
+    <string name="change_merchant_cover_in_album_title" translatable="false">图片列表</string>
+
+    <!-- 图片选择器相关 -->
+    <string name="folder_name">文件名</string>
+    <string name="image_num">图片数量</string>
+    <string name="all_folder">所有图片</string>
+    <string name="sheet">张</string>
+    <string name="shoot">拍摄照片</string>
+    <string name="picture">图片</string>
+    <string name="finish">下一步</string>
+    <string name="temp_date">2015年12月2日</string>
+    <string name="msg_no_camera">没有系统相机</string>
+    <string name="msg_amount_limit">最多只能添加</string>
+    <string name="msg_amount_limit_02">张图片</string>
+    <string name="preview_delete_msg">删除</string>
+    <string name="preview_title_msg">预览</string>
+
+    <string name="open_camera_fail">相册初始化失败!</string>
+    <string name="empty_sdcard">没有SD卡</string>
+    <string name="msg_amount_limit_03">最多只能添加%1$s张图片</string>
+
+    <!--  选择图片弹出的dialog  -->
+    <string name="down_to_up_string_take_photo">拍照</string>
+    <string name="down_to_up_string_cancle">取消</string>
+    <string name="down_to_up_string_choose_from_album">从图片列表中选择</string>
+    <string name="down_to_up_string_choose_from_l0cation_album">从相册中选择</string>
+
+    <!-- 修改邮箱相关 -->
+    <string name="change_email_ed_hint_01_text">请输入您的新邮箱</string>
+    <string name="change_email_ed_hint_02_text">请再次输入您的新邮箱</string>
+    <string name="change_email_ed_text_01">新邮箱</string>
+    <string name="change_email_ed_text_02">确认新邮箱</string>
+    <string name="change_email_title_text">修改邮箱</string>
+
+
+    <!-- 修改密码相关 -->
+    <string name="change_pwd_title" translatable="false">修改密码</string>
+    <string name="change_pwd_warn_text_01" translatable="false">三个任意一个都不能为空</string>
+    <string name="change_pwd_warn_text_02" translatable="false">修改失败,请检查你的密码是否正确</string>
+    <string name="change_pwd_warn_text_03" translatable="false">两次输入不一致</string>
+    <string name="change_pwd_ed_text_01" translatable="false">当前密码</string>
+    <string name="change_pwd_ed_text_01_hint" translatable="false">请输入您的当前密码</string>
+    <string name="change_pwd_ed_text_02" translatable="false">新密码</string>
+    <string name="change_pwd_ed_text_02_hint" translatable="false">请输入您的新6-12位字符密码</string>
+    <string name="change_pwd_ed_text_03" translatable="false">确认密码</string>
+    <string name="change_pwd_ed_text_03_hint" translatable="false">请再次输入您的新密码</string>
+    <string name="change_pwd_success_text" translatable="false">修改成功</string>
+    <string name="change_pwd_fail_text" translatable="false">修改失败</string>
+
+    <!-- Preferences相关  -->
+    <string name="String_perferences" translatable="false">偏好</string>
+    <string name="string_for_preferences_language">语言</string>
+    <string name="string_for_preferences_currency">货币</string>
+
+    <!-- Language相关 -->
+    <string name="string_for_language_default">默认(English)</string>
+    <string name="string_for_language_english">English</string>
+    <string name="string_language_us">en_US</string>
+    <string name="string_for_language_chn">中文(简体)</string>
+    <string name="string_language_zh">zh_CN</string>
+    <string name="string_for_language_chnn">中文(繁体)</string>
+    <string name="string_language_zh_02">zh_TW</string>
+    <string name="string_for_language_korea">한국의</string>
+    <string name="string_language_ko">ko_KR</string>
+    <string name="string_for_language_russia">русский</string>
+    <string name="string_language_ru">ru_RU</string>
+    <string name="kuo_hao" translatable="false">(%1$s)</string>
+    <string name="russia_sign">&#8381;</string>
+
+    <!--  我的余额相关  -->
+    <string name="string_for_my_balance_title" translatable="false">我的余额</string>
+    <string name="string_for_my_balance_rl_01" translatable="false">账户余额</string>
+    <string name="string_for_my_balance_rl_02" translatable="false">直充订单查询</string>
+    <string name="string_for_my_balance_title_02" translatable="false">账户直充</string>
+    <string name="string_for_my_balance_tab01" translatable="false">待付款</string>
+    <string name="string_for_my_balance_tab02" translatable="false">已支付</string>
+    <string name="string_for_my_balance_tab03" translatable="false">已取消</string>
+    <string name="string_for_my_balance_tab04" translatable="false">全部</string>
+
+    <!-- 充值卡相关 -->
+    <string name="my_gift_card_title" translatable="false">我的充值卡</string>
+    <string name="my_gift_card_tab_01" translatable="false">充值卡账户</string>
+    <string name="my_gift_card_tab_02" translatable="false">充值卡订单查询</string>
+    <string name="my_gift_card_tab_03" translatable="false">绑定充值卡</string>
+    <string name="my_gift_card_title_02" translatable="false">充值卡账户</string>
+    <string name="my_gift_card_account_can_use_money" translatable="false">可用余额</string>
+    <string name="my_gift_card_account_not_use_money" translatable="false">不可用余额</string>
+    <string name="my_gift_card_order_title_text_01" translatable="false">充值卡</string>
+    <string name="my_gift_card_order_title_text_02" translatable="false">账户直充</string>
+    <string name="my_gift_card_order_tab_01" translatable="false">去付款</string>
+    <string name="my_gift_card_order_tab_02" translatable="false">已支付</string>
+    <string name="my_gift_card_order_tab_03" translatable="false">已取消</string>
+    <string name="my_gift_card_order_tab_04" translatable="false">全部</string>
+    <string name="my_gift_card_order_adapter_wait_pay" translatable="false">待付款</string>
+    <string name="my_gift_card_order_adapter_order_num" translatable="false">订单编号:&#160;</string>
+    <string name="my_gift_card_order_adapter_order_time" translatable="false">订单日期:&#160;</string>
+    <string name="my_gift_card_order_adapter_order_total" translatable="false">订单总额:&#160;</string>
+    <string name="my_gift_card_order_binding_title" translatable="false">绑定充值卡</string>
+    <string name="my_gift_card_order_binding_balance" translatable="false">账户余额:&#160;</string>
+    <string name="my_gift_card_order_binding_right_text" translatable="false">返回</string>
+    <string name="my_gift_card_order_binding_balance_hint" translatable="false">请输入充值卡号码</string>
+    <string name="my_gift_card_order_binding_btn_text" translatable="false">绑定</string>
+    <string name="my_gift_card_order_binding_faile_crad_not_has" translatable="false">充值卡不存在!请稍后再试...</string>
+    <string name="my_gift_card_order_binding_success" translatable="false">绑定成功</string>
+    <string name="my_gift_card_order_binding_faile_text" translatable="false">绑定失败</string>
+    <string name="my_gift_card_order_binding_from_this_text" translatable="false">本网站</string>
+    <string name="my_gift_card_order_binding_dialog_config" translatable="false">确定</string>
+    <string name="my_gift_card_order_binding_dialog_cancle" translatable="false">取消</string>
+    <string name="my_gift_card_order_no_order_text" translatable="false">您还没有相关订单</string>
+    <string name="my_gift_card_order_no_order_text_02" translatable="false">马上去逛逛</string>
+    <string name="my_gift_card_bingding_cycode_text" translatable="false">
+        当前充值卡货币单位是“%1$s”，绑定后需切换到%1$s货币下查看余额
+    </string>
+    <string name="my_gift_card_account_lv_item_day_string">日期:</string>
+    <string name="fb_login_protocol_scheme">1218437891553090</string>
+    <string name="app_id">1218437891553090</string>
+    <!-- 地址管理相关  -->
+    <string name="string_for_address_manager_add">新增地址</string>
+    <string name="string_for_address_manager_def_item">设为默认地址</string>
+    <string name="string_for_address_manager_edit_item">编辑</string>
+    <string name="string_for_am_item_top">%1$s&#160;&#160;%2$s&#160;&#160;%3$s</string>
+    <string name="String_order_name_and_phone" translatable="false">%1$s&#160;&#160;&#160;&#160;%2$s&#160;&#160;&#160;&#160;%3$s</string>
+    <string name="string_for_address_custom_address">新增地址</string>
+
+
+    <string name="add_new_address_consignee_title">收货人：</string>
+    <string name="add_new_address_phone_title">电话：</string>
+    <string name="add_new_address_country_title">国家地区：</string>
+    <string name="add_new_address_region_title">所在地：</string>
+    <string name="add_new_address_detail_address_title">详细地址：</string>
+    <string name="add_new_address_post_code_title">邮编：</string>
+    <string name="add_new_address_compony_title">公司名：</string>
+    <string name="add_new_address_ID_title">身份证：</string>
+    <string name="add_new_address_default_title">作为默认收货地址：</string>
+    <string name="edit_address_star">*</string>
+    <string name="address_adapter_none_name" translatable="false">未填写姓名</string>
+    <string name="address_adapter_none_phone" translatable="false">未填写电话</string>
+    <string name="delivery_address_default">请选择</string>
+    <!--收货地址-->
+    <string name="delivery_title_bar_edit_address">编辑收货地址</string>
+    <string name="delivery_title_bar_add_address">新增收货地址</string>
+    <string name="delivery_toast_msg_consignee">收货人不能为空</string>
+    <string name="delivery_toast_msg_phone">请输入正确的电话号码</string>
+    <string name="delivery_toast_msg_country">国家不能为空</string>
+    <string name="delivery_toast_msg_region">所在地不能为空</string>
+    <string name="delivery_toast_msg_detail_address">详细地址不能为空</string>
+    <string name="delivery_toast_msg_post_code">邮编不能为空</string>
+    <string name="delivert_dialog_msg">您还没有设置收货地址，请点击确定设置！</string>
+
+
+    <string name="package_double_decimals" translatable="false">%1$.2f</string>
+
+    <string name="home_page_dialog_request_fail_02" translatable="false">请求失败</string>
+
+    <string name="card_order_detils_title_msg">账户直充</string>
+    <string name="card_order_detail_order_number" translatable="false">订单编号:</string>
+    <string name="card_order_detail_order_date" translatable="false">订单日期:</string>
+    <string name="card_order_detail_order_grand_total" translatable="false">订单总额:</string>
+    <string name="card_order_detail_order_state" translatable="false">订单状态:</string>
+    <string name="card_order_detail_order_type" translatable="false">订单类型:</string>
+    <string name="card_order_detail_cancel_order" translatable="false">取消订单</string>
+    <string name="String_payment_type" translatable="false">支付方式</string>
+    <string name="cart_order_card_msg_title_type_submit">提交发货：</string>
+    <string name="recharge_order_detail_freight" translatable="false">预估运费:</string>
+    <string name="recharge_order_detail_balance_pay" translatable="false">其中账户余额支付:</string>
+    <string name="recharge_order_detail_coupon_title" translatable="false">其中使用优惠券:</string>
+    <string name="recharge_order_detail_need_pay" translatable="false">还需支付:</string>
+    <string name="gift_card_total_msg" translatable="false">合计:</string>
+    <string name="order_goto_pay" translatable="false">去支付</string>
+    <string name="card_order_detail_title_bar_wait_pay">待付款</string>
+    <string name="card_order_detail_title_bar_payed">已支付</string>
+    <string name="card_order_detail_title_bar_canceled">已取消</string>
+    <string name="card_order_detail_dialog_msg" translatable="false">账户直充后，请重新提交发货！</string>
+    <string name="card_order_detail_dialog_split_msg" translatable="false">账户直充后，会自动拆分包裹，请知悉！
+    </string>
+    <string name="cart_dialog_title">提醒</string>
+    <string name="cart_dialog_btn_confirm">知道了</string>
+    <string name="cart_dialog_btn_cancel">关闭</string>
+    <string name="cart_order_grand_total" translatable="false">%1$.2f</string>
+    <string name="cart_order_card_type_recharge">充值卡</string>
+    <string name="cart_order_card_type_prepaid">账户直充</string>
+    <string name="String_order_price" translatable="false">%1$s%2$.2f</string>
+    <string name="cart_order_card_msg_freight_estimate">预估运费：</string>
+    <string name="recharge_order_detail_price" translatable="false">￥%1$.2f</string>
+    <string name="cart_order_card_msg_title_type_split">拆分包裹：</string>
+    <string name="cart_order_card_msg_freight_split">拆包服务费：</string>
+    <string name="toast_msg_canceled">取消成功</string>
+    <string name="toast_msg_cancel_failed">取消失败</string>
+    <string name="gift_card_item_price" translatable="false">%1$s%2$.2f</string>
+    <string name="card_order_detail_charge_card" translatable="false">电子充值卡：</string>
+    <string name="card_order_detail_face_value" translatable="false">面值</string>
+    <string name="card_order_detail_price" translatable="false">价格</string>
+    <string name="card_order_detail_count" translatable="false">数量</string>
+    <string name="card_order_detail_sub_total" translatable="false">小计</string>
+    <string name="order_details_content_title">提交发货:</string>
+    <string name="order_details_grand_total">总计:</string>
+    <string name="order_details_btn_msg">去支付</string>
+    <string name="card_order_details_pending">待付款</string>
+    <string name="card_order_details_paid">已支付</string>
+    <string name="card_order_details_canceled">已取消</string>
+
+
+    <!--优惠券-->
+    <string name="coupon_exchange_msg">兑换</string>
+    <string name="coupon_item_uses_msg">x%1$d</string>
+    <string name="coupon_currency_msg">人民币(%1$d)</string>
+    <string name="coupon_currency_name_cny">人民币</string>
+    <string name="coupon_currency_name_usd">美元</string>
+    <string name="coupon_currency_name_krw">韩元</string>
+    <string name="coupon_currency_msg2">(%1$d)</string>
+    <string name="exchange_now" translatable="false">立即兑换</string>
+    <string name="exchange_code" translatable="false">兑换码</string>
+    <string name="exchange_edit_hint_msg" translatable="false">请输入优惠券兑换码</string>
+    <string name="exchange" translatable="false">兑换</string>
+    <string name="coupon_count_msg">%1$d张可用</string>
+
+    <string name="card_payment_success_title_bar_title">订单支付成功</string>
+    <string name="pay_result_payment_success_order_title" translatable="false">您已经成功支付了订单！</string>
+    <string name="gift_card_thanks_msg" translatable="false">感谢您在壹时尚购物，祝您购物愉快！</string>
+    <string name="gift_card_payment_success_order_no" translatable="false">您的充值卡订单号#</string>
+    <string name="card_payment_success_to_home_msg">返回首页</string>
+
+    <string name="clean_success" translatable="false">清理成功</string>
+
+    <string name="search_result_num_befor" translatable="false">(</string>
+    <string name="search_result_num_end" translatable="false">)</string>
+    <string name="you_do_not_have_any_coupon" translatable="false">您暂时没有优惠券</string>
+    <string name="system_notice" translatable="false">系统通知</string>
+    <string name="card_order_payment_title_bar_title">选择支付方式</string>
+
+    <string name="uploading_string">上传中</string>
+    <string name="uploading_string_progress">第:%1$s个需求图片上传中:%1$s%%</string>
+    <string name="uploading_string_image">上传图片中…</string>
+    <string name="uploading_string_image_pro">上传图片中:%1$s%%</string>
+    <string name="uploading_fail">上传失败</string>
+
+    <string name="delet_address_dialog_message" translatable="false">您确定要删除该地址吗？</string>
+    <string name="pr_use">优先使用</string>
+
+    <string name="string_package_detail_back" translatable="false">包裹详情</string>
+    <string name="select_warehouse">选择仓库</string>
+    <string name="please_select_pay_method">选择支付方式</string>
+    <string name="pay_error_msg">支付失败，请检查信息并重新尝试</string>
+    <string name="cart_confirm_title_bar_title">确认付款</string>
+    <string name="gift_card_order_id_title" translatable="false">订单号</string>
+    <string name="String_delivery_method" translatable="false">配送方式</string>
+    <string name="String_buy_type" translatable="false">采购方式</string>
+    <string name="gift_card_payment_title" translatable="false">支付方式</string>
+    <string name="confirm_payment_commodity_count_msg">商品数量</string>
+    <string name="String_for_cart_total" translatable="false">总计</string>
+    <string name="recharge_order_detail_balance_pay_02" translatable="false">其中账户余额支付</string>
+    <string name="recharge_order_detail_need_pay_02" translatable="false">还需支付</string>
+    <string name="confirm_payment_waring_msg">48小时内未付款，订单将自动取消</string>
+    <string name="bank_name" translatable="false">银行名称</string>
+    <string name="bank_info" translatable="false">银行信息</string>
+    <string name="receiver_name" translatable="false">收款人</string>
+    <string name="account_number" translatable="false">银行账号</string>
+    <string name="trans_count" translatable="false">汇款金额</string>
+    <string name="ps_content" translatable="false">汇款备注请填写以下红色数字:</string>
+    <string name="kr_notice_1" translatable="false">복익스프레스 주식회사서울시 영등포구 양평로21나길 8(양평동5가)  대표이사：윤상룡</string>
+    <string name="kr_address" translatable="false">서울시 영등포구 양평로21나길 8(양평동5가)  대표이사：윤상룡
+    </string>
+    <string name="kr_number" translatable="false"> 사업자번호 : 813-88-00097
+    </string>
+    <string name="kr_address_detail" translatable="false">통신판매업신고번호 : 제 2016-서울영등포-1134 호</string>
+    <string name="kr_notice" translatable="false">Copyright © 2015 FU-EXPRESS, All Rights
+        Reserved.
+    </string>
+    <string name="keep_on_selecting" translatable="false">继续去逛逛</string>
+    <string name="keep_searching" translatable="false">Continue to shop</string>
+    <string name="String_out_pay_title" translatable="false">确定要放弃付款吗？放弃后可以在“我的订单”页面查询到相应订单继续支付
+    </string>
+    <string name="String_go_on_pay_btn" translatable="false">继续支付</string>
+    <string name="String_out_pay_btn" translatable="false">放弃</string>
+    <string name="String_merge_order" translatable="false">合并订单发货</string>
+    <string name="get_krbank_info_failure" translatable="false">获取信息失败</string>
+    <string name="String_krbank_pay2" translatable="false">银行汇款</string>
+    <string name="String_wechat_pay" translatable="false">微信支付</string>
+
+    <!--积分-->
+    <string name="integral_titlebar_msg">积分查询</string>
+    <string name="integral_management_resources_1">积分查询</string>
+    <string name="integral_management_resources_2">我的好友</string>
+    <string name="integral_management_resources_3">邀请好友</string>
+    <string name="integral_management_msg">奖励积分</string>
+    <string name="integral_management_back_msg">我</string>
+    <!--我的好友-->
+    <string name="friends_titlebar_msg">我的好友</string>
+    <string name="friends_invite_msg">成功邀请</string>
+    <string name="friends_name_1">被邀请人:</string>
+    <string name="friends_name_2">被邀请人:%1$s</string>
+    <string name="friends_time_1">邀请时间:</string>
+    <string name="friends_time_2">邀请时间:%1$s</string>
+    <string name="friends_status_1">状态:</string>
+    <string name="friends_status_2">状态:%1$s</string>
+    <!--邀请好友-->
+    <string name="invite_top_msg_1">邀请好友得积分</string>
+    <string name="invite_top_msg_2">您可以通过以下几种方式来邀请好友注册福快递App帐户，\n好友注册及使用App，您将会得到奖励积分。\n奖励积分可以直接抵扣您的消费或提现。</string>
+    <string name="invite_resources_1">联系人</string>
+    <string name="invite_resources_2">短信</string>
+    <string name="invite_resources_3">朋友圈</string>
+    <string name="invite_resources_4">微信好友</string>
+    <string name="invite_resources_5">QQ空间</string>
+    <string name="invite_resources_6">QQ好友</string>
+    <string name="invite_resources_7">微博</string>
+    <string name="invite_resources_8">Facebook</string>
+
+    <!--帮我取货-->
+    <string name="pick_up_title">帮我取货</string>
+    <string name="add_require_title">添加物品</string>
+    <string name="edit_require_title">编辑物品</string>
+    <string name="pick_up_add_msg">继续添加</string>
+    <string name="pick_up_services">服务费</string>
+    <string name="pick_up_exchange_rate">汇率</string>
+    <string name="pick_up_services_waring_msg">服务费按商品总额的%1$.2f%%收取</string>
+    <string name="pick_up_services_waring_msg_item">服务费按商品总额的%1$.2f%%收取</string>
+    <string name="pick_up_services_waring_msg2">服务费按每件商品总额的%1$s%%收取</string>
+    <string name="pick_up_services_waring_msg2_item">服务费按每件商品%1$s%%收取</string>
+    <string name="pick_up_services_waring_msg3">免费</string>
+    <string name="pick_up_payment">支付方式</string>
+    <string name="pick_up_payment_balance">优先使用账户余额：</string>
+    <string name="pick_up_payment_balance2">还需使用%1$s充值：</string>
+    <string name="pick_up_payment_bank">国民银行</string>
+    <string name="pick_up_grand_total_title">总计:</string>
+    <string name="pick_up_submit">提交</string>
+    <string name="pick_up_commodity_hint">请添加您的物品图片</string>
+    <string name="pick_up_commodity_hint2">（支持JPG,JPEG,GIF.PNG格式）</string>
+    <string name="pick_up_commodity_note">物品名称</string>
+    <string name="pick_up_commodity_note_hint">请输入物品名称</string>
+    <string name="pick_up_commodity_brand">品牌名称&#160;&#160;</string>
+    <string name="pick_up_commodity_brand_hint">请输入品牌名称，顺丰发货必填项！</string>
+    <string name="pick_up_commodity_material">材&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;质</string>
+    <string name="pick_up_commodity_material_hint">请选择材质，顺丰发货必填项！</string>
+    <string name="pick_up_commodity_class">分&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;类</string>
+    <string name="pick_up_commodity_class_hint">请选择分类</string>
+    <string name="pick_up_commodity_address">取货地址</string>
+    <string name="pick_up_commodity_address_hint">请输入取货地址，例如：apM Luxe 3F-06</string>
+    <string name="pick_up_commodity_price">物品单价</string>
+    <string name="pick_up_commodity_price_hint">请输入单价</string>
+    <string name="pick_up_commodity_price_currency">KRW</string>
+    <string name="pick_up_commodity_count">物品数量</string>
+    <string name="pick_up_commodity_count_hint">请输入数量</string>
+    <string name="pick_up_right_delete">删除</string>
+    <string name="pick_up_right_confrim">确定</string>
+    <string name="pick_up_add_item_max_msg">每次最多添加4个物品</string>
+    <string name="pick_up_add_item_min_msg">最少需要添加一个需求</string>
+    <string name="pick_up_add_item_adapter_msg">最少添加一张图片</string>
+    <string name="pick_up_add_item_note_msg">请填写物品名称</string>
+    <string name="pick_up_add_item_materials_msg">请选择材质</string>
+    <string name="pick_up_add_item_class_msg">请选择分类</string>
+    <string name="pick_up_add_item_address_msg">请填写取货地址</string>
+    <string name="pick_up_add_item_price_msg">请填写商品单价</string>
+    <string name="pick_up_add_item_price_msg2">商品价格不能小于0</string>
+    <string name="pick_up_add_item_count_msg">请填写商品数量</string>
+    <string name="pick_up_add_item_count_msg2">商品数量不能小于0</string>
+    <string name="pick_up_add_save_success_msg">提交需求成功</string>
+    <string name="upload_failed_msg">上传失败</string>
+    <string name="pick_up_top_layout_title_msg">所有物品</string>
+    <string name="pick_up_top_layout_btn_msg">添加物品</string>
+    <string name="pick_up_empty_msg">您还没有相关物品，去添加物品</string>
+    <string name="pick_item_count_msg">x%1$s</string>
+    <string name="add_require_success_msg">添加成功</string>
+    <string name="edit_require_success_msg">编辑成功</string>
+    <string name="pick_up_rate_msg" translatable="false">1KRW=%1$.5f%2$s</string>
+    <string name="pick_up_rate_back_msg" translatable="false">1%1$s=%2$.2fKRW</string>
+    <string name="pick_up_submitting">正在提交需求</string>
+    <string name="pick_up_generating_order">正在生成订单</string>
+    <string name="pick_up_getting_pay_info">正在获取支付信息</string>
+    <string name="pick_up_delete_msg">确认删除此物品?</string>
+    <string name="pick_up_cancel_msg">取消</string>
+    <string name="pick_up_confirm_msg">确认</string>
+    <string name="pick_up_init_error_msg">初始化异常</string>
+    <string name="alipay_confirming_msg">支付结果确认中</string>
+    <string name="alipay_canceled_msg">支付取消</string>
+    <string name="alipay_failed_msg">支付失败</string>
+    <string name="krbank_title_msg">银行汇款</string>
+    <string name="pick_submit_error_msg">需要添加至少一件物品</string>
+    <string name="pick_submit_error_msg_item">您还没有相关商品，去添加商品</string>
+    <string name="order_info_bottom_msg_1">복익스프레스 주식회사  |  서울시 영등포구 양평로21나길 8(양평동5가)  대표이사 : 윤상룡</string>
+    <string name="order_info_bottom_msg_2">사업자번호 : 813-88-00097</string>
+    <string name="order_info_bottom_msg_3">통신판매업신고번호 : 제 2016-서울영등포-1134 호</string>
+    <string name="order_info_bottom_msg_4">Copyright © 2015 FU-EXPRESS, All Rights Reserved.</string>
+    <string name="pick_up_krbank_info_pay_amount">付款金额</string>
+    <string name="pick_up_krbank_info_pay_type">支付方式</string>
+    <string name="pick_up_krbank_inzhafo_balance_pay">其中账户余额支付</string>
+    <string name="pick_up_krbank_info_need_pay">还需支付</string>
+    <string name="pick_up_krbank_info_bank_name">银行名称</string>
+    <string name="pick_up_krbank_info_payee">收款人</string>
+    <string name="pick_up_krbank_info_bank_id">银行账号</string>
+    <string name="pick_up_krbank_info_amount">汇款金额</string>
+    <string name="pick_up_krbank_info_note_number">汇款备注请填写以下红色数字：</string>
+    <string name="pick_up_save_help_my_get_empty">没有需求单信息</string>
+    <string name="pick_up_choose_payment_msg">请选择一种支付方式</string>
+    <string name="request_payment_error_msg">获取支付方式失败</string>
+    <string name="pick_up_service_msg">(含服务费)</string>
+    <string name="pick_up_submit_success_msg">提交需求成功</string>
+
+    <!-- 帮我收货相关  -->
+    <string name="hms_warehouse_text">入库仓库</string>
+    <string name="hms_warehouse_text_hint">请选择入库仓库</string>
+    <string name="hms_desc_text">物品名称</string>
+    <string name="hms_desc_text_hint">您还可以输入200字符</string>
+    <string name="hms_remarks_hint">请填写物品快递单号，寄出来源等信息</string>
+    <string name="hms_remarks_text">备注说明</string>
+    <string name="hms_price_text">申报价格</string>
+    <string name="hms_price_text_hint">请输入申报价格</string>
+    <string name="hms_item_quantity">单品数量</string>
+    <string name="hms_item_quantity_hint">请输入单品数量</string>
+    <string name="adapter_id_01">id01</string>
+    <string name="adapter_id_02">id02</string>
+    <string name="adapter_id_is_add">isAdd</string>
+    <string name="adapter_id_ip_center_tv">ipcentertv</string>
+    <string name="adapter_id_url">url</string>
+    <string name="adapter_id_position">head_adapter_po</string>
+    <string name="adapter_id_ip_tag">ip_tag</string>
+    <string name="adapter_key_ip_tag">ip_key_tag</string>
+    <string name="ip_text_address">收货地址：%1$s</string>
+    <string name="ip_text_receiver">收&#160;&#160;货&#160;&#160;人：%1$s</string>
+    <string name="ip_text_phone">电&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;话：%1$s</string>
+    <string name="ip_text_post_code">邮&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;编：%1$s</string>
+    <string name="ip_text_center">请选择入库仓库</string>
+    <string name="adapter_ip_ware_house_ID">ware_house_ID</string>
+    <string name="adapter_add_new_demand">继续添加</string>
+    <string name="delete_demand_note">确认删除此物品?</string>
+    <string name="add_demand_success">添加成功</string>
+    <string name="submit_demand_success">提交成功</string>
+    <string name="hs_item_total">%1$s件</string>
+    <string name="hs_item_one_total">X%1$s</string>
+    <string name="sub_demand_success">成功提交需求</string>
+    <string name="sub_demand_success_note">您的需求已成功提交</string>
+    <string name="sub_damand_success_note_p1">您可以在</string>
+    <string name="sub_demand_success_note_p2">“我的需求”</string>
+    <string name="sub_demand_success_note_p3">中查询相关信息。</string>
+    <string name="demand_full_note">每次最多添加4个商品</string>
+    <string name="hs_name">品牌名称</string>
+    <string name="hs_name_hint">请输入品牌名称，顺丰发货必填项！</string>
+    <string name="hs_material">材&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;质</string>
+    <string name="hs_material_hint">请选择材质，顺丰发货必填项！</string>
+    <string name="hs_category">分&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;类</string>
+    <string name="hs_category_hint">请选择分类</string>
+
+    <string name="hm_item_desc">单品描述</string>
+    <string name="string_hint_200_char">您还可以输入200字符</string>
+    <string name="hm_item_remark">备注说明</string>
+    <string name="hm_item_ware_house">入库仓库</string>
+    <string name="hm_item_ware_house_hint">请选择入库仓库</string>
+    <string name="hm_item_request_price">申报价格</string>
+    <string name="hm_item_request_price_hint">请输入申报价格</string>
+    <string name="hm_item_quantity">物品数量</string>
+    <string name="hm_item_quantity_hint">请输入数量</string>
+    <string name="hm_default_currency_code">KRW</string>
+
+    <string name="hs_note_desc">请输入描述!</string>
+    <string name="hs_note_remark">请输入备注!</string>
+    <string name="hs_note_warehouse">请选择入库仓库!</string>
+    <string name="hs_note_quantity">请输入数量!</string>
+    <string name="hs_note_category">请选择分类!</string>
+    <string name="hs_note_material">请选择材质!</string>
+    <string name="hs_note_price">请输入申报价格!</string>
+    <string name="hs_note_image">请至少选择一张图片!</string>
+    <string name="hs_note_empty">您还没有相关物品，去添加物品</string>
+
+
+    <string name="convertView_id">convertVie_id</string>
+    <string name="parcel_id_card">收货人身份证</string>
+    <string name="parcel_id_string">身份证资料</string>
+    <string name="String_id_card_num">身份证号码</string>
+    <string name="String_please_input_id_card_num">请输入身份证号码</string>
+    <string name="id_card_notice">请提交真实的身份证正反图片，否则将无法清关，造成包裹滞留。</string>
+
+    <!--帮我补货-->
+    <string name="exchange_rate" translatable="false">汇率</string>
+    <string name="item_name" translatable="false">商品名称</string>
+    <string name="buy_count" translatable="false">购买数量</string>
+    <string name="please_enter_item_name" translatable="false">请输入您的商品名称</string>
+    <string name="please_enter_item_price" translatable="false">请输入您的商品单价</string>
+    <string name="please_enter_item_count" translatable="false">请输入您的购买数量</string>
+    <string name="please_enter_note" translatable="false">您还可以输入200字符</string>
+    <string name="exchange_rate_rmb_2_korea" translatable="false">1韩元= %1$.2f人民币</string>
+    <string name="exchange_rate_korea_2_rmb" translatable="false">1人民币= %1$.5f韩元</string>
+    <!--我的需求-->
+    <string name="checking" translatable="false">审核中</string>
+    <string name="my_demand" translatable="false">我的需求</string>
+    <string name="cancel_apply" translatable="false">申请取消</string>
+    <string name="awaitingcancel" translatable="false">等待取消</string>
+    <string name="canceled" translatable="false">已取消</string>
+    <string name="to_pay" translatable="false">去付款</string>
+    <string name="demand_no" translatable="false">需求单号：</string>
+    <string name="demand_time" translatable="false">需求时间：</string>
+    <string name="demand_type" translatable="false">需求类型：</string>
+    <string name="demand_state" translatable="false">需求状态：</string>
+    <string name="service_fee" translatable="false">服务费：</string>
+    <string name="item_address" translatable="false">收货地址</string>
+    <string name="card_front_uplode_success">正面上传成功</string>
+    <string name="card_back_uplode_success">背面上传成功</string>
+    <string name="pending" translatable="false">去付款</string>
+    <string name="allocating" translatable="false">分配中</string>
+    <string name="grabbing" translatable="false">配单中</string>
+    <string name="processing" translatable="false">待处理</string>
+    <string name="preorder" translatable="false">已预订</string>
+    <string name="packing" translatable="false">已入库</string>
+    <string name="shipped" translatable="false">已发货</string>
+
+    <string name="alipay" translatable="false">支付宝支付</string>
+    <string name="netpay" translatable="false">中国银联</string>
+    <string name="tenpay" translatable="false">财付通</string>
+    <string name="fastpay" translatable="false">块钱</string>
+    <string name="wxap" translatable="false">微信支付</string>
+    <string name="adyen" translatable="false">Adyen</string>
+    <string name="krbank" translatable="false">银行汇款</string>
+    <string name="get_message_failed" translatable="false">获取数据失败</string>
+    <string name="can_not_be_empty" translatable="false">不能为空</string>
+    <string name="add_item" translatable="false">添加商品</string>
+    <string name="edit_item" translatable="false">编辑商品</string>
+    <string name="do_not_have_item_now" translatable="false">没有现货！</string>
+    <string name="can_not_be_higher_than" translatable="false">价格不高于</string>
+    <string name="frequently_used_currency" translatable="false">常用货币</string>
+    <string name="please_select_payment_method" translatable="false">请选择支付方式</string>
+    <string name="data_is_worng" translatable="false">数据有问题，请重新请求</string>
+    <string name="create_another_order" translatable="false">再下一单</string>
+    <string name="replenish_desc_hint" translatable="false">请填写商品销售档口，销售网站等信息</string>
+    <string name="item_grand_total" translatable="false">商品总价</string>
+    <string name="include_service_fee" translatable="false">（含服务费）</string>
+    <string name="you_cancel_require_have_commit" translatable="false">您的取消需求的申请已经成功提交</string>
+    <string name="please_enter_item_note" translatable="false">请填写备注说明</string>
+    <string name="item_price" translatable="false">物品价格</string>
+    <string name="pick_up_commodity_hint_item">请添加您的商品图片</string>
+    <string name="choose_category_back_text" translatable="false">选择分类</string>
+    <string name="shopping_item_price" translatable="false">商品价格</string>
+    <string name="all_items" translatable="false">所有商品</string>
+    <string name="replenish_services_waring_msg">服务费按商品总额的%1$d%%收取</string>
+    <string name="item_should_be_less_than_4">每次最多添加4个商品</string>
+    <string name="string_replenish_tip">取货量大的用户，\n在&#34;我-在线客服&#34;联系客服，\n可申请VIP服务费。目前只支持东大门市场取货、提货！</string>
+    <string name="string_pick_tip">补货、代购量大的用户，\n在&#34;我-在线客服&#34;联系客服，可申请VIP服务费。</string>
+    <string name="help_me" translatable="false">帮我</string>
+
+
+    <!-- 充值卡的订单来源 -->
+    <string name="gift_card_from_yiss">衣时尚</string>
+    <string name="gift_card_from_ddm">东大门</string>
+    <string name="gift_card_from_oneyiss">壹时尚</string>
+    <string name="gift_card_from_there">本网站</string>
+    <string name="gift_card_from_fkd">福快递</string>
+    <string name="binding_gift_card_dialog_title_01" translatable="false">当前充值卡购买自</string>
+    <string name="binding_gift_card_dialog_title_02" translatable="false">网站,你确定要绑定并充值到福快递账户吗</string>
+    <string name="binding_gift_card_dialog_title_03" translatable="false">充值卡不存在!请稍后再试...</string>
+    <!--个人页面修改-->
+    <string name="logged" translatable="false">已登录</string>
+    <string name="reward_score" translatable="false">奖励积分</string>
+    <string name="search_materials">"  搜索材质"</string>
+    <string name="notice_customer_service" translatable="false">汇款后，通知在线客服！</string>
+    <string name="share_success" translatable="false">分享成功</string>
+    <string name="share_failure" translatable="false">分享失败</string>
+    <string name="share_cancel" translatable="false">分享被取消</string>
+</resources>
+

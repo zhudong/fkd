@@ -1,0 +1,356 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.HelpItemViewBean;
+import com.fuexpress.kr.bean.PickUpItemBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PaymentManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.adapter.AdapterForHelp;
+import com.fuexpress.kr.ui.uiutils.AnimationUtils;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomGridView;
+import com.fuexpress.kr.ui.view.CustomListView;
+import com.fuexpress.kr.ui.view.CustomToast;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
+import com.fuexpress.kr.utils.UpLoadImageManager;
+import com.google.protobuf.GeneratedMessage;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.io.File;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import fksproto.CsBase;
+import fksproto.CsParcel;
+
+import static com.fuexpress.kr.base.SysApplication.mContext;
+import static com.fuexpress.kr.conf.SqlParcelsHelper.Parcel.currencyCode;
+
+/**
+ * Created by Administrator on 2016-12-5.
+ */
+
+public class PickUpActivity extends BaseActivity {
+
+    private static final int CODE_PAYMENT_REQUEST = 0x1001;
+
+    private View rootView;
+    private LinearLayout paymentLayout;
+    private TitleBarView titleBarView;
+    private TextView backTv;
+    private ImageView backIv;
+    private CustomListView pickListView;
+    private ScrollView pickUpSv;
+
+    private TextView balanceTv;
+    private TextView grandTotalTv;
+    private CsParcel.HelpMyGetInitResponse response;
+    private List<PickUpItemBean> pickUpItemlist = new ArrayList<PickUpItemBean>();
+    private LinearLayout serviceFeeLayout;
+    private TextView waringTv;
+    private Button submitBtn;
+    private int payType = Constants.PAYMENT_ALIPAY;
+    private TextView paymentTv;
+    private String currencyCode;
+    private String payCode;
+
+    private Button addBtn;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_pick_up, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.pick_up_titlebar);
+        backTv = titleBarView.getmTv_in_title_back_tv();
+        backTv.setText(getString(R.string.main_home_tab_string));
+        backIv = titleBarView.getIv_in_title_back();
+        paymentLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_payment_layout);
+        paymentTv = (TextView) rootView.findViewById(R.id.pick_up_payment_tv);
+        pickUpSv = (ScrollView) rootView.findViewById(R.id.pick_up_sv);
+        pickListView = (CustomListView) rootView.findViewById(R.id.pick_up_listview);
+        balanceTv = (TextView) rootView.findViewById(R.id.pick_up_balance_tv);
+        serviceFeeLayout = (LinearLayout) rootView.findViewById(R.id.pick_up_service_fee_layout);
+        waringTv = (TextView) rootView.findViewById(R.id.pick_up_service_waring_tv);
+        grandTotalTv = (TextView) rootView.findViewById(R.id.pick_up_grand_total_tv);
+        submitBtn = (Button) rootView.findViewById(R.id.pick_up_submit_btn);
+        addBtn = (Button) rootView.findViewById(R.id.pick_up_add_btn);
+
+        init();
+
+        backIv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        paymentLayout.setOnClickListener(this);
+        submitBtn.setOnClickListener(this);
+        addBtn.setOnClickListener(this);
+        return rootView;
+    }
+
+
+    public void init() {
+        helpMyGetInitRequest();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_in_title_back:
+            case R.id.tv_in_title_back_tv:
+                finish();
+                break;
+            case R.id.tv_in_title_right:
+                break;
+            case R.id.pick_up_payment_layout:
+                Intent intent = new Intent(this, PaymentActivity.class);
+                int i = (int) SPUtils.get(this, AccountManager.getInstance().getCurrencyCode() + "paymentPos", 0);
+                intent.putExtra("paymentPos", i);
+                intent.putExtra(PaymentActivity.CURRENCY_CODE, currencyCode);
+                intent.putExtra("payType", payType);
+                intent.putExtra("payCode", payCode);
+                intent.putExtra("paymentString", paymentTv.getText().toString());
+                startActivityForResult(intent, CODE_PAYMENT_REQUEST);
+                break;
+            case R.id.pick_up_submit_btn:
+                break;
+            case R.id.pick_up_add_btn:
+                toActivity(AddRequireActivity.class);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.d("----requestCode " + requestCode);
+        if (resultCode == Constants.PAYMENT_REQUEST_CODE) {
+            String payString = SPUtils.get(PickUpActivity.this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_NAME, "").toString();
+            payCode = SPUtils.get(PickUpActivity.this, AccountManager.getInstance().getCurrencyCode() + PaymentActivity.DEF_PAY_CODE, "").toString();
+            paymentTv.setText(payString);
+        }
+
+    }
+
+    public void saveHelpMyGetRequest(String payCode, String sumcount, List<CsParcel.ProductDataList> productList) {
+        CsParcel.SaveHelpMyGetRequest.Builder builder = CsParcel.SaveHelpMyGetRequest.newBuilder();
+        builder.setUserhead(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setPaymentcode(payCode);
+        builder.setSumcount(sumcount);
+        builder.addAllProductlist(productList);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SaveHelpMyGetResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.SaveHelpMyGetResponse response) {
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                saveHanlder.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mSweetAlertDialog.dismiss();
+    }
+
+    private Handler saveHanlder = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CustomToast.makeText(mContext, getString(R.string.pick_up_add_save_success_msg), Toast.LENGTH_SHORT).show();
+//            clearData();
+            mSweetAlertDialog.dismiss();
+//            EventBus.getDefault().post(new BusEvent(BusEvent.CODE_GO_MERCHAND, true));
+        }
+    };
+
+    public void helpMyGetInitRequest() {
+        showLoading();
+        CsParcel.HelpMyGetInitRequest.Builder builder = CsParcel.HelpMyGetInitRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCurrencyCode(AccountManager.getInstance().getCurrencyCode());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.HelpMyGetInitResponse>() {
+
+            @Override
+            public void onSuccess(CsParcel.HelpMyGetInitResponse response) {
+                closeLoading();
+                LogUtils.d(response.toString());
+                Message msg = Message.obtain();
+                msg.obj = response;
+                initHandler.sendMessage(msg);
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                closeLoading();
+            }
+        });
+    }
+
+    private Handler initHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            response = (CsParcel.HelpMyGetInitResponse) msg.obj;
+            currencyCode = response.getCurrencyCode();
+            PaymentManager.getInstance(PickUpActivity.this).getFKDPaymentListRequest(response.getCurrencyCode(), new PaymentManager.OnFKDPaymentListener() {
+                @Override
+                public void onResult(int paymentType, final String pString, String pCode) {
+                    payCode = pCode;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            paymentTv.setText(pString);
+                        }
+                    });
+                }
+            });
+            balanceTv.setText(getString(R.string.pick_up_payment_balance, response.getGiftCardAccount()));
+            waringTv.setText(getString(R.string.pick_up_services_waring_msg, (int) response.getServiceFee()));
+//            itemAdapter = new ItemAdapter(PickUpActivity.this, itemlist, response.getCurrencyCode());
+//            itemAdapter.notifyDataSetChanged();
+        }
+    };
+
+    public void scrollToBottom() {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                pickUpSv.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        if (listView == null)
+            return;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
+    public void updateServiceFeeLayout(Set<PickUpItemBean> serviceFeeSet) {
+        for (PickUpItemBean item : serviceFeeSet) {
+            float price = Float.parseFloat(item.getItemPrice());
+            int count = Integer.parseInt(item.getItemCount());
+            float fee = (float) (price * count * (response.getServiceFee() / 100));
+            String feeMsg = response.getCurrencySign() + price + "*" + count + "*" + (int) response.getServiceFee() + "%=" + response.getCurrencySign() + fee;
+
+            TextView feeTv = new TextView(PickUpActivity.this);
+            feeTv.setTextColor(getResources().getColor(R.color.black_0));
+            feeTv.setTextSize(13);
+            feeTv.setText(feeMsg);
+            feeTv.setGravity(Gravity.RIGHT);
+            serviceFeeLayout.addView(feeTv);
+        }
+
+    }
+
+    int itemId = -1;
+
+    public void updateServiceFeeLayout(PickUpItemBean item) {
+        List<PickUpItemBean> list = new ArrayList<PickUpItemBean>();
+        if (itemId != item.getItemId()) {
+            pickUpItemlist.add(item);
+        } else {
+            for (int i = 0; i < pickUpItemlist.size(); i++) {
+                if (pickUpItemlist.get(i).getItemId() == item.getItemId()) {
+                    pickUpItemlist.set(i, item);
+                }
+            }
+        }
+        float grandTotal = 0;
+        for (int i = 0; i < pickUpItemlist.size(); i++) {
+            float price = Float.parseFloat(pickUpItemlist.get(i).getItemPrice());
+            int count = Integer.parseInt(pickUpItemlist.get(i).getItemCount());
+            float fee = (float) (price * count * (response.getServiceFee() / 100));
+            String feeMsg = response.getCurrencySign() + price + "*" + count + "*" + (int) response.getServiceFee() + "%=" + response.getCurrencySign() + fee;
+
+            TextView feeTv = new TextView(PickUpActivity.this);
+            feeTv.setTextColor(getResources().getColor(R.color.black_0));
+            feeTv.setTextSize(13);
+            feeTv.setText(feeMsg);
+            feeTv.setGravity(Gravity.RIGHT);
+            serviceFeeLayout.addView(feeTv);
+            grandTotal += price * count + fee;
+        }
+        grandTotalTv.setText(getString(R.string.String_price2, UIUtils.getCurrency(this), grandTotal));
+        itemId = item.getItemId();
+    }
+
+    public void requestFocus(EditText editText) {
+        editText.requestFocus();
+    }
+
+}

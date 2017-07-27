@@ -1,0 +1,287 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//单品详情-配送列表
+message MatchShippingInfo
+{
+	optional int32       	shippingId   = 1;
+	optional string       	title        = 2;
+	optional string         shippingInfo = 3;
+	optional string         attention    = 4;
+}
+
+message GetMatchShippingListRequest
+{
+	required BaseRequest 	 head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional string          countryCode  = 3;
+	optional int32       	 regionId     = 4;
+	optional int32       	 matchItemId  = 5;
+	optional string          currencyCode = 6;
+	optional string          localeCode   = 7;
+}
+
+message GetMatchShippingListResponse
+{
+	required BaseResponse 	head         = 1;
+	repeated MatchShippingInfo 	matchShippingList = 2;
+}
+
+//add by jack.zuoquan  
+message GetMatchShippingInfoRequest
+{
+	required BaseRequest 	 head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional int32           regionid	  = 3;
+	optional int32           matchitemid  = 4;
+	optional string          countrycode  = 5;
+	optional string          currencycode = 6;
+	optional string          localecode   = 7;
+
+}
+
+message GetMatchShippingInfoResponse
+{
+	required BaseResponse 	head         = 1;
+	optional string       	title   	 = 2;
+	optional string 		shippinginfo = 3;
+	optional string 		shippingimageurl  =4;
+	optional string         countryname  = 5;
+	optional string         countryimageurl  =6;
+	optional string         errmsg          =7;
+
+}
+
+message GetItemListByPlaceRequest
+{
+	required BaseRequest head         = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int32       place_id     = 3;
+	optional int32       pageno       = 4;
+	optional string      localecode   = 5;
+	optional string      currencycode = 6;
+	optional int32       currencyid   = 7;
+}
+
+message GetItemListByPlaceResponse
+{
+	required BaseResponse head  = 1;
+	optional int32        total = 2;
+	optional bool         more  = 3;
+	repeated Item         items = 4;
+}
+
+message GetItemListByWebsiteRequest
+{
+	required BaseRequest head         = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int32       website_id   = 3;
+	optional int32       pageno       = 4;
+	optional string      localecode   = 5;
+	optional string      currencycode = 6;
+	optional int32       currencyid   = 7;
+}
+
+message GetItemListByWebsiteResponse
+{
+	required BaseResponse head  = 1;
+	optional int32        total = 2;
+	optional bool         more  = 3;
+	repeated Item         items = 4;
+}
+
+//获取我的单品列表请求
+message GetMyItemListRequest
+{
+	required BaseRequest	 head	    = 1;
+	optional BaseUserRequest userinfo   = 2;
+	required int32           author     = 3;//看谁的单品列表
+	required int32			 pageno	    = 4;
+	optional string          localecode = 5;
+	optional string          currencycode = 6;
+	optional int32           currencyid = 7;
+}
+
+message GetMyItemListResponse
+{
+	required BaseResponse	head 	= 1;
+	optional bool 			more 	= 2;
+	repeated Item			items 	= 3;
+}
+
+//Like单品请求
+message LikeItemRequest
+{
+	required BaseRequest     head     = 1;
+	optional BaseUserRequest userinfo = 2;
+	required int64           item_id  = 3;
+	required int32           opera    = 4;
+}
+
+//Like单品应答
+message LikeItemResponse
+{
+	required BaseResponse head	= 1;
+}
+
+//查询某单品的所有图片请求
+message GetItemImageListRequest
+{
+	required BaseRequest     head              = 1;
+	optional BaseUserRequest userinfo          = 2;
+	optional int32           matchItemId       = 3;
+}
+
+message ItemImageUrlList
+{
+	optional string   imageUrl                 = 1;
+}
+
+message GetItemImageListResponse
+{
+	required BaseResponse     head              = 1;
+	optional string           caption           = 2; //单品描述
+	repeated ItemImageUrlList itemImageUrlList  = 3; //单品多图list
+}
+
+message GetItemBasicDetailRequest
+{
+	required BaseRequest head             = 1;
+	optional BaseUserRequest userinfo     = 2;
+	required int64       item_id          = 3;//单品id
+	optional string      localecode       = 4;
+	optional string      currencycode     = 5;
+	optional int32       currencyid       = 6;
+}
+
+message GetItemBasicDetailResponse
+{
+	required BaseResponse 	head        = 1;
+	optional Item         	item        = 2;//基本信息	
+	optional ItemLink     	item_link   = 3;//来源信息
+	repeated ItemImage      item_images = 4;//图片信息
+	optional ItemPlace      item_place  = 5;//PLACE信息
+}
+
+message Comment
+{
+	required int32 	uin		      = 1;//评论者
+	required string content	      = 2;//评论内容
+	optional string review_time   = 3;//评论时间
+	repeated ItemImage    images  = 4; //多图路径串
+}
+
+//获取评论
+message GetCommentListRequest
+{
+	required BaseRequest head 	    = 1;
+	optional BaseUserRequest userinfo     = 2;
+	required int64       item_id          = 3;
+}
+
+message GetCommentListResponse
+{
+	required BaseResponse head		= 1;
+	repeated UserInfo     reviewers	= 2;//评论者
+	repeated Comment	  comments 	= 3;//评论
+	optional int32 		  total		= 4;//评论总数
+}
+
+//添加评论
+message PostCommentRequest
+{
+	required BaseRequest	head		= 1;
+	optional BaseUserRequest userinfo   = 2;
+	required string 		content		= 3;
+	required int64 			item_id		= 4;
+	optional int64 			album_id	= 5;
+}
+
+message PostCommentResponse
+{
+	required BaseResponse	head 	= 1;
+}
+
+//获取单品喜欢者列表请求
+message Liker
+{
+	required UserInfo 	   user     = 1;
+	repeated PairIntInt    pairids  = 2;//k为单品id,v为专辑id
+}
+
+message GetItemLikerListRequest
+{
+	required BaseRequest  head     = 1;
+	optional BaseUserRequest userinfo   = 2;
+	required int64        item_id  = 3;
+	required int32        pageno   = 4;
+	optional string       localecode = 5;
+	optional string       currencycode = 6;
+	optional int32        currencyid = 7;
+}
+
+message GetItemLikerListResponse
+{
+	required BaseResponse head   = 1;
+	optional bool         more   = 2;
+	optional int32 		  total  = 3;//喜欢者总数
+	repeated Liker        likers = 4;//喜欢者列表
+	repeated Item         items  = 5;//喜欢者的单品(去重)
+}
+
+//添加晒单
+message AddImageReviewRequest
+{
+	required BaseRequest  head                = 1;
+	optional BaseUserRequest userinfo         = 2;
+	optional int32        itemid              = 3;
+	optional string       review_content      = 4;//回复内容
+	repeated ItemImage    images              = 5; //多图路径串
+
+}
+
+message AddImageReviewResponse
+{
+	required BaseResponse head                = 1;
+
+}
+
+message GetItemPurchaseDetailRequest
+{
+	required BaseRequest head    = 1;
+	optional BaseUserRequest userinfo         = 2;
+	required int64       item_id = 3;//单品id
+	optional string      localecode          = 4;//语种
+	optional string      currencycode        = 5;//币种
+	optional int32       currencyid          = 6;
+}
+
+message GetItemPurchaseDetailResponse
+{
+	required BaseResponse 	head             = 1;
+	optional ItemLocale     item_locale      = 2;//国家化信息
+	optional ItemOffer    	item_offer       = 3;//报价信息
+	repeated ItemOfferGroup item_offer_groups= 4;//报价组信息
+	repeated ItemExtend		item_extends     = 5;//变种属性
+	optional Seller       	seller           = 6;//卖家信息
+	optional Warehouse    	warehouse        = 7;//仓储信息
+	optional ItemProduct	item_product	 = 8;//产品信息,最大最小购买量
+}
+
+
+//推荐晒单
+message DoReCommendReviewRequest
+{
+	required BaseRequest  head                = 1;
+	optional BaseUserRequest userinfo         = 2;
+	optional int32        matchreviewid       = 3;
+
+}
+
+message DoReCommendReviewResponse
+{
+	required BaseResponse head                = 1;
+
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_total_before"
+        style="@style/system_Mytextsize_black_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="11dp"
+        android:text="@string/pick_up_grand_total_title"/>
+
+    <TextView
+        android:id="@+id/tv_total"
+        style="@style/system_Mytextsize_red_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/tv_total_before"
+        android:text="14"/>
+
+    <TextView
+        android:id="@+id/tv_demand_submit"
+        style="@style/system_Mytextsize_black_15"
+        android:layout_width="115dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/title_bar_black"
+        android:gravity="center"
+        android:text="@string/pick_up_submit"/>
+
+</RelativeLayout>

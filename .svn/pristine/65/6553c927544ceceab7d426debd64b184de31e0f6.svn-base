@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">福快递</string>
+
+    <!--积分-->
+    <string name="integral_titlebar_msg">积分查询</string>
+    <string name="integral_management_resources_1">积分查询</string>
+    <string name="integral_management_resources_2">我的好友</string>
+    <string name="integral_management_resources_3">邀请好友</string>
+    <string name="integral_management_msg">奖励积分</string>
+    <string name="integral_management_back_msg">我</string>
+    <!--我的好友-->
+    <string name="friends_titlebar_msg">我的好友</string>
+    <string name="friends_invite_msg">成功邀请</string>
+    <string name="friends_name_1">被邀请人：</string>
+    <string name="friends_name_2">被邀请人：%1$s</string>
+    <string name="friends_time_1">邀请时间：</string>
+    <string name="friends_time_2">邀请时间：%1$s</string>
+    <string name="friends_status_1">状态：已通过邀请加入</string>
+    <string name="friends_status_2">状态：%1$s</string>
+    <!--邀请好友-->
+    <string name="invite_top_msg_1">邀请好友得积分</string>
+    <string name="invite_top_msg_2">您可以通过以下几种方式来邀请好友注册福快递App帐户，\n好友注册及使用App，您将会得到奖励积分。\n奖励积分可以直接抵扣您的消费或提现。</string>
+    <string name="invite_resources_1">联系人</string>
+    <string name="invite_resources_2">短信</string>
+    <string name="invite_resources_3">朋友圈</string>
+    <string name="invite_resources_4">微信好友</string>
+    <string name="invite_resources_5">QQ空间</string>
+    <string name="invite_resources_6">QQ好友</string>
+    <string name="invite_resources_7">微博</string>
+    <string name="invite_resources_8">Facebook</string>
+</resources>

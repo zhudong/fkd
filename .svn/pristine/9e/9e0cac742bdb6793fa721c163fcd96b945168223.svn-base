@@ -1,0 +1,62 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.view.View;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.adapter.AddressManagerAdapter;
+import com.fuexpress.kr.ui.view.RefreshListView;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import butterknife.BindView;
+
+public class AddressManagerActivity extends BaseActivity implements RefreshListView.OnRefreshListener {
+
+
+    @BindView(R.id.rfl_in_address_manager)
+    RefreshListView mRflInAddressManager;
+    private View mRootView;
+
+    @Override
+    public View setInitView() {
+        mRootView = View.inflate(this, R.layout.activity_address_manager, null);
+        TitleBarView title_in_address_manager = (TitleBarView) mRootView.findViewById(R.id.title_in_address_manager);
+        title_in_address_manager.getIv_in_title_back().setOnClickListener(this);
+        title_in_address_manager.getTv_in_title_right().setText(getString(R.string.string_for_address_manager_add));
+        title_in_address_manager.getTv_in_title_right().setOnClickListener(this);
+        initData();
+        return mRootView;
+    }
+
+    private void initData() {
+        // TODO: 2016/11/2 加载地址列表数据
+
+    }
+
+
+    @Override
+    public void initView() {
+        mRflInAddressManager.setAdapter(new AddressManagerAdapter(this));
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.tv_in_title_right:
+                // TODO: 2016/11/1 跳转到新增地址页面
+                startDDMActivity(AddNewAddressActivity.class, true);
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshListView refreshListView) {
+
+    }
+
+    @Override
+    public void onLoadMore(RefreshListView refreshListView) {
+
+    }
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:minHeight="69dp"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/tv_in_item_for_gift_card_account_title_01"
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="13dp"
+                android:text="@string/my_gift_card_account_lv_item_day_string"/>
+
+            <TextView
+                android:id="@+id/tv_in_item_for_gift_card_account_time"
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tv_in_item_for_gift_card_account_title_01"
+                />
+
+            <TextView
+                android:id="@+id/tv_in_item_for_gift_card_account_money"
+                style="@style/system_Mytextsize_black_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="13dp"
+                android:text="¥6443.87"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/tv_in_item_for_gift_card_account_title_02"
+                style="@style/system_Mytextsize_GRAY_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="2dp"
+                android:singleLine="true"
+                android:text="订单付款"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/default_bg"/>
+
+</LinearLayout>

@@ -1,0 +1,528 @@
+package com.fuexpress.kr.ui.activity.append_parcel;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.HelpSendParcelBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.ParcelHelpDao;
+import com.fuexpress.kr.model.ParcleUploadManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.PreviewParceldiseActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import staffproto.CsBase;
+import staffproto.CsParcel;
+
+/**
+ * Created by yuan on 2016-6-14.
+ */
+public class AppendParcelPresent extends ParcelAppendContract.Presenter {
+    static Handler mHandler = new Handler();
+    private final ParcleUploadManager uploadManager;
+    private int mWarehouseid;
+    private int mCustomeraddressid;
+    private int mParcelid;
+    private Float mShippingFee;
+    public List<String> mPhotosPath;
+    private String mDeclarePrice;
+    private String mProductInfo;
+    private HelpSendParcelBean mParcelBean;
+    private LinkedHashMap<String, String> mPhotoFileUrlMap;
+    private List<String> mInfos;
+    private boolean mNeedSave;
+    private boolean mClose;
+    public boolean mCompleteUpdate;
+
+    public AppendParcelPresent() {
+        uploadManager = ParcleUploadManager.getInstance();
+        uploadManager.reset();
+    }
+
+    @Override
+    public void setmSave(boolean mSave) {
+        this.mSave = mSave;
+    }
+
+    public boolean mSave;
+
+    @Override
+    public void setCompleteUpdate(boolean completeUpdate) {
+        this.mCompleteUpdate = completeUpdate;
+    }
+
+    @Override
+    public void getShippingList() {
+
+    }
+
+    @Override
+    public void getShippingFee() {
+
+    }
+
+    @Override
+    public List<String> getPhotosPath() {
+        return mPhotosPath;
+    }
+
+    @Override
+    public void setPhotosPath(List<String> photosPath) {
+        mPhotosPath = photosPath;
+    }
+
+    @Override
+    public void onStart() {
+        mPhotoFileUrlMap = new LinkedHashMap<>();
+        mPhotosPath = new ArrayList<>();
+        mInfos = new ArrayList<>();
+
+        if (mParcelBean == null) {
+            List<HelpSendParcelBean> allParcel = ParcelHelpDao.getInstance(context).getAllParcel(false);
+            if (allParcel != null && allParcel.size() > 0) {
+                mParcelBean = allParcel.get(0);
+            }
+        }
+        if (mParcelBean != null) {
+            reStore();
+        } else {
+            mParcelBean = new HelpSendParcelBean();
+            initParcel();
+        }
+    }
+
+    @Override
+    public void setParcelBean(HelpSendParcelBean bean) {
+        this.mParcelBean = bean;
+    }
+
+    private void reStore() {
+        mParcelid = mParcelBean.getParcelid();
+        mWarehouseid = mParcelBean.getWareHouseID();
+
+        mView.shoParcelName(mParcelBean.getParcelName());
+        mView.showProductInfo(mParcelBean.getProductdescription());
+        mView.showDeclarePrice(mParcelBean.getProductprice());
+        mView.showPircelItemCount(mParcelBean.getQty());
+        mView.showPircelWeight(mParcelBean.getWeight());
+        mView.showAddress(mParcelBean.getCustomeraddress());
+        mView.showShippingFee(mParcelBean.getShippingFee());
+        showShippingMethod(mParcelBean.getCustomeraddressid() + "", mParcelBean.getWareHouseID() + "", mParcelBean.getShippingmethodid());
+
+        String[] split = mParcelBean.getImages().split(" ");
+        String[] split1 = mParcelBean.getImagePaths().split(" ");
+        for (int i = 0; i < (split.length < split1.length ? split.length : split1.length); i++) {
+            String value = split[i];
+            if ("".equals(value))
+                continue;
+            mPhotoFileUrlMap.put(split1[i], value);
+        }
+        for (String path : split1) {
+            if ("".equals(path))
+                continue;
+            mPhotosPath.add(path);
+        }
+        mView.appendPhotos(getPreStrings());
+        mNeedSave = true;
+    }
+
+    @Override
+    public void selectAddress() {
+        Intent intent = null;//= new Intent(context, PackageAddressActivity.class);
+        if (mCustomeraddressid != 0) {
+            intent.putExtra("addressID", mCustomeraddressid);
+        }
+        intent.putExtra("isShowTick", false);
+        ((Activity) mView).startActivityForResult(intent, Constants.ADDRESS_REQUEST_CODE);
+    }
+
+
+    private void initParcel() {
+        CsParcel.SendInitRequest.Builder builder = CsParcel.SendInitRequest.newBuilder();
+        builder.setSecond(AccountManager.getInstance().mBaseUserRequest);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SendInitReponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.SendInitReponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mParcelid = response.getParcelid();
+                        mView.shoParcelName(response.getParcelname());
+                        mWarehouseid = response.getWarehouseid();
+                        mParcelBean.setWareHouseID(mWarehouseid);
+                        if (response.getAddresslistCount() > 0) {
+                            CsParcel.AddressList addresslist = response.getAddresslist(0);
+                            for (CsParcel.AddressList address : response.getAddresslistList()) {
+                                if ("yes".equals(address.getIsdefaultship())) {
+                                    addresslist = address;
+                                }
+                            }
+                            mView.showAddress(addresslist);
+                            mCustomeraddressid = addresslist.getCustomeraddressid();
+                            showShippingMethod(mCustomeraddressid + "", mWarehouseid + "");
+                            mParcelBean.setCustomeraddressid(mCustomeraddressid);
+                        }
+                        mParcelBean.setParcelid(mParcelid);
+                        mParcelBean.setParcelName(response.getParcelname());
+                        String defaultparcelweight = response.getDefaultparcelweight();
+                        mParcelBean.setDefaultWeight("".equals(defaultparcelweight) ? 0f : Float.valueOf(defaultparcelweight));
+                        /*自动保存*/
+                        mNeedSave = true;
+                        save2Db(null, false);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void setWeight(float weight) {
+        mView.showPircelWeight(weight);
+        mParcelBean.setWeight(weight);
+    }
+
+    @Override
+    public void setItemCount(int count) {
+        mView.showPircelItemCount(count);
+        mParcelBean.setParcelCount(count);
+    }
+
+    @Override
+    public void setDeclarePrice(float declarePrice) {
+        mView.showDeclarePrice(declarePrice);
+        mParcelBean.setProductprice(declarePrice);
+    }
+
+    @Override
+    public HelpSendParcelBean getParcelBean() {
+        return mParcelBean;
+    }
+
+
+    public String formatAddress(CsParcel.MerchantAddressList address) {
+        String s = address.getName() + "," + address.getTelephone();
+//        String region = AssetFileManager.getInstance().readFile(context, address.getRegioncode(), AssetFileManager.ADDRESS_TYPE);
+//        String detail = (s + "\n" + region + "," + address.getStreet());
+//        return detail;
+        return "";
+    }
+
+    @Override
+    public void setAddress(CsParcel.MerchantAddressList address) {
+        mParcelBean.setCustomeraddressid(address.getCustomeraddressid());
+        mParcelBean.setCustomeraddress(formatAddress(address));
+        mView.showAddress(mParcelBean.getCustomeraddress());
+        showShippingMethod(mParcelBean.getCustomeraddressid() + "", mWarehouseid + "");
+        save2Db(null, false);
+    }
+
+    public void showShippingMethod(String addressID, String warehouseID) {
+        showShippingMethod(addressID, warehouseID, -1);
+    }
+
+    public void showShippingMethod(String addressID, String warehouseID, final int selectid) {
+        CsParcel.GetSelectAddressAjaxRequest.Builder builder = CsParcel.GetSelectAddressAjaxRequest.newBuilder().setWarehouseid(warehouseID).setCustomeraddressid(addressID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.GetSelectAddressAjaxReponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.GetSelectAddressAjaxReponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<CsParcel.MerchantParcelShippingMethodList> methodLists = response.getMerchantparcelshippintmethodlistList();
+                        mView.showShippingMethods(methodLists);
+                        if (selectid > 0) {
+                            mView.selsetShippingMethod(selectid);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+            }
+        });
+    }
+
+
+    @Override
+    public int getShippingMethodId() {
+        if (mParcelBean != null) {
+            return mParcelBean.getShippingmethodid();
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public void setShippingMethodId(int shippingMethodId) {
+        if (mParcelBean != null) {
+            mParcelBean.setShippingmethodid(shippingMethodId);
+        }
+    }
+
+    private boolean getInputInfo(boolean check) {
+        boolean hasData = mView.getInfo(mInfos, check);
+        if (!hasData && check)
+            return false;
+        mParcelBean.setProductdescription(mInfos.get(0));
+        mDeclarePrice = "".equals(mInfos.get(1)) ? "0" : mInfos.get(1);
+        String count = "".equals(mInfos.get(2)) ? "0" : mInfos.get(2);
+        String weight = "".equals(mInfos.get(3)) ? "0" : mInfos.get(3);
+        String addressinfo = mInfos.get(4);
+
+        mParcelBean.setProductprice(Float.valueOf(mDeclarePrice));
+        mParcelBean.setQty(Integer.valueOf(count));
+        mParcelBean.setWeight(Float.valueOf(weight));
+        mParcelBean.setCustomeraddress(addressinfo);
+        mParcelBean.setWareHouseID(mWarehouseid);
+        return true;
+    }
+
+
+    @Override
+    public void selectShippingMethod(final CsParcel.MerchantParcelShippingMethodList method) {
+        mShippingFee = 0f;
+        if (!getInputInfo(true))
+            return;
+        String[] split = method.getShippingmethodstring().split("\n")[0].split(" ");
+        String title = "";
+        if (split.length == 3) {
+            title = split[1] + " " + split[2];
+        } else if (split.length == 2) {
+            title = split[1];
+        }
+        mParcelBean.setShippingTitle(title);
+        CsParcel.GetShippingInfoRequest.Builder builder = CsParcel.GetShippingInfoRequest.newBuilder().
+                setParcelshippingmethodid(method.getParcelshippingmethodid()).
+                setSecond(AccountManager.getInstance().mBaseUserRequest).setQty(mParcelBean.getQty()).setWeight(mParcelBean.getWeight()).setPrice(mParcelBean.getProductprice());
+        NetEngine.postRequest(builder, new INetEngineListener<CsParcel.GetShippingInfoReponse>() {
+
+            @Override
+            public void onSuccess(final CsParcel.GetShippingInfoReponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String total = "".equals(response.getTotal()) ? "0" : response.getTotal();
+                        mShippingFee = Float.valueOf(total);
+                        mView.showShippingFee(mShippingFee);
+                        mParcelBean.setShippingmethodid(method.getParcelshippingmethodid());
+                        mParcelBean.setShippingFee(mShippingFee);
+                        mView.selsetShippingMethod(method.getParcelshippingmethodid());
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, final String errMsg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mView.selsetShippingMethod(0);
+                        mParcelBean.setShippingmethodid(0);
+                        mShippingFee = 0f;
+                        mParcelBean.setShippingFee(mShippingFee);
+                        mView.showShippingFee(mShippingFee);
+                        mView.showParcleDialog(errMsg, context.getString(R.string.package_confirm), "");
+                    }
+                });
+            }
+        });
+    }
+
+
+    @Override
+    public void delectParcel() {
+        if (mParcelBean != null && mParcelBean.getParcelid() > 0) {
+            ParcelHelpDao.getInstance(context).delete(mParcelBean.getParcelid());
+            mView.finishView();
+            EventBus.getDefault().post(new BusEvent(BusEvent.Append_PARCEN_SUCESS, ""));
+        }
+    }
+
+    @Override
+    public void delectPhoto(List<String> photos) {
+        List<String> indexs = new ArrayList<>();
+        for (int i = 0; i < mPhotosPath.size(); i++) {
+            String s = mPhotosPath.get(i);
+            if (!photos.contains(s)) {
+                indexs.add(s);
+            }
+        }
+        if (indexs.size() > 0) {
+            mPhotosPath.removeAll(indexs);
+            for (String str : indexs) {
+                mPhotoFileUrlMap.remove(str);
+            }
+        }
+        mView.appendPhotos(getPreStrings());
+    }
+
+    @Override
+    public void preViewPhoto(int index) {
+        Intent intent = new Intent();
+        intent.setClass(context, PreviewParceldiseActivity.class);
+        Bundle bundle = new Bundle();
+        ArrayList<String> imgs = getPreStrings();
+        bundle.putSerializable("imgList", (Serializable) imgs);
+        intent.putExtra("resourceType", PreviewParceldiseActivity.RESOURCE_TYPE_ADD);
+        bundle.putInt("position", index);
+        intent.putExtras(bundle);
+        context.startActivityForResult(intent, PreviewParceldiseActivity.REQUEST_CODE_BACK_IMG_LIST);
+    }
+
+    @NonNull
+    private ArrayList<String> getPreStrings() {
+        ArrayList<String> imgs = new ArrayList<>();
+        for (int i = 0; i < mPhotosPath.size(); i++) {
+            String key = mPhotosPath.get(i);
+            String url = mPhotoFileUrlMap.get(key);
+            if (url != null) {
+                imgs.add(key + "," + url);
+            } else {
+                imgs.add(key + "," + "");
+            }
+        }
+        return imgs;
+    }
+
+    @Override
+    public void sava() {
+        ((BaseActivity) mView).showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传 ... ");
+        mParcelBean.setSaved(true);
+        uploadManager.getAllComplete(new ParcleUploadManager.UpLoadeCompleteListener() {
+            @Override
+            public void complete(final float prgress, final ArrayMap map) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<String> list = new ArrayList<String>();
+                        ((BaseActivity) mView).showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传:" + Math.round(prgress) + "%");
+                        if (prgress >= 100) {
+                            for (String key : mPhotosPath) {
+                                String value = (String) map.get(key);
+                                if (value == null) value = mPhotoFileUrlMap.get(key);
+                                String s = value + "," + key;
+                                list.add(s);
+                            }
+                            ((BaseActivity) mView).showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传:" + Math.round(100) + "%");
+                            mClose = true;
+                            save2Db(list, true);
+                            ((BaseActivity) mView).closeLoading();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void upPhoto() {
+        if (mPhotosPath != null && mPhotosPath.size() > 0) {
+            ArrayList<String> photsPath = new ArrayList<>();
+            for (int i = 0; i < mPhotosPath.size(); i++) {
+                String key = mPhotosPath.get(i);
+                if (mPhotoFileUrlMap.get(key) == null) {
+                    photsPath.add(mPhotosPath.get(i));
+                }
+            }
+            if (photsPath.size() > 0) {
+                uploadManager.addTask(photsPath);
+            } else {
+                save2Db(null, false);
+            }
+        }
+    }
+
+
+    @Override
+    public void addPhotoFile(String fileName) {
+        ArrayList<String> imgs = getPreStrings();
+        mView.appendPhotos(imgs);
+        save2Db(null, false);
+    }
+
+    @Override
+    public void save2Db(List<String> imgs, boolean finsh) {
+        finsh = mPhotoFileUrlMap.size() >= mPhotosPath.size() && finsh;
+        if (!mNeedSave)
+            return;
+        getInputInfo(false);
+        String sImags = "";
+        String sPath = "";
+        if (imgs != null) {
+            for (int i = 0; i < imgs.size(); i++) {
+                String str = imgs.get(i);
+                String[] split = str.split(",");
+                mPhotoFileUrlMap.put(split[1], split[0]);
+            }
+        }
+        for (String path : mPhotosPath) {
+            sPath += path + " ";
+            sImags += mPhotoFileUrlMap.get(path) + " ";
+        }
+        if (imgs == null) {
+            sPath = "";
+            for (String path : mPhotosPath) {
+                sPath += path + " ";
+            }
+        }
+        mParcelBean.setImages(sImags.trim());
+        mParcelBean.setImagePaths(sPath.trim());
+        ParcelHelpDao dao = ParcelHelpDao.getInstance(context);
+        HelpSendParcelBean helpSendParcelBean = dao.getItem(mParcelBean.getParcelid());
+
+       /* Realm realm = DbConfig.getInstance(context).getRealm();
+        HelpSendParcelBean helpSendParcelBean = realm.where(HelpSendParcelBean.class).equalTo("parcelid", mParcelBean.getParcelid()).findFirst();
+*/
+        if (helpSendParcelBean == null) {
+//            helpSendParcelBean = new HelpSendParcelBean();
+//            realm.beginTransaction();
+//            ClassUtil.conventHelpSendBean2Reaml(helpSendParcelBean, mParcelBean);
+//            realm.copyToRealm(helpSendParcelBean);
+//            realm.commitTransaction();
+            dao.insert(mParcelBean);
+        } else {
+//            realm.beginTransaction();
+//            ClassUtil.conventHelpSendBean2Reaml(helpSendParcelBean, mParcelBean);
+//            realm.commitTransaction();
+//            dao.delete(mParcelBean.getParcelid());
+            dao.update(mParcelBean);
+        }
+        if (mClose) {
+            Log.d("save", "finish");
+            EventBus.getDefault().post(new BusEvent(BusEvent.Append_PARCEN_SUCESS, ""));
+            mView.finishView();
+        }
+    }
+}

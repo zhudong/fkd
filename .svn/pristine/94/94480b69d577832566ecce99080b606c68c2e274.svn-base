@@ -1,0 +1,75 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.ui.adapter.CouponAdapter;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Created by Administrator on 2016-10-20.
+ */
+public class CouponActivity extends BaseActivity {
+
+    private View rootView;
+    private TextView topTv;
+    private ListView touponListView;
+    private List<String> data = new ArrayList<String>();
+    private ImageView backIv;
+    private TitleBarView titleBarView;
+    public static final int CODE_RESULT_COUPON = 1001;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_coupon_layout, null);
+        titleBarView = (TitleBarView) rootView.findViewById(R.id.coupon_titlebarview);
+        titleBarView.setTitleText(getString(R.string.coupon_title_msg));
+        backIv = titleBarView.getIv_in_title_back();
+        topTv = (TextView) rootView.findViewById(R.id.coupon_top_tv);
+        touponListView = (ListView) rootView.findViewById(R.id.coupon_listview);
+
+        init();
+
+        backIv.setOnClickListener(this);
+        return rootView;
+    }
+
+    public void init(){
+        for (int i = 0; i < 10; i++){
+            data.add("测试数据 " + i);
+        }
+
+        CouponAdapter adapter = new CouponAdapter(this, data);
+        touponListView.setAdapter(adapter);
+        touponListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String data = parent.getAdapter().getItem(position).toString();
+                setResult(RESULT_OK, new Intent().putExtra("couponName", data));
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_in_title_back:
+                finish();
+                break;
+        }
+    }
+
+
+}

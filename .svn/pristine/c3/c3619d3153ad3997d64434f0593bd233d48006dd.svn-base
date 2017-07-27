@@ -1,0 +1,57 @@
+package com.fuexpress.kr.ui.activity.help_signed;
+
+import com.fuexpress.kr.base.BasePresenterRx;
+import com.fuexpress.kr.base.BaseView;
+import com.fuexpress.kr.base.BaseViewGeneric;
+
+import android.widget.EditText;
+
+import java.util.List;
+
+import fksproto.CsParcel;
+
+/**
+ * Created by Longer on 2016/12/5.
+ * 帮我收货的Contract类
+ * 这个类的目的其实是把我们在mvp层需要做的操作都统一以接口形式写到这里来了
+ * 这样就能方便管理,易于维护
+ */
+public interface HelpSignedContract {
+
+    interface View extends BaseViewGeneric<Presenter> {//这里是有关视图层需要实现的一些操作接口汇总
+
+        void createInputBoxView();//创建需要显示的InputBox
+
+        void referListViewShow();//在每次修改了数据之后,进行视图的刷新
+
+        void doDeleteAnimator();//执行删除的动画
+
+        void setPresenter(HelpSignedContract.Presenter presenter);//将逻辑层和视图层绑定到一起的方法
+
+
+    }
+
+    interface Presenter extends BasePresenterRx {//这里是有关逻辑层需要实现的一些操作接口汇总
+
+        void addNewDeMand();//添加需求单
+
+        String transformPrice(String price);//根据不同国家来进行货币单位的转换
+
+        void handleImageSelectorReturn(int index, List<String> list);//处理图片选择器的返回值
+
+        void enterItemDesc(int index, String itemDesc);//处理单品的描述
+
+        void enterItemRemarks(int index, String itemReMarks);//处理单品的备注
+
+        void enterItemWareHouse(int index, int wareHouseID);//处理单品的入库仓库
+
+        void enterItemPrice(int index, String price);//处理单品的价格
+
+        void enterItemQuantity(int index, String itemQuantity);//处理单品的数量
+
+        void submitItemToServer(List<CsParcel.ProductDataList> productDataLists);//把需求单提交到服务器
+
+        void editData(EditText editText, int index, int resKey);//对处理的数据进行分类判断并交给相应的处理方法
+
+    }
+}

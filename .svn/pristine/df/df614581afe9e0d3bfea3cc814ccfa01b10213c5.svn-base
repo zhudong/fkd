@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/default_bg"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_title_normal_two"/>
+    <RelativeLayout
+        android:id="@+id/rl_for_login_choose_location"
+        style="@style/rl_for_login"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:id="@+id/tv_for_login_in_rl_01"
+            style="@style/tv_for_login"
+            android:layout_marginLeft="10dp"
+
+            android:text="@string/country_region"
+            android:textColor="@color/black_title" />
+
+        <TextView
+            android:id="@+id/tv_for_login_location"
+            style="@style/tv_for_login"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:text="@string/default_country"
+            android:textColor="@color/black_title" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/fill_5" />
+    </RelativeLayout>
+    <RelativeLayout style="@style/rl_for_login"
+                    android:layout_marginTop="1px">
+
+        <TextView
+            android:id="@+id/tv_for_login_in_rl_02"
+            style="@style/tv_for_login"
+            android:layout_marginLeft="10dp"
+            android:text="+86"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/ed_for_login_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="30dp"
+            android:background="@null"
+            android:hint="@string/please_enter_phone_number"
+            android:singleLine="true"
+            android:textColor="@color/text_color_666"
+            android:gravity="center_vertical|right"
+            android:textColorHint="@color/text_color_999"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+    <RelativeLayout style="@style/rl_for_login"
+                    android:layout_marginTop="1px">
+
+        <TextView
+            android:id="@+id/tv_for_login_in_rl_03"
+            style="@style/tv_for_login"
+            android:layout_marginLeft="10dp"
+            android:text="@string/password"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <EditText
+            android:gravity="center_vertical|right"
+            android:id="@+id/ed_for_login_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="30dp"
+            android:background="@null"
+            android:hint="@string/please_enter_password"
+            android:singleLine="true"
+            android:textColor="@color/text_color_666"
+            android:textColorHint="@color/text_color_999"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/logoutButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_for_login_btn"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+    <TextView
+        android:id="@+id/tv_for_login_forgetpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/forget_password"
+        android:textColor="@color/text_color_666"
+        android:textSize="13sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/showAnotherLoginMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <View
+                    android:layout_width="0dip"
+                    android:layout_height="2px"
+                    android:layout_weight="1"
+                    android:background="@color/line_gray" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/you_can_use_other_login_account"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="0dip"
+                    android:layout_height="2px"
+                    android:layout_weight="1"
+                    android:background="@color/line_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/tv_for_login_qq"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@mipmap/login_qq"
+                    android:gravity="center_horizontal"
+                    android:text="@string/qq"
+                    android:textColor="@color/text_color_666"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/tv_for_login_wx"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@mipmap/login_wechat"
+                    android:gravity="center_horizontal"
+                    android:text="@string/wechat"
+                    android:textColor="@color/text_color_666"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/tv_for_facebook_login"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@mipmap/login_facebook"
+                    android:gravity="center_horizontal"
+                    android:text="@string/facebook"
+                    android:textColor="@color/text_color_666"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

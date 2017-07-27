@@ -1,0 +1,293 @@
+package com.fuexpress.kr.ui.activity.append_item;
+
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.bean.ItemAppendBean;
+import com.fuexpress.kr.model.ItemUploadManager;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.imageselector.ImageSelectorActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+/**
+ * A fragment with a Google +1 button.
+ * Use the {@link AppendItemFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AppendItemFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    // The request code must be 0 or greater.
+    private static final int PLUS_ONE_REQUEST_CODE = 0;
+    // The URL to +1.  Must be a valid URL.
+    private final String PLUS_ONE_URL = "http://developer.android.com";
+    @BindView(R.id.ll_phote_container)
+    LinearLayout llPhoteContainer;
+    @BindView(R.id.edt_item_info)
+    EditText edtItemInfo;
+    @BindView(R.id.edt_declare_price)
+    EditText edtDeclarePrice;
+    @BindView(R.id.edt_item_counts)
+    EditText edtItemCounts;
+    @BindView(R.id.img_append_photo)
+    ImageView imgAppendPhoto;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private ArrayList<String> mPathList;
+    private AppendItemActivity mContext;
+    private ItemUploadManager itemUploadManager;
+    private Object failImages;
+    private List<String> mComplent;
+    private ItemAppendBean item;
+
+
+    public AppendItemFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment AppendItemFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static AppendItemFragment newInstance(String param1, String param2) {
+        AppendItemFragment fragment = new AppendItemFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        mContext = (AppendItemActivity) getContext();
+        mComplent = new ArrayList<>();
+        item = new ItemAppendBean();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_append_item, container, false);
+        ButterKnife.bind(this, view);
+        mPathList = new ArrayList<String>();
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @OnClick({R.id.img_append_photo, R.id.btn_continue, R.id.btn_save})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_append_photo:
+                MPermissions.requestPermissions(this, 6, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                break;
+            case R.id.btn_continue:
+                getInfo();
+                getLoadedPhoto();
+                break;
+            case R.id.btn_save:
+                break;
+        }
+    }
+
+    /*适配6.0 权限检查*/
+    @PermissionGrant(6)
+    public void requestContactSuccess() {
+//        mPathList = mPresenter.getPhotosPath();
+
+        UIUtils.startImageSelectorForAddItem(1001, (ArrayList) mPathList, this, 4);
+    }
+
+    @PermissionDenied(6)
+    public void requestContactFailed() {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1001 || resultCode == Activity.RESULT_OK || resultCode == Activity.RESULT_CANCELED) {
+            if (data != null) {
+                mPathList.clear();
+                mPathList.addAll(data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT));
+                appendPhotos(mPathList);
+                upLoadPhoto(mPathList);
+            }
+        }
+    }
+
+    private void upLoadPhoto(ArrayList<String> mPathList) {
+        if (itemUploadManager == null)
+            itemUploadManager = new ItemUploadManager(AppendItemFragment.class.getSimpleName());
+        itemUploadManager.addTask(mPathList);
+    }
+
+    public void appendPhoto(String url, int type) {
+        int width = UIUtils.dip2px(73);
+        int padding = UIUtils.dip2px(1);
+        int margin = UIUtils.dip2px(8);
+        ImageView imageView = new ImageView(getContext());
+        imageView.setCropToPadding(true);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setBackground(getResources().getDrawable(R.drawable.shape_bg_rectangle_));
+        DisplayImageOptions options = ImageLoaderHelper.getInstance(mContext).getDisplayOptions();
+
+        if (type != 0) {
+            // TODO: 2016-10-31，后缀
+            ImageLoader.getInstance().displayImage(url, imageView, options);
+        } else {
+            ImageLoader.getInstance().displayImage(url, imageView, options);
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, width);
+        imageView.setPadding(padding, padding, padding, padding);
+        int index = llPhoteContainer.getChildCount() - 1 < 0 ? 0 : llPhoteContainer.getChildCount() - 1;
+        params.setMargins(0, 0, margin, 0);
+        llPhoteContainer.addView(imageView, index, params);
+        int position = 0;
+        for (int i = llPhoteContainer.getChildCount() - 1; i >= 0; i--) {
+            if (imageView.equals(llPhoteContainer.getChildAt(i))) {
+                position = i;
+            }
+        }
+        imageView.setTag(position);
+        imageView.setOnClickListener(new PhotoClickListener());
+    }
+
+    public void appendPhotos(List<String> urls) {
+        llPhoteContainer.removeAllViews();
+        llPhoteContainer.addView(imgAppendPhoto);
+
+        for (int i = 0; i < urls.size(); i++) {
+            String[] split = urls.get(i).split(",");
+            if ("".equals(split[0]))
+                continue;
+            if (split.length > 1 && !"".equals(split[1])) {
+                appendPhoto(split[1], 1);
+            } else {
+                String s = "file://" + split[0];
+                appendPhoto(s, 0);
+            }
+        }
+        if (urls.size() >= 4) {
+            imgAppendPhoto.setVisibility(View.GONE);
+        } else {
+            imgAppendPhoto.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void getLoadedPhoto() {
+        mContext.showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传...");
+        mComplent.clear();
+        if (itemUploadManager != null) {
+            itemUploadManager.getAllComplete(new ItemUploadManager.UpLoadeCompleteListener() {
+                @Override
+                public void complete(final float prgress, final ArrayMap map) {
+                    if (failImages != null) failImages = null;
+                    mContext.showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传:" + Math.round(prgress) + "%");
+                    if (prgress >= 100) {
+                        List<String> imgs = item.getImgs();
+                        if (imgs == null) {
+                            imgs = new ArrayList<String>();
+                            item.setImgs(imgs);
+                        }
+                        item.getImgs().clear();
+                        for (String key : mPathList) {
+                            String value = (String) map.get(key);
+//                                    if (value == null) value = mPhotoFileUrlMap.get(key);
+//                                    String s = value + "," + key;
+                            item.getImgs().add(value);
+//                                    mComplent.add(value);
+                        }
+                        mContext.showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, "正在上传:" + Math.round(100) + "%");
+//                                mClose = true;
+//                                save2Db(list, true);
+                        mContext.closeLoading();
+                        Toast.makeText(mContext, item.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d(AppendItemFragment.class.getSimpleName(), "progress:" + prgress);
+                        Log.d(AppendItemFragment.class.getSimpleName(), item.toString());
+                    }
+                }
+
+                @Override
+                public void error(List<String> urls) {
+
+                }
+            });
+        }
+    }
+
+    public void getInfo() {
+        Float price = Float.valueOf(edtDeclarePrice.getText().toString());
+        Integer num = Integer.valueOf(edtItemCounts.getText().toString());
+        String info = edtItemInfo.getText().toString();
+        item.setPrice(price);
+        item.setNum(num);
+        item.setInfo(info);
+    }
+
+    class PhotoClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            int postioin = (int) v.getTag();
+//            mPresenter.preViewPhoto(postioin);
+        }
+    }
+
+
+}
