@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shape_circle_cover"
+        android:orientation="vertical">
+
+        <com.fuexpress.kr.ui.view.RatioLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:picRatio="1"
+            app:relative="width">
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/img_crowd_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:sriv_left_top_corner_radius="6dp"
+                app:sriv_right_top_corner_radius="6dp"/>
+        </com.fuexpress.kr.ui.view.RatioLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/divide_line"/>
+
+        <TextView
+            android:id="@+id/tv_crowd_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:lines="2"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/divide_line"/>
+
+        <com.fuexpress.kr.ui.view.CrowdProgressDetail
+            android:id="@+id/progress_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:buttom_space="1"
+            app:progressHeight="5"
+            app:showIndicator="false"
+            app:size="10"
+            app:CrowdProgress_hintMiddle="true"
+            app:vertical_space="-2"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_discount_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="1dp"
+        android:lineSpacingMultiplier="0.8"
+        android:background="@mipmap/banner_discount2"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:text="7折"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/lv_crowd_item_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/default_bg"
+        android:divider="@null"/>
+
+    <TextView
+        android:id="@+id/tv_go_crowd_detail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:drawableRight="@mipmap/fill_5"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="16dp"
+        android:text="@string/String_crowd_detail"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+</LinearLayout>

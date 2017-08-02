@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/default_bg">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title_normal"/>
+
+    <com.fuexpress.kr.ui.view.SwitcherHotAndNew
+        android:id="@+id/sw_hot_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"/>
+
+    <com.fuexpress.kr.ui.view.RefreshListView
+        android:id="@+id/lv_crowd_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sw_hot_new"
+        android:divider="@null"/>
+
+    <LinearLayout
+        android:id="@+id/ll_other"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sw_hot_new"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.fuexpress.kr.ui.view.FlowListLayout
+            android:id="@+id/gv_category_crowd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/crowd_toast_bg"
+            android:padding="12dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

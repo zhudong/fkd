@@ -202,7 +202,7 @@
     <string name="package_append_count_tip3">패키지 최대 3개 추가가능 합니다</string>
     <string name="String_price">￥%1$.2f</string>
     <string name="String_price2">%1$s%2$.2f</string>
-    <string name="String_package_address">고객 배송지</string>
+    <string name="String_package_address">수취인 주소</string>
     <string name="String_package_wait_receive">수취 대기 중</string>
     <string name="package_product_realy_price">실제 가격</string>
     <string name="package_product_realy_price_note">(패키지 실제 가격은 %1$s 필요합니다&lt;%1$s)</string>
@@ -518,12 +518,12 @@
     <string name="order_goto_pay">결제하기</string>
     <string name="card_order_detail_title_bar_wait_pay">결제 대기</string>
     <string name="card_order_detail_title_bar_payed">결제 완료</string>
-    <string name="card_order_detail_title_bar_canceled">결제 취소</string>
+    <string name="card_order_detail_title_bar_canceled">취소완료</string>
     <string name="card_order_detail_dialog_msg">충전 완료 후, "발송 시작" 다시 클릭하세요!</string>
     <string name="card_order_detail_dialog_split_msg">충전 완료 후 패키지가 자동적 분리됩니다! 완료 후 패키지가 자동적 분리됩니다!</string>
     <string name="cart_dialog_title">알림</string>
     <string name="cart_dialog_btn_confirm">알겠습니다</string>
-    <string name="cart_dialog_btn_cancel">关闭</string>
+    <string name="cart_dialog_btn_cancel">닫기</string>
     <string name="cart_order_grand_total">%1$.2f</string>
     <string name="cart_order_card_type_recharge">닫기</string>
     <string name="cart_order_card_type_prepaid">계정 직접 충전</string>
@@ -539,7 +539,7 @@
     <string name="card_order_detail_face_value">액면가</string>
     <string name="card_order_detail_price">가격</string>
     <string name="card_order_detail_count">수량</string>
-    <string name="card_order_detail_sub_total">합계</string>
+    <string name="card_order_detail_sub_total">소계</string>
     <string name="order_details_content_title">발송 시작:</string>
     <string name="order_details_grand_total">합계:</string>
     <string name="order_details_btn_msg">결제하기</string>
@@ -607,7 +607,7 @@
     <string name="String_out_pay_title">결제 안 하시겠습니까? 지금 결제 안 하시면 "나의 주문" 페이지에 조회 해서 결제 가능합니다 결제 안 하시겠습니까? 지금 결제 안 하시면 "나의 주문" 페이지에 조회 해서 결제 가능합니다</string>
     <string name="String_go_on_pay_btn">계속 결제</string>
     <string name="String_out_pay_btn">결제 안함</string>
-    <string name="String_merge_order">묶은 배송</string>
+    <string name="String_merge_order">상품을 통합하여 배송</string>
     <string name="get_krbank_info_failure">정보 조회 실패</string>
     <string name="String_krbank_pay2">은행 이체</string>
     <string name="String_wechat_pay">위챗으로 결제</string>
@@ -1036,7 +1036,7 @@
 
     <string name="main_source">브랜드</string>
 
-    <string name="shop_cart_title_txt">매진</string>
+    <string name="shop_cart_title_txt">장바구니</string>
     <string name="String_cart_coupon_hint" translatable="false">할인권 번호를 입력하세요</string>
     <string name="String_cart_coupon_use_btn" translatable="false">사용</string>
     <string name="String_cart_commodity_list_titile" translatable="false">한국 YISS 창고 직송</string>
@@ -1074,7 +1074,7 @@
     <string name="dialog_cancel_msg" translatable="false">주문서에 재고 있는 상품만 주문합니다. 만약 일부 상품이 품절되면 해당 삼품제외에 주문합니다</string>
     <string name="app_tip" translatable="false">제시</string>
     <string name="card_order_payment_title_bar_title2">결제 방식을 선택하세요</string>
-    <string name="cart_order_dialog_confirm">고객 서비스</string>
+    <string name="cart_order_dialog_confirm">1:1 문의</string>
     <string name="String_submit_hint" translatable="false">(배송비 포함 안됨, 배송비는 발송 요청 시 고객님의 잔고에서 차감 됩니다)</string>
     <string name="cart_order_grand_total_msg" translatable="false">(운송비 포함:%1$s)</string>
     <string name="String_merge_order_hint" translatable="false">(배송비절약, 상품이 입고 된 이후 나의 주문 메뉴에서)</string>
@@ -1101,13 +1101,11 @@
     <string name="dialog_direct_mail_help_msg" translatable="false">주문하신 상품을 입고 후, 바로 직송 가능합니다.</string>
     <string name="delivery_toast_msg">물류 방식을 미 선택</string>
 
-
-
     <string name="String_my_order" translatable="false">나의 주문서</string>
     <string name="String_goto_pay" translatable="false">결제대기</string>
     <string name="String_payed" translatable="false">결제 완료</string>
     <string name="String_canceled" translatable="false">취소완료</string>
-    <string name="all_order" translatable="false">모든</string>
+    <string name="all_order" translatable="false">바로 쇼핑하기</string>
     <string name="you_have_no_order" translatable="false">주문 정보가 없습니다</string>
     <string name="wait_to_pay" translatable="false">결제 대기 중</string>
     <string name="wait_cancel" translatable="false">취소중</string>
@@ -1115,7 +1113,7 @@
     <string name="all_send" translatable="false">배송 완료</string>
     <string name="crowding" translatable="false">공동구매중</string>
     <string name="crowd_" translatable="false">공동구매중</string>
-    <string name="buy_now">바로 주문하기</string>
+    <string name="buy_now">바로 쇼핑하기</string>
 
 
 
@@ -1127,7 +1125,7 @@
     <string name="String_go_shopping" translatable="false">매장가기</string>
     <string name="String_exchange_rate" translatable="false">환율:</string>
     <string name="String_order_message" translatable="false">요구사항</string>
-    <string name="String_direct_mail_1" translatable="false">바로 발송</string>
+    <string name="String_direct_mail_1" translatable="false">바로발송</string>
     <string name="String_Direct_Mail" translatable="false">에서 배송</string>
     <string name="String_product_detail" translatable="false">상품정보</string>
     <string name="String_add_coart" translatable="false">장바구니에 담기</string>
@@ -1137,8 +1135,8 @@
     <string name="String_vip_member" translatable="false">VIP회원</string>
     <string name="String_norme_member" translatable="false">일반 회원</string>
     <string name="String_service_charge" translatable="false">서비스비용:</string>
-    <string name="String_service_seller" translatable="false">FKD 인증 대행원 %1$s 의 구매대행 서비스，비용은 상품 단가 × %2$d%%</string>
-    <string name="String_service_seller2" translatable="false">FKD 인증 판매자 %1$s 이 상품 배송과 사후 관리 서비스를 담당합니다.</string>
+    <string name="String_service_seller" translatable="false">FU Express 인증 대행원 %1$s 의 구매대행 서비스，비용은 상품 단가 × %2$d%%</string>
+    <string name="String_service_seller2" translatable="false">FU Express 인증 판매자 %1$s 이 상품 배송과 사후 관리 서비스를 담당합니다.</string>
     <string name="String_vip_rate" translatable="false">▶ %1$s，일회에 %2$d 건 상품 구매시，서비스 비용은 %3$s%% </string>
     <string name="String_vip_promotion" translatable="false">▶ %1$s 일회 구매 %2$d건 금액%3$s，할인 %4$d%%</string>
     <string name="String_promotion_rate" translatable="false">건당 %1$s，절약금액 %2$d%%</string>
@@ -1269,5 +1267,22 @@
 
     <string name="string_sell_product">판매</string>
 
+    <!--拼单-->
+    <string name="String_hottest" translatable="false">Hot</string>
+    <string name="String_newest" translatable="false">Newest</string>
+    <string name="String_crowd_attend" translatable="false">공동구매 참여하기</string>
+    <string name="String_hot_crowd" translatable="false">Hottest</string>
+    <string name="String_finish_crowd" translatable="false">마감입막</string>
+    <string name="String_no_discount" translatable="false">할인 없음</string>
 
+    <string name="String_discount_tag_int" translatable="false">%1$d%% \nOff</string>
+    <string name="String_discount_tag_int2" translatable="false">%1$d%% Off</string>
+    <string name="String_discount_tag" translatable="false">%1$.1f%% \nOff</string>
+    <string name="String_discount_tag2" translatable="false">%1$.1f%% Off</string>
+    <string name="String_invite_friend" translatable="false">친구 초대해서 공동 구매하기</string>
+    <string name="String_has_attend_count" translatable="false">이미%1$d 사람 참여하였습니다</string>
+     <string name="String_addend_crowd_now" translatable="false">바로 공동구매 참여</string>
+    <string name="String_crowd_title" translatable="false">공동구매</string>
+    <string name="String_attend_crowd_title" translatable="false">공동구매 참여하기</string>
+    <string name="String_crowd_detail_title" translatable="false">공동구매 내역</string>
 </resources>
