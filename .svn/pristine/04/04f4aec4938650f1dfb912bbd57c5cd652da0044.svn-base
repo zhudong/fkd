@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="10dp">
+    </LinearLayout>
+    <include layout="@layout/layout_order_detail"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <com.fuexpress.kr.ui.view.CrowdTimer
+            android:id="@+id/crowd_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.fuexpress.kr.ui.view.CrowdProgressDetail
+            android:id="@+id/crowd_progress_detail"
+            android:paddingBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="10dp">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/navLayout"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_left"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/percelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已加入包裹(2)"
+                    android:textColor="@color/select_hot_new"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_dede"
+                />
+            <LinearLayout
+                android:id="@+id/ll_center"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/toSendTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="待发货(1)"
+                    android:textColor="@color/select_hot_new"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_dede"
+                />
+            <LinearLayout
+                android:id="@+id/ll_right"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/sendedTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已出库(1)"
+                    android:textColor="@color/select_hot_new"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_dede"
+                />
+            <LinearLayout
+                android:id="@+id/ll_forth"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/otherTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="其他(1)"
+                    android:textColor="@color/select_hot_new"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

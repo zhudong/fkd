@@ -22,6 +22,7 @@
     <color name="gary_e8e8">#e8e8e8</color>
     <color name="gary_d8d8">#D8D8D8</color>
     <color name="gray_fcfc">#FCFCFC</color>
+    <color name="gray_3f">#3F3F3F</color>
     <color name="blue_0047ff">#0047FF</color>
     <color name="red_shape">#FFF20818</color>
     <color name="btntextcolor">#ff1E90FF</color>
@@ -117,5 +118,8 @@
     <color name="text_switch_unseleted">#666666</color>
     <color name="crowd_toast_bg">#DDFDFEFE</color>
     <color name="text_switch_indicator">#ff0000</color>
+
+    <color name="text_color_for_login_note">#696969</color>
+    <color name="bg_for_send_security_code">#F5A623</color>
 
 </resources>

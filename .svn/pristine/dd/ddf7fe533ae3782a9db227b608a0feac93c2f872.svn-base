@@ -1,0 +1,621 @@
+package com.fuexpress.kr.model;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v4.util.ArrayMap;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.ShareFriendsBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.activity.ChooseUserPhoneActivity;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.AccessTokenKeeper;
+import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.WeiboMessage;
+import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
+import com.sina.weibo.sdk.api.share.SendMessageToWeiboRequest;
+import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.socks.library.KLog;
+import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzoneShare;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
+
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.InterfaceAddress;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by andy on 2017/8/4.
+ */
+
+public class ShareManager2Friend implements AdapterView.OnItemClickListener, IWXAPIEventHandler {
+
+    Activity mContext;
+    ShareFriendsBean response = new ShareFriendsBean();
+
+    public static final int SEND_SMS_TYPE = 100;
+    public IWXAPI iwxapi;//微信分享
+    private Tencent mTencent;//qq分享
+    private IWeiboShareAPI mWeiboShareApi;//微博分享
+    private byte[] image2WX;
+
+
+    private final int[] RESOURCES_NAME = {
+            R.string.invite_resources_1,
+            R.string.invite_resources_2,
+            R.string.invite_resources_8,
+            R.string.invite_resources_3,
+            R.string.invite_resources_4,
+            R.string.invite_resources_5,
+            R.string.invite_resources_6,
+            R.string.invite_resources_7
+    };
+    private final int[] RESOURCES_LOGO = {
+            R.mipmap.invite_phonebook,
+            R.mipmap.invite_sms,
+            R.mipmap.invite_facebook,
+            R.mipmap.invite_wechat_friend,
+            R.mipmap.invite_wechat,
+            R.mipmap.invite_qzone,
+            R.mipmap.invite_qq,
+            R.mipmap.invite_weibo
+    };
+    private Map<Integer, Integer> mNames = new ArrayMap<>();
+    private Map<Integer, Integer> mLogos = new ArrayMap<>();
+    private List<Integer> mMethods = new ArrayList<>();
+
+
+    public static final int PHONEBOOK = 0;
+    public static final int SMS = 1;
+    public static final int FACEBOOK = 2;
+    public static final int WECHAT_FRIEND = 3;
+    public static final int WECHAT = 4;
+    public static final int QZONE = 5;
+    public static final int QQ = 6;
+    public static final int WEIBO = 7;
+
+    private static final String MSG_CONTACT = "inviteDesc";
+    private static final String MSG_SMS = "inviteDesc";
+    private static final String MSG_FACEBOOK = "inviteFacebook";
+    private static final String MSG_WX_SESSION = "inviteMoments";
+    private static final String MSG_WEIXIN = "inviteWechat";
+    private static final String MSG_QQ_ZONE = "inviteQQS";
+    private static final String MSG_QQ_FRIEND = "inviteQQF";
+    private static final String MSG_WEIBO = "inviteWeibo";
+
+
+    public ShareManager2Friend(Activity context) {
+        mContext = context;
+        for (int i = 0; i < RESOURCES_NAME.length; i++) {
+            mNames.put(i, RESOURCES_NAME[i]);
+            mLogos.put(i, RESOURCES_LOGO[i]);
+            mMethods.add(i);
+        }
+        iwxapi = WXAPIFactory.createWXAPI(context, Constants.WeiXin.WX_APPID_SHARE, true);
+        iwxapi.registerApp(Constants.WeiXin.WX_APPID_SHARE);
+        iwxapi.handleIntent(context.getIntent(), this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        position = position - 1;
+        Integer in = mAdapter.getItem(position);
+        switch (in) {
+            case PHONEBOOK:
+                share2Friends(MSG_CONTACT, in);
+                //电话联系人
+                break;
+            case SMS:
+                share2Friends(MSG_SMS, in);
+                //短信
+                break;
+            case WECHAT_FRIEND:
+                share2Friends(MSG_WX_SESSION, in);
+                //微信朋友圈
+                break;
+            case WECHAT:
+                share2Friends(MSG_WEIXIN, in);
+                //微信
+                break;
+            case QZONE:
+                //QQ空间
+                share2Friends(MSG_QQ_ZONE, in);
+                break;
+            case QQ:
+                //QQ
+                share2Friends(MSG_QQ_FRIEND, in);
+                break;
+            case WEIBO:
+                //新浪微博
+                share2Friends(MSG_WEIBO, in);
+                break;
+            case FACEBOOK:
+                share2Friends(MSG_FACEBOOK, in);
+                //Facebook
+                break;
+        }
+    }
+
+    private void getContacts() {
+        Intent i = new Intent();
+        i.setAction(Intent.ACTION_PICK);
+        i.setData(ContactsContract.Contacts.CONTENT_URI);
+        startActivityForResult(i, SEND_SMS_TYPE);
+    }
+
+    public void sendSms(String toBody) {
+        if (response == null) {
+            return;
+        }
+        Uri smsToUri = Uri.parse("smsto:" + toBody);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);
+
+        intent.putExtra("sms_body", response.getTitle() + response.getUrl());
+
+        startActivity(intent);
+    }
+
+    //分享到微信好友或者朋友圈
+    public void share2WX(int scene) {
+        if (response == null) {
+            return;
+        }
+        WXWebpageObject wxWebpageObject = new WXWebpageObject();
+        wxWebpageObject.webpageUrl = "http://www.qq.com/news/1.html";
+
+        WXMediaMessage msg = new WXMediaMessage(wxWebpageObject);
+        if (null != image2WX) {
+            msg.thumbData = image2WX;
+        }
+        msg.title = response.getTitle();
+        msg.description = response.getInfo();
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.message = msg;
+        req.scene = scene;
+        iwxapi.sendReq(req);
+    }
+
+    //分享到QQ好友
+    public void share2QQF() {
+        if (response == null) {
+            return;
+        }
+        mTencent = Tencent.createInstance(Constants.QQ.QQ_APPID, mContext.getApplicationContext());
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, response.getTitle());             //QQ空间分享标题
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "福快递专注中韩物流");       //QQ分享摘要
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, "http://www.qq.com/news/1.html");   //QQ分享目标地址
+        params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "福快递");//QQ分享指定应用名称
+
+//        List<String> imgs = response.getImgs();
+//        if (imgs != null & imgs.size() > 0) {
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://dimage.yissimg.com/app/logo.jpg");
+//        }
+        //     params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
+        mTencent.shareToQQ(mContext, params, new BaseUiListener());
+    }
+
+    //分享到QQ空间
+    public void share2QQZ() {
+        if (response == null) {
+            return;
+        }
+        mTencent = Tencent.createInstance(Constants.QQ.QQ_APPID, mContext.getApplicationContext());
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
+
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, response.getTitle());             //QQ空间分享标题
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, response.getTitle());        //QQ空间分享摘要
+        params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, response.getUrl());   //QQ空间分享目标链接
+        ArrayList<String> urls = new ArrayList<>();
+        urls.addAll(response.getImgs());
+        params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, urls);          //QQ空间分享图片集
+        mTencent.shareToQzone(mContext, params, new BaseUiListener());
+    }
+
+    /**********************
+     * QQ分享重写的方法
+     ********************************/
+    public class BaseUiListener implements IUiListener {
+        protected void doComplete(JSONObject values) {
+            Log.i("InviteFriend", "onComplete " + values.toString());
+        }
+
+        @Override
+        public void onComplete(Object response) {
+            Log.e("InviteFriend", "---------------111111");
+            toast(mContext.getString(R.string.share_success));
+            Log.i("InviteFriend", "onComplete " + response.toString());
+            doComplete((JSONObject) response);
+        }
+
+        @Override
+        public void onError(UiError e) {
+            Log.i("InviteFriend", "code:" + e.errorCode + ", msg:"
+                    + e.errorMessage + ", detail:" + e.errorDetail);
+        }
+
+        @Override
+        public void onCancel() {
+            Log.i("InviteFriend", "cancel");
+        }
+    }
+
+    //分享到FB好友
+    public void share2FB() {
+        if (response == null) {
+            return;
+        }
+        ShareLinkContent shareLinkContent = new ShareLinkContent.Builder()
+                .setImageUrl(Uri.parse(response.getImage()))
+                .setContentUrl(Uri.parse(response.getUrl()))
+                .setContentTitle(response.getTitle())
+                .build();
+
+
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareDialog.show((Activity) mContext, shareLinkContent);
+        }
+    }
+
+    //获取分享的连接
+    public void share2Friends(String messageCode, final int position) {
+
+        switch (position) {
+            case PHONEBOOK:
+                getContacts();
+                //电话联系人
+                break;
+            case SMS:
+                sendSms("");
+                //短信
+                break;
+            case WECHAT_FRIEND:
+                share2WX(1);
+                //微信朋友圈
+                break;
+            case WECHAT:
+                share2WX(0);
+                //微信
+                break;
+            case QZONE:
+                //QQ空间
+                share2QQZ();
+                break;
+            case QQ:
+                //QQ
+                share2QQF();
+                break;
+            case WEIBO:
+                //新浪微博
+                share2WB();
+                break;
+            case FACEBOOK:
+                share2FB();
+                //Facebook
+                break;
+        }
+
+
+    }
+
+    //分享到微博
+    public void share2WB() {
+        mWeiboShareApi = WeiboShareSDK.createWeiboAPI(mContext, Constants.Weibo.APP_KEY);
+        mWeiboShareApi.registerApp();
+        AuthInfo authInfo = new AuthInfo(mContext, Constants.Weibo.APP_KEY, Constants.Weibo.REDIRECT_URL, Constants.Weibo.SCOPE);
+        Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(mContext.getApplicationContext());
+        String token = "";
+        if (accessToken != null) {
+            token = accessToken.getToken();
+        }
+        // 2. 初始化从第三方到微博的消息请求
+        SendMessageToWeiboRequest request = new SendMessageToWeiboRequest();
+        // 用transaction唯一标识一个请求
+        request.transaction = String.valueOf(System.currentTimeMillis());
+        WeiboMessage weiboMessage = new WeiboMessage();
+        TextObject textObject = new TextObject();
+        textObject.text = response.getTitle() + response.getUrl();
+        weiboMessage.mediaObject = textObject;
+        request.message = weiboMessage;
+        mWeiboShareApi.sendRequest(mContext, request, authInfo, token, new WeiboAuthListener() {
+            @Override
+            public void onWeiboException(WeiboException arg0) {
+            }
+
+            @Override
+            public void onComplete(Bundle bundle) {
+                // TODO Auto-generated method stub
+                Oauth2AccessToken newToken = Oauth2AccessToken.parseAccessToken(bundle);
+                AccessTokenKeeper.writeAccessToken(mContext.getApplicationContext(), newToken);
+                //   Toast.makeText(getApplicationContext(), "onAuthorizeComplete token = " + newToken.getToken(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancel() {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast(mContext.getString(R.string.share_cancel));
+                    }
+                });
+            }
+        });
+    }
+
+    public void share2WBImage() {
+
+    }
+
+    public static String formatString(String url) {
+        return url;
+    }
+
+    public static byte[] loadRawDataFromURL(String u) {
+        try {
+            URL url = new URL(formatString(u));
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            final int BUFFER_SIZE = 2048;
+            final int EOF = -1;
+
+            int c;
+            byte[] buf = new byte[BUFFER_SIZE];
+
+            while (true) {
+                c = bis.read(buf);
+                if (c == EOF)
+                    break;
+
+                baos.write(buf, 0, c);
+            }
+
+            conn.disconnect();
+            is.close();
+
+            byte[] data = baos.toByteArray();
+            baos.flush();
+
+            return data;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) {
+            case Activity.RESULT_OK:
+                switch (requestCode) {
+                    case SEND_SMS_TYPE:
+                        if (data == null) {
+                            return;
+                        }
+                        ArrayList<String> strs = getPhoneData(data);
+                        if (strs != null) {
+                            if (strs.size() == 0) {
+                                sendSms("");
+                            } else if (strs.size() == 1) {
+                                sendSms(strs.get(0));
+                            } else {
+                                Intent intent = new Intent(mContext, ChooseUserPhoneActivity.class);
+                                intent.putStringArrayListExtra(ChooseUserPhoneActivity.PHONE_LIST, strs);
+                                startActivity(intent);
+                            }
+                        }
+                        break;
+                }
+                break;
+        }
+    }
+
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+
+    }
+
+    @Override
+    public void onResp(BaseResp baseResp) {
+        System.out.println("resp=" + baseResp.errCode);
+
+        switch (baseResp.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+//                Toast.makeText(this, mContext.getString(R.string.share_success), Toast.LENGTH_LONG).show();
+                toast(mContext.getString(R.string.share_success));
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                toast(mContext.getString(R.string.share_cancel));
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                toast(mContext.getString(R.string.share_failure));
+                break;
+            default:
+                toast(mContext.getString(R.string.share_failure));
+                break;
+        }
+    }
+
+    protected void onNewIntent(Intent intent) {
+        mContext.setIntent(intent);
+        if (iwxapi != null) {
+            iwxapi.handleIntent(intent, this);
+        }
+        // 从当前应用唤起微博并进行分享后，返回到当前应用时，需要在此处调用该函数
+        // 来接收微博客户端返回的数据；执行成功，返回 true，并调用
+        // {@link IWeiboHandler.Response#onResponse}；失败返回 false，不调用上述回调
+
+
+    }
+
+    private ArrayList<String> getPhoneData(Intent data) {
+        String phoneNumber = null;
+        Uri contactData = data.getData();
+        if (contactData == null) {
+            return null;
+        }
+        ArrayList<String> phoneList = new ArrayList<>();
+        Cursor cursor = mContext.managedQuery(contactData, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            String hasPhone = cursor
+                    .getString(cursor
+                            .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+            String id = cursor.getString(cursor
+                    .getColumnIndex(ContactsContract.Contacts._ID));
+            if (hasPhone.equalsIgnoreCase("1")) {
+                hasPhone = "true";
+            } else {
+                hasPhone = "false";
+            }
+            if (Boolean.parseBoolean(hasPhone)) {
+                Cursor phones = mContext.getContentResolver().query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+                                + " = " + id, null, null);
+                while (phones.moveToNext()) {
+                    phoneNumber = phones
+                            .getString(phones
+                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    KLog.i("phone = " + phoneNumber);
+                    phoneList.add(phoneNumber);
+                    mContext.setTitle(phoneNumber);
+                }
+                phones.close();
+            }
+        }
+        return phoneList;
+    }
+
+
+    private FriendMethodAdapter mAdapter;
+
+    public BaseAdapter getAdapter(Context context) {
+        if (mAdapter == null) {
+            mAdapter = new FriendMethodAdapter(context, mMethods);
+        }
+        return mAdapter;
+    }
+
+    public void initView(ListView listView, Activity context) {
+        listView.setAdapter(getAdapter(context));
+        listView.setOnItemClickListener(this);
+    }
+
+
+    private class FriendMethodAdapter extends BaseAdapter {
+
+        private List<Integer> data;
+        private Context context;
+
+        FriendMethodAdapter(Context context, List<Integer> data) {
+            this.data = data;
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            if (data == null) {
+                return 0;
+            }
+            return data.size();
+        }
+
+        @Override
+        public Integer getItem(int position) {
+            return data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(context).inflate(R.layout.invite_item, null);
+                holder = new ViewHolder();
+                holder.logoIv = (ImageView) convertView.findViewById(R.id.invite_item_logo_iv);
+                holder.nameTv = (TextView) convertView.findViewById(R.id.invite_item_name_tv);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.logoIv.setImageResource(mLogos.get(getItem(position)));
+            holder.nameTv.setText(SysApplication.mContext.getString(mNames.get(getItem(position))));
+            return convertView;
+        }
+
+        class ViewHolder {
+            ImageView logoIv;
+            TextView nameTv;
+        }
+    }
+
+    private void startActivity(Intent intent) {
+        mContext.startActivity(intent);
+    }
+
+    private void startActivityForResult(Intent intent, int code) {
+        mContext.startActivityForResult(intent, code);
+    }
+
+    private void toast(String string) {
+        Toast.makeText(mContext, string, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setmMethods(List<Integer> mMethods) {
+        this.mMethods = mMethods;
+    }
+}

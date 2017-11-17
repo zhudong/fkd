@@ -135,6 +135,14 @@ public final class CsOrder {
      * </pre>
      */
     SHIPPING_SCHEME_MERGE(1, 2),
+    /**
+     * <code>SHIPPING_SCHEME_FBAG_GIFT = 3;</code>
+     *
+     * <pre>
+     *福袋送礼
+     * </pre>
+     */
+    SHIPPING_SCHEME_FBAG_GIFT(2, 3),
     ;
 
     /**
@@ -153,6 +161,14 @@ public final class CsOrder {
      * </pre>
      */
     public static final int SHIPPING_SCHEME_MERGE_VALUE = 2;
+    /**
+     * <code>SHIPPING_SCHEME_FBAG_GIFT = 3;</code>
+     *
+     * <pre>
+     *福袋送礼
+     * </pre>
+     */
+    public static final int SHIPPING_SCHEME_FBAG_GIFT_VALUE = 3;
 
 
     public final int getNumber() { return value; }
@@ -161,6 +177,7 @@ public final class CsOrder {
       switch (value) {
         case 1: return SHIPPING_SCHEME_DIRECT;
         case 2: return SHIPPING_SCHEME_MERGE;
+        case 3: return SHIPPING_SCHEME_FBAG_GIFT;
         default: return null;
       }
     }
@@ -3348,6 +3365,82 @@ public final class CsOrder {
      */
     com.google.protobuf.ByteString
     getMerchantMessageBytes();
+
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    boolean hasCrowd();
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    fksproto.CsCrowd.Crowd getCrowd();
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder();
+
+    /**
+     * <code>optional bool is_crowd = 25;</code>
+     *
+     * <pre>
+     *是否是拼单
+     * </pre>
+     */
+    boolean hasIsCrowd();
+    /**
+     * <code>optional bool is_crowd = 25;</code>
+     *
+     * <pre>
+     *是否是拼单
+     * </pre>
+     */
+    boolean getIsCrowd();
+
+    /**
+     * <code>optional int32 bag_status = 26;</code>
+     *
+     * <pre>
+     *福袋是否发送标志
+     * </pre>
+     */
+    boolean hasBagStatus();
+    /**
+     * <code>optional int32 bag_status = 26;</code>
+     *
+     * <pre>
+     *福袋是否发送标志
+     * </pre>
+     */
+    int getBagStatus();
+
+    /**
+     * <code>optional int32 parcel_id_return = 27;</code>
+     *
+     * <pre>
+     *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+     * </pre>
+     */
+    boolean hasParcelIdReturn();
+    /**
+     * <code>optional int32 parcel_id_return = 27;</code>
+     *
+     * <pre>
+     *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+     * </pre>
+     */
+    int getParcelIdReturn();
   }
   /**
    * Protobuf type {@code fksproto.SalesOrderItem}
@@ -3531,6 +3624,34 @@ public final class CsOrder {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00400000;
               merchantMessage_ = bs;
+              break;
+            }
+            case 194: {
+              fksproto.CsCrowd.Crowd.Builder subBuilder = null;
+              if (((bitField0_ & 0x00800000) == 0x00800000)) {
+                subBuilder = crowd_.toBuilder();
+              }
+              crowd_ = input.readMessage(fksproto.CsCrowd.Crowd.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(crowd_);
+                crowd_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00800000;
+              break;
+            }
+            case 200: {
+              bitField0_ |= 0x01000000;
+              isCrowd_ = input.readBool();
+              break;
+            }
+            case 208: {
+              bitField0_ |= 0x02000000;
+              bagStatus_ = input.readInt32();
+              break;
+            }
+            case 216: {
+              bitField0_ |= 0x04000000;
+              parcelIdReturn_ = input.readInt32();
               break;
             }
           }
@@ -4493,6 +4614,108 @@ public final class CsOrder {
       }
     }
 
+    public static final int CROWD_FIELD_NUMBER = 24;
+    private fksproto.CsCrowd.Crowd crowd_;
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    public boolean hasCrowd() {
+      return ((bitField0_ & 0x00800000) == 0x00800000);
+    }
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    public fksproto.CsCrowd.Crowd getCrowd() {
+      return crowd_;
+    }
+    /**
+     * <code>optional .fksproto.Crowd crowd = 24;</code>
+     *
+     * <pre>
+     *拼单信息 GetOrderCrowdDetailResponse需要
+     * </pre>
+     */
+    public fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder() {
+      return crowd_;
+    }
+
+    public static final int IS_CROWD_FIELD_NUMBER = 25;
+    private boolean isCrowd_;
+    /**
+     * <code>optional bool is_crowd = 25;</code>
+     *
+     * <pre>
+     *是否是拼单
+     * </pre>
+     */
+    public boolean hasIsCrowd() {
+      return ((bitField0_ & 0x01000000) == 0x01000000);
+    }
+    /**
+     * <code>optional bool is_crowd = 25;</code>
+     *
+     * <pre>
+     *是否是拼单
+     * </pre>
+     */
+    public boolean getIsCrowd() {
+      return isCrowd_;
+    }
+
+    public static final int BAG_STATUS_FIELD_NUMBER = 26;
+    private int bagStatus_;
+    /**
+     * <code>optional int32 bag_status = 26;</code>
+     *
+     * <pre>
+     *福袋是否发送标志
+     * </pre>
+     */
+    public boolean hasBagStatus() {
+      return ((bitField0_ & 0x02000000) == 0x02000000);
+    }
+    /**
+     * <code>optional int32 bag_status = 26;</code>
+     *
+     * <pre>
+     *福袋是否发送标志
+     * </pre>
+     */
+    public int getBagStatus() {
+      return bagStatus_;
+    }
+
+    public static final int PARCEL_ID_RETURN_FIELD_NUMBER = 27;
+    private int parcelIdReturn_;
+    /**
+     * <code>optional int32 parcel_id_return = 27;</code>
+     *
+     * <pre>
+     *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+     * </pre>
+     */
+    public boolean hasParcelIdReturn() {
+      return ((bitField0_ & 0x04000000) == 0x04000000);
+    }
+    /**
+     * <code>optional int32 parcel_id_return = 27;</code>
+     *
+     * <pre>
+     *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+     * </pre>
+     */
+    public int getParcelIdReturn() {
+      return parcelIdReturn_;
+    }
+
     private void initFields() {
       orderItemId_ = 0L;
       orderId_ = 0L;
@@ -4517,6 +4740,10 @@ public final class CsOrder {
       koreaColor_ = "";
       koreaOrder_ = "";
       merchantMessage_ = "";
+      crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+      isCrowd_ = false;
+      bagStatus_ = 0;
+      parcelIdReturn_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4535,6 +4762,12 @@ public final class CsOrder {
       if (!hasItemId()) {
         memoizedIsInitialized = 0;
         return false;
+      }
+      if (hasCrowd()) {
+        if (!getCrowd().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -4611,6 +4844,18 @@ public final class CsOrder {
       }
       if (((bitField0_ & 0x00400000) == 0x00400000)) {
         output.writeBytes(23, getMerchantMessageBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        output.writeMessage(24, crowd_);
+      }
+      if (((bitField0_ & 0x01000000) == 0x01000000)) {
+        output.writeBool(25, isCrowd_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        output.writeInt32(26, bagStatus_);
+      }
+      if (((bitField0_ & 0x04000000) == 0x04000000)) {
+        output.writeInt32(27, parcelIdReturn_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4712,6 +4957,22 @@ public final class CsOrder {
       if (((bitField0_ & 0x00400000) == 0x00400000)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(23, getMerchantMessageBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(24, crowd_);
+      }
+      if (((bitField0_ & 0x01000000) == 0x01000000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBoolSize(25, isCrowd_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(26, bagStatus_);
+      }
+      if (((bitField0_ & 0x04000000) == 0x04000000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(27, parcelIdReturn_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4826,6 +5087,7 @@ public final class CsOrder {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCrowdFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4880,6 +5142,18 @@ public final class CsOrder {
         bitField0_ = (bitField0_ & ~0x00200000);
         merchantMessage_ = "";
         bitField0_ = (bitField0_ & ~0x00400000);
+        if (crowdBuilder_ == null) {
+          crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+        } else {
+          crowdBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00800000);
+        isCrowd_ = false;
+        bitField0_ = (bitField0_ & ~0x01000000);
+        bagStatus_ = 0;
+        bitField0_ = (bitField0_ & ~0x02000000);
+        parcelIdReturn_ = 0;
+        bitField0_ = (bitField0_ & ~0x04000000);
         return this;
       }
 
@@ -5000,6 +5274,26 @@ public final class CsOrder {
           to_bitField0_ |= 0x00400000;
         }
         result.merchantMessage_ = merchantMessage_;
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00800000;
+        }
+        if (crowdBuilder_ == null) {
+          result.crowd_ = crowd_;
+        } else {
+          result.crowd_ = crowdBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
+          to_bitField0_ |= 0x01000000;
+        }
+        result.isCrowd_ = isCrowd_;
+        if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
+          to_bitField0_ |= 0x02000000;
+        }
+        result.bagStatus_ = bagStatus_;
+        if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
+          to_bitField0_ |= 0x04000000;
+        }
+        result.parcelIdReturn_ = parcelIdReturn_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5111,6 +5405,18 @@ public final class CsOrder {
           merchantMessage_ = other.merchantMessage_;
           onChanged();
         }
+        if (other.hasCrowd()) {
+          mergeCrowd(other.getCrowd());
+        }
+        if (other.hasIsCrowd()) {
+          setIsCrowd(other.getIsCrowd());
+        }
+        if (other.hasBagStatus()) {
+          setBagStatus(other.getBagStatus());
+        }
+        if (other.hasParcelIdReturn()) {
+          setParcelIdReturn(other.getParcelIdReturn());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -5127,6 +5433,12 @@ public final class CsOrder {
         if (!hasItemId()) {
 
           return false;
+        }
+        if (hasCrowd()) {
+          if (!getCrowd().isInitialized()) {
+
+            return false;
+          }
         }
         return true;
       }
@@ -6906,6 +7218,302 @@ public final class CsOrder {
         return this;
       }
 
+      private fksproto.CsCrowd.Crowd crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder> crowdBuilder_;
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public boolean hasCrowd() {
+        return ((bitField0_ & 0x00800000) == 0x00800000);
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public fksproto.CsCrowd.Crowd getCrowd() {
+        if (crowdBuilder_ == null) {
+          return crowd_;
+        } else {
+          return crowdBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public Builder setCrowd(fksproto.CsCrowd.Crowd value) {
+        if (crowdBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          crowd_ = value;
+          onChanged();
+        } else {
+          crowdBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00800000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public Builder setCrowd(
+              fksproto.CsCrowd.Crowd.Builder builderForValue) {
+        if (crowdBuilder_ == null) {
+          crowd_ = builderForValue.build();
+          onChanged();
+        } else {
+          crowdBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00800000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public Builder mergeCrowd(fksproto.CsCrowd.Crowd value) {
+        if (crowdBuilder_ == null) {
+          if (((bitField0_ & 0x00800000) == 0x00800000) &&
+                  crowd_ != fksproto.CsCrowd.Crowd.getDefaultInstance()) {
+            crowd_ =
+                    fksproto.CsCrowd.Crowd.newBuilder(crowd_).mergeFrom(value).buildPartial();
+          } else {
+            crowd_ = value;
+          }
+          onChanged();
+        } else {
+          crowdBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00800000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public Builder clearCrowd() {
+        if (crowdBuilder_ == null) {
+          crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+          onChanged();
+        } else {
+          crowdBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00800000);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public fksproto.CsCrowd.Crowd.Builder getCrowdBuilder() {
+        bitField0_ |= 0x00800000;
+        onChanged();
+        return getCrowdFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      public fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder() {
+        if (crowdBuilder_ != null) {
+          return crowdBuilder_.getMessageOrBuilder();
+        } else {
+          return crowd_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 24;</code>
+       *
+       * <pre>
+       *拼单信息 GetOrderCrowdDetailResponse需要
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder>
+      getCrowdFieldBuilder() {
+        if (crowdBuilder_ == null) {
+          crowdBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder>(
+                  getCrowd(),
+                  getParentForChildren(),
+                  isClean());
+          crowd_ = null;
+        }
+        return crowdBuilder_;
+      }
+
+      private boolean isCrowd_ ;
+      /**
+       * <code>optional bool is_crowd = 25;</code>
+       *
+       * <pre>
+       *是否是拼单
+       * </pre>
+       */
+      public boolean hasIsCrowd() {
+        return ((bitField0_ & 0x01000000) == 0x01000000);
+      }
+      /**
+       * <code>optional bool is_crowd = 25;</code>
+       *
+       * <pre>
+       *是否是拼单
+       * </pre>
+       */
+      public boolean getIsCrowd() {
+        return isCrowd_;
+      }
+      /**
+       * <code>optional bool is_crowd = 25;</code>
+       *
+       * <pre>
+       *是否是拼单
+       * </pre>
+       */
+      public Builder setIsCrowd(boolean value) {
+        bitField0_ |= 0x01000000;
+        isCrowd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool is_crowd = 25;</code>
+       *
+       * <pre>
+       *是否是拼单
+       * </pre>
+       */
+      public Builder clearIsCrowd() {
+        bitField0_ = (bitField0_ & ~0x01000000);
+        isCrowd_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int bagStatus_ ;
+      /**
+       * <code>optional int32 bag_status = 26;</code>
+       *
+       * <pre>
+       *福袋是否发送标志
+       * </pre>
+       */
+      public boolean hasBagStatus() {
+        return ((bitField0_ & 0x02000000) == 0x02000000);
+      }
+      /**
+       * <code>optional int32 bag_status = 26;</code>
+       *
+       * <pre>
+       *福袋是否发送标志
+       * </pre>
+       */
+      public int getBagStatus() {
+        return bagStatus_;
+      }
+      /**
+       * <code>optional int32 bag_status = 26;</code>
+       *
+       * <pre>
+       *福袋是否发送标志
+       * </pre>
+       */
+      public Builder setBagStatus(int value) {
+        bitField0_ |= 0x02000000;
+        bagStatus_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 bag_status = 26;</code>
+       *
+       * <pre>
+       *福袋是否发送标志
+       * </pre>
+       */
+      public Builder clearBagStatus() {
+        bitField0_ = (bitField0_ & ~0x02000000);
+        bagStatus_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int parcelIdReturn_ ;
+      /**
+       * <code>optional int32 parcel_id_return = 27;</code>
+       *
+       * <pre>
+       *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+       * </pre>
+       */
+      public boolean hasParcelIdReturn() {
+        return ((bitField0_ & 0x04000000) == 0x04000000);
+      }
+      /**
+       * <code>optional int32 parcel_id_return = 27;</code>
+       *
+       * <pre>
+       *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+       * </pre>
+       */
+      public int getParcelIdReturn() {
+        return parcelIdReturn_;
+      }
+      /**
+       * <code>optional int32 parcel_id_return = 27;</code>
+       *
+       * <pre>
+       *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+       * </pre>
+       */
+      public Builder setParcelIdReturn(int value) {
+        bitField0_ |= 0x04000000;
+        parcelIdReturn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcel_id_return = 27;</code>
+       *
+       * <pre>
+       *福袋超时后回滚的父包裹id 为0显示 其他不显示 针对订单详情
+       * </pre>
+       */
+      public Builder clearParcelIdReturn() {
+        bitField0_ = (bitField0_ & ~0x04000000);
+        parcelIdReturn_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:fksproto.SalesOrderItem)
     }
 
@@ -6989,6 +7597,57 @@ public final class CsOrder {
      * </pre>
      */
     float getShippingFee();
+
+    /**
+     * <code>optional float premium = 4;</code>
+     *
+     * <pre>
+     *保险费
+     * </pre>
+     */
+    boolean hasPremium();
+    /**
+     * <code>optional float premium = 4;</code>
+     *
+     * <pre>
+     *保险费
+     * </pre>
+     */
+    float getPremium();
+
+    /**
+     * <code>optional float product_duty = 5;</code>
+     *
+     * <pre>
+     *商品关税
+     * </pre>
+     */
+    boolean hasProductDuty();
+    /**
+     * <code>optional float product_duty = 5;</code>
+     *
+     * <pre>
+     *商品关税
+     * </pre>
+     */
+    float getProductDuty();
+
+    /**
+     * <code>optional float shipping_duty = 6;</code>
+     *
+     * <pre>
+     *运费关税
+     * </pre>
+     */
+    boolean hasShippingDuty();
+    /**
+     * <code>optional float shipping_duty = 6;</code>
+     *
+     * <pre>
+     *运费关税
+     * </pre>
+     */
+    float getShippingDuty();
   }
   /**
    * Protobuf type {@code fksproto.SalesOrderShipping}
@@ -7061,6 +7720,21 @@ public final class CsOrder {
             case 29: {
               bitField0_ |= 0x00000004;
               shippingFee_ = input.readFloat();
+              break;
+            }
+            case 37: {
+              bitField0_ |= 0x00000008;
+              premium_ = input.readFloat();
+              break;
+            }
+            case 45: {
+              bitField0_ |= 0x00000010;
+              productDuty_ = input.readFloat();
+              break;
+            }
+            case 53: {
+              bitField0_ |= 0x00000020;
+              shippingDuty_ = input.readFloat();
               break;
             }
           }
@@ -7234,10 +7908,82 @@ public final class CsOrder {
       return shippingFee_;
     }
 
+    public static final int PREMIUM_FIELD_NUMBER = 4;
+    private float premium_;
+    /**
+     * <code>optional float premium = 4;</code>
+     *
+     * <pre>
+     *保险费
+     * </pre>
+     */
+    public boolean hasPremium() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional float premium = 4;</code>
+     *
+     * <pre>
+     *保险费
+     * </pre>
+     */
+    public float getPremium() {
+      return premium_;
+    }
+
+    public static final int PRODUCT_DUTY_FIELD_NUMBER = 5;
+    private float productDuty_;
+    /**
+     * <code>optional float product_duty = 5;</code>
+     *
+     * <pre>
+     *商品关税
+     * </pre>
+     */
+    public boolean hasProductDuty() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional float product_duty = 5;</code>
+     *
+     * <pre>
+     *商品关税
+     * </pre>
+     */
+    public float getProductDuty() {
+      return productDuty_;
+    }
+
+    public static final int SHIPPING_DUTY_FIELD_NUMBER = 6;
+    private float shippingDuty_;
+    /**
+     * <code>optional float shipping_duty = 6;</code>
+     *
+     * <pre>
+     *运费关税
+     * </pre>
+     */
+    public boolean hasShippingDuty() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional float shipping_duty = 6;</code>
+     *
+     * <pre>
+     *运费关税
+     * </pre>
+     */
+    public float getShippingDuty() {
+      return shippingDuty_;
+    }
+
     private void initFields() {
       warehouseName_ = "";
       shippingMethod_ = "";
       shippingFee_ = 0F;
+      premium_ = 0F;
+      productDuty_ = 0F;
+      shippingDuty_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7261,6 +8007,15 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeFloat(3, shippingFee_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeFloat(4, premium_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeFloat(5, productDuty_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeFloat(6, shippingDuty_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -7281,6 +8036,18 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeFloatSize(3, shippingFee_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeFloatSize(4, premium_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeFloatSize(5, productDuty_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeFloatSize(6, shippingDuty_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7409,6 +8176,12 @@ public final class CsOrder {
         bitField0_ = (bitField0_ & ~0x00000002);
         shippingFee_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
+        premium_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        productDuty_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        shippingDuty_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -7449,6 +8222,18 @@ public final class CsOrder {
           to_bitField0_ |= 0x00000004;
         }
         result.shippingFee_ = shippingFee_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.premium_ = premium_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.productDuty_ = productDuty_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.shippingDuty_ = shippingDuty_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7477,6 +8262,15 @@ public final class CsOrder {
         }
         if (other.hasShippingFee()) {
           setShippingFee(other.getShippingFee());
+        }
+        if (other.hasPremium()) {
+          setPremium(other.getPremium());
+        }
+        if (other.hasProductDuty()) {
+          setProductDuty(other.getProductDuty());
+        }
+        if (other.hasShippingDuty()) {
+          setShippingDuty(other.getShippingDuty());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7749,6 +8543,150 @@ public final class CsOrder {
       public Builder clearShippingFee() {
         bitField0_ = (bitField0_ & ~0x00000004);
         shippingFee_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float premium_ ;
+      /**
+       * <code>optional float premium = 4;</code>
+       *
+       * <pre>
+       *保险费
+       * </pre>
+       */
+      public boolean hasPremium() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional float premium = 4;</code>
+       *
+       * <pre>
+       *保险费
+       * </pre>
+       */
+      public float getPremium() {
+        return premium_;
+      }
+      /**
+       * <code>optional float premium = 4;</code>
+       *
+       * <pre>
+       *保险费
+       * </pre>
+       */
+      public Builder setPremium(float value) {
+        bitField0_ |= 0x00000008;
+        premium_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float premium = 4;</code>
+       *
+       * <pre>
+       *保险费
+       * </pre>
+       */
+      public Builder clearPremium() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        premium_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float productDuty_ ;
+      /**
+       * <code>optional float product_duty = 5;</code>
+       *
+       * <pre>
+       *商品关税
+       * </pre>
+       */
+      public boolean hasProductDuty() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional float product_duty = 5;</code>
+       *
+       * <pre>
+       *商品关税
+       * </pre>
+       */
+      public float getProductDuty() {
+        return productDuty_;
+      }
+      /**
+       * <code>optional float product_duty = 5;</code>
+       *
+       * <pre>
+       *商品关税
+       * </pre>
+       */
+      public Builder setProductDuty(float value) {
+        bitField0_ |= 0x00000010;
+        productDuty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float product_duty = 5;</code>
+       *
+       * <pre>
+       *商品关税
+       * </pre>
+       */
+      public Builder clearProductDuty() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        productDuty_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float shippingDuty_ ;
+      /**
+       * <code>optional float shipping_duty = 6;</code>
+       *
+       * <pre>
+       *运费关税
+       * </pre>
+       */
+      public boolean hasShippingDuty() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional float shipping_duty = 6;</code>
+       *
+       * <pre>
+       *运费关税
+       * </pre>
+       */
+      public float getShippingDuty() {
+        return shippingDuty_;
+      }
+      /**
+       * <code>optional float shipping_duty = 6;</code>
+       *
+       * <pre>
+       *运费关税
+       * </pre>
+       */
+      public Builder setShippingDuty(float value) {
+        bitField0_ |= 0x00000020;
+        shippingDuty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float shipping_duty = 6;</code>
+       *
+       * <pre>
+       *运费关税
+       * </pre>
+       */
+      public Builder clearShippingDuty() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        shippingDuty_ = 0F;
         onChanged();
         return this;
       }
@@ -10061,6 +10999,32 @@ public final class CsOrder {
      * <code>optional float totalpaid = 5;</code>
      */
     float getTotalpaid();
+
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    boolean hasInitaddressurl();
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    java.lang.String getInitaddressurl();
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getInitaddressurlBytes();
   }
   /**
    * Protobuf type {@code fksproto.SubmitSalesOrderResponse}
@@ -10147,6 +11111,12 @@ public final class CsOrder {
             case 45: {
               bitField0_ |= 0x00000010;
               totalpaid_ = input.readFloat();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              initaddressurl_ = bs;
               break;
             }
           }
@@ -10324,12 +11294,67 @@ public final class CsOrder {
       return totalpaid_;
     }
 
+    public static final int INITADDRESSURL_FIELD_NUMBER = 6;
+    private java.lang.Object initaddressurl_;
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public boolean hasInitaddressurl() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public java.lang.String getInitaddressurl() {
+      java.lang.Object ref = initaddressurl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          initaddressurl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getInitaddressurlBytes() {
+      java.lang.Object ref = initaddressurl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        initaddressurl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       orderId_ = 0L;
       orderNumber_ = "";
       currencycode_ = "";
       totalpaid_ = 0F;
+      initaddressurl_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10367,6 +11392,9 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeFloat(5, totalpaid_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getInitaddressurlBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10395,6 +11423,10 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeFloatSize(5, totalpaid_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getInitaddressurlBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10528,6 +11560,8 @@ public final class CsOrder {
         bitField0_ = (bitField0_ & ~0x00000008);
         totalpaid_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000010);
+        initaddressurl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -10580,6 +11614,10 @@ public final class CsOrder {
           to_bitField0_ |= 0x00000010;
         }
         result.totalpaid_ = totalpaid_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.initaddressurl_ = initaddressurl_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10614,6 +11652,11 @@ public final class CsOrder {
         }
         if (other.hasTotalpaid()) {
           setTotalpaid(other.getTotalpaid());
+        }
+        if (other.hasInitaddressurl()) {
+          bitField0_ |= 0x00000020;
+          initaddressurl_ = other.initaddressurl_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10978,6 +12021,106 @@ public final class CsOrder {
       public Builder clearTotalpaid() {
         bitField0_ = (bitField0_ & ~0x00000010);
         totalpaid_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object initaddressurl_ = "";
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public boolean hasInitaddressurl() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public java.lang.String getInitaddressurl() {
+        java.lang.Object ref = initaddressurl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            initaddressurl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getInitaddressurlBytes() {
+        java.lang.Object ref = initaddressurl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          initaddressurl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder setInitaddressurl(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        initaddressurl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder clearInitaddressurl() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        initaddressurl_ = getDefaultInstance().getInitaddressurl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder setInitaddressurlBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        initaddressurl_ = value;
         onChanged();
         return this;
       }
@@ -19096,6 +20239,3277 @@ public final class CsOrder {
     // @@protoc_insertion_point(class_scope:fksproto.GetSalesOrderDetailResponse)
   }
 
+  public interface NewSalesOrderDetailRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.NewSalesOrderDetailRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    boolean hasUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+
+    /**
+     * <code>optional int64 order_id = 3;</code>
+     */
+    boolean hasOrderId();
+    /**
+     * <code>optional int64 order_id = 3;</code>
+     */
+    long getOrderId();
+
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    boolean hasLocalecode();
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    java.lang.String getLocalecode();
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getLocalecodeBytes();
+
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    boolean hasCurrencycode();
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    java.lang.String getCurrencycode();
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getCurrencycodeBytes();
+
+    /**
+     * <code>optional int32 currencyid = 6;</code>
+     */
+    boolean hasCurrencyid();
+    /**
+     * <code>optional int32 currencyid = 6;</code>
+     */
+    int getCurrencyid();
+  }
+  /**
+   * Protobuf type {@code fksproto.NewSalesOrderDetailRequest}
+   *
+   * <pre>
+   *原订单详情接口升级版 原来一个拼单下只有一个单品
+   *现在可以有多个单品
+   * </pre>
+   */
+  public static final class NewSalesOrderDetailRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.NewSalesOrderDetailRequest)
+          NewSalesOrderDetailRequestOrBuilder {
+    // Use NewSalesOrderDetailRequest.newBuilder() to construct.
+    private NewSalesOrderDetailRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private NewSalesOrderDetailRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final NewSalesOrderDetailRequest defaultInstance;
+    public static NewSalesOrderDetailRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public NewSalesOrderDetailRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NewSalesOrderDetailRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userinfo_.toBuilder();
+              }
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userinfo_);
+                userinfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              orderId_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localecode_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              currencycode_ = bs;
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              currencyid_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsOrder.NewSalesOrderDetailRequest.class, fksproto.CsOrder.NewSalesOrderDetailRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<NewSalesOrderDetailRequest> PARSER =
+            new com.google.protobuf.AbstractParser<NewSalesOrderDetailRequest>() {
+              public NewSalesOrderDetailRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new NewSalesOrderDetailRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NewSalesOrderDetailRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USERINFO_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public boolean hasUserinfo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
+      return userinfo_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      return userinfo_;
+    }
+
+    public static final int ORDER_ID_FIELD_NUMBER = 3;
+    private long orderId_;
+    /**
+     * <code>optional int64 order_id = 3;</code>
+     */
+    public boolean hasOrderId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 order_id = 3;</code>
+     */
+    public long getOrderId() {
+      return orderId_;
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 4;
+    private java.lang.Object localecode_;
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public boolean hasLocalecode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localecode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string localecode = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localecode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CURRENCYCODE_FIELD_NUMBER = 5;
+    private java.lang.Object currencycode_;
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    public boolean hasCurrencycode() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          currencycode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string currencycode = 5;</code>
+     *
+     * <pre>
+     *币种
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        currencycode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CURRENCYID_FIELD_NUMBER = 6;
+    private int currencyid_;
+    /**
+     * <code>optional int32 currencyid = 6;</code>
+     */
+    public boolean hasCurrencyid() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 currencyid = 6;</code>
+     */
+    public int getCurrencyid() {
+      return currencyid_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      orderId_ = 0L;
+      localecode_ = "";
+      currencycode_ = "";
+      currencyid_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, orderId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCurrencycodeBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, currencyid_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt64Size(3, orderId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getCurrencycodeBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(6, currencyid_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsOrder.NewSalesOrderDetailRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.NewSalesOrderDetailRequest}
+     *
+     * <pre>
+     *原订单详情接口升级版 原来一个拼单下只有一个单品
+     *现在可以有多个单品
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.NewSalesOrderDetailRequest)
+            fksproto.CsOrder.NewSalesOrderDetailRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsOrder.NewSalesOrderDetailRequest.class, fksproto.CsOrder.NewSalesOrderDetailRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsOrder.NewSalesOrderDetailRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserinfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        orderId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localecode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        currencycode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currencyid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailRequest_descriptor;
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailRequest getDefaultInstanceForType() {
+        return fksproto.CsOrder.NewSalesOrderDetailRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailRequest build() {
+        fksproto.CsOrder.NewSalesOrderDetailRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailRequest buildPartial() {
+        fksproto.CsOrder.NewSalesOrderDetailRequest result = new fksproto.CsOrder.NewSalesOrderDetailRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userinfoBuilder_ == null) {
+          result.userinfo_ = userinfo_;
+        } else {
+          result.userinfo_ = userinfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.orderId_ = orderId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localecode_ = localecode_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.currencycode_ = currencycode_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.currencyid_ = currencyid_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsOrder.NewSalesOrderDetailRequest) {
+          return mergeFrom((fksproto.CsOrder.NewSalesOrderDetailRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsOrder.NewSalesOrderDetailRequest other) {
+        if (other == fksproto.CsOrder.NewSalesOrderDetailRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserinfo()) {
+          mergeUserinfo(other.getUserinfo());
+        }
+        if (other.hasOrderId()) {
+          setOrderId(other.getOrderId());
+        }
+        if (other.hasLocalecode()) {
+          bitField0_ |= 0x00000008;
+          localecode_ = other.localecode_;
+          onChanged();
+        }
+        if (other.hasCurrencycode()) {
+          bitField0_ |= 0x00000010;
+          currencycode_ = other.currencycode_;
+          onChanged();
+        }
+        if (other.hasCurrencyid()) {
+          setCurrencyid(other.getCurrencyid());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsOrder.NewSalesOrderDetailRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsOrder.NewSalesOrderDetailRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public boolean hasUserinfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
+        if (userinfoBuilder_ == null) {
+          return userinfo_;
+        } else {
+          return userinfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userinfo_ = value;
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userinfo_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+          } else {
+            userinfo_ = value;
+          }
+          onChanged();
+        } else {
+          userinfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder clearUserinfo() {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserinfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+        if (userinfoBuilder_ != null) {
+          return userinfoBuilder_.getMessageOrBuilder();
+        } else {
+          return userinfo_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
+        if (userinfoBuilder_ == null) {
+          userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserinfo(),
+                  getParentForChildren(),
+                  isClean());
+          userinfo_ = null;
+        }
+        return userinfoBuilder_;
+      }
+
+      private long orderId_ ;
+      /**
+       * <code>optional int64 order_id = 3;</code>
+       */
+      public boolean hasOrderId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 order_id = 3;</code>
+       */
+      public long getOrderId() {
+        return orderId_;
+      }
+      /**
+       * <code>optional int64 order_id = 3;</code>
+       */
+      public Builder setOrderId(long value) {
+        bitField0_ |= 0x00000004;
+        orderId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 order_id = 3;</code>
+       */
+      public Builder clearOrderId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        orderId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localecode_ = "";
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public boolean hasLocalecode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localecode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localecode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder setLocalecode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder clearLocalecode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localecode_ = getDefaultInstance().getLocalecode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder setLocalecodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object currencycode_ = "";
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public boolean hasCurrencycode() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            currencycode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          currencycode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public Builder setCurrencycode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        currencycode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public Builder clearCurrencycode() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currencycode_ = getDefaultInstance().getCurrencycode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currencycode = 5;</code>
+       *
+       * <pre>
+       *币种
+       * </pre>
+       */
+      public Builder setCurrencycodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        currencycode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int currencyid_ ;
+      /**
+       * <code>optional int32 currencyid = 6;</code>
+       */
+      public boolean hasCurrencyid() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 currencyid = 6;</code>
+       */
+      public int getCurrencyid() {
+        return currencyid_;
+      }
+      /**
+       * <code>optional int32 currencyid = 6;</code>
+       */
+      public Builder setCurrencyid(int value) {
+        bitField0_ |= 0x00000020;
+        currencyid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 currencyid = 6;</code>
+       */
+      public Builder clearCurrencyid() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        currencyid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.NewSalesOrderDetailRequest)
+    }
+
+    static {
+      defaultInstance = new NewSalesOrderDetailRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.NewSalesOrderDetailRequest)
+  }
+
+  public interface NewSalesOrderDetailResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.NewSalesOrderDetailResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    boolean hasOrder();
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrder getOrder();
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrderOrBuilder getOrderOrBuilder();
+
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    java.util.List<fksproto.CsOrder.SalesOrderItem>
+    getOrderItemsList();
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrderItem getOrderItems(int index);
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    int getOrderItemsCount();
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    java.util.List<? extends fksproto.CsOrder.SalesOrderItemOrBuilder>
+    getOrderItemsOrBuilderList();
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrderItemOrBuilder getOrderItemsOrBuilder(
+            int index);
+
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    boolean hasAddress();
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    fksproto.CsAddress.CustomerAddress getAddress();
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    fksproto.CsAddress.CustomerAddressOrBuilder getAddressOrBuilder();
+
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    java.util.List<fksproto.CsOrder.SalesOrderShipping>
+    getShippingsList();
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrderShipping getShippings(int index);
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    int getShippingsCount();
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    java.util.List<? extends fksproto.CsOrder.SalesOrderShippingOrBuilder>
+    getShippingsOrBuilderList();
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    fksproto.CsOrder.SalesOrderShippingOrBuilder getShippingsOrBuilder(
+            int index);
+  }
+  /**
+   * Protobuf type {@code fksproto.NewSalesOrderDetailResponse}
+   */
+  public static final class NewSalesOrderDetailResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.NewSalesOrderDetailResponse)
+          NewSalesOrderDetailResponseOrBuilder {
+    // Use NewSalesOrderDetailResponse.newBuilder() to construct.
+    private NewSalesOrderDetailResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private NewSalesOrderDetailResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final NewSalesOrderDetailResponse defaultInstance;
+    public static NewSalesOrderDetailResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public NewSalesOrderDetailResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NewSalesOrderDetailResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsOrder.SalesOrder.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = order_.toBuilder();
+              }
+              order_ = input.readMessage(fksproto.CsOrder.SalesOrder.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(order_);
+                order_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                orderItems_ = new java.util.ArrayList<fksproto.CsOrder.SalesOrderItem>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              orderItems_.add(input.readMessage(fksproto.CsOrder.SalesOrderItem.PARSER, extensionRegistry));
+              break;
+            }
+            case 34: {
+              fksproto.CsAddress.CustomerAddress.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = address_.toBuilder();
+              }
+              address_ = input.readMessage(fksproto.CsAddress.CustomerAddress.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(address_);
+                address_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                shippings_ = new java.util.ArrayList<fksproto.CsOrder.SalesOrderShipping>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              shippings_.add(input.readMessage(fksproto.CsOrder.SalesOrderShipping.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          orderItems_ = java.util.Collections.unmodifiableList(orderItems_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          shippings_ = java.util.Collections.unmodifiableList(shippings_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsOrder.NewSalesOrderDetailResponse.class, fksproto.CsOrder.NewSalesOrderDetailResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<NewSalesOrderDetailResponse> PARSER =
+            new com.google.protobuf.AbstractParser<NewSalesOrderDetailResponse>() {
+              public NewSalesOrderDetailResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new NewSalesOrderDetailResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NewSalesOrderDetailResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int ORDER_FIELD_NUMBER = 2;
+    private fksproto.CsOrder.SalesOrder order_;
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    public boolean hasOrder() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrder getOrder() {
+      return order_;
+    }
+    /**
+     * <code>optional .fksproto.SalesOrder order = 2;</code>
+     *
+     * <pre>
+     *订单信息
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrderOrBuilder getOrderOrBuilder() {
+      return order_;
+    }
+
+    public static final int ORDER_ITEMS_FIELD_NUMBER = 3;
+    private java.util.List<fksproto.CsOrder.SalesOrderItem> orderItems_;
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    public java.util.List<fksproto.CsOrder.SalesOrderItem> getOrderItemsList() {
+      return orderItems_;
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    public java.util.List<? extends fksproto.CsOrder.SalesOrderItemOrBuilder>
+    getOrderItemsOrBuilderList() {
+      return orderItems_;
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    public int getOrderItemsCount() {
+      return orderItems_.size();
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrderItem getOrderItems(int index) {
+      return orderItems_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+     *
+     * <pre>
+     *订单单品列表
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrderItemOrBuilder getOrderItemsOrBuilder(
+            int index) {
+      return orderItems_.get(index);
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 4;
+    private fksproto.CsAddress.CustomerAddress address_;
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    public boolean hasAddress() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    public fksproto.CsAddress.CustomerAddress getAddress() {
+      return address_;
+    }
+    /**
+     * <code>optional .fksproto.CustomerAddress address = 4;</code>
+     *
+     * <pre>
+     *订单地址(邮寄地址)
+     * </pre>
+     */
+    public fksproto.CsAddress.CustomerAddressOrBuilder getAddressOrBuilder() {
+      return address_;
+    }
+
+    public static final int SHIPPINGS_FIELD_NUMBER = 5;
+    private java.util.List<fksproto.CsOrder.SalesOrderShipping> shippings_;
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    public java.util.List<fksproto.CsOrder.SalesOrderShipping> getShippingsList() {
+      return shippings_;
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    public java.util.List<? extends fksproto.CsOrder.SalesOrderShippingOrBuilder>
+    getShippingsOrBuilderList() {
+      return shippings_;
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    public int getShippingsCount() {
+      return shippings_.size();
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrderShipping getShippings(int index) {
+      return shippings_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+     *
+     * <pre>
+     *物流信息
+     * </pre>
+     */
+    public fksproto.CsOrder.SalesOrderShippingOrBuilder getShippingsOrBuilder(
+            int index) {
+      return shippings_.get(index);
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      order_ = fksproto.CsOrder.SalesOrder.getDefaultInstance();
+      orderItems_ = java.util.Collections.emptyList();
+      address_ = fksproto.CsAddress.CustomerAddress.getDefaultInstance();
+      shippings_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasOrder()) {
+        if (!getOrder().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getOrderItemsCount(); i++) {
+        if (!getOrderItems(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, order_);
+      }
+      for (int i = 0; i < orderItems_.size(); i++) {
+        output.writeMessage(3, orderItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(4, address_);
+      }
+      for (int i = 0; i < shippings_.size(); i++) {
+        output.writeMessage(5, shippings_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, order_);
+      }
+      for (int i = 0; i < orderItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(3, orderItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(4, address_);
+      }
+      for (int i = 0; i < shippings_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(5, shippings_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsOrder.NewSalesOrderDetailResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsOrder.NewSalesOrderDetailResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.NewSalesOrderDetailResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.NewSalesOrderDetailResponse)
+            fksproto.CsOrder.NewSalesOrderDetailResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsOrder.NewSalesOrderDetailResponse.class, fksproto.CsOrder.NewSalesOrderDetailResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsOrder.NewSalesOrderDetailResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getOrderFieldBuilder();
+          getOrderItemsFieldBuilder();
+          getAddressFieldBuilder();
+          getShippingsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (orderBuilder_ == null) {
+          order_ = fksproto.CsOrder.SalesOrder.getDefaultInstance();
+        } else {
+          orderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (orderItemsBuilder_ == null) {
+          orderItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          orderItemsBuilder_.clear();
+        }
+        if (addressBuilder_ == null) {
+          address_ = fksproto.CsAddress.CustomerAddress.getDefaultInstance();
+        } else {
+          addressBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (shippingsBuilder_ == null) {
+          shippings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          shippingsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsOrder.internal_static_fksproto_NewSalesOrderDetailResponse_descriptor;
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailResponse getDefaultInstanceForType() {
+        return fksproto.CsOrder.NewSalesOrderDetailResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailResponse build() {
+        fksproto.CsOrder.NewSalesOrderDetailResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsOrder.NewSalesOrderDetailResponse buildPartial() {
+        fksproto.CsOrder.NewSalesOrderDetailResponse result = new fksproto.CsOrder.NewSalesOrderDetailResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (orderBuilder_ == null) {
+          result.order_ = order_;
+        } else {
+          result.order_ = orderBuilder_.build();
+        }
+        if (orderItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            orderItems_ = java.util.Collections.unmodifiableList(orderItems_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.orderItems_ = orderItems_;
+        } else {
+          result.orderItems_ = orderItemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (addressBuilder_ == null) {
+          result.address_ = address_;
+        } else {
+          result.address_ = addressBuilder_.build();
+        }
+        if (shippingsBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            shippings_ = java.util.Collections.unmodifiableList(shippings_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.shippings_ = shippings_;
+        } else {
+          result.shippings_ = shippingsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsOrder.NewSalesOrderDetailResponse) {
+          return mergeFrom((fksproto.CsOrder.NewSalesOrderDetailResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsOrder.NewSalesOrderDetailResponse other) {
+        if (other == fksproto.CsOrder.NewSalesOrderDetailResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasOrder()) {
+          mergeOrder(other.getOrder());
+        }
+        if (orderItemsBuilder_ == null) {
+          if (!other.orderItems_.isEmpty()) {
+            if (orderItems_.isEmpty()) {
+              orderItems_ = other.orderItems_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureOrderItemsIsMutable();
+              orderItems_.addAll(other.orderItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.orderItems_.isEmpty()) {
+            if (orderItemsBuilder_.isEmpty()) {
+              orderItemsBuilder_.dispose();
+              orderItemsBuilder_ = null;
+              orderItems_ = other.orderItems_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              orderItemsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getOrderItemsFieldBuilder() : null;
+            } else {
+              orderItemsBuilder_.addAllMessages(other.orderItems_);
+            }
+          }
+        }
+        if (other.hasAddress()) {
+          mergeAddress(other.getAddress());
+        }
+        if (shippingsBuilder_ == null) {
+          if (!other.shippings_.isEmpty()) {
+            if (shippings_.isEmpty()) {
+              shippings_ = other.shippings_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureShippingsIsMutable();
+              shippings_.addAll(other.shippings_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.shippings_.isEmpty()) {
+            if (shippingsBuilder_.isEmpty()) {
+              shippingsBuilder_.dispose();
+              shippingsBuilder_ = null;
+              shippings_ = other.shippings_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              shippingsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getShippingsFieldBuilder() : null;
+            } else {
+              shippingsBuilder_.addAllMessages(other.shippings_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        if (hasOrder()) {
+          if (!getOrder().isInitialized()) {
+
+            return false;
+          }
+        }
+        for (int i = 0; i < getOrderItemsCount(); i++) {
+          if (!getOrderItems(i).isInitialized()) {
+
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsOrder.NewSalesOrderDetailResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsOrder.NewSalesOrderDetailResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsOrder.SalesOrder order_ = fksproto.CsOrder.SalesOrder.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsOrder.SalesOrder, fksproto.CsOrder.SalesOrder.Builder, fksproto.CsOrder.SalesOrderOrBuilder> orderBuilder_;
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public boolean hasOrder() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrder getOrder() {
+        if (orderBuilder_ == null) {
+          return order_;
+        } else {
+          return orderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public Builder setOrder(fksproto.CsOrder.SalesOrder value) {
+        if (orderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          order_ = value;
+          onChanged();
+        } else {
+          orderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public Builder setOrder(
+              fksproto.CsOrder.SalesOrder.Builder builderForValue) {
+        if (orderBuilder_ == null) {
+          order_ = builderForValue.build();
+          onChanged();
+        } else {
+          orderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public Builder mergeOrder(fksproto.CsOrder.SalesOrder value) {
+        if (orderBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  order_ != fksproto.CsOrder.SalesOrder.getDefaultInstance()) {
+            order_ =
+                    fksproto.CsOrder.SalesOrder.newBuilder(order_).mergeFrom(value).buildPartial();
+          } else {
+            order_ = value;
+          }
+          onChanged();
+        } else {
+          orderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public Builder clearOrder() {
+        if (orderBuilder_ == null) {
+          order_ = fksproto.CsOrder.SalesOrder.getDefaultInstance();
+          onChanged();
+        } else {
+          orderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrder.Builder getOrderBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getOrderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderOrBuilder getOrderOrBuilder() {
+        if (orderBuilder_ != null) {
+          return orderBuilder_.getMessageOrBuilder();
+        } else {
+          return order_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.SalesOrder order = 2;</code>
+       *
+       * <pre>
+       *订单信息
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsOrder.SalesOrder, fksproto.CsOrder.SalesOrder.Builder, fksproto.CsOrder.SalesOrderOrBuilder>
+      getOrderFieldBuilder() {
+        if (orderBuilder_ == null) {
+          orderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsOrder.SalesOrder, fksproto.CsOrder.SalesOrder.Builder, fksproto.CsOrder.SalesOrderOrBuilder>(
+                  getOrder(),
+                  getParentForChildren(),
+                  isClean());
+          order_ = null;
+        }
+        return orderBuilder_;
+      }
+
+      private java.util.List<fksproto.CsOrder.SalesOrderItem> orderItems_ =
+              java.util.Collections.emptyList();
+      private void ensureOrderItemsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          orderItems_ = new java.util.ArrayList<fksproto.CsOrder.SalesOrderItem>(orderItems_);
+          bitField0_ |= 0x00000004;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsOrder.SalesOrderItem, fksproto.CsOrder.SalesOrderItem.Builder, fksproto.CsOrder.SalesOrderItemOrBuilder> orderItemsBuilder_;
+
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public java.util.List<fksproto.CsOrder.SalesOrderItem> getOrderItemsList() {
+        if (orderItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(orderItems_);
+        } else {
+          return orderItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public int getOrderItemsCount() {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.size();
+        } else {
+          return orderItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderItem getOrderItems(int index) {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.get(index);
+        } else {
+          return orderItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder setOrderItems(
+              int index, fksproto.CsOrder.SalesOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.set(index, value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder setOrderItems(
+              int index, fksproto.CsOrder.SalesOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder addOrderItems(fksproto.CsOrder.SalesOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.add(value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder addOrderItems(
+              int index, fksproto.CsOrder.SalesOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.add(index, value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder addOrderItems(
+              fksproto.CsOrder.SalesOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder addOrderItems(
+              int index, fksproto.CsOrder.SalesOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder addAllOrderItems(
+              java.lang.Iterable<? extends fksproto.CsOrder.SalesOrderItem> values) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, orderItems_);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder clearOrderItems() {
+        if (orderItemsBuilder_ == null) {
+          orderItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          orderItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public Builder removeOrderItems(int index) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.remove(index);
+          onChanged();
+        } else {
+          orderItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderItem.Builder getOrderItemsBuilder(
+              int index) {
+        return getOrderItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderItemOrBuilder getOrderItemsOrBuilder(
+              int index) {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.get(index);  } else {
+          return orderItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public java.util.List<? extends fksproto.CsOrder.SalesOrderItemOrBuilder>
+      getOrderItemsOrBuilderList() {
+        if (orderItemsBuilder_ != null) {
+          return orderItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(orderItems_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderItem.Builder addOrderItemsBuilder() {
+        return getOrderItemsFieldBuilder().addBuilder(
+                fksproto.CsOrder.SalesOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderItem.Builder addOrderItemsBuilder(
+              int index) {
+        return getOrderItemsFieldBuilder().addBuilder(
+                index, fksproto.CsOrder.SalesOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderItem order_items = 3;</code>
+       *
+       * <pre>
+       *订单单品列表
+       * </pre>
+       */
+      public java.util.List<fksproto.CsOrder.SalesOrderItem.Builder>
+      getOrderItemsBuilderList() {
+        return getOrderItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsOrder.SalesOrderItem, fksproto.CsOrder.SalesOrderItem.Builder, fksproto.CsOrder.SalesOrderItemOrBuilder>
+      getOrderItemsFieldBuilder() {
+        if (orderItemsBuilder_ == null) {
+          orderItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsOrder.SalesOrderItem, fksproto.CsOrder.SalesOrderItem.Builder, fksproto.CsOrder.SalesOrderItemOrBuilder>(
+                  orderItems_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          orderItems_ = null;
+        }
+        return orderItemsBuilder_;
+      }
+
+      private fksproto.CsAddress.CustomerAddress address_ = fksproto.CsAddress.CustomerAddress.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsAddress.CustomerAddress, fksproto.CsAddress.CustomerAddress.Builder, fksproto.CsAddress.CustomerAddressOrBuilder> addressBuilder_;
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public boolean hasAddress() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public fksproto.CsAddress.CustomerAddress getAddress() {
+        if (addressBuilder_ == null) {
+          return address_;
+        } else {
+          return addressBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public Builder setAddress(fksproto.CsAddress.CustomerAddress value) {
+        if (addressBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          address_ = value;
+          onChanged();
+        } else {
+          addressBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public Builder setAddress(
+              fksproto.CsAddress.CustomerAddress.Builder builderForValue) {
+        if (addressBuilder_ == null) {
+          address_ = builderForValue.build();
+          onChanged();
+        } else {
+          addressBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public Builder mergeAddress(fksproto.CsAddress.CustomerAddress value) {
+        if (addressBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+                  address_ != fksproto.CsAddress.CustomerAddress.getDefaultInstance()) {
+            address_ =
+                    fksproto.CsAddress.CustomerAddress.newBuilder(address_).mergeFrom(value).buildPartial();
+          } else {
+            address_ = value;
+          }
+          onChanged();
+        } else {
+          addressBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public Builder clearAddress() {
+        if (addressBuilder_ == null) {
+          address_ = fksproto.CsAddress.CustomerAddress.getDefaultInstance();
+          onChanged();
+        } else {
+          addressBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public fksproto.CsAddress.CustomerAddress.Builder getAddressBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getAddressFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      public fksproto.CsAddress.CustomerAddressOrBuilder getAddressOrBuilder() {
+        if (addressBuilder_ != null) {
+          return addressBuilder_.getMessageOrBuilder();
+        } else {
+          return address_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.CustomerAddress address = 4;</code>
+       *
+       * <pre>
+       *订单地址(邮寄地址)
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsAddress.CustomerAddress, fksproto.CsAddress.CustomerAddress.Builder, fksproto.CsAddress.CustomerAddressOrBuilder>
+      getAddressFieldBuilder() {
+        if (addressBuilder_ == null) {
+          addressBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsAddress.CustomerAddress, fksproto.CsAddress.CustomerAddress.Builder, fksproto.CsAddress.CustomerAddressOrBuilder>(
+                  getAddress(),
+                  getParentForChildren(),
+                  isClean());
+          address_ = null;
+        }
+        return addressBuilder_;
+      }
+
+      private java.util.List<fksproto.CsOrder.SalesOrderShipping> shippings_ =
+              java.util.Collections.emptyList();
+      private void ensureShippingsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          shippings_ = new java.util.ArrayList<fksproto.CsOrder.SalesOrderShipping>(shippings_);
+          bitField0_ |= 0x00000010;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsOrder.SalesOrderShipping, fksproto.CsOrder.SalesOrderShipping.Builder, fksproto.CsOrder.SalesOrderShippingOrBuilder> shippingsBuilder_;
+
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public java.util.List<fksproto.CsOrder.SalesOrderShipping> getShippingsList() {
+        if (shippingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(shippings_);
+        } else {
+          return shippingsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public int getShippingsCount() {
+        if (shippingsBuilder_ == null) {
+          return shippings_.size();
+        } else {
+          return shippingsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderShipping getShippings(int index) {
+        if (shippingsBuilder_ == null) {
+          return shippings_.get(index);
+        } else {
+          return shippingsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder setShippings(
+              int index, fksproto.CsOrder.SalesOrderShipping value) {
+        if (shippingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureShippingsIsMutable();
+          shippings_.set(index, value);
+          onChanged();
+        } else {
+          shippingsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder setShippings(
+              int index, fksproto.CsOrder.SalesOrderShipping.Builder builderForValue) {
+        if (shippingsBuilder_ == null) {
+          ensureShippingsIsMutable();
+          shippings_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          shippingsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder addShippings(fksproto.CsOrder.SalesOrderShipping value) {
+        if (shippingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureShippingsIsMutable();
+          shippings_.add(value);
+          onChanged();
+        } else {
+          shippingsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder addShippings(
+              int index, fksproto.CsOrder.SalesOrderShipping value) {
+        if (shippingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureShippingsIsMutable();
+          shippings_.add(index, value);
+          onChanged();
+        } else {
+          shippingsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder addShippings(
+              fksproto.CsOrder.SalesOrderShipping.Builder builderForValue) {
+        if (shippingsBuilder_ == null) {
+          ensureShippingsIsMutable();
+          shippings_.add(builderForValue.build());
+          onChanged();
+        } else {
+          shippingsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder addShippings(
+              int index, fksproto.CsOrder.SalesOrderShipping.Builder builderForValue) {
+        if (shippingsBuilder_ == null) {
+          ensureShippingsIsMutable();
+          shippings_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          shippingsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder addAllShippings(
+              java.lang.Iterable<? extends fksproto.CsOrder.SalesOrderShipping> values) {
+        if (shippingsBuilder_ == null) {
+          ensureShippingsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, shippings_);
+          onChanged();
+        } else {
+          shippingsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder clearShippings() {
+        if (shippingsBuilder_ == null) {
+          shippings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          shippingsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public Builder removeShippings(int index) {
+        if (shippingsBuilder_ == null) {
+          ensureShippingsIsMutable();
+          shippings_.remove(index);
+          onChanged();
+        } else {
+          shippingsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderShipping.Builder getShippingsBuilder(
+              int index) {
+        return getShippingsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderShippingOrBuilder getShippingsOrBuilder(
+              int index) {
+        if (shippingsBuilder_ == null) {
+          return shippings_.get(index);  } else {
+          return shippingsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public java.util.List<? extends fksproto.CsOrder.SalesOrderShippingOrBuilder>
+      getShippingsOrBuilderList() {
+        if (shippingsBuilder_ != null) {
+          return shippingsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(shippings_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderShipping.Builder addShippingsBuilder() {
+        return getShippingsFieldBuilder().addBuilder(
+                fksproto.CsOrder.SalesOrderShipping.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public fksproto.CsOrder.SalesOrderShipping.Builder addShippingsBuilder(
+              int index) {
+        return getShippingsFieldBuilder().addBuilder(
+                index, fksproto.CsOrder.SalesOrderShipping.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.SalesOrderShipping shippings = 5;</code>
+       *
+       * <pre>
+       *物流信息
+       * </pre>
+       */
+      public java.util.List<fksproto.CsOrder.SalesOrderShipping.Builder>
+      getShippingsBuilderList() {
+        return getShippingsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsOrder.SalesOrderShipping, fksproto.CsOrder.SalesOrderShipping.Builder, fksproto.CsOrder.SalesOrderShippingOrBuilder>
+      getShippingsFieldBuilder() {
+        if (shippingsBuilder_ == null) {
+          shippingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsOrder.SalesOrderShipping, fksproto.CsOrder.SalesOrderShipping.Builder, fksproto.CsOrder.SalesOrderShippingOrBuilder>(
+                  shippings_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          shippings_ = null;
+        }
+        return shippingsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.NewSalesOrderDetailResponse)
+    }
+
+    static {
+      defaultInstance = new NewSalesOrderDetailResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.NewSalesOrderDetailResponse)
+  }
+
   public interface CancelSalesOrderRequestOrBuilder extends
           // @@protoc_insertion_point(interface_extends:fksproto.CancelSalesOrderRequest)
           com.google.protobuf.MessageOrBuilder {
@@ -25236,6 +29650,32 @@ public final class CsOrder {
      * </pre>
      */
     float getTotalPaid();
+
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    boolean hasInitaddressurl();
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    java.lang.String getInitaddressurl();
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getInitaddressurlBytes();
   }
   /**
    * Protobuf type {@code fksproto.SubmitCrowdOrderResponse}
@@ -25322,6 +29762,12 @@ public final class CsOrder {
             case 45: {
               bitField0_ |= 0x00000010;
               totalPaid_ = input.readFloat();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              initaddressurl_ = bs;
               break;
             }
           }
@@ -25527,12 +29973,67 @@ public final class CsOrder {
       return totalPaid_;
     }
 
+    public static final int INITADDRESSURL_FIELD_NUMBER = 6;
+    private java.lang.Object initaddressurl_;
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public boolean hasInitaddressurl() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public java.lang.String getInitaddressurl() {
+      java.lang.Object ref = initaddressurl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          initaddressurl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string initaddressurl = 6;</code>
+     *
+     * <pre>
+     *礼品订单设置地址的url
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getInitaddressurlBytes() {
+      java.lang.Object ref = initaddressurl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        initaddressurl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       orderId_ = 0L;
       orderNumber_ = "";
       currencyCode_ = "";
       totalPaid_ = 0F;
+      initaddressurl_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -25570,6 +30071,9 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeFloat(5, totalPaid_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getInitaddressurlBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -25598,6 +30102,10 @@ public final class CsOrder {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeFloatSize(5, totalPaid_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getInitaddressurlBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -25731,6 +30239,8 @@ public final class CsOrder {
         bitField0_ = (bitField0_ & ~0x00000008);
         totalPaid_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000010);
+        initaddressurl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -25783,6 +30293,10 @@ public final class CsOrder {
           to_bitField0_ |= 0x00000010;
         }
         result.totalPaid_ = totalPaid_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.initaddressurl_ = initaddressurl_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -25817,6 +30331,11 @@ public final class CsOrder {
         }
         if (other.hasTotalPaid()) {
           setTotalPaid(other.getTotalPaid());
+        }
+        if (other.hasInitaddressurl()) {
+          bitField0_ |= 0x00000020;
+          initaddressurl_ = other.initaddressurl_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -26241,6 +30760,106 @@ public final class CsOrder {
         return this;
       }
 
+      private java.lang.Object initaddressurl_ = "";
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public boolean hasInitaddressurl() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public java.lang.String getInitaddressurl() {
+        java.lang.Object ref = initaddressurl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            initaddressurl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getInitaddressurlBytes() {
+        java.lang.Object ref = initaddressurl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          initaddressurl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder setInitaddressurl(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        initaddressurl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder clearInitaddressurl() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        initaddressurl_ = getDefaultInstance().getInitaddressurl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string initaddressurl = 6;</code>
+       *
+       * <pre>
+       *礼品订单设置地址的url
+       * </pre>
+       */
+      public Builder setInitaddressurlBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        initaddressurl_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:fksproto.SubmitCrowdOrderResponse)
     }
 
@@ -26308,6 +30927,16 @@ public final class CsOrder {
   com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internal_static_fksproto_GetSalesOrderDetailResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_NewSalesOrderDetailRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_NewSalesOrderDetailRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_NewSalesOrderDetailResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_NewSalesOrderDetailResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_fksproto_CancelSalesOrderRequest_descriptor;
   private static
   com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -26355,7 +30984,7 @@ public final class CsOrder {
                     "ard\030\007 \001(\010\022\023\n\013grand_total\030\010 \001(\002\022\020\n\010is_cro" +
                     "wd\030\t \001(\010\022\024\n\014currencycode\030\n \001(\t\022\022\n\ntotal_" +
                     "paid\030\013 \001(\002\022\030\n\020gift_card_amount\030\014 \001(\002\022\026\n\016" +
-                    "pay_method_str\030\r \001(\t\"\307\003\n\016SalesOrderItem\022",
+                    "pay_method_str\030\r \001(\t\"\247\004\n\016SalesOrderItem\022",
             "\025\n\rorder_item_id\030\001 \002(\003\022\020\n\010order_id\030\002 \002(\003" +
                     "\022\017\n\007item_id\030\003 \002(\003\022\021\n\tparcel_id\030\004 \001(\003\022\025\n\r" +
                     "parcel_number\030\005 \001(\t\022\024\n\014order_number\030\006 \001(" +
@@ -26366,98 +30995,115 @@ public final class CsOrder {
                     "_label\030\020 \001(\t\022\025\n\rcancel_reason\030\021 \001(\t\022\016\n\006p" +
                     "rompt\030\022 \001(\t\022\017\n\007message\030\023 \001(\t\022\024\n\014currency" +
                     "code\030\024 \001(\t\022\023\n\013korea_color\030\025 \001(\t\022\023\n\013korea",
-            "_order\030\026 \001(\t\022\030\n\020merchant_message\030\027 \001(\t\"[" +
-                    "\n\022SalesOrderShipping\022\026\n\016warehouse_name\030\001" +
-                    " \001(\t\022\027\n\017shipping_method\030\002 \001(\t\022\024\n\014shippin" +
-                    "g_fee\030\003 \001(\002\"\310\002\n\027SubmitSalesOrderRequest\022" +
-                    "#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010" +
-                    "userinfo\030\002 \001(\0132\031.fksproto.BaseUserReques" +
-                    "t\022\033\n\023shipping_address_id\030\003 \001(\005\022\025\n\ruse_gi" +
-                    "ft_card\030\004 \001(\010\022\022\n\npay_method\030\005 \001(\005\022\027\n\017pur" +
-                    "chase_scheme\030\006 \001(\005\022\027\n\017shipping_scheme\030\007 " +
-                    "\001(\005\022#\n\005pairs\030\010 \003(\0132\024.fksproto.PairIntInt",
-            "\022\022\n\nlocalecode\030\t \001(\t\022\024\n\014currencycode\030\n \001" +
-                    "(\t\022\022\n\ncurrencyid\030\013 \001(\005\"\221\001\n\030SubmitSalesOr" +
-                    "derResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.Bas" +
-                    "eResponse\022\020\n\010order_id\030\002 \001(\003\022\024\n\014order_num" +
-                    "ber\030\003 \001(\t\022\024\n\014currencycode\030\004 \001(\t\022\021\n\ttotal" +
-                    "paid\030\005 \001(\002\"\324\001\n\034ApplyForSalesOrderPayRequ" +
-                    "est\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest" +
-                    "\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUserRe" +
-                    "quest\022\020\n\010order_id\030\003 \002(\003\022\022\n\npay_method\030\004 " +
-                    "\002(\005\022\022\n\nlocalecode\030\005 \001(\t\022\024\n\014currencycode\030",
-            "\006 \001(\t\022\022\n\ncurrencyid\030\007 \001(\005\"W\n\035ApplyForSal" +
-                    "esOrderPayResponse\022$\n\004head\030\001 \002(\0132\026.fkspr" +
-                    "oto.BaseResponse\022\020\n\010pay_info\030\002 \001(\t\"\211\001\n\030G" +
-                    "etSalesOrderListRequest\022#\n\004head\030\001 \002(\0132\025." +
-                    "fksproto.BaseRequest\022+\n\010userinfo\030\002 \001(\0132\031" +
-                    ".fksproto.BaseUserRequest\022\013\n\003tab\030\003 \001(\005\022\016" +
-                    "\n\006pageno\030\004 \001(\005\"\242\001\n\031GetSalesOrderListResp" +
-                    "onse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRespon" +
-                    "se\022\014\n\004more\030\002 \001(\010\022$\n\006orders\030\003 \003(\0132\024.fkspr" +
-                    "oto.SalesOrder\022+\n\rorder_vs_urls\030\004 \003(\0132\024.",
-            "fksproto.PairIntStr\"\276\001\n\032GetSalesOrderDet" +
-                    "ailRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Base" +
-                    "Request\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.Bas" +
-                    "eUserRequest\022\020\n\010order_id\030\003 \001(\003\022\022\n\nlocale" +
-                    "code\030\004 \001(\t\022\024\n\014currencycode\030\005 \001(\t\022\022\n\ncurr" +
-                    "encyid\030\006 \001(\005\"\224\002\n\033GetSalesOrderDetailResp" +
-                    "onse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRespon" +
-                    "se\022#\n\005order\030\002 \001(\0132\024.fksproto.SalesOrder\022" +
-                    "-\n\013order_items\030\003 \003(\0132\030.fksproto.SalesOrd" +
-                    "erItem\022*\n\007address\030\004 \001(\0132\031.fksproto.Custo",
-            "merAddress\022/\n\tshippings\030\005 \003(\0132\034.fksproto" +
-                    ".SalesOrderShipping\022\036\n\005crowd\030\006 \001(\0132\017.fks" +
-                    "proto.Crowd\"}\n\027CancelSalesOrderRequest\022#" +
+            "_order\030\026 \001(\t\022\030\n\020merchant_message\030\027 \001(\t\022\036" +
+                    "\n\005crowd\030\030 \001(\0132\017.fksproto.Crowd\022\020\n\010is_cro" +
+                    "wd\030\031 \001(\010\022\022\n\nbag_status\030\032 \001(\005\022\030\n\020parcel_i" +
+                    "d_return\030\033 \001(\005\"\231\001\n\022SalesOrderShipping\022\026\n" +
+                    "\016warehouse_name\030\001 \001(\t\022\027\n\017shipping_method" +
+                    "\030\002 \001(\t\022\024\n\014shipping_fee\030\003 \001(\002\022\017\n\007premium\030" +
+                    "\004 \001(\002\022\024\n\014product_duty\030\005 \001(\002\022\025\n\rshipping_" +
+                    "duty\030\006 \001(\002\"\310\002\n\027SubmitSalesOrderRequest\022#" +
                     "\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010u" +
-                    "serinfo\030\002 \001(\0132\031.fksproto.BaseUserRequest" +
-                    "\022\020\n\010order_id\030\003 \002(\003\"@\n\030CancelSalesOrderRe" +
-                    "sponse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResp" +
-                    "onse\"\221\001\n\027ModifySalesOrderRequest\022#\n\004head" +
-                    "\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinf" +
-                    "o\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\020\n\010or",
-            "der_id\030\003 \002(\003\022\022\n\npay_method\030\004 \001(\005\"@\n\030Modi" +
-                    "fySalesOrderResponse\022$\n\004head\030\001 \002(\0132\026.fks" +
-                    "proto.BaseResponse\"\253\003\n\027SubmitCrowdOrderR" +
+                    "serinfo\030\002 \001(\0132\031.fksproto.BaseUserRequest",
+            "\022\033\n\023shipping_address_id\030\003 \001(\005\022\025\n\ruse_gif" +
+                    "t_card\030\004 \001(\010\022\022\n\npay_method\030\005 \001(\005\022\027\n\017purc" +
+                    "hase_scheme\030\006 \001(\005\022\027\n\017shipping_scheme\030\007 \001" +
+                    "(\005\022#\n\005pairs\030\010 \003(\0132\024.fksproto.PairIntInt\022" +
+                    "\022\n\nlocalecode\030\t \001(\t\022\024\n\014currencycode\030\n \001(" +
+                    "\t\022\022\n\ncurrencyid\030\013 \001(\005\"\251\001\n\030SubmitSalesOrd" +
+                    "erResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.Base" +
+                    "Response\022\020\n\010order_id\030\002 \001(\003\022\024\n\014order_numb" +
+                    "er\030\003 \001(\t\022\024\n\014currencycode\030\004 \001(\t\022\021\n\ttotalp" +
+                    "aid\030\005 \001(\002\022\026\n\016initaddressurl\030\006 \001(\t\"\324\001\n\034Ap",
+            "plyForSalesOrderPayRequest\022#\n\004head\030\001 \002(\013" +
+                    "2\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \001(" +
+                    "\0132\031.fksproto.BaseUserRequest\022\020\n\010order_id" +
+                    "\030\003 \002(\003\022\022\n\npay_method\030\004 \002(\005\022\022\n\nlocalecode" +
+                    "\030\005 \001(\t\022\024\n\014currencycode\030\006 \001(\t\022\022\n\ncurrency" +
+                    "id\030\007 \001(\005\"W\n\035ApplyForSalesOrderPayRespons" +
+                    "e\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022" +
+                    "\020\n\010pay_info\030\002 \001(\t\"\211\001\n\030GetSalesOrderListR" +
                     "equest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequ" +
-                    "est\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUse" +
-                    "rRequest\022\020\n\010crowd_id\030\003 \002(\003\022\017\n\007item_id\030\004 " +
-                    "\002(\003\022\013\n\003qty\030\005 \002(\005\022\014\n\004note\030\006 \001(\t\022#\n\005attrs\030" +
-                    "\007 \003(\0132\024.fksproto.PairIntInt\022\033\n\023shipping_" +
-                    "address_id\030\010 \001(\005\022\025\n\ruse_gift_card\030\t \001(\010\022" +
-                    "\022\n\npay_method\030\n \001(\005\022\027\n\017purchase_scheme\030\013",
-            " \001(\005\022\027\n\017shipping_scheme\030\014 \001(\005\022#\n\005pairs\030\r" +
-                    " \003(\0132\024.fksproto.PairIntInt\022\022\n\nlocalecode" +
-                    "\030\016 \001(\t\022\024\n\014currencycode\030\017 \001(\t\022\022\n\ncurrency" +
-                    "id\030\020 \001(\005\"\223\001\n\030SubmitCrowdOrderResponse\022$\n" +
-                    "\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022\020\n\010o" +
-                    "rder_id\030\002 \001(\003\022\024\n\014order_number\030\003 \001(\t\022\025\n\rc" +
-                    "urrency_code\030\004 \001(\t\022\022\n\ntotal_paid\030\005 \001(\002*E" +
-                    "\n\016PurchaseScheme\022\031\n\025PURCHASE_SCHEME_STOC" +
-                    "K\020\001\022\030\n\024PURCHASE_SCHEME_BOOK\020\002*G\n\016Shippin" +
-                    "gScheme\022\032\n\026SHIPPING_SCHEME_DIRECT\020\001\022\031\n\025S",
-            "HIPPING_SCHEME_MERGE\020\002*\177\n\rSalesOrderTab\022" +
-                    "\030\n\024SALES_ORDER_TAB_NONE\020\000\022\033\n\027SALES_ORDER" +
-                    "_TAB_PENDING\020\001\022\031\n\025SALES_ORDER_TAB_PAYED\020" +
-                    "\002\022\034\n\030SALES_ORDER_TAB_CANCELED\020\003*\223\002\n\017Sale" +
-                    "sOrderState\022\032\n\026SALES_ORDER_STATE_NONE\020\000\022" +
-                    "\035\n\031SALES_ORDER_STATE_PENDING\020\001\022%\n!SALES_" +
-                    "ORDER_STATE_AWAITING_CANCEL\020\002\022\036\n\032SALES_O" +
-                    "RDER_STATE_CANCELED\020\003\022\033\n\027SALES_ORDER_STA" +
-                    "TE_PAYED\020\004\022\"\n\036SALES_ORDER_STATE_PART_SHI" +
-                    "PPED\020\005\022\035\n\031SALES_ORDER_STATE_SHIPPED\020\006\022\036\n",
-            "\032SALES_ORDER_STATE_CROWDING\020\007*\260\003\n\023SalesO" +
-                    "rderItemState\022\037\n\033SALES_ORDER_ITEM_STATE_" +
-                    "NONE\020\000\022\"\n\036SALES_ORDER_ITEM_STATE_PENDING" +
-                    "\020\001\022%\n!SALES_ORDER_ITEM_STATE_PROCESSING\020" +
-                    "\002\022#\n\037SALES_ORDER_ITEM_STATE_CHECKING\020\003\022&" +
-                    "\n\"SALES_ORDER_ITEM_STATE_PREORDERING\020\004\022\"" +
-                    "\n\036SALES_ORDER_ITEM_STATE_PACKING\020\005\022\"\n\036SA" +
-                    "LES_ORDER_ITEM_STATE_NOTICED\020\006\022\"\n\036SALES_" +
-                    "ORDER_ITEM_STATE_SHIPPED\020\007\022*\n&SALES_ORDE" +
-                    "R_ITEM_STATE_AWAITING_CANCEL\020\010\022#\n\037SALES_",
-            "ORDER_ITEM_STATE_CANCELED\020\t\022#\n\037SALES_ORD" +
-                    "ER_ITEM_STATE_CROWDING\020\n"
+                    "est\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUse",
+            "rRequest\022\013\n\003tab\030\003 \001(\005\022\016\n\006pageno\030\004 \001(\005\"\242\001" +
+                    "\n\031GetSalesOrderListResponse\022$\n\004head\030\001 \002(" +
+                    "\0132\026.fksproto.BaseResponse\022\014\n\004more\030\002 \001(\010\022" +
+                    "$\n\006orders\030\003 \003(\0132\024.fksproto.SalesOrder\022+\n" +
+                    "\rorder_vs_urls\030\004 \003(\0132\024.fksproto.PairIntS" +
+                    "tr\"\276\001\n\032GetSalesOrderDetailRequest\022#\n\004hea" +
+                    "d\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userin" +
+                    "fo\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\020\n\010o" +
+                    "rder_id\030\003 \001(\003\022\022\n\nlocalecode\030\004 \001(\t\022\024\n\014cur" +
+                    "rencycode\030\005 \001(\t\022\022\n\ncurrencyid\030\006 \001(\005\"\224\002\n\033",
+            "GetSalesOrderDetailResponse\022$\n\004head\030\001 \002(" +
+                    "\0132\026.fksproto.BaseResponse\022#\n\005order\030\002 \001(\013" +
+                    "2\024.fksproto.SalesOrder\022-\n\013order_items\030\003 " +
+                    "\003(\0132\030.fksproto.SalesOrderItem\022*\n\007address" +
+                    "\030\004 \001(\0132\031.fksproto.CustomerAddress\022/\n\tshi" +
+                    "ppings\030\005 \003(\0132\034.fksproto.SalesOrderShippi" +
+                    "ng\022\036\n\005crowd\030\006 \001(\0132\017.fksproto.Crowd\"\276\001\n\032N" +
+                    "ewSalesOrderDetailRequest\022#\n\004head\030\001 \002(\0132" +
+                    "\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \001(\013" +
+                    "2\031.fksproto.BaseUserRequest\022\020\n\010order_id\030",
+            "\003 \001(\003\022\022\n\nlocalecode\030\004 \001(\t\022\024\n\014currencycod" +
+                    "e\030\005 \001(\t\022\022\n\ncurrencyid\030\006 \001(\005\"\364\001\n\033NewSales" +
+                    "OrderDetailResponse\022$\n\004head\030\001 \002(\0132\026.fksp" +
+                    "roto.BaseResponse\022#\n\005order\030\002 \001(\0132\024.fkspr" +
+                    "oto.SalesOrder\022-\n\013order_items\030\003 \003(\0132\030.fk" +
+                    "sproto.SalesOrderItem\022*\n\007address\030\004 \001(\0132\031" +
+                    ".fksproto.CustomerAddress\022/\n\tshippings\030\005" +
+                    " \003(\0132\034.fksproto.SalesOrderShipping\"}\n\027Ca" +
+                    "ncelSalesOrderRequest\022#\n\004head\030\001 \002(\0132\025.fk" +
+                    "sproto.BaseRequest\022+\n\010userinfo\030\002 \001(\0132\031.f",
+            "ksproto.BaseUserRequest\022\020\n\010order_id\030\003 \002(" +
+                    "\003\"@\n\030CancelSalesOrderResponse\022$\n\004head\030\001 " +
+                    "\002(\0132\026.fksproto.BaseResponse\"\221\001\n\027ModifySa" +
+                    "lesOrderRequest\022#\n\004head\030\001 \002(\0132\025.fksproto" +
+                    ".BaseRequest\022+\n\010userinfo\030\002 \001(\0132\031.fksprot" +
+                    "o.BaseUserRequest\022\020\n\010order_id\030\003 \002(\003\022\022\n\np" +
+                    "ay_method\030\004 \001(\005\"@\n\030ModifySalesOrderRespo" +
+                    "nse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRespons" +
+                    "e\"\253\003\n\027SubmitCrowdOrderRequest\022#\n\004head\030\001 " +
+                    "\002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002",
+            " \001(\0132\031.fksproto.BaseUserRequest\022\020\n\010crowd" +
+                    "_id\030\003 \002(\003\022\017\n\007item_id\030\004 \002(\003\022\013\n\003qty\030\005 \002(\005\022" +
+                    "\014\n\004note\030\006 \001(\t\022#\n\005attrs\030\007 \003(\0132\024.fksproto." +
+                    "PairIntInt\022\033\n\023shipping_address_id\030\010 \001(\005\022" +
+                    "\025\n\ruse_gift_card\030\t \001(\010\022\022\n\npay_method\030\n \001" +
+                    "(\005\022\027\n\017purchase_scheme\030\013 \001(\005\022\027\n\017shipping_" +
+                    "scheme\030\014 \001(\005\022#\n\005pairs\030\r \003(\0132\024.fksproto.P" +
+                    "airIntInt\022\022\n\nlocalecode\030\016 \001(\t\022\024\n\014currenc" +
+                    "ycode\030\017 \001(\t\022\022\n\ncurrencyid\030\020 \001(\005\"\253\001\n\030Subm" +
+                    "itCrowdOrderResponse\022$\n\004head\030\001 \002(\0132\026.fks",
+            "proto.BaseResponse\022\020\n\010order_id\030\002 \001(\003\022\024\n\014" +
+                    "order_number\030\003 \001(\t\022\025\n\rcurrency_code\030\004 \001(" +
+                    "\t\022\022\n\ntotal_paid\030\005 \001(\002\022\026\n\016initaddressurl\030" +
+                    "\006 \001(\t*E\n\016PurchaseScheme\022\031\n\025PURCHASE_SCHE" +
+                    "ME_STOCK\020\001\022\030\n\024PURCHASE_SCHEME_BOOK\020\002*f\n\016" +
+                    "ShippingScheme\022\032\n\026SHIPPING_SCHEME_DIRECT" +
+                    "\020\001\022\031\n\025SHIPPING_SCHEME_MERGE\020\002\022\035\n\031SHIPPIN" +
+                    "G_SCHEME_FBAG_GIFT\020\003*\177\n\rSalesOrderTab\022\030\n" +
+                    "\024SALES_ORDER_TAB_NONE\020\000\022\033\n\027SALES_ORDER_T" +
+                    "AB_PENDING\020\001\022\031\n\025SALES_ORDER_TAB_PAYED\020\002\022",
+            "\034\n\030SALES_ORDER_TAB_CANCELED\020\003*\223\002\n\017SalesO" +
+                    "rderState\022\032\n\026SALES_ORDER_STATE_NONE\020\000\022\035\n" +
+                    "\031SALES_ORDER_STATE_PENDING\020\001\022%\n!SALES_OR" +
+                    "DER_STATE_AWAITING_CANCEL\020\002\022\036\n\032SALES_ORD" +
+                    "ER_STATE_CANCELED\020\003\022\033\n\027SALES_ORDER_STATE" +
+                    "_PAYED\020\004\022\"\n\036SALES_ORDER_STATE_PART_SHIPP" +
+                    "ED\020\005\022\035\n\031SALES_ORDER_STATE_SHIPPED\020\006\022\036\n\032S" +
+                    "ALES_ORDER_STATE_CROWDING\020\007*\260\003\n\023SalesOrd" +
+                    "erItemState\022\037\n\033SALES_ORDER_ITEM_STATE_NO" +
+                    "NE\020\000\022\"\n\036SALES_ORDER_ITEM_STATE_PENDING\020\001",
+            "\022%\n!SALES_ORDER_ITEM_STATE_PROCESSING\020\002\022" +
+                    "#\n\037SALES_ORDER_ITEM_STATE_CHECKING\020\003\022&\n\"" +
+                    "SALES_ORDER_ITEM_STATE_PREORDERING\020\004\022\"\n\036" +
+                    "SALES_ORDER_ITEM_STATE_PACKING\020\005\022\"\n\036SALE" +
+                    "S_ORDER_ITEM_STATE_NOTICED\020\006\022\"\n\036SALES_OR" +
+                    "DER_ITEM_STATE_SHIPPED\020\007\022*\n&SALES_ORDER_" +
+                    "ITEM_STATE_AWAITING_CANCEL\020\010\022#\n\037SALES_OR" +
+                    "DER_ITEM_STATE_CANCELED\020\t\022#\n\037SALES_ORDER" +
+                    "_ITEM_STATE_CROWDING\020\n"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -26486,13 +31132,13 @@ public final class CsOrder {
     internal_static_fksproto_SalesOrderItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_SalesOrderItem_descriptor,
-            new java.lang.String[] { "OrderItemId", "OrderId", "ItemId", "ParcelId", "ParcelNumber", "OrderNumber", "Title", "Url", "State", "UnitPrice", "Qty", "QtyPack", "QtyShip", "QtyCancel", "Buyfrom", "ExtendLabel", "CancelReason", "Prompt", "Message", "Currencycode", "KoreaColor", "KoreaOrder", "MerchantMessage", });
+            new java.lang.String[] { "OrderItemId", "OrderId", "ItemId", "ParcelId", "ParcelNumber", "OrderNumber", "Title", "Url", "State", "UnitPrice", "Qty", "QtyPack", "QtyShip", "QtyCancel", "Buyfrom", "ExtendLabel", "CancelReason", "Prompt", "Message", "Currencycode", "KoreaColor", "KoreaOrder", "MerchantMessage", "Crowd", "IsCrowd", "BagStatus", "ParcelIdReturn", });
     internal_static_fksproto_SalesOrderShipping_descriptor =
             getDescriptor().getMessageTypes().get(2);
     internal_static_fksproto_SalesOrderShipping_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_SalesOrderShipping_descriptor,
-            new java.lang.String[] { "WarehouseName", "ShippingMethod", "ShippingFee", });
+            new java.lang.String[] { "WarehouseName", "ShippingMethod", "ShippingFee", "Premium", "ProductDuty", "ShippingDuty", });
     internal_static_fksproto_SubmitSalesOrderRequest_descriptor =
             getDescriptor().getMessageTypes().get(3);
     internal_static_fksproto_SubmitSalesOrderRequest_fieldAccessorTable = new
@@ -26504,7 +31150,7 @@ public final class CsOrder {
     internal_static_fksproto_SubmitSalesOrderResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_SubmitSalesOrderResponse_descriptor,
-            new java.lang.String[] { "Head", "OrderId", "OrderNumber", "Currencycode", "Totalpaid", });
+            new java.lang.String[] { "Head", "OrderId", "OrderNumber", "Currencycode", "Totalpaid", "Initaddressurl", });
     internal_static_fksproto_ApplyForSalesOrderPayRequest_descriptor =
             getDescriptor().getMessageTypes().get(5);
     internal_static_fksproto_ApplyForSalesOrderPayRequest_fieldAccessorTable = new
@@ -26541,42 +31187,54 @@ public final class CsOrder {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_GetSalesOrderDetailResponse_descriptor,
             new java.lang.String[] { "Head", "Order", "OrderItems", "Address", "Shippings", "Crowd", });
-    internal_static_fksproto_CancelSalesOrderRequest_descriptor =
+    internal_static_fksproto_NewSalesOrderDetailRequest_descriptor =
             getDescriptor().getMessageTypes().get(11);
+    internal_static_fksproto_NewSalesOrderDetailRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_NewSalesOrderDetailRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "OrderId", "Localecode", "Currencycode", "Currencyid", });
+    internal_static_fksproto_NewSalesOrderDetailResponse_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+    internal_static_fksproto_NewSalesOrderDetailResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_NewSalesOrderDetailResponse_descriptor,
+            new java.lang.String[] { "Head", "Order", "OrderItems", "Address", "Shippings", });
+    internal_static_fksproto_CancelSalesOrderRequest_descriptor =
+            getDescriptor().getMessageTypes().get(13);
     internal_static_fksproto_CancelSalesOrderRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_CancelSalesOrderRequest_descriptor,
             new java.lang.String[] { "Head", "Userinfo", "OrderId", });
     internal_static_fksproto_CancelSalesOrderResponse_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(14);
     internal_static_fksproto_CancelSalesOrderResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_CancelSalesOrderResponse_descriptor,
             new java.lang.String[] { "Head", });
     internal_static_fksproto_ModifySalesOrderRequest_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(15);
     internal_static_fksproto_ModifySalesOrderRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_ModifySalesOrderRequest_descriptor,
             new java.lang.String[] { "Head", "Userinfo", "OrderId", "PayMethod", });
     internal_static_fksproto_ModifySalesOrderResponse_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(16);
     internal_static_fksproto_ModifySalesOrderResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_ModifySalesOrderResponse_descriptor,
             new java.lang.String[] { "Head", });
     internal_static_fksproto_SubmitCrowdOrderRequest_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(17);
     internal_static_fksproto_SubmitCrowdOrderRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_SubmitCrowdOrderRequest_descriptor,
             new java.lang.String[] { "Head", "Userinfo", "CrowdId", "ItemId", "Qty", "Note", "Attrs", "ShippingAddressId", "UseGiftCard", "PayMethod", "PurchaseScheme", "ShippingScheme", "Pairs", "Localecode", "Currencycode", "Currencyid", });
     internal_static_fksproto_SubmitCrowdOrderResponse_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(18);
     internal_static_fksproto_SubmitCrowdOrderResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_SubmitCrowdOrderResponse_descriptor,
-            new java.lang.String[] { "Head", "OrderId", "OrderNumber", "CurrencyCode", "TotalPaid", });
+            new java.lang.String[] { "Head", "OrderId", "OrderNumber", "CurrencyCode", "TotalPaid", "Initaddressurl", });
     fksproto.CsHead.getDescriptor();
     fksproto.CsBase.getDescriptor();
     fksproto.CsAddress.getDescriptor();

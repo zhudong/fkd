@@ -18,10 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-
             <RelativeLayout
-                android:id="@+id/delivery_merge_order_layout"
+                android:id="@+id/delivery_gift_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -30,26 +28,26 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/merge_order_title"
+                    android:id="@+id/gift_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/String_merge_order"
+                    android:text="@string/String_direct_fu"
                     android:layout_centerVertical="true"
                     android:textColor="@color/text_gray"
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/delivery_merge_order_help_iv"
+                    android:id="@+id/delivery_gift_help_iv"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="center"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/merge_order_title"
+                    android:layout_toRightOf="@id/gift_title"
                     android:src="@mipmap/help" />
 
                 <ImageView
-                    android:id="@+id/delivery_merge_order_iv"
+                    android:id="@+id/delivery_gift_iv"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_centerVertical="true"
@@ -80,7 +78,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="center"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/direct_mail_title"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/help" />
@@ -93,7 +91,42 @@
                     android:layout_alignParentRight="true"
                     android:src="@mipmap/cart_unselect" />
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/delivery_merge_order_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="10dp">
 
+                <TextView
+                    android:id="@+id/merge_order_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/String_merge_order"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/delivery_merge_order_help_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/merge_order_title"
+                    android:src="@mipmap/help" />
+
+                <ImageView
+                    android:id="@+id/delivery_merge_order_iv"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/cart_unselect" />
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/delivery_address_layout"
                 android:layout_width="match_parent"

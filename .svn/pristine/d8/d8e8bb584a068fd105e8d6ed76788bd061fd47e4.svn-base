@@ -1,0 +1,239 @@
+package com.fuexpress.kr.ui.activity.crowd;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.PayMethodManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.activity.ParcelPayMethodActivity;
+import com.fuexpress.kr.ui.adapter.OrderCommodityAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsAddress;
+import fksproto.CsCart;
+import fksproto.CsUser;
+
+
+/**
+ * Created by Administrator on 2016/4/13.
+ */
+public class CrowdCartOrderActivity extends BaseActivity implements View.OnClickListener {
+
+    public static final String Crowd_order_info = "Crowd_order_info";
+
+    @BindView(R.id.megre_order_layout)
+    LinearLayout mMegreOrderLayout;
+    @BindView(R.id.direct_layout)
+    LinearLayout mDirectLayout;
+    @BindView(R.id.delivery_layout)
+    LinearLayout mDeliveryLayout;
+    @BindView(R.id.order_address_title_tv)
+    TextView mOrderAddressTitleTv;
+    @BindView(R.id.order_default_address_iv)
+    TextView mOrderDefaultAddressIv;
+    @BindView(R.id.order_name_and_phone_tv)
+    TextView mOrderNameAndPhoneTv;
+    @BindView(R.id.order_package_address)
+    TextView mOrderPackageAddress;
+    @BindView(R.id.address_arrow_iv)
+    ImageView mAddressArrowIv;
+    @BindView(R.id.order_package_address_layout)
+    LinearLayout mOrderPackageAddressLayout;
+    @BindView(R.id.shipping_left_tv)
+    TextView mShippingLeftTv;
+    @BindView(R.id.order_shipping_content_layout)
+    LinearLayout mOrderShippingContentLayout;
+    @BindView(R.id.order_shipping_layout)
+    RelativeLayout mOrderShippingLayout;
+    @BindView(R.id.order_payment_layout)
+    RelativeLayout mOrderPaymentLayout;
+    @BindView(R.id.order_content_layout)
+    LinearLayout mOrderContentLayout;
+    @BindView(R.id.cart_order_sv)
+    ScrollView mCartOrderSv;
+    @BindView(R.id.order_gandtotal_tv)
+    TextView mOrderGandtotalTv;
+    @BindView(R.id.order_grand_total_msg_tv)
+    TextView mOrderGrandTotalMsgTv;
+    @BindView(R.id.order_submit_btn)
+    Button mOrderSubmitBtn;
+    @BindView(R.id.title_tv_center)
+    TextView mTitleTvCenter;
+    @BindView(R.id.tv_warehose_name)
+    TextView mTvWarehoseName;
+    @BindView(R.id.payment_method)
+    TextView mPaymentMethod;
+    public static CrowdOrderInfo mOrderInfo;
+    PayMethodManager mPayMethodManager;
+    public final int MPAYMETHODCODE = 12334;
+
+    @Override
+    public View setInitView() {
+        return View.inflate(this, R.layout.activity_crowd_cart_order, null);
+    }
+
+    @Override
+    public void initView() {
+        mPayMethodManager = PayMethodManager.getInstance(this);
+        mOrderInfo = (CrowdOrderInfo) getIntent().getExtras().getSerializable(Crowd_order_info);
+        mTitleTvCenter.setText(getString(R.string.cart_order_title_bar_title));
+        getCustomerAddressList();
+        showItem();
+        mOrderGandtotalTv.setText(UIUtils.getCurrency(this, mOrderInfo.getTotal()));
+        showPayMethod();
+    }
+
+    private void showPayMethod() {
+        mPayMethodManager.reSet();
+        mPayMethodManager.getCurrentPayMethod(new PayMethodManager.PayMethodResultListener() {
+            @Override
+            public void onResult(String payCode, final String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPaymentMethod.setText(result);
+                    }
+                });
+            }
+
+            @Override
+            public void onMethodList(List<CsUser.PaymentList> paymantlistList, String balance, int couponCount) {
+
+            }
+        }, mOrderInfo.getTotal(), AccountManager.getInstance().getCurrencyCode());
+
+    }
+
+    private void showItem() {
+        mTvWarehoseName.setText(mOrderInfo.getWarehouse().getName());
+        ArrayList<CsCart.SalesCartItem> list = new ArrayList<>();
+        list.add(mOrderInfo.getSalesCartItem());
+        OrderCommodityAdapter adapter = new OrderCommodityAdapter(this, list);
+        View view = adapter.getView(0, null, null);
+        mOrderContentLayout.addView(view);
+    }
+
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.delivery_layout, R.id.order_payment_layout, R.id.order_package_address_layout})
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.title_iv_left:
+            case R.id.title_tv_left:
+                finish();
+                break;
+            case R.id.order_package_address_layout:
+                intent = new Intent(this, AddressManagerActivity.class);
+                intent.putExtra(AddressManagerActivity.KEY_IS_CHOOSE_TYPE, true);
+                startActivityForResult(intent, Constants.ADDRESS_REQUEST_CODE);
+                break;
+            case R.id.delivery_layout:
+                intent = new Intent(this, CrowdDeliveryActivity.class);
+                startActivityForResult(intent, Constants.DELIVERY_REQUEST_CODE);
+                break;
+            case R.id.order_payment_layout:
+                intent = new Intent(this, ParcelPayMethodActivity.class);
+                intent.putExtra(ParcelPayMethodActivity.CURRENCY_CODE, AccountManager.getInstance().getCurrencyCode());
+                intent.putExtra(ParcelPayMethodActivity.SHIPPING_FEE, mOrderInfo.getTotal());
+                intent.putExtra(ParcelPayMethodActivity.USE_COUPON, false);
+                startActivityForResult(intent, MPAYMETHODCODE);
+                break;
+        }
+    }
+
+    public void getCustomerAddressList() {
+//        showLoading(5000);
+        CsAddress.GetCustomerAddressListExRequest.Builder builder = CsAddress.GetCustomerAddressListExRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        builder.setPageNum(1);
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.GetCustomerAddressListExResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.GetCustomerAddressListExResponse response) {
+//                closeLoading();
+                LogUtils.d("getCustomerAddress: " + response.toString());
+                List<CsAddress.CustomerAddress> addressesList = response.getAddressesList();
+                if (addressesList != null && addressesList.size() > 0) {
+                    for (int i = 0; i < addressesList.size(); i++) {
+                        CsAddress.CustomerAddress address = addressesList.get(i);
+                        if (address.getIsDefault()) mAddress = address;
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showAddress();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                closeLoading();
+            }
+        });
+    }
+
+    public static CsAddress.CustomerAddress mAddress;
+
+    private void showAddress() {
+        if (mAddress == null) {
+            return;
+        }
+        String str = getResources().getString(R.string.String_cart_consignee_msg);
+        str = String.format(str, mAddress.getName(), mAddress.getPhone());
+        mOrderNameAndPhoneTv.setText(str);
+        mOrderPackageAddress.setText(mAddress.getStreet() + "," + mAddress.getFullRegionName());
+        if (mAddress.getIsDefault()) {
+            mOrderDefaultAddressIv.setVisibility(View.VISIBLE);
+        } else {
+            mOrderDefaultAddressIv.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MPAYMETHODCODE) {
+            showPayMethod();
+        }
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE) {
+            if (data != null) {
+                mAddress = (CsAddress.CustomerAddress) data.getExtras().getSerializable("address");
+                showAddress();
+            }
+        }
+        if (requestCode == Constants.DELIVERY_REQUEST_CODE) {
+            showAddress();
+        }
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+}

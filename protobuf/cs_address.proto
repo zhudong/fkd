@@ -1,6 +1,5 @@
 import "cs_head.proto";
 import "cs_base.proto";
-
 package fksproto;
 
 //用户地址
@@ -28,7 +27,7 @@ message CustomerAddress
 
 message RegionCityInfo{
 	optional string  regionId    =  1;//城市ID
-	optional string  regionName  =  2;//地区城市名称 
+	optional string  regionName  =  2;//地区城市名称
 }
 
 message RegionInfo{
@@ -40,7 +39,7 @@ message CountryRegionInfo
 {
 	optional string      countryCode       = 1;//国家编码
 	optional string      countryName       = 2;//国家名称
-	repeated RegionInfo  regionInfoList    = 3;//地区信息列表  
+	repeated RegionInfo  regionInfoList    = 3;//地区信息列表
 }
 
 //添加用户地址请求
@@ -233,4 +232,69 @@ message GetCustomerAddressListExResponse
 	repeated CustomerAddress addresses = 2;
 	optional bool            more      = 3;
 	optional int32           count     = 4;
+}
+
+//收货地址初始化  java接口
+message InitAddressAjaxRequest
+{
+	required BaseRequest     head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional int32           parcelId     = 3;
+	optional int32           salesOrderId = 4;
+	optional int32           appType      = 5;
+	optional string          localeCode   = 6;
+}
+
+message TinySalesOrderItem
+{
+	optional string 	title         = 1; //标题
+	optional string 	url           = 2; //图片url
+	optional int32  	qty           = 3; //订单单品状态
+}
+
+message TinyParcel
+{
+	optional int64  parcel_id            = 1; //包裹id
+	optional string parcel_name          = 2; //包裹名称
+}
+
+//收货地址初始化应答
+message InitAddressAjaxResponse
+{
+	required BaseResponse    head          = 1;
+	optional string          msg           = 2;
+	optional string          sign          = 3;
+	optional string          warehouseName = 4;
+	optional string          name          = 5;
+	optional string          telephone     = 6;
+	optional string          postcode      = 7;
+	optional string          street        = 8;
+	optional string          countryCode   = 9;
+	optional int32           regionId      = 10;
+	optional int32           parcelId      = 11;
+	optional string          countryName   = 12;
+	optional string          regionName    = 13;
+	repeated TinySalesOrderItem  orderItemList = 14;
+	repeated TinyParcel 	     parcelList    = 15;
+}
+
+//保存收货地址请求  java接口
+message SaveAddressAjaxRequest
+{
+	required BaseRequest     head         = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional int32           parcelId     = 3;
+	optional int32           salesOrderId = 4;
+	optional string          name         = 5;
+	optional string          telephone    = 6;
+	optional string          postcode     = 7;
+	optional string          street       = 8;
+	optional string          directoryCountryCode      = 9;
+	optional int32           directoryCountryRegionId  = 10;
+}
+
+//保存收货地址应答
+message SaveAddressAjaxResponse
+{
+	required BaseResponse    head          = 1;
 }

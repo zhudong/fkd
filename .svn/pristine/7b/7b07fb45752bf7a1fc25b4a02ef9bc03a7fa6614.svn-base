@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_item_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="16dp"
+        android:text="@string/string_parcel_item_total"
+        android:textColor="#FF000000"
+        android:textSize="12sp"
+        />
+
+    <com.fuexpress.kr.ui.view.CustomListView
+        android:id="@+id/lv_item_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingBottom="13dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="13dp"
+                android:text="@string/string_fu_bag_count"
+                android:textColor="#FF000000"
+                android:textSize="12sp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/divide_line"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingBottom="13dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="13dp"
+                android:text="@string/gift_card_message_02"
+                android:textColor="#FF000000"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ll_left"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:hint="@string/string_input_fu_count"
+                android:inputType="number"
+                android:paddingBottom="13dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="13dp"
+                android:textColor="#FF666666"
+                android:textSize="12sp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/divide_line"/>
+
+            <EditText
+                android:id="@+id/et_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:hint="@string/string_send_fu_message"
+                android:paddingBottom="13dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="13dp"
+                android:textColor="#FF666666"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_save"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_append_item_continue"
+        android:gravity="center"
+        android:text="@string/string_btn_send_fu"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/tv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="100dp"
+        android:text="@string/string_baby_counts"
+        android:textColor="#FF666666"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        />
+
+
+</LinearLayout>

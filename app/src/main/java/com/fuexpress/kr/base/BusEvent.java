@@ -269,10 +269,17 @@ public class BusEvent {
     //当创建图集的小型Activity成功创建之后的消失:
     public static final int CREAT_ALBUM_SUCCESS = 140;
 
+    //包裹类型的地址信息初始化成功:
+    public static final int INIT_PARCEL_ADDRESS_COMPLETE = 155;
+
     //加入图集成功需要弹dialog:
     public static final int ADD_ITEM_TO_ALBUM_SUCCESS_SHOW_DIALOG = 151;
     public static final int GO_PRODUSRC_PAGE = 152;
-    public static final int GO_CATEGORY_PAGE = 153;
+    public static final int GO_CROWD_PAGE = 153;
+    public static final int GO_CROWD_Detail = 154;
+
+    //绑定微信：
+    public static final int BIND_WX_REQUEST = 155;
 
 
     //图片下载完成
@@ -374,6 +381,12 @@ public class BusEvent {
         mType = type;
         mStrParam = stringParam;
         mBooleanParam = booleanParam;
+        mStrParam02 = strParam02;
+    }
+
+    public BusEvent(int type,  String stringParam, String strParam02) {
+        mType = type;
+        mStrParam = stringParam;
         mStrParam02 = strParam02;
     }
 

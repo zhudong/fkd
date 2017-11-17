@@ -209,11 +209,12 @@
     <string name="String_package_address">Customer address</string>
     <string name="String_package_wait_receive">Waiting for delivery</string>
     <string name="package_product_realy_price">Actual value</string>
-    <string name="package_product_realy_price_note">(The actual value includes&lt;%1$s)</string>
+    <string name="package_product_realy_price_note">(Actual value of parcel no more than %1$s)   </string>
     <string name="package_product_tarrif">Goods tax</string>
     <string name="package_product_tarrif_note">(Customs duty%1$.2f%%)</string>
     <string name="package_shipping_tarrif">Shipping tax</string>
     <string name="package_shipping_tarrif_note">(Customs duty%1$.2f%%，est. amount)</string>
+    <string name="package_shipping_tarrif_note_ver2">(Customs duty%1$.2f%%)</string>
     <string name="package_item_need_number">Sheet No.: %1$d</string>
     <string name="package_item_state">Status：%1$s</string>
     <string name="package_item_note">备注说明：%1$s</string>
@@ -513,6 +514,7 @@
     <string name="card_order_detail_order_state">Order status:</string>
     <string name="card_order_detail_order_type">Order type:</string>
     <string name="card_order_detail_cancel_order">Cancel order</string>
+    <string name="card_order_detail_again_order">Re-Order</string>
     <string name="String_payment_type">Payment methods</string>
     <string name="cart_order_card_msg_title_type_submit">Submit to ship:</string>
     <string name="recharge_order_detail_freight">Est. shipping:</string>
@@ -565,6 +567,7 @@
     <string name="exchange">Redeem</string>
     <string name="coupon_count_msg">%1$d available</string>
     <string name="card_payment_success_title_bar_title">Payment successful</string>
+    <string name="card_payment_success_crowd_title">Payment successful</string>
     <string name="pay_result_payment_success_order_title">Your payment was successful</string>
     <string name="gift_card_thanks_msg">Thanks for your order at FU Express.</string>
     <string name="gift_card_payment_success_order_no">Your gift card order #</string>
@@ -833,6 +836,7 @@
     <string name="processing">Pending</string>
     <string name="preorder">In-transit</string>
     <string name="packing">In Stock</string>
+    <string name="packing_num">%1$d in stock</string>
     <string name="shipped">Shipped</string>
     <string name="alipay">Alipay</string>
     <string name="netpay">China UnionPay</string>
@@ -878,9 +882,9 @@
     <string name="reward_score">Reward Points</string>
     <string name="search_materials">"  Material Search"</string>
     <string name="notice_customer_service">After remittance, please notify customer service！</string>
-    <string name="share_success">分享成功</string>
-    <string name="share_failure">分享失败</string>
-    <string name="share_cancel">分享被取消</string>
+    <string name="share_success">success</string>
+    <string name="share_failure">fail</string>
+    <string name="share_cancel">cancel</string>
     <string name="pay_by_gift_card">account balance</string>
     <string name="are_you_sure_cancel_demands">Are you sure you want to cancel_this_demand?</string>
     <string name="login_language">English</string>
@@ -917,8 +921,8 @@
 
     <string name="integral_list_date">Date：%1$s</string>
     <string name="integral_available_points">Available points%1$s</string>
-    <string name="most_used_cities" translatable="false"> My Cities</string>
-    <string name="select_city" translatable="false">Change City</string>
+    <string name="most_used_cities"> My Cities</string>
+    <string name="select_city">Change City</string>
 
     <string name="search_result_brackets">(%1$s)</string>
 
@@ -942,8 +946,8 @@
     <string name="withdraw_success_msg">Your request to withdraw fund to your account has been approved.We will send you the gift card by Email.</string>
     <string name="withdraw_current_integral_msg">Current Points</string>
     <string name="dao_u_pay">DAOUPAY</string>
-    <string name="String_contract_service" translatable="false">Live Chat</string>
-    <string name="String_refresh" translatable="false">Refresh</string>
+    <string name="String_contract_service">Live Chat</string>
+    <string name="String_refresh">Refresh</string>
 
 
     <string name="selected_address_title_right">Selected</string>
@@ -953,47 +957,47 @@
 
     <string name="default_not_delete">Default address can\'t be deleted</string>
     <string name="string_all_parcels">All parcels</string>
-    <string name="String_buy_value_card" translatable="false">Buy Gift Card</string>
-    <string name="gift_card_title_msg" translatable="false">FU Express Gift Card</string>
-<string name="gift_card_msg_info" translatable="false">After placing an order,you need buy FU Express gift card and top  up your account for on-time shipping.Once parcels delivered,the shipping cost will be deducted directly from the gift card account.
+    <string name="String_buy_value_card">Buy Gift Card</string>
+    <string name="gift_card_title_msg">FU Express Gift Card</string>
+    <string name="gift_card_msg_info">After placing an order,you need buy FU Express gift card and top  up your account for on-time shipping.Once parcels delivered,the shipping cost will be deducted directly from the gift card account.
     </string>
-    <string name="gift_card_addressee_name" translatable="false">To:</string>
-    <string name="gift_card_addressee_name_02" translatable="false">To:</string>
-    <string name="gift_card_input_addressee_name" translatable="false">Please enter recipient\'s name</string>
-    <string name="gift_card_mail" translatable="false">Email:</string>
-    <string name="gift_card_mail_02" translatable="false">Email:</string>
-    <string name="gift_card_input_mail" translatable="false">Please enter recipient\'s email</string>
-    <string name="gift_card_sender_name" translatable="false">From:</string>
-    <string name="gift_card_input_sender_name" translatable="false">Please enter sender\'s name</string>
-    <string name="gift_card_message" translatable="false">Message:</string>
-    <string name="gift_card_message_02" translatable="false">Message:</string>
-    <string name="gift_card_message_limit" translatable="false">Limited to 100 characters</string>
-    <string name="gift_card_msg_add_to_cart" translatable="false">Add to Cart</string>
+    <string name="gift_card_addressee_name">To:</string>
+    <string name="gift_card_addressee_name_02">To:</string>
+    <string name="gift_card_input_addressee_name">Please enter recipient\'s name</string>
+    <string name="gift_card_mail">Email:</string>
+    <string name="gift_card_mail_02">Email:</string>
+    <string name="gift_card_input_mail">Please enter recipient\'s email</string>
+    <string name="gift_card_sender_name">From:</string>
+    <string name="gift_card_input_sender_name">Please enter sender\'s name</string>
+    <string name="gift_card_message">Message:</string>
+    <string name="gift_card_message_02">Message:</string>
+    <string name="gift_card_message_limit">Limited to 100 characters</string>
+    <string name="gift_card_msg_add_to_cart">Add to Cart</string>
     <string name="add_gift_card_title">Select a design</string>
-    <string name="gift_card_face_value" translatable="false">Value</string>
-    <string name="gift_card_count" translatable="false">Qty.</string>
-    <string name="gift_card_confirm_btn" translatable="false">Confirm</string>
+    <string name="gift_card_face_value">Value</string>
+    <string name="gift_card_count">Qty.</string>
+    <string name="gift_card_confirm_btn">Confirm</string>
     <string name="gift_card_email_input_msg">Invalid email</string>
     <string name="gift_card_email_input_msg2">Enter Email</string>
     <string name="gift_card_add_cart_toast_msg">Gift card number can\'t exceed 20, please checkout cards in the cart</string>
     <string name="gift_card_title_bar_title">Gift Card Cart</string>
-    <string name="gift_card_TOU" translatable="false">Gift card Terms of Use</string>
-    <string name="gift_card_waring" translatable="false">Note:Using gift card to top up, it is not allowed to exchange for cash or refund to bank card</string>
-    <string name="String_for_cart_select_all" translatable="false">Select all</string>
-    <string name="gift_card_grandtotal" translatable="false">Total:</string>
-    <string name="gift_card_account" translatable="false">Checkout</string>
-    <string name="gift_card_empty" translatable="false">It is empty here!</string>
-    <string name="gift_card_item_title" translatable="false">Gift Card is </string>
+    <string name="gift_card_TOU">Gift card Terms of Use</string>
+    <string name="gift_card_waring">Note:Using gift card to top up, it is not allowed to exchange for cash or refund to bank card</string>
+    <string name="String_for_cart_select_all">Select all</string>
+    <string name="gift_card_grandtotal">Total:</string>
+    <string name="gift_card_account">Checkout</string>
+    <string name="gift_card_empty">It is empty here!</string>
+    <string name="gift_card_item_title">Gift Card is </string>
     <string name="gift_card_order_dialog_msg">Are you sure you want to delete it?</string>
     <string name="card_TOU_title_bar_title">Terms of Use</string>
     <string name="cart_order_title_bar_title">Confirm Order</string>
-    <string name="gift_card_count_msg" translatable="false">X%1$s</string>
-    <string name="gift_card_commit_order" translatable="false">Submit order</string>
+    <string name="gift_card_count_msg">X%1$s</string>
+    <string name="gift_card_commit_order">Submit order</string>
     <string name="gift_card_dialog_msg">Cancel this payment? You can pay later by going to “My Balance - Gift Card Orders”</string>
     <string name="are_you_sure_cancel">Are you sure you want to cancel?</string>
 
-    <string name="gift_card_count_title" translatable="false">Qty.</string>
-    <string name="gift_card_grandtotal_title" translatable="false">Total</string>
+    <string name="gift_card_count_title">Qty.</string>
+    <string name="gift_card_grandtotal_title">Total</string>
     <string name="expire_date">Period of use</string>
 
 
@@ -1012,248 +1016,251 @@
     <string name="title_produ_src_focus">Follwed</string>
 
 
-    <string name="String_for_home_item_like" translatable="false">Like  </string>
-    <string name="String_for_home_item_unlike" translatable="false">Unlike  </string>
+    <string name="String_for_home_item_like">Like  </string>
+    <string name="String_for_home_item_unlike">Unlike  </string>
 
 
-    <string name="merchant_detail_business_working" translatable="false">Opening</string>
-    <string name="merchant_detail_business_working_none" translatable="false">Closed</string>
+    <string name="merchant_detail_business_working">Opening</string>
+    <string name="merchant_detail_business_working_none">Closed</string>
 
 
-    <string name="merchant_detail_icon_desc" translatable="false">Profile</string>
-    <string name="merchant_detail_icon_image" translatable="false">Photos</string>
-    <string name="merchant_business_main_title" translatable="false">Primary Business:</string>
-    <string name="merchant_business_shoptime_title" translatable="false">Opening Bours:</string>
-    <string name="String_for_home_item_add_attention" translatable="false">Follow  </string>
-    <string name="merchant_detail_follower_befor_string" translatable="false">Followers </string>
+    <string name="merchant_detail_icon_desc">Profile</string>
+    <string name="merchant_detail_icon_image">Photos</string>
+    <string name="merchant_business_main_title">Primary Business:</string>
+    <string name="merchant_business_shoptime_title">Opening Bours:</string>
+    <string name="String_for_home_item_add_attention">Follow  </string>
+    <string name="merchant_detail_follower_befor_string">Followers </string>
 
-    <string name="merchant_detail_followed_not" translatable="false">Follow</string>
-    <string name="merchant_detail_followed" translatable="false">Unfollow</string>
-    <string name="String_for_store_dialog_request_fail" translatable="false">Request failed</string>
+    <string name="merchant_detail_followed_not">Follow</string>
+    <string name="merchant_detail_followed">Unfollow</string>
+    <string name="String_for_store_dialog_request_fail">Request failed</string>
 
-    <string name="merchant_detail_follows_title" translatable="false">Followers</string>
-    <string name="merchant_detail_follows_space" translatable="false">Followers&#160;&#160;</string>
-    <string name="merchant_detail_image_title" translatable="false">Merchant photos</string>
-    <string name="share_error_info" translatable="false">Please install clients </string>
-    <string name="send_to_wx_friend" translatable="false">Send to Chat</string>
-    <string name="share_to_wx_timeline" translatable="false">Share on Moments</string>
-    <string name="favovrite" translatable="false">Favorite</string>
-    <string name="send_to_qq_friend" translatable="false">Send to Friend</string>
-    <string name="share_to_qzone" translatable="false">Share on QQ zone</string>
-    <string name="my_favorite" translatable="false">My Favorite</string>
+    <string name="merchant_detail_follows_title">Followers</string>
+    <string name="merchant_detail_follows_space">Followers&#160;&#160;</string>
+    <string name="merchant_detail_image_title">Merchant photos</string>
+    <string name="share_error_info">Please install clients </string>
+    <string name="send_to_wx_friend">Send to Chat</string>
+    <string name="share_to_wx_timeline">Share on Moments</string>
+    <string name="favovrite">Favorite</string>
+    <string name="send_to_qq_friend">Send to Friend</string>
+    <string name="share_to_qzone">Share on QQ zone</string>
+    <string name="my_favorite">My Favorite</string>
     <string name="photos_">%s photo(s)</string>
 
-    <string name="String_share" translatable="false">Share</string>
-    <string name="String_home_page" translatable="false">Home</string>
+    <string name="String_share">Share</string>
+    <string name="String_home_page">Home</string>
     <string name="main_source">Brands</string>
 
     <string name="string_sell_product">Sell</string>
 
     <string name="shop_cart_title_txt">Shopping Cart</string>
-    <string name="String_cart_coupon_hint" translatable="false">Enter coupon code</string>
+    <string name="String_cart_coupon_hint">Enter coupon code</string>
 
-    <string name="String_cart_coupon_use_btn" translatable="false">Redeem</string>
-    <string name="String_cart_commodity_list_titile" translatable="false">Korea YISS warehouse drop ship</string>
-    <string name="String_cart_seller" translatable="false">Sender:</string>
-    <string name="String_cart_buyfrom" translatable="false">Sold by:</string>
-    <string name="String_cart_size" translatable="false">Size:</string>
-    <string name="String_cart_color" translatable="false">Color︰</string>
-    <string name="String_details_order_note_02" translatable="false">Order Message:</string>
+    <string name="String_cart_coupon_use_btn">Redeem</string>
+    <string name="String_cart_commodity_list_titile">Korea YISS warehouse drop ship</string>
+    <string name="String_cart_seller">Sender:</string>
+    <string name="String_cart_buyfrom">Sold by:</string>
+    <string name="String_cart_size">Size:</string>
+    <string name="String_cart_color">Color︰</string>
+    <string name="String_details_order_note_02">Order Message:</string>
     <string name="sold_out_waring_msg">Sold Out</string>
-    <string name="exit_app" translatable="false">Are you sure you want to delete this item?</string>
-    <string name="String_cart_commodity_all_select" translatable="false">Select all</string>
-    <string name="String_for_cart_settlement" translatable="false">Checkout</string>
-    <string name="String_for_cart_total_note" translatable="false">(Excluding shipping)</string>
-    <string name="String_cart_empty" translatable="false">&#160;&#160;It\'s empty here!!</string>
-    <string name="String_cart_prompt_msg" translatable="false">&#160;&#160;Fu Express market new arrivals,daily new！</string>
-    <string name="String_cart_skip_home" translatable="false">&#160;&#160;Start shopping~</string>
+    <string name="crowd_end_waring_msg">Closed</string>
+    <string name="exit_app">Are you sure you want to delete this item?</string>
+    <string name="String_cart_commodity_all_select">Select all</string>
+    <string name="String_for_cart_settlement">Checkout</string>
+    <string name="String_for_cart_total_note">(Excluding shipping)</string>
+    <string name="String_cart_empty">&#160;&#160;It\'s empty here!!</string>
+    <string name="String_cart_prompt_msg">&#160;&#160;Fu Express market new arrivals,daily new！</string>
+    <string name="String_cart_skip_home">&#160;&#160;Start shopping~</string>
     <string name="pull_refresh_loading_msg">Loading...</string>
     <string name="pull_refresh_complete_msg">Update complete</string>
     <string name="pull_refresh_pull_msg">Pull to refresh</string>
     <string name="pull_refresh_release_msg">Release to refresh</string>
-    <string name="String_word_number" translatable="false">%1$d characters remaining</string>
+    <string name="String_word_number">%1$d characters remaining</string>
 
     <!--单品详情-->
-    <string name="String_same_price" translatable="false">100% Wholesale Price</string>
-    <string name="String_add_album" translatable="false">Add to list</string>
-    <string name="String_comment_hint" translatable="false">Write a  comment...</string>
-    <string name="String_comment_release" translatable="false">Remark</string>
-    <string name="String_go_shopping" translatable="false">Browse</string>
-    <string name="String_exchange_rate" translatable="false">Exchange rate:</string>
-    <string name="String_order_message" translatable="false">Order Message</string>
-    <string name="String_direct_mail_1" translatable="false">Direct Ship</string>
-    <string name="String_Direct_Mail" translatable="false">Direct Ship</string>
-    <string name="String_product_detail" translatable="false">Product Details</string>
-    <string name="String_add_coart" translatable="false">Add to cart</string>
-    <string name="String_liker_count" translatable="false">%1$d likes</string>
-    <string name="String_comment_count" translatable="false">%1$d comments</string>
-    <string name="String_super_member" translatable="false">SVIP</string>
-    <string name="String_vip_member" translatable="false">VIP</string>
-    <string name="String_norme_member" translatable="false">Member</string>
-    <string name="String_service_charge" translatable="false">Service fees:</string>
-    <string name="String_service_seller" translatable="false">Buying service is provided by FU Express certified buyer %1$s, service fees will be the price × %2$d%%</string>
-    <string name="String_service_seller2" translatable="false">FU Express Certified Seller %1$s Responsible for shipping and provide after-sales service. </string>
-    <string name="String_vip_rate" translatable="false">▶ %1$s, buy %2$d items at once, service fees are %3$s%% only</string>
-    <string name="String_vip_promotion" translatable="false">▶ %1$s, one-time purchase %2$d at price %3$s, save %4$d%%</string>
-    <string name="String_promotion_rate" translatable="false">Each %1$s, save %2$d%%</string>
-    <string name="String_promotion" translatable="false">Promotion:</string>
-    <string name="String_number_oney" translatable="false">%1$d%%</string>
-    <string name="String_crowd_detail" translatable="false">More Info</string>
-    <string name="String_item_detail" translatable="false">Product Details</string>
-    <string name="String_sell_one_key" translatable="false">Sell</string>
+    <string name="String_same_price">100% Wholesale Price</string>
+    <string name="String_add_album">Add to list</string>
+    <string name="String_comment_hint">Write a  comment...</string>
+    <string name="String_comment_release">Remark</string>
+    <string name="String_go_shopping">Browse</string>
+    <string name="String_exchange_rate">Exchange rate:</string>
+    <string name="String_order_message">Order Message</string>
+    <string name="String_direct_mail_1">Direct Ship</string>
+    <string name="String_Direct_Mail">Direct Ship</string>
+    <string name="String_product_detail">Product Details</string>
+    <string name="String_add_coart">Add to cart</string>
+    <string name="String_liker_count">%1$d likes</string>
+    <string name="String_comment_count">%1$d comments</string>
+    <string name="String_super_member">SVIP</string>
+    <string name="String_vip_member">VIP</string>
+    <string name="String_norme_member">Member</string>
+    <string name="String_service_charge">Service fees:</string>
+    <string name="String_service_seller">Buying service is provided by FU Express certified buyer %1$s, service fees will be the price × %2$d%%</string>
+    <string name="String_service_seller2">FU Express Certified Seller %1$s Responsible for shipping and provide after-sales service. </string>
+    <string name="String_vip_rate">▶ %1$s, buy %2$d items at once, service fees are %3$s%% only</string>
+    <string name="String_vip_promotion">▶ %1$s, one-time purchase %2$d at price %3$s, save %4$s</string>
+    <string name="String_promotion_rate">Each %1$s, save %2$s</string>
+    <string name="String_promotion">Promotion:</string>
+    <string name="String_number_oney">%1$d%%</string>
+    <string name="String_crowd_detail">More Info</string>
+    <string name="String_item_detail">Product Details</string>
+    <string name="String_sell_one_key">Sell</string>
     <string name="string_change">Change</string>
     <string name="string_please_select_country">Select Country/Region</string>
     <string name="product_shipping_info">Delivery</string>
-    <string name="login_tv_01" translatable="false">Country/Region</string>
-    <string name="String_item_title" translatable="false">Details</string>
+    <string name="login_tv_01">Country/Region</string>
+    <string name="String_item_title">Details</string>
 
-    <string name="String_count_no_discount" translatable="false">%1$d pc. \nNo Discount</string>
-    <string name="String_count_nos_discount" translatable="false">%1$d pcs. \nNo Discount</string>
-    <string name="String_count_num_discount_int" translatable="false">%1$d pcs. \n%2$d%% Off</string>
-    <string name="String_count_num_discount" translatable="false">%1$d pcs. \n%2$.1f%% Off</string>
-    <string name="String_count_reduce_money" translatable="false">%1$d pcs. \nSave %2$s</string>
-    <string name="String_count_target_count" translatable="false">Goal:%1$d</string>
-    <string name="String_money_target" translatable="false">Goal:%1$s</string>
-    <string name="String_money_no_discount" translatable="false">%1$s \nNo Discount</string>
-    <string name="String_money_num_discount" translatable="false">%1$s\n%2$.1f%% Off</string>
-    <string name="String_money_num_discount_int" translatable="false">%1$s\n%2$d%% Off</string>
-    <string name="String_money_reduce_money" translatable="false">%1$s\nSave %2$s</string>
-    <string name="String_money_ten_thousand" translatable="false">K</string>
-    <string name="String_money_million" translatable="false">M</string>
-    <string name="String_crowd_sucessed" translatable="false">Succeeded:</string>
-    <string name="String_crowd_sucess" translatable="false">Crowdordering Successful</string>
-    <string name="String_crowd_fail" translatable="false">Crowd ordering failed</string>
-    <string name="String_start_crowd" translatable="false">Start crowd ordering</string>
+    <string name="String_count_no_discount">%1$d pc. \nNo Discount</string>
+    <string name="String_count_nos_discount">%1$d pcs. \nNo Discount</string>
+    <string name="String_count_num_discount_int">%1$d pcs. \n%2$d%% Off</string>
+    <string name="String_count_num_discount">%1$d pcs. \n%2$.1f%% Off</string>
+    <string name="String_count_reduce_money">%1$d pcs. \nSave %2$s</string>
+    <string name="String_count_target_count">Goal:%1$d</string>
+    <string name="String_money_target">Goal:%1$s</string>
+    <string name="String_money_no_discount">%1$s \nNo Discount</string>
+    <string name="String_money_num_discount">%1$s\n%2$.1f%% Off</string>
+    <string name="String_money_num_discount_int">%1$s\n%2$d%% Off</string>
+    <string name="String_money_reduce_money">%1$s\nSave %2$s</string>
+    <string name="String_money_ten_thousand">K</string>
+    <string name="String_money_million">M</string>
+    <string name="String_crowd_sucessed">Succeeded:</string>
+    <string name="String_crowd_sucess">Crowdordering Successful</string>
+    <string name="String_crowd_fail">Crowd ordering failed</string>
+    <string name="String_start_crowd">Start crowd ordering</string>
 
 
     <!--订单-->
-    <string name="auto_translate" translatable="false">Automatic translation</string>
-    <string name="view_original" translatable="false">View original</string>
-    <string name="translation_failure" translatable="false">Translate failed</string>
-    <string name="auto_translateing" translatable="false">Loading&#8230;</string>
-    <string name="order_status" translatable="false">Status:</string>
-    <string name="pending_adapter" translatable="false">Pending</string>
-    <string name="all" translatable="false">All</string>
-    <string name="order_canceled" translatable="false">Cancelled</string>
-    <string name="grand_total" translatable="false">Total:</string>
-    <string name="order_no" translatable="false">Order #:</string>
-    <string name="item_number" translatable="false">Quantity:</string>
-    <string name="order_date" translatable="false">Order Date:</string>
-    <string name="send_direct_" translatable="false">Direct Ship </string>
-    <string name="order_panding" translatable="false">Pending</string>
-    <string name="panding" translatable="false">Pending</string>
-    <string name="wait_to_do" translatable="false">On-hold</string>
-    <string name="check_item" translatable="false">Inspecting</string>
-    <string name="to_store" translatable="false">Warehousing</string>
-    <string name="order_wait_cancel" translatable="false">Wait order cancellation</string>
-    <string name="total_no" translatable="false">Total</string>
-    <string name="left_no" translatable="false">And</string>
-    <string name="xiang" translatable="false">items</string>
-    <string name="left_pay_time" translatable="false"> (Time For Payment:</string>
-    <string name="left_pay_time_hour" translatable="false">hours)</string>
-    <string name="left_pay_time_minute" translatable="false">minutes)</string>
-    <string name="order_payed" translatable="false">Orders paid</string>
-    <string name="order_parceled" translatable="false">Added to parcel (</string>
-    <string name="order_wait_out" translatable="false">Pending (</string>
-    <string name="order_send" translatable="false">Delivered (</string>
-    <string name="order_other" translatable="false">Misc. (</string>
-    <string name="check_parcel" translatable="false">View parcles</string>
-    <string name="parcel_title" translatable="false">Parcel name:</string>
-    <string name="send" translatable="false">Send</string>
-    <string name="left_time" translatable="false">(Time for payment:47 hours)</string>
-    <string name="order_direct_notice" translatable="false">(Excl.shipping cost,it will be deducted from the account balance after submission of delivery)</string>
-    <string name="change_pay_method" translatable="false">Change payment method</string>
-    <string name="send_type" translatable="false">Shipping Methods</string>
-    <string name="String_crowd_panding" translatable="false">Pending</string>
-    <string name="package_attend_Warehouse" translatable="false">Ready</string>
-    <string name="package_waite_send" translatable="false">Pending</string>
-    <string name="package_has_sended" translatable="false">Delivered</string>
-    <string name="String_has_time" translatable="false">Left</string>
-    <string name="String_time_start_cowd" translatable="false">%1$s Months %2$s Days %3$s Start</string>
-    <string name="String_time_has_days" translatable="false">%1$s Days</string>
-    <string name="String_time_has_hours" translatable="false">%1$s Hours</string>
+    <string name="auto_translate">Automatic translation</string>
+    <string name="view_original">View original</string>
+    <string name="translation_failure">Translate failed</string>
+    <string name="auto_translateing">Loading&#8230;</string>
+    <string name="order_status">Status:</string>
+    <string name="pending_adapter">Pending</string>
+    <string name="all">All</string>
+    <string name="order_canceled">Cancelled</string>
+    <string name="grand_total">Total:</string>
+    <string name="order_no">Order #:</string>
+    <string name="item_number">Quantity:</string>
+    <string name="order_date">Order Date:</string>
+    <string name="send_direct_">Direct Ship </string>
+    <string name="order_panding">Pending</string>
+    <string name="panding">Pending</string>
+    <string name="wait_to_do">On-hold</string>
+    <string name="check_item">Inspecting</string>
+    <string name="to_store">Warehousing</string>
+    <string name="order_wait_cancel">Wait order cancellation</string>
+    <string name="total_no">Total</string>
+    <string name="left_no">And</string>
+    <string name="xiang">items</string>
+    <string name="left_pay_time"> (Time For Payment:</string>
+    <string name="left_pay_time_hour">hours)</string>
+    <string name="left_pay_time_minute">minutes)</string>
+    <string name="order_payed">Orders paid</string>
+    <string name="order_parceled">Added to parcel (</string>
+    <string name="order_wait_out">Pending (</string>
+    <string name="order_send">Delivered (</string>
+    <string name="order_other">Misc. (</string>
+    <string name="check_parcel">View parcles</string>
+    <string name="parcel_title">Parcel name:</string>
+    <string name="send">Send</string>
+    <string name="left_time">(Time for payment:47 hours)</string>
+    <string name="order_direct_notice">(Excl.shipping cost,it will be deducted from the account balance after submission of delivery)</string>
+    <string name="change_pay_method">Change payment method</string>
+    <string name="send_type">Shipping Methods</string>
+    <string name="String_crowd_panding">Pending</string>
+    <string name="package_attend_Warehouse">Ready</string>
+    <string name="package_waite_send">Pending</string>
+    <string name="package_has_sended">Delivered</string>
+    <string name="String_has_time">Left</string>
+    <string name="String_time_start_cowd">%1$s Months %2$s Days %3$s Start</string>
+    <string name="String_time_has_days">%1$s Days</string>
+    <string name="String_time_has_hours">%1$s Hours</string>
     <string name="delivery_title_bar_title">Shipping Method</string>
-    <string name="String_merger" translatable="false">Combine Orders &amp; Ship</string>
+    <string name="String_merger">Combine Orders &amp; Ship</string>
     <string name="gift_pay">Balance</string>
-    <string name="credit_card" translatable="false">Credit Card</string>
-    <string name="cancel_order" translatable="false"> Cancel Order </string>
-    <string name="String_goto_send" translatable="false">Ready</string>
-    <string name="cancel_failure" translatable="false">Cancel failed, please try again later</string>
-    <string name="fee_detail_before" translatable="false">(Including shipping</string>
-    <string name="fee_detail_after" translatable="false">)</string>
-    <string name="pay_result_payment_success_crowd_title" translatable="false">You have completed the payment!</string>
-    <string name="pay_result_thank" translatable="false">Thank you for shopping at FU Express!</string>
-    <string name="pay_result_order_id" translatable="false">Your order No.:</string>
-    <string name="String_payment_success_msg" translatable="false">#%1$s</string>
-    <string name="pay_result_delivery_method" translatable="false">Your delivery method:</string>
-    <string name="pay_result_waring_msg" translatable="false">Once received an in-warehouse notification, please submit a delivery order on \&quot;My Parcel\&quot;.</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="cancel_order"> Cancel Order </string>
+    <string name="String_goto_send">Ready</string>
+    <string name="cancel_failure">Cancel failed, please try again later</string>
+    <string name="fee_detail_before">(Including shipping</string>
+    <string name="fee_detail_after">)</string>
+    <string name="pay_result_payment_success_crowd_title">You have completed the payment!</string>
+    <string name="pay_result_thank">Thank you for shopping at FU Express!</string>
+    <string name="pay_result_order_id">Your order No.:</string>
+    <string name="String_payment_success_msg">#%1$s</string>
+    <string name="pay_result_delivery_method">Your delivery method:</string>
+    <string name="pay_result_waring_msg">Once received an in-warehouse notification, please submit a delivery order on \&quot;My Parcel\&quot;.</string>
     <string name="payment_success_go_home_msg">Continue shopping</string>
 
 
-    <string name="String_details_order_note" translatable="false">Order Message</string>
-    <string name="String_size" translatable="false">Size：</string>
-    <string name="String_color" translatable="false">Color︰</string>
-    <string name="sold_out_msg">Sold-out items can\'t be purchased, remove it?</string>
-    <string name="delete" translatable="false">Delete</string>
+    <string name="String_details_order_note">Order Message</string>
+    <string name="String_size">Size：</string>
+    <string name="String_color">Color︰</string>
+    <string name="sold_out_msg">The sold-out items should be removed first before checking out. Remove them?</string>
+    <string name="delete">Delete</string>
     <string name="cart_dialog_msg">Your packages will be shipped from %1$d warehouses, the freight costs are billed separately, please be advised!</string>
-    <string name="use_coupon_error" translatable="false">Please enter the correct coupon code</string>
-    <string name="String_order_commodity_counter" translatable="false">x%1$s</string>
-    <string name="String_cart_consignee_msg" translatable="false">%1$s,&#160;%2$s</string>
+    <string name="use_coupon_error">Please enter the correct coupon code</string>
+    <string name="String_order_commodity_counter">x%1$s</string>
+    <string name="String_cart_consignee_msg">%1$s,&#160;%2$s</string>
     <string name="cart_order_submit_order_failed">Submit order failed:</string>
-    <string name="dialog_reseve_title" translatable="false">Accept Reservations</string>
-    <string name="dialog_reseve_msg" translatable="false">Pre-order out-of-stock items of this order</string>
-    <string name="dialog_cancel_title" translatable="false">Spot Purchases</string>
-    <string name="dialog_cancel_msg" translatable="false">Only purchase available products in this order and cancel out of stock products.</string>
-    <string name="app_tip" translatable="false">Hint</string>
+    <string name="dialog_reseve_title">Accept Reservations</string>
+    <string name="dialog_reseve_msg">Pre-order out-of-stock items of this order</string>
+    <string name="dialog_cancel_title">Spot Purchases</string>
+    <string name="dialog_cancel_msg">Only purchase available products in this order and cancel out of stock products.</string>
+    <string name="app_tip">Hint</string>
     <string name="card_order_payment_title_bar_title2">Please choose payment method</string>
     <string name="cart_order_dialog_confirm">Customer Service</string>
-    <string name="String_submit_hint" translatable="false">(Excl.shipping cost,it will be deducted from the account balance after submission of delivery)</string>
-    <string name="cart_order_grand_total_msg" translatable="false">(Including shipping:%1$s)</string>
-    <string name="String_merge_order_hint" translatable="false">(Save shipping costs, submit a delivery request on \&quot;My parcel\&quot; when items in warehouse)</string>
+    <string name="String_submit_hint">(Excl.shipping cost,it will be deducted from the account balance after submission of delivery)</string>
+    <string name="cart_order_grand_total_msg">(Including shipping:%1$s)</string>
+    <string name="String_merge_order_hint">(Save shipping costs, submit a delivery request on \&quot;My parcel\&quot; when items in warehouse)</string>
     <string name="default_msg">Default</string>
-    <string name="String_reseve" translatable="false">Available for booking if products were out of stock</string>
-    <string name="String_cancel_msg" translatable="false">Only spot purchase. Order will be cancelled if products were sold out.</string>
+    <string name="String_reseve">Available for booking if products were out of stock</string>
+    <string name="String_cancel_msg">Only spot purchase. Order will be cancelled if products were sold out.</string>
     <string name="add_to_cart_failed_msg">fail errorCode=</string>
     <string name="add_to_cart_error_msg">Failed to add cart. errorCode=</string>
     <string name="add_to_cart_success_msg">Added Successfully</string>
-    <string name="dialog_merge_order_help_title" translatable="false">Combine Orders &#38; Ship</string>
-    <string name="dialog_merge_order_help_msg" translatable="false">Combining items from multiple orders into one parcel can save shipping cost.Submitting "Shipping notification" on the "My parcel"page,we will deliver the parcel.</string>
-    <string name="dialog_direct_mail_help_title" translatable="false">Direct Ship</string>
-    <string name="dialog_direct_mail_help_msg" translatable="false">Once items are in warehouse, we will deliver your parcel. </string>
+    <string name="dialog_merge_order_help_title">Combine Orders &#38; Ship</string>
+    <string name="dialog_merge_order_help_msg">Combining items from multiple orders into one parcel can save shipping cost.Submitting "Shipping notification" on the "My parcel"page,we will deliver the parcel.</string>
+    <string name="dialog_direct_mail_help_title">Direct Ship</string>
+    <string name="dialog_direct_mail_help_msg">Once items are in warehouse, we will deliver your parcel. </string>
+    <string name="dialog_gift_help_msg">Please submit the “Shipping Notification” at My Parcels after your friend entered his address. We will ship your order.</string>
+
     <string name="delivery_toast_msg">Delivery method is not selected</string>
 
 
-    <string name="String_my_order" translatable="false">My Orders</string>
-    <string name="String_goto_pay" translatable="false">Pending</string>
-    <string name="String_payed" translatable="false">Paid</string>
-    <string name="String_canceled" translatable="false">Cancelled</string>
-    <string name="all_order" translatable="false">All</string>
-    <string name="you_have_no_order" translatable="false">It\'s empty here.</string>
-    <string name="wait_to_pay" translatable="false">Pending</string>
-    <string name="wait_cancel" translatable="false">Wait cancellation</string>
-    <string name="part_send" translatable="false">Part deliver</string>
-    <string name="all_send" translatable="false">All deliver</string>
-    <string name="crowding" translatable="false">In process</string>
-    <string name="crowd_" translatable="false"> Crowdorderings </string>
+    <string name="String_my_order">My Orders</string>
+    <string name="String_goto_pay">Pending</string>
+    <string name="String_payed">Paid</string>
+    <string name="String_canceled">Cancelled</string>
+    <string name="all_order">All</string>
+    <string name="you_have_no_order">It\'s empty here.</string>
+    <string name="wait_to_pay">Pending</string>
+    <string name="wait_cancel">Wait cancellation</string>
+    <string name="part_send">Part deliver</string>
+    <string name="all_send">All deliver</string>
+    <string name="crowding">In process</string>
+    <string name="crowd_"> Crowdorderings </string>
     <string name="buy_now">Go Shopping</string>
 
 
     <!-- 7 7-->
-    <string name="add_to_album" translatable="false">Add to list</string>
-    <string name="create_new_album" translatable="false">Create New List</string>
-    <string name="add_to_album_in" translatable="false">Add to list</string>
-    <string name="album_name" translatable="false">List name</string>
-    <string name="String_enter_album_name" translatable="false">Enter List Title</string>
-    <string name="creating_album" translatable="false">Creating list ..</string>
-    <string name="String_create_album_success" translatable="false">List created successfully</string>
-    <string name="String_create_album_failure" translatable="false">List created failed</string>
+    <string name="add_to_album">Add to list</string>
+    <string name="create_new_album">Create New List</string>
+    <string name="add_to_album_in">Add to list</string>
+    <string name="album_name">List name</string>
+    <string name="String_enter_album_name">Enter List Title</string>
+    <string name="creating_album">Creating list ..</string>
+    <string name="String_create_album_success">List created successfully</string>
+    <string name="String_create_album_failure">List created failed</string>
     <string name="add_to_album_failed">Adding failed</string>
 
 
-    <string name="item_name_has_been_copy" translatable="false">商品已经复制到粘贴板</string>
-    <string name="pictures_downing" translatable="false">Downloading</string>
-    <string name="string_qq" translatable="false">QQ</string>
-    <string name="string_wechat" translatable="false">Wechat</string>
+    <string name="item_name_has_been_copy">商品已经复制到粘贴板</string>
+    <string name="pictures_downing">Downloading</string>
+    <string name="string_qq">QQ</string>
+    <string name="string_wechat">Wechat</string>
 
 
     <string name="string_product_in_store">Buy</string>
@@ -1277,21 +1284,71 @@
     <string name="cropper_next">Next Photo</string>
 
     <!--拼单-->
-    <string name="String_hottest" translatable="false">Hottest</string>
-    <string name="String_newest" translatable="false">Newest</string>
-    <string name="String_crowd_attend" translatable="false">Crowdordering</string>
-    <string name="String_hot_crowd" translatable="false">Hottest</string>
-    <string name="String_finish_crowd" translatable="false">Ending Soon</string>
-    <string name="String_no_discount" translatable="false">No Discount</string>
-    <string name="String_discount_tag_int" translatable="false">%1$d%% \nOff</string>
-    <string name="String_discount_tag_int2" translatable="false">%1$d%% Off</string>
-    <string name="String_discount_tag" translatable="false">%1$.1f%% \nOff</string>
-    <string name="String_discount_tag2" translatable="false">%1$.1f%% Off</string>
-    <string name="String_invite_friend" translatable="false">Invite friends</string>
-    <string name="String_has_attend_count" translatable="false">%1$d have joined</string>
-    <string name="String_addend_crowd_now" translatable="false">Start Now</string>
-    <string name="String_crowd_title" translatable="false">Crowdorderings</string>
-    <string name="String_attend_crowd_title" translatable="false">Crowdordering</string>
-    <string name="String_crowd_detail_title" translatable="false">Details</string>
+    <string name="String_hottest">Hottest</string>
+    <string name="String_newest">Newest</string>
+    <string name="String_crowd_attend">Crowdordering</string>
+    <string name="String_hot_crowd">Hottest</string>
+    <string name="String_finish_crowd">Ending Soon</string>
+    <string name="String_no_discount">No Discount</string>
+    <string name="String_discount_tag_int">%1$d%% \nOff</string>
+    <string name="String_discount_tag_int2">%1$d%% Off</string>
+    <string name="String_discount_tag">%1$.1f%% \nOff</string>
+    <string name="String_discount_tag2">%1$.1f%% Off</string>
+    <string name="String_invite_friend">Invite friends</string>
+    <string name="String_has_attend_count">%1$d have joined</string>
+    <string name="String_addend_crowd_now">Start Now</string>
+    <string name="String_crowd_title">Crowdorderings</string>
+    <string name="String_attend_crowd_title">Crowdordering</string>
+    <string name="String_crowd_detail_title">Details</string>
+    <string name="send_friend_for_address">Ask friend to fill in his/her shipping address</string>
+    <string name="share_method_messenger">Messenger</string>
+    <string name="parcel_type_gift">Gift Parcel</string>
+    <string name="String_direct_fu">Surprise Grab Bag</string>
+    <string name="main_group">Crowdorderings</string>
+    <string name="string_crowd_success_message">Please check in-warehouse notification after successful crowd ordering, and submit a shipping request on \&quot;My parcels\&quot;.</string>
+    <string name="share_friend_title">Gift</string>
+    <string name="share_friend_info">Please fill in your delivery address and receive your gift!</string>
+
+
+    <string name="out_of_range_note_text">The actual value of goods must be less than %1$s according to the selected shipping method.</string>
+    <string name="package_pay_text_only">Payment</string>
+    <string name="string_my_receive_address">My shipping address</string>
+
+    <!--福袋-->
+    <string name="string_parcel_item_total">Quantity items:</string>
+    <string name="string_baby_counts">The collectible items are one or two %1$s</string>
+    <string name="string_give_fu_title">Grab Bags</string>
+    <string name="string_btn_send_fu">Send</string>
+    <string name="string_fu_bag_count">Quantity Surprise Grab Bags</string>
+    <string name="string_fu_text">福袋</string>
+    <string name="string_availabe_time">有效期：</string>
+    <string name="string_input_fu_count">输入福袋的个数</string>
+    <string name="please_input_fu_count">请输入福袋数量!</string>
+    <string name="string_send_fu_message">希望你能够喜欢这个福袋</string>
+
+
+
+    <!-- 绑定模块相关 -->
+    <string name="account_bind">Bind account</string>
+    <string name="login_location_z_01">Mainland China</string>
+    <string name="tv_for_login_ed_hinnt_01">Please enter mobile number</string>
+    <string name="tv_for_register_in_phone_rl_03">Verification code</string>
+    <string name="tv_for_register_in_phone_ed_03_hinnt">Enter code received via SMS</string>
+    <string name="String_bind_phone">Bind mobile number</string>
+    <string name="string_bind_now">Bind now</string>
+    <string name="bind_successful">Bound successfully</string>
+    <string name="go_to_bind">Bind</string>
+    <string name="no_bind">No, thanks</string>
+    <string name="bind_ph_dialog_text">Bind registered mobile phone</string>
+    <string name="is_bind">Bound</string>
+    <string name="is_not_bind">Unbound</string>
+    <string name="string_unbind">Unbind</string>
+    <string name="string_unbind_02">Unbind%1$s</string>
+    <string name="unbind_messg">For Unbinding, you should bind your mobile phone first.</string>
+    <string name="string_parcel_time_out">已超时</string>
+    <string name="string_send_pre_note">分享后您的包裹将被拆分为福袋送给对方</string>
+    <string name="string_had_send_fu">已发福袋</string>
+    <string name="string_this_is">这是</string>
+
 
 </resources>

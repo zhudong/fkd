@@ -184,11 +184,13 @@ public class AppendParcelPresent extends ParcelAppendContract.Presenter {
                                     addresslist = address;
                                 }
                             }
-                            mCustomeraddressid = addresslist.getCustomeraddressid();
-                            showShippingMethod(mCustomeraddressid + "", mWarehouseid + "");
-                            mParcelBean.setCustomeraddressid(mCustomeraddressid);
+//                            mCustomeraddressid = addresslist.getCustomeraddressid();
+//                            showShippingMethod(mCustomeraddressid + "", mWarehouseid + "");
+//                            mParcelBean.setCustomeraddressid(mCustomeraddressid);
                         }
-                        mView.showAddress(addresslist);
+//                        mView.showAddress(addresslist);
+                        setAddress(addresslist);
+
                         mParcelBean.setParcelid(mParcelid);
                         mParcelBean.setParcelName(response.getParcelname());
                         String defaultparcelweight = response.getDefaultparcelweight();
@@ -246,11 +248,12 @@ public class AppendParcelPresent extends ParcelAppendContract.Presenter {
     }
 
     @Override
-    public void setAddress(String topText, String addressText, int id) {
-        mParcelBean.setCustomeraddressid(id);
-        mParcelBean.setCustomeraddress(topText + "\n" + addressText);
-        mView.showAddress(mParcelBean.getCustomeraddress());
-        showShippingMethod(mParcelBean.getCustomeraddressid() + "", mWarehouseid + "");
+    public void setAddress(CsParcel.AddressList address) {
+//        mParcelBean.setCustomeraddressid(address.getCustomeraddressid());
+//        mParcelBean.setCustomeraddress(topText + "\n" + addressText);
+        if(address==null)return;
+        mView.showAddress(address);
+        showShippingMethod(address.getCustomeraddressid() + "", mWarehouseid + "");
 //        save2Db(null, false);
     }
 

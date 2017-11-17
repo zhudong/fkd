@@ -284,6 +284,10 @@ public class MeFragment extends BaseFragment<MainActivity> {
             case BusEvent.GET_MY_RED_POINT_COUNT_SUCCESS:
                 setRedPoint();
                 break;
+            case BusEvent.GET_INFO_SUCCESS:
+                mTvLogin.setText(AccountManager.getInstance().nikename);
+                Glide.with(this).load(AccountManager.getInstance().avater).error(R.mipmap.me_photo_white).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(mProfileImage);
+                break;
         }
     }
 

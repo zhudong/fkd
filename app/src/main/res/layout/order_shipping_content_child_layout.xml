@@ -28,6 +28,7 @@
         <TextView
             android:id="@+id/order_shipping_info_tv"
             android:layout_width="match_parent"
+            style="@style/system_Mytextsize_gray_11"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:textSize="12sp"/>

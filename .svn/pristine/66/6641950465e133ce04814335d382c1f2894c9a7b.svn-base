@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line_gray"
+    android:orientation="vertical">
+
+
+    <com.fuexpress.kr.ui.view.TitleBarView
+        android:id="@+id/deliverty_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/delivery_gift_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/gift_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/String_direct_fu"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/delivery_gift_help_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/gift_title"
+                    android:src="@mipmap/help" />
+
+                <ImageView
+                    android:id="@+id/delivery_gift_iv"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/cart_unselect" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/delivery_direct_mail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/direct_mail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/String_direct_mail_1"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/delivery_direct_mail_help_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/direct_mail_title"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/help" />
+
+                <ImageView
+                    android:id="@+id/delivery_direct_mail_iv"
+                    android:layout_width="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/cart_unselect" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/delivery_merge_order_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/merge_order_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/String_merge_order"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/delivery_merge_order_help_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/merge_order_title"
+                    android:src="@mipmap/help" />
+
+                <ImageView
+                    android:id="@+id/delivery_merge_order_iv"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/cart_unselect" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/delivery_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/address_pin_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/package_address" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/address_pin_iv"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/delivery_name_and_phone_tv"
+                        style="@style/system_Mytextsize_black_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:text="@string/String_cart_consignee_msg" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!--<ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:src="@mipmap/default_address"/>-->
+
+                        <TextView
+                            android:id="@+id/delivery_default_address_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_red_btn_drawable"
+                            android:textColor="@color/white"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:textSize="9sp"
+                            android:layout_marginRight="5dp"
+                            android:text="@string/default_msg"
+                            />
+                        <TextView
+                            android:id="@+id/delivery_phone_tv"
+                            style="@style/system_Mytextsize_gray_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="ddddd" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/arrow_right" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/delivery_commodity_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="vertical">
+
+                <!-- <RelativeLayout
+                     android:id="@+id/delivery_title_layout"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginBottom="5dp"
+                     android:layout_marginTop="5dp"
+                     android:padding="10dp">
+
+                     <TextView
+                         android:id="@+id/delivery_title_tv"
+                         style="@style/system_Mytextsize_black_12"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerVertical="true"
+                         android:text="韩国东大门仓库" />
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:layout_centerVertical="true"
+                         android:src="@mipmap/arrow_up" />
+                 </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/delivery_list_line_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@color/line_gray" />
+
+                <ListView
+                    android:id="@+id/delivery_commodity_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@+id/delivery_list_line_iv"
+                     android:orientation="vertical">
+
+                 </LinearLayout>-->
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/delivery_confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/selector_red_btn_drawable"
+                android:text="@string/confirm"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

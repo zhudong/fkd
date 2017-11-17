@@ -1,0 +1,172 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+//拼单计价类型
+enum CrowdCountType
+{
+	CROWD_COUNT_TYPE_NUMBER = 1;//按数量拼单
+	CROWD_COUNT_TYPE_AMOUNT = 2;//按金额拼单
+}
+
+//拼单类型
+enum CrowdType
+{
+	CROWD_TYPE_PRODUCT = 1;//按产品拼单
+	CROWD_TYPE_ITEM    = 2;//按单品拼单
+}
+
+//拼单状态
+enum CrowdState
+{
+	CROWD_STATE_NONE     = 0;
+	CROWD_STATE_PENDING  = 1;//待发布
+	CROWD_STATE_CROWDING = 2;//拼单中
+	CROWD_STATE_SUCCESS  = 3;//成功
+	CROWD_STATE_FAILED   = 4;//失败
+	CROWD_STATE_CHECKING = 5;//拼单草稿
+}
+
+//拼单阶段
+message CrowdLadder
+{
+	optional float goal          = 1;//目标
+	optional int32 discount_type = 2;//折扣类型, 1:定值，2:百分比
+	optional float discount      = 3;//折扣
+}
+
+//拼单基本信息
+message Crowd
+{
+	required int64       crowd_id          = 1; //拼单Id
+	optional string      name              = 2; //拼单名称
+	optional string      title             = 3; //拼单标题
+	optional string      logo              = 4; //拼单Logo
+	optional int32       crowd_type        = 5; //拼单类型
+	optional int32       count_type        = 6; //计价类型
+	optional int32       begin_time        = 7; //开始时间
+	optional int32       end_time          = 8; //结束时间
+	repeated CrowdLadder ladders           = 9; //阶段信息
+	optional float       complete    	   = 10;//完成值
+	optional int32       state             = 11;//状态
+	optional string      currency_code     = 12;//返回的默认币种
+	//optional int32       service_rate_type = 13;//费率类型
+	//optional float       service_rate      = 14;//服务费率
+
+}
+
+//获取拼单详情
+message GetCrowdDetailRequest
+{
+	required BaseRequest head     = 1;
+	optional BaseUserRequest userinfo     = 2;
+	required int64       crowd_id         = 3;
+	optional string      localecode       = 4;//语种
+	optional string      currencycode     = 5;//币种
+	optional int32       currencyid       = 6;
+	optional int32       pageno           = 7;
+}
+
+message GetCrowdDetailResponse
+{
+	required BaseResponse head        = 1;
+	optional Crowd        crowd       = 2;//拼单信息
+	repeated Item         items       = 3;//单品列表
+	optional int32        users_total = 4;//参与者总数
+	repeated UserInfo     users       = 5;//参与者列表
+	repeated PairIntFloat discounts   = 6;//折扣 单品id-折扣值
+	optional bool         more        = 7;
+	optional string       image_url    = 8;//拼单详情图片
+	optional string       select_image = 9;//0使用富文本 1使用图片
+}
+
+
+//获取拼单列表
+message GetCrowdListRequest
+{
+	required BaseRequest head             = 1;
+	optional BaseUserRequest userinfo     = 2;
+	required int32       type             = 3;//1:最热拼单, 2:即将开始
+	required int32       pageno           = 4;//页码
+	optional string      localecode       = 5;//语种
+	optional string      currencycode     = 6;//币种
+	optional int32       currencyid       = 7;
+	optional int32       crowdtagid       = 8;//标签ID
+
+}
+
+message GetCrowdListResponse
+{
+	required BaseResponse head   = 1;
+	optional bool         more   = 2;
+	repeated Crowd        crowds = 3;
+}
+
+//标签ID名称
+message CrowdTag
+{
+	optional int32  crowdtagid   = 1;//标签ID
+	optional string crowdtagname = 2;//标签name
+}
+
+
+//获取标签
+message GetCrowdTagRequest
+{
+	required BaseRequest head   = 1;
+	optional BaseUserRequest userinfo     = 2;
+	optional string      localecode       = 3;//语种
+}
+
+message GetCrowdTagResponse
+{
+	required BaseResponse head   = 1;
+	repeated CrowdTag     crowdtag        = 2;
+
+}
+
+// 用户发起拼单
+message InitiateCrowdRequest
+{
+	required BaseRequest head             = 1;
+	optional BaseUserRequest userinfo     = 2;
+	required int64       customer_id      = 3;
+	required int64       match_item_id    = 4;
+	optional string      localecode       = 5;//语种
+	optional string      currencycode     = 6;//币种
+	optional int32       currencyid       = 7;
+}
+
+message InitiateCrowdResponse
+{
+	required BaseResponse head           = 1;
+	optional string     flag             = 2;//发送success或fail
+	optional int64     crowd_order_id    = 3;//拼单订单id，返回success有效
+	optional int64     match_item_id     = 4;//单品id，返回success有效
+	optional string     msg              = 5;//返回fail有效，错误的信息
+}
+
+message GetItemCrowdDetailRequest
+{
+	required BaseRequest     head     	  = 1;
+	optional BaseUserRequest userinfo 	  = 2;
+	required int64           itemId  	  = 3;//单品id
+	optional string          currencyCode     = 4;
+	optional string          localeCode       = 5;
+	optional int32           currencyID       = 6;
+}
+
+message GetItemCrowdDetailResponse
+{
+	required BaseResponse 	head         = 1;
+	optional ItemOffer    	item_offer   = 2;//报价信息
+	repeated ItemOfferGroup item_offer_groups= 3;//报价组信息(只下发当前会员组优惠)
+	repeated ItemExtend	item_extends = 4;//变种属性
+	optional Crowd          crowd        = 5;//拼单信息
+	optional Seller       	seller       = 6;//卖家信息
+	optional Warehouse    	warehouse    = 7;//仓储信息
+	optional ItemProduct	item_product = 8;//产品信息,最大最小购买量
+	optional string      	imageUrl     = 9;//
+	optional string		selectImage  = 10;//
+}

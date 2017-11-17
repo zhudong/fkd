@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.SysApplication;
 import com.fuexpress.kr.bean.IDinfoBean;
-import com.fuexpress.kr.bean.ParcelItemBean;
 import com.fuexpress.kr.bean.PayResultBaen;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.AccountManager;
@@ -34,6 +33,7 @@ import com.fuexpress.kr.utils.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import fksproto.CsAddress;
 import fksproto.CsBase;
 import fksproto.CsMy;
@@ -45,6 +45,7 @@ import okhttp3.Response;
  * Created by yuan on 2016-6-16.
  */
 public class PackageDeatilPresent extends PackageDetailContract.Presenter {
+    public static int isGab;
 
     private long mParcelID;
     private Handler mHandler = new Handler();
@@ -69,6 +70,8 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
     private float mPureFeeDuty;
     private CsParcel.ParcelShipping mShipping;
     private PayMethodManager mPayMethodManager;
+    private boolean is_fu_shipping = false;
+    private CsParcel.MerchantParcelShippingMethodList mShippingMethod;
 
     public OrderParcelUseCase getOrderParcelUseCase() {
         return mOrderParcelUseCase;
@@ -83,6 +86,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
 
     @Override
     public void onStart() {
+        isGab = 0;
         mOrderParcelUseCase = new OrderParcelUseCase(context, this);
         mPayMethodManager = PayMethodManager.getInstance(context);
         mPayMethodManager.setFreshBalance(false);
@@ -97,7 +101,20 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
 
     @Override
     public boolean checkIdCard() {
-        return !TextUtils.isEmpty(mIdCard);
+        if (mShippingMethod != null) {
+            if (mShippingMethod.getIsneedidcard() == 1 && TextUtils.isEmpty(mIdCard)) {
+                CustomToast.makeText((Activity) mView, UIUtils.getString(R.string.String_please_input_id_card_num), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (mShippingMethod.getIsneedidcard() == 1 && mShippingMethod.getIsNeedIdcardImage() == 1) {
+                if (TextUtils.isEmpty(mIdCardBackImg) && TextUtils.isEmpty(mIdCardFrontImg)) {
+                    CustomToast.makeText((Activity) mView, UIUtils.getString(R.string.id_card_notice), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -119,7 +136,9 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
             return;
         }
 
-        if (mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE) {
+        if (mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE |
+                mParcel.getType() == 5 |
+                mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE) {
             String tIdCard = null;
             if (mNeedIdcard) {
                 tIdCard = mIdCard;
@@ -150,6 +169,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
 
     @Override
     public void selectShippingMethod(final CsParcel.MerchantParcelShippingMethodList method) {
+        this.mShippingMethod = method;
         this.methodID = method.getParcelshippingmethodid();
         mHasSelectShippingMethod = false;
         mNeedIdcard = method.getIsneedidcard() == 1;// TODO: 2016/12/20 正式时候要改成1
@@ -168,6 +188,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
                         selectShippingRes = response;
                         mParcelshippingmethodid = method.getParcelshippingmethodid();
                         mView.showShippingMethodInsurance(response.getValueAlert(), response.getMaxdeclaredvalue(), response.getDeclaredtotal(), response.getPremiumrate(), response.getPremium(), mParcelshippingmethodid, response);
+                        mView.showIdNumber(method.getIsneedidcard() == 1, mIdCard);
                         mGiftcardaccount = response.getGiftcardaccount();
                         shippingfee = response.getShippingfee();
                         mPureShippingFee = shippingfee - response.getShippingduty() - response.getProductduty() - response.getPremium();
@@ -203,7 +224,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
         });
     }
 
-    String usedPayCode;
+    private String usedPayCode;
 
     private void calc(CsParcel.SelectShippingMethodReponse response) {
         if (response == null) return;
@@ -237,6 +258,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
 
             @Override
             public void onSuccess(final CsParcel.GetParcelDetailResponse response) {
+                isGab = response.getIsGrab();
                 mParcel = response.getParcel();
                 mParcelName = mParcel.getParcelNumber();
                 mOrderParcelUseCase.setParcelName(mParcelName);
@@ -290,9 +312,14 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
                                 mView.setTraceVisibility(false, response.getParcelitemlistList());
                                 mView.hitFoot();
                                 mView.showEstimateWeight(response.getShipping().getWeight());
-                                mView.showShippingMethods(response.getMerchantparcelshippingmethodlistList());
-                                showAddress(address);
-                                mView.showIdNumber(!"".endsWith(address.getIdCard()), address.getIdCard());
+                                is_fu_shipping = (mParcel.getType() == 4);// 福袋送包裹
+                                if (is_fu_shipping & isEmpty(address)) {
+                                    mView.showFuGiftShipping();
+                                } else {
+                                    mView.showShippingMethods(response.getMerchantparcelshippingmethodlistList());
+                                    showAddress(address);
+                                }
+//                                mView.showIdNumber(false, address.getIdCard());
                                 mIdCardBackImg = address.getIdcardbackimage();
                                 mIdCardFrontImg = address.getIdcardfrontimage();
                                 mIdCard = address.getIdCard();
@@ -314,8 +341,12 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
         });
     }
 
+    private boolean isEmpty(CsAddress.CustomerAddress address) {
+        return TextUtils.isEmpty(address.getName()) & TextUtils.isEmpty(address.getPhone()) & TextUtils.isEmpty(address.getRegion());
+    }
+
     private void showItem(List<CsParcel.ParcelItemList> parcelitemlistList) {
-        List<ParcelItemBean> list = new ArrayList<>();
+       /* List<ParcelItemBean> list = new ArrayList<>();
         for (CsParcel.ParcelItemList itemList : parcelitemlistList) {
             ParcelItemBean itemBean = new ParcelItemBean();
             itemBean.titel = itemList.getName();
@@ -333,8 +364,8 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
             }
             itemBean.message = itemList.getMessage();
             list.add(itemBean);
-        }
-        mView.setParcelsItme(list, mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE | mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_DIRECT_VALUE);
+        }*/
+        mView.setParcelsItme(parcelitemlistList, mParcel.getType());
     }
 
 
@@ -347,6 +378,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
         bean.setServerUrlFront(mIdCardFrontImg);
         String s = new JsonSerializer().serializeIDinfo(bean);
         intent.putExtra(IdCardActivity.ID_CARD_BEAN, s);
+        intent.putExtra(IdCardActivity.NEED_CARD_IMG, mShippingMethod != null && mShippingMethod.getIsNeedIdcardImage() == 1);
         context.startActivityForResult(intent, 11);
         context.overridePendingTransition(R.anim.activity_translate_x_in, R.anim.activity_translate_x_out);
     }
@@ -364,23 +396,23 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
     }
 
     @Override
-    public void setAddress(String topText, String addressText, int id) {
-        showShippingMethod(id + "", mWarehouse);
+    public void setAddress(CsAddress.CustomerAddress customerAddress) {
+        showShippingMethod(customerAddress.getAddressId() + "", mWarehouse);
 //        mView.showCustomerAddress(topText, addressText, id);
-        showAddress(topText, addressText, id);
+//        showAddress(topText, addressText, id);
+        showAddress(customerAddress);
     }
 
 
     private void showAddress(CsAddress.CustomerAddress address) {
         this.addressID = address.getAddressId();
         mView.showCustomerAddress(address);
-
     }
 
-    private void showAddress(String topText, String addressText, int id) {
+   /* private void showAddress(String topText, String addressText, int id) {
         this.addressID = id;
         mView.showCustomerAddress(topText, addressText, id);
-    }
+    }*/
 
 
     private void showShippingMethod(String addressID, CsBase.Warehouse warehouse) {
@@ -634,7 +666,7 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
 
 
     private void showShipping(CsParcel.ParcelShipping shipping, int i) {
-        String[] split = shipping.getShippingMethodInfo().split("\\s+");
+        String[] split = shipping.getShippingMethodInfo().split("\n");
         String detail = "";
         String name = "";
         if (split.length == 1) {
@@ -643,13 +675,13 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
             name = split[0];
             detail = split[1];
         } else if (split.length == 3) {
-            name = split[0] + " " + split[1];
+            name = split[0] + "\n" + split[1];
             detail = split[2];
         } else if (split.length == 4) {
-            name = split[1] + " " + split[2];
+            name = split[1] + "\n" + split[2];
             detail = split[3];
         } else if (split.length > 4) {
-            name = split[1] + " " + split[2];
+            name = split[1] + "\n" + split[2];
             detail = split[3];
         }
         Activity content = (Activity) mView;
@@ -674,4 +706,6 @@ public class PackageDeatilPresent extends PackageDetailContract.Presenter {
             context.finish();
         }
     }
+
+
 }

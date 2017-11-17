@@ -11,19 +11,22 @@ import com.fuexpress.kr.base.SimpleBaseAdapter;
 import com.fuexpress.kr.bean.ParcelItemBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.ParcelItemView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import fksproto.CsParcel;
+
 
 /**
  * Created by yuan on 2016-6-15.
  */
-public class ParcelItemAdapter extends SimpleBaseAdapter<ParcelItemBean> {
+public class ParcelItemAdapter extends SimpleBaseAdapter<CsParcel.ParcelItemList> {
 
-    public ParcelItemAdapter(Activity content, List<ParcelItemBean> data) {
+    public ParcelItemAdapter(Activity content, List<CsParcel.ParcelItemList> data) {
         super(content, data);
     }
 
@@ -39,11 +42,11 @@ public class ParcelItemAdapter extends SimpleBaseAdapter<ParcelItemBean> {
         }
 
         ParcelItemView parcelItemView = (ParcelItemView) convertView;
-        ParcelItemBean item = (ParcelItemBean) getItem(position);
-        parcelItemView.setTitle(item.titel);
-        parcelItemView.setCount("×" + item.count);
-        parcelItemView.setIvIcon(item.img);
-        parcelItemView.setPrice(item.price);
+        CsParcel.ParcelItemList item = (CsParcel.ParcelItemList) getItem(position);
+        parcelItemView.setTitle(item.getName());
+        parcelItemView.setCount("×" + item.getQty());
+        parcelItemView.setIvIcon(item.getImageurl());
+        parcelItemView.setPrice(UIUtils.getCurrency(mContent, item.getPriceCurrencyCode(), item.getPrice()));
         return convertView;
     }
 

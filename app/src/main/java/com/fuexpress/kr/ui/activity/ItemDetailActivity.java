@@ -35,6 +35,7 @@ public class ItemDetailActivity extends BaseActivity {
 
         mTvRight = (TextView) rootView.findViewById(R.id.title_tv_right);
         mTvLeft = (TextView) rootView.findViewById(R.id.title_tv_left);
+        rootView.findViewById(R.id.title_iv_left).setOnClickListener(this);
         mTvRight.setText(getResources().getString(R.string.String_refresh));
         mTvLeft.setOnClickListener(this);
 

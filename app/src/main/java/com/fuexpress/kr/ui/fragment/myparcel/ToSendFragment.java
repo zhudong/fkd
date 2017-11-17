@@ -1,11 +1,8 @@
 package com.fuexpress.kr.ui.fragment.myparcel;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -13,13 +10,11 @@ import com.fuexpress.kr.MainActivity;
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseFragment;
 import com.fuexpress.kr.bean.NeedBean;
-import com.fuexpress.kr.ui.adapter.NeedItemsAdapter;
 import com.fuexpress.kr.ui.adapter.ParcelItemsAdapter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.

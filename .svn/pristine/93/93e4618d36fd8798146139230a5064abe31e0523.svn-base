@@ -1,0 +1,662 @@
+package com.fuexpress.kr.ui.activity.order_detail;
+
+import android.graphics.Color;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.OrderConstants;
+import com.fuexpress.kr.bean.SalesOrderItemBean;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.SalesOrderManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.net.RequestNetListener;
+import com.fuexpress.kr.ui.activity.my_order.OrderAll;
+import com.fuexpress.kr.ui.adapter.SalesOrderDetailPayedAdapter;
+import com.fuexpress.kr.ui.adapter.ShippingAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CrowdProgressDetail;
+import com.fuexpress.kr.ui.view.CrowdTimer;
+import com.fuexpress.kr.utils.ClassUtil;
+import com.fuexpress.kr.utils.TimeUtils;
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fksproto.CsAddress;
+import fksproto.CsCrowd;
+import fksproto.CsOrder;
+
+
+/**
+ * Created by k550 on 5/9/2016.
+ */
+public class OrderDetailPayedActivity extends BaseActivity {
+    private TextView leftTv, centerTv, rigthTv;
+    private ImageView leftIv, rightIv;
+    private TextView idTv, priceTv, timeTv, countTv;
+    public long mLong;
+    public int currentIndex = 1;
+    public static final int stateParcel = 1, stateToSend = 2, stateSended = 3, stateOther = 4;
+    private List<SalesOrderItemBean> parceleds, toSends, sendeds, others;
+    private List<SalesOrderItemBean> parceledShorts, toSendShorts, sendedsShort, otherShorts;
+    private boolean parcelShrink = true, toSendShrink = true, sendShrink = true, otherShrink = true;
+    private TextView percelTv, toSendTv, sendedTv, otherTv, payMethodTv;
+    public TextView editBtn;
+    public TextView shrinkCountTv;
+    public RelativeLayout shrinkLayout;
+    public ImageView upIv;
+    private ListView mListView, mShippingListView;
+    private SalesOrderDetailPayedAdapter perceledAdapter, tosendAdapter, sendedAdapter, otherAdapter;
+    private SalesOrderDetailPayedAdapter perceledShortAdapter, toSendShortAdapter, sendShortAdapter, otherShortAdapter;
+    private CrowdProgressDetail mProgressDetail;
+    private CrowdTimer mCrowdTimer;
+    private LinearLayout navLayout;
+    //海外方式直邮需要委外的信息
+    public LinearLayout otherLayout;
+    public TextView addressTv, nameTv, deliverTv;
+    //添加字段，判断是否直邮发货，直邮发货则隐藏去发货按钮
+    public boolean isDirect = false;
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.title_tv_left:
+                    onBackPressed();
+                    break;
+                case R.id.title_iv_left:
+                    onBackPressed();
+                    break;
+                case R.id.percelTv:
+                    currentIndex = stateParcel;
+                    switchState();
+                    break;
+                case R.id.toSendTv:
+                    currentIndex = stateToSend;
+                    switchState();
+                    break;
+                case R.id.sendedTv:
+                    currentIndex = stateSended;
+                    switchState();
+                    break;
+                case R.id.otherTv:
+                    currentIndex = stateOther;
+                    switchState();
+                    break;
+                case R.id.editBtn:
+                    changeOrderState();
+                    break;
+                case R.id.shrinkLayout:
+                    switch (currentIndex) {
+                        case stateParcel:
+                            parcelShrink = !parcelShrink;
+                            switchState();
+                            break;
+                        case stateSended:
+                            sendShrink = !sendShrink;
+                            switchState();
+                            break;
+                        case stateToSend:
+                            toSendShrink = !toSendShrink;
+                            switchState();
+                            break;
+                        case stateOther:
+                            otherShrink = !otherShrink;
+                            switchState();
+                            break;
+
+                    }
+
+                    break;
+
+            }
+        }
+    };
+
+    @Override
+    public View setInitView() {
+        View view = View.inflate(this, R.layout.activity_order_detail_payed, null);
+        mLong = getIntent().getLongExtra(OrderAll.BEAN, 0);
+        leftIv = (ImageView) view.findViewById(R.id.title_iv_left);
+        rightIv = (ImageView) view.findViewById(R.id.title_iv_right);
+        leftTv = (TextView) view.findViewById(R.id.title_tv_left);
+        centerTv = (TextView) view.findViewById(R.id.title_tv_center);
+        rigthTv = (TextView) view.findViewById(R.id.title_tv_right);
+        rightIv.setVisibility(View.GONE);
+        rigthTv.setVisibility(View.GONE);
+        leftIv.setOnClickListener(onClickListener);
+        leftTv.setOnClickListener(onClickListener);
+        leftTv.setText(getString(R.string.order_payed));
+        centerTv.setText(getString(R.string.String_payed));
+
+
+        mListView = (ListView) view.findViewById(R.id.mListView);
+        View footView = View.inflate(this, R.layout.layout_order_payed, null);
+        mListView.addFooterView(footView);
+        mShippingListView = (ListView) footView.findViewById(R.id.list_shipping);
+        otherLayout = (LinearLayout) footView.findViewById(R.id.otherLayout);
+        addressTv = (TextView) footView.findViewById(R.id.ad_address_tv);
+        nameTv = (TextView) footView.findViewById(R.id.ad_name_tv);
+        deliverTv = (TextView) footView.findViewById(R.id.deliverTv);
+
+
+        addCrowdView();
+        payMethodTv = (TextView) footView.findViewById(R.id.payment_type_tv);
+        shrinkCountTv = (TextView) footView.findViewById(R.id.itemCountTv);
+        shrinkLayout = (RelativeLayout) footView.findViewById(R.id.shrinkLayout);
+        shrinkLayout.setOnClickListener(onClickListener);
+        upIv = (ImageView) footView.findViewById(R.id.upIv);
+
+        perceledAdapter = new SalesOrderDetailPayedAdapter(OrderDetailPayedActivity.this, new ArrayList<SalesOrderItemBean>(), isDirect);
+        mListView.setAdapter(perceledAdapter);
+
+
+        getSalesDetail();
+        switchState();
+        return view;
+
+    }
+
+    public void addCrowdView() {
+        View mHeadView = View.inflate(this, R.layout.layout_order_crowd_detail, null);
+        idTv = (TextView) mHeadView.findViewById(R.id.idTv);
+        priceTv = (TextView) mHeadView.findViewById(R.id.priceTv);
+        timeTv = (TextView) mHeadView.findViewById(R.id.timeTv);
+        countTv = (TextView) mHeadView.findViewById(R.id.countTv);
+        percelTv = (TextView) mHeadView.findViewById(R.id.percelTv);
+        percelTv.setOnClickListener(onClickListener);
+        toSendTv = (TextView) mHeadView.findViewById(R.id.toSendTv);
+        toSendTv.setOnClickListener(onClickListener);
+        sendedTv = (TextView) mHeadView.findViewById(R.id.sendedTv);
+        sendedTv.setOnClickListener(onClickListener);
+        otherTv = (TextView) mHeadView.findViewById(R.id.otherTv);
+        otherTv.setOnClickListener(onClickListener);
+        editBtn = (TextView) mHeadView.findViewById(R.id.editBtn);
+        editBtn.setVisibility(View.GONE);
+        editBtn = (TextView) mHeadView.findViewById(R.id.editBtn);
+        editBtn.setOnClickListener(onClickListener);
+        mCrowdTimer = (CrowdTimer) mHeadView.findViewById(R.id.crowd_timer);
+        mProgressDetail = (CrowdProgressDetail) mHeadView.findViewById(R.id.crowd_progress_detail);
+        navLayout = (LinearLayout) mHeadView.findViewById(R.id.navLayout);
+        navLayout.setVisibility(View.VISIBLE);
+        mListView.addHeaderView(mHeadView);
+    }
+
+    public void switchState() {
+        percelTv.setTextColor(Color.BLACK);
+        toSendTv.setTextColor(Color.BLACK);
+        sendedTv.setTextColor(Color.BLACK);
+        otherTv.setTextColor(Color.BLACK);
+        shrinkLayout.setVisibility(View.GONE);
+        mListView.setVisibility(View.VISIBLE);
+        switch (currentIndex) {
+            case stateParcel:
+                percelTv.setTextColor(Color.RED);
+
+                if (parceleds != null) {
+                    perceledAdapter.setData(parceleds);
+                    if (parceleds.size() > 3) {
+                        shrinkLayout.setVisibility(View.VISIBLE);
+                        shrinkList(parcelShrink, parceleds.size(), parceledShorts.size());
+                        if (parcelShrink) {
+                            perceledAdapter.setData(parceledShorts);
+                            upIv.setImageResource(R.mipmap.arrow_down);
+                        } else {
+                            perceledAdapter.setData(parceleds);
+                            upIv.setImageResource(R.mipmap.arrow_up);
+                        }
+                    }
+                }
+                break;
+            case stateSended:
+                sendedTv.setTextColor(Color.RED);
+                if (sendeds != null) {
+                    perceledAdapter.setData(sendeds);
+                    if (sendeds.size() > 3) {
+                        shrinkLayout.setVisibility(View.VISIBLE);
+                        shrinkList(sendShrink, sendeds.size(), sendedsShort.size());
+                        if (sendShrink) {
+                            perceledAdapter.setData(sendedsShort);
+                            upIv.setImageResource(R.mipmap.arrow_down);
+                        } else {
+                            perceledAdapter.setData(sendeds);
+                            upIv.setImageResource(R.mipmap.arrow_up);
+                        }
+                    }
+                }
+                break;
+            case stateToSend:
+                toSendTv.setTextColor(Color.RED);
+                if (toSends != null) {
+                    perceledAdapter.setData(toSends);
+                    if (toSends.size() > 3) {
+                        shrinkList(toSendShrink, toSends.size(), toSendShorts.size());
+                        if (toSendShrink) {
+                            perceledAdapter.setData(toSendShorts);
+                            upIv.setImageResource(R.mipmap.arrow_down);
+                        } else {
+                            perceledAdapter.setData(toSends);
+                            upIv.setImageResource(R.mipmap.arrow_up);
+                        }
+                    }
+                }
+                break;
+            case stateOther:
+                otherTv.setTextColor(Color.RED);
+                if (others != null) {
+                    perceledAdapter.setData(others);
+                    if (others.size() > 3) {
+                        shrinkLayout.setVisibility(View.VISIBLE);
+                        shrinkList(otherShrink, others.size(), otherShorts.size());
+                        if (otherShrink) {
+                            perceledAdapter.setData(otherShorts);
+                            upIv.setImageResource(R.mipmap.arrow_down);
+                        } else {
+                            upIv.setImageResource(R.mipmap.arrow_up);
+                            perceledAdapter.setData(others);
+                        }
+                    }
+                }
+                break;
+        }
+        perceledAdapter.notifyDataSetChanged();
+    }
+
+
+/*
+    //订单单品状态
+    enum SalesOrderItemState
+    {
+        SALES_ORDER_ITEM_STATE_NONE            = 0;
+        SALES_ORDER_ITEM_STATE_PENDING         = 1;//待付款
+        SALES_ORDER_ITEM_STATE_PROCESSING      = 2;//待处理
+        SALES_ORDER_ITEM_STATE_CHECKING        = 3;//验货中
+        SALES_ORDER_ITEM_STATE_PREORDERING     = 4;//入库中
+        SALES_ORDER_ITEM_STATE_PACKING         = 5;//已入库
+        SALES_ORDER_ITEM_STATE_NOTICED         = 6;//待发货
+        SALES_ORDER_ITEM_STATE_SHIPPED         = 7;//已发货
+        SALES_ORDER_ITEM_STATE_AWAITING_CANCEL = 8;//等待取消
+        SALES_ORDER_ITEM_STATE_CANCELED        = 9;//已取消
+        SALES_ORDER_ITEM_STATE_CROWDING        = 10;//拼单中
+    }*/
+
+    public void getSalesDetail() {
+        SalesOrderManager.getSalesOrderDetail(mLong, new RequestNetListener<CsOrder.NewSalesOrderDetailResponse>() {
+            @Override
+            public void onSuccess(CsOrder.NewSalesOrderDetailResponse response) {
+                KLog.i("getSalesDetail", response.toString());
+
+                CsOrder.SalesOrder order = response.getOrder();
+                String price = UIUtils.getCurrency(myActivity(), order.getCurrencycode(), order.getGrandTotal());
+                priceTv.setText(getString(R.string.grand_total) + price);
+                idTv.setText(getString(R.string.order_no) + order.getOrderNumber());
+                countTv.setText(getString(R.string.item_number) + response.getOrderItemsCount());
+                timeTv.setText(getString(R.string.order_date) + TimeUtils.getDateStyle(order.getCreateTime()));
+                //判断是否为直邮
+                if (order.getShippingScheme() == CsOrder.ShippingScheme.SHIPPING_SCHEME_DIRECT_VALUE) {
+                    isDirect = true;
+                }
+                boolean isProcessing = true;//!order.getIsCrowd();
+                for (int i = 0; i < response.getOrderItemsList().size(); i++) {
+                    CsOrder.SalesOrderItem salesOrderItem = response.getOrderItemsList().get(i);
+                    if (salesOrderItem.getCrowd().getCrowdId() == 0 && salesOrderItem.getState() != 2) {
+                        isProcessing = false;
+                        break;
+                    }
+                }
+                if (isProcessing) {
+                    editBtn.setVisibility(View.VISIBLE);
+                }
+                if (order.getIsCrowd() && mProgressDetail != null) {
+
+//                    mProgressDetail.setData(response.getCrowd());
+//                    mCrowdTimer.initTime(response.getCrowd());
+                } else {
+                    mProgressDetail.setVisibility(View.GONE);
+                    mCrowdTimer.setVisibility(View.GONE);
+                }
+                parceleds = new ArrayList<>();
+                toSends = new ArrayList<>();
+                sendeds = new ArrayList<>();
+                others = new ArrayList<>();
+                long parcelLong = 0, toSendLong = 0, sendLong = 0, otherLong = 0;
+                for (CsOrder.SalesOrderItem salesOrderItem : response.getOrderItemsList()) {
+                    switch (salesOrderItem.getState()) {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            /*if(isDirect){
+                                parceleds.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                                parcelLong = parcelLong + salesOrderItem.getQty();
+                            }else {*/
+                            others.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                            otherLong = otherLong + salesOrderItem.getQty();
+                            //}
+                            break;
+                        case 5:
+                            parceleds.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                            parcelLong = parcelLong + salesOrderItem.getQty();
+                            break;
+                        case 6:
+                            toSends.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                            toSendLong = toSendLong + salesOrderItem.getQty();
+                            break;
+                        case 7:
+                            sendeds.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                            sendLong = sendLong + salesOrderItem.getQty();
+                            break;
+                        case 8:
+                        case 9:
+                        case 10:
+                            others.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
+                            otherLong = otherLong + salesOrderItem.getQty();
+                            break;
+
+
+                    }
+                }
+                if (parceleds != null && parceleds.size() > 3) {
+                    parceledShorts = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        parceledShorts.add(parceleds.get(i));
+                    }
+                }
+                if (toSends != null && toSends.size() > 3) {
+                    toSendShorts = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        toSendShorts.add(toSends.get(i));
+                    }
+                }
+                if (sendeds != null && sendeds.size() > 3) {
+                    sendedsShort = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        sendedsShort.add(sendeds.get(i));
+                    }
+                }
+                if (others != null && others.size() > 3) {
+                    otherShorts = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        otherShorts.add(others.get(i));
+                    }
+                }
+                if (parceleds != null && parceleds.size() > 0) {
+                    currentIndex = stateParcel;
+                } else if (toSends != null && toSends.size() > 0) {
+                    currentIndex = stateToSend;
+                } else if (sendeds != null && sendeds.size() > 0) {
+                    currentIndex = stateSended;
+                } else {
+                    currentIndex = stateOther;
+                }
+                countTv.setText((getString(R.string.item_number) + (parcelLong + toSendLong + sendLong + otherLong)));
+                percelTv.setText(getString(R.string.order_parceled) + parcelLong + ")");
+                toSendTv.setText(getString(R.string.order_wait_out) + toSendLong + ")");
+                sendedTv.setText(getString(R.string.order_send) + sendLong + ")");
+                otherTv.setText(getString(R.string.order_other) + otherLong + ")");
+                String payMethod = "";
+                if (order.getGiftCardAmount() > 0 & order.getGiftCardAmount() < order.getGrandTotal()) {
+                    payMethod += getString(R.string.pay_by_gift_card) + ":" + UIUtils.getCurrency(OrderDetailPayedActivity.this, order.getCurrencycode(), order.getGiftCardAmount()) + "\n";
+                }
+                payMethod += order.getPayMethodStr();
+                payMethodTv.setText(payMethod);
+                switchState();
+
+                showOtherInfo(response);
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
+
+    //取消订单
+    public void changeOrderState() {
+        CsOrder.CancelSalesOrderRequest.Builder builder = CsOrder.CancelSalesOrderRequest.newBuilder();
+        builder.setOrderId(mLong).setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        NetEngine.postRequest(builder, new INetEngineListener<CsOrder.CancelSalesOrderResponse>() {
+            @Override
+            public void onSuccess(CsOrder.CancelSalesOrderResponse response) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        //    KLog.i("取消成功");
+                        centerTv.setText(getString(R.string.wait_cancel));
+                        editBtn.setVisibility(View.GONE);
+                        cancelOrder();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewUtils.toast(getString(R.string.cancel_failure));
+                    }
+                });
+            }
+        });
+    }
+
+    public void shrinkList(boolean shrink, int allSize, int shortSize) {
+        shrinkLayout.setVisibility(View.VISIBLE);
+        if (shrink) {
+            shrinkCountTv.setText(getString(R.string.left_no) + (allSize - shortSize) + getString(R.string.xiang));
+        } else {
+            shrinkCountTv.setText(getString(R.string.total_no) + allSize + getString(R.string.xiang));
+        }
+
+    }
+
+    private float getFee(List<CsOrder.SalesOrderShipping> list) {
+        float fee = 0;
+        if (list == null) {
+            return 0;
+        }
+        for (CsOrder.SalesOrderShipping shipping : list) {
+            if (shipping != null) {
+                fee = fee + shipping.getShippingFee();
+            }
+        }
+        return fee;
+    }
+
+    public void showOtherInfo(CsOrder.NewSalesOrderDetailResponse response) {
+        navLayout.setVisibility(response.getOrder().getIsCrowd() ? View.GONE : View.VISIBLE);
+        float fee = getFee(response.getShippingsList());
+        String price = UIUtils.getCurrency(myActivity(), response.getOrder().getCurrencycode(), fee);
+        if (response.getOrder().getShippingScheme() == 1) {
+            otherLayout.setVisibility(View.VISIBLE);
+            deliverTv.setText(getString(R.string.String_direct_mail_1) + price);
+        } else if (response.getOrder().getShippingScheme() == 2) {
+            deliverTv.setText(getString(R.string.String_merge_order));
+        } else if (response.getOrder().getShippingScheme() == 3) {
+            deliverTv.setText(getString(R.string.String_direct_fu));
+        }
+
+        //String region = AssetFileManager.getInstance().readFilePlus(response.getAddress().getRegion(), AssetFileManager.ADDRESS_TYPE);
+        CsAddress.CustomerAddress address = response.getAddress();
+        String region = address.getFullRegionName();
+        String addressDetail = response.getAddress().getStreet() + " " + region /*+response.getAddress().getStreet()*/;
+
+        nameTv.setText(response.getAddress().getName() + "," + response.getAddress().getPhone());
+        addressTv.setText(addressDetail);
+        //    feeTv.setText(price);
+        //    wareHouseTv.setText(response.getShippings(0).getWarehouseName());
+        //    methodTv.setText(response.getShippings(0).getShippingMethod());
+        ShippingAdapter shippingAdapter = new ShippingAdapter(OrderDetailPayedActivity.this, response.getShippingsList(), response.getOrder().getCurrencycode());
+        mShippingListView.setAdapter(shippingAdapter);
+        setListViewHeightBasedOnChildren(mShippingListView);
+    }
+
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        switch (event.getType()) {
+            case BusEvent.PACKAGE_OPERAT_PARCEL:
+                //  operaParcel(event.getmLongParam());
+                reset();
+                getSalesDetail();
+                break;
+            case BusEvent.GET_TEXT_TRANSLATE_SUCCESS:
+                switch (currentIndex) {
+                    case stateParcel:
+                        if (perceledAdapter != null) {
+                            perceledAdapter.notifyDataSetChanged();
+                        }
+                        if (perceledShortAdapter != null) {
+                            perceledShortAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case stateToSend:
+                        if (tosendAdapter != null) {
+                            tosendAdapter.notifyDataSetChanged();
+                        }
+                        if (toSendShortAdapter != null) {
+                            toSendShortAdapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                    case stateSended:
+                        if (sendedAdapter != null) {
+                            sendedAdapter.notifyDataSetChanged();
+                        }
+                        if (sendShortAdapter != null) {
+                            sendShortAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case stateOther:
+                        if (otherAdapter != null) {
+                            otherAdapter.notifyDataSetChanged();
+                        }
+                        if (otherShortAdapter != null) {
+                            otherShortAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                }
+                break;
+        }
+    }
+
+    //发货成功后
+    private void operaParcel(long id) {
+        changeOrder(id, parceleds, 7);
+        changeOrder(id, toSends, 7);
+        changeOrder(id, sendeds, 7);
+        changeOrder(id, others, 7);
+        changeOrder(id, parceledShorts, 7);
+        changeOrder(id, toSendShorts, 7);
+        changeOrder(id, sendedsShort, 7);
+        changeOrder(id, otherShorts, 7);
+        showAdapter();
+    }
+
+    private void changeOrder(long id, List<SalesOrderItemBean> list, int state) {
+        if (list == null) {
+            return;
+        }
+        for (SalesOrderItemBean salesOrderItemBean : list) {
+            if (salesOrderItemBean.parcel_id == id) {
+                salesOrderItemBean.state = state;
+            }
+        }
+    }
+
+    private void changeOrder(List<SalesOrderItemBean> list, int state) {
+        if (list == null) {
+            return;
+        }
+        for (SalesOrderItemBean salesOrderItemBean : list) {
+            salesOrderItemBean.state = state;
+        }
+    }
+
+    private void showAdapter() {
+        if (perceledAdapter != null) {
+            perceledAdapter.notifyDataSetChanged();
+        }
+        if (perceledShortAdapter != null) {
+            perceledShortAdapter.notifyDataSetChanged();
+        }
+        if (toSendShortAdapter != null) {
+            toSendShortAdapter.notifyDataSetChanged();
+        }
+        if (tosendAdapter != null) {
+            tosendAdapter.notifyDataSetChanged();
+        }
+        if (sendedAdapter != null) {
+            sendedAdapter.notifyDataSetChanged();
+        }
+        if (sendShortAdapter != null) {
+            sendShortAdapter.notifyDataSetChanged();
+        }
+        if (otherAdapter != null) {
+            otherAdapter.notifyDataSetChanged();
+        }
+        if (otherShortAdapter != null) {
+            otherShortAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void cancelOrder() {
+        changeOrder(parceleds, 8);
+        changeOrder(toSends, 8);
+        changeOrder(sendeds, 8);
+        changeOrder(others, 8);
+        changeOrder(parceledShorts, 8);
+        changeOrder(toSendShorts, 8);
+        changeOrder(sendedsShort, 8);
+        changeOrder(otherShorts, 8);
+        showAdapter();
+    }
+
+    private void reset() {
+        parcelShrink = true;
+        toSendShrink = true;
+        sendShrink = true;
+        otherShrink = true;
+        perceledAdapter = null;
+        tosendAdapter = null;
+        sendedAdapter = null;
+        otherAdapter = null;
+        perceledShortAdapter = null;
+        toSendShortAdapter = null;
+        sendShortAdapter = null;
+        otherShortAdapter = null;
+
+    }
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        // 获取ListView对应的Adapter
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        // listView.getDividerHeght()获取子项间分隔符占用的高度
+        // params.height最后得到整个ListView完整显示需要的高度
+        listView.setLayoutParams(params);
+    }
+}

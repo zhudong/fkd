@@ -6,11 +6,11 @@ package fksproto;
 public final class CsShipping {
   private CsShipping() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+          com.google.protobuf.ExtensionRegistry registry) {
   }
   public interface ShippingOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.Shipping)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.Shipping)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required int32 shipping_id = 1;</code>
@@ -28,12 +28,12 @@ public final class CsShipping {
     /**
      * <code>required string title = 2;</code>
      */
-    String getTitle();
+    java.lang.String getTitle();
     /**
      * <code>required string title = 2;</code>
      */
     com.google.protobuf.ByteString
-        getTitleBytes();
+    getTitleBytes();
 
     /**
      * <code>required string info = 3;</code>
@@ -42,18 +42,18 @@ public final class CsShipping {
     /**
      * <code>required string info = 3;</code>
      */
-    String getInfo();
+    java.lang.String getInfo();
     /**
      * <code>required string info = 3;</code>
      */
     com.google.protobuf.ByteString
-        getInfoBytes();
+    getInfoBytes();
 
     /**
      * <code>optional double fee = 4;</code>
      *
      * <pre>
-     *�˷�	
+     *运费
      * </pre>
      */
     boolean hasFee();
@@ -61,7 +61,7 @@ public final class CsShipping {
      * <code>optional double fee = 4;</code>
      *
      * <pre>
-     *�˷�	
+     *运费
      * </pre>
      */
     double getFee();
@@ -70,7 +70,7 @@ public final class CsShipping {
      * <code>optional bool is_need_duty = 5;</code>
      *
      * <pre>
-     *�Ƿ���Ҫ��˰
+     *是否需要关税
      * </pre>
      */
     boolean hasIsNeedDuty();
@@ -78,7 +78,7 @@ public final class CsShipping {
      * <code>optional bool is_need_duty = 5;</code>
      *
      * <pre>
-     *�Ƿ���Ҫ��˰
+     *是否需要关税
      * </pre>
      */
     boolean getIsNeedDuty();
@@ -87,7 +87,7 @@ public final class CsShipping {
      * <code>optional int32 parcel_subtotal_quota = 6;</code>
      *
      * <pre>
-     *������Ʒʵ�ʼ۸��޶�
+     *包裹商品实际价格限额
      * </pre>
      */
     boolean hasParcelSubtotalQuota();
@@ -95,7 +95,7 @@ public final class CsShipping {
      * <code>optional int32 parcel_subtotal_quota = 6;</code>
      *
      * <pre>
-     *������Ʒʵ�ʼ۸��޶�
+     *包裹商品实际价格限额
      * </pre>
      */
     int getParcelSubtotalQuota();
@@ -104,7 +104,7 @@ public final class CsShipping {
      * <code>optional float duty_rate = 7;</code>
      *
      * <pre>
-     *��˰��
+     *关税率
      * </pre>
      */
     boolean hasDutyRate();
@@ -112,7 +112,7 @@ public final class CsShipping {
      * <code>optional float duty_rate = 7;</code>
      *
      * <pre>
-     *��˰��
+     *关税率
      * </pre>
      */
     float getDutyRate();
@@ -121,7 +121,7 @@ public final class CsShipping {
      * <code>optional float shipping_duty = 8;</code>
      *
      * <pre>
-     *�˷ѹ�˰
+     *运费关税
      * </pre>
      */
     boolean hasShippingDuty();
@@ -129,23 +129,49 @@ public final class CsShipping {
      * <code>optional float shipping_duty = 8;</code>
      *
      * <pre>
-     *�˷ѹ�˰
+     *运费关税
      * </pre>
      */
     float getShippingDuty();
+
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    boolean hasAlertMsg();
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    java.lang.String getAlertMsg();
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getAlertMsgBytes();
   }
   /**
    * Protobuf type {@code fksproto.Shipping}
    *
    * <pre>
-   *�����ϰ汾�������°汾һ����ShippingMethod
-   *����Ľ��磬�ʲ�����
+   *兼容老版本保留，新版本一律用ShippingMethod
+   *定义的较早，词不达意
    * </pre>
    */
   public static final class Shipping extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.Shipping)
-      ShippingOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.Shipping)
+          ShippingOrBuilder {
     // Use Shipping.newBuilder() to construct.
     private Shipping(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -163,19 +189,19 @@ public final class CsShipping {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private Shipping(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -186,7 +212,7 @@ public final class CsShipping {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -233,41 +259,47 @@ public final class CsShipping {
               shippingDuty_ = input.readFloat();
               break;
             }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              alertMsg_ = bs;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsShipping.internal_static_fksproto_Shipping_descriptor;
+    getDescriptor() {
+      return fksproto.CsShipping.internal_static_fksproto_Shipping_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsShipping.internal_static_fksproto_Shipping_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              Shipping.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsShipping.internal_static_fksproto_Shipping_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsShipping.Shipping.class, fksproto.CsShipping.Shipping.Builder.class);
     }
 
     public static com.google.protobuf.Parser<Shipping> PARSER =
-        new com.google.protobuf.AbstractParser<Shipping>() {
-      public Shipping parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Shipping(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<Shipping>() {
+              public Shipping parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new Shipping(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<Shipping> getParserForType() {
       return PARSER;
     }
@@ -289,7 +321,7 @@ public final class CsShipping {
     }
 
     public static final int TITLE_FIELD_NUMBER = 2;
-    private Object title_;
+    private java.lang.Object title_;
     /**
      * <code>required string title = 2;</code>
      */
@@ -299,14 +331,14 @@ public final class CsShipping {
     /**
      * <code>required string title = 2;</code>
      */
-    public String getTitle() {
-      Object ref = title_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           title_ = s;
         }
@@ -317,12 +349,12 @@ public final class CsShipping {
      * <code>required string title = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getTitleBytes() {
-      Object ref = title_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         title_ = b;
         return b;
       } else {
@@ -331,7 +363,7 @@ public final class CsShipping {
     }
 
     public static final int INFO_FIELD_NUMBER = 3;
-    private Object info_;
+    private java.lang.Object info_;
     /**
      * <code>required string info = 3;</code>
      */
@@ -341,14 +373,14 @@ public final class CsShipping {
     /**
      * <code>required string info = 3;</code>
      */
-    public String getInfo() {
-      Object ref = info_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getInfo() {
+      java.lang.Object ref = info_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           info_ = s;
         }
@@ -359,12 +391,12 @@ public final class CsShipping {
      * <code>required string info = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getInfoBytes() {
-      Object ref = info_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getInfoBytes() {
+      java.lang.Object ref = info_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         info_ = b;
         return b;
       } else {
@@ -378,7 +410,7 @@ public final class CsShipping {
      * <code>optional double fee = 4;</code>
      *
      * <pre>
-     *�˷�	
+     *运费
      * </pre>
      */
     public boolean hasFee() {
@@ -388,7 +420,7 @@ public final class CsShipping {
      * <code>optional double fee = 4;</code>
      *
      * <pre>
-     *�˷�	
+     *运费
      * </pre>
      */
     public double getFee() {
@@ -401,7 +433,7 @@ public final class CsShipping {
      * <code>optional bool is_need_duty = 5;</code>
      *
      * <pre>
-     *�Ƿ���Ҫ��˰
+     *是否需要关税
      * </pre>
      */
     public boolean hasIsNeedDuty() {
@@ -411,7 +443,7 @@ public final class CsShipping {
      * <code>optional bool is_need_duty = 5;</code>
      *
      * <pre>
-     *�Ƿ���Ҫ��˰
+     *是否需要关税
      * </pre>
      */
     public boolean getIsNeedDuty() {
@@ -424,7 +456,7 @@ public final class CsShipping {
      * <code>optional int32 parcel_subtotal_quota = 6;</code>
      *
      * <pre>
-     *������Ʒʵ�ʼ۸��޶�
+     *包裹商品实际价格限额
      * </pre>
      */
     public boolean hasParcelSubtotalQuota() {
@@ -434,7 +466,7 @@ public final class CsShipping {
      * <code>optional int32 parcel_subtotal_quota = 6;</code>
      *
      * <pre>
-     *������Ʒʵ�ʼ۸��޶�
+     *包裹商品实际价格限额
      * </pre>
      */
     public int getParcelSubtotalQuota() {
@@ -447,7 +479,7 @@ public final class CsShipping {
      * <code>optional float duty_rate = 7;</code>
      *
      * <pre>
-     *��˰��
+     *关税率
      * </pre>
      */
     public boolean hasDutyRate() {
@@ -457,7 +489,7 @@ public final class CsShipping {
      * <code>optional float duty_rate = 7;</code>
      *
      * <pre>
-     *��˰��
+     *关税率
      * </pre>
      */
     public float getDutyRate() {
@@ -470,7 +502,7 @@ public final class CsShipping {
      * <code>optional float shipping_duty = 8;</code>
      *
      * <pre>
-     *�˷ѹ�˰
+     *运费关税
      * </pre>
      */
     public boolean hasShippingDuty() {
@@ -480,11 +512,65 @@ public final class CsShipping {
      * <code>optional float shipping_duty = 8;</code>
      *
      * <pre>
-     *�˷ѹ�˰
+     *运费关税
      * </pre>
      */
     public float getShippingDuty() {
       return shippingDuty_;
+    }
+
+    public static final int ALERT_MSG_FIELD_NUMBER = 9;
+    private java.lang.Object alertMsg_;
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    public boolean hasAlertMsg() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    public java.lang.String getAlertMsg() {
+      java.lang.Object ref = alertMsg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          alertMsg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string alert_msg = 9;</code>
+     *
+     * <pre>
+     *免运费的配送,订单金额不足时的提示
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getAlertMsgBytes() {
+      java.lang.Object ref = alertMsg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        alertMsg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
@@ -496,6 +582,7 @@ public final class CsShipping {
       parcelSubtotalQuota_ = 0;
       dutyRate_ = 0F;
       shippingDuty_ = 0F;
+      alertMsg_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -520,7 +607,7 @@ public final class CsShipping {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, shippingId_);
@@ -546,6 +633,9 @@ public final class CsShipping {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeFloat(8, shippingDuty_);
       }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getAlertMsgBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -557,35 +647,39 @@ public final class CsShipping {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, shippingId_);
+                .computeInt32Size(1, shippingId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getTitleBytes());
+                .computeBytesSize(2, getTitleBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getInfoBytes());
+                .computeBytesSize(3, getInfoBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, fee_);
+                .computeDoubleSize(4, fee_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isNeedDuty_);
+                .computeBoolSize(5, isNeedDuty_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, parcelSubtotalQuota_);
+                .computeInt32Size(6, parcelSubtotalQuota_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, dutyRate_);
+                .computeFloatSize(7, dutyRate_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(8, shippingDuty_);
+                .computeFloatSize(8, shippingDuty_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(9, getAlertMsgBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -593,75 +687,75 @@ public final class CsShipping {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static Shipping parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Shipping parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Shipping parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.Shipping parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Shipping parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Shipping parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static Shipping parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static Shipping parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static Shipping parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static Shipping parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static Shipping parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.Shipping parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(Shipping prototype) {
+    public static Builder newBuilder(fksproto.CsShipping.Shipping prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -669,24 +763,24 @@ public final class CsShipping {
      * Protobuf type {@code fksproto.Shipping}
      *
      * <pre>
-     *�����ϰ汾�������°汾һ����ShippingMethod
-     *����Ľ��磬�ʲ�����
+     *兼容老版本保留，新版本一律用ShippingMethod
+     *定义的较早，词不达意
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.Shipping)
-        ShippingOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.Shipping)
+            fksproto.CsShipping.ShippingOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsShipping.internal_static_fksproto_Shipping_descriptor;
+      getDescriptor() {
+        return fksproto.CsShipping.internal_static_fksproto_Shipping_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsShipping.internal_static_fksproto_Shipping_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                Shipping.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsShipping.internal_static_fksproto_Shipping_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsShipping.Shipping.class, fksproto.CsShipping.Shipping.Builder.class);
       }
 
       // Construct using fksproto.CsShipping.Shipping.newBuilder()
@@ -695,7 +789,7 @@ public final class CsShipping {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -725,6 +819,8 @@ public final class CsShipping {
         bitField0_ = (bitField0_ & ~0x00000040);
         shippingDuty_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000080);
+        alertMsg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -733,24 +829,24 @@ public final class CsShipping {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsShipping.internal_static_fksproto_Shipping_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsShipping.internal_static_fksproto_Shipping_descriptor;
       }
 
-      public Shipping getDefaultInstanceForType() {
-        return Shipping.getDefaultInstance();
+      public fksproto.CsShipping.Shipping getDefaultInstanceForType() {
+        return fksproto.CsShipping.Shipping.getDefaultInstance();
       }
 
-      public Shipping build() {
-        Shipping result = buildPartial();
+      public fksproto.CsShipping.Shipping build() {
+        fksproto.CsShipping.Shipping result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public Shipping buildPartial() {
-        Shipping result = new Shipping(this);
+      public fksproto.CsShipping.Shipping buildPartial() {
+        fksproto.CsShipping.Shipping result = new fksproto.CsShipping.Shipping(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -785,22 +881,26 @@ public final class CsShipping {
           to_bitField0_ |= 0x00000080;
         }
         result.shippingDuty_ = shippingDuty_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.alertMsg_ = alertMsg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Shipping) {
-          return mergeFrom((Shipping)other);
+        if (other instanceof fksproto.CsShipping.Shipping) {
+          return mergeFrom((fksproto.CsShipping.Shipping)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Shipping other) {
-        if (other == Shipping.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsShipping.Shipping other) {
+        if (other == fksproto.CsShipping.Shipping.getDefaultInstance()) return this;
         if (other.hasShippingId()) {
           setShippingId(other.getShippingId());
         }
@@ -829,35 +929,40 @@ public final class CsShipping {
         if (other.hasShippingDuty()) {
           setShippingDuty(other.getShippingDuty());
         }
+        if (other.hasAlertMsg()) {
+          bitField0_ |= 0x00000100;
+          alertMsg_ = other.alertMsg_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasShippingId()) {
-          
+
           return false;
         }
         if (!hasTitle()) {
-          
+
           return false;
         }
         if (!hasInfo()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        Shipping parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsShipping.Shipping parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Shipping) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsShipping.Shipping) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -900,7 +1005,7 @@ public final class CsShipping {
         return this;
       }
 
-      private Object title_ = "";
+      private java.lang.Object title_ = "";
       /**
        * <code>required string title = 2;</code>
        */
@@ -910,30 +1015,30 @@ public final class CsShipping {
       /**
        * <code>required string title = 2;</code>
        */
-      public String getTitle() {
-        Object ref = title_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getTitle() {
+        java.lang.Object ref = title_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             title_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string title = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getTitleBytes() {
-        Object ref = title_;
+      getTitleBytes() {
+        java.lang.Object ref = title_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           title_ = b;
           return b;
         } else {
@@ -944,11 +1049,11 @@ public final class CsShipping {
        * <code>required string title = 2;</code>
        */
       public Builder setTitle(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         title_ = value;
         onChanged();
         return this;
@@ -966,17 +1071,17 @@ public final class CsShipping {
        * <code>required string title = 2;</code>
        */
       public Builder setTitleBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         title_ = value;
         onChanged();
         return this;
       }
 
-      private Object info_ = "";
+      private java.lang.Object info_ = "";
       /**
        * <code>required string info = 3;</code>
        */
@@ -986,30 +1091,30 @@ public final class CsShipping {
       /**
        * <code>required string info = 3;</code>
        */
-      public String getInfo() {
-        Object ref = info_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getInfo() {
+        java.lang.Object ref = info_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             info_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string info = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getInfoBytes() {
-        Object ref = info_;
+      getInfoBytes() {
+        java.lang.Object ref = info_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           info_ = b;
           return b;
         } else {
@@ -1020,11 +1125,11 @@ public final class CsShipping {
        * <code>required string info = 3;</code>
        */
       public Builder setInfo(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         info_ = value;
         onChanged();
         return this;
@@ -1042,11 +1147,11 @@ public final class CsShipping {
        * <code>required string info = 3;</code>
        */
       public Builder setInfoBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         info_ = value;
         onChanged();
         return this;
@@ -1057,7 +1162,7 @@ public final class CsShipping {
        * <code>optional double fee = 4;</code>
        *
        * <pre>
-       *�˷�	
+       *运费
        * </pre>
        */
       public boolean hasFee() {
@@ -1067,7 +1172,7 @@ public final class CsShipping {
        * <code>optional double fee = 4;</code>
        *
        * <pre>
-       *�˷�	
+       *运费
        * </pre>
        */
       public double getFee() {
@@ -1077,7 +1182,7 @@ public final class CsShipping {
        * <code>optional double fee = 4;</code>
        *
        * <pre>
-       *�˷�	
+       *运费
        * </pre>
        */
       public Builder setFee(double value) {
@@ -1090,7 +1195,7 @@ public final class CsShipping {
        * <code>optional double fee = 4;</code>
        *
        * <pre>
-       *�˷�	
+       *运费
        * </pre>
        */
       public Builder clearFee() {
@@ -1105,7 +1210,7 @@ public final class CsShipping {
        * <code>optional bool is_need_duty = 5;</code>
        *
        * <pre>
-       *�Ƿ���Ҫ��˰
+       *是否需要关税
        * </pre>
        */
       public boolean hasIsNeedDuty() {
@@ -1115,7 +1220,7 @@ public final class CsShipping {
        * <code>optional bool is_need_duty = 5;</code>
        *
        * <pre>
-       *�Ƿ���Ҫ��˰
+       *是否需要关税
        * </pre>
        */
       public boolean getIsNeedDuty() {
@@ -1125,7 +1230,7 @@ public final class CsShipping {
        * <code>optional bool is_need_duty = 5;</code>
        *
        * <pre>
-       *�Ƿ���Ҫ��˰
+       *是否需要关税
        * </pre>
        */
       public Builder setIsNeedDuty(boolean value) {
@@ -1138,7 +1243,7 @@ public final class CsShipping {
        * <code>optional bool is_need_duty = 5;</code>
        *
        * <pre>
-       *�Ƿ���Ҫ��˰
+       *是否需要关税
        * </pre>
        */
       public Builder clearIsNeedDuty() {
@@ -1153,7 +1258,7 @@ public final class CsShipping {
        * <code>optional int32 parcel_subtotal_quota = 6;</code>
        *
        * <pre>
-       *������Ʒʵ�ʼ۸��޶�
+       *包裹商品实际价格限额
        * </pre>
        */
       public boolean hasParcelSubtotalQuota() {
@@ -1163,7 +1268,7 @@ public final class CsShipping {
        * <code>optional int32 parcel_subtotal_quota = 6;</code>
        *
        * <pre>
-       *������Ʒʵ�ʼ۸��޶�
+       *包裹商品实际价格限额
        * </pre>
        */
       public int getParcelSubtotalQuota() {
@@ -1173,7 +1278,7 @@ public final class CsShipping {
        * <code>optional int32 parcel_subtotal_quota = 6;</code>
        *
        * <pre>
-       *������Ʒʵ�ʼ۸��޶�
+       *包裹商品实际价格限额
        * </pre>
        */
       public Builder setParcelSubtotalQuota(int value) {
@@ -1186,7 +1291,7 @@ public final class CsShipping {
        * <code>optional int32 parcel_subtotal_quota = 6;</code>
        *
        * <pre>
-       *������Ʒʵ�ʼ۸��޶�
+       *包裹商品实际价格限额
        * </pre>
        */
       public Builder clearParcelSubtotalQuota() {
@@ -1201,7 +1306,7 @@ public final class CsShipping {
        * <code>optional float duty_rate = 7;</code>
        *
        * <pre>
-       *��˰��
+       *关税率
        * </pre>
        */
       public boolean hasDutyRate() {
@@ -1211,7 +1316,7 @@ public final class CsShipping {
        * <code>optional float duty_rate = 7;</code>
        *
        * <pre>
-       *��˰��
+       *关税率
        * </pre>
        */
       public float getDutyRate() {
@@ -1221,7 +1326,7 @@ public final class CsShipping {
        * <code>optional float duty_rate = 7;</code>
        *
        * <pre>
-       *��˰��
+       *关税率
        * </pre>
        */
       public Builder setDutyRate(float value) {
@@ -1234,7 +1339,7 @@ public final class CsShipping {
        * <code>optional float duty_rate = 7;</code>
        *
        * <pre>
-       *��˰��
+       *关税率
        * </pre>
        */
       public Builder clearDutyRate() {
@@ -1249,7 +1354,7 @@ public final class CsShipping {
        * <code>optional float shipping_duty = 8;</code>
        *
        * <pre>
-       *�˷ѹ�˰
+       *运费关税
        * </pre>
        */
       public boolean hasShippingDuty() {
@@ -1259,7 +1364,7 @@ public final class CsShipping {
        * <code>optional float shipping_duty = 8;</code>
        *
        * <pre>
-       *�˷ѹ�˰
+       *运费关税
        * </pre>
        */
       public float getShippingDuty() {
@@ -1269,7 +1374,7 @@ public final class CsShipping {
        * <code>optional float shipping_duty = 8;</code>
        *
        * <pre>
-       *�˷ѹ�˰
+       *运费关税
        * </pre>
        */
       public Builder setShippingDuty(float value) {
@@ -1282,12 +1387,112 @@ public final class CsShipping {
        * <code>optional float shipping_duty = 8;</code>
        *
        * <pre>
-       *�˷ѹ�˰
+       *运费关税
        * </pre>
        */
       public Builder clearShippingDuty() {
         bitField0_ = (bitField0_ & ~0x00000080);
         shippingDuty_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object alertMsg_ = "";
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public boolean hasAlertMsg() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public java.lang.String getAlertMsg() {
+        java.lang.Object ref = alertMsg_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            alertMsg_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getAlertMsgBytes() {
+        java.lang.Object ref = alertMsg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          alertMsg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public Builder setAlertMsg(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        alertMsg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public Builder clearAlertMsg() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        alertMsg_ = getDefaultInstance().getAlertMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string alert_msg = 9;</code>
+       *
+       * <pre>
+       *免运费的配送,订单金额不足时的提示
+       * </pre>
+       */
+      public Builder setAlertMsgBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        alertMsg_ = value;
         onChanged();
         return this;
       }
@@ -1304,8 +1509,8 @@ public final class CsShipping {
   }
 
   public interface GetShippingListRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetShippingListRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetShippingListRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -1314,11 +1519,11 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -1327,17 +1532,17 @@ public final class CsShipping {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>required int32 shipping_address_id = 3;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     boolean hasShippingAddressId();
@@ -1345,7 +1550,7 @@ public final class CsShipping {
      * <code>required int32 shipping_address_id = 3;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     int getShippingAddressId();
@@ -1354,15 +1559,15 @@ public final class CsShipping {
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
-    java.util.List<Integer> getWarehouseIdsList();
+    java.util.List<java.lang.Integer> getWarehouseIdsList();
     /**
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     int getWarehouseIdsCount();
@@ -1370,7 +1575,7 @@ public final class CsShipping {
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     int getWarehouseIds(int index);
@@ -1379,7 +1584,7 @@ public final class CsShipping {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -1387,25 +1592,25 @@ public final class CsShipping {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     boolean hasLocalecode();
@@ -1413,27 +1618,27 @@ public final class CsShipping {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
   }
   /**
    * Protobuf type {@code fksproto.GetShippingListRequest}
    */
   public static final class GetShippingListRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetShippingListRequest)
-      GetShippingListRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetShippingListRequest)
+          GetShippingListRequestOrBuilder {
     // Use GetShippingListRequest.newBuilder() to construct.
     private GetShippingListRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1451,19 +1656,19 @@ public final class CsShipping {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetShippingListRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1474,17 +1679,17 @@ public final class CsShipping {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -1493,11 +1698,11 @@ public final class CsShipping {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -1512,7 +1717,7 @@ public final class CsShipping {
             }
             case 32: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                warehouseIds_ = new java.util.ArrayList<Integer>();
+                warehouseIds_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000008;
               }
               warehouseIds_.add(input.readInt32());
@@ -1522,7 +1727,7 @@ public final class CsShipping {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                warehouseIds_ = new java.util.ArrayList<Integer>();
+                warehouseIds_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000008;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -1549,7 +1754,7 @@ public final class CsShipping {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           warehouseIds_ = java.util.Collections.unmodifiableList(warehouseIds_);
@@ -1559,35 +1764,35 @@ public final class CsShipping {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsShipping.internal_static_fksproto_GetShippingListRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetShippingListRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsShipping.internal_static_fksproto_GetShippingListRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsShipping.GetShippingListRequest.class, fksproto.CsShipping.GetShippingListRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetShippingListRequest> PARSER =
-        new com.google.protobuf.AbstractParser<GetShippingListRequest>() {
-      public GetShippingListRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetShippingListRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetShippingListRequest>() {
+              public GetShippingListRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetShippingListRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetShippingListRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -1597,18 +1802,18 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -1618,13 +1823,13 @@ public final class CsShipping {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
@@ -1634,7 +1839,7 @@ public final class CsShipping {
      * <code>required int32 shipping_address_id = 3;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     public boolean hasShippingAddressId() {
@@ -1644,7 +1849,7 @@ public final class CsShipping {
      * <code>required int32 shipping_address_id = 3;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     public int getShippingAddressId() {
@@ -1652,23 +1857,23 @@ public final class CsShipping {
     }
 
     public static final int WAREHOUSE_IDS_FIELD_NUMBER = 4;
-    private java.util.List<Integer> warehouseIds_;
+    private java.util.List<java.lang.Integer> warehouseIds_;
     /**
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
-    public java.util.List<Integer>
-        getWarehouseIdsList() {
+    public java.util.List<java.lang.Integer>
+    getWarehouseIdsList() {
       return warehouseIds_;
     }
     /**
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     public int getWarehouseIdsCount() {
@@ -1678,7 +1883,7 @@ public final class CsShipping {
      * <code>repeated int32 warehouse_ids = 4;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     public int getWarehouseIds(int index) {
@@ -1686,12 +1891,12 @@ public final class CsShipping {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 5;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -1701,17 +1906,17 @@ public final class CsShipping {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -1722,16 +1927,16 @@ public final class CsShipping {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -1740,12 +1945,12 @@ public final class CsShipping {
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 6;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public boolean hasLocalecode() {
@@ -1755,17 +1960,17 @@ public final class CsShipping {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -1776,16 +1981,16 @@ public final class CsShipping {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -1794,8 +1999,8 @@ public final class CsShipping {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       shippingAddressId_ = 0;
       warehouseIds_ = java.util.Collections.emptyList();
       currencycode_ = "";
@@ -1820,7 +2025,7 @@ public final class CsShipping {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -1851,32 +2056,32 @@ public final class CsShipping {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, shippingAddressId_);
+                .computeInt32Size(3, shippingAddressId_);
       }
       {
         int dataSize = 0;
         for (int i = 0; i < warehouseIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(warehouseIds_.get(i));
+                  .computeInt32SizeNoTag(warehouseIds_.get(i));
         }
         size += dataSize;
         size += 1 * getWarehouseIdsList().size();
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getCurrencycodeBytes());
+                .computeBytesSize(5, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getLocalecodeBytes());
+                .computeBytesSize(6, getLocalecodeBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1884,75 +2089,75 @@ public final class CsShipping {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetShippingListRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetShippingListRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetShippingListRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetShippingListRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetShippingListRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetShippingListRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetShippingListRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetShippingListRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetShippingListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetShippingListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetShippingListRequest prototype) {
+    public static Builder newBuilder(fksproto.CsShipping.GetShippingListRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1960,19 +2165,19 @@ public final class CsShipping {
      * Protobuf type {@code fksproto.GetShippingListRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetShippingListRequest)
-        GetShippingListRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetShippingListRequest)
+            fksproto.CsShipping.GetShippingListRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsShipping.internal_static_fksproto_GetShippingListRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetShippingListRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsShipping.GetShippingListRequest.class, fksproto.CsShipping.GetShippingListRequest.Builder.class);
       }
 
       // Construct using fksproto.CsShipping.GetShippingListRequest.newBuilder()
@@ -1981,7 +2186,7 @@ public final class CsShipping {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1998,13 +2203,13 @@ public final class CsShipping {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -2025,24 +2230,24 @@ public final class CsShipping {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListRequest_descriptor;
       }
 
-      public GetShippingListRequest getDefaultInstanceForType() {
-        return GetShippingListRequest.getDefaultInstance();
+      public fksproto.CsShipping.GetShippingListRequest getDefaultInstanceForType() {
+        return fksproto.CsShipping.GetShippingListRequest.getDefaultInstance();
       }
 
-      public GetShippingListRequest build() {
-        GetShippingListRequest result = buildPartial();
+      public fksproto.CsShipping.GetShippingListRequest build() {
+        fksproto.CsShipping.GetShippingListRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetShippingListRequest buildPartial() {
-        GetShippingListRequest result = new GetShippingListRequest(this);
+      public fksproto.CsShipping.GetShippingListRequest buildPartial() {
+        fksproto.CsShipping.GetShippingListRequest result = new fksproto.CsShipping.GetShippingListRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2084,16 +2289,16 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetShippingListRequest) {
-          return mergeFrom((GetShippingListRequest)other);
+        if (other instanceof fksproto.CsShipping.GetShippingListRequest) {
+          return mergeFrom((fksproto.CsShipping.GetShippingListRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetShippingListRequest other) {
-        if (other == GetShippingListRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsShipping.GetShippingListRequest other) {
+        if (other == fksproto.CsShipping.GetShippingListRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -2129,25 +2334,25 @@ public final class CsShipping {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!hasShippingAddressId()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetShippingListRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsShipping.GetShippingListRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetShippingListRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsShipping.GetShippingListRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -2158,9 +2363,9 @@ public final class CsShipping {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -2170,7 +2375,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -2180,7 +2385,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2197,7 +2402,7 @@ public final class CsShipping {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -2210,12 +2415,12 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -2231,7 +2436,7 @@ public final class CsShipping {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -2242,7 +2447,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -2250,7 +2455,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -2261,11 +2466,11 @@ public final class CsShipping {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -2274,9 +2479,9 @@ public final class CsShipping {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -2286,7 +2491,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -2296,7 +2501,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2313,7 +2518,7 @@ public final class CsShipping {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -2326,12 +2531,12 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -2347,7 +2552,7 @@ public final class CsShipping {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -2358,7 +2563,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -2366,7 +2571,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -2377,11 +2582,11 @@ public final class CsShipping {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -2395,7 +2600,7 @@ public final class CsShipping {
        * <code>required int32 shipping_address_id = 3;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public boolean hasShippingAddressId() {
@@ -2405,7 +2610,7 @@ public final class CsShipping {
        * <code>required int32 shipping_address_id = 3;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public int getShippingAddressId() {
@@ -2415,7 +2620,7 @@ public final class CsShipping {
        * <code>required int32 shipping_address_id = 3;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public Builder setShippingAddressId(int value) {
@@ -2428,7 +2633,7 @@ public final class CsShipping {
        * <code>required int32 shipping_address_id = 3;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public Builder clearShippingAddressId() {
@@ -2438,29 +2643,29 @@ public final class CsShipping {
         return this;
       }
 
-      private java.util.List<Integer> warehouseIds_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> warehouseIds_ = java.util.Collections.emptyList();
       private void ensureWarehouseIdsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          warehouseIds_ = new java.util.ArrayList<Integer>(warehouseIds_);
+          warehouseIds_ = new java.util.ArrayList<java.lang.Integer>(warehouseIds_);
           bitField0_ |= 0x00000008;
-         }
+        }
       }
       /**
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
-      public java.util.List<Integer>
-          getWarehouseIdsList() {
+      public java.util.List<java.lang.Integer>
+      getWarehouseIdsList() {
         return java.util.Collections.unmodifiableList(warehouseIds_);
       }
       /**
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public int getWarehouseIdsCount() {
@@ -2470,7 +2675,7 @@ public final class CsShipping {
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public int getWarehouseIds(int index) {
@@ -2480,11 +2685,11 @@ public final class CsShipping {
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder setWarehouseIds(
-          int index, int value) {
+              int index, int value) {
         ensureWarehouseIdsIsMutable();
         warehouseIds_.set(index, value);
         onChanged();
@@ -2494,7 +2699,7 @@ public final class CsShipping {
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder addWarehouseIds(int value) {
@@ -2507,14 +2712,14 @@ public final class CsShipping {
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder addAllWarehouseIds(
-          Iterable<? extends Integer> values) {
+              java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureWarehouseIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, warehouseIds_);
+                values, warehouseIds_);
         onChanged();
         return this;
       }
@@ -2522,7 +2727,7 @@ public final class CsShipping {
        * <code>repeated int32 warehouse_ids = 4;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder clearWarehouseIds() {
@@ -2532,12 +2737,12 @@ public final class CsShipping {
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -2547,37 +2752,37 @@ public final class CsShipping {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -2588,15 +2793,15 @@ public final class CsShipping {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
@@ -2605,7 +2810,7 @@ public final class CsShipping {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -2618,26 +2823,26 @@ public final class CsShipping {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public boolean hasLocalecode() {
@@ -2647,37 +2852,37 @@ public final class CsShipping {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -2688,15 +2893,15 @@ public final class CsShipping {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         localecode_ = value;
         onChanged();
         return this;
@@ -2705,7 +2910,7 @@ public final class CsShipping {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder clearLocalecode() {
@@ -2718,15 +2923,15 @@ public final class CsShipping {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         localecode_ = value;
         onChanged();
         return this;
@@ -2744,8 +2949,8 @@ public final class CsShipping {
   }
 
   public interface GetShippingListResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetShippingListResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetShippingListResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -2754,34 +2959,34 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    java.util.List<CsBase.PairIntInt>
-        getPairsList();
+    java.util.List<fksproto.CsBase.PairIntInt>
+    getPairsList();
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    CsBase.PairIntInt getPairs(int index);
+    fksproto.CsBase.PairIntInt getPairs(int index);
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
     int getPairsCount();
@@ -2789,43 +2994,43 @@ public final class CsShipping {
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    java.util.List<? extends CsBase.PairIntIntOrBuilder>
-        getPairsOrBuilderList();
+    java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+    getPairsOrBuilderList();
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    CsBase.PairIntIntOrBuilder getPairsOrBuilder(
+    fksproto.CsBase.PairIntIntOrBuilder getPairsOrBuilder(
             int index);
 
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    java.util.List<Shipping>
-        getShippingsList();
+    java.util.List<fksproto.CsShipping.Shipping>
+    getShippingsList();
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    Shipping getShippings(int index);
+    fksproto.CsShipping.Shipping getShippings(int index);
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
     int getShippingsCount();
@@ -2833,28 +3038,28 @@ public final class CsShipping {
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    java.util.List<? extends ShippingOrBuilder>
-        getShippingsOrBuilderList();
+    java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+    getShippingsOrBuilderList();
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    ShippingOrBuilder getShippingsOrBuilder(
+    fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
             int index);
   }
   /**
    * Protobuf type {@code fksproto.GetShippingListResponse}
    */
   public static final class GetShippingListResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetShippingListResponse)
-      GetShippingListResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetShippingListResponse)
+          GetShippingListResponseOrBuilder {
     // Use GetShippingListResponse.newBuilder() to construct.
     private GetShippingListResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2872,19 +3077,19 @@ public final class CsShipping {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetShippingListResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2895,17 +3100,17 @@ public final class CsShipping {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -2915,18 +3120,18 @@ public final class CsShipping {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                pairs_ = new java.util.ArrayList<CsBase.PairIntInt>();
+                pairs_ = new java.util.ArrayList<fksproto.CsBase.PairIntInt>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              pairs_.add(input.readMessage(CsBase.PairIntInt.PARSER, extensionRegistry));
+              pairs_.add(input.readMessage(fksproto.CsBase.PairIntInt.PARSER, extensionRegistry));
               break;
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                shippings_ = new java.util.ArrayList<Shipping>();
+                shippings_ = new java.util.ArrayList<fksproto.CsShipping.Shipping>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              shippings_.add(input.readMessage(Shipping.PARSER, extensionRegistry));
+              shippings_.add(input.readMessage(fksproto.CsShipping.Shipping.PARSER, extensionRegistry));
               break;
             }
           }
@@ -2935,7 +3140,7 @@ public final class CsShipping {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           pairs_ = java.util.Collections.unmodifiableList(pairs_);
@@ -2948,35 +3153,35 @@ public final class CsShipping {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsShipping.internal_static_fksproto_GetShippingListResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetShippingListResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsShipping.internal_static_fksproto_GetShippingListResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsShipping.GetShippingListResponse.class, fksproto.CsShipping.GetShippingListResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetShippingListResponse> PARSER =
-        new com.google.protobuf.AbstractParser<GetShippingListResponse>() {
-      public GetShippingListResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetShippingListResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetShippingListResponse>() {
+              public GetShippingListResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetShippingListResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetShippingListResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -2986,44 +3191,44 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int PAIRS_FIELD_NUMBER = 2;
-    private java.util.List<CsBase.PairIntInt> pairs_;
+    private java.util.List<fksproto.CsBase.PairIntInt> pairs_;
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    public java.util.List<CsBase.PairIntInt> getPairsList() {
+    public java.util.List<fksproto.CsBase.PairIntInt> getPairsList() {
       return pairs_;
     }
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    public java.util.List<? extends CsBase.PairIntIntOrBuilder>
-        getPairsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+    getPairsOrBuilderList() {
       return pairs_;
     }
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
     public int getPairsCount() {
@@ -3033,52 +3238,52 @@ public final class CsShipping {
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    public CsBase.PairIntInt getPairs(int index) {
+    public fksproto.CsBase.PairIntInt getPairs(int index) {
       return pairs_.get(index);
     }
     /**
      * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
      *
      * <pre>
-     *&lt;�ֿ�id������id&gt;
+     *&lt;仓库id，托运id&gt;
      * </pre>
      */
-    public CsBase.PairIntIntOrBuilder getPairsOrBuilder(
-        int index) {
+    public fksproto.CsBase.PairIntIntOrBuilder getPairsOrBuilder(
+            int index) {
       return pairs_.get(index);
     }
 
     public static final int SHIPPINGS_FIELD_NUMBER = 3;
-    private java.util.List<Shipping> shippings_;
+    private java.util.List<fksproto.CsShipping.Shipping> shippings_;
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    public java.util.List<Shipping> getShippingsList() {
+    public java.util.List<fksproto.CsShipping.Shipping> getShippingsList() {
       return shippings_;
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    public java.util.List<? extends ShippingOrBuilder>
-        getShippingsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+    getShippingsOrBuilderList() {
       return shippings_;
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
     public int getShippingsCount() {
@@ -3088,26 +3293,26 @@ public final class CsShipping {
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    public Shipping getShippings(int index) {
+    public fksproto.CsShipping.Shipping getShippings(int index) {
       return shippings_.get(index);
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 3;</code>
      *
      * <pre>
-     *�����б�
+     *托运列表
      * </pre>
      */
-    public ShippingOrBuilder getShippingsOrBuilder(
-        int index) {
+    public fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
+            int index) {
       return shippings_.get(index);
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       pairs_ = java.util.Collections.emptyList();
       shippings_ = java.util.Collections.emptyList();
     }
@@ -3142,7 +3347,7 @@ public final class CsShipping {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -3164,15 +3369,15 @@ public final class CsShipping {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       for (int i = 0; i < pairs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, pairs_.get(i));
+                .computeMessageSize(2, pairs_.get(i));
       }
       for (int i = 0; i < shippings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, shippings_.get(i));
+                .computeMessageSize(3, shippings_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3180,75 +3385,75 @@ public final class CsShipping {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetShippingListResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetShippingListResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetShippingListResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetShippingListResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetShippingListResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetShippingListResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetShippingListResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetShippingListResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetShippingListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetShippingListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetShippingListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetShippingListResponse prototype) {
+    public static Builder newBuilder(fksproto.CsShipping.GetShippingListResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3256,19 +3461,19 @@ public final class CsShipping {
      * Protobuf type {@code fksproto.GetShippingListResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetShippingListResponse)
-        GetShippingListResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetShippingListResponse)
+            fksproto.CsShipping.GetShippingListResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsShipping.internal_static_fksproto_GetShippingListResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetShippingListResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsShipping.GetShippingListResponse.class, fksproto.CsShipping.GetShippingListResponse.Builder.class);
       }
 
       // Construct using fksproto.CsShipping.GetShippingListResponse.newBuilder()
@@ -3277,7 +3482,7 @@ public final class CsShipping {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3295,7 +3500,7 @@ public final class CsShipping {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -3320,24 +3525,24 @@ public final class CsShipping {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsShipping.internal_static_fksproto_GetShippingListResponse_descriptor;
       }
 
-      public GetShippingListResponse getDefaultInstanceForType() {
-        return GetShippingListResponse.getDefaultInstance();
+      public fksproto.CsShipping.GetShippingListResponse getDefaultInstanceForType() {
+        return fksproto.CsShipping.GetShippingListResponse.getDefaultInstance();
       }
 
-      public GetShippingListResponse build() {
-        GetShippingListResponse result = buildPartial();
+      public fksproto.CsShipping.GetShippingListResponse build() {
+        fksproto.CsShipping.GetShippingListResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetShippingListResponse buildPartial() {
-        GetShippingListResponse result = new GetShippingListResponse(this);
+      public fksproto.CsShipping.GetShippingListResponse buildPartial() {
+        fksproto.CsShipping.GetShippingListResponse result = new fksproto.CsShipping.GetShippingListResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -3372,16 +3577,16 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetShippingListResponse) {
-          return mergeFrom((GetShippingListResponse)other);
+        if (other instanceof fksproto.CsShipping.GetShippingListResponse) {
+          return mergeFrom((fksproto.CsShipping.GetShippingListResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetShippingListResponse other) {
-        if (other == GetShippingListResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsShipping.GetShippingListResponse other) {
+        if (other == fksproto.CsShipping.GetShippingListResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -3403,9 +3608,9 @@ public final class CsShipping {
               pairsBuilder_ = null;
               pairs_ = other.pairs_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              pairsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPairsFieldBuilder() : null;
+              pairsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getPairsFieldBuilder() : null;
             } else {
               pairsBuilder_.addAllMessages(other.pairs_);
             }
@@ -3429,9 +3634,9 @@ public final class CsShipping {
               shippingsBuilder_ = null;
               shippings_ = other.shippings_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              shippingsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getShippingsFieldBuilder() : null;
+              shippingsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getShippingsFieldBuilder() : null;
             } else {
               shippingsBuilder_.addAllMessages(other.shippings_);
             }
@@ -3443,22 +3648,22 @@ public final class CsShipping {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         for (int i = 0; i < getPairsCount(); i++) {
           if (!getPairs(i).isInitialized()) {
-            
+
             return false;
           }
         }
         for (int i = 0; i < getShippingsCount(); i++) {
           if (!getShippings(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -3466,14 +3671,14 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetShippingListResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsShipping.GetShippingListResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetShippingListResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsShipping.GetShippingListResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -3484,9 +3689,9 @@ public final class CsShipping {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -3496,7 +3701,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -3506,7 +3711,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3523,7 +3728,7 @@ public final class CsShipping {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -3536,12 +3741,12 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -3557,7 +3762,7 @@ public final class CsShipping {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -3568,7 +3773,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -3576,7 +3781,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -3587,11 +3792,11 @@ public final class CsShipping {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -3600,26 +3805,26 @@ public final class CsShipping {
         return headBuilder_;
       }
 
-      private java.util.List<CsBase.PairIntInt> pairs_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsBase.PairIntInt> pairs_ =
+              java.util.Collections.emptyList();
       private void ensurePairsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          pairs_ = new java.util.ArrayList<CsBase.PairIntInt>(pairs_);
+          pairs_ = new java.util.ArrayList<fksproto.CsBase.PairIntInt>(pairs_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder> pairsBuilder_;
+              fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder> pairsBuilder_;
 
       /**
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public java.util.List<CsBase.PairIntInt> getPairsList() {
+      public java.util.List<fksproto.CsBase.PairIntInt> getPairsList() {
         if (pairsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(pairs_);
         } else {
@@ -3630,7 +3835,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public int getPairsCount() {
@@ -3644,10 +3849,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public CsBase.PairIntInt getPairs(int index) {
+      public fksproto.CsBase.PairIntInt getPairs(int index) {
         if (pairsBuilder_ == null) {
           return pairs_.get(index);
         } else {
@@ -3658,11 +3863,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder setPairs(
-          int index, CsBase.PairIntInt value) {
+              int index, fksproto.CsBase.PairIntInt value) {
         if (pairsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3679,11 +3884,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder setPairs(
-          int index, CsBase.PairIntInt.Builder builderForValue) {
+              int index, fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (pairsBuilder_ == null) {
           ensurePairsIsMutable();
           pairs_.set(index, builderForValue.build());
@@ -3697,10 +3902,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public Builder addPairs(CsBase.PairIntInt value) {
+      public Builder addPairs(fksproto.CsBase.PairIntInt value) {
         if (pairsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3717,11 +3922,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder addPairs(
-          int index, CsBase.PairIntInt value) {
+              int index, fksproto.CsBase.PairIntInt value) {
         if (pairsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3738,11 +3943,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder addPairs(
-          CsBase.PairIntInt.Builder builderForValue) {
+              fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (pairsBuilder_ == null) {
           ensurePairsIsMutable();
           pairs_.add(builderForValue.build());
@@ -3756,11 +3961,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder addPairs(
-          int index, CsBase.PairIntInt.Builder builderForValue) {
+              int index, fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (pairsBuilder_ == null) {
           ensurePairsIsMutable();
           pairs_.add(index, builderForValue.build());
@@ -3774,15 +3979,15 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder addAllPairs(
-          Iterable<? extends CsBase.PairIntInt> values) {
+              java.lang.Iterable<? extends fksproto.CsBase.PairIntInt> values) {
         if (pairsBuilder_ == null) {
           ensurePairsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, pairs_);
+                  values, pairs_);
           onChanged();
         } else {
           pairsBuilder_.addAllMessages(values);
@@ -3793,7 +3998,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder clearPairs() {
@@ -3810,7 +4015,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
       public Builder removePairs(int index) {
@@ -3827,22 +4032,22 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public CsBase.PairIntInt.Builder getPairsBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntInt.Builder getPairsBuilder(
+              int index) {
         return getPairsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public CsBase.PairIntIntOrBuilder getPairsOrBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntIntOrBuilder getPairsOrBuilder(
+              int index) {
         if (pairsBuilder_ == null) {
           return pairs_.get(index);  } else {
           return pairsBuilder_.getMessageOrBuilder(index);
@@ -3852,11 +4057,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public java.util.List<? extends CsBase.PairIntIntOrBuilder>
-           getPairsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+      getPairsOrBuilderList() {
         if (pairsBuilder_ != null) {
           return pairsBuilder_.getMessageOrBuilderList();
         } else {
@@ -3867,42 +4072,42 @@ public final class CsShipping {
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public CsBase.PairIntInt.Builder addPairsBuilder() {
+      public fksproto.CsBase.PairIntInt.Builder addPairsBuilder() {
         return getPairsFieldBuilder().addBuilder(
-            CsBase.PairIntInt.getDefaultInstance());
+                fksproto.CsBase.PairIntInt.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public CsBase.PairIntInt.Builder addPairsBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntInt.Builder addPairsBuilder(
+              int index) {
         return getPairsFieldBuilder().addBuilder(
-            index, CsBase.PairIntInt.getDefaultInstance());
+                index, fksproto.CsBase.PairIntInt.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.PairIntInt pairs = 2;</code>
        *
        * <pre>
-       *&lt;�ֿ�id������id&gt;
+       *&lt;仓库id，托运id&gt;
        * </pre>
        */
-      public java.util.List<CsBase.PairIntInt.Builder>
-           getPairsBuilderList() {
+      public java.util.List<fksproto.CsBase.PairIntInt.Builder>
+      getPairsBuilderList() {
         return getPairsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder>
-          getPairsFieldBuilder() {
+              fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder>
+      getPairsFieldBuilder() {
         if (pairsBuilder_ == null) {
           pairsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder>(
+                  fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder>(
                   pairs_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -3912,26 +4117,26 @@ public final class CsShipping {
         return pairsBuilder_;
       }
 
-      private java.util.List<Shipping> shippings_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsShipping.Shipping> shippings_ =
+              java.util.Collections.emptyList();
       private void ensureShippingsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          shippings_ = new java.util.ArrayList<Shipping>(shippings_);
+          shippings_ = new java.util.ArrayList<fksproto.CsShipping.Shipping>(shippings_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          Shipping, Shipping.Builder, ShippingOrBuilder> shippingsBuilder_;
+              fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder> shippingsBuilder_;
 
       /**
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public java.util.List<Shipping> getShippingsList() {
+      public java.util.List<fksproto.CsShipping.Shipping> getShippingsList() {
         if (shippingsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(shippings_);
         } else {
@@ -3942,7 +4147,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public int getShippingsCount() {
@@ -3956,10 +4161,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public Shipping getShippings(int index) {
+      public fksproto.CsShipping.Shipping getShippings(int index) {
         if (shippingsBuilder_ == null) {
           return shippings_.get(index);
         } else {
@@ -3970,11 +4175,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder setShippings(
-          int index, Shipping value) {
+              int index, fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3991,11 +4196,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder setShippings(
-          int index, Shipping.Builder builderForValue) {
+              int index, fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.set(index, builderForValue.build());
@@ -4009,10 +4214,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public Builder addShippings(Shipping value) {
+      public Builder addShippings(fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4029,11 +4234,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder addShippings(
-          int index, Shipping value) {
+              int index, fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4050,11 +4255,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder addShippings(
-          Shipping.Builder builderForValue) {
+              fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.add(builderForValue.build());
@@ -4068,11 +4273,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder addShippings(
-          int index, Shipping.Builder builderForValue) {
+              int index, fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.add(index, builderForValue.build());
@@ -4086,15 +4291,15 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder addAllShippings(
-          Iterable<? extends Shipping> values) {
+              java.lang.Iterable<? extends fksproto.CsShipping.Shipping> values) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, shippings_);
+                  values, shippings_);
           onChanged();
         } else {
           shippingsBuilder_.addAllMessages(values);
@@ -4105,7 +4310,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder clearShippings() {
@@ -4122,7 +4327,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
       public Builder removeShippings(int index) {
@@ -4139,22 +4344,22 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public Shipping.Builder getShippingsBuilder(
-          int index) {
+      public fksproto.CsShipping.Shipping.Builder getShippingsBuilder(
+              int index) {
         return getShippingsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public ShippingOrBuilder getShippingsOrBuilder(
-          int index) {
+      public fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
+              int index) {
         if (shippingsBuilder_ == null) {
           return shippings_.get(index);  } else {
           return shippingsBuilder_.getMessageOrBuilder(index);
@@ -4164,11 +4369,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public java.util.List<? extends ShippingOrBuilder>
-           getShippingsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+      getShippingsOrBuilderList() {
         if (shippingsBuilder_ != null) {
           return shippingsBuilder_.getMessageOrBuilderList();
         } else {
@@ -4179,42 +4384,42 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public Shipping.Builder addShippingsBuilder() {
+      public fksproto.CsShipping.Shipping.Builder addShippingsBuilder() {
         return getShippingsFieldBuilder().addBuilder(
-            Shipping.getDefaultInstance());
+                fksproto.CsShipping.Shipping.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public Shipping.Builder addShippingsBuilder(
-          int index) {
+      public fksproto.CsShipping.Shipping.Builder addShippingsBuilder(
+              int index) {
         return getShippingsFieldBuilder().addBuilder(
-            index, Shipping.getDefaultInstance());
+                index, fksproto.CsShipping.Shipping.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 3;</code>
        *
        * <pre>
-       *�����б�
+       *托运列表
        * </pre>
        */
-      public java.util.List<Shipping.Builder>
-           getShippingsBuilderList() {
+      public java.util.List<fksproto.CsShipping.Shipping.Builder>
+      getShippingsBuilderList() {
         return getShippingsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          Shipping, Shipping.Builder, ShippingOrBuilder>
-          getShippingsFieldBuilder() {
+              fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder>
+      getShippingsFieldBuilder() {
         if (shippingsBuilder_ == null) {
           shippingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              Shipping, Shipping.Builder, ShippingOrBuilder>(
+                  fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder>(
                   shippings_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
@@ -4236,8 +4441,8 @@ public final class CsShipping {
   }
 
   public interface GetCrowdShippingMethodListRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetCrowdShippingMethodListRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetCrowdShippingMethodListRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -4246,11 +4451,11 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -4259,17 +4464,17 @@ public final class CsShipping {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>required int64 crowd_id = 3;</code>
      *
      * <pre>
-     *ƴ��id
+     *拼单id
      * </pre>
      */
     boolean hasCrowdId();
@@ -4277,7 +4482,7 @@ public final class CsShipping {
      * <code>required int64 crowd_id = 3;</code>
      *
      * <pre>
-     *ƴ��id
+     *拼单id
      * </pre>
      */
     long getCrowdId();
@@ -4286,7 +4491,7 @@ public final class CsShipping {
      * <code>required int64 item_id = 4;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     boolean hasItemId();
@@ -4294,7 +4499,7 @@ public final class CsShipping {
      * <code>required int64 item_id = 4;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     long getItemId();
@@ -4303,7 +4508,7 @@ public final class CsShipping {
      * <code>required int32 qty = 5;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     boolean hasQty();
@@ -4311,7 +4516,7 @@ public final class CsShipping {
      * <code>required int32 qty = 5;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     int getQty();
@@ -4320,7 +4525,7 @@ public final class CsShipping {
      * <code>optional int32 shipping_address_id = 6;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     boolean hasShippingAddressId();
@@ -4328,7 +4533,7 @@ public final class CsShipping {
      * <code>optional int32 shipping_address_id = 6;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     int getShippingAddressId();
@@ -4337,7 +4542,7 @@ public final class CsShipping {
      * <code>optional int32 warehouse_id = 7;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     boolean hasWarehouseId();
@@ -4345,7 +4550,7 @@ public final class CsShipping {
      * <code>optional int32 warehouse_id = 7;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     int getWarehouseId();
@@ -4357,12 +4562,12 @@ public final class CsShipping {
     /**
      * <code>optional string localecode = 8;</code>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 8;</code>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
 
     /**
      * <code>optional string currencycode = 9;</code>
@@ -4371,12 +4576,12 @@ public final class CsShipping {
     /**
      * <code>optional string currencycode = 9;</code>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 9;</code>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional int32 currencyid = 10;</code>
@@ -4391,13 +4596,13 @@ public final class CsShipping {
    * Protobuf type {@code fksproto.GetCrowdShippingMethodListRequest}
    *
    * <pre>
-   *��ȡƴ�������б�
+   *获取拼单物流列表
    * </pre>
    */
   public static final class GetCrowdShippingMethodListRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetCrowdShippingMethodListRequest)
-      GetCrowdShippingMethodListRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetCrowdShippingMethodListRequest)
+          GetCrowdShippingMethodListRequestOrBuilder {
     // Use GetCrowdShippingMethodListRequest.newBuilder() to construct.
     private GetCrowdShippingMethodListRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4415,19 +4620,19 @@ public final class CsShipping {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetCrowdShippingMethodListRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4438,17 +4643,17 @@ public final class CsShipping {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -4457,11 +4662,11 @@ public final class CsShipping {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -4517,42 +4722,42 @@ public final class CsShipping {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetCrowdShippingMethodListRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsShipping.GetCrowdShippingMethodListRequest.class, fksproto.CsShipping.GetCrowdShippingMethodListRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetCrowdShippingMethodListRequest> PARSER =
-        new com.google.protobuf.AbstractParser<GetCrowdShippingMethodListRequest>() {
-      public GetCrowdShippingMethodListRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetCrowdShippingMethodListRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetCrowdShippingMethodListRequest>() {
+              public GetCrowdShippingMethodListRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetCrowdShippingMethodListRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetCrowdShippingMethodListRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -4562,18 +4767,18 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -4583,13 +4788,13 @@ public final class CsShipping {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
@@ -4599,7 +4804,7 @@ public final class CsShipping {
      * <code>required int64 crowd_id = 3;</code>
      *
      * <pre>
-     *ƴ��id
+     *拼单id
      * </pre>
      */
     public boolean hasCrowdId() {
@@ -4609,7 +4814,7 @@ public final class CsShipping {
      * <code>required int64 crowd_id = 3;</code>
      *
      * <pre>
-     *ƴ��id
+     *拼单id
      * </pre>
      */
     public long getCrowdId() {
@@ -4622,7 +4827,7 @@ public final class CsShipping {
      * <code>required int64 item_id = 4;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public boolean hasItemId() {
@@ -4632,7 +4837,7 @@ public final class CsShipping {
      * <code>required int64 item_id = 4;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public long getItemId() {
@@ -4645,7 +4850,7 @@ public final class CsShipping {
      * <code>required int32 qty = 5;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public boolean hasQty() {
@@ -4655,7 +4860,7 @@ public final class CsShipping {
      * <code>required int32 qty = 5;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public int getQty() {
@@ -4668,7 +4873,7 @@ public final class CsShipping {
      * <code>optional int32 shipping_address_id = 6;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     public boolean hasShippingAddressId() {
@@ -4678,7 +4883,7 @@ public final class CsShipping {
      * <code>optional int32 shipping_address_id = 6;</code>
      *
      * <pre>
-     *�ջ���ַ
+     *收货地址
      * </pre>
      */
     public int getShippingAddressId() {
@@ -4691,7 +4896,7 @@ public final class CsShipping {
      * <code>optional int32 warehouse_id = 7;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     public boolean hasWarehouseId() {
@@ -4701,7 +4906,7 @@ public final class CsShipping {
      * <code>optional int32 warehouse_id = 7;</code>
      *
      * <pre>
-     *�ֿ��б�
+     *仓库列表
      * </pre>
      */
     public int getWarehouseId() {
@@ -4709,7 +4914,7 @@ public final class CsShipping {
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 8;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 8;</code>
      */
@@ -4719,14 +4924,14 @@ public final class CsShipping {
     /**
      * <code>optional string localecode = 8;</code>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -4737,12 +4942,12 @@ public final class CsShipping {
      * <code>optional string localecode = 8;</code>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -4751,7 +4956,7 @@ public final class CsShipping {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 9;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 9;</code>
      */
@@ -4761,14 +4966,14 @@ public final class CsShipping {
     /**
      * <code>optional string currencycode = 9;</code>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -4779,12 +4984,12 @@ public final class CsShipping {
      * <code>optional string currencycode = 9;</code>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -4808,8 +5013,8 @@ public final class CsShipping {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       crowdId_ = 0L;
       itemId_ = 0L;
       qty_ = 0;
@@ -4846,7 +5051,7 @@ public final class CsShipping {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -4889,43 +5094,43 @@ public final class CsShipping {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, crowdId_);
+                .computeInt64Size(3, crowdId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, itemId_);
+                .computeInt64Size(4, itemId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, qty_);
+                .computeInt32Size(5, qty_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, shippingAddressId_);
+                .computeInt32Size(6, shippingAddressId_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, warehouseId_);
+                .computeInt32Size(7, warehouseId_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getLocalecodeBytes());
+                .computeBytesSize(8, getLocalecodeBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getCurrencycodeBytes());
+                .computeBytesSize(9, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, currencyid_);
+                .computeInt32Size(10, currencyid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4933,75 +5138,75 @@ public final class CsShipping {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetCrowdShippingMethodListRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetCrowdShippingMethodListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetCrowdShippingMethodListRequest prototype) {
+    public static Builder newBuilder(fksproto.CsShipping.GetCrowdShippingMethodListRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5009,23 +5214,23 @@ public final class CsShipping {
      * Protobuf type {@code fksproto.GetCrowdShippingMethodListRequest}
      *
      * <pre>
-     *��ȡƴ�������б�
+     *获取拼单物流列表
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetCrowdShippingMethodListRequest)
-        GetCrowdShippingMethodListRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetCrowdShippingMethodListRequest)
+            fksproto.CsShipping.GetCrowdShippingMethodListRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetCrowdShippingMethodListRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsShipping.GetCrowdShippingMethodListRequest.class, fksproto.CsShipping.GetCrowdShippingMethodListRequest.Builder.class);
       }
 
       // Construct using fksproto.CsShipping.GetCrowdShippingMethodListRequest.newBuilder()
@@ -5034,7 +5239,7 @@ public final class CsShipping {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5051,13 +5256,13 @@ public final class CsShipping {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -5086,24 +5291,24 @@ public final class CsShipping {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
       }
 
-      public GetCrowdShippingMethodListRequest getDefaultInstanceForType() {
-        return GetCrowdShippingMethodListRequest.getDefaultInstance();
+      public fksproto.CsShipping.GetCrowdShippingMethodListRequest getDefaultInstanceForType() {
+        return fksproto.CsShipping.GetCrowdShippingMethodListRequest.getDefaultInstance();
       }
 
-      public GetCrowdShippingMethodListRequest build() {
-        GetCrowdShippingMethodListRequest result = buildPartial();
+      public fksproto.CsShipping.GetCrowdShippingMethodListRequest build() {
+        fksproto.CsShipping.GetCrowdShippingMethodListRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetCrowdShippingMethodListRequest buildPartial() {
-        GetCrowdShippingMethodListRequest result = new GetCrowdShippingMethodListRequest(this);
+      public fksproto.CsShipping.GetCrowdShippingMethodListRequest buildPartial() {
+        fksproto.CsShipping.GetCrowdShippingMethodListRequest result = new fksproto.CsShipping.GetCrowdShippingMethodListRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -5160,16 +5365,16 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetCrowdShippingMethodListRequest) {
-          return mergeFrom((GetCrowdShippingMethodListRequest)other);
+        if (other instanceof fksproto.CsShipping.GetCrowdShippingMethodListRequest) {
+          return mergeFrom((fksproto.CsShipping.GetCrowdShippingMethodListRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetCrowdShippingMethodListRequest other) {
-        if (other == GetCrowdShippingMethodListRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsShipping.GetCrowdShippingMethodListRequest other) {
+        if (other == fksproto.CsShipping.GetCrowdShippingMethodListRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -5210,33 +5415,33 @@ public final class CsShipping {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!hasCrowdId()) {
-          
+
           return false;
         }
         if (!hasItemId()) {
-          
+
           return false;
         }
         if (!hasQty()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetCrowdShippingMethodListRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsShipping.GetCrowdShippingMethodListRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetCrowdShippingMethodListRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsShipping.GetCrowdShippingMethodListRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -5247,9 +5452,9 @@ public final class CsShipping {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -5259,7 +5464,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -5269,7 +5474,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5286,7 +5491,7 @@ public final class CsShipping {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -5299,12 +5504,12 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -5320,7 +5525,7 @@ public final class CsShipping {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -5331,7 +5536,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -5339,7 +5544,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -5350,11 +5555,11 @@ public final class CsShipping {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -5363,9 +5568,9 @@ public final class CsShipping {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -5375,7 +5580,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -5385,7 +5590,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5402,7 +5607,7 @@ public final class CsShipping {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -5415,12 +5620,12 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -5436,7 +5641,7 @@ public final class CsShipping {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -5447,7 +5652,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -5455,7 +5660,7 @@ public final class CsShipping {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -5466,11 +5671,11 @@ public final class CsShipping {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -5484,7 +5689,7 @@ public final class CsShipping {
        * <code>required int64 crowd_id = 3;</code>
        *
        * <pre>
-       *ƴ��id
+       *拼单id
        * </pre>
        */
       public boolean hasCrowdId() {
@@ -5494,7 +5699,7 @@ public final class CsShipping {
        * <code>required int64 crowd_id = 3;</code>
        *
        * <pre>
-       *ƴ��id
+       *拼单id
        * </pre>
        */
       public long getCrowdId() {
@@ -5504,7 +5709,7 @@ public final class CsShipping {
        * <code>required int64 crowd_id = 3;</code>
        *
        * <pre>
-       *ƴ��id
+       *拼单id
        * </pre>
        */
       public Builder setCrowdId(long value) {
@@ -5517,7 +5722,7 @@ public final class CsShipping {
        * <code>required int64 crowd_id = 3;</code>
        *
        * <pre>
-       *ƴ��id
+       *拼单id
        * </pre>
        */
       public Builder clearCrowdId() {
@@ -5532,7 +5737,7 @@ public final class CsShipping {
        * <code>required int64 item_id = 4;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public boolean hasItemId() {
@@ -5542,7 +5747,7 @@ public final class CsShipping {
        * <code>required int64 item_id = 4;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public long getItemId() {
@@ -5552,7 +5757,7 @@ public final class CsShipping {
        * <code>required int64 item_id = 4;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder setItemId(long value) {
@@ -5565,7 +5770,7 @@ public final class CsShipping {
        * <code>required int64 item_id = 4;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder clearItemId() {
@@ -5580,7 +5785,7 @@ public final class CsShipping {
        * <code>required int32 qty = 5;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public boolean hasQty() {
@@ -5590,7 +5795,7 @@ public final class CsShipping {
        * <code>required int32 qty = 5;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public int getQty() {
@@ -5600,7 +5805,7 @@ public final class CsShipping {
        * <code>required int32 qty = 5;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder setQty(int value) {
@@ -5613,7 +5818,7 @@ public final class CsShipping {
        * <code>required int32 qty = 5;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder clearQty() {
@@ -5628,7 +5833,7 @@ public final class CsShipping {
        * <code>optional int32 shipping_address_id = 6;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public boolean hasShippingAddressId() {
@@ -5638,7 +5843,7 @@ public final class CsShipping {
        * <code>optional int32 shipping_address_id = 6;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public int getShippingAddressId() {
@@ -5648,7 +5853,7 @@ public final class CsShipping {
        * <code>optional int32 shipping_address_id = 6;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public Builder setShippingAddressId(int value) {
@@ -5661,7 +5866,7 @@ public final class CsShipping {
        * <code>optional int32 shipping_address_id = 6;</code>
        *
        * <pre>
-       *�ջ���ַ
+       *收货地址
        * </pre>
        */
       public Builder clearShippingAddressId() {
@@ -5676,7 +5881,7 @@ public final class CsShipping {
        * <code>optional int32 warehouse_id = 7;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public boolean hasWarehouseId() {
@@ -5686,7 +5891,7 @@ public final class CsShipping {
        * <code>optional int32 warehouse_id = 7;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public int getWarehouseId() {
@@ -5696,7 +5901,7 @@ public final class CsShipping {
        * <code>optional int32 warehouse_id = 7;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder setWarehouseId(int value) {
@@ -5709,7 +5914,7 @@ public final class CsShipping {
        * <code>optional int32 warehouse_id = 7;</code>
        *
        * <pre>
-       *�ֿ��б�
+       *仓库列表
        * </pre>
        */
       public Builder clearWarehouseId() {
@@ -5719,7 +5924,7 @@ public final class CsShipping {
         return this;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 8;</code>
        */
@@ -5729,30 +5934,30 @@ public final class CsShipping {
       /**
        * <code>optional string localecode = 8;</code>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 8;</code>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -5763,11 +5968,11 @@ public final class CsShipping {
        * <code>optional string localecode = 8;</code>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
         localecode_ = value;
         onChanged();
         return this;
@@ -5785,17 +5990,17 @@ public final class CsShipping {
        * <code>optional string localecode = 8;</code>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
         localecode_ = value;
         onChanged();
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 9;</code>
        */
@@ -5805,30 +6010,30 @@ public final class CsShipping {
       /**
        * <code>optional string currencycode = 9;</code>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 9;</code>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -5839,11 +6044,11 @@ public final class CsShipping {
        * <code>optional string currencycode = 9;</code>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
         currencycode_ = value;
         onChanged();
         return this;
@@ -5861,11 +6066,11 @@ public final class CsShipping {
        * <code>optional string currencycode = 9;</code>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
         currencycode_ = value;
         onChanged();
         return this;
@@ -5915,8 +6120,8 @@ public final class CsShipping {
   }
 
   public interface GetCrowdShippingMethodListResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetCrowdShippingMethodListResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetCrowdShippingMethodListResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -5925,34 +6130,34 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    java.util.List<Shipping>
-        getShippingsList();
+    java.util.List<fksproto.CsShipping.Shipping>
+    getShippingsList();
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    Shipping getShippings(int index);
+    fksproto.CsShipping.Shipping getShippings(int index);
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
     int getShippingsCount();
@@ -5960,28 +6165,28 @@ public final class CsShipping {
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    java.util.List<? extends ShippingOrBuilder>
-        getShippingsOrBuilderList();
+    java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+    getShippingsOrBuilderList();
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    ShippingOrBuilder getShippingsOrBuilder(
+    fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
             int index);
   }
   /**
    * Protobuf type {@code fksproto.GetCrowdShippingMethodListResponse}
    */
   public static final class GetCrowdShippingMethodListResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetCrowdShippingMethodListResponse)
-      GetCrowdShippingMethodListResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetCrowdShippingMethodListResponse)
+          GetCrowdShippingMethodListResponseOrBuilder {
     // Use GetCrowdShippingMethodListResponse.newBuilder() to construct.
     private GetCrowdShippingMethodListResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5999,19 +6204,19 @@ public final class CsShipping {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetCrowdShippingMethodListResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6022,17 +6227,17 @@ public final class CsShipping {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -6042,10 +6247,10 @@ public final class CsShipping {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                shippings_ = new java.util.ArrayList<Shipping>();
+                shippings_ = new java.util.ArrayList<fksproto.CsShipping.Shipping>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              shippings_.add(input.readMessage(Shipping.PARSER, extensionRegistry));
+              shippings_.add(input.readMessage(fksproto.CsShipping.Shipping.PARSER, extensionRegistry));
               break;
             }
           }
@@ -6054,7 +6259,7 @@ public final class CsShipping {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           shippings_ = java.util.Collections.unmodifiableList(shippings_);
@@ -6064,35 +6269,35 @@ public final class CsShipping {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetCrowdShippingMethodListResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsShipping.GetCrowdShippingMethodListResponse.class, fksproto.CsShipping.GetCrowdShippingMethodListResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetCrowdShippingMethodListResponse> PARSER =
-        new com.google.protobuf.AbstractParser<GetCrowdShippingMethodListResponse>() {
-      public GetCrowdShippingMethodListResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetCrowdShippingMethodListResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetCrowdShippingMethodListResponse>() {
+              public GetCrowdShippingMethodListResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetCrowdShippingMethodListResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetCrowdShippingMethodListResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -6102,44 +6307,44 @@ public final class CsShipping {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int SHIPPINGS_FIELD_NUMBER = 2;
-    private java.util.List<Shipping> shippings_;
+    private java.util.List<fksproto.CsShipping.Shipping> shippings_;
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    public java.util.List<Shipping> getShippingsList() {
+    public java.util.List<fksproto.CsShipping.Shipping> getShippingsList() {
       return shippings_;
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    public java.util.List<? extends ShippingOrBuilder>
-        getShippingsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+    getShippingsOrBuilderList() {
       return shippings_;
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
     public int getShippingsCount() {
@@ -6149,26 +6354,26 @@ public final class CsShipping {
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    public Shipping getShippings(int index) {
+    public fksproto.CsShipping.Shipping getShippings(int index) {
       return shippings_.get(index);
     }
     /**
      * <code>repeated .fksproto.Shipping shippings = 2;</code>
      *
      * <pre>
-     *�����б�
+     *物流列表
      * </pre>
      */
-    public ShippingOrBuilder getShippingsOrBuilder(
-        int index) {
+    public fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
+            int index) {
       return shippings_.get(index);
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       shippings_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -6196,7 +6401,7 @@ public final class CsShipping {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -6215,11 +6420,11 @@ public final class CsShipping {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       for (int i = 0; i < shippings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, shippings_.get(i));
+                .computeMessageSize(2, shippings_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6227,75 +6432,75 @@ public final class CsShipping {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetCrowdShippingMethodListResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetCrowdShippingMethodListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsShipping.GetCrowdShippingMethodListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetCrowdShippingMethodListResponse prototype) {
+    public static Builder newBuilder(fksproto.CsShipping.GetCrowdShippingMethodListResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6303,19 +6508,19 @@ public final class CsShipping {
      * Protobuf type {@code fksproto.GetCrowdShippingMethodListResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetCrowdShippingMethodListResponse)
-        GetCrowdShippingMethodListResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetCrowdShippingMethodListResponse)
+            fksproto.CsShipping.GetCrowdShippingMethodListResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetCrowdShippingMethodListResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsShipping.GetCrowdShippingMethodListResponse.class, fksproto.CsShipping.GetCrowdShippingMethodListResponse.Builder.class);
       }
 
       // Construct using fksproto.CsShipping.GetCrowdShippingMethodListResponse.newBuilder()
@@ -6324,7 +6529,7 @@ public final class CsShipping {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6341,7 +6546,7 @@ public final class CsShipping {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -6360,24 +6565,24 @@ public final class CsShipping {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsShipping.internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
       }
 
-      public GetCrowdShippingMethodListResponse getDefaultInstanceForType() {
-        return GetCrowdShippingMethodListResponse.getDefaultInstance();
+      public fksproto.CsShipping.GetCrowdShippingMethodListResponse getDefaultInstanceForType() {
+        return fksproto.CsShipping.GetCrowdShippingMethodListResponse.getDefaultInstance();
       }
 
-      public GetCrowdShippingMethodListResponse build() {
-        GetCrowdShippingMethodListResponse result = buildPartial();
+      public fksproto.CsShipping.GetCrowdShippingMethodListResponse build() {
+        fksproto.CsShipping.GetCrowdShippingMethodListResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetCrowdShippingMethodListResponse buildPartial() {
-        GetCrowdShippingMethodListResponse result = new GetCrowdShippingMethodListResponse(this);
+      public fksproto.CsShipping.GetCrowdShippingMethodListResponse buildPartial() {
+        fksproto.CsShipping.GetCrowdShippingMethodListResponse result = new fksproto.CsShipping.GetCrowdShippingMethodListResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6403,16 +6608,16 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetCrowdShippingMethodListResponse) {
-          return mergeFrom((GetCrowdShippingMethodListResponse)other);
+        if (other instanceof fksproto.CsShipping.GetCrowdShippingMethodListResponse) {
+          return mergeFrom((fksproto.CsShipping.GetCrowdShippingMethodListResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetCrowdShippingMethodListResponse other) {
-        if (other == GetCrowdShippingMethodListResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsShipping.GetCrowdShippingMethodListResponse other) {
+        if (other == fksproto.CsShipping.GetCrowdShippingMethodListResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -6434,9 +6639,9 @@ public final class CsShipping {
               shippingsBuilder_ = null;
               shippings_ = other.shippings_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              shippingsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getShippingsFieldBuilder() : null;
+              shippingsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getShippingsFieldBuilder() : null;
             } else {
               shippingsBuilder_.addAllMessages(other.shippings_);
             }
@@ -6448,16 +6653,16 @@ public final class CsShipping {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         for (int i = 0; i < getShippingsCount(); i++) {
           if (!getShippings(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -6465,14 +6670,14 @@ public final class CsShipping {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetCrowdShippingMethodListResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsShipping.GetCrowdShippingMethodListResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetCrowdShippingMethodListResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsShipping.GetCrowdShippingMethodListResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -6483,9 +6688,9 @@ public final class CsShipping {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -6495,7 +6700,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -6505,7 +6710,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6522,7 +6727,7 @@ public final class CsShipping {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -6535,12 +6740,12 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -6556,7 +6761,7 @@ public final class CsShipping {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -6567,7 +6772,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -6575,7 +6780,7 @@ public final class CsShipping {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -6586,11 +6791,11 @@ public final class CsShipping {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -6599,26 +6804,26 @@ public final class CsShipping {
         return headBuilder_;
       }
 
-      private java.util.List<Shipping> shippings_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsShipping.Shipping> shippings_ =
+              java.util.Collections.emptyList();
       private void ensureShippingsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          shippings_ = new java.util.ArrayList<Shipping>(shippings_);
+          shippings_ = new java.util.ArrayList<fksproto.CsShipping.Shipping>(shippings_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          Shipping, Shipping.Builder, ShippingOrBuilder> shippingsBuilder_;
+              fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder> shippingsBuilder_;
 
       /**
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public java.util.List<Shipping> getShippingsList() {
+      public java.util.List<fksproto.CsShipping.Shipping> getShippingsList() {
         if (shippingsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(shippings_);
         } else {
@@ -6629,7 +6834,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public int getShippingsCount() {
@@ -6643,10 +6848,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public Shipping getShippings(int index) {
+      public fksproto.CsShipping.Shipping getShippings(int index) {
         if (shippingsBuilder_ == null) {
           return shippings_.get(index);
         } else {
@@ -6657,11 +6862,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder setShippings(
-          int index, Shipping value) {
+              int index, fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6678,11 +6883,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder setShippings(
-          int index, Shipping.Builder builderForValue) {
+              int index, fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.set(index, builderForValue.build());
@@ -6696,10 +6901,10 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public Builder addShippings(Shipping value) {
+      public Builder addShippings(fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6716,11 +6921,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder addShippings(
-          int index, Shipping value) {
+              int index, fksproto.CsShipping.Shipping value) {
         if (shippingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6737,11 +6942,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder addShippings(
-          Shipping.Builder builderForValue) {
+              fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.add(builderForValue.build());
@@ -6755,11 +6960,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder addShippings(
-          int index, Shipping.Builder builderForValue) {
+              int index, fksproto.CsShipping.Shipping.Builder builderForValue) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           shippings_.add(index, builderForValue.build());
@@ -6773,15 +6978,15 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder addAllShippings(
-          Iterable<? extends Shipping> values) {
+              java.lang.Iterable<? extends fksproto.CsShipping.Shipping> values) {
         if (shippingsBuilder_ == null) {
           ensureShippingsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, shippings_);
+                  values, shippings_);
           onChanged();
         } else {
           shippingsBuilder_.addAllMessages(values);
@@ -6792,7 +6997,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder clearShippings() {
@@ -6809,7 +7014,7 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
       public Builder removeShippings(int index) {
@@ -6826,22 +7031,22 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public Shipping.Builder getShippingsBuilder(
-          int index) {
+      public fksproto.CsShipping.Shipping.Builder getShippingsBuilder(
+              int index) {
         return getShippingsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public ShippingOrBuilder getShippingsOrBuilder(
-          int index) {
+      public fksproto.CsShipping.ShippingOrBuilder getShippingsOrBuilder(
+              int index) {
         if (shippingsBuilder_ == null) {
           return shippings_.get(index);  } else {
           return shippingsBuilder_.getMessageOrBuilder(index);
@@ -6851,11 +7056,11 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public java.util.List<? extends ShippingOrBuilder>
-           getShippingsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsShipping.ShippingOrBuilder>
+      getShippingsOrBuilderList() {
         if (shippingsBuilder_ != null) {
           return shippingsBuilder_.getMessageOrBuilderList();
         } else {
@@ -6866,42 +7071,42 @@ public final class CsShipping {
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public Shipping.Builder addShippingsBuilder() {
+      public fksproto.CsShipping.Shipping.Builder addShippingsBuilder() {
         return getShippingsFieldBuilder().addBuilder(
-            Shipping.getDefaultInstance());
+                fksproto.CsShipping.Shipping.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public Shipping.Builder addShippingsBuilder(
-          int index) {
+      public fksproto.CsShipping.Shipping.Builder addShippingsBuilder(
+              int index) {
         return getShippingsFieldBuilder().addBuilder(
-            index, Shipping.getDefaultInstance());
+                index, fksproto.CsShipping.Shipping.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Shipping shippings = 2;</code>
        *
        * <pre>
-       *�����б�
+       *物流列表
        * </pre>
        */
-      public java.util.List<Shipping.Builder>
-           getShippingsBuilderList() {
+      public java.util.List<fksproto.CsShipping.Shipping.Builder>
+      getShippingsBuilderList() {
         return getShippingsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          Shipping, Shipping.Builder, ShippingOrBuilder>
-          getShippingsFieldBuilder() {
+              fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder>
+      getShippingsFieldBuilder() {
         if (shippingsBuilder_ == null) {
           shippingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              Shipping, Shipping.Builder, ShippingOrBuilder>(
+                  fksproto.CsShipping.Shipping, fksproto.CsShipping.Shipping.Builder, fksproto.CsShipping.ShippingOrBuilder>(
                   shippings_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -6923,111 +7128,111 @@ public final class CsShipping {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_Shipping_descriptor;
+          internal_static_fksproto_Shipping_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_Shipping_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_Shipping_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetShippingListRequest_descriptor;
+          internal_static_fksproto_GetShippingListRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetShippingListRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetShippingListRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetShippingListResponse_descriptor;
+          internal_static_fksproto_GetShippingListResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetShippingListResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetShippingListResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
+          internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
+          internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
-    String[] descriptorData = {
-      "\n\021cs_shipping.proto\022\010fksproto\032\rcs_head.p" +
-      "roto\032\rcs_base.proto\"\250\001\n\010Shipping\022\023\n\013ship" +
-      "ping_id\030\001 \002(\005\022\r\n\005title\030\002 \002(\t\022\014\n\004info\030\003 \002" +
-      "(\t\022\013\n\003fee\030\004 \001(\001\022\024\n\014is_need_duty\030\005 \001(\010\022\035\n" +
-      "\025parcel_subtotal_quota\030\006 \001(\005\022\021\n\tduty_rat" +
-      "e\030\007 \001(\002\022\025\n\rshipping_duty\030\010 \001(\002\"\310\001\n\026GetSh" +
-      "ippingListRequest\022#\n\004head\030\001 \002(\0132\025.fkspro" +
-      "to.BaseRequest\022+\n\010userinfo\030\002 \001(\0132\031.fkspr" +
-      "oto.BaseUserRequest\022\033\n\023shipping_address_" +
-      "id\030\003 \002(\005\022\025\n\rwarehouse_ids\030\004 \003(\005\022\024\n\014curre",
-      "ncycode\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(\t\"\213\001\n\027Ge" +
-      "tShippingListResponse\022$\n\004head\030\001 \002(\0132\026.fk" +
-      "sproto.BaseResponse\022#\n\005pairs\030\002 \003(\0132\024.fks" +
-      "proto.PairIntInt\022%\n\tshippings\030\003 \003(\0132\022.fk" +
-      "sproto.Shipping\"\226\002\n!GetCrowdShippingMeth" +
-      "odListRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.B" +
-      "aseRequest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto." +
-      "BaseUserRequest\022\020\n\010crowd_id\030\003 \002(\003\022\017\n\007ite" +
-      "m_id\030\004 \002(\003\022\013\n\003qty\030\005 \002(\005\022\033\n\023shipping_addr" +
-      "ess_id\030\006 \001(\005\022\024\n\014warehouse_id\030\007 \001(\005\022\022\n\nlo",
-      "calecode\030\010 \001(\t\022\024\n\014currencycode\030\t \001(\t\022\022\n\n" +
-      "currencyid\030\n \001(\005\"q\n\"GetCrowdShippingMeth" +
-      "odListResponse\022$\n\004head\030\001 \002(\0132\026.fksproto." +
-      "BaseResponse\022%\n\tshippings\030\002 \003(\0132\022.fkspro" +
-      "to.Shipping"
+    java.lang.String[] descriptorData = {
+            "\n\021cs_shipping.proto\022\010fksproto\032\rcs_head.p" +
+                    "roto\032\rcs_base.proto\"\273\001\n\010Shipping\022\023\n\013ship" +
+                    "ping_id\030\001 \002(\005\022\r\n\005title\030\002 \002(\t\022\014\n\004info\030\003 \002" +
+                    "(\t\022\013\n\003fee\030\004 \001(\001\022\024\n\014is_need_duty\030\005 \001(\010\022\035\n" +
+                    "\025parcel_subtotal_quota\030\006 \001(\005\022\021\n\tduty_rat" +
+                    "e\030\007 \001(\002\022\025\n\rshipping_duty\030\010 \001(\002\022\021\n\talert_" +
+                    "msg\030\t \001(\t\"\310\001\n\026GetShippingListRequest\022#\n\004" +
+                    "head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010use" +
+                    "rinfo\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\033" +
+                    "\n\023shipping_address_id\030\003 \002(\005\022\025\n\rwarehouse",
+            "_ids\030\004 \003(\005\022\024\n\014currencycode\030\005 \001(\t\022\022\n\nloca" +
+                    "lecode\030\006 \001(\t\"\213\001\n\027GetShippingListResponse" +
+                    "\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022#" +
+                    "\n\005pairs\030\002 \003(\0132\024.fksproto.PairIntInt\022%\n\ts" +
+                    "hippings\030\003 \003(\0132\022.fksproto.Shipping\"\226\002\n!G" +
+                    "etCrowdShippingMethodListRequest\022#\n\004head" +
+                    "\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinf" +
+                    "o\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\020\n\010cr" +
+                    "owd_id\030\003 \002(\003\022\017\n\007item_id\030\004 \002(\003\022\013\n\003qty\030\005 \002" +
+                    "(\005\022\033\n\023shipping_address_id\030\006 \001(\005\022\024\n\014wareh",
+            "ouse_id\030\007 \001(\005\022\022\n\nlocalecode\030\010 \001(\t\022\024\n\014cur" +
+                    "rencycode\030\t \001(\t\022\022\n\ncurrencyid\030\n \001(\005\"q\n\"G" +
+                    "etCrowdShippingMethodListResponse\022$\n\004hea" +
+                    "d\030\001 \002(\0132\026.fksproto.BaseResponse\022%\n\tshipp" +
+                    "ings\030\002 \003(\0132\022.fksproto.Shipping"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                      com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          CsHead.getDescriptor(),
-          CsBase.getDescriptor(),
-        }, assigner);
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                            fksproto.CsHead.getDescriptor(),
+                            fksproto.CsBase.getDescriptor(),
+                    }, assigner);
     internal_static_fksproto_Shipping_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+            getDescriptor().getMessageTypes().get(0);
     internal_static_fksproto_Shipping_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_Shipping_descriptor,
-        new String[] { "ShippingId", "Title", "Info", "Fee", "IsNeedDuty", "ParcelSubtotalQuota", "DutyRate", "ShippingDuty", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_Shipping_descriptor,
+            new java.lang.String[] { "ShippingId", "Title", "Info", "Fee", "IsNeedDuty", "ParcelSubtotalQuota", "DutyRate", "ShippingDuty", "AlertMsg", });
     internal_static_fksproto_GetShippingListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(1);
     internal_static_fksproto_GetShippingListRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetShippingListRequest_descriptor,
-        new String[] { "Head", "Userinfo", "ShippingAddressId", "WarehouseIds", "Currencycode", "Localecode", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetShippingListRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "ShippingAddressId", "WarehouseIds", "Currencycode", "Localecode", });
     internal_static_fksproto_GetShippingListResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(2);
     internal_static_fksproto_GetShippingListResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetShippingListResponse_descriptor,
-        new String[] { "Head", "Pairs", "Shippings", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetShippingListResponse_descriptor,
+            new java.lang.String[] { "Head", "Pairs", "Shippings", });
     internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(3);
     internal_static_fksproto_GetCrowdShippingMethodListRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor,
-        new String[] { "Head", "Userinfo", "CrowdId", "ItemId", "Qty", "ShippingAddressId", "WarehouseId", "Localecode", "Currencycode", "Currencyid", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetCrowdShippingMethodListRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "CrowdId", "ItemId", "Qty", "ShippingAddressId", "WarehouseId", "Localecode", "Currencycode", "Currencyid", });
     internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(4);
     internal_static_fksproto_GetCrowdShippingMethodListResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor,
-        new String[] { "Head", "Shippings", });
-    CsHead.getDescriptor();
-    CsBase.getDescriptor();
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetCrowdShippingMethodListResponse_descriptor,
+            new java.lang.String[] { "Head", "Shippings", });
+    fksproto.CsHead.getDescriptor();
+    fksproto.CsBase.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

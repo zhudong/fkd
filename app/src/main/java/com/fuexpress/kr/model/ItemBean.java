@@ -27,6 +27,15 @@ public class ItemBean implements Serializable {
     public int alert_type;
     public int is_crowd;//1不显示按钮，2参加拼单，3、发起拼单
     public long crowd_order_id;// 参与拼单id add by jack.zuoquan
+    public float price;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public String getCurrency_code() {
         return currency_code;

@@ -24,7 +24,7 @@ import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.model.ParcelHelpDao;
 import com.fuexpress.kr.model.UserManager;
-import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
+import com.fuexpress.kr.ui.activity.bind_module.BindOperatingActivity;
 import com.fuexpress.kr.utils.BitMapUtils;
 import com.fuexpress.kr.utils.UpLoadImageManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -106,7 +106,7 @@ public class AccountSettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_center, R.id.profile_image, R.id.avatarLayout, R.id.baseInfoLayout, R.id.change_password_layout, R.id.performLayout, R.id.logoutButton})
+    @OnClick({R.id.title_iv_left, R.id.title_tv_left, R.id.title_tv_center, R.id.profile_image, R.id.avatarLayout, R.id.baseInfoLayout, R.id.change_password_layout, R.id.performLayout, R.id.logoutButton, R.id.bind_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.title_iv_left:
@@ -138,6 +138,9 @@ public class AccountSettingActivity extends BaseActivity {
                 break;
             case R.id.logoutButton:
                 logout();
+                break;
+            case R.id.bind_layout:
+                startDDMActivity(BindOperatingActivity.class, true);
                 break;
         }
     }

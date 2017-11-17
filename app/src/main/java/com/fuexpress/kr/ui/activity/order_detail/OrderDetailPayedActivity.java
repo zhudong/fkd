@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.base.BusEvent;
-import com.fuexpress.kr.bean.OrderConstants;
 import com.fuexpress.kr.bean.SalesOrderItemBean;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.model.SalesOrderManager;
@@ -290,9 +289,9 @@ public class OrderDetailPayedActivity extends BaseActivity {
     }*/
 
     public void getSalesDetail() {
-        SalesOrderManager.getSalesOrderDetail(mLong, new RequestNetListener<CsOrder.GetSalesOrderDetailResponse>() {
+        SalesOrderManager.getSalesOrderDetail(mLong, new RequestNetListener<CsOrder.NewSalesOrderDetailResponse>() {
             @Override
-            public void onSuccess(CsOrder.GetSalesOrderDetailResponse response) {
+            public void onSuccess(CsOrder.NewSalesOrderDetailResponse response) {
                 KLog.i("getSalesDetail", response.toString());
 
                 CsOrder.SalesOrder order = response.getOrder();
@@ -305,13 +304,12 @@ public class OrderDetailPayedActivity extends BaseActivity {
                 if (order.getShippingScheme() == CsOrder.ShippingScheme.SHIPPING_SCHEME_DIRECT_VALUE) {
                     isDirect = true;
                 }
-                boolean isProcessing = !order.getIsCrowd();
-                if (isProcessing) {
-                    for (int i = 0; i < response.getOrderItemsList().size(); i++) {
-                        if (response.getOrderItemsList().get(i).getState() != 2) {
-                            isProcessing = false;
-                            break;
-                        }
+                boolean isProcessing = true;//!order.getIsCrowd();
+                for (int i = 0; i < response.getOrderItemsList().size(); i++) {
+                    CsOrder.SalesOrderItem salesOrderItem = response.getOrderItemsList().get(i);
+                    if (salesOrderItem.getCrowd().getCrowdId() == 0 && salesOrderItem.getState() != 2) {
+                        isProcessing = false;
+                        break;
                     }
                 }
                 if (isProcessing) {
@@ -319,8 +317,8 @@ public class OrderDetailPayedActivity extends BaseActivity {
                 }
                 if (order.getIsCrowd() && mProgressDetail != null) {
 
-                    mProgressDetail.setData(response.getCrowd());
-                    mCrowdTimer.initTime(response.getCrowd());
+//                    mProgressDetail.setData(response.getCrowd());
+//                    mCrowdTimer.initTime(response.getCrowd());
                 } else {
                     mProgressDetail.setVisibility(View.GONE);
                     mCrowdTimer.setVisibility(View.GONE);
@@ -329,7 +327,7 @@ public class OrderDetailPayedActivity extends BaseActivity {
                 toSends = new ArrayList<>();
                 sendeds = new ArrayList<>();
                 others = new ArrayList<>();
-                long parcelLong = 0, toSendLong = 0, sendLong = 0, otherLong = 0;
+                long parcelLong = 0,itemInStock=0, toSendLong = 0, sendLong = 0, otherLong = 0;
                 for (CsOrder.SalesOrderItem salesOrderItem : response.getOrderItemsList()) {
                     switch (salesOrderItem.getState()) {
                         case 1:
@@ -347,6 +345,7 @@ public class OrderDetailPayedActivity extends BaseActivity {
                         case 5:
                             parceleds.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
                             parcelLong = parcelLong + salesOrderItem.getQty();
+                            itemInStock += salesOrderItem.getQtyPack();
                             break;
                         case 6:
                             toSends.add(ClassUtil.conventSalsOrderItem2Bean(salesOrderItem));
@@ -400,7 +399,7 @@ public class OrderDetailPayedActivity extends BaseActivity {
                     currentIndex = stateOther;
                 }
                 countTv.setText((getString(R.string.item_number) + (parcelLong + toSendLong + sendLong + otherLong)));
-                percelTv.setText(getString(R.string.order_parceled) + parcelLong + ")");
+                percelTv.setText(getString(R.string.order_parceled) + itemInStock + ")");
                 toSendTv.setText(getString(R.string.order_wait_out) + toSendLong + ")");
                 sendedTv.setText(getString(R.string.order_send) + sendLong + ")");
                 otherTv.setText(getString(R.string.order_other) + otherLong + ")");
@@ -477,14 +476,23 @@ public class OrderDetailPayedActivity extends BaseActivity {
         return fee;
     }
 
-    public void showOtherInfo(CsOrder.GetSalesOrderDetailResponse response) {
+    public void showOtherInfo(CsOrder.NewSalesOrderDetailResponse response) {
+        navLayout.setVisibility(response.getOrder().getIsCrowd() ? View.GONE : View.VISIBLE);
         float fee = getFee(response.getShippingsList());
         String price = UIUtils.getCurrency(myActivity(), response.getOrder().getCurrencycode(), fee);
         if (response.getOrder().getShippingScheme() == 1) {
             otherLayout.setVisibility(View.VISIBLE);
-            deliverTv.setText(getString(R.string.String_direct_mail_1) + price);
+            //deliverTv.setText(getString(R.string.String_direct_mail_1) + price);
+            deliverTv.setText(getString(R.string.String_direct_mail_1));
         } else if (response.getOrder().getShippingScheme() == 2) {
             deliverTv.setText(getString(R.string.String_merge_order));
+        } else if (response.getOrder().getShippingScheme() == 3) {
+            deliverTv.setText(getString(R.string.String_direct_fu));
+        }
+
+        for (CsOrder.SalesOrderItem item : response.getOrderItemsList()) {
+            if (item.getCrowd().getCrowdId() > 0)
+                editBtn.setVisibility(View.GONE);
         }
 
         //String region = AssetFileManager.getInstance().readFilePlus(response.getAddress().getRegion(), AssetFileManager.ADDRESS_TYPE);

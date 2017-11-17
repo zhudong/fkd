@@ -516,5 +516,37 @@ public class AddressManager {
         });
     }
 
+    public void getParcelAddressRequest(long parcelId) {
+
+        CsAddress.InitAddressAjaxRequest.Builder builder = CsAddress.InitAddressAjaxRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setParcelId((int) parcelId);
+        builder.setAppType(2);
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.InitAddressAjaxResponse>() {
+
+
+            @Override
+            public void onSuccess(CsAddress.InitAddressAjaxResponse response) {
+                CsAddress.CustomerAddress.Builder builder1 = CsAddress.CustomerAddress.newBuilder();
+                builder1.setStreet(response.getStreet());
+                builder1.setPostcode(response.getPostcode());
+                builder1.setName(response.getName());
+                builder1.setCountryname(response.getCountryName());
+                builder1.setCountryCode(response.getCountryCode());
+                builder1.setRegionname(response.getRegionName());
+                builder1.setRegionId(response.getRegionId());
+                builder1.setPhone(response.getTelephone());
+                EventBus.getDefault().post(new BusEvent(BusEvent.INIT_PARCEL_ADDRESS_COMPLETE, true, builder1.build()));
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                EventBus.getDefault().post(new BusEvent(BusEvent.INIT_PARCEL_ADDRESS_COMPLETE, false, ret + errMsg));
+            }
+        });
+    }
+
 
 }

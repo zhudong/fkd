@@ -24,6 +24,7 @@ import com.fuexpress.kr.R;
 import com.fuexpress.kr.model.ActivityController;
 import com.fuexpress.kr.model.ShareManager;
 import com.fuexpress.kr.ui.activity.ShareSelectActiviy;
+import com.fuexpress.kr.ui.activity.crowd.CrowdDetailActivity;
 import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.uiutils.ViewUtils;
@@ -389,7 +390,8 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
             }
         }*/
 
-        if (event.getType() == BusEvent.GO_HOME_CODE || event.getType() == BusEvent.LOGIN_SUCCESS || event.getType() == GO_SUBMIT_PARCEL) {
+        if (event.getType() == BusEvent.GO_HOME_CODE || event.getType() == BusEvent.LOGIN_SUCCESS ||
+                event.getType() == GO_SUBMIT_PARCEL || event.getType() == BusEvent.GO_CROWD_PAGE) {
             if (!(this instanceof MainActivity)) {
                 finish();
             }
@@ -401,6 +403,11 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         }
         if (event.getType() == BusEvent.GO_PRODUSRC_PAGE) {
             if (!(this instanceof MainActivity)) {
+                finish();
+            }
+        }
+        if (event.getType() == BusEvent.GO_CROWD_Detail) {
+            if (!(this instanceof MainActivity || this instanceof CrowdDetailActivity)) {
                 finish();
             }
         }
@@ -465,6 +472,12 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public void toActivity(Class target) {
         this.startActivity(new Intent(this, target));
+    }
+
+    public void toActivityByBoolean(Class target, String key, boolean value) {
+        Intent intent = new Intent(this, target);
+        intent.putExtra(key, value);
+        this.startActivity(intent);
     }
 
 

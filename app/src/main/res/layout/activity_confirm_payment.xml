@@ -241,7 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/recharge_order_detail_need_pay_02"
-                            android:textColor="@color/gray_02"/>
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/payment_need_pay_tv"

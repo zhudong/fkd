@@ -59496,6 +59496,32 @@ public final class CsUser {
          */
         com.google.protobuf.ByteString
         getSupplyBytes();
+
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        boolean hasGroup();
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        java.lang.String getGroup();
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        com.google.protobuf.ByteString
+        getGroupBytes();
     }
     /**
      * Protobuf type {@code fksproto.MyRequireParcelNumResponse}
@@ -59576,6 +59602,12 @@ public final class CsUser {
                             com.google.protobuf.ByteString bs = input.readBytes();
                             bitField0_ |= 0x00000008;
                             supply_ = bs;
+                            break;
+                        }
+                        case 42: {
+                            com.google.protobuf.ByteString bs = input.readBytes();
+                            bitField0_ |= 0x00000010;
+                            group_ = bs;
                             break;
                         }
                     }
@@ -59739,11 +59771,66 @@ public final class CsUser {
             }
         }
 
+        public static final int GROUP_FIELD_NUMBER = 5;
+        private java.lang.Object group_;
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        public boolean hasGroup() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        public java.lang.String getGroup() {
+            java.lang.Object ref = group_;
+            if (ref instanceof java.lang.String) {
+                return (java.lang.String) ref;
+            } else {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                java.lang.String s = bs.toStringUtf8();
+                if (bs.isValidUtf8()) {
+                    group_ = s;
+                }
+                return s;
+            }
+        }
+        /**
+         * <code>optional string group = 5;</code>
+         *
+         * <pre>
+         *1代表显示拼团,0代表不显示
+         * </pre>
+         */
+        public com.google.protobuf.ByteString
+        getGroupBytes() {
+            java.lang.Object ref = group_;
+            if (ref instanceof java.lang.String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (java.lang.String) ref);
+                group_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
+
         private void initFields() {
             head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
             requirecount_ = 0;
             parcelcount_ = 0;
             supply_ = "";
+            group_ = "";
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -59778,6 +59865,9 @@ public final class CsUser {
             if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 output.writeBytes(4, getSupplyBytes());
             }
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                output.writeBytes(5, getGroupBytes());
+            }
             getUnknownFields().writeTo(output);
         }
 
@@ -59802,6 +59892,10 @@ public final class CsUser {
             if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 size += com.google.protobuf.CodedOutputStream
                         .computeBytesSize(4, getSupplyBytes());
+            }
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeBytesSize(5, getGroupBytes());
             }
             size += getUnknownFields().getSerializedSize();
             memoizedSerializedSize = size;
@@ -59933,6 +60027,8 @@ public final class CsUser {
                 bitField0_ = (bitField0_ & ~0x00000004);
                 supply_ = "";
                 bitField0_ = (bitField0_ & ~0x00000008);
+                group_ = "";
+                bitField0_ = (bitField0_ & ~0x00000010);
                 return this;
             }
 
@@ -59981,6 +60077,10 @@ public final class CsUser {
                     to_bitField0_ |= 0x00000008;
                 }
                 result.supply_ = supply_;
+                if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+                    to_bitField0_ |= 0x00000010;
+                }
+                result.group_ = group_;
                 result.bitField0_ = to_bitField0_;
                 onBuilt();
                 return result;
@@ -60009,6 +60109,11 @@ public final class CsUser {
                 if (other.hasSupply()) {
                     bitField0_ |= 0x00000008;
                     supply_ = other.supply_;
+                    onChanged();
+                }
+                if (other.hasGroup()) {
+                    bitField0_ |= 0x00000010;
+                    group_ = other.group_;
                     onChanged();
                 }
                 this.mergeUnknownFields(other.getUnknownFields());
@@ -60354,6 +60459,106 @@ public final class CsUser {
                 }
                 bitField0_ |= 0x00000008;
                 supply_ = value;
+                onChanged();
+                return this;
+            }
+
+            private java.lang.Object group_ = "";
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public boolean hasGroup() {
+                return ((bitField0_ & 0x00000010) == 0x00000010);
+            }
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public java.lang.String getGroup() {
+                java.lang.Object ref = group_;
+                if (!(ref instanceof java.lang.String)) {
+                    com.google.protobuf.ByteString bs =
+                            (com.google.protobuf.ByteString) ref;
+                    java.lang.String s = bs.toStringUtf8();
+                    if (bs.isValidUtf8()) {
+                        group_ = s;
+                    }
+                    return s;
+                } else {
+                    return (java.lang.String) ref;
+                }
+            }
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public com.google.protobuf.ByteString
+            getGroupBytes() {
+                java.lang.Object ref = group_;
+                if (ref instanceof String) {
+                    com.google.protobuf.ByteString b =
+                            com.google.protobuf.ByteString.copyFromUtf8(
+                                    (java.lang.String) ref);
+                    group_ = b;
+                    return b;
+                } else {
+                    return (com.google.protobuf.ByteString) ref;
+                }
+            }
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public Builder setGroup(
+                    java.lang.String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                bitField0_ |= 0x00000010;
+                group_ = value;
+                onChanged();
+                return this;
+            }
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public Builder clearGroup() {
+                bitField0_ = (bitField0_ & ~0x00000010);
+                group_ = getDefaultInstance().getGroup();
+                onChanged();
+                return this;
+            }
+            /**
+             * <code>optional string group = 5;</code>
+             *
+             * <pre>
+             *1代表显示拼团,0代表不显示
+             * </pre>
+             */
+            public Builder setGroupBytes(
+                    com.google.protobuf.ByteString value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                bitField0_ |= 0x00000010;
+                group_ = value;
                 onChanged();
                 return this;
             }
@@ -94099,140 +94304,141 @@ public final class CsUser {
                         "elName\030\037 \001(\t\022\024\n\014parcelStatus\030  \001(\t\"n\n\031My" +
                         "RequireParcelNumRequest\022#\n\004head\030\001 \002(\0132\025." +
                         "fksproto.BaseRequest\022,\n\tuser_head\030\002 \001(\0132" +
-                        "\031.fksproto.BaseUserRequest\"}\n\032MyRequireP",
-                "arcelNumResponse\022$\n\004head\030\001 \002(\0132\026.fksprot" +
-                        "o.BaseResponse\022\024\n\014requirecount\030\002 \001(\005\022\023\n\013" +
-                        "parcelcount\030\003 \001(\005\022\016\n\006supply\030\004 \001(\t\"\225\001\n\024Ca" +
-                        "ncelRequireRequest\022#\n\004head\030\001 \002(\0132\025.fkspr" +
-                        "oto.BaseRequest\022,\n\tuser_head\030\002 \001(\0132\031.fks" +
-                        "proto.BaseUserRequest\022\026\n\016salesrequireid\030" +
-                        "\003 \001(\005\022\022\n\nlocalecode\030\004 \001(\t\"=\n\025CancelRequi" +
-                        "reResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.Base" +
-                        "Response\"h\n\024GetKrBankInfoRequest\022#\n\004head" +
-                        "\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinf",
-                "o\030\002 \001(\0132\031.fksproto.BaseUserRequest\"y\n\025Ge" +
-                        "tKrBankInfoResponse\022$\n\004head\030\001 \002(\0132\026.fksp" +
-                        "roto.BaseResponse\022\020\n\010bankName\030\002 \001(\t\022\022\n\na" +
-                        "countName\030\003 \001(\t\022\024\n\014acountNumber\030\004 \001(\t\"\253\001" +
-                        "\n\007Require\022\026\n\016salesRequireId\030\001 \001(\005\022\016\n\006sta" +
-                        "tus\030\002 \001(\t\022\014\n\004type\030\003 \001(\005\022\022\n\ncreateTime\030\004 " +
-                        "\001(\t\022%\n\010imageUrl\030\005 \003(\0132\023.fksproto.ImagesU" +
-                        "rl\022\023\n\013description\030\006 \001(\t\022\r\n\005price\030\007 \001(\002\022\013" +
-                        "\n\003qty\030\010 \001(\002\"\213\001\n\027GetMyRequireListRequest\022" +
-                        "#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010",
-                "userinfo\030\002 \002(\0132\031.fksproto.BaseUserReques" +
-                        "t\022\016\n\006pageNo\030\003 \001(\005\022\016\n\006status\030\004 \001(\t\"\244\001\n\030Ge" +
-                        "tMyRequireListResponse\022$\n\004head\030\001 \002(\0132\026.f" +
-                        "ksproto.BaseResponse\022\014\n\004more\030\002 \001(\t\022\025\n\rpe" +
-                        "ndingCounts\030\003 \001(\005\022&\n\013requireList\030\004 \003(\0132\021" +
-                        ".fksproto.Require\022\025\n\rpackingCounts\030\005 \001(\005" +
-                        "\"\230\001\n\031GetMemberGroupNameRequest\022#\n\004head\030\001" +
-                        " \002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030" +
-                        "\002 \002(\0132\031.fksproto.BaseUserRequest\022\025\n\rmemb" +
-                        "erGroupId\030\003 \001(\005\022\022\n\nlocaleCode\030\004 \001(\t\"[\n\032G",
-                "etMemberGroupNameResponse\022$\n\004head\030\001 \002(\0132" +
-                        "\026.fksproto.BaseResponse\022\027\n\017memberGroupNa" +
-                        "me\030\002 \001(\t\"4\n\010MatchTag\022\022\n\nmatchTagId\030\001 \001(\005" +
-                        "\022\024\n\014matchTagName\030\002 \001(\t\"\177\n\027GetMaterialsLi" +
-                        "stRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseR" +
-                        "equest\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.Base" +
-                        "UserRequest\022\022\n\nlocaleCode\030\003 \001(\t\"j\n\030GetMa" +
-                        "terialsListResponse\022$\n\004head\030\001 \002(\0132\026.fksp" +
-                        "roto.BaseResponse\022(\n\014matchTagList\030\002 \003(\0132" +
-                        "\022.fksproto.MatchTag\"O\n\021MatchItemCategory",
-                "\022\033\n\023matchItemCategoryId\030\001 \001(\005\022\035\n\025matchIt" +
-                        "emCategoryName\030\002 \001(\t\"U\n\010Invitees\022\022\n\ncust" +
-                        "omerid\030\001 \001(\005\022\017\n\007iconurl\030\002 \001(\t\022\020\n\010nicknam" +
-                        "e\030\003 \001(\t\022\022\n\ncreatetime\030\004 \001(\t\"j\n\026GetInvite" +
-                        "esListRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.B" +
-                        "aseRequest\022+\n\010userinfo\030\002 \002(\0132\031.fksproto." +
-                        "BaseUserRequest\"i\n\027GetInviteesListRespon" +
-                        "se\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse" +
-                        "\022(\n\014inviteeslist\030\002 \003(\0132\022.fksproto.Invite" +
-                        "es\"\223\001\n\026GetInviteConfigRequest\022#\n\004head\030\001 ",
-                "\002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002" +
-                        " \002(\0132\031.fksproto.BaseUserRequest\022\022\n\nlocal" +
-                        "eCode\030\003 \001(\t\022\023\n\013messagecode\030\004 \001(\t\"t\n\027GetI" +
-                        "nviteConfigResponse\022$\n\004head\030\001 \002(\0132\026.fksp" +
-                        "roto.BaseResponse\022\016\n\006titile\030\002 \001(\t\022\020\n\010ima" +
-                        "geurl\030\003 \001(\t\022\021\n\tinviteurl\030\004 \001(\t\"\177\n\025GetAcc" +
-                        "ountInfoRequest\022#\n\004head\030\001 \002(\0132\025.fksproto" +
-                        ".BaseRequest\022+\n\010userinfo\030\002 \002(\0132\031.fksprot" +
-                        "o.BaseUserRequest\022\024\n\014currencycode\030\003 \001(\t\"" +
-                        "\311\001\n\026GetAccountInfoResponse\022$\n\004head\030\001 \002(\013",
-                "2\026.fksproto.BaseResponse\022\030\n\020myshippingco" +
-                        "upon\030\002 \001(\005\022\027\n\017giftcardaccount\030\003 \001(\002\022\024\n\014f" +
-                        "rozenamount\030\004 \001(\002\022\017\n\007credits\030\005 \001(\005\022\025\n\rcr" +
-                        "editsfrozen\030\006 \001(\005\022\030\n\020minchangecashnum\030\007 " +
-                        "\001(\t\"H\n\rcreditsDetail\022\022\n\ncreatetime\030\001 \001(\t" +
-                        "\022\023\n\013description\030\002 \001(\t\022\016\n\006change\030\003 \001(\005\"\246\001" +
-                        "\n\027GetCreditsDetailRequest\022#\n\004head\030\001 \002(\0132" +
+                        "\031.fksproto.BaseUserRequest\"\214\001\n\032MyRequire",
+                "ParcelNumResponse\022$\n\004head\030\001 \002(\0132\026.fkspro" +
+                        "to.BaseResponse\022\024\n\014requirecount\030\002 \001(\005\022\023\n" +
+                        "\013parcelcount\030\003 \001(\005\022\016\n\006supply\030\004 \001(\t\022\r\n\005gr" +
+                        "oup\030\005 \001(\t\"\225\001\n\024CancelRequireRequest\022#\n\004he" +
+                        "ad\030\001 \002(\0132\025.fksproto.BaseRequest\022,\n\tuser_" +
+                        "head\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\026\n" +
+                        "\016salesrequireid\030\003 \001(\005\022\022\n\nlocalecode\030\004 \001(" +
+                        "\t\"=\n\025CancelRequireResponse\022$\n\004head\030\001 \002(\013" +
+                        "2\026.fksproto.BaseResponse\"h\n\024GetKrBankInf" +
+                        "oRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRe",
+                "quest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseU" +
+                        "serRequest\"y\n\025GetKrBankInfoResponse\022$\n\004h" +
+                        "ead\030\001 \002(\0132\026.fksproto.BaseResponse\022\020\n\010ban" +
+                        "kName\030\002 \001(\t\022\022\n\nacountName\030\003 \001(\t\022\024\n\014acoun" +
+                        "tNumber\030\004 \001(\t\"\253\001\n\007Require\022\026\n\016salesRequir" +
+                        "eId\030\001 \001(\005\022\016\n\006status\030\002 \001(\t\022\014\n\004type\030\003 \001(\005\022" +
+                        "\022\n\ncreateTime\030\004 \001(\t\022%\n\010imageUrl\030\005 \003(\0132\023." +
+                        "fksproto.ImagesUrl\022\023\n\013description\030\006 \001(\t\022" +
+                        "\r\n\005price\030\007 \001(\002\022\013\n\003qty\030\010 \001(\002\"\213\001\n\027GetMyReq" +
+                        "uireListRequest\022#\n\004head\030\001 \002(\0132\025.fksproto",
+                ".BaseRequest\022+\n\010userinfo\030\002 \002(\0132\031.fksprot" +
+                        "o.BaseUserRequest\022\016\n\006pageNo\030\003 \001(\005\022\016\n\006sta" +
+                        "tus\030\004 \001(\t\"\244\001\n\030GetMyRequireListResponse\022$" +
+                        "\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022\014\n\004" +
+                        "more\030\002 \001(\t\022\025\n\rpendingCounts\030\003 \001(\005\022&\n\013req" +
+                        "uireList\030\004 \003(\0132\021.fksproto.Require\022\025\n\rpac" +
+                        "kingCounts\030\005 \001(\005\"\230\001\n\031GetMemberGroupNameR" +
+                        "equest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequ" +
+                        "est\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.BaseUse" +
+                        "rRequest\022\025\n\rmemberGroupId\030\003 \001(\005\022\022\n\nlocal",
+                "eCode\030\004 \001(\t\"[\n\032GetMemberGroupNameRespons" +
+                        "e\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022" +
+                        "\027\n\017memberGroupName\030\002 \001(\t\"4\n\010MatchTag\022\022\n\n" +
+                        "matchTagId\030\001 \001(\005\022\024\n\014matchTagName\030\002 \001(\t\"\177" +
+                        "\n\027GetMaterialsListRequest\022#\n\004head\030\001 \002(\0132" +
                         "\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \002(\013" +
-                        "2\031.fksproto.BaseUserRequest\022\024\n\014currencyc" +
-                        "ode\030\003 \001(\t\022\022\n\nlocalecode\030\004 \001(\t\022\017\n\007pagenum",
-                "\030\005 \001(\005\"\376\001\n\030GetCreditsDetailResponse\022$\n\004h" +
-                        "ead\030\001 \002(\0132\026.fksproto.BaseResponse\022\017\n\007cre" +
-                        "dits\030\002 \001(\005\022\025\n\rcreditsfrozen\030\003 \001(\005\022\016\n\006amo" +
-                        "unt\030\004 \001(\t\022.\n\rcreditsdetail\030\005 \003(\0132\027.fkspr" +
-                        "oto.creditsDetail\022\030\n\020minchangecashnum\030\006 " +
-                        "\001(\t\022\014\n\004more\030\007 \001(\t\022,\n\014currencylist\030\010 \003(\0132" +
-                        "\026.fksproto.CurrencyList\"\200\001\n\030CreditsInvit" +
-                        "eInfoRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Ba" +
-                        "seRequest\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.B" +
-                        "aseUserRequest\022\022\n\nlocalecode\030\003 \001(\t\"l\n\031Cr",
-                "editsInviteInfoResponse\022$\n\004head\030\001 \002(\0132\026." +
-                        "fksproto.BaseResponse\022\023\n\013invite_info\030\002 \001" +
-                        "(\t\022\024\n\014invite_title\030\003 \001(\t\"\220\001\n\026GetCategory" +
-                        "ListRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Bas" +
-                        "eRequest\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.Ba" +
-                        "seUserRequest\022\022\n\nlocaleCode\030\003 \001(\t\022\020\n\010par" +
-                        "entId\030\004 \001(\005\"{\n\027GetCategoryListResponse\022$" +
-                        "\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022:\n\025" +
-                        "matchItemCategoryList\030\002 \003(\0132\033.fksproto.M" +
-                        "atchItemCategory\"\244\001\n\034GetDaoupayVaccountU",
-                "rlRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseR" +
-                        "equest\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.Base" +
-                        "UserRequest\022\017\n\007orderid\030\003 \001(\005\022\021\n\tordertyp" +
-                        "e\030\004 \001(\t\022\016\n\006amount\030\005 \001(\t\"U\n\035GetDaoupayVac" +
-                        "countUrlResponse\022$\n\004head\030\001 \002(\0132\026.fksprot" +
-                        "o.BaseResponse\022\016\n\006payurl\030\002 \001(\t\"9\n\013Countr" +
-                        "yList\022\024\n\014country_code\030\001 \001(\t\022\024\n\014country_n" +
-                        "ame\030\002 \001(\t\"\315\001\n\036GetCountryWarehouseListReq" +
-                        "uest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseReques" +
-                        "t\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.BaseUserR",
-                "equest\022\023\n\013countrycode\030\003 \001(\t\022\014\n\004type\030\004 \001(" +
-                        "\005\022\022\n\nlocalecode\030\005 \001(\t\022\017\n\007pagenum\030\006 \001(\005\022\021" +
-                        "\n\tpage_size\030\007 \001(\005\"\311\001\n\037GetCountryWarehous" +
-                        "eListResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.B" +
-                        "aseResponse\022+\n\014country_list\030\002 \003(\0132\025.fksp" +
-                        "roto.CountryList\022/\n\016warehouse_list\030\003 \003(\013" +
-                        "2\027.fksproto.WareHouseList\022\014\n\004more\030\004 \001(\t\022" +
-                        "\024\n\014country_code\030\005 \001(\t*:\n\nUserGender\022\026\n\022U" +
-                        "SER_GENDER_FEMALE\020\001\022\024\n\020USER_GENDER_MALE\020" +
-                        "\002*T\n\013MemberGroup\022\027\n\023MEMBER_GROUP_NORMAL\020",
-                "\001\022\024\n\020MEMBER_GROUP_VIP\020\002\022\026\n\022MEMBER_GROUP_" +
-                        "SUPER\020\003*\345\004\n\021UserInfoFieldType\022\032\n\026USER_IN" +
-                        "FO_FIELD_AVATAR\020\001\022\034\n\030USER_INFO_FIELD_NIC" +
-                        "KNAME\020\002\022\031\n\025USER_INFO_FIELD_EMAIL\020\003\022\034\n\030US" +
-                        "ER_INFO_FIELD_USERNAME\020\004\022\032\n\026USER_INFO_FI" +
-                        "ELD_GENDER\020\005\022\034\n\030USER_INFO_FIELD_BIRTHDAY" +
-                        "\020\006\022\032\n\026USER_INFO_FIELD_REGION\020\007\022\032\n\026USER_I" +
-                        "NFO_FIELD_MOBILE\020\010\022\032\n\026USER_INFO_FIELD_WE" +
-                        "CHAT\020\t\022\031\n\025USER_INFO_FIELD_INTRO\020\n\022\033\n\027USE" +
-                        "R_INFO_FIELD_URL_KEY\020\013\022\036\n\032USER_INFO_FIEL",
-                "D_INVITE_KEY\020\014\022\030\n\024USER_INFO_FIELD_FLAG\020\r" +
-                        "\022 \n\034USER_INFO_FIELD_MEMBER_GROUP\020\016\022 \n\034US" +
-                        "ER_INFO_FIELD_MEMBER_START\020\017\022\036\n\032USER_INF" +
-                        "O_FIELD_MEMBER_END\020\020\022\035\n\031USER_INFO_FIELD_" +
-                        "HOME_PAGE\020\021\022\031\n\025USER_INFO_FIELD_PHONE\020\022\022\035" +
-                        "\n\031USER_INFO_FIELD_REGION_ID\020\023\022 \n\034USER_IN" +
-                        "FO_FIELD_COUNTRY_CODE\020\024*\224\001\n\013CounterType\022" +
-                        "\026\n\022COUNTER_TYPE_ALBUM\020\001\022\025\n\021COUNTER_TYPE_" +
-                        "ITEM\020\002\022\025\n\021COUNTER_TYPE_LIKE\020\003\022 \n\034COUNTER" +
-                        "_TYPE_FOLLOW_MERCHANT\020\004\022\035\n\031COUNTER_TYPE_",
-                "FOLLOW_ALBUM\020\005*^\n\014RedPointType\022\030\n\024RED_PO" +
-                        "INT_TYPE_ORDER\020\001\022\031\n\025RED_POINT_TYPE_NOTIF" +
-                        "Y\020\002\022\031\n\025RED_POINT_TYPE_PARCEL\020\003"
+                        "2\031.fksproto.BaseUserRequest\022\022\n\nlocaleCod" +
+                        "e\030\003 \001(\t\"j\n\030GetMaterialsListResponse\022$\n\004h" +
+                        "ead\030\001 \002(\0132\026.fksproto.BaseResponse\022(\n\014mat" +
+                        "chTagList\030\002 \003(\0132\022.fksproto.MatchTag\"O\n\021M",
+                "atchItemCategory\022\033\n\023matchItemCategoryId\030" +
+                        "\001 \001(\005\022\035\n\025matchItemCategoryName\030\002 \001(\t\"U\n\010" +
+                        "Invitees\022\022\n\ncustomerid\030\001 \001(\005\022\017\n\007iconurl\030" +
+                        "\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022\022\n\ncreatetime\030\004 " +
+                        "\001(\t\"j\n\026GetInviteesListRequest\022#\n\004head\030\001 " +
+                        "\002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002" +
+                        " \002(\0132\031.fksproto.BaseUserRequest\"i\n\027GetIn" +
+                        "viteesListResponse\022$\n\004head\030\001 \002(\0132\026.fkspr" +
+                        "oto.BaseResponse\022(\n\014inviteeslist\030\002 \003(\0132\022" +
+                        ".fksproto.Invitees\"\223\001\n\026GetInviteConfigRe",
+                "quest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseReque" +
+                        "st\022+\n\010userinfo\030\002 \002(\0132\031.fksproto.BaseUser" +
+                        "Request\022\022\n\nlocaleCode\030\003 \001(\t\022\023\n\013messageco" +
+                        "de\030\004 \001(\t\"t\n\027GetInviteConfigResponse\022$\n\004h" +
+                        "ead\030\001 \002(\0132\026.fksproto.BaseResponse\022\016\n\006tit" +
+                        "ile\030\002 \001(\t\022\020\n\010imageurl\030\003 \001(\t\022\021\n\tinviteurl" +
+                        "\030\004 \001(\t\"\177\n\025GetAccountInfoRequest\022#\n\004head\030" +
+                        "\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo" +
+                        "\030\002 \002(\0132\031.fksproto.BaseUserRequest\022\024\n\014cur" +
+                        "rencycode\030\003 \001(\t\"\311\001\n\026GetAccountInfoRespon",
+                "se\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse" +
+                        "\022\030\n\020myshippingcoupon\030\002 \001(\005\022\027\n\017giftcardac" +
+                        "count\030\003 \001(\002\022\024\n\014frozenamount\030\004 \001(\002\022\017\n\007cre" +
+                        "dits\030\005 \001(\005\022\025\n\rcreditsfrozen\030\006 \001(\005\022\030\n\020min" +
+                        "changecashnum\030\007 \001(\t\"H\n\rcreditsDetail\022\022\n\n" +
+                        "createtime\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\016\n" +
+                        "\006change\030\003 \001(\005\"\246\001\n\027GetCreditsDetailReques" +
+                        "t\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+" +
+                        "\n\010userinfo\030\002 \002(\0132\031.fksproto.BaseUserRequ" +
+                        "est\022\024\n\014currencycode\030\003 \001(\t\022\022\n\nlocalecode\030",
+                "\004 \001(\t\022\017\n\007pagenum\030\005 \001(\005\"\376\001\n\030GetCreditsDet" +
+                        "ailResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.Bas" +
+                        "eResponse\022\017\n\007credits\030\002 \001(\005\022\025\n\rcreditsfro" +
+                        "zen\030\003 \001(\005\022\016\n\006amount\030\004 \001(\t\022.\n\rcreditsdeta" +
+                        "il\030\005 \003(\0132\027.fksproto.creditsDetail\022\030\n\020min" +
+                        "changecashnum\030\006 \001(\t\022\014\n\004more\030\007 \001(\t\022,\n\014cur" +
+                        "rencylist\030\010 \003(\0132\026.fksproto.CurrencyList\"" +
+                        "\200\001\n\030CreditsInviteInfoRequest\022#\n\004head\030\001 \002" +
+                        "(\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 " +
+                        "\002(\0132\031.fksproto.BaseUserRequest\022\022\n\nlocale",
+                "code\030\003 \001(\t\"l\n\031CreditsInviteInfoResponse\022" +
+                        "$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022\023\n" +
+                        "\013invite_info\030\002 \001(\t\022\024\n\014invite_title\030\003 \001(\t" +
+                        "\"\220\001\n\026GetCategoryListRequest\022#\n\004head\030\001 \002(" +
+                        "\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \002" +
+                        "(\0132\031.fksproto.BaseUserRequest\022\022\n\nlocaleC" +
+                        "ode\030\003 \001(\t\022\020\n\010parentId\030\004 \001(\005\"{\n\027GetCatego" +
+                        "ryListResponse\022$\n\004head\030\001 \002(\0132\026.fksproto." +
+                        "BaseResponse\022:\n\025matchItemCategoryList\030\002 " +
+                        "\003(\0132\033.fksproto.MatchItemCategory\"\244\001\n\034Get",
+                "DaoupayVaccountUrlRequest\022#\n\004head\030\001 \002(\0132" +
+                        "\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \002(\013" +
+                        "2\031.fksproto.BaseUserRequest\022\017\n\007orderid\030\003" +
+                        " \001(\005\022\021\n\tordertype\030\004 \001(\t\022\016\n\006amount\030\005 \001(\t\"" +
+                        "U\n\035GetDaoupayVaccountUrlResponse\022$\n\004head" +
+                        "\030\001 \002(\0132\026.fksproto.BaseResponse\022\016\n\006payurl" +
+                        "\030\002 \001(\t\"9\n\013CountryList\022\024\n\014country_code\030\001 " +
+                        "\001(\t\022\024\n\014country_name\030\002 \001(\t\"\315\001\n\036GetCountry" +
+                        "WarehouseListRequest\022#\n\004head\030\001 \002(\0132\025.fks" +
+                        "proto.BaseRequest\022+\n\010userinfo\030\002 \002(\0132\031.fk",
+                "sproto.BaseUserRequest\022\023\n\013countrycode\030\003 " +
+                        "\001(\t\022\014\n\004type\030\004 \001(\005\022\022\n\nlocalecode\030\005 \001(\t\022\017\n" +
+                        "\007pagenum\030\006 \001(\005\022\021\n\tpage_size\030\007 \001(\005\"\311\001\n\037Ge" +
+                        "tCountryWarehouseListResponse\022$\n\004head\030\001 " +
+                        "\002(\0132\026.fksproto.BaseResponse\022+\n\014country_l" +
+                        "ist\030\002 \003(\0132\025.fksproto.CountryList\022/\n\016ware" +
+                        "house_list\030\003 \003(\0132\027.fksproto.WareHouseLis" +
+                        "t\022\014\n\004more\030\004 \001(\t\022\024\n\014country_code\030\005 \001(\t*:\n" +
+                        "\nUserGender\022\026\n\022USER_GENDER_FEMALE\020\001\022\024\n\020U" +
+                        "SER_GENDER_MALE\020\002*T\n\013MemberGroup\022\027\n\023MEMB",
+                "ER_GROUP_NORMAL\020\001\022\024\n\020MEMBER_GROUP_VIP\020\002\022" +
+                        "\026\n\022MEMBER_GROUP_SUPER\020\003*\345\004\n\021UserInfoFiel" +
+                        "dType\022\032\n\026USER_INFO_FIELD_AVATAR\020\001\022\034\n\030USE" +
+                        "R_INFO_FIELD_NICKNAME\020\002\022\031\n\025USER_INFO_FIE" +
+                        "LD_EMAIL\020\003\022\034\n\030USER_INFO_FIELD_USERNAME\020\004" +
+                        "\022\032\n\026USER_INFO_FIELD_GENDER\020\005\022\034\n\030USER_INF" +
+                        "O_FIELD_BIRTHDAY\020\006\022\032\n\026USER_INFO_FIELD_RE" +
+                        "GION\020\007\022\032\n\026USER_INFO_FIELD_MOBILE\020\010\022\032\n\026US" +
+                        "ER_INFO_FIELD_WECHAT\020\t\022\031\n\025USER_INFO_FIEL" +
+                        "D_INTRO\020\n\022\033\n\027USER_INFO_FIELD_URL_KEY\020\013\022\036",
+                "\n\032USER_INFO_FIELD_INVITE_KEY\020\014\022\030\n\024USER_I" +
+                        "NFO_FIELD_FLAG\020\r\022 \n\034USER_INFO_FIELD_MEMB" +
+                        "ER_GROUP\020\016\022 \n\034USER_INFO_FIELD_MEMBER_STA" +
+                        "RT\020\017\022\036\n\032USER_INFO_FIELD_MEMBER_END\020\020\022\035\n\031" +
+                        "USER_INFO_FIELD_HOME_PAGE\020\021\022\031\n\025USER_INFO" +
+                        "_FIELD_PHONE\020\022\022\035\n\031USER_INFO_FIELD_REGION" +
+                        "_ID\020\023\022 \n\034USER_INFO_FIELD_COUNTRY_CODE\020\024*" +
+                        "\224\001\n\013CounterType\022\026\n\022COUNTER_TYPE_ALBUM\020\001\022" +
+                        "\025\n\021COUNTER_TYPE_ITEM\020\002\022\025\n\021COUNTER_TYPE_L" +
+                        "IKE\020\003\022 \n\034COUNTER_TYPE_FOLLOW_MERCHANT\020\004\022",
+                "\035\n\031COUNTER_TYPE_FOLLOW_ALBUM\020\005*^\n\014RedPoi" +
+                        "ntType\022\030\n\024RED_POINT_TYPE_ORDER\020\001\022\031\n\025RED_" +
+                        "POINT_TYPE_NOTIFY\020\002\022\031\n\025RED_POINT_TYPE_PA" +
+                        "RCEL\020\003"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
                 new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -94505,7 +94711,7 @@ public final class CsUser {
         internal_static_fksproto_MyRequireParcelNumResponse_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessage.FieldAccessorTable(
                 internal_static_fksproto_MyRequireParcelNumResponse_descriptor,
-                new java.lang.String[] { "Head", "Requirecount", "Parcelcount", "Supply", });
+                new java.lang.String[] { "Head", "Requirecount", "Parcelcount", "Supply", "Group", });
         internal_static_fksproto_CancelRequireRequest_descriptor =
                 getDescriptor().getMessageTypes().get(43);
         internal_static_fksproto_CancelRequireRequest_fieldAccessorTable = new

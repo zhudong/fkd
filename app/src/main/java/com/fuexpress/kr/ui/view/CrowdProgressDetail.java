@@ -99,7 +99,7 @@ public class CrowdProgressDetail extends RelativeLayout {
         if (mVerSpace != 6) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mProgressBar.getLayoutParams();
             int left = UIUtils.dip2px(2);
-            int ver = UIUtils.dip2px( mVerSpace);
+            int ver = UIUtils.dip2px(mVerSpace);
             layoutParams.setMargins(-left, ver, -left, ver);
             mRoot2.updateViewLayout(mProgressBar, layoutParams);
         }
@@ -131,6 +131,7 @@ public class CrowdProgressDetail extends RelativeLayout {
         if (item != null) {
             this.mItem = item;
             mPrice = item.getDefaultPrice() * item.getExchangeRate();
+//            mPrice = item.getPrice();
         }
 
         this.mCrowd = crowd;
@@ -265,7 +266,8 @@ public class CrowdProgressDetail extends RelativeLayout {
         if (LgUitl.isOtherLanguage(AccountManager.getInstance().getLocaleCode())) {
             return discount * 100;
         } else {
-            return ((1 - discount) * 10);
+            float i = 100 - (int) (discount * 100);
+            return i / 10;
         }
     }
 
@@ -344,8 +346,12 @@ public class CrowdProgressDetail extends RelativeLayout {
 
     public String getCurrencyCode(Context context, float price, int type, String achor) {
         final String currencyCode = mCrowd.getCurrencyCode();
-        String formatprice;
-        formatprice = Math.round(price) + "";
+        String formatprice = "";
+        if ((int) price < price) {
+            formatprice = price + "";
+        } else {
+            formatprice = (int) price + "";
+        }
         if (type != 1) {
             return formatprice + achor + currencyCode;
         } else {
@@ -393,7 +399,7 @@ public class CrowdProgressDetail extends RelativeLayout {
         if (mItem != null) {
             float finalPrice;
             if (type == 0) {
-                finalPrice = price * (1 - discount);
+                finalPrice = price * (1.0f - discount);
             } else {
                 finalPrice = price - (discount * mItem.getExchangeRate());
             }

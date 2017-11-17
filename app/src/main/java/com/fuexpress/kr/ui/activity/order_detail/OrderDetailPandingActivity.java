@@ -38,8 +38,8 @@ import com.fuexpress.kr.net.OperaRequestListener;
 import com.fuexpress.kr.net.RequestNetListener;
 import com.fuexpress.kr.ui.activity.DaoUPayActivity;
 import com.fuexpress.kr.ui.activity.KrBankInfoActivity;
-import com.fuexpress.kr.ui.activity.PaymentSuccessActivity;
 import com.fuexpress.kr.ui.activity.my_order.OrderAll;
+import com.fuexpress.kr.ui.activity.shopping_cart.PaymentSuccessActivity;
 import com.fuexpress.kr.ui.adapter.SalesOrderDetailAdapter;
 import com.fuexpress.kr.ui.adapter.ShippingAdapter;
 import com.fuexpress.kr.ui.fragment.ButtomFragment;
@@ -116,6 +116,13 @@ public class OrderDetailPandingActivity extends BaseActivity {
             }
         }
     };
+
+    private void setInfo() {
+        SysApplication application = (SysApplication) getApplication();
+        application.setOrderNumber(mOrder.getOrderNumber());
+        application.setShippingScheme(mOrder.getShippingScheme());
+    }
+
     private ButtomFragment mButtomFragment;
     private String mPayCode;
     private CsOrder.SalesOrder mOrder;
@@ -206,6 +213,7 @@ public class OrderDetailPandingActivity extends BaseActivity {
 
         if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(mSalesOrderBean.order_number)) {
             if (event.getBooleanParam()) {
+                setInfo();
                 SysApplication.mCurrentRequestPayment = "";
                 Intent intent = new Intent(this, PaymentSuccessActivity.class);
                 startActivity(intent);
@@ -238,9 +246,9 @@ public class OrderDetailPandingActivity extends BaseActivity {
     public void getSalesDetail() {
         //获取账户余额
         GiftCardManager.getInstance().getGiftCardBalanceRequest();
-        SalesOrderManager.getSalesOrderDetail(mSalesOrderBean.order_id, new RequestNetListener<CsOrder.GetSalesOrderDetailResponse>() {
+        SalesOrderManager.getSalesOrderDetail(mSalesOrderBean.order_id, new RequestNetListener<CsOrder.NewSalesOrderDetailResponse>() {
             @Override
-            public void onSuccess(CsOrder.GetSalesOrderDetailResponse response) {
+            public void onSuccess(CsOrder.NewSalesOrderDetailResponse response) {
                 mOrder = response.getOrder();
                 KLog.i("getSalesDetail", response.toString());
                 if (response.getOrder().getState() == CsOrder.SalesOrderState.SALES_ORDER_STATE_AWAITING_CANCEL_VALUE) {
@@ -255,7 +263,8 @@ public class OrderDetailPandingActivity extends BaseActivity {
                 idTv.setText(getString(R.string.order_no) + response.getOrder().getOrderNumber());
                 timeTv.setText(getString(R.string.order_date) + TimeUtils.getDateStyle(response.getOrder().getCreateTime()));
                 //国际版只有“Adyen"支付
-                payMethodTv.setText(mOrder.getPayMethodStr());
+//                payMethodTv.setText(mOrder.getPayMethodStr());
+                showPayMethod(mOrder.getPayMethodStr());
                 payType = response.getOrder().getPayMethod();
                 mPayCode = getPayCode();
                 timeLeftTv.setText(getLeftTime(System.currentTimeMillis(), response.getOrder().getCreateTime()));
@@ -281,8 +290,8 @@ public class OrderDetailPandingActivity extends BaseActivity {
                     shrinkLayout.setVisibility(View.GONE);
                 }
                 if (response.getOrder().getIsCrowd() && mProgressDetail != null) {
-                    mProgressDetail.setData(response.getCrowd());
-                    mCrowdTimer.initTime(response.getCrowd(), true);
+//                    mProgressDetail.setData(response.getCrowd());
+//                    mCrowdTimer.initTime(response.getCrowd(), true);
                 }
                 showOtherInfo(response);
 
@@ -340,7 +349,8 @@ public class OrderDetailPandingActivity extends BaseActivity {
                         } else {
                             mSalesOrderBean.pay_method = CsBase.PayMethod.PAY_METHOD_ALIPAY_VALUE;
                         }
-                        payMethodTv.setText(OrderConstants.PAY_METHOD[mSalesOrderBean.pay_method]);
+//                        payMethodTv.setText();
+                        showPayMethod(OrderConstants.PAY_METHOD[mSalesOrderBean.pay_method]);
                         break;
                     case R.id.cancelIv:
                         if (mPopWindow != null) {
@@ -485,8 +495,9 @@ public class OrderDetailPandingActivity extends BaseActivity {
                             try {
                                 LogUtils.d(payResult.authCode);
                                 if (!TextUtils.isEmpty(payResult.authCode)) {
+                                    setInfo();
                                     Intent intent = new Intent();
-                                    intent.setClass(OrderDetailPandingActivity.this, PaymentSuccessActivity.class);
+                                    intent.setClass(OrderDetailPandingActivity.this, com.fuexpress.kr.ui.activity.shopping_cart.PaymentSuccessActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -517,6 +528,7 @@ public class OrderDetailPandingActivity extends BaseActivity {
                     .setListener(new OperaRequestListener() {
                         @Override
                         public void onOperaSuccess() {
+                            setInfo();
                             Intent intent = new Intent();
                             intent.setClass(OrderDetailPandingActivity.this, PaymentSuccessActivity.class);
                             startActivity(intent);
@@ -588,7 +600,7 @@ public class OrderDetailPandingActivity extends BaseActivity {
         }
     }
 
-    public void showOtherInfo(CsOrder.GetSalesOrderDetailResponse response) {
+    public void showOtherInfo(CsOrder.NewSalesOrderDetailResponse response) {
         float fee = getFee(response.getShippingsList());
 //        String price = String.format(string, fee);
         String price = UIUtils.getCurrency(this, response.getOrder().getCurrencycode(), fee);
@@ -597,9 +609,15 @@ public class OrderDetailPandingActivity extends BaseActivity {
             deliverTv.setText(getString(R.string.String_direct_mail_1) + UIUtils.getCurrency(myActivity(), response.getOrder().getCurrencycode(), fee));
         } else if (response.getOrder().getShippingScheme() == 2) {
             deliverTv.setText(getString(R.string.String_merge_order));
+        } else if (response.getOrder().getShippingScheme() == 3) {
+            deliverTv.setText(getString(R.string.String_direct_fu));
         }
 
-
+/*
+        for (CsOrder.SalesOrderItem item : response.getOrderItemsList()) {
+            if (item.getCrowd().getCrowdId() > 0)
+                editBtn.setVisibility(View.GONE);
+        }*/
         ShippingAdapter shippingAdapter = new ShippingAdapter(OrderDetailPandingActivity.this, response.getShippingsList(), response.getOrder().getCurrencycode());
         mShippingListView.setAdapter(shippingAdapter);
         setListViewHeightBasedOnChildren(mShippingListView);
@@ -617,7 +635,8 @@ public class OrderDetailPandingActivity extends BaseActivity {
         if (data != null) {
             if (requestCode == Constants.PAYMENT_REQUEST_CODE) {
                 String paymentString = data.getStringExtra("paymentString");
-                payMethodTv.setText(paymentString);
+//                payMethodTv.setText(paymentString);
+                showPayMethod(paymentString);
                 payType = data.getIntExtra("payType", Constants.PAYMENT_ADYEN);
             }
         }
@@ -685,6 +704,10 @@ public class OrderDetailPandingActivity extends BaseActivity {
 
     public void showPayMethod(String name) {
         payMethodTv.setText(getPayMethod(name));
+        if (TextUtils.isEmpty(name)) {
+            payMethodTv.setVisibility(View.GONE);
+        } else {
+            payMethodTv.setVisibility(View.VISIBLE);
+        }
     }
-
 }

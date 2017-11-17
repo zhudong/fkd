@@ -133,7 +133,7 @@ public class CrowdGrideAdapter extends CrowdAdapter implements View.OnClickListe
             }
         }
         holder.mCrowdProgressDetail.setData(crowd);
-        holder.mCrowdName.setText(crowd.getName());
+        holder.mCrowdName.setText(crowd.getTitle());
        /* holde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

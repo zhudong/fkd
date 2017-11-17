@@ -17513,7 +17513,7 @@ public final class CsBase {
      * <code>optional bool is_follow = 10;</code>
      *
      * <pre>
-     *商户是否关注	
+     *商户是否关注
      * </pre>
      */
     boolean hasIsFollow();
@@ -17521,7 +17521,7 @@ public final class CsBase {
      * <code>optional bool is_follow = 10;</code>
      *
      * <pre>
-     *商户是否关注	
+     *商户是否关注
      * </pre>
      */
     boolean getIsFollow();
@@ -18185,7 +18185,7 @@ public final class CsBase {
      * <code>optional bool is_follow = 10;</code>
      *
      * <pre>
-     *商户是否关注	
+     *商户是否关注
      * </pre>
      */
     public boolean hasIsFollow() {
@@ -18195,7 +18195,7 @@ public final class CsBase {
      * <code>optional bool is_follow = 10;</code>
      *
      * <pre>
-     *商户是否关注	
+     *商户是否关注
      * </pre>
      */
     public boolean getIsFollow() {
@@ -19615,7 +19615,7 @@ public final class CsBase {
        * <code>optional bool is_follow = 10;</code>
        *
        * <pre>
-       *商户是否关注	
+       *商户是否关注
        * </pre>
        */
       public boolean hasIsFollow() {
@@ -19625,7 +19625,7 @@ public final class CsBase {
        * <code>optional bool is_follow = 10;</code>
        *
        * <pre>
-       *商户是否关注	
+       *商户是否关注
        * </pre>
        */
       public boolean getIsFollow() {
@@ -19635,7 +19635,7 @@ public final class CsBase {
        * <code>optional bool is_follow = 10;</code>
        *
        * <pre>
-       *商户是否关注	
+       *商户是否关注
        * </pre>
        */
       public Builder setIsFollow(boolean value) {
@@ -19648,7 +19648,7 @@ public final class CsBase {
        * <code>optional bool is_follow = 10;</code>
        *
        * <pre>
-       *商户是否关注	
+       *商户是否关注
        * </pre>
        */
       public Builder clearIsFollow() {
@@ -20077,7 +20077,7 @@ public final class CsBase {
      * <code>required int32 member_group = 6;</code>
      *
      * <pre>
-     *会员组
+     *会员组ID
      * </pre>
      */
     boolean hasMemberGroup();
@@ -20085,7 +20085,7 @@ public final class CsBase {
      * <code>required int32 member_group = 6;</code>
      *
      * <pre>
-     *会员组
+     *会员组ID
      * </pre>
      */
     int getMemberGroup();
@@ -20141,6 +20141,32 @@ public final class CsBase {
      */
     com.google.protobuf.ByteString
     getFullRegionNameBytes();
+
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    boolean hasMemberGroupName();
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    java.lang.String getMemberGroupName();
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getMemberGroupNameBytes();
   }
   /**
    * Protobuf type {@code fksproto.UserInfo}
@@ -20237,6 +20263,12 @@ public final class CsBase {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
               fullRegionName_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              memberGroupName_ = bs;
               break;
             }
           }
@@ -20485,7 +20517,7 @@ public final class CsBase {
      * <code>required int32 member_group = 6;</code>
      *
      * <pre>
-     *会员组
+     *会员组ID
      * </pre>
      */
     public boolean hasMemberGroup() {
@@ -20495,7 +20527,7 @@ public final class CsBase {
      * <code>required int32 member_group = 6;</code>
      *
      * <pre>
-     *会员组
+     *会员组ID
      * </pre>
      */
     public int getMemberGroup() {
@@ -20610,6 +20642,60 @@ public final class CsBase {
       }
     }
 
+    public static final int MEMBER_GROUP_NAME_FIELD_NUMBER = 9;
+    private java.lang.Object memberGroupName_;
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    public boolean hasMemberGroupName() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    public java.lang.String getMemberGroupName() {
+      java.lang.Object ref = memberGroupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          memberGroupName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string member_group_name = 9;</code>
+     *
+     * <pre>
+     *会员组名称
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getMemberGroupNameBytes() {
+      java.lang.Object ref = memberGroupName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        memberGroupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       uin_ = 0;
       avatar_ = "";
@@ -20619,6 +20705,7 @@ public final class CsBase {
       memberGroup_ = 0;
       intro_ = "";
       fullRegionName_ = "";
+      memberGroupName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -20681,6 +20768,9 @@ public final class CsBase {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(8, getFullRegionNameBytes());
       }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getMemberGroupNameBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -20721,6 +20811,10 @@ public final class CsBase {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(8, getFullRegionNameBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(9, getMemberGroupNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -20855,6 +20949,8 @@ public final class CsBase {
         bitField0_ = (bitField0_ & ~0x00000040);
         fullRegionName_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
+        memberGroupName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -20915,6 +21011,10 @@ public final class CsBase {
           to_bitField0_ |= 0x00000080;
         }
         result.fullRegionName_ = fullRegionName_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.memberGroupName_ = memberGroupName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -20963,6 +21063,11 @@ public final class CsBase {
         if (other.hasFullRegionName()) {
           bitField0_ |= 0x00000080;
           fullRegionName_ = other.fullRegionName_;
+          onChanged();
+        }
+        if (other.hasMemberGroupName()) {
+          bitField0_ |= 0x00000100;
+          memberGroupName_ = other.memberGroupName_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -21401,7 +21506,7 @@ public final class CsBase {
        * <code>required int32 member_group = 6;</code>
        *
        * <pre>
-       *会员组
+       *会员组ID
        * </pre>
        */
       public boolean hasMemberGroup() {
@@ -21411,7 +21516,7 @@ public final class CsBase {
        * <code>required int32 member_group = 6;</code>
        *
        * <pre>
-       *会员组
+       *会员组ID
        * </pre>
        */
       public int getMemberGroup() {
@@ -21421,7 +21526,7 @@ public final class CsBase {
        * <code>required int32 member_group = 6;</code>
        *
        * <pre>
-       *会员组
+       *会员组ID
        * </pre>
        */
       public Builder setMemberGroup(int value) {
@@ -21434,7 +21539,7 @@ public final class CsBase {
        * <code>required int32 member_group = 6;</code>
        *
        * <pre>
-       *会员组
+       *会员组ID
        * </pre>
        */
       public Builder clearMemberGroup() {
@@ -21640,6 +21745,106 @@ public final class CsBase {
         }
         bitField0_ |= 0x00000080;
         fullRegionName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object memberGroupName_ = "";
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public boolean hasMemberGroupName() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public java.lang.String getMemberGroupName() {
+        java.lang.Object ref = memberGroupName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            memberGroupName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getMemberGroupNameBytes() {
+        java.lang.Object ref = memberGroupName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          memberGroupName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public Builder setMemberGroupName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        memberGroupName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public Builder clearMemberGroupName() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        memberGroupName_ = getDefaultInstance().getMemberGroupName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string member_group_name = 9;</code>
+       *
+       * <pre>
+       *会员组名称
+       * </pre>
+       */
+      public Builder setMemberGroupNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        memberGroupName_ = value;
         onChanged();
         return this;
       }
@@ -30740,39 +30945,40 @@ public final class CsBase {
                     "(\t\022\017\n\007contact\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\022\n\nfol" +
                     "low_num\030\t \001(\005\022\021\n\tis_follow\030\n \001(\010\022\013\n\003url\030" +
                     "\013 \001(\t\022\021\n\tlongitude\030\014 \001(\002\022\020\n\010latitude\030\r \001",
-            "(\002\022\r\n\005place\030\016 \001(\t\"\230\001\n\010UserInfo\022\013\n\003uin\030\001 " +
+            "(\002\022\r\n\005place\030\016 \001(\t\"\263\001\n\010UserInfo\022\013\n\003uin\030\001 " +
                     "\002(\005\022\016\n\006avatar\030\002 \002(\t\022\020\n\010nickname\030\003 \002(\t\022\016\n" +
                     "\006gender\030\004 \002(\005\022\016\n\006region\030\005 \002(\t\022\024\n\014member_" +
                     "group\030\006 \002(\005\022\r\n\005intro\030\007 \001(\t\022\030\n\020full_regio" +
-                    "n_name\030\010 \001(\t\"<\n\013CreatorInfo\022\013\n\003uin\030\001 \002(\005" +
-                    "\022\016\n\006avatar\030\002 \002(\t\022\020\n\010nickname\030\003 \002(\t\"\'\n\006Se" +
-                    "ller\022\013\n\003uin\030\001 \002(\005\022\020\n\010nickname\030\002 \002(\t\"\205\001\n\t" +
-                    "Warehouse\022\024\n\014warehouse_id\030\001 \001(\005\022\014\n\004name\030" +
-                    "\002 \001(\t\022\014\n\004desc\030\003 \001(\t\022\023\n\013fulladdress\030\004 \001(\t" +
-                    "\022\020\n\010receiver\030\005 \001(\t\022\r\n\005phone\030\006 \001(\t\022\020\n\010pos",
-            "tcode\030\007 \001(\t\"S\n\010Follower\022 \n\004user\030\001 \002(\0132\022." +
-                    "fksproto.UserInfo\022%\n\007pairids\030\002 \003(\0132\024.fks" +
-                    "proto.PairIntInt\"\307\001\n\005Album\022\020\n\010album_id\030\001" +
-                    " \002(\003\022\r\n\005title\030\002 \002(\t\022\016\n\006author\030\003 \002(\005\022\020\n\010c" +
-                    "ategory\030\004 \002(\005\022\014\n\004desc\030\005 \002(\t\022\r\n\005total\030\006 \002" +
-                    "(\005\022\014\n\004flag\030\007 \002(\005\022\r\n\005cover\030\010 \001(\t\022\021\n\tis_fo" +
-                    "llow\030\t \001(\005\022\024\n\014follow_count\030\n \001(\005\022\030\n\020deta" +
-                    "il_image_url\030\013 \001(\t\"\374\001\n\016ShippingMethod\022\032\n" +
-                    "\022shipping_method_id\030\001 \001(\005\022\r\n\005title\030\002 \001(\t" +
-                    "\022\014\n\004info\030\003 \001(\t\022\013\n\003fee\030\004 \001(\001\022\023\n\013need_idca",
-            "rd\030\005 \001(\010\022\026\n\016need_insurance\030\006 \001(\010\022\027\n\017max_" +
-                    "declaration\030\007 \001(\002\022\024\n\014premium_rate\030\010 \001(\002\022" +
-                    "\021\n\tattention\030\t \001(\t\022\013\n\003qty\030\n \001(\005\022\023\n\013shipp" +
-                    "ingfee\030\013 \001(\001\022\023\n\013handing_fee\030\014 \001(\001\";\n\017Bas" +
-                    "eUserRequest\022\013\n\003uin\030\001 \001(\005\022\013\n\003mid\030\002 \001(\005\022\016" +
-                    "\n\006ticket\030\003 \001(\t*N\n\tOfferType\022\025\n\021OFFER_TYP" +
-                    "E_BUYNOW\020\001\022\024\n\020OFFER_TYPE_BUY4U\020\002\022\024\n\020OFFE" +
-                    "R_TYPE_CROWD\020\003*.\n\006Action\022\020\n\014ACTION_CHECK" +
-                    "\020\001\022\022\n\016ACTION_UNCHECK\020\002*\253\001\n\tPayMethod\022\023\n\017" +
-                    "PAY_METHOD_NONE\020\000\022\025\n\021PAY_METHOD_ALIPAY\020\001",
-            "\022\024\n\020PAY_METHOD_WXPAY\020\002\022\027\n\023PAY_METHOD_GIF" +
-                    "TCARD\020\003\022\024\n\020PAY_METHOD_ADYEN\020\004\022\025\n\021PAY_MET" +
-                    "HOD_KRBANK\020\005\022\026\n\022PAY_METHOD_DAOUPAY\020\006"
+                    "n_name\030\010 \001(\t\022\031\n\021member_group_name\030\t \001(\t\"" +
+                    "<\n\013CreatorInfo\022\013\n\003uin\030\001 \002(\005\022\016\n\006avatar\030\002 " +
+                    "\002(\t\022\020\n\010nickname\030\003 \002(\t\"\'\n\006Seller\022\013\n\003uin\030\001" +
+                    " \002(\005\022\020\n\010nickname\030\002 \002(\t\"\205\001\n\tWarehouse\022\024\n\014" +
+                    "warehouse_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004desc" +
+                    "\030\003 \001(\t\022\023\n\013fulladdress\030\004 \001(\t\022\020\n\010receiver\030",
+            "\005 \001(\t\022\r\n\005phone\030\006 \001(\t\022\020\n\010postcode\030\007 \001(\t\"S" +
+                    "\n\010Follower\022 \n\004user\030\001 \002(\0132\022.fksproto.User" +
+                    "Info\022%\n\007pairids\030\002 \003(\0132\024.fksproto.PairInt" +
+                    "Int\"\307\001\n\005Album\022\020\n\010album_id\030\001 \002(\003\022\r\n\005title" +
+                    "\030\002 \002(\t\022\016\n\006author\030\003 \002(\005\022\020\n\010category\030\004 \002(\005" +
+                    "\022\014\n\004desc\030\005 \002(\t\022\r\n\005total\030\006 \002(\005\022\014\n\004flag\030\007 " +
+                    "\002(\005\022\r\n\005cover\030\010 \001(\t\022\021\n\tis_follow\030\t \001(\005\022\024\n" +
+                    "\014follow_count\030\n \001(\005\022\030\n\020detail_image_url\030" +
+                    "\013 \001(\t\"\374\001\n\016ShippingMethod\022\032\n\022shipping_met" +
+                    "hod_id\030\001 \001(\005\022\r\n\005title\030\002 \001(\t\022\014\n\004info\030\003 \001(",
+            "\t\022\013\n\003fee\030\004 \001(\001\022\023\n\013need_idcard\030\005 \001(\010\022\026\n\016n" +
+                    "eed_insurance\030\006 \001(\010\022\027\n\017max_declaration\030\007" +
+                    " \001(\002\022\024\n\014premium_rate\030\010 \001(\002\022\021\n\tattention\030" +
+                    "\t \001(\t\022\013\n\003qty\030\n \001(\005\022\023\n\013shippingfee\030\013 \001(\001\022" +
+                    "\023\n\013handing_fee\030\014 \001(\001\";\n\017BaseUserRequest\022" +
+                    "\013\n\003uin\030\001 \001(\005\022\013\n\003mid\030\002 \001(\005\022\016\n\006ticket\030\003 \001(" +
+                    "\t*N\n\tOfferType\022\025\n\021OFFER_TYPE_BUYNOW\020\001\022\024\n" +
+                    "\020OFFER_TYPE_BUY4U\020\002\022\024\n\020OFFER_TYPE_CROWD\020" +
+                    "\003*.\n\006Action\022\020\n\014ACTION_CHECK\020\001\022\022\n\016ACTION_" +
+                    "UNCHECK\020\002*\253\001\n\tPayMethod\022\023\n\017PAY_METHOD_NO",
+            "NE\020\000\022\025\n\021PAY_METHOD_ALIPAY\020\001\022\024\n\020PAY_METHO" +
+                    "D_WXPAY\020\002\022\027\n\023PAY_METHOD_GIFTCARD\020\003\022\024\n\020PA" +
+                    "Y_METHOD_ADYEN\020\004\022\025\n\021PAY_METHOD_KRBANK\020\005\022" +
+                    "\026\n\022PAY_METHOD_DAOUPAY\020\006"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -30918,7 +31124,7 @@ public final class CsBase {
     internal_static_fksproto_UserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_UserInfo_descriptor,
-            new java.lang.String[] { "Uin", "Avatar", "Nickname", "Gender", "Region", "MemberGroup", "Intro", "FullRegionName", });
+            new java.lang.String[] { "Uin", "Avatar", "Nickname", "Gender", "Region", "MemberGroup", "Intro", "FullRegionName", "MemberGroupName", });
     internal_static_fksproto_CreatorInfo_descriptor =
             getDescriptor().getMessageTypes().get(22);
     internal_static_fksproto_CreatorInfo_fieldAccessorTable = new

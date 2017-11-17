@@ -82,7 +82,7 @@ public interface ParcelAppendContract {
 
         abstract HelpSendParcelBean getParcelBean();
 
-        abstract void setAddress(String topText, String addressText, int id);
+        abstract void setAddress(CsParcel.AddressList address);
 
         abstract int getShippingMethodId();
 

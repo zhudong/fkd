@@ -9,12 +9,18 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include layout="@layout/home_btn_layout" />
         </FrameLayout>
+
 
         <TextView
             style="@style/parcel_divide_line"
@@ -78,13 +84,13 @@
                     android:background="@drawable/shape_cricle"
                     android:visibility="gone" />
             </FrameLayout>
+
             <FrameLayout
                 android:id="@+id/fl_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <RadioButton
                     android:id="@+id/rb_group"
@@ -133,5 +139,25 @@
         </com.fuexpress.kr.ui.view.NoteRadioGroup>
     </LinearLayout>
 
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/fl_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/button_bg" />
+
+        <ImageView
+            android:id="@+id/iv_home_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/button" />
+    </FrameLayout>
 
 </FrameLayout>

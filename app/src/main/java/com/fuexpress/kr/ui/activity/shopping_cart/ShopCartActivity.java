@@ -12,6 +12,7 @@ import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -54,6 +55,7 @@ import com.fuexpress.kr.ui.view.NumberCounter2;
 import com.fuexpress.kr.ui.view.OrderMessageView;
 import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.TextSpannable;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -65,8 +67,11 @@ import com.rey.material.app.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 import fksproto.CsBase;
@@ -81,10 +86,14 @@ import in.srain.cube.views.ptr.PtrHandler;
  */
 
 public class ShopCartActivity extends BaseActivity {
+
+    public static final int TYPE_FROM_CROWD = 1;
+    public static final int TYPE_FROM_PRODUSRC = 2;
+
     private View rootView;
     private TitleBarView titleBarView;
     private ImageView backIv;
-    private TextView backTv;
+    //    private TextView backTv;
     private TextView grandtotalTv;
     private Button cartGoHomeBtn;
     //    private EditText cartCouponEt;
@@ -115,6 +124,8 @@ public class ShopCartActivity extends BaseActivity {
     private ListView cartListView;
     private CartAdapter cartAdapter;
     private Map<Integer, Boolean> wareHouseMap = new HashMap<Integer, Boolean>();
+    private Map<Integer, Boolean> hideWareHouseMap = new HashMap<Integer, Boolean>();
+
     private CustomDialog.Builder dialog;
     private PtrClassicFrameLayout mPtrFrameLayout;
     private LinearLayout emptyLayout;
@@ -127,6 +138,7 @@ public class ShopCartActivity extends BaseActivity {
     private boolean childIsChecked = true;
     private boolean mIsRefresh;
     private List<Long> buyList = new ArrayList<Long>();
+    private Set<Long> buySet = new HashSet<>();
     private boolean isAllSelected = true;
 
     //所有商品的封装对象，很重要
@@ -143,7 +155,8 @@ public class ShopCartActivity extends BaseActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
+    private int fromWhere = 1;
+    private String currencyCode;
 
     @Override
     public View setInitView() {
@@ -151,8 +164,8 @@ public class ShopCartActivity extends BaseActivity {
         itemDetailsLayout = (LinearLayout) rootView.findViewById(R.id.cart_item_details);
         titleBarView = (TitleBarView) rootView.findViewById(R.id.shop_cart_titlebar);
         backIv = titleBarView.getIv_in_title_back();
-        backTv = titleBarView.getmTv_in_title_back_tv();
-        backTv.setText(getString(R.string.main_source));
+//        backTv = titleBarView.getmTv_in_title_back_tv();
+//        backTv.setText(getString(R.string.main_source));
         bottomLayout = (RelativeLayout) rootView.findViewById(R.id.grandtotal_ll);
         cartListView = (ListView) rootView.findViewById(R.id.shop_cart_listview);
 //        contentLayout = (LinearLayout) rootView.findViewById(R.id.shop_cart_content_layout);
@@ -188,7 +201,8 @@ public class ShopCartActivity extends BaseActivity {
         detailsNumberCount.mNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         app = (SysApplication) getApplication();
-
+        fromWhere = getIntent().getIntExtra("fromWhere", 1);
+        currencyCode = getIntent().getStringExtra("currency");
 //        killEditFocused();
 
         CustomPtrHeader header = new CustomPtrHeader(this);
@@ -222,13 +236,13 @@ public class ShopCartActivity extends BaseActivity {
                     @Override
                     public void run() {
                         mPtrFrameLayout.refreshComplete();
-                        getSalesCartListRequest();
+                        getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
                     }
                 }, 100);
             }
         });
 
-        backTv.setOnClickListener(this);
+//        backTv.setOnClickListener(this);
         backIv.setOnClickListener(this);
         detailsSaveBtn.setOnClickListener(this);
 //        cartUsedCouponBtn.setOnClickListener(this);
@@ -259,10 +273,10 @@ public class ShopCartActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         app.setQtyCount(0);
-        getSalesCartListRequest();
+//        getSalesCartListRequest();
     }
 
-    public void getSalesCartListRequest() {
+    public void getSalesCartListRequest(String currencyCode) {
         isPutMapDate = true;
         //清空商品ID集合
         itemIdList.clear();
@@ -270,7 +284,7 @@ public class ShopCartActivity extends BaseActivity {
         CsCart.GetSalesCartListRequest.Builder builder = CsCart.GetSalesCartListRequest.newBuilder();
         builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
         builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
-        builder.setCurrencycode(AccountManager.getInstance().getCurrencyCode());
+        builder.setCurrencycode(currencyCode);
         NetEngine.postRequest(builder, new INetEngineListener<CsCart.GetSalesCartListResponse>() {
 
             @Override
@@ -319,41 +333,50 @@ public class ShopCartActivity extends BaseActivity {
                     wh.receiver = response.getWarehouses(i).getReceiver();
                     wh.phone = response.getWarehouses(i).getPhone();
                     wh.postcode = response.getWarehouses(i).getPostcode();
-                    bean.warehouseList.add(wh);
 
                     for (int j = 0; j < response.getItemsCount(); j++) {
                         itemIdList.add(response.getItems(j).getCartItemId());
-                        qtyCount += response.getItems(j).getQty();
+//                        qtyCount += response.getItems(j).getQty();
                         if (response.getWarehouses(i).getWarehouseId() == response.getItems(j).getWarehouseId()) {
                             wh.salesCartItems.add(response.getItems(j));
                         }
                     }
+                    bean.warehouseList.add(wh);
+
+                }
+                for (int j = 0; j < response.getItemsCount(); j++) {
+                    qtyCount += response.getItems(j).getQty();
                 }
                 app.setQtyCount(qtyCount);
                 for (int i = 0; i < bean.warehouseList.size(); i++) {
                     int count = 0;
                     for (int j = 0; j < bean.warehouseList.get(i).salesCartItems.size(); j++) {
-                        if(bean.warehouseList.get(i).salesCartItems.get(j).getIsSelected()){
+                        if (bean.warehouseList.get(i).salesCartItems.get(j).getIsSelected()) {
                             count++;
                         }
-                        if(count == bean.warehouseList.get(i).salesCartItems.size()){
+                        if (count == bean.warehouseList.get(i).salesCartItems.size()) {
                             wareHouseMap.put(i, true);
-                        }else {
+                        } else {
                             wareHouseMap.put(i, false);
+                        }
+                        if(count == 0){
+                            hideWareHouseMap.put(bean.warehouseList.get(i).warehouse_id, false);
+                        }else {
+                            hideWareHouseMap.put(bean.warehouseList.get(i).warehouse_id, true);
                         }
                     }
 
                 }
                 int wareHouseCount = 0;
                 for (int i = 0; i < wareHouseMap.size(); i++) {
-                    if(wareHouseMap.get(i)){
+                    if (wareHouseMap.get(i)) {
                         wareHouseCount++;
                     }
                 }
-                if(wareHouseCount == bean.warehouseList.size()){
+                if (wareHouseCount == bean.warehouseList.size()) {
                     isAllSelected = true;
                     allSelectedCB.setChecked(true);
-                }else {
+                } else {
                     isAllSelected = false;
                     allSelectedCB.setChecked(false);
                 }
@@ -369,14 +392,14 @@ public class ShopCartActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_in_title_back:
-            case R.id.tv_in_title_back_tv:
+//            case R.id.tv_in_title_back_tv:
                 finish();
                 break;
             case R.id.details_save_btn:
                 modityCart(cartItem.getCartItemId(), destailsOrderMsg.getMessage(), detailsNumberCount.getCurrentNumber());
                 break;
             case R.id.cart_settle_btn:
-                if (buyList.size() > 0) {
+                if (buySet.size() > 0) {
                     showDialog();
                     return;
                 }
@@ -388,6 +411,7 @@ public class ShopCartActivity extends BaseActivity {
                 break;
             case R.id.cart_commodity_allselect_cb:
                 isAllSelected = !isAllSelected;
+
                 allSelectedCB.setChecked(isAllSelected);
 //                setWareHouseChecked(isAllSelected);
                 selectedSalesCartRequest(itemIdList, isAllSelected ? 1 : 2, true, true);
@@ -401,7 +425,12 @@ public class ShopCartActivity extends BaseActivity {
                 Hidekeyboard(destailsOrderMsg.mMessage);
                 break;
             case R.id.cart_gohome_btn:
-                EventBus.getDefault().post(new BusEvent(BusEvent.GO_PRODUSRC_PAGE, null));
+                if (fromWhere == TYPE_FROM_CROWD) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GO_CROWD_PAGE, null));
+                }
+                if (fromWhere == TYPE_FROM_PRODUSRC) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GO_PRODUSRC_PAGE, null));
+                }
                 break;
         }
     }
@@ -505,6 +534,7 @@ public class ShopCartActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         wareHouseMap.put(position, !wareHouseMap.get(position));
+                        hideWareHouseMap.put(bean.warehouse_id, wareHouseMap.get(position));
                         finalHolder.wareHouseBox.setChecked(wareHouseMap.get(position));
                         commodityAdapter.setAllChecked(wareHouseMap.get(position));
                         commodityAdapter.notifyDataSetChanged();
@@ -593,14 +623,54 @@ public class ShopCartActivity extends BaseActivity {
                 holder.numberCounter = (NumberCounter2) convertView.findViewById(R.id.commodity_nc);
                 holder.removeSalesIV = (ImageView) convertView.findViewById(R.id.commodity_delete_iv);
                 holder.soldOutTv = (TextView) convertView.findViewById(R.id.sold_out_tv);
+                holder.crowdEndTv = (TextView) convertView.findViewById(R.id.crowd_end_tv);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
             final CsCart.SalesCartItem item = list.get(position);
-            if (item.getCannotBuyit()) {
-                buyList.add(item.getCartItemId());
+            TextSpannable.setTitle(item.getSubtitle(), holder.titleTv, item);
+            if (item.getCannotBuyit() && item.getCrowdOrderId() <= 0)  {
+                holder.soldOutTv.setVisibility(View.VISIBLE);
+            } else {
+                holder.soldOutTv.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(item.getCrowdOrderStatus())) {
+                holder.crowdEndTv.setVisibility(View.VISIBLE);
+                holder.crowdEndTv.setText(item.getCrowdOrderStatus());
+            } else {
+                holder.crowdEndTv.setVisibility(View.GONE);
+            }
+
+       /*     if (item.getCannotBuyit()) {
+                holder.soldOutTv.setVisibility(View.VISIBLE);
+                holder.numberCounter.setVisibility(View.GONE);
+            } else {
+                holder.numberCounter.setVisibility(View.VISIBLE);
+                holder.soldOutTv.setVisibility(View.GONE);
+////                holder.numberCounter.setVisibility(View.VISIBLE);
+//                if(item.getCrowdOrderId() > 0){
+//
+//                }
+
+                if (!TextUtils.isEmpty(item.getCrowdOrderStatus())  || item.getCrowdOrderId() <= 0 ) {
+                    holder.crowdEndTv.setVisibility(View.VISIBLE);
+                    holder.crowdEndTv.setText(item.getCrowdOrderStatus());
+                    holder.numberCounter.setVisibility(View.GONE);
+
+                } else {
+                    holder.crowdEndTv.setVisibility(View.GONE);
+                    holder.numberCounter.setVisibility(View.VISIBLE);
+
+                }
+            }*/
+
+            if (item.getCannotBuyit() && commodityMap.get(position) || (!TextUtils.isEmpty(item.getCrowdOrderStatus()) && commodityMap.get(position))) {
+                buySet.add(item.getCartItemId());
+//                buyList.add(item.getCartItemId());
+            }else {
+                buySet.remove(item.getCartItemId());
             }
 
             if (item.getExtendsCount() > 0) {
@@ -609,7 +679,6 @@ public class ShopCartActivity extends BaseActivity {
             } else {
                 holder.sizeTV.setVisibility(View.GONE);
             }
-            holder.titleTv.setText(item.getSubtitle());
             imgLoader.displayImage(item.getImageUrl() + Constants.ImgUrlSuffix.dp_list, holder.commodityIV, imgOptions);
             holder.sellerTV.setText(item.getSeller());
             holder.buyFromTV.setText(item.getBuyfrom());
@@ -624,13 +693,7 @@ public class ShopCartActivity extends BaseActivity {
             holder.numberCounter.init(item.getMinQtyAllow(), item.getMaxQtyAllow() > item.getStock() ? item.getStock() : item.getMaxQtyAllow());
             holder.numberCounter.setNumberText(item.getQty());
             holder.numberCounter.getCurrentNumber();
-            if (item.getCannotBuyit()) {
-                holder.soldOutTv.setVisibility(View.VISIBLE);
-                holder.numberCounter.setVisibility(View.GONE);
-            } else {
-                holder.soldOutTv.setVisibility(View.GONE);
-                holder.numberCounter.setVisibility(View.VISIBLE);
-            }
+
             MyInputFilter filter = new MyInputFilter();
 //            holder.numberCounter.mNumber.setFilters(new InputFilter[]{filter});
             holder.numberCounter.mNumber.setOnTouchListener(new View.OnTouchListener() {
@@ -678,6 +741,11 @@ public class ShopCartActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     commodityMap.put(position, !commodityMap.get(position));
+                    if (item.getCannotBuyit() && commodityMap.get(position) || (!TextUtils.isEmpty(item.getCrowdOrderStatus()) && commodityMap.get(position))) {
+                        buySet.add(item.getCartItemId());
+                    } else {
+                        buySet.remove(item.getCartItemId());
+                    }
                     finalHolder.commodityBox.setChecked(commodityMap.get(position));
                     int checkedCount = 0;
                     for (int i = 0; i < commodityMap.size(); i++) {
@@ -696,14 +764,19 @@ public class ShopCartActivity extends BaseActivity {
                     int wareHouseCount = 0;
 
                     for (int i = 0; i < wareHouseMap.size(); i++) {
-                        if(wareHouseMap.get(i)){
+                        if (wareHouseMap.get(i)) {
                             wareHouseCount++;
                         }
                     }
-                    if(wareHouseCount == bean.warehouseList.size()){
+                    if(checkedCount == 0){
+                        hideWareHouseMap.put(item.getWarehouseId(), false);
+                    }else {
+                        hideWareHouseMap.put(item.getWarehouseId(), true);
+                    }
+                    if (wareHouseCount == bean.warehouseList.size()) {
                         isAllSelected = true;
                         allSelectedCB.setChecked(true);
-                    }else {
+                    } else {
                         isAllSelected = false;
                         allSelectedCB.setChecked(false);
                     }
@@ -746,7 +819,7 @@ public class ShopCartActivity extends BaseActivity {
                     cartItem = item;
                     imgLoader.displayImage(item.getImageUrl() + Constants.ImgUrlSuffix.small_9, detailsIV, imgOptions);
                     detailsTitleTv.setText(item.getTitle());
-                    detailsSubTitleTv.setText(item.getSubtitle());
+                    TextSpannable.setTitle(item.getSubtitle(), detailsSubTitleTv, item);
 //                    detailsPriceTitleTv.setText(UIUtils.getCurrency(mContext));
                     detailsPriceTv.setText(UIUtils.getCurrency(ShopCartActivity.this, item.getUnitPrice()));
                     if (item.getNote() != null && item.getNote().length() > 0) {
@@ -776,7 +849,8 @@ public class ShopCartActivity extends BaseActivity {
                         detailsColorTitlteTv.setVisibility(View.GONE);
                     }
 
-                    detailsNumberCount.init(item.getMinQtyAllow(), item.getStock());
+                    detailsNumberCount.init(item.getMinQtyAllow(), item.getMaxQtyAllow() > item.getStock() ? item.getStock() : item.getMaxQtyAllow());
+
                     detailsNumberCount.setNumberText(finalHolder1.numberCounter.getCurrentNumber());
                     detailsDeleteIv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -829,6 +903,7 @@ public class ShopCartActivity extends BaseActivity {
             NumberCounter2 numberCounter;
             ImageView removeSalesIV;
             TextView soldOutTv;
+            TextView crowdEndTv;
         }
 
         public void setAllChecked(boolean isChecked) {
@@ -853,7 +928,8 @@ public class ShopCartActivity extends BaseActivity {
                         grandtotalTv.setText(UIUtils.getCurrency(ShopCartActivity.this, response.getGrandtotal()));
                         changeSettleBtnState(response.getGrandtotal());
                         if (mIsRefresh) {
-                            getSalesCartListRequest();
+                            getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
+
                         }
                     }
                 });
@@ -911,7 +987,8 @@ public class ShopCartActivity extends BaseActivity {
                     int count = app.getQtyCount();
                     app.setQtyCount(count--);
                     sendCartQty(count);
-                    getSalesCartListRequest();
+                    getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
+
                 }
                 ShopCartActivity.this.runOnUiThread(new Runnable() {
                     @Override
@@ -935,7 +1012,7 @@ public class ShopCartActivity extends BaseActivity {
      *
      * @param cartItemIds
      */
-    public void removeBatchSalce(final List<Long> cartItemIds) {
+    public void removeBatchSalce(final Set<Long> cartItemIds) {
         CsCart.RemoveBatchSalesCartRequest.Builder builder = CsCart.RemoveBatchSalesCartRequest.newBuilder();
         builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
         builder.addAllCartItemIds(cartItemIds);
@@ -944,7 +1021,12 @@ public class ShopCartActivity extends BaseActivity {
             @Override
             public void onSuccess(final CsCart.RemoveBatchSalesCartResponse response) {
                 LogUtils.d(response.toString());
-                buyList.remove(cartItemIds);
+                Iterator iter = cartItemIds.iterator();
+                while (iter.hasNext()) {
+                    long value = (long) iter.next();
+                    buySet.remove(value);
+                    hideWareHouseMap.clear();
+                }
                 int count = app.getQtyCount();
                 if (count - cartItemIds.size() > 0) {
                     app.setQtyCount(count - cartItemIds.size());
@@ -952,7 +1034,8 @@ public class ShopCartActivity extends BaseActivity {
                     app.setQtyCount(0);
                 }
                 sendCartQty(count);
-                getSalesCartListRequest();
+                getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
+
                 ShopCartActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -998,7 +1081,8 @@ public class ShopCartActivity extends BaseActivity {
                         itemDetailLoadingView.setVisibility(View.GONE);
                         Hidekeyboard(destailsOrderMsg.mMessage);
                         grandtotalTv.setText(UIUtils.getCurrency(ShopCartActivity.this, response.getGrandtotal()));
-                        getSalesCartListRequest();
+                        getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
+
                     }
                 });
 
@@ -1088,8 +1172,10 @@ public class ShopCartActivity extends BaseActivity {
 
     public int countWareHouses() {
         int count = 0;
-        for (int i = 0; i < wareHouseMap.size(); i++) {
-            if (wareHouseMap.get(i)) {
+        Iterator iterator = hideWareHouseMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry entry = (Map.Entry) iterator.next();
+            if ((boolean) entry.getValue()) {
                 count++;
             }
         }
@@ -1161,7 +1247,7 @@ public class ShopCartActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                removeBatchSalce(buyList);
+                removeBatchSalce(buySet);
             }
         });
         dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -1182,13 +1268,28 @@ public class ShopCartActivity extends BaseActivity {
 //        intent.putExtra("grandTotal", rsp.getGrandtotal());
 //        intent.putExtra("qtyCount", app.getQtyCount());
 //        intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, Constants.CONFIRM_REQUEST_CODE);
 
         /*
         //跳转Html5订单界面
         Intent intent = new Intent(mContext, OrderActivity.class);
         startActivity(intent);
         */
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            if (requestCode == Constants.CONFIRM_REQUEST_CODE) {
+                if (data != null) {
+                    boolean isCancelPay = data.getBooleanExtra("isCancelPay", false);
+                    if (isCancelPay) {
+                        getSalesCartListRequest(!TextUtils.isEmpty(currencyCode) ? currencyCode : AccountManager.getInstance().getCurrencyCode());
+
+                    }
+                }
+            }
+        }
     }
 
     public void sendCartQty(int count) {

@@ -1,0 +1,768 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+enum UserGender
+{
+	USER_GENDER_FEMALE	= 1;//女性
+	USER_GENDER_MALE 	= 2;//男性
+}
+
+enum MemberGroup
+{
+	MEMBER_GROUP_NORMAL = 1; //普通会员
+	MEMBER_GROUP_VIP    = 2; //VIP会员
+	MEMBER_GROUP_SUPER  = 3; //超级会员
+}
+
+enum UserInfoFieldType
+{
+	USER_INFO_FIELD_AVATAR 	    = 1; //用户头像
+	USER_INFO_FIELD_NICKNAME    = 2; //昵称
+	USER_INFO_FIELD_EMAIL		= 3; //邮箱
+	USER_INFO_FIELD_USERNAME	= 4; //姓名
+	USER_INFO_FIELD_GENDER		= 5; //性别
+	USER_INFO_FIELD_BIRTHDAY    = 6; //生日
+	USER_INFO_FIELD_REGION	    = 7; //区域码
+	USER_INFO_FIELD_MOBILE		= 8; //手机号
+	USER_INFO_FIELD_WECHAT      = 9; //微信号
+	USER_INFO_FIELD_INTRO		= 10;//自我介绍
+	USER_INFO_FIELD_URL_KEY     = 11;//个性域名
+	USER_INFO_FIELD_INVITE_KEY  = 12;//邀请码
+	USER_INFO_FIELD_FLAG        = 13;//标志位
+	USER_INFO_FIELD_MEMBER_GROUP= 14;//会员组，见宏MemberGroup定义
+	USER_INFO_FIELD_MEMBER_START= 15;//会员开始时间，格式为: 年-月-日 时:分:秒
+	USER_INFO_FIELD_MEMBER_END  = 16;//会员开始时间，格式为: 年-月-日 时:分:秒
+	USER_INFO_FIELD_HOME_PAGE   = 17;//个人主页
+	USER_INFO_FIELD_PHONE       = 18;//账号:手机号
+	USER_INFO_FIELD_REGION_ID   = 19; //区域id
+	USER_INFO_FIELD_COUNTRY_CODE  = 20;//国家CODE
+}
+
+enum CounterType
+{
+	COUNTER_TYPE_ALBUM			  = 1;//图集数
+	COUNTER_TYPE_ITEM			  = 2;//单品数
+	COUNTER_TYPE_LIKE			  = 3;//喜欢数
+	COUNTER_TYPE_FOLLOW_MERCHANT  = 4;//关注商户数
+	COUNTER_TYPE_FOLLOW_ALBUM	  = 5;//关注图集数
+}
+
+enum RedPointType
+{
+	RED_POINT_TYPE_ORDER  = 1;//订单
+	RED_POINT_TYPE_NOTIFY
+= 2;//通知
+	RED_POINT_TYPE_PARCEL = 3;//包裹
+}
+
+message UserInfoField
+{
+	required int32  field_type  = 1;//字段类型
+	required string field_value = 2;//字段值
+}
+
+message Counter
+{
+	required int32 counter_type	 = 1;//计数类型
+	required int32 counter_value = 2;//计数值
+}
+
+//设置用户信息字段请求
+message SetUserInfoFieldRequest
+{
+	required BaseRequest   head   = 1;
+	repeated UserInfoField fields = 2;//要设置的用户信息字段数据
+	required BaseUserRequest baseuser =3;//用户信息  by jack.zuoquan
+}
+
+//设置用户信息字段应答
+message SetUserInfoFieldResponse
+{
+    required BaseResponse head  = 1;
+}
+
+//兑换运费优惠劵
+message ExchangeShippingCouponRequest
+{
+	required BaseRequest     head	          = 1;
+	optional BaseUserRequest user_head        = 2;
+	required string          couponcode       = 3;//优惠劵代码
+	optional string          locale_code      = 4;
+
+}
+
+message ExchangeShippingCouponResponse
+{
+	required BaseResponse head                = 1;
+	required string       message             = 2;
+}
+
+message CouponList
+{
+    required int32  shippingcouponcustomerid   = 1; //id
+    required string shippingcouponname         = 2; //优惠劵名称
+    required string starttime                  = 3; //开始时间
+    required string endtime                    = 4; //结束时间
+    required string description                = 5; //描述
+    required int32  uses                       = 6; //使用次数
+    required int32  minprice                   = 7; //使用门槛
+    required int32  discountamount             = 8; //折扣金额
+}
+
+message CurrencyCouponList
+{
+    required string currencycode              = 1; //币种
+    required string currencyname              = 2; //优惠劵名称
+    required string currencysign              = 3;
+    required int32  count                     = 4; //可用优惠劵张数
+}
+
+message MyShippingCouponListRequest
+{
+    required BaseRequest     head	      = 1;
+    optional BaseUserRequest user_head        = 2;
+    optional string          currencycode     = 3;//币种
+    optional int32           pagenum          = 4;//页面号
+    optional string          locale_code      = 5;
+
+}
+
+message MyShippingCouponListResponse
+{
+	required BaseResponse       head                = 1;
+	optional string             status              = 2;
+    repeated CouponList         couponlist          = 3;
+    repeated CurrencyCouponList currencylist        = 4;
+   	optional string             message             = 5;
+}
+
+message UseableCouponListRequest
+{
+    required BaseRequest     head	          = 1;
+    optional BaseUserRequest user_head            = 2;
+    optional string          currencycode         = 3;//币种
+    optional float           shippingfee          = 4;//运费
+    optional string          locale_code      = 5;
+
+
+}
+
+message UseableCouponListResponse
+{
+	required BaseResponse head                = 1;
+	optional int32        count               = 2;//可用数量
+   	repeated CouponList   couponlist          = 3;
+   	optional string       message             = 4;
+   	optional string       currencyname        = 5;
+   	optional string       currencysign        = 6;
+}
+
+//切换语种
+message ChangeLocaleRequest
+{
+	required BaseRequest head	             = 1;
+	optional BaseUserRequest user_head       = 2;
+	optional string      localecode          = 3;//切换后的语种
+}
+
+message ChangeLocaleResponse
+{
+	required BaseResponse head  = 1;
+}
+
+//获取用户信息字段请求
+message GetUserInfoFieldRequest
+{
+    required BaseRequest  head   = 1;
+    repeated int32        fields = 2;//要获取的用户信息字段
+   	required BaseUserRequest baseuser =3;//用户信息  //by jack.zuoquan
+}
+
+//获取用户信息字段应答
+message GetUserInfoFieldResponse
+{
+    required BaseResponse  head   = 1;
+    repeated UserInfoField fields = 2;//获取到的用户信息
+}
+
+//获取简单用户信息请求
+message GetSimpleUserInfoRequest
+{
+    required BaseRequest  head   = 1;
+	required int32        author = 2;
+	required BaseUserRequest baseuser = 3;//用户信息    by jack.zuoquan
+	optional string       localecode  = 4;
+	optional int32        type   = 5;
+
+}
+
+//获取简单用户信息应答
+message GetSimpleUserInfoResponse
+{
+    required BaseResponse  head   = 1;
+	optional UserInfo      user   = 2;
+	optional string        countryname  = 3;//国家名称
+	optional string        regionname   = 4;//地区名称
+	optional int32         regionID     = 5;
+	optional string        countryCode  = 6;
+}
+
+//获取我的计数请求
+message GetMyCounterRequest
+{
+	required BaseRequest head	= 1;
+	repeated int32 		 types 	= 2;
+	optional int32       author = 3;//看谁的计数
+}
+
+message GetMyCounterResponse
+{
+	required BaseResponse head     = 1;
+	repeated Counter 	  counters = 2;
+}
+
+//获取我的红点请求
+message GetMyRedPointRequest
+{
+	required BaseRequest head	= 1;
+	repeated int32 		 types 	= 2;
+	optional  string     localecode =3;//语种信息
+	optional int32       uin      =4;
+}
+
+message GetMyRedPointResponse
+{
+	required BaseResponse head  = 1;
+	repeated PairIntInt   pairs = 2;
+}
+
+
+//切换币种
+message ChangeCurrencyRequest
+{
+	required BaseRequest head	             = 1;
+	optional BaseUserRequest user_head       = 2;
+	optional string      currencycode        = 3;//切换后的币种
+}
+
+message ChangeCurrencyResponse
+{
+	required BaseResponse head  = 1;
+}
+
+message CurrencyList
+{
+    required int32   currencyid                      = 1; //币种ID
+    required string  currencycode                    = 2; //币种CODE
+    required string  currencyname                    = 3; //币种名称
+    required string  currencysign                    = 4; //币种符号
+}
+
+//获取币种列表
+message GetCurrencyListRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+}
+
+message GetCurrencyListResponse
+{
+    required BaseResponse   head	             = 1;
+    repeated CurrencyList   currencyList 	     = 2;
+}
+
+message PaymentList
+{
+    required string    paycode       = 1;//支付code
+    required string    payname       = 2;//支付name
+    required string    sortorder     = 3;//序号
+    required bool      flagex        = 4;
+}
+
+//获取满足条件的国际支付方式
+message GetFKDPaymentListRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+    optional string      currencycode        = 3;//币种
+    optional string      localecode          = 4;
+}
+
+message GetFKDPaymentListResponse
+{
+    required BaseResponse   head	             = 1;
+    repeated PaymentList    paymantlist 	     = 2;
+}
+
+message WareHouseList
+{
+    optional int32 warehouseid   = 1;
+    optional string warehousename  = 2;
+    optional double defaultparcelweight  = 3;
+    optional string fulladdress    = 4;//收货地址
+    optional string receiver       = 5;//收货人
+    optional string phone          = 6;//电话
+    optional string postcode       = 7;//邮编
+}
+
+message GetWarehouseListRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+    optional int32       type                = 3;
+    optional string      localecode          = 4;
+}
+
+message GetWarehouseListResponse
+{
+    required BaseResponse   head	         = 1;
+    repeated WareHouseList  warehouselist    = 2;
+
+}
+
+
+message RequireType
+{
+    optional int32   date       = 1;
+    optional int32   day        = 2;
+    optional int32   hours      = 3;
+    optional int32   minutes    = 4;
+    optional int32   month      = 5;
+    optional int32   seconds    = 6;
+    optional int32   time       = 7;
+    optional int32   timezoneoffset  = 8;
+    optional int32   year       = 9;
+
+}
+
+message ImagesUrl
+{
+	optional string  image          = 1;//图片路径
+}
+
+//需求单-帮我取货详情
+message HelpMyGetInfoRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+    optional int32       salesrequireid      = 3; //需求单id
+    optional string      localeCode          = 4;
+}
+
+message HelpMyGetInfoResponse
+{
+	required  BaseResponse    head                  = 1;
+    optional  int32           salesrequireid        = 2;//需求单id
+    optional  string          createtime            = 3;//需求时间
+    optional  int32           requiretype           = 4;//需求类型
+    optional  string          status                = 5;//需求状态
+    optional  string          description           = 6;//需求描述
+    optional  string          price                 = 7;//商品价格,币种符号+价格
+    optional  string          remark                = 8;//备注说明
+    optional  string          servicefee            = 9;//服务费,币种符号+服务费
+    optional  string          address               = 10;//取货地址
+    optional  int32           qty                   = 11;//数量
+    optional  string          paymentcode           = 12;//支付方式
+    optional  string          subtotal              = 13;//总计金额,字符串,币种符号+金额
+    optional  string          shippingname          = 14;//收货人姓名
+    optional  string          shippingphone         = 15;//收货人手机号
+    optional  string          shippingaddress       = 16;//收货地址
+    repeated  ImagesUrl       imagesurl             = 17;//图片
+    optional  string          currencycode          = 18;
+    optional  double          totalpay              = 19;//需支付总金额
+    optional  string          merchantmessage       = 20;//商户留言
+    optional  double          giftcardaccount       = 21;//用户礼品卡账户余额
+    optional  string          pricecurrencycode     = 22;//单价币种code
+    optional  string          paymentname           = 23;//支付方式名称
+    optional  string          brandName             = 24;//品牌名称
+    optional  string          matchTagId            = 25;//材质id
+    optional  string          matchTagName          = 26;//材质名称
+    optional  string          matchCategoryId       = 27;//分类id
+    optional  string          matchCategoryName     = 28;//分类名称
+    optional  string          parentMatchCategoryId = 29;//父分类id
+    optional  string          parentMatchCategoryName = 30;//父分类名字
+    optional  string          parcelId		    = 31;//包裹id
+    optional  string          parcelName	    = 32;//包裹名字
+    optional  string          parcelStatus 	    = 33;//包裹状态
+}
+
+
+
+//需求单-帮我补货详情
+message helpMyBuyInfoRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+    optional int32       salesrequireid      = 3; //需求单id
+    optional string      localeCode          = 4;
+
+}
+
+//需求单-帮我补货详情
+message helpMyBuyInfoResponse
+{
+	required  BaseResponse    head                  = 1;
+    optional  int32           salesrequireid        = 2;//需求单id
+    optional  string          createtime            = 3;//需求时间
+    optional  int32           requiretype           = 4;//需求类型
+    optional  string          status                = 5;//需求状态
+    optional  string          description           = 6;//需求描述
+    optional  string          price                 = 7;//商品价格,币种符号+价格
+    optional  string          remark                = 8;//备注说明
+    optional  string          servicefee            = 9;//服务费,币种符号+服务费
+    optional  int32           qty                   = 10;//数量
+    optional  string          paymentcode           = 11;//支付方式
+    optional  string          subtotal              = 12;//总计金额,字符串,币种符号+金额
+    optional  string          shippingname          = 13;//收货人姓名
+    optional  string          shippingphone         = 14;//收货人手机号
+    optional  string          shippingaddress       = 15;//收货地址
+    repeated  ImagesUrl       imagesurl             = 16;//图片
+    optional  string          currencycode          = 18;
+    optional  double          totalpay              = 19;//需支付总金额
+    optional  string          merchantmessage       = 20;//商户留言
+    optional  double          giftcardaccount       = 21;//用户礼品卡账户余额
+    optional  string          pricecurrencycode     = 22;//单价币种code
+    optional  string          paymentname           = 23;//支付方式名称
+    optional  string          brandName             = 24;//品牌名称
+    optional  string          matchTagId            = 25;//材质id
+    optional  string          matchTagName          = 26;//材质名称
+    optional  string          matchCategoryId       = 27;//分类id
+    optional  string          matchCategoryName     = 28;//分类名称
+    optional  string          parentMatchCategoryId = 29;//父分类id
+    optional  string          parentMatchCategoryName = 30;//父分类名字
+    optional  string          parcelId		    = 31;//包裹id
+    optional  string          parcelName	    = 32;//包裹名字
+    optional  string          parcelStatus 	    = 33;//包裹状态
+    optional  string          preorder_time     = 34;//预定时间
+    optional  string          pickup_time       = 35;
+}
+
+//需求单-帮我收货详情
+message helpMyReceiveInfoRequest
+{
+    required BaseRequest head	             = 1;
+    optional BaseUserRequest user_head       = 2;
+    optional int32       salesrequireid      = 3; //需求单id
+    optional string      localeCode          = 4;
+}
+
+message helpMyReceiveInfoResponse
+{
+	required  BaseResponse    head                  = 1;
+    optional  int32           salesrequireid        = 2;//需求单id
+    optional  string          createtime            = 3;//需求时间
+    optional  int32           requiretype           = 4;//需求类型
+    optional  string          status                = 5;//需求状态
+    optional  string          description           = 6;//需求描述
+    optional  string          price                 = 7;//商品价格,币种符号+价格
+    optional  string          remark                = 8;//备注说明
+    optional  int32           qty                   = 9;//数量
+    optional  int32           warehouseid           = 10;//入库仓库id
+    optional  string          warehousename         = 11;//入库仓库名称
+    optional  string          subtotal              = 12;//总计金额,字符串,币种符号+金额
+    optional  string          shippingname          = 13;//收货人姓名
+    optional  string          shippingphone         = 14;//收货人手机号
+    optional  string          shippingaddress       = 15;//收货地址
+    repeated  ImagesUrl       imagesurl             = 16;//图片
+    optional  string          merchantmessage       = 17;//商户留言
+    optional  string          pricecurrencycode     = 18;//单价币种code
+    optional  string          fulladdress           = 19;//仓库地址
+    optional  string          receiver              = 20;//收货人
+    optional  string          phone                 = 21;//仓库电话
+    optional  string          postcode              = 22;//邮编
+    optional  string          brandName             = 23;//品牌名称
+    optional  string          matchTagId            = 24;//材质id
+    optional  string          matchTagName          = 25;//材质名称
+    optional  string          matchCategoryId       = 26;//分类id
+    optional  string          matchCategoryName     = 27;//分类名称
+    optional  string          parentMatchCategoryId = 28;//父分类id
+    optional  string          parentMatchCategoryName = 29;//父分类名字
+    optional  string          parcelId		    = 30;//包裹id
+    optional  string          parcelName	    = 31;//包裹名字
+    optional  string          parcelStatus 	    = 32;//包裹状态
+}
+
+message MyRequireParcelNumRequest
+{
+	required BaseRequest     head                  = 1;
+	optional BaseUserRequest user_head             = 2;
+}
+
+message MyRequireParcelNumResponse
+{
+	required BaseResponse    head                  = 1;
+    optional int32           requirecount          = 2;//我的需求单数量
+    optional int32           parcelcount           = 3;//我的包裹数量
+    optional string          supply                = 4;//1代表显示货源,0代表不显示货源
+    optional string          group                 = 5;//1代表显示拼团,0代表不显示
+}
+
+message CancelRequireRequest
+{
+	required BaseRequest     head                  = 1;
+	optional BaseUserRequest user_head             = 2;
+	optional int32           salesrequireid        = 3;
+	optional string          localecode            = 4;
+}
+
+message CancelRequireResponse
+{
+	required BaseResponse    head                  = 1;
+}
+
+
+//获取友利银行的信息
+message GetKrBankInfoRequest
+{
+	required BaseRequest     head                  = 1;
+	optional BaseUserRequest userinfo              = 2;
+}
+
+message GetKrBankInfoResponse
+{
+	required BaseResponse    head                  = 1;
+	optional string          bankName              = 2;//银行名称
+	optional string          acountName            = 3;//收款人
+	optional string          acountNumber          = 4;//银行账号
+}
+
+//获取我的需求列表
+message Require
+{
+	optional int32          salesRequireId         = 1;//需求单id
+	optional string 		status                 = 2;//不传查出所有
+	optional int32			type                   = 3;//1取2找3买4收
+	optional string         createTime             = 4;//生成日期
+	repeated ImagesUrl		imageUrl               = 5;//图片链接
+	optional string			description            = 6;//描述
+	optional float			price                  = 7;//单价
+	optional float 			qty                    = 8;//数量
+}
+
+//获取我的需求列表请求
+message GetMyRequireListRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional int32           pageNo                = 3;//第几页
+	optional string          status                = 4;//状态，待付款（Pending）；已发布（Allocating）；配单中（Grabbing）；待处理（Processing）；预定中（Preordering)；已入库（Packing）；已发货（Shipped）；等待取消（AWaitingCancel）；已取消（Canceled）
+}
+
+//获取我的需求列表应答
+message GetMyRequireListResponse
+{
+	required BaseResponse    head                  = 1;
+	optional string          more                  = 2;//是否存在更多，"no"/"yes"
+	optional int32           pendingCounts         = 3;//我的需求列表数量
+	repeated Require         requireList           = 4;//我的需求列表
+	optional int32           packingCounts         = 5;//已入库数量
+}
+
+//获取会员组名称请求
+message GetMemberGroupNameRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional int32           memberGroupId         = 3;//会员组Id
+	optional string		     localeCode            = 4;//语种
+}
+
+//获取会员组名称应答
+message GetMemberGroupNameResponse
+{
+	required BaseResponse    head                  = 1;
+	optional string          memberGroupName       = 2;//会员组名称
+}
+
+//标签信息
+message MatchTag{
+	optional int32  matchTagId                     = 1;//标签id
+	optional string matchTagName                   = 2;//标签名字
+}
+
+//所有材质列表请求
+message GetMaterialsListRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string		     localeCode            = 3;//语种
+}
+
+//所有材质列表应答
+message GetMaterialsListResponse
+{
+	required BaseResponse    head                  = 1;
+	repeated MatchTag        matchTagList          = 2;//标签信息列表
+}
+
+//分类信息
+message MatchItemCategory{
+	optional int32  matchItemCategoryId            = 1;//分类id
+	optional string matchItemCategoryName          = 2;//分类名字
+}
+
+message Invitees
+{
+    optional int32 customerid   = 1;//被邀请者ID
+    optional string  iconurl    = 2;//头像
+    optional string  nickname   = 3;//昵称
+    optional string  createtime = 4;//创建时间
+}
+
+//被邀请者列表
+message GetInviteesListRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+}
+
+message GetInviteesListResponse
+{
+	required BaseResponse       head                  = 1;
+    repeated Invitees           inviteeslist          = 2;
+}
+
+
+//获取邀请链接等信息
+message GetInviteConfigRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string          localeCode            = 3;
+	optional string          messagecode           = 4;
+}
+
+message GetInviteConfigResponse
+{
+	required BaseResponse       head                  = 1;
+    optional string             titile                = 2;//标题
+    optional string             imageurl              = 3;//图片地址
+    optional string             inviteurl             = 4;//邀请链接
+}
+
+//获取帐号账户余额，优惠券，积分信息
+message GetAccountInfoRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string          currencycode          = 3;//币种
+}
+
+message GetAccountInfoResponse
+{
+	required BaseResponse       head                  = 1;
+    optional int32              myshippingcoupon      = 2;//优惠券数量
+    optional float              giftcardaccount       = 3;//用户当前币种礼品卡账户余额
+    optional float              frozenamount          = 4;//冻结账户余额
+    optional int32              credits               = 5;//用户可用积分
+    optional int32              creditsfrozen         = 6;//用户冻结积分
+    optional string             minchangecashnum      = 7;//最小可提现金额
+}
+
+message creditsDetail
+{
+    optional string createtime   = 1;//记录时间
+    optional string description  = 2;//描述
+    optional int32  change       = 3;//变动金额
+}
+
+
+//积分明细
+message GetCreditsDetailRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string          currencycode          = 3;
+	optional string          localecode            = 4;
+	optional int32           pagenum               = 5;//页码
+}
+
+message GetCreditsDetailResponse
+{
+	required BaseResponse       head                  = 1;
+    optional int32              credits               = 2;//可用积分
+    optional int32              creditsfrozen         = 3;//冻结积分
+    optional string             amount                = 4;//提现金额
+    repeated creditsDetail      creditsdetail         = 5;
+    optional string             minchangecashnum      = 6;//最小可提现金额
+    optional string             more                  = 7;//是否有下一页 yes:有 no:无
+    repeated CurrencyList       currencylist          = 8;//币种列表  //add by jack.zuoquan
+}
+
+message CreditsInviteInfoRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string          localecode            = 3;
+}
+
+message CreditsInviteInfoResponse
+{
+	required BaseResponse       head                  = 1;
+	optional string             invite_info           = 2;
+	optional string             invite_title          = 3;
+}
+
+
+//所有分类列表请求
+message GetCategoryListRequest
+{
+	required BaseRequest     head                  = 1;
+	required BaseUserRequest userinfo              = 2;
+	optional string		     localeCode            = 3;//语种
+	optional int32		     parentId              = 4;//父分类id（要获得一级菜单，不传此参数）
+}
+
+//所有分类列表应答
+message GetCategoryListResponse
+{
+	required BaseResponse       head                  = 1;
+	repeated MatchItemCategory  matchItemCategoryList = 2;//分类信息列表
+}
+
+message GetDaoupayVaccountUrlRequest
+{
+	required BaseRequest          head              = 1;
+	required BaseUserRequest      userinfo          = 2;
+    optional int32                orderid           = 3;
+    optional string               ordertype         = 4;
+    optional string               amount            = 5;
+}
+
+message GetDaoupayVaccountUrlResponse
+{
+	required BaseResponse         head       		= 1;
+    optional string               payurl            = 2;
+}
+
+
+message CountryList
+{
+    optional string               country_code      = 1;//国家代码
+    optional string               country_name      = 2;//国家名称
+}
+
+
+//获取国家下的仓库列表
+message GetCountryWarehouseListRequest
+{
+	required BaseRequest          head              = 1;
+	required BaseUserRequest      userinfo          = 2;
+    optional string               countrycode       = 3;//国家代码(国家tab切换要传)
+    optional int32                type              = 4;//1、订单仓库  2、转运仓库
+    optional string               localecode        = 5;
+    optional int32                pagenum           = 6;//第几页
+    optional int32                page_size         = 7;//一页显示几条
+}
+
+message  GetCountryWarehouseListResponse
+{
+	required BaseResponse         head       		= 1;
+	repeated CountryList          country_list      = 2;
+	repeated WareHouseList        warehouse_list    = 3;
+    optional string               more              = 4;//yes(有下一页) no(没下一页)
+    optional string               country_code      = 5;//默认国家码
+}
+

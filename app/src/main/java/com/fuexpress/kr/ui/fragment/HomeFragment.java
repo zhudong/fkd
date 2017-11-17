@@ -21,10 +21,10 @@ import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.activity.ChooseCityActivity;
 import com.fuexpress.kr.ui.activity.PickUpActivity;
 import com.fuexpress.kr.ui.activity.ReplenishActivity;
-import com.fuexpress.kr.ui.activity.crowd.CrowdDetailActivity;
 import com.fuexpress.kr.ui.activity.crowd.CrowdListActivity;
 import com.fuexpress.kr.ui.activity.help_send.ToHelpSendActivity;
 import com.fuexpress.kr.ui.activity.help_signed.HelpMeSignedActivity;
+import com.fuexpress.kr.ui.activity.shopping_cart.PaymentSuccessActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.LogUtils;
@@ -41,6 +41,7 @@ import fksproto.CsAddress;
 
 /**
  * Created by Longer on 2016/10/26.
+ * home页面的Fragment
  */
 public class HomeFragment extends BaseFragment<MainActivity> {
 
@@ -69,8 +70,6 @@ public class HomeFragment extends BaseFragment<MainActivity> {
         instance.cleanData();
         instance.initDta(mContext, convenientBanner);
         getUserCity();
-        //AlbumManager.getInstance().getSimpleAlbumList();
-        //AddressManager.getInstance().getUpdateCountryAndRegionRequest();
     }
 
     private void getUserCity() {
@@ -92,8 +91,6 @@ public class HomeFragment extends BaseFragment<MainActivity> {
                         }
                     }
                 });
-
-
             }
 
             @Override
@@ -103,16 +100,13 @@ public class HomeFragment extends BaseFragment<MainActivity> {
     }
 
 
-    @OnClick({R.id.rl_in_hf_help_get, R.id.rl_in_hf_help_take, R.id.rl_in_hf_help_buy, R.id.rl_in_hf_help_send, R.id.tv_in_title_left, R.id.btn_crowd,R.id.btn_crowd_detail})
+    @OnClick({R.id.rl_in_hf_help_get, R.id.rl_in_hf_help_take, R.id.rl_in_hf_help_buy, R.id.rl_in_hf_help_send, R.id.tv_in_title_left, R.id.btn_crowd, R.id.btn_crowd_detail})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_in_hf_help_get:
                 mContext.startDDMActivity(PickUpActivity.class, true);
                 break;
             case R.id.rl_in_hf_help_take:
-                //MerchantDetailManager.getInstance().getMerchantItemsList(2019, 1, 0);
-                //ProduSrcDataManager.getInstance().getProductSourceAll(1);
-                //mContext.startDDMActivity(OrderShowActivity.class, true);
                 /*try {
                     testMethod();
                 } catch (IOException e) {
@@ -134,7 +128,7 @@ public class HomeFragment extends BaseFragment<MainActivity> {
                 mContext.startDDMActivity(CrowdListActivity.class, true);
                 break;
             case R.id.btn_crowd_detail:
-                mContext.startDDMActivity(CrowdDetailActivity.class, true);
+                mContext.startDDMActivity(PaymentSuccessActivity.class, true);
                 break;
         }
     }
@@ -148,7 +142,7 @@ public class HomeFragment extends BaseFragment<MainActivity> {
     }
 
     public void testMethod() throws IOException {
-        final Map config = new HashMap();
+        Map<String, String> config = new HashMap<>();
         config.put("cloud_name", "yiss");
         config.put("api_key", "654276367494388");
         config.put("api_secret", "FtzCxMPuUZVxIFaVTLqzDHdNS7U");
@@ -156,7 +150,6 @@ public class HomeFragment extends BaseFragment<MainActivity> {
         final Uploader uploader = cloudinary.uploader();
         final File file = new File("storage/emulated/0/Download/dced6968be7d36becd6e1d0ca1a825fd.jpg");
         ImageView iv_in_home_02 = (ImageView) mRootView.findViewById(R.id.iv_in_home_02);
-        //final InputStream inputStream = new FileInputStream(file);
         Glide.with(mContext).load(file).into(iv_in_home_02);
         String generate = cloudinary.url().generate("yiss_test_2017_080110.jpg");
         LogUtils.e(generate);

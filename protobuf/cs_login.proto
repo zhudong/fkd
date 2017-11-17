@@ -14,6 +14,9 @@ enum AccountOperacode
 	ACCOUNT_OPERACODE_CHECK_NICKNAME_EXIST= 8; //判断昵称是否已存在
 	ACCOUNT_OPERACODE_PHONE_RESET_PASSWORD= 9; //手机重置密码
 	ACCOUNT_OPERACODE_PHONE_BIND          = 10;//手机号绑定
+	ACCOUNT_OPERACODE_PHONE_BIND_NEW      = 11;//新的手机号绑定(使用这个)
+	ACCOUNT_OPERACODE_THIRD_BIND_NEW      = 12;//第三方绑定(新)
+	ACCOUNT_OPERACODE_THIRD_UNBIND        = 13;//第三方解绑
 }
 
 enum AccountType
@@ -22,7 +25,7 @@ enum AccountType
 	ACCOUNT_TYPE_PHONE = 2;//phone
 }
 
-enum AuthPlatform 
+enum AuthPlatform
 {
 	AUTH_PLATFORM_WT   = 0; //自建授权平台
 	AUTH_PLATFORM_WX   = 1; //微信授权平台
@@ -42,9 +45,8 @@ enum VerifyCodeScene
 message ThirdAccount
 {
 	required int32  platform = 1;//第三方平台
-	required string openid   = 2;//openid
-	optional string token
-   = 3;//token
+	optional string openid   = 2;//openid
+	optional string token    = 3;//token
 }
 
 message AccountRequest
@@ -54,25 +56,26 @@ message AccountRequest
     required int32        account_type  = 3; //账号类型
     required string       account       = 4; //账号
     optional string       password      = 5; //密码md5
-    optional ThirdAccount third         = 6; //第三方账号  
+    optional ThirdAccount third         = 6; //第三方账号
     optional string       reserve       = 7;
     optional string       random_key    = 8; //会话密钥，随机key
     optional string       account_extra = 9; //当为手机号注册时，该字段填手机号的国家码
-    optional string       verify_code   = 10;//验证码   
+    optional string       verify_code   = 10;//验证码
     optional string       countrycode   = 11;//国家代码  CN--中国
     optional string       localecode    = 12;
+    optional int32        uin           = 13;
 }
 
 message AccountResponse
 {
-    required BaseResponse head = 1;
+    required BaseResponse    head = 1;
 }
 
 //普通登录
 message LoginRequest
 {
-	required BaseRequest head          = 1;
-	required int32       account_type  = 2;//账号类型
+    required BaseRequest head          = 1;
+    required int32       account_type  = 2;//账号类型
     required string      account       = 3;//账号
     optional string      password      = 4;//密码md5
     optional string      random_key    = 5;//会话密钥，随机key
@@ -93,6 +96,7 @@ message LoginResponse
     optional uint32      currencyid    = 8;
     optional string     currency_sign  = 9;//货币符号
     optional string     currency_name  = 10;//货币名称
+    optional bool       isBindPhone    = 11;//是否绑定手机
 }
 
 //第三方登录
@@ -117,3 +121,44 @@ message ThirdLoginResponse
     optional string      currencycode  = 7;
     optional uint32      currencyid    = 8;
 }
+
+//无绑定第三方登录
+message ThirdLoginWithoutBindRequest
+{
+    required BaseRequest head        = 1;
+    required int32       platform    = 2;//refer AuthPlatform
+    required string      openid      = 3;//openid
+    optional string      token       = 4;//access token
+    optional string      random_key  = 5;//会话密钥，随机key
+    optional string      localecode  = 6;
+}
+
+message ThirdLoginWithoutBindResponse
+{
+    required BaseResponse head        = 1;
+    optional string       session_key = 2;//后续的会话密钥，客户端保留在本地
+    optional string       ticket      = 3;//票据，客户端保留在本地
+    optional uint32       uin         = 4;//userid，全平台唯一
+    optional string       h5_ticket   = 5;//H5票据，客户端保留在本地，客户端调用H5页面时用到
+    optional bool         isBindPhone = 6;//是否绑定手机
+    optional string       localecode  = 7;
+    optional string       currencycode= 8;
+    optional uint32       currencyid  = 9;
+}
+
+message GetBindInfoRequest
+{
+    required BaseRequest head        = 1;
+    required uint32      uin         = 2;//userid，全平台唯一
+    required string      localecode  = 3;
+    optional string      random_key  = 4;//会话密钥，随机key
+
+}
+message GetBindInfoResponse
+{
+    required BaseResponse head          = 1;
+    optional bool         is_bindphone  = 2;//是否绑定手机
+    optional string       phone_numer   = 3;//如果绑定手机号,对应的手机号码
+    repeated int32        platform      = 4;
+}
+

@@ -1,5 +1,6 @@
 package com.fuexpress.kr.ui.activity.package_detail;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.util.ArrayMap;
@@ -275,11 +276,12 @@ public class InsuranceDeclarationActivity extends BaseActivity {
                     @Override
                     public void run() {
                         closeLoading();
-                        Intent intent = new Intent(InsuranceDeclarationActivity.this, PackageDetailActivity.class);
-                        long parcelid = (long) response.getParcelId();
-                        intent.putExtra(PackageDetailActivity.PARCEL_ID, parcelid);
-                        startActivity(intent);
-                        sendBus((long) mParcleID);
+//                        Intent intent = new Intent(InsuranceDeclarationActivity.this, PackageDetailActivity.class);
+//                        long parcelid = (long) response.getParcelId();
+//                        intent.putExtra(PackageDetailActivity.PARCEL_ID, parcelid);
+//                        startActivity(intent);
+//                        sendBus((long) mParcleID);
+                        setResult(Activity.RESULT_OK);
                         finish();
                     }
                 });

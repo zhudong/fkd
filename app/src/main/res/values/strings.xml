@@ -613,6 +613,7 @@
     <string name="coupon_count_msg">%1$d张可用</string>
 
     <string name="card_payment_success_title_bar_title">成功提交订单</string>
+    <string name="card_payment_success_crowd_title">订单支付成功</string>
     <string name="pay_result_payment_success_order_title">您已经成功提交了订单！</string>
     <string name="gift_card_thanks_msg">感谢您在福快递购物，祝您购物愉快！</string>
     <string name="gift_card_payment_success_order_no">您的充值卡订单号#</string>
@@ -900,6 +901,7 @@
     <string name="processing">待处理</string>
     <string name="preorder">入库中</string>
     <string name="packing">已入库</string>
+    <string name="packing_num">已入包裹%1$d件</string>
     <string name="shipped">已发货</string>
 
     <string name="alipay">支付宝支付</string>
@@ -971,8 +973,8 @@
 
     <string name="string_search_result_title">搜索结果</string>
     <string name="search_result_head_title">\"%1$s\"的搜索结果</string>
-    <string name="most_used_cities" translatable="false">常用城市</string>
-    <string name="select_city" translatable="false">切换城市</string>
+    <string name="most_used_cities">常用城市</string>
+    <string name="select_city">切换城市</string>
     <string name="report_price">申报价格</string>
 
     <string name="string_year">年</string>
@@ -1002,44 +1004,44 @@
 
     <string name="default_not_delete">默认地址不能删除</string>
     <string name="string_all_parcels">所有包裹</string>
-    <string name="String_buy_value_card" translatable="false">购买充值卡</string>
-    <string name="gift_card_title_msg" translatable="false">福快递电子邮件充值卡</string>
-    <string name="gift_card_msg_info" translatable="false">为了保障您的包裹能够及时发出，客户下单后，需购买福快递充值卡并充值到账户中。包裹发出后，运费将从充值卡账户直接扣减。</string>
-    <string name="gift_card_addressee_name" translatable="false">收件人姓名：</string>
-    <string name="gift_card_addressee_name_02" translatable="false">收件人姓名</string>
-    <string name="gift_card_input_addressee_name" translatable="false">请输入收件人姓名</string>
-    <string name="gift_card_mail" translatable="false">收件人邮箱：</string>
-    <string name="gift_card_mail_02" translatable="false">收件人邮箱</string>
-    <string name="gift_card_input_mail" translatable="false">请输入收件人邮箱</string>
-    <string name="gift_card_sender_name" translatable="false">发件人姓名</string>
-    <string name="gift_card_input_sender_name" translatable="false">请输入发件人姓名</string>
-    <string name="gift_card_message" translatable="false">留言：</string>
-    <string name="gift_card_message_02" translatable="false">留言</string>
-    <string name="gift_card_message_limit" translatable="false">限制100个字符</string>
-    <string name="gift_card_msg_add_to_cart" translatable="false">加入购物车</string>
+    <string name="String_buy_value_card">购买充值卡</string>
+    <string name="gift_card_title_msg">福快递电子邮件充值卡</string>
+    <string name="gift_card_msg_info">为了保障您的包裹能够及时发出，客户下单后，需购买福快递充值卡并充值到账户中。包裹发出后，运费将从充值卡账户直接扣减。</string>
+    <string name="gift_card_addressee_name">收件人姓名：</string>
+    <string name="gift_card_addressee_name_02">收件人姓名</string>
+    <string name="gift_card_input_addressee_name">请输入收件人姓名</string>
+    <string name="gift_card_mail">收件人邮箱：</string>
+    <string name="gift_card_mail_02">收件人邮箱</string>
+    <string name="gift_card_input_mail">请输入收件人邮箱</string>
+    <string name="gift_card_sender_name">发件人姓名</string>
+    <string name="gift_card_input_sender_name">请输入发件人姓名</string>
+    <string name="gift_card_message">留言：</string>
+    <string name="gift_card_message_02">留言</string>
+    <string name="gift_card_message_limit">限制100个字符</string>
+    <string name="gift_card_msg_add_to_cart">加入购物车</string>
     <string name="add_gift_card_title">请选择一种设计</string>
-    <string name="gift_card_face_value" translatable="false">面值：</string>
-    <string name="gift_card_count" translatable="false">数量：</string>
-    <string name="gift_card_confirm_btn" translatable="false">确定</string>
+    <string name="gift_card_face_value">面值：</string>
+    <string name="gift_card_count">数量：</string>
+    <string name="gift_card_confirm_btn">确定</string>
     <string name="gift_card_email_input_msg">邮箱输入错误</string>
     <string name="gift_card_email_input_msg2">请输入邮箱地址</string>
     <string name="gift_card_add_cart_toast_msg">充值卡的数量不能超过20，请先结算购物车中已有的充值卡</string>
     <string name="gift_card_title_bar_title">充值卡购物车</string>
-    <string name="gift_card_TOU" translatable="false">充值卡使用条款</string>
-    <string name="gift_card_waring" translatable="false">注意：充值卡充值后，将不得兑换现金或退款至银行卡</string>
-    <string name="String_for_cart_select_all" translatable="false">全选</string>
-    <string name="gift_card_grandtotal" translatable="false">总计:</string>
-    <string name="gift_card_account" translatable="false">去结算</string>
-    <string name="gift_card_empty" translatable="false">您的充值卡购物车是空的！</string>
-    <string name="gift_card_item_title" translatable="false">电子充值卡</string>
+    <string name="gift_card_TOU">充值卡使用条款</string>
+    <string name="gift_card_waring">注意：充值卡充值后，将不得兑换现金或退款至银行卡</string>
+    <string name="String_for_cart_select_all">全选</string>
+    <string name="gift_card_grandtotal">总计:</string>
+    <string name="gift_card_account">去结算</string>
+    <string name="gift_card_empty">您的充值卡购物车是空的！</string>
+    <string name="gift_card_item_title">电子充值卡</string>
     <string name="gift_card_order_dialog_msg">确认要删除这个商品吗？</string>
     <string name="card_TOU_title_bar_title">使用条款</string>
     <string name="cart_order_title_bar_title">确认订单</string>
-    <string name="gift_card_count_msg" translatable="false">X%1$s</string>
-    <string name="gift_card_commit_order" translatable="false">提交订单</string>
+    <string name="gift_card_count_msg">X%1$s</string>
+    <string name="gift_card_commit_order">提交订单</string>
     <string name="gift_card_dialog_msg">取消付款吗？取消后可在“我的余额-充值卡订单查询”页面继续支付。</string>
-    <string name="gift_card_count_title" translatable="false">数量</string>
-    <string name="gift_card_grandtotal_title" translatable="false">总计</string>
+    <string name="gift_card_count_title">数量</string>
+    <string name="gift_card_grandtotal_title">总计</string>
 
 
     <string name="expire_date">使用期限</string>
@@ -1052,19 +1054,19 @@
 
     <string name="notice_copy_warehouse">个人仓库地址已复制</string>
 
-    <string name="String_btn_unlike" translatable="false">Like</string>
-    <string name="String_btn_liking" translatable="false">Liking...</string>
-    <string name="String_btn_like" translatable="false">Unlike</string>
-    <string name="String_btn_unliking" translatable="false">Unliking...</string>
+    <string name="String_btn_unlike">Like</string>
+    <string name="String_btn_liking">Liking...</string>
+    <string name="String_btn_like">Unlike</string>
+    <string name="String_btn_unliking">Unliking...</string>
 
-    <string name="String_for_home_item_focus" translatable="false">Follow</string>
-    <string name="String_for_home_item_unfocus" translatable="false">Unfollow</string>
-    <string name="String_for_home_item_liking" translatable="false">Like...  </string>
-    <string name="String_for_home_item_unliking" translatable="false">Unlike...  </string>
-    <string name="String_for_home_item_add_attention_ing" translatable="false">Following...  </string>
-    <string name="String_for_home_item_not_add_attention_ing" translatable="false">Unfollowing...  </string>
+    <string name="String_for_home_item_focus">Follow</string>
+    <string name="String_for_home_item_unfocus">Unfollow</string>
+    <string name="String_for_home_item_liking">Like...  </string>
+    <string name="String_for_home_item_unliking">Unlike...  </string>
+    <string name="String_for_home_item_add_attention_ing">Following...  </string>
+    <string name="String_for_home_item_not_add_attention_ing">Unfollowing...  </string>
 
-    <string name="String_for_store_item_view_all" translatable="false">View all</string>
+    <string name="String_for_store_item_view_all">View all</string>
 
 
     <!--以下为新增-->
@@ -1074,34 +1076,34 @@
     <string name="title_produ_src_focus">Follwed</string>
 
 
-    <string name="String_for_home_item_like" translatable="false">Like  </string>
-    <string name="String_for_home_item_unlike" translatable="false">Unlike  </string>
+    <string name="String_for_home_item_like">Like  </string>
+    <string name="String_for_home_item_unlike">Unlike  </string>
 
 
-    <string name="merchant_detail_business_working" translatable="false">Opening</string>
-    <string name="merchant_detail_business_working_none" translatable="false">Closed</string>
+    <string name="merchant_detail_business_working">Opening</string>
+    <string name="merchant_detail_business_working_none">Closed</string>
 
 
-    <string name="merchant_detail_icon_desc" translatable="false">Profile</string>
-    <string name="merchant_detail_icon_image" translatable="false">Photos</string>
-    <string name="merchant_business_main_title" translatable="false">Primary Business:</string>
-    <string name="merchant_business_shoptime_title" translatable="false">Opening Bours:</string>
-    <string name="String_for_home_item_add_attention" translatable="false">Follow  </string>
-    <string name="merchant_detail_follower_befor_string" translatable="false">Followers </string>
+    <string name="merchant_detail_icon_desc">Profile</string>
+    <string name="merchant_detail_icon_image">Photos</string>
+    <string name="merchant_business_main_title">Primary Business:</string>
+    <string name="merchant_business_shoptime_title">Opening Bours:</string>
+    <string name="String_for_home_item_add_attention">Follow  </string>
+    <string name="merchant_detail_follower_befor_string">Followers </string>
 
-    <string name="merchant_detail_followed_not" translatable="false">Follow</string>
-    <string name="merchant_detail_followed" translatable="false">Unfollow </string>
-    <string name="String_for_store_dialog_request_fail" translatable="false">Request failed</string>
+    <string name="merchant_detail_followed_not">Follow</string>
+    <string name="merchant_detail_followed">Unfollow </string>
+    <string name="String_for_store_dialog_request_fail">Request failed</string>
 
-    <string name="merchant_detail_follows_title" translatable="false">Followers</string>
-    <string name="merchant_detail_follows_space" translatable="false">Followers&#160;&#160;</string>
-    <string name="merchant_detail_image_title" translatable="false">Merchant photos</string>
+    <string name="merchant_detail_follows_title">Followers</string>
+    <string name="merchant_detail_follows_space">Followers&#160;&#160;</string>
+    <string name="merchant_detail_image_title">Merchant photos</string>
 
 
     <!-- 6/29 -->
 
-    <string name="String_share" translatable="false">Share</string>
-    <string name="String_home_page" translatable="false">Home</string>
+    <string name="String_share">Share</string>
+    <string name="String_home_page">Home</string>
 
     <string name="string_sell_product">卖货</string>
 
@@ -1125,233 +1127,283 @@
     <string name="cropper_next">Next</string>
 
     <!--单品详情-->
-    <string name="String_same_price" translatable="false">100% Wholesale Price</string>
-    <string name="String_add_album" translatable="false">加入图集</string>
-    <string name="String_comment_hint" translatable="false">请输入评论内容</string>
-    <string name="String_comment_release" translatable="false">评价</string>
-    <string name="String_go_shopping" translatable="false">去逛逛</string>
-    <string name="String_exchange_rate" translatable="false">汇率：</string>
-    <string name="String_order_message" translatable="false">订单留言</string>
+    <string name="String_same_price">100% Wholesale Price</string>
+    <string name="String_add_album">加入图集</string>
+    <string name="String_comment_hint">请输入评论内容</string>
+    <string name="String_comment_release">评价</string>
+    <string name="String_go_shopping">去逛逛</string>
+    <string name="String_exchange_rate">汇率：</string>
+    <string name="String_order_message">订单留言</string>
     <string name="String_merge_order">海外集运发货</string>
     <string name="String_direct_mail_1">海外直邮发货</string>
-    <string name="String_Direct_Mail" translatable="false">发货</string>
-    <string name="String_product_detail" translatable="false">商品详情</string>
-    <string name="String_add_coart" translatable="false">加入购物车</string>
-    <string name="String_liker_count" translatable="false">%1$d人喜欢</string>
-    <string name="String_comment_count" translatable="false">%1$d个评论</string>
-    <string name="String_super_member" translatable="false">超级会员</string>
-    <string name="String_vip_member" translatable="false">VIP会员</string>
-    <string name="String_norme_member" translatable="false">普通会员</string>
-    <string name="String_service_charge" translatable="false">服务费：</string>
-    <string name="String_service_seller" translatable="false">由福快递认证买手 %1$s 提供代采购服务，服务费为单价×%2$d%%</string>
-    <string name="String_service_seller2" translatable="false">由福快递认证卖家 %1$s 负责发货并提供售后服务。</string>
-    <string name="String_vip_rate" translatable="false">▶ %1$s，一次购买%2$d件商品，每件仅需要服务费%3$s%%</string>
-    <string name="String_vip_promotion" translatable="false">▶ %1$s，一次购买%2$d件单价%3$s，为您节省%4$d%%</string>
-    <string name="String_promotion_rate" translatable="false">每件%1$s，为您节省%2$d%%</string>
-    <string name="String_promotion" translatable="false">促销：</string>
-    <string name="String_number_oney" translatable="false">%1$d%%</string>
-    <string name="String_crowd_detail" translatable="false">更多资讯</string>
-    <string name="String_item_detail" translatable="false">商品详情</string>
-    <string name="String_sell_one_key" translatable="false">一键卖货</string>
+    <string name="String_direct_fu">福袋送礼</string>
+    <string name="String_Direct_Mail">发货</string>
+    <string name="String_product_detail">商品详情</string>
+    <string name="String_add_coart">加入购物车</string>
+    <string name="String_liker_count">%1$d人喜欢</string>
+    <string name="String_comment_count">%1$d个评论</string>
+    <string name="String_super_member">超级会员</string>
+    <string name="String_vip_member">VIP会员</string>
+    <string name="String_norme_member">普通会员</string>
+    <string name="String_service_charge">服务费：</string>
+    <string name="String_service_seller">由福快递认证买手 %1$s 提供代采购服务，服务费为单价×%2$d%%</string>
+    <string name="String_service_seller2">由福快递认证卖家 %1$s 负责发货并提供售后服务。</string>
+    <string name="String_vip_rate">▶ %1$s，一次购买%2$d件商品，每件仅需要服务费%3$s%%</string>
+    <string name="String_vip_promotion">▶ %1$s，一次购买%2$d件单价%3$s，为您节省%4$s</string>
+    <string name="String_promotion_rate">每件%1$s，为您节省%2$s</string>
+    <string name="String_promotion">促销：</string>
+    <string name="String_number_oney">%1$d%%</string>
+    <string name="String_crowd_detail">更多资讯</string>
+    <string name="String_item_detail">商品详情</string>
+    <string name="String_sell_one_key">一键卖货</string>
     <string name="string_change">更改</string>
     <string name="string_please_select_country">请选择国家地区</string>
     <string name="product_shipping_info">配送信息</string>
-    <string name="login_tv_01" translatable="false">国家/地区</string>
-    <string name="String_item_title" translatable="false">单品详情</string>
+    <string name="login_tv_01">国家/地区</string>
+    <string name="String_item_title">单品详情</string>
 
-    <string name="String_count_no_discount" translatable="false">%1$d件\n无折扣</string>
-    <string name="String_count_nos_discount" translatable="false">%1$d件\n无折扣</string>
-    <string name="String_count_num_discount_int" translatable="false">%1$d件\n%2$d折</string>
-    <string name="String_count_num_discount" translatable="false">%1$d件\n%2$.1f折</string>
-    <string name="String_count_reduce_money" translatable="false">%1$d件\n减%2$s</string>
-    <string name="String_count_target_count" translatable="false">目标：%1$d件</string>
-    <string name="String_money_target" translatable="false">目标：%1$s</string>
-    <string name="String_money_no_discount" translatable="false">%1$s\n无折扣</string>
-    <string name="String_money_num_discount" translatable="false">%1$s\n%2$.1f折</string>
-    <string name="String_money_num_discount_int" translatable="false">%1$s\n%2$d折</string>
-    <string name="String_money_reduce_money" translatable="false">%1$s\n减%2$s</string>
-    <string name="String_money_ten_thousand" translatable="false">万</string>
-    <string name="String_money_million" translatable="false">百万</string>
-    <string name="String_crowd_sucessed" translatable="false">已成功：</string>
-    <string name="String_crowd_sucess" translatable="false">拼团成功</string>
-    <string name="String_crowd_fail" translatable="false">拼团失败</string>
-    <string name="String_start_crowd" translatable="false">启动拼团</string>
+    <string name="String_count_no_discount">%1$d件\n无折扣</string>
+    <string name="String_count_nos_discount">%1$d件\n无折扣</string>
+    <string name="String_count_num_discount_int">%1$d件\n%2$d折</string>
+    <string name="String_count_num_discount">%1$d件\n%2$.1f折</string>
+    <string name="String_count_reduce_money">%1$d件\n减%2$s</string>
+    <string name="String_count_target_count">目标：%1$d件</string>
+    <string name="String_money_target">目标：%1$s</string>
+    <string name="String_money_no_discount">%1$s\n无折扣</string>
+    <string name="String_money_num_discount">%1$s\n%2$.1f折</string>
+    <string name="String_money_num_discount_int">%1$s\n%2$d折</string>
+    <string name="String_money_reduce_money">%1$s\n减%2$s</string>
+    <string name="String_money_ten_thousand">万</string>
+    <string name="String_money_million">百万</string>
+    <string name="String_crowd_sucessed">已成功：</string>
+    <string name="String_crowd_sucess">拼团成功</string>
+    <string name="String_crowd_fail">拼团失败</string>
+    <string name="String_start_crowd">启动拼团</string>
 
 
     <!--订单-->
-    <string name="auto_translate" translatable="false">自动翻译</string>
-    <string name="view_original" translatable="false">查看原文</string>
-    <string name="translation_failure" translatable="false">翻译失败</string>
-    <string name="auto_translateing" translatable="false">Loading&#8230;</string>
-    <string name="crowd_" translatable="false"> 拼团 </string>
-    <string name="order_status" translatable="false">状态:</string>
-    <string name="pending_adapter" translatable="false">待付款</string>
-    <string name="all_order" translatable="false">全部</string>
-    <string name="all" translatable="false">全部</string>
-    <string name="order_canceled" translatable="false">已取消订单</string>
-    <string name="grand_total" translatable="false">订单总额：</string>
-    <string name="order_no" translatable="false">订单编号：</string>
-    <string name="item_number" translatable="false">商品数量：</string>
-    <string name="order_date" translatable="false">订单日期：</string>
-    <string name="send_direct_" translatable="false">直接发货     </string>
-    <string name="order_panding" translatable="false">待付款订单</string>
-    <string name="panding" translatable="false">待付款</string>
-    <string name="wait_to_do" translatable="false">待处理</string>
-    <string name="check_item" translatable="false">验货中</string>
-    <string name="to_store" translatable="false">入库中</string>
-    <string name="wait_cancel" translatable="false">等待取消</string>
-    <string name="order_wait_cancel" translatable="false">等待取消订单</string>
-    <string name="total_no" translatable="false">共有</string>
-    <string name="left_no" translatable="false">还有</string>
-    <string name="xiang" translatable="false">项</string>
-    <string name="left_pay_time" translatable="false"> (剩余支付时间:</string>
-    <string name="left_pay_time_hour" translatable="false">小时)</string>
-    <string name="left_pay_time_minute" translatable="false">分钟)</string>
-    <string name="order_payed" translatable="false">已支付订单</string>
-    <string name="crowding" translatable="false">拼团中</string>
-    <string name="order_parceled" translatable="false">已加入包裹(</string>
-    <string name="order_wait_out" translatable="false">待出库(</string>
-    <string name="order_send" translatable="false">已发货(</string>
-    <string name="order_other" translatable="false">其他(</string>
-    <string name="check_parcel" translatable="false">查看包裹</string>
-    <string name="parcel_title" translatable="false">包裹名称: </string>
-    <string name="wait_to_pay" translatable="false">待付款</string>
-    <string name="send" translatable="false">发送</string>
-    <string name="left_time" translatable="false">(剩余支付时间:47小时)</string>
-    <string name="order_direct_notice" translatable="false">(不含运费，运费将从余额里去除)</string>
-    <string name="part_send" translatable="false">部分发货</string>
-    <string name="all_send" translatable="false">全部发货</string>
-    <string name="change_pay_method" translatable="false">修改支付方式</string>
-    <string name="you_have_no_order" translatable="false">您还没有相关订单</string>
-    <string name="send_type" translatable="false">发货方式</string>
-    <string name="String_crowd_panding" translatable="false">未付款</string>
-    <string name="package_attend_Warehouse" translatable="false">已入库</string>
-    <string name="package_waite_send" translatable="false">待发货</string>
-    <string name="package_has_sended" translatable="false">已发货</string>
-    <string name="String_has_time" translatable="false">剩余时间</string>
-    <string name="String_time_start_cowd" translatable="false">%1$s月%2$s日 %3$s开始</string>
-    <string name="String_time_has_days" translatable="false">%1$s天</string>
-    <string name="String_time_has_hours" translatable="false">%1$s小时</string>
-    <string name="String_canceled" translatable="false">已取消</string>
-    <string name="String_merger" translatable="false">合并订单发货</string>
+    <string name="auto_translate">自动翻译</string>
+    <string name="view_original">查看原文</string>
+    <string name="translation_failure">翻译失败</string>
+    <string name="auto_translateing">Loading&#8230;</string>
+    <string name="crowd_"> 拼团 </string>
+    <string name="order_status">状态:</string>
+    <string name="pending_adapter">待付款</string>
+    <string name="all_order">全部</string>
+    <string name="all">全部</string>
+    <string name="order_canceled">已取消订单</string>
+    <string name="grand_total">订单总额：</string>
+    <string name="order_no">订单编号：</string>
+    <string name="item_number">商品数量：</string>
+    <string name="order_date">订单日期：</string>
+    <string name="send_direct_">直接发货     </string>
+    <string name="order_panding">待付款订单</string>
+    <string name="panding">待付款</string>
+    <string name="wait_to_do">待处理</string>
+    <string name="check_item">验货中</string>
+    <string name="to_store">入库中</string>
+    <string name="wait_cancel">等待取消</string>
+    <string name="order_wait_cancel">等待取消订单</string>
+    <string name="total_no">共有</string>
+    <string name="left_no">还有</string>
+    <string name="xiang">项</string>
+    <string name="left_pay_time"> (剩余支付时间:</string>
+    <string name="left_pay_time_hour">小时)</string>
+    <string name="left_pay_time_minute">分钟)</string>
+    <string name="order_payed">已支付订单</string>
+    <string name="crowding">拼团中</string>
+    <string name="order_parceled">已加入包裹(</string>
+    <string name="order_wait_out">待出库(</string>
+    <string name="order_send">已发货(</string>
+    <string name="order_other">其他(</string>
+    <string name="check_parcel">查看包裹</string>
+    <string name="parcel_title">包裹名称: </string>
+    <string name="wait_to_pay">待付款</string>
+    <string name="send">发送</string>
+    <string name="left_time">(剩余支付时间:47小时)</string>
+    <string name="order_direct_notice">(不含运费，运费将从余额里去除)</string>
+    <string name="part_send">部分发货</string>
+    <string name="all_send">全部发货</string>
+    <string name="change_pay_method">修改支付方式</string>
+    <string name="you_have_no_order">您还没有相关订单</string>
+    <string name="send_type">发货方式</string>
+    <string name="String_crowd_panding">未付款</string>
+    <string name="package_attend_Warehouse">已入库</string>
+    <string name="package_waite_send">待发货</string>
+    <string name="package_has_sended">已发货</string>
+    <string name="String_has_time">剩余时间</string>
+    <string name="String_time_start_cowd">%1$s月%2$s日 %3$s开始</string>
+    <string name="String_time_has_days">%1$s天</string>
+    <string name="String_time_has_hours">%1$s小时</string>
+    <string name="String_canceled">已取消</string>
+    <string name="String_merger">合并订单发货</string>
     <string name="gift_pay">使用账户余额支付</string>
-    <string name="credit_card" translatable="false">Credit Card</string>
-    <string name="cancel_order" translatable="false">取消订单</string>
-    <string name="String_goto_send" translatable="false">去发货</string>
-    <string name="cancel_failure" translatable="false">取消失败，请稍后重试</string>
-    <string name="fee_detail_before" translatable="false">(含运费</string>
-    <string name="fee_detail_after" translatable="false">)</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="cancel_order">取消订单</string>
+    <string name="String_goto_send">去发货</string>
+    <string name="cancel_failure">取消失败，请稍后重试</string>
+    <string name="fee_detail_before">(含运费</string>
+    <string name="fee_detail_after">)</string>
 
     <string name="shop_cart_title_txt">购物车</string>
-    <string name="String_cart_coupon_hint" translatable="false">请输入优惠券编码</string>
-    <string name="String_cart_coupon_use_btn" translatable="false">使用</string>
-    <string name="String_cart_commodity_list_titile" translatable="false">韩国衣时尚仓库直邮</string>
-    <string name="String_cart_seller" translatable="false">发货人:</string>
-    <string name="String_cart_buyfrom" translatable="false">在哪儿买:</string>
-    <string name="String_cart_size" translatable="false">尺码:</string>
-    <string name="String_cart_color" translatable="false">颜色︰</string>
-    <string name="String_details_order_note_02" translatable="false">订单留言:</string>
-    <string name="sold_out_waring_msg">无货</string>
-    <string name="exit_app" translatable="false">确定要删除这个商品吗?</string>
-    <string name="String_cart_commodity_all_select" translatable="false">全选</string>
-    <string name="String_for_cart_settlement" translatable="false">去结算</string>
-    <string name="String_for_cart_total_note" translatable="false">(不含运费)</string>
-    <string name="String_cart_empty" translatable="false">&#160;&#160;您的购物车是空的!</string>
-    <string name="String_cart_prompt_msg" translatable="false">&#160;&#160;一级批发市场最新单品，每日上新！</string>
-    <string name="String_cart_skip_home" translatable="false">&#160;&#160;快去看看吧~</string>
+    <string name="String_cart_coupon_hint">请输入优惠券编码</string>
+    <string name="String_cart_coupon_use_btn">使用</string>
+    <string name="String_cart_commodity_list_titile">韩国衣时尚仓库直邮</string>
+    <string name="String_cart_seller">发货人:</string>
+    <string name="String_cart_buyfrom">在哪儿买:</string>
+    <string name="String_cart_size">尺码:</string>
+    <string name="String_cart_color">颜色︰</string>
+    <string name="String_details_order_note_02">订单留言:</string>
+    <string name="sold_out_waring_msg">已下架</string>
+    <string name="exit_app">确定要删除这个商品吗?</string>
+    <string name="String_cart_commodity_all_select">全选</string>
+    <string name="String_for_cart_settlement">去结算</string>
+    <string name="String_for_cart_total_note">(不含运费)</string>
+    <string name="String_cart_empty">&#160;&#160;您的购物车是空的!</string>
+    <string name="String_cart_prompt_msg">&#160;&#160;一级批发市场最新单品，每日上新！</string>
+    <string name="String_cart_skip_home">&#160;&#160;快去看看吧~</string>
     <string name="pull_refresh_loading_msg">载入中...</string>
     <string name="pull_refresh_complete_msg">更新完成</string>
     <string name="pull_refresh_pull_msg">下拉刷新</string>
     <string name="pull_refresh_release_msg">释放刷新</string>
-    <string name="String_word_number" translatable="false">还可以输入 %1$d 个字符</string>
-    <string name="String_details_order_note" translatable="false">订单留言</string>
-    <string name="String_size" translatable="false">尺码：</string>
-    <string name="String_color" translatable="false">颜色︰</string>
-    <string name="sold_out_msg">无货商品不能参与结算，是否删除无货商品？</string>
-    <string name="delete" translatable="false">删除</string>
+    <string name="String_word_number">还可以输入 %1$d 个字符</string>
+    <string name="String_details_order_note">订单留言</string>
+    <string name="String_size">尺码：</string>
+    <string name="String_color">颜色︰</string>
+    <string name="sold_out_msg">已下架或已结束商品不能参与结算，是否删除？</string>
+    <string name="delete">删除</string>
     <string name="cart_dialog_msg">您的订单包裹将由%1$d个仓库发出，需分开支付运费，请知悉！</string>
-    <string name="use_coupon_error" translatable="false">请输入有效优惠券编码</string>
-    <string name="String_order_commodity_counter" translatable="false">x%1$s</string>
-    <string name="String_cart_consignee_msg" translatable="false">%1$s,&#160;%2$s</string>
+    <string name="use_coupon_error">请输入有效优惠券编码</string>
+    <string name="String_order_commodity_counter">x%1$s</string>
+    <string name="String_cart_consignee_msg">%1$s,&#160;%2$s</string>
     <string name="cart_order_submit_order_failed">提交订单失败：</string>
-    <string name="dialog_reseve_title" translatable="false">接受预定</string>
-    <string name="dialog_reseve_msg" translatable="false">订单内的商品暂无现货时，不取消采购，预订该商品</string>
-    <string name="dialog_cancel_title" translatable="false">采购现货</string>
-    <string name="dialog_cancel_msg" translatable="false">只采购订单内的现货商品，如订单内有商品缺货，则取消缺货商品的采购</string>
-    <string name="app_tip" translatable="false">提示</string>
+    <string name="dialog_reseve_title">接受预定</string>
+    <string name="dialog_reseve_msg">订单内的商品暂无现货时，不取消采购，预订该商品</string>
+    <string name="dialog_cancel_title">采购现货</string>
+    <string name="dialog_cancel_msg">只采购订单内的现货商品，如订单内有商品缺货，则取消缺货商品的采购</string>
+    <string name="app_tip">提示</string>
     <string name="card_order_payment_title_bar_title2">请选择支付方式</string>
     <string name="cart_order_dialog_confirm">联系客服</string>
-    <string name="String_submit_hint" translatable="false">(不含运费，运费将在提交发货后从账户余额中扣除)</string>
-    <string name="cart_order_grand_total_msg" translatable="false">(含运费：%1$s)</string>
-    <string name="String_merge_order_hint" translatable="false">(节省运费，商品入库后需到我的包裹中提交发货)</string>
+    <string name="String_submit_hint">(不含运费，运费将在提交发货后从账户余额中扣除)</string>
+    <string name="cart_order_grand_total_msg">(含运费：%1$s)</string>
+    <string name="String_merge_order_hint">(节省运费，商品入库后需到我的包裹中提交发货)</string>
     <string name="default_msg">默认</string>
-    <string name="String_reseve" translatable="false">商品若缺货，可接受预定</string>
-    <string name="String_cancel_msg" translatable="false">只采购现货，缺货商品取消订购</string>
+    <string name="String_reseve">商品若缺货，可接受预定</string>
+    <string name="String_cancel_msg">只采购现货，缺货商品取消订购</string>
     <string name="add_to_cart_failed_msg">添加购物车失败 错误码=</string>
     <string name="add_to_cart_error_msg">商品库存不足，添加失败错误码=</string>
     <string name="add_to_cart_success_msg">添加购物车成功</string>
-    <!--<string name="pay_result_payment_success_crowd_title" translatable="false">您已经完成了拼团的支付！</string>
-    <string name="pay_result_thank" translatable="false">感谢您在福快递购物，祝您购物愉快！</string>
-    <string name="pay_result_order_id" translatable="false">您的订单号：</string>
-    <string name="String_payment_success_msg" translatable="false">#%1$s</string>
-    <string name="pay_result_delivery_method" translatable="false">您的订单配送方式为：</string>
-    <string name="pay_result_waring_msg" translatable="false">请耐心等待您的包裹，他将漂洋过海来与您相见。</string>
+    <!--<string name="pay_result_payment_success_crowd_title">您已经完成了拼团的支付！</string>
+    <string name="pay_result_thank">感谢您在福快递购物，祝您购物愉快！</string>
+    <string name="pay_result_order_id">您的订单号：</string>
+    <string name="String_payment_success_msg">#%1$s</string>
+    <string name="pay_result_delivery_method">您的订单配送方式为：</string>
+    <string name="pay_result_waring_msg">请耐心等待您的包裹，他将漂洋过海来与您相见。</string>
     <string name="payment_success_go_home_msg">继续购物</string>
     <string name="delivery_title_bar_title">配送方式</string>-->
-    <string name="dialog_merge_order_help_title" translatable="false">海外集运发货</string>
-    <string name="dialog_direct_mail_help_title" translatable="false">海外直邮发货</string>
-    <string name="dialog_merge_order_help_msg" translatable="false">您多个订单的商品可以加入同一个包裹发货（节省运费）。在包裹页面提交“发货通知”后，仓库即会为您发货。</string>
-    <string name="dialog_direct_mail_help_msg" translatable="false">订单内的商品入库后，仓库即会为你直接发货。</string>
+    <string name="dialog_merge_order_help_title">海外集运发货</string>
+    <string name="dialog_direct_mail_help_title">海外直邮发货</string>
+    <string name="dialog_merge_order_help_msg">您多个订单的商品可以加入同一个包裹发货（节省运费）。在包裹页面提交“发货通知”后，仓库即会为您发货。</string>
+    <string name="dialog_direct_mail_help_msg">订单内的商品入库后，仓库即会为你直接发货。</string>
+    <string name="dialog_gift_help_msg">好友填写收货信息后，请在包裹页面提交“发货通知”，仓库即会为您发货。</string>
+
     <string name="delivery_toast_msg">未选择物流方式</string>
     <!-- 7 6-->
-    <string name="String_my_order" translatable="false">我的订单</string>
-    <string name="String_goto_pay" translatable="false">Pending</string>
-    <string name="String_payed" translatable="false">Paid</string>
+    <string name="String_my_order">我的订单</string>
+    <string name="String_goto_pay">Pending</string>
+    <string name="String_payed">Paid</string>
     <string name="buy_now">Go Shopping</string>
 
     <!-- 7 7-->
-    <string name="add_to_album" translatable="false">Add to list</string>
-    <string name="create_new_album" translatable="false">Create New List</string>
-    <string name="add_to_album_in" translatable="false">Add to list</string>
-    <string name="album_name" translatable="false">List name</string>
-    <string name="String_enter_album_name" translatable="false">Enter List Title</string>
-    <string name="creating_album" translatable="false">Creating list ..</string>
-    <string name="String_create_album_success" translatable="false">List created successfully</string>
-    <string name="String_create_album_failure" translatable="false">List created failed</string>
+    <string name="add_to_album">Add to list</string>
+    <string name="create_new_album">Create New List</string>
+    <string name="add_to_album_in">Add to list</string>
+    <string name="album_name">List name</string>
+    <string name="String_enter_album_name">Enter List Title</string>
+    <string name="creating_album">Creating list ..</string>
+    <string name="String_create_album_success">List created successfully</string>
+    <string name="String_create_album_failure">List created failed</string>
     <string name="add_to_album_failed">Adding failed</string>
 
 
-    <string name="send_to_wx_friend" translatable="false">发送给朋友</string>
-    <string name="favovrite" translatable="false">收藏</string>
-    <string name="share_error_info" translatable="false">请安装对应版本的客户端</string>
-    <string name="share_to_qzone" translatable="false">分享到QQ空间</string>
-    <string name="my_favorite" translatable="false">我的收藏</string>
-    <string name="send_to_qq_friend" translatable="false">发送给好友</string>
-    <string name="item_name_has_been_copy" translatable="false">商品已经复制到粘贴板</string>
-    <string name="pictures_downing" translatable="false">图片下载中</string>
-    <string name="string_qq" translatable="false">QQ</string>
-    <string name="string_wechat" translatable="false">Wechat</string>
+    <string name="send_to_wx_friend">发送给朋友</string>
+    <string name="favovrite">收藏</string>
+    <string name="share_error_info">请安装对应版本的客户端</string>
+    <string name="share_to_qzone">分享到QQ空间</string>
+    <string name="my_favorite">我的收藏</string>
+    <string name="send_to_qq_friend">发送给好友</string>
+    <string name="item_name_has_been_copy">商品已经复制到粘贴板</string>
+    <string name="pictures_downing">图片下载中</string>
+    <string name="string_qq">QQ</string>
+    <string name="string_wechat">Wechat</string>
     <string name="string_product_in_store">进货</string>
     <string name="String_direct_mail">海外直邮发货</string>
 
     <!--拼团-->
-    <string name="String_hottest" translatable="false">最热</string>
-    <string name="String_newest" translatable="false">最新</string>
-    <string name="String_crowd_attend" translatable="false">参加拼团</string>
-    <string name="String_hot_crowd" translatable="false">最热拼团</string>
-    <string name="String_finish_crowd" translatable="false">即将结束</string>
-    <string name="String_no_discount" translatable="false">无折扣</string>
-    <string name="String_discount_tag_int" translatable="false">%1$d折</string>
-    <string name="String_discount_tag_int2" translatable="false">%1$d折</string>
-    <string name="String_discount_tag" translatable="false">%1$.1f折</string>
-    <string name="String_discount_tag2" translatable="false">%1$.1f折</string>
-    <string name="String_invite_friend" translatable="false">邀请好友拼团</string>
-    <string name="String_has_attend_count" translatable="false">已有%1$d人参加</string>
-    <string name="String_addend_crowd_now" translatable="false">立即拼团</string>
-    <string name="String_crowd_title" translatable="false">拼团</string>
-    <string name="String_attend_crowd_title" translatable="false">参加拼团</string>
-    <string name="String_crowd_detail_title" translatable="false">拼团详情</string>
+    <string name="String_hottest">最热</string>
+    <string name="String_newest">最新</string>
+    <string name="String_crowd_attend">参加拼团</string>
+    <string name="String_hot_crowd">最热拼团</string>
+    <string name="String_finish_crowd">即将结束</string>
+    <string name="String_no_discount">无折扣</string>
+    <string name="String_discount_tag_int">%1$d折</string>
+    <string name="String_discount_tag_int2">%1$d折</string>
+    <string name="String_discount_tag">%1$.1f折</string>
+    <string name="String_discount_tag2">%1$.1f折</string>
+    <string name="String_invite_friend">邀请好友拼团</string>F
+    <string name="String_has_attend_count">已有%1$d人参加</string>
+    <string name="String_addend_crowd_now">立即拼团</string>
+    <string name="String_crowd_title">拼团</string>
+    <string name="String_attend_crowd_title">参加拼团</string>
+    <string name="String_crowd_detail_title">拼团详情</string>
+    <string name="send_friend_for_address">发送给好友填写收货地址</string>
+    <string name="share_method_messenger">Messenger</string>
+    <string name="parcel_type_gift">礼品包裹</string>
+    <string name="string_crowd_success_message">拼团成功后请注意查收入库通知，并到我的包裹中提交发货通知！</string>
+    <string name="share_friend_title">海淘送礼</string>
+    <string name="share_friend_info">填写您的收货地址，领取宝贝吧！</string>
+
+    <string name="package_shipping_tarrif_note_ver2">&#040;海关关税%1$.2f%%&#041;</string>
 
 
+    <string name="out_of_range_note_text">您选择的物流方式限定了商品实际价值需小于%1$s元</string>
+    <string name="package_pay_text_only">支付</string>ƒ
+    <string name="string_my_receive_address">我的收货地址</string>
+    <string name="string_parcel_item_total">宝贝总数量:</string>
+    <string name="string_baby_counts">对方可以领到的宝贝数量为%1$s个</string>
+    <string name="string_fu_text">福袋</string>
+
+    <!-- 绑定模块相关 -->
+    <string name="account_bind">Bind account</string>
+    <string name="login_location_z_01">Mainland China</string>
+    <string name="tv_for_login_ed_hinnt_01">Please enter mobile number</string>
+    <string name="tv_for_register_in_phone_rl_03">Verification code</string>
+    <string name="tv_for_register_in_phone_ed_03_hinnt">Enter code received via SMS</string>
+    <string name="String_bind_phone">Bind mobile number</string>
+    <string name="string_bind_now">Bind now</string>
+    <string name="bind_successful">Bound successfully</string>
+    <string name="go_to_bind">Bind</string>
+    <string name="no_bind">No, thanks</string>
+    <string name="bind_ph_dialog_text">Bind registered mobile phone</string>
+    <string name="is_bind">Bound</string>
+    <string name="is_not_bind">Unbound</string>
+    <string name="string_unbind">Unbind</string>
+    <string name="string_unbind_02">Unbind%1$s</string>
+    <string name="unbind_messg">For Unbinding, you should bind your mobile phone first.</string>
+
+    <string name="unbind_successful">Unbound successfully</string>
+
+
+    <string name="string_availabe_time">有效期：</string>
+    <string name="string_give_fu_title">送福袋</string>
+    <string name="please_input_fu_count">请输入福袋数量!</string>
+    <string name="string_fu_bag_count">福袋个数</string>
+    <string name="string_input_fu_count">输入福袋的个数</string>
+    <string name="string_send_fu_message">希望你能够喜欢这个福袋</string>
+    <string name="string_btn_send_fu">送出福袋</string>
+    <string name="string_parcel_time_out">已超时</string>
+    <string name="string_send_pre_note">分享后您的包裹将被拆分为福袋送给对方</string>
+    <string name="string_had_send_fu">已发福袋</string>
+    <string name="string_this_is">这是</string>
 </resources>
 

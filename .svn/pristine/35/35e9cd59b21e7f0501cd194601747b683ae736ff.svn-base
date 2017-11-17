@@ -1,0 +1,42 @@
+package com.fuexpress.kr.bean;
+
+import java.io.Serializable;
+
+import fksproto.CsCrowd;
+
+/**
+ * Created by k550 on 5/9/2016.
+ * 订单单品详情
+ */
+public class SalesOrderItemBean implements Serializable {
+    public long order_item_id;
+    public long order_id;
+    public long item_id;
+    public long parcel_id;
+    public String parcel_number;
+    public String order_number;
+    public String title;
+    public String url;
+    public int state;
+    public float unit_price;
+    public int qty;
+    public int qty_pack;
+    public int qty_ship;
+    public int qty_cancel;
+    public String buyfrom;
+    public String extend_label;
+    public String cancel_reason;
+    public String prompt;
+    public String currencyCode;
+    public String order_message="";
+    public String korea_color="";
+    public String merchant_message="";
+    public String korea_order="";
+    public boolean isTranslated=false;
+    public String merchant_message_translated="";
+    public String korea_order_translated="";
+    public CsCrowd.Crowd crowd;
+
+    public SalesOrderItemBean(){
+    }
+}

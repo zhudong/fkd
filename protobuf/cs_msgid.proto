@@ -442,6 +442,39 @@ enum FksCSProtoMsgId
 	MSGID_GET_ITEM_CROWD_DETAIL_REQUEST               = 283;//单品拼单详情请求
 	MSGID_GET_ITEM_CROWD_DETAIL_RESPONSE              = 284;//单品拼单详情应答
 
+	MSGID_INIT_ADDRESS_AJAX_REQUEST              	  = 285;//收货地址初始化请求
+	MSGID_INIT_ADDRESS_AJAX_RESPONSE             	  = 286;//收货地址初始化应答
+
+	MSGID_SAVE_ADDRESS_AJAX_REQUEST               	  = 287;//保存收货地址请求
+	MSGID_SAVE_ADDRESS_AJAX_RESPONSE             	  = 288;//保存收货地址应答
+
+	MSGID_ADD_CROWD_TO_CART_REQUEST                   = 289;//拼单加入购物车请求
+	MSGID_ADD_CROWD_TO_CART_RESPONSE                  = 290;//拼单加入购物车应答
+
+	MSGID_NEW_SALES_ORDER_DETAIL_REQUEST              = 291;//新订单详情请求
+	MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE             = 292;//新订单详情应答
+
+	MSGID_PLACE_ORDER_AGAIN_REQUEST                   = 293;//重新下单请求
+	MSGID_PLACE_ORDER_AGAIN_RESPONSE                  = 294;//重新下单应答
+
+	MSG_DO_SHARE_BAG_REQUEST                          = 295;//送福袋保存福袋数量请求
+	MSG_DO_SHARE_BAG_RESPONSE                         = 296;//送福袋保存福袋数量应答
+
+	MSG_INIT_BAG_AJAX_REQUEST                         = 297;//福袋弹出请求
+	MSG_INIT_BAG_AJAX_RESPONSE                        = 298;//福袋弹出应答
+
+	MSG_BAG_INFO_AJAX_REQUEST                         = 299;//福袋详情请求
+	MSG_BAG_INFO_AJAX_RESPONSE                        = 300;//福袋详情应答
+
+	MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST     	      = 301; //无绑定第三方登录请求
+	MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE    	      = 302; //无绑定第三方登录应答
+
+	MSGID_GET_BIND_INFO_REQUEST                       = 303;//获取绑定信息请求
+	MSGID_GET_BIND_INFO_RESPONSE                      = 304;//获取绑定信息应答
+
+	MSGID_INIT_SEND_BAG_REQUEST                       = 305;//初始化发送福袋请求
+	MSGID_INIT_SEND_BAG_RESPONSE                      = 306;//初始化发送福袋应答
+
 	//add by jack.zuoquan
 	MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST      = 503;//获取充值卡购物车请求
 	MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE     = 504;//获取充值卡购物车应答

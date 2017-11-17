@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -39,6 +40,8 @@ public class ProductInfoMiddleView extends LinearLayout {
     TextView mTvItemPriceEnd;
     @BindView(R.id.btn_buy_now)
     TextView mBtnBuyNow;
+    @BindView(R.id.btn_crowd)
+    TextView mBtnCrowd;
 
     @BindView(R.id.img_item_tag)
     ImageView mImgItemTag;
@@ -85,8 +88,13 @@ public class ProductInfoMiddleView extends LinearLayout {
             mTvItemPriceEnd.setText(salePrices.get(1)[0]);
         }
         mImgItemTag.setImageResource(productManage.isSales() ? R.mipmap.tag1 : R.mipmap.tag0);
-//        if (!productManage.isBuyNow() /*& !productManage.isCrowd()*/)
-//            mImgItemTag.setImageResource(R.mipmap.tag2);
+
+        mBtnBuyNow.setVisibility(productManage.isBuyNow() ? VISIBLE : GONE);
+        mBtnCrowd.setVisibility(productManage.isCrowd() ? VISIBLE : GONE);
+        if (!productManage.isBuyNow() && !productManage.isCrowd()) {
+            mImgItemTag.setImageResource(R.mipmap.tag2);
+        }
+
     }
 
     public TextView getBtnBuyNow() {
@@ -95,5 +103,16 @@ public class ProductInfoMiddleView extends LinearLayout {
 
     public void setmItemBean(ItemBean mItemBean) {
         this.mItemBean = mItemBean;
+    }
+
+    OnClickListener mListener;
+
+    public void setClickListener(OnClickListener listener) {
+        this.mListener = listener;
+    }
+
+    @OnClick({R.id.btn_crowd, R.id.btn_buy_now})
+    public void onClick(View view) {
+        if (mListener != null) mListener.onClick(view);
     }
 }

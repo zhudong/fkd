@@ -2,6 +2,8 @@ package com.fuexpress.kr.bean;
 
 import java.io.Serializable;
 
+import fksproto.CsCrowd;
+
 /**
  * Created by k550 on 5/9/2016.
  * 订单单品详情
@@ -33,6 +35,10 @@ public class SalesOrderItemBean implements Serializable {
     public boolean isTranslated=false;
     public String merchant_message_translated="";
     public String korea_order_translated="";
+    public CsCrowd.Crowd crowd;
+    public boolean isCrowd;
+    public int bagStatus;
+
     public SalesOrderItemBean(){
     }
 }

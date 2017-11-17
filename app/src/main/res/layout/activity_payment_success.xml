@@ -1,120 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <com.fuexpress.kr.ui.view.TitleBarView
         android:id="@+id/payment_titlebar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <LinearLayout
+        android:layout_height="wrap_content"/>
+
+
+    <ListView
+        android:id="@+id/lv_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/payment_success" />
-
-            <TextView
-                android:id="@+id/payment_success_message_tv"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_result_payment_success_order_title"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_result_thank" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_result_order_id" />
-
-
-            <TextView
-                android:id="@+id/payment_success_order_number_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/String_payment_success_msg"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_result_delivery_method" />
-
-
-            <TextView
-                android:id="@+id/payment_success_shipping_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_result_waring_msg" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/payment_success_shopping_btn"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/selector_red_btn_drawable"
-        android:text="@string/payment_success_go_home_msg"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

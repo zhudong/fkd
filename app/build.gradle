@@ -5,13 +5,14 @@ apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion '24.0.3'
+
     defaultConfig {
         applicationId "com.fuexpress.kr"
         minSdkVersion 16
         targetSdkVersion 23
         multiDexEnabled true
-        versionCode 100009
-        versionName "1.0.9"
+        versionCode 100101
+        versionName "1.1.1"
     }
     dexOptions {
         incremental true
@@ -49,7 +50,6 @@ android {
         flatDir {
             dirs 'libs'
             mavenCentral()
-
         }
     }
     productFlavors {
@@ -76,6 +76,14 @@ dependencies {
     compile project(':volley-release')
 
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    //    compile 'com.facebook.android:facebook-android-sdk:4.22.0'
+    //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+//dependencies
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //新增了一个外国的云项目：
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.android.support:appcompat-v7:24.2.1'
@@ -106,19 +114,12 @@ dependencies {
     compile 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
     compile 'com.github.rey5137:material:1.2.4'
     compile 'com.steelkiwi:cropiwa:1.0.0'
+    compile 'com.github.florent37:materialviewpager:1.2.1'
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    compile 'com.cloudinary:cloudinary-android:1.14.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     apt 'com.zhy:mpermission-compiler:1.0.0'
-
-    compile 'com.github.florent37:materialviewpager:1.2.1'
-
-//dependencies
-    compile 'com.flaviofaria:kenburnsview:1.0.7'
-    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    //新增了一个外国的云项目：
-
-    compile 'com.cloudinary:cloudinary-android:1.14.0'
 }

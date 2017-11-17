@@ -13,7 +13,6 @@ import com.fuexpress.kr.bean.SysNoticeBean;
 import com.fuexpress.kr.model.ItemBean;
 import com.fuexpress.kr.model.MerChantBean;
 import com.fuexpress.kr.model.UserInfoBean;
-import com.fuexpress.kr.ui.view.imageselector.imsbean.Image;
 import com.socks.library.KLog;
 
 import java.lang.reflect.Method;
@@ -340,6 +339,7 @@ public class ClassUtil {
         itemBean.crowd_order_id = item.getCrowdOrderId();
         itemBean.create_id = item.getCreateId();
         itemBean.currency_code = item.getCurrencyCode();
+        itemBean.price = item.getPrice();
         return itemBean;
     }
 
@@ -407,8 +407,8 @@ public class ClassUtil {
         orderBean.grand_total = salesOrder.getGrandTotal();
         orderBean.is_crowd = salesOrder.getIsCrowd();
         orderBean.use_gift_card = salesOrder.getUseGiftCard();
-        orderBean.currencyCode=salesOrder.getCurrencycode();
-        orderBean.total_paid=salesOrder.getTotalPaid();
+        orderBean.currencyCode = salesOrder.getCurrencycode();
+        orderBean.total_paid = salesOrder.getTotalPaid();
         return orderBean;
     }
 
@@ -440,13 +440,17 @@ public class ClassUtil {
         salesOrderItemBean.extend_label = salesOrderItem.getExtendLabel();
         salesOrderItemBean.cancel_reason = salesOrderItem.getCancelReason();
         salesOrderItemBean.prompt = salesOrderItem.getPrompt();
-        salesOrderItemBean.currencyCode=salesOrderItem.getCurrencycode();
-        salesOrderItemBean.order_message=salesOrderItem.getMessage();
-        salesOrderItemBean.korea_color=salesOrderItem.getKoreaColor();
-        salesOrderItemBean.merchant_message=salesOrderItem.getMerchantMessage();
-        salesOrderItemBean.korea_order=salesOrderItem.getKoreaOrder();
+        salesOrderItemBean.currencyCode = salesOrderItem.getCurrencycode();
+        salesOrderItemBean.order_message = salesOrderItem.getMessage();
+        salesOrderItemBean.korea_color = salesOrderItem.getKoreaColor();
+        salesOrderItemBean.merchant_message = salesOrderItem.getMerchantMessage();
+        salesOrderItemBean.korea_order = salesOrderItem.getKoreaOrder();
+        salesOrderItemBean.crowd = salesOrderItem.getCrowd();
+        salesOrderItemBean.isCrowd = salesOrderItem.getIsCrowd();
+        salesOrderItemBean.bagStatus = salesOrderItem.getBagStatus();
         return salesOrderItemBean;
     }
+
     public static List<SalesOrderItemBean> conventSalesOrderItemList2BeanList(List<CsOrder.SalesOrderItem> salesOrderItems) {
         List<SalesOrderItemBean> salesOrderItemBeans = new ArrayList<>();
         for (CsOrder.SalesOrderItem salesOrderItem : salesOrderItems) {

@@ -2,19 +2,16 @@ package com.fuexpress.kr.net;
 
 import android.util.Log;
 
-
 import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.base.SysApplication;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.utils.ClassUtil;
 import com.fuexpress.kr.utils.CommonUtils;
-import com.fuexpress.kr.utils.LogUtils;
 import com.fuexpress.kr.utils.RandomUtil;
 import com.fuexpress.kr.utils.RequestBodyUtil;
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Message;
-import com.socks.library.KLog;
 import com.yiss.ddm.packer.proto.SSPDU;
 
 import java.io.ByteArrayInputStream;
@@ -92,14 +89,14 @@ public class NetEngine {
 //        baseRequestBuilder.setUuid(mUuid);
         baseRequestBuilder.setAutoCall(isAutoCall);
         ClassUtil.invoke(requestBuilder, "setHead", baseRequestBuilder);
-        if (requestBuilder.getClass() == CsLogin.AccountRequest.Builder.class) {//当请求是与账户有关的操作时,这里我们进行判断是否设置了RandomKey: edit by Longer
+        /*if (requestBuilder.getClass() == CsLogin.AccountRequest.Builder.class) {//当请求是与账户有关的操作时,这里我们进行判断是否设置了RandomKey: edit by Longer
             CsLogin.AccountRequest.Builder requestBuilder1 = (CsLogin.AccountRequest.Builder) requestBuilder;
             sIsHasRandomKey = requestBuilder1.hasRandomKey();//把其作为成员变量储存起来 edit by Longer
         } else {
             if (sIsHasRandomKey) {
                 sIsHasRandomKey = false;
             }
-        }
+        }*/
         cachedThreadPool.execute(new Runnable() {
                                      @Override
                                      public void run() {
@@ -142,7 +139,12 @@ public class NetEngine {
 
     private static void unpack(byte[] responseBytes, INetEngineListener listener, ProtoConfig protoConfig) {
         SSPDU sspdu = new SSPDU();
-        if (AccountManager.getInstance().mSessionKey != null && AccountManager.getInstance().mSessionKey.length() > 0 && !sIsHasRandomKey) {
+        /*if (AccountManager.getInstance().mSessionKey != null && AccountManager.getInstance().mSessionKey.length() > 0 && !sIsHasRandomKey) {
+            sspdu.mKey = AccountManager.getInstance().mSessionKey;
+        } else {
+            sspdu.mKey = sRandomKey;
+        }*/
+        if (AccountManager.getInstance().mSessionKey != null && AccountManager.getInstance().mSessionKey.length() > 0) {
             sspdu.mKey = AccountManager.getInstance().mSessionKey;
         } else {
             sspdu.mKey = sRandomKey;
@@ -159,7 +161,8 @@ public class NetEngine {
             if (pbHead.getBase().getResult() == -6) {
                 //协议票据无效
                 EventBus.getDefault().post(new BusEvent(BusEvent.LOGOUT, null));
-                AccountManager.getInstance().logout(null);
+                if (AccountManager.isLogin)
+                    AccountManager.getInstance().logout(null);
             }
             return;
         }

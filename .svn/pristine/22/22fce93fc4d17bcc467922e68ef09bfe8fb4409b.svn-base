@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <ScrollView
+        android:id="@+id/cart_order_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="false">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/delivery_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:minHeight="55dp"
+                android:padding="10dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center"
+                    android:text="@string/String_delivery_method"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:id="@+id/megre_order_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/system_Mytextsize_black_12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/String_merge_order"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/system_Mytextsize_gray_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/String_merge_order_hint"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/direct_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/system_Mytextsize_black_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/String_direct_mail_1"/>
+
+                    <TextView
+                        android:id="@+id/direct_price_tv"
+                        style="@style/system_Mytextsize_black_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/String_order_price"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/fu_direct_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/String_direct_fu"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/arrow_right"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/order_package_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/order_address_title_tv"
+                    style="@style/system_Mytextsize_gray_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/String_package_address"
+                    android:textColor="#999999"
+                    android:textSize="12sp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/order_default_address_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/selector_red_btn_drawable"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/default_msg"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"/>
+
+                        <TextView
+                            android:id="@+id/order_name_and_phone_tv"
+                            style="@style/system_Mytextsize_gray_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/String_cart_consignee_msg"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/order_package_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textColor="#999999"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/address_arrow_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/arrow_right"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/order_shipping_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/shipping_left_tv"
+                    style="@style/system_Mytextsize_gray_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/package_transport_type"
+                    android:textSize="12sp"/>
+
+                <LinearLayout
+                    android:id="@+id/order_shipping_content_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/shipping_left_tv"
+                    android:orientation="vertical"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/order_payment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:paddingBottom="8dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/String_payment_type"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:id="@+id/payment_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginRight="14dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:visibility="visible"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/arrow_right"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/order_content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_warehose_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:text="warsehouse"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/system_Mytextsize_black_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gift_card_grandtotal"
+                    android:textSize="12sp"/>
+
+                <!--<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="¥"
+                    android:textColor="@color/red_shape"
+                    android:textSize="12sp"/>-->
+
+                <TextView
+                    android:id="@+id/order_gandtotal_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="@string/String_price"
+                    android:textColor="@color/red_shape"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/order_grand_total_msg_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/String_submit_hint"
+                android:textColor="#999999"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/order_submit_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector_red_btn_drawable"
+            android:text="@string/gift_card_commit_order"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>

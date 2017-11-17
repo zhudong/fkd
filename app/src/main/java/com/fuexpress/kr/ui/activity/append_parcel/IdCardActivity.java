@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import butterknife.OnClick;
 
 public class IdCardActivity extends BaseActivity {
 
+    public static final String NEED_CARD_IMG = "need_card_img";
     public static final String ID_CARD_FRONT = "id_card_front";
     public static final String ID_CARD_BACK = "id_card_back";
     public static final String ID_CARD_NUMBER = "id_card_number";
@@ -70,6 +72,8 @@ public class IdCardActivity extends BaseActivity {
     TextView titleTvRight;
     @BindView(R.id.title_iv_right)
     ImageView titleIvRight;
+    @BindView(R.id.ll_id_img)
+    LinearLayout llIdImg;
     private ItemUploadManager mFrontuploadManager;
     private ItemUploadManager mBackuploadManager;
     private DisplayImageOptions mDisplayOptions;
@@ -79,6 +83,7 @@ public class IdCardActivity extends BaseActivity {
     private String mFrontUrl;
     private String mBackUrl;
     private IDinfoBean mInfo;
+    private boolean mNeedCardImg;
 
     @Override
     public View setInitView() {
@@ -94,13 +99,15 @@ public class IdCardActivity extends BaseActivity {
         titleTvRight.setText(R.string.String_parcel_delete);
         mDisplayOptions = ImageLoaderHelper.getInstance(this).getDisplayOptions();
         JsonSerializer jsonSerializer = new JsonSerializer();
-        mInfo = jsonSerializer.deserializeIDinfo(getIntent().getStringExtra(ID_CARD_BEAN));
+        Intent intent = getIntent();
+        mInfo = jsonSerializer.deserializeIDinfo(intent.getStringExtra(ID_CARD_BEAN));
+        mNeedCardImg = intent.getBooleanExtra(NEED_CARD_IMG, false);
         initEvent();
         retore();
     }
 
     private void retore() {
-
+        llIdImg.setVisibility(mNeedCardImg ? View.VISIBLE : View.GONE);
         if (!TextUtils.isEmpty(mInfo.getIdNumber())) {
             mId_card_number = mInfo.getIdNumber();
             mBackUrl = mInfo.getUrlBack();
@@ -150,6 +157,12 @@ public class IdCardActivity extends BaseActivity {
             Toast.makeText(this, "请输入身份证号码！", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if (mNeedCardImg && TextUtils.isEmpty(mFrontUrl) && TextUtils.isEmpty(mBackUrl)) {
+            Toast.makeText(this, "请上传身份证图片", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent();
         intent.putExtra(ID_CARD_FRONT, mFrontUrl);
         intent.putExtra(ID_CARD_BACK, mBackUrl);

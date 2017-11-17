@@ -1,7 +1,6 @@
 package com.fuexpress.kr.ui.activity.choose_address;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -229,7 +228,8 @@ public class ChooseRegionActivity extends BaseActivity implements RefreshListVie
             } else {
                 List<CsAddress.DirectoryRegionInfo> regionInfoListList = RegionDataManager.getInstance().getRegionInfoListList();
                 CsAddress.DirectoryRegionInfo directoryRegionInfo = regionInfoListList.get(index);
-                addressBundleBean.setRegionId(mAddressBundleBean.getRegionId());
+                //addressBundleBean.setRegionId(mAddressBundleBean.getRegionId());
+                addressBundleBean.setRegionId(directoryRegionInfo.getDirectoryCountryRegionId());
                 addressBundleBean.setRegionCode(directoryRegionInfo.getDirectoryCountryRegionCode());
                 addressBundleBean.setParentId(directoryRegionInfo.getDirectoryCountryRegionId());
                 addressBundleBean.setLocaleCode(mAddressBundleBean.getLocaleCode());

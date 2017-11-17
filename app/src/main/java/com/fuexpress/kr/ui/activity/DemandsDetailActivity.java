@@ -249,7 +249,7 @@ public class DemandsDetailActivity extends BaseActivity {
                 }
                 Intent intent = new Intent(DemandsDetailActivity.this, PackageDetailActivity.class);
                 intent.putExtra(PackageDetailActivity.PARCEL_ID, Long.valueOf(mBean.parcelId));
-                intent.putExtra(PackageDetailActivity.FROM_WHERE, Constants.getStatusString(mBean.status));
+                intent.putExtra(PackageDetailActivity.FROM_WHERE, Constants.getStatusString(mBean.status, null));
                 this.startActivity(intent);
                 break;
             case R.id.parcel_name_layout:
@@ -258,7 +258,7 @@ public class DemandsDetailActivity extends BaseActivity {
                 }
                 Intent intent1 = new Intent(DemandsDetailActivity.this, PackageDetailActivity.class);
                 intent1.putExtra(PackageDetailActivity.PARCEL_ID, Long.valueOf(mBean.parcelId));
-                intent1.putExtra(PackageDetailActivity.FROM_WHERE, Constants.getStatusString(mBean.status));
+                intent1.putExtra(PackageDetailActivity.FROM_WHERE, Constants.getStatusString(mBean.status, null));
                 this.startActivity(intent1);
                 break;
         }
@@ -749,7 +749,7 @@ public class DemandsDetailActivity extends BaseActivity {
                 tvDemandType.getPaint().setFakeBoldText(false);
             }
 
-            tvDemandState.setText(getString(R.string.demand_state) + Constants.getStatusString(mBean.status));
+            tvDemandState.setText(getString(R.string.demand_state) + Constants.getStatusString(mBean.status, null));
             tvDemandState.getPaint().setFakeBoldText(false);
             if (mType != Receive) {
                 tvDemandServiceFee.setText(getString(R.string.service_fee) + UIUtils.getCurrency(this, mBean.currencycode, Float.valueOf(mBean.servicefee.replace(",", ""))));
@@ -777,7 +777,7 @@ public class DemandsDetailActivity extends BaseActivity {
                     loader.displayImage(mBean.imagesurl.get(i).getImage(), mImageViews[i], options);
                 }
             }
-            titleTvCenter.setText("" + Constants.getStatusString(mBean.status));
+            titleTvCenter.setText("" + Constants.getStatusString(mBean.status, null));
             if (Constants.DemandStatus.STATUS_SHIPPED.equals(mBean.status)) {
                 //已发货就显示地址
                 mAddressLayout.setVisibility(View.VISIBLE);

@@ -1,7 +1,10 @@
 package com.fuexpress.kr.model;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,14 +16,18 @@ import com.fuexpress.kr.bean.CartCommodityBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
+import com.fuexpress.kr.ui.activity.CardOrderDetailActivity;
+import com.fuexpress.kr.ui.activity.order_detail.OrderDetailCanceledActivity;
+import com.fuexpress.kr.ui.activity.shopping_cart.ShopCartActivity;
 import com.fuexpress.kr.utils.LogUtils;
+import com.google.protobuf.GeneratedMessage;
 
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import fksproto.CsBase;
 import fksproto.CsCart;
-
+import fksproto.CsCrowd;
 
 
 public class ShopCartManager {
@@ -57,6 +64,44 @@ public class ShopCartManager {
 //        dialog.getProgressHelper().setBarColor(Color.WHITE);
 //        dialog.setCancelable(false);
         return instance;
+    }
+
+    public void addCrowdToCartRequest(int crowdId, int itemId, final int qty, String note, List<CsBase.PairIntInt> optionIds) {
+        CsCrowd.AddCrowdToCartRequest.Builder builder = CsCrowd.AddCrowdToCartRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setCrowdId(crowdId);
+        builder.setItemId(itemId);
+        builder.setQty(qty);
+        builder.setNote(note);
+        builder.addAllAttrs(optionIds);
+        builder.setCurrencyCode(AccountManager.getInstance().getCurrencyCode());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsCrowd.AddCrowdToCartResponse>() {
+
+            @Override
+            public void onSuccess(CsCrowd.AddCrowdToCartResponse response) {
+                ((Activity) mCtx).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_success_msg), Toast.LENGTH_SHORT).show();
+                        int count = mApp.getQtyCount();
+                        Log.d(TAG, "------------------------ShopCartManager count: " + count);
+                        sendCartQty(qty + count);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(final int ret, String errMsg) {
+                ((Activity) mCtx).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_failed_msg) + ret, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
     }
 
     public void addToShopCart(final CartCommodityBean cartCommodityBean) {
@@ -116,6 +161,50 @@ public class ShopCartManager {
                 }
                 Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_failed_msg) + ret, Toast.LENGTH_SHORT).show();
                 Looper.loop();
+            }
+        });
+    }
+
+
+    public void placeOrderAgainRequest(int salesOrderId, final String currencyCode){
+        ((OrderDetailCanceledActivity)mCtx).showLoading();
+        CsCart.PlaceOrderAgainRequest.Builder builder = CsCart.PlaceOrderAgainRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setLocaleCode(AccountManager.getInstance().getLocaleCode());
+        builder.setCurrencyCode(currencyCode);
+        builder.setSalesOrderId(salesOrderId);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCart.PlaceOrderAgainResponse>() {
+
+            @Override
+            public void onSuccess(final CsCart.PlaceOrderAgainResponse response) {
+                LogUtils.d(response.toString());
+                ((Activity) mCtx).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((OrderDetailCanceledActivity)mCtx).closeLoading();
+                        if (!TextUtils.isEmpty(response.getHead().getErrmsg())) {
+                            Toast.makeText(mCtx, response.getHead().getErrmsg(), Toast.LENGTH_SHORT).show();
+                        }
+                        int count = mApp.getQtyCount();
+                        Log.d(TAG, "------------------------ShopCartManager count: " + count);
+                        sendCartQty(count++);
+                        Intent intent = new Intent();
+                        intent.setClass(mCtx, ShopCartActivity.class);
+                        intent.putExtra("currency", currencyCode);
+                        mCtx.startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(final int ret, String errMsg) {
+                ((Activity) mCtx).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((OrderDetailCanceledActivity)mCtx).closeLoading();
+                        Toast.makeText(mCtx, mCtx.getString(R.string.add_to_cart_failed_msg) + ret, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

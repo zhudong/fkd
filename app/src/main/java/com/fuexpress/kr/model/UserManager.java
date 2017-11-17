@@ -13,15 +13,11 @@ import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.net.RequestNetListener;
 import com.fuexpress.kr.ui.activity.AddRequireActivity;
-import com.fuexpress.kr.ui.activity.EditRequireActivity;
-import com.fuexpress.kr.ui.activity.PickUpActivity;
 import com.fuexpress.kr.ui.activity.choose_address.AddressBundleBean;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.utils.DataCleanManager;
 import com.fuexpress.kr.utils.LogUtils;
 import com.fuexpress.kr.utils.SPUtils;
-import com.fuexpress.kr.wxapi.WXPayEntryActivity;
-import com.google.protobuf.GeneratedMessage;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -29,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
-import fksproto.CsBase;
 import fksproto.CsUser;
 
 /**
@@ -451,7 +446,7 @@ public class UserManager {
             @Override
             public void onSuccess(CsUser.MyRequireParcelNumResponse response) {
                 //LogUtils.e("这是订单数量:" + response.getRequirecount() + "+" + response.getParcelcount());
-                mBottomStateBean = new BottomStateBean(response.getRequirecount(), response.getParcelcount(), response.getSupply());
+                mBottomStateBean = new BottomStateBean(response.getRequirecount(), response.getParcelcount(), response.getSupply(),response.getGroup());
                 EventBus.getDefault().post(new BusEvent(BusEvent.GET_DEMAND_AND_PACKAGE_COUNT_COMPLETE
                         , true, mBottomStateBean));
 

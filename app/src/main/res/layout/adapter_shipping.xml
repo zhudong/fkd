@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/shipping_fee_tv"
+            android:layout_marginRight="10dp"
             android:gravity="right"
             android:orientation="vertical">
 
@@ -39,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="韩国首尔中转仓"
+                android:gravity="right"
                 android:textColor="@color/gray_666"
                 android:textSize="13sp"
                 />
@@ -47,6 +49,7 @@
                 android:id="@+id/shipping_method_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:layout_alignParentRight="true"
                 android:text="韩中顺丰空运，3-5天"
                 android:textColor="@color/black_to_pay"

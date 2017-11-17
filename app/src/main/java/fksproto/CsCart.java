@@ -6,11 +6,11 @@ package fksproto;
 public final class CsCart {
   private CsCart() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+          com.google.protobuf.ExtensionRegistry registry) {
   }
   public interface SalesCartItemOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.SalesCartItem)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.SalesCartItem)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required int64 cart_item_id = 1;</code>
@@ -25,7 +25,7 @@ public final class CsCart {
      * <code>required int64 item_id = 2;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     boolean hasItemId();
@@ -33,7 +33,7 @@ public final class CsCart {
      * <code>required int64 item_id = 2;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     long getItemId();
@@ -42,7 +42,7 @@ public final class CsCart {
      * <code>required int32 warehouse_id = 3;</code>
      *
      * <pre>
-     *�ֿ�id
+     *仓库id
      * </pre>
      */
     boolean hasWarehouseId();
@@ -50,7 +50,7 @@ public final class CsCart {
      * <code>required int32 warehouse_id = 3;</code>
      *
      * <pre>
-     *�ֿ�id
+     *仓库id
      * </pre>
      */
     int getWarehouseId();
@@ -59,7 +59,7 @@ public final class CsCart {
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
     boolean hasTitle();
@@ -67,25 +67,25 @@ public final class CsCart {
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
-    String getTitle();
+    java.lang.String getTitle();
     /**
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
     com.google.protobuf.ByteString
-        getTitleBytes();
+    getTitleBytes();
 
     /**
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
     boolean hasSubtitle();
@@ -93,25 +93,25 @@ public final class CsCart {
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
-    String getSubtitle();
+    java.lang.String getSubtitle();
     /**
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
     com.google.protobuf.ByteString
-        getSubtitleBytes();
+    getSubtitleBytes();
 
     /**
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
     boolean hasImageUrl();
@@ -119,25 +119,25 @@ public final class CsCart {
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
-    String getImageUrl();
+    java.lang.String getImageUrl();
     /**
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
     com.google.protobuf.ByteString
-        getImageUrlBytes();
+    getImageUrlBytes();
 
     /**
      * <code>required int32 qty = 7;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     boolean hasQty();
@@ -145,7 +145,7 @@ public final class CsCart {
      * <code>required int32 qty = 7;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     int getQty();
@@ -154,7 +154,7 @@ public final class CsCart {
      * <code>required float unit_price = 8;</code>
      *
      * <pre>
-     *���ۣ��۸������
+     *单价，价格人民币
      * </pre>
      */
     boolean hasUnitPrice();
@@ -162,7 +162,7 @@ public final class CsCart {
      * <code>required float unit_price = 8;</code>
      *
      * <pre>
-     *���ۣ��۸������
+     *单价，价格人民币
      * </pre>
      */
     float getUnitPrice();
@@ -171,7 +171,7 @@ public final class CsCart {
      * <code>optional int32 stock = 9;</code>
      *
      * <pre>
-     *���
+     *库存
      * </pre>
      */
     boolean hasStock();
@@ -179,7 +179,7 @@ public final class CsCart {
      * <code>optional int32 stock = 9;</code>
      *
      * <pre>
-     *���
+     *库存
      * </pre>
      */
     int getStock();
@@ -188,7 +188,7 @@ public final class CsCart {
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     boolean hasNote();
@@ -196,25 +196,25 @@ public final class CsCart {
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
-    String getNote();
+    java.lang.String getNote();
     /**
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     com.google.protobuf.ByteString
-        getNoteBytes();
+    getNoteBytes();
 
     /**
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
     boolean hasSeller();
@@ -222,25 +222,25 @@ public final class CsCart {
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
-    String getSeller();
+    java.lang.String getSeller();
     /**
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
     com.google.protobuf.ByteString
-        getSellerBytes();
+    getSellerBytes();
 
     /**
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
     boolean hasBuyfrom();
@@ -248,42 +248,42 @@ public final class CsCart {
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
-    String getBuyfrom();
+    java.lang.String getBuyfrom();
     /**
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
     com.google.protobuf.ByteString
-        getBuyfromBytes();
+    getBuyfromBytes();
 
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    java.util.List<CsBase.ItemExtend>
-        getExtendsList();
+    java.util.List<fksproto.CsBase.ItemExtend>
+    getExtendsList();
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    CsBase.ItemExtend getExtends(int index);
+    fksproto.CsBase.ItemExtend getExtends(int index);
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
     int getExtendsCount();
@@ -291,26 +291,26 @@ public final class CsCart {
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    java.util.List<? extends CsBase.ItemExtendOrBuilder>
-        getExtendsOrBuilderList();
+    java.util.List<? extends fksproto.CsBase.ItemExtendOrBuilder>
+    getExtendsOrBuilderList();
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
+    fksproto.CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
             int index);
 
     /**
      * <code>optional bool is_selected = 14;</code>
      *
      * <pre>
-     *�Ƿ�ѡ��
+     *是否选中
      * </pre>
      */
     boolean hasIsSelected();
@@ -318,7 +318,7 @@ public final class CsCart {
      * <code>optional bool is_selected = 14;</code>
      *
      * <pre>
-     *�Ƿ�ѡ��
+     *是否选中
      * </pre>
      */
     boolean getIsSelected();
@@ -327,7 +327,7 @@ public final class CsCart {
      * <code>optional bool cannot_buyit = 15;</code>
      *
      * <pre>
-     *�Ƿ��ܹ���
+     *是否能购买
      * </pre>
      */
     boolean hasCannotBuyit();
@@ -335,7 +335,7 @@ public final class CsCart {
      * <code>optional bool cannot_buyit = 15;</code>
      *
      * <pre>
-     *�Ƿ��ܹ���
+     *是否能购买
      * </pre>
      */
     boolean getCannotBuyit();
@@ -344,7 +344,7 @@ public final class CsCart {
      * <code>optional int32 min_qty_allow = 16;</code>
      *
      * <pre>
-     *������С��������
+     *允许最小购买数量
      * </pre>
      */
     boolean hasMinQtyAllow();
@@ -352,7 +352,7 @@ public final class CsCart {
      * <code>optional int32 min_qty_allow = 16;</code>
      *
      * <pre>
-     *������С��������
+     *允许最小购买数量
      * </pre>
      */
     int getMinQtyAllow();
@@ -361,7 +361,7 @@ public final class CsCart {
      * <code>optional int32 max_qty_allow = 17;</code>
      *
      * <pre>
-     *�������������
+     *允许最大购买数量
      * </pre>
      */
     boolean hasMaxQtyAllow();
@@ -369,22 +369,76 @@ public final class CsCart {
      * <code>optional int32 max_qty_allow = 17;</code>
      *
      * <pre>
-     *�������������
+     *允许最大购买数量
      * </pre>
      */
     int getMaxQtyAllow();
+
+    /**
+     * <code>optional int32 crowdOrderId = 18;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    boolean hasCrowdOrderId();
+    /**
+     * <code>optional int32 crowdOrderId = 18;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    int getCrowdOrderId();
+
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    boolean hasCrowdOrderStatus();
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    java.lang.String getCrowdOrderStatus();
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    com.google.protobuf.ByteString
+    getCrowdOrderStatusBytes();
+
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    boolean hasCrowd();
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    fksproto.CsCrowd.Crowd getCrowd();
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder();
   }
   /**
    * Protobuf type {@code fksproto.SalesCartItem}
    *
    * <pre>
-   *���ﳵ��Ʒ��Ϣ
+   *购物车单品信息
    * </pre>
    */
   public static final class SalesCartItem extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.SalesCartItem)
-      SalesCartItemOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.SalesCartItem)
+          SalesCartItemOrBuilder {
     // Use SalesCartItem.newBuilder() to construct.
     private SalesCartItem(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -402,19 +456,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private SalesCartItem(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -425,7 +479,7 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -498,10 +552,10 @@ public final class CsCart {
             }
             case 106: {
               if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-                extends_ = new java.util.ArrayList<CsBase.ItemExtend>();
+                extends_ = new java.util.ArrayList<fksproto.CsBase.ItemExtend>();
                 mutable_bitField0_ |= 0x00001000;
               }
-              extends_.add(input.readMessage(CsBase.ItemExtend.PARSER, extensionRegistry));
+              extends_.add(input.readMessage(fksproto.CsBase.ItemExtend.PARSER, extensionRegistry));
               break;
             }
             case 112: {
@@ -524,13 +578,37 @@ public final class CsCart {
               maxQtyAllow_ = input.readInt32();
               break;
             }
+            case 144: {
+              bitField0_ |= 0x00010000;
+              crowdOrderId_ = input.readInt32();
+              break;
+            }
+            case 154: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00020000;
+              crowdOrderStatus_ = bs;
+              break;
+            }
+            case 162: {
+              fksproto.CsCrowd.Crowd.Builder subBuilder = null;
+              if (((bitField0_ & 0x00040000) == 0x00040000)) {
+                subBuilder = crowd_.toBuilder();
+              }
+              crowd_ = input.readMessage(fksproto.CsCrowd.Crowd.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(crowd_);
+                crowd_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00040000;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
           extends_ = java.util.Collections.unmodifiableList(extends_);
@@ -540,28 +618,28 @@ public final class CsCart {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_SalesCartItem_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_SalesCartItem_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_SalesCartItem_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              SalesCartItem.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_SalesCartItem_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.SalesCartItem.class, fksproto.CsCart.SalesCartItem.Builder.class);
     }
 
     public static com.google.protobuf.Parser<SalesCartItem> PARSER =
-        new com.google.protobuf.AbstractParser<SalesCartItem>() {
-      public SalesCartItem parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SalesCartItem(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<SalesCartItem>() {
+              public SalesCartItem parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new SalesCartItem(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<SalesCartItem> getParserForType() {
       return PARSER;
     }
@@ -588,7 +666,7 @@ public final class CsCart {
      * <code>required int64 item_id = 2;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public boolean hasItemId() {
@@ -598,7 +676,7 @@ public final class CsCart {
      * <code>required int64 item_id = 2;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public long getItemId() {
@@ -611,7 +689,7 @@ public final class CsCart {
      * <code>required int32 warehouse_id = 3;</code>
      *
      * <pre>
-     *�ֿ�id
+     *仓库id
      * </pre>
      */
     public boolean hasWarehouseId() {
@@ -621,7 +699,7 @@ public final class CsCart {
      * <code>required int32 warehouse_id = 3;</code>
      *
      * <pre>
-     *�ֿ�id
+     *仓库id
      * </pre>
      */
     public int getWarehouseId() {
@@ -629,12 +707,12 @@ public final class CsCart {
     }
 
     public static final int TITLE_FIELD_NUMBER = 4;
-    private Object title_;
+    private java.lang.Object title_;
     /**
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
     public boolean hasTitle() {
@@ -644,17 +722,17 @@ public final class CsCart {
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
-    public String getTitle() {
-      Object ref = title_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           title_ = s;
         }
@@ -665,16 +743,16 @@ public final class CsCart {
      * <code>required string title = 4;</code>
      *
      * <pre>
-     *����
+     *标题
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getTitleBytes() {
-      Object ref = title_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         title_ = b;
         return b;
       } else {
@@ -683,12 +761,12 @@ public final class CsCart {
     }
 
     public static final int SUBTITLE_FIELD_NUMBER = 5;
-    private Object subtitle_;
+    private java.lang.Object subtitle_;
     /**
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
     public boolean hasSubtitle() {
@@ -698,17 +776,17 @@ public final class CsCart {
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
-    public String getSubtitle() {
-      Object ref = subtitle_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSubtitle() {
+      java.lang.Object ref = subtitle_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           subtitle_ = s;
         }
@@ -719,16 +797,16 @@ public final class CsCart {
      * <code>required string subtitle = 5;</code>
      *
      * <pre>
-     *������
+     *副标题
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getSubtitleBytes() {
-      Object ref = subtitle_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getSubtitleBytes() {
+      java.lang.Object ref = subtitle_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         subtitle_ = b;
         return b;
       } else {
@@ -737,12 +815,12 @@ public final class CsCart {
     }
 
     public static final int IMAGE_URL_FIELD_NUMBER = 6;
-    private Object imageUrl_;
+    private java.lang.Object imageUrl_;
     /**
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
     public boolean hasImageUrl() {
@@ -752,17 +830,17 @@ public final class CsCart {
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
-    public String getImageUrl() {
-      Object ref = imageUrl_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getImageUrl() {
+      java.lang.Object ref = imageUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           imageUrl_ = s;
         }
@@ -773,16 +851,16 @@ public final class CsCart {
      * <code>required string image_url = 6;</code>
      *
      * <pre>
-     *��ƷͼƬURL
+     *单品图片URL
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getImageUrlBytes() {
-      Object ref = imageUrl_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getImageUrlBytes() {
+      java.lang.Object ref = imageUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         imageUrl_ = b;
         return b;
       } else {
@@ -796,7 +874,7 @@ public final class CsCart {
      * <code>required int32 qty = 7;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public boolean hasQty() {
@@ -806,7 +884,7 @@ public final class CsCart {
      * <code>required int32 qty = 7;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public int getQty() {
@@ -819,7 +897,7 @@ public final class CsCart {
      * <code>required float unit_price = 8;</code>
      *
      * <pre>
-     *���ۣ��۸������
+     *单价，价格人民币
      * </pre>
      */
     public boolean hasUnitPrice() {
@@ -829,7 +907,7 @@ public final class CsCart {
      * <code>required float unit_price = 8;</code>
      *
      * <pre>
-     *���ۣ��۸������
+     *单价，价格人民币
      * </pre>
      */
     public float getUnitPrice() {
@@ -842,7 +920,7 @@ public final class CsCart {
      * <code>optional int32 stock = 9;</code>
      *
      * <pre>
-     *���
+     *库存
      * </pre>
      */
     public boolean hasStock() {
@@ -852,7 +930,7 @@ public final class CsCart {
      * <code>optional int32 stock = 9;</code>
      *
      * <pre>
-     *���
+     *库存
      * </pre>
      */
     public int getStock() {
@@ -860,12 +938,12 @@ public final class CsCart {
     }
 
     public static final int NOTE_FIELD_NUMBER = 10;
-    private Object note_;
+    private java.lang.Object note_;
     /**
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     public boolean hasNote() {
@@ -875,17 +953,17 @@ public final class CsCart {
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
-    public String getNote() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getNote() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           note_ = s;
         }
@@ -896,16 +974,16 @@ public final class CsCart {
      * <code>optional string note = 10;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getNoteBytes() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getNoteBytes() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         note_ = b;
         return b;
       } else {
@@ -914,12 +992,12 @@ public final class CsCart {
     }
 
     public static final int SELLER_FIELD_NUMBER = 11;
-    private Object seller_;
+    private java.lang.Object seller_;
     /**
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
     public boolean hasSeller() {
@@ -929,17 +1007,17 @@ public final class CsCart {
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
-    public String getSeller() {
-      Object ref = seller_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSeller() {
+      java.lang.Object ref = seller_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           seller_ = s;
         }
@@ -950,16 +1028,16 @@ public final class CsCart {
      * <code>optional string seller = 11;</code>
      *
      * <pre>
-     *����
+     *卖家
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getSellerBytes() {
-      Object ref = seller_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getSellerBytes() {
+      java.lang.Object ref = seller_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         seller_ = b;
         return b;
       } else {
@@ -968,12 +1046,12 @@ public final class CsCart {
     }
 
     public static final int BUYFROM_FIELD_NUMBER = 12;
-    private Object buyfrom_;
+    private java.lang.Object buyfrom_;
     /**
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
     public boolean hasBuyfrom() {
@@ -983,17 +1061,17 @@ public final class CsCart {
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
-    public String getBuyfrom() {
-      Object ref = buyfrom_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getBuyfrom() {
+      java.lang.Object ref = buyfrom_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           buyfrom_ = s;
         }
@@ -1004,16 +1082,16 @@ public final class CsCart {
      * <code>optional string buyfrom = 12;</code>
      *
      * <pre>
-     *���Ķ����
+     *在哪儿买的
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getBuyfromBytes() {
-      Object ref = buyfrom_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getBuyfromBytes() {
+      java.lang.Object ref = buyfrom_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         buyfrom_ = b;
         return b;
       } else {
@@ -1022,33 +1100,33 @@ public final class CsCart {
     }
 
     public static final int EXTENDS_FIELD_NUMBER = 13;
-    private java.util.List<CsBase.ItemExtend> extends_;
+    private java.util.List<fksproto.CsBase.ItemExtend> extends_;
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    public java.util.List<CsBase.ItemExtend> getExtendsList() {
+    public java.util.List<fksproto.CsBase.ItemExtend> getExtendsList() {
       return extends_;
     }
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    public java.util.List<? extends CsBase.ItemExtendOrBuilder>
-        getExtendsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsBase.ItemExtendOrBuilder>
+    getExtendsOrBuilderList() {
       return extends_;
     }
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
     public int getExtendsCount() {
@@ -1058,21 +1136,21 @@ public final class CsCart {
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    public CsBase.ItemExtend getExtends(int index) {
+    public fksproto.CsBase.ItemExtend getExtends(int index) {
       return extends_.get(index);
     }
     /**
      * <code>repeated .fksproto.ItemExtend extends = 13;</code>
      *
      * <pre>
-     *ѡ��ı��������б�
+     *选择的变种属性列表
      * </pre>
      */
-    public CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
-        int index) {
+    public fksproto.CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
+            int index) {
       return extends_.get(index);
     }
 
@@ -1082,7 +1160,7 @@ public final class CsCart {
      * <code>optional bool is_selected = 14;</code>
      *
      * <pre>
-     *�Ƿ�ѡ��
+     *是否选中
      * </pre>
      */
     public boolean hasIsSelected() {
@@ -1092,7 +1170,7 @@ public final class CsCart {
      * <code>optional bool is_selected = 14;</code>
      *
      * <pre>
-     *�Ƿ�ѡ��
+     *是否选中
      * </pre>
      */
     public boolean getIsSelected() {
@@ -1105,7 +1183,7 @@ public final class CsCart {
      * <code>optional bool cannot_buyit = 15;</code>
      *
      * <pre>
-     *�Ƿ��ܹ���
+     *是否能购买
      * </pre>
      */
     public boolean hasCannotBuyit() {
@@ -1115,7 +1193,7 @@ public final class CsCart {
      * <code>optional bool cannot_buyit = 15;</code>
      *
      * <pre>
-     *�Ƿ��ܹ���
+     *是否能购买
      * </pre>
      */
     public boolean getCannotBuyit() {
@@ -1128,7 +1206,7 @@ public final class CsCart {
      * <code>optional int32 min_qty_allow = 16;</code>
      *
      * <pre>
-     *������С��������
+     *允许最小购买数量
      * </pre>
      */
     public boolean hasMinQtyAllow() {
@@ -1138,7 +1216,7 @@ public final class CsCart {
      * <code>optional int32 min_qty_allow = 16;</code>
      *
      * <pre>
-     *������С��������
+     *允许最小购买数量
      * </pre>
      */
     public int getMinQtyAllow() {
@@ -1151,7 +1229,7 @@ public final class CsCart {
      * <code>optional int32 max_qty_allow = 17;</code>
      *
      * <pre>
-     *�������������
+     *允许最大购买数量
      * </pre>
      */
     public boolean hasMaxQtyAllow() {
@@ -1161,11 +1239,107 @@ public final class CsCart {
      * <code>optional int32 max_qty_allow = 17;</code>
      *
      * <pre>
-     *�������������
+     *允许最大购买数量
      * </pre>
      */
     public int getMaxQtyAllow() {
       return maxQtyAllow_;
+    }
+
+    public static final int CROWDORDERID_FIELD_NUMBER = 18;
+    private int crowdOrderId_;
+    /**
+     * <code>optional int32 crowdOrderId = 18;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    public boolean hasCrowdOrderId() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional int32 crowdOrderId = 18;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    public int getCrowdOrderId() {
+      return crowdOrderId_;
+    }
+
+    public static final int CROWDORDERSTATUS_FIELD_NUMBER = 19;
+    private java.lang.Object crowdOrderStatus_;
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    public boolean hasCrowdOrderStatus() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    public java.lang.String getCrowdOrderStatus() {
+      java.lang.Object ref = crowdOrderStatus_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          crowdOrderStatus_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string crowdOrderStatus = 19;</code>
+     */
+    public com.google.protobuf.ByteString
+    getCrowdOrderStatusBytes() {
+      java.lang.Object ref = crowdOrderStatus_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        crowdOrderStatus_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CROWD_FIELD_NUMBER = 20;
+    private fksproto.CsCrowd.Crowd crowd_;
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    public boolean hasCrowd() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    public fksproto.CsCrowd.Crowd getCrowd() {
+      return crowd_;
+    }
+    /**
+     * <code>optional .fksproto.Crowd crowd = 20;</code>
+     *
+     * <pre>
+     *拼单信息
+     * </pre>
+     */
+    public fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder() {
+      return crowd_;
     }
 
     private void initFields() {
@@ -1186,6 +1360,9 @@ public final class CsCart {
       cannotBuyit_ = false;
       minQtyAllow_ = 0;
       maxQtyAllow_ = 0;
+      crowdOrderId_ = 0;
+      crowdOrderStatus_ = "";
+      crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1231,12 +1408,18 @@ public final class CsCart {
           return false;
         }
       }
+      if (hasCrowd()) {
+        if (!getCrowd().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(1, cartItemId_);
@@ -1289,6 +1472,15 @@ public final class CsCart {
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeInt32(17, maxQtyAllow_);
       }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeInt32(18, crowdOrderId_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeBytes(19, getCrowdOrderStatusBytes());
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeMessage(20, crowd_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1300,71 +1492,83 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, cartItemId_);
+                .computeInt64Size(1, cartItemId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, itemId_);
+                .computeInt64Size(2, itemId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, warehouseId_);
+                .computeInt32Size(3, warehouseId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getTitleBytes());
+                .computeBytesSize(4, getTitleBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getSubtitleBytes());
+                .computeBytesSize(5, getSubtitleBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getImageUrlBytes());
+                .computeBytesSize(6, getImageUrlBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, qty_);
+                .computeInt32Size(7, qty_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(8, unitPrice_);
+                .computeFloatSize(8, unitPrice_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, stock_);
+                .computeInt32Size(9, stock_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, getNoteBytes());
+                .computeBytesSize(10, getNoteBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getSellerBytes());
+                .computeBytesSize(11, getSellerBytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getBuyfromBytes());
+                .computeBytesSize(12, getBuyfromBytes());
       }
       for (int i = 0; i < extends_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(13, extends_.get(i));
+                .computeMessageSize(13, extends_.get(i));
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(14, isSelected_);
+                .computeBoolSize(14, isSelected_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(15, cannotBuyit_);
+                .computeBoolSize(15, cannotBuyit_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(16, minQtyAllow_);
+                .computeInt32Size(16, minQtyAllow_);
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(17, maxQtyAllow_);
+                .computeInt32Size(17, maxQtyAllow_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(18, crowdOrderId_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(19, getCrowdOrderStatusBytes());
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(20, crowd_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1372,75 +1576,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static SalesCartItem parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SalesCartItem parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SalesCartItem parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SalesCartItem parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SalesCartItem parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SalesCartItem parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static SalesCartItem parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static SalesCartItem parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static SalesCartItem parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SalesCartItem parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SalesCartItem parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(SalesCartItem prototype) {
+    public static Builder newBuilder(fksproto.CsCart.SalesCartItem prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1448,23 +1652,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.SalesCartItem}
      *
      * <pre>
-     *���ﳵ��Ʒ��Ϣ
+     *购物车单品信息
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.SalesCartItem)
-        SalesCartItemOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.SalesCartItem)
+            fksproto.CsCart.SalesCartItemOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_SalesCartItem_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_SalesCartItem_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_SalesCartItem_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                SalesCartItem.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_SalesCartItem_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.SalesCartItem.class, fksproto.CsCart.SalesCartItem.Builder.class);
       }
 
       // Construct using fksproto.CsCart.SalesCartItem.newBuilder()
@@ -1473,13 +1677,14 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getExtendsFieldBuilder();
+          getCrowdFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1526,6 +1731,16 @@ public final class CsCart {
         bitField0_ = (bitField0_ & ~0x00008000);
         maxQtyAllow_ = 0;
         bitField0_ = (bitField0_ & ~0x00010000);
+        crowdOrderId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00020000);
+        crowdOrderStatus_ = "";
+        bitField0_ = (bitField0_ & ~0x00040000);
+        if (crowdBuilder_ == null) {
+          crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+        } else {
+          crowdBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00080000);
         return this;
       }
 
@@ -1534,24 +1749,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_SalesCartItem_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_SalesCartItem_descriptor;
       }
 
-      public SalesCartItem getDefaultInstanceForType() {
-        return SalesCartItem.getDefaultInstance();
+      public fksproto.CsCart.SalesCartItem getDefaultInstanceForType() {
+        return fksproto.CsCart.SalesCartItem.getDefaultInstance();
       }
 
-      public SalesCartItem build() {
-        SalesCartItem result = buildPartial();
+      public fksproto.CsCart.SalesCartItem build() {
+        fksproto.CsCart.SalesCartItem result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public SalesCartItem buildPartial() {
-        SalesCartItem result = new SalesCartItem(this);
+      public fksproto.CsCart.SalesCartItem buildPartial() {
+        fksproto.CsCart.SalesCartItem result = new fksproto.CsCart.SalesCartItem(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1627,22 +1842,38 @@ public final class CsCart {
           to_bitField0_ |= 0x00008000;
         }
         result.maxQtyAllow_ = maxQtyAllow_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.crowdOrderId_ = crowdOrderId_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.crowdOrderStatus_ = crowdOrderStatus_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        if (crowdBuilder_ == null) {
+          result.crowd_ = crowd_;
+        } else {
+          result.crowd_ = crowdBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SalesCartItem) {
-          return mergeFrom((SalesCartItem)other);
+        if (other instanceof fksproto.CsCart.SalesCartItem) {
+          return mergeFrom((fksproto.CsCart.SalesCartItem)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(SalesCartItem other) {
-        if (other == SalesCartItem.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.SalesCartItem other) {
+        if (other == fksproto.CsCart.SalesCartItem.getDefaultInstance()) return this;
         if (other.hasCartItemId()) {
           setCartItemId(other.getCartItemId());
         }
@@ -1709,9 +1940,9 @@ public final class CsCart {
               extendsBuilder_ = null;
               extends_ = other.extends_;
               bitField0_ = (bitField0_ & ~0x00001000);
-              extendsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getExtendsFieldBuilder() : null;
+              extendsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getExtendsFieldBuilder() : null;
             } else {
               extendsBuilder_.addAllMessages(other.extends_);
             }
@@ -1729,46 +1960,63 @@ public final class CsCart {
         if (other.hasMaxQtyAllow()) {
           setMaxQtyAllow(other.getMaxQtyAllow());
         }
+        if (other.hasCrowdOrderId()) {
+          setCrowdOrderId(other.getCrowdOrderId());
+        }
+        if (other.hasCrowdOrderStatus()) {
+          bitField0_ |= 0x00040000;
+          crowdOrderStatus_ = other.crowdOrderStatus_;
+          onChanged();
+        }
+        if (other.hasCrowd()) {
+          mergeCrowd(other.getCrowd());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasCartItemId()) {
-          
+
           return false;
         }
         if (!hasItemId()) {
-          
+
           return false;
         }
         if (!hasWarehouseId()) {
-          
+
           return false;
         }
         if (!hasTitle()) {
-          
+
           return false;
         }
         if (!hasSubtitle()) {
-          
+
           return false;
         }
         if (!hasImageUrl()) {
-          
+
           return false;
         }
         if (!hasQty()) {
-          
+
           return false;
         }
         if (!hasUnitPrice()) {
-          
+
           return false;
         }
         for (int i = 0; i < getExtendsCount(); i++) {
           if (!getExtends(i).isInitialized()) {
-            
+
+            return false;
+          }
+        }
+        if (hasCrowd()) {
+          if (!getCrowd().isInitialized()) {
+
             return false;
           }
         }
@@ -1776,14 +2024,14 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        SalesCartItem parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.SalesCartItem parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (SalesCartItem) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.SalesCartItem) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1831,7 +2079,7 @@ public final class CsCart {
        * <code>required int64 item_id = 2;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public boolean hasItemId() {
@@ -1841,7 +2089,7 @@ public final class CsCart {
        * <code>required int64 item_id = 2;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public long getItemId() {
@@ -1851,7 +2099,7 @@ public final class CsCart {
        * <code>required int64 item_id = 2;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder setItemId(long value) {
@@ -1864,7 +2112,7 @@ public final class CsCart {
        * <code>required int64 item_id = 2;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder clearItemId() {
@@ -1879,7 +2127,7 @@ public final class CsCart {
        * <code>required int32 warehouse_id = 3;</code>
        *
        * <pre>
-       *�ֿ�id
+       *仓库id
        * </pre>
        */
       public boolean hasWarehouseId() {
@@ -1889,7 +2137,7 @@ public final class CsCart {
        * <code>required int32 warehouse_id = 3;</code>
        *
        * <pre>
-       *�ֿ�id
+       *仓库id
        * </pre>
        */
       public int getWarehouseId() {
@@ -1899,7 +2147,7 @@ public final class CsCart {
        * <code>required int32 warehouse_id = 3;</code>
        *
        * <pre>
-       *�ֿ�id
+       *仓库id
        * </pre>
        */
       public Builder setWarehouseId(int value) {
@@ -1912,7 +2160,7 @@ public final class CsCart {
        * <code>required int32 warehouse_id = 3;</code>
        *
        * <pre>
-       *�ֿ�id
+       *仓库id
        * </pre>
        */
       public Builder clearWarehouseId() {
@@ -1922,12 +2170,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object title_ = "";
+      private java.lang.Object title_ = "";
       /**
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
       public boolean hasTitle() {
@@ -1937,37 +2185,37 @@ public final class CsCart {
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
-      public String getTitle() {
-        Object ref = title_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getTitle() {
+        java.lang.Object ref = title_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             title_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getTitleBytes() {
-        Object ref = title_;
+      getTitleBytes() {
+        java.lang.Object ref = title_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           title_ = b;
           return b;
         } else {
@@ -1978,15 +2226,15 @@ public final class CsCart {
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
       public Builder setTitle(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         title_ = value;
         onChanged();
         return this;
@@ -1995,7 +2243,7 @@ public final class CsCart {
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
       public Builder clearTitle() {
@@ -2008,26 +2256,26 @@ public final class CsCart {
        * <code>required string title = 4;</code>
        *
        * <pre>
-       *����
+       *标题
        * </pre>
        */
       public Builder setTitleBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         title_ = value;
         onChanged();
         return this;
       }
 
-      private Object subtitle_ = "";
+      private java.lang.Object subtitle_ = "";
       /**
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
       public boolean hasSubtitle() {
@@ -2037,37 +2285,37 @@ public final class CsCart {
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
-      public String getSubtitle() {
-        Object ref = subtitle_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSubtitle() {
+        java.lang.Object ref = subtitle_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             subtitle_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getSubtitleBytes() {
-        Object ref = subtitle_;
+      getSubtitleBytes() {
+        java.lang.Object ref = subtitle_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           subtitle_ = b;
           return b;
         } else {
@@ -2078,15 +2326,15 @@ public final class CsCart {
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
       public Builder setSubtitle(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         subtitle_ = value;
         onChanged();
         return this;
@@ -2095,7 +2343,7 @@ public final class CsCart {
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
       public Builder clearSubtitle() {
@@ -2108,26 +2356,26 @@ public final class CsCart {
        * <code>required string subtitle = 5;</code>
        *
        * <pre>
-       *������
+       *副标题
        * </pre>
        */
       public Builder setSubtitleBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         subtitle_ = value;
         onChanged();
         return this;
       }
 
-      private Object imageUrl_ = "";
+      private java.lang.Object imageUrl_ = "";
       /**
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
       public boolean hasImageUrl() {
@@ -2137,37 +2385,37 @@ public final class CsCart {
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
-      public String getImageUrl() {
-        Object ref = imageUrl_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getImageUrl() {
+        java.lang.Object ref = imageUrl_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             imageUrl_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getImageUrlBytes() {
-        Object ref = imageUrl_;
+      getImageUrlBytes() {
+        java.lang.Object ref = imageUrl_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           imageUrl_ = b;
           return b;
         } else {
@@ -2178,15 +2426,15 @@ public final class CsCart {
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
       public Builder setImageUrl(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         imageUrl_ = value;
         onChanged();
         return this;
@@ -2195,7 +2443,7 @@ public final class CsCart {
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
       public Builder clearImageUrl() {
@@ -2208,15 +2456,15 @@ public final class CsCart {
        * <code>required string image_url = 6;</code>
        *
        * <pre>
-       *��ƷͼƬURL
+       *单品图片URL
        * </pre>
        */
       public Builder setImageUrlBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         imageUrl_ = value;
         onChanged();
         return this;
@@ -2227,7 +2475,7 @@ public final class CsCart {
        * <code>required int32 qty = 7;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public boolean hasQty() {
@@ -2237,7 +2485,7 @@ public final class CsCart {
        * <code>required int32 qty = 7;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public int getQty() {
@@ -2247,7 +2495,7 @@ public final class CsCart {
        * <code>required int32 qty = 7;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder setQty(int value) {
@@ -2260,7 +2508,7 @@ public final class CsCart {
        * <code>required int32 qty = 7;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder clearQty() {
@@ -2275,7 +2523,7 @@ public final class CsCart {
        * <code>required float unit_price = 8;</code>
        *
        * <pre>
-       *���ۣ��۸������
+       *单价，价格人民币
        * </pre>
        */
       public boolean hasUnitPrice() {
@@ -2285,7 +2533,7 @@ public final class CsCart {
        * <code>required float unit_price = 8;</code>
        *
        * <pre>
-       *���ۣ��۸������
+       *单价，价格人民币
        * </pre>
        */
       public float getUnitPrice() {
@@ -2295,7 +2543,7 @@ public final class CsCart {
        * <code>required float unit_price = 8;</code>
        *
        * <pre>
-       *���ۣ��۸������
+       *单价，价格人民币
        * </pre>
        */
       public Builder setUnitPrice(float value) {
@@ -2308,7 +2556,7 @@ public final class CsCart {
        * <code>required float unit_price = 8;</code>
        *
        * <pre>
-       *���ۣ��۸������
+       *单价，价格人民币
        * </pre>
        */
       public Builder clearUnitPrice() {
@@ -2323,7 +2571,7 @@ public final class CsCart {
        * <code>optional int32 stock = 9;</code>
        *
        * <pre>
-       *���
+       *库存
        * </pre>
        */
       public boolean hasStock() {
@@ -2333,7 +2581,7 @@ public final class CsCart {
        * <code>optional int32 stock = 9;</code>
        *
        * <pre>
-       *���
+       *库存
        * </pre>
        */
       public int getStock() {
@@ -2343,7 +2591,7 @@ public final class CsCart {
        * <code>optional int32 stock = 9;</code>
        *
        * <pre>
-       *���
+       *库存
        * </pre>
        */
       public Builder setStock(int value) {
@@ -2356,7 +2604,7 @@ public final class CsCart {
        * <code>optional int32 stock = 9;</code>
        *
        * <pre>
-       *���
+       *库存
        * </pre>
        */
       public Builder clearStock() {
@@ -2366,12 +2614,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object note_ = "";
+      private java.lang.Object note_ = "";
       /**
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public boolean hasNote() {
@@ -2381,37 +2629,37 @@ public final class CsCart {
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
-      public String getNote() {
-        Object ref = note_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getNote() {
+        java.lang.Object ref = note_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             note_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getNoteBytes() {
-        Object ref = note_;
+      getNoteBytes() {
+        java.lang.Object ref = note_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           note_ = b;
           return b;
         } else {
@@ -2422,15 +2670,15 @@ public final class CsCart {
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder setNote(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000200;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000200;
         note_ = value;
         onChanged();
         return this;
@@ -2439,7 +2687,7 @@ public final class CsCart {
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder clearNote() {
@@ -2452,26 +2700,26 @@ public final class CsCart {
        * <code>optional string note = 10;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder setNoteBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000200;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000200;
         note_ = value;
         onChanged();
         return this;
       }
 
-      private Object seller_ = "";
+      private java.lang.Object seller_ = "";
       /**
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
       public boolean hasSeller() {
@@ -2481,37 +2729,37 @@ public final class CsCart {
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
-      public String getSeller() {
-        Object ref = seller_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSeller() {
+        java.lang.Object ref = seller_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             seller_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getSellerBytes() {
-        Object ref = seller_;
+      getSellerBytes() {
+        java.lang.Object ref = seller_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           seller_ = b;
           return b;
         } else {
@@ -2522,15 +2770,15 @@ public final class CsCart {
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
       public Builder setSeller(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000400;
         seller_ = value;
         onChanged();
         return this;
@@ -2539,7 +2787,7 @@ public final class CsCart {
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
       public Builder clearSeller() {
@@ -2552,26 +2800,26 @@ public final class CsCart {
        * <code>optional string seller = 11;</code>
        *
        * <pre>
-       *����
+       *卖家
        * </pre>
        */
       public Builder setSellerBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000400;
         seller_ = value;
         onChanged();
         return this;
       }
 
-      private Object buyfrom_ = "";
+      private java.lang.Object buyfrom_ = "";
       /**
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
       public boolean hasBuyfrom() {
@@ -2581,37 +2829,37 @@ public final class CsCart {
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
-      public String getBuyfrom() {
-        Object ref = buyfrom_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getBuyfrom() {
+        java.lang.Object ref = buyfrom_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             buyfrom_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getBuyfromBytes() {
-        Object ref = buyfrom_;
+      getBuyfromBytes() {
+        java.lang.Object ref = buyfrom_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           buyfrom_ = b;
           return b;
         } else {
@@ -2622,15 +2870,15 @@ public final class CsCart {
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
       public Builder setBuyfrom(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000800;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000800;
         buyfrom_ = value;
         onChanged();
         return this;
@@ -2639,7 +2887,7 @@ public final class CsCart {
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
       public Builder clearBuyfrom() {
@@ -2652,40 +2900,40 @@ public final class CsCart {
        * <code>optional string buyfrom = 12;</code>
        *
        * <pre>
-       *���Ķ����
+       *在哪儿买的
        * </pre>
        */
       public Builder setBuyfromBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000800;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000800;
         buyfrom_ = value;
         onChanged();
         return this;
       }
 
-      private java.util.List<CsBase.ItemExtend> extends_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsBase.ItemExtend> extends_ =
+              java.util.Collections.emptyList();
       private void ensureExtendsIsMutable() {
         if (!((bitField0_ & 0x00001000) == 0x00001000)) {
-          extends_ = new java.util.ArrayList<CsBase.ItemExtend>(extends_);
+          extends_ = new java.util.ArrayList<fksproto.CsBase.ItemExtend>(extends_);
           bitField0_ |= 0x00001000;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.ItemExtend, CsBase.ItemExtend.Builder, CsBase.ItemExtendOrBuilder> extendsBuilder_;
+              fksproto.CsBase.ItemExtend, fksproto.CsBase.ItemExtend.Builder, fksproto.CsBase.ItemExtendOrBuilder> extendsBuilder_;
 
       /**
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public java.util.List<CsBase.ItemExtend> getExtendsList() {
+      public java.util.List<fksproto.CsBase.ItemExtend> getExtendsList() {
         if (extendsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(extends_);
         } else {
@@ -2696,7 +2944,7 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public int getExtendsCount() {
@@ -2710,10 +2958,10 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public CsBase.ItemExtend getExtends(int index) {
+      public fksproto.CsBase.ItemExtend getExtends(int index) {
         if (extendsBuilder_ == null) {
           return extends_.get(index);
         } else {
@@ -2724,11 +2972,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder setExtends(
-          int index, CsBase.ItemExtend value) {
+              int index, fksproto.CsBase.ItemExtend value) {
         if (extendsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2745,11 +2993,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder setExtends(
-          int index, CsBase.ItemExtend.Builder builderForValue) {
+              int index, fksproto.CsBase.ItemExtend.Builder builderForValue) {
         if (extendsBuilder_ == null) {
           ensureExtendsIsMutable();
           extends_.set(index, builderForValue.build());
@@ -2763,10 +3011,10 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public Builder addExtends(CsBase.ItemExtend value) {
+      public Builder addExtends(fksproto.CsBase.ItemExtend value) {
         if (extendsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2783,11 +3031,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder addExtends(
-          int index, CsBase.ItemExtend value) {
+              int index, fksproto.CsBase.ItemExtend value) {
         if (extendsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2804,11 +3052,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder addExtends(
-          CsBase.ItemExtend.Builder builderForValue) {
+              fksproto.CsBase.ItemExtend.Builder builderForValue) {
         if (extendsBuilder_ == null) {
           ensureExtendsIsMutable();
           extends_.add(builderForValue.build());
@@ -2822,11 +3070,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder addExtends(
-          int index, CsBase.ItemExtend.Builder builderForValue) {
+              int index, fksproto.CsBase.ItemExtend.Builder builderForValue) {
         if (extendsBuilder_ == null) {
           ensureExtendsIsMutable();
           extends_.add(index, builderForValue.build());
@@ -2840,15 +3088,15 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder addAllExtends(
-          Iterable<? extends CsBase.ItemExtend> values) {
+              java.lang.Iterable<? extends fksproto.CsBase.ItemExtend> values) {
         if (extendsBuilder_ == null) {
           ensureExtendsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, extends_);
+                  values, extends_);
           onChanged();
         } else {
           extendsBuilder_.addAllMessages(values);
@@ -2859,7 +3107,7 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder clearExtends() {
@@ -2876,7 +3124,7 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
       public Builder removeExtends(int index) {
@@ -2893,22 +3141,22 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public CsBase.ItemExtend.Builder getExtendsBuilder(
-          int index) {
+      public fksproto.CsBase.ItemExtend.Builder getExtendsBuilder(
+              int index) {
         return getExtendsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
-          int index) {
+      public fksproto.CsBase.ItemExtendOrBuilder getExtendsOrBuilder(
+              int index) {
         if (extendsBuilder_ == null) {
           return extends_.get(index);  } else {
           return extendsBuilder_.getMessageOrBuilder(index);
@@ -2918,11 +3166,11 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public java.util.List<? extends CsBase.ItemExtendOrBuilder>
-           getExtendsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsBase.ItemExtendOrBuilder>
+      getExtendsOrBuilderList() {
         if (extendsBuilder_ != null) {
           return extendsBuilder_.getMessageOrBuilderList();
         } else {
@@ -2933,42 +3181,42 @@ public final class CsCart {
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public CsBase.ItemExtend.Builder addExtendsBuilder() {
+      public fksproto.CsBase.ItemExtend.Builder addExtendsBuilder() {
         return getExtendsFieldBuilder().addBuilder(
-            CsBase.ItemExtend.getDefaultInstance());
+                fksproto.CsBase.ItemExtend.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public CsBase.ItemExtend.Builder addExtendsBuilder(
-          int index) {
+      public fksproto.CsBase.ItemExtend.Builder addExtendsBuilder(
+              int index) {
         return getExtendsFieldBuilder().addBuilder(
-            index, CsBase.ItemExtend.getDefaultInstance());
+                index, fksproto.CsBase.ItemExtend.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.ItemExtend extends = 13;</code>
        *
        * <pre>
-       *ѡ��ı��������б�
+       *选择的变种属性列表
        * </pre>
        */
-      public java.util.List<CsBase.ItemExtend.Builder>
-           getExtendsBuilderList() {
+      public java.util.List<fksproto.CsBase.ItemExtend.Builder>
+      getExtendsBuilderList() {
         return getExtendsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.ItemExtend, CsBase.ItemExtend.Builder, CsBase.ItemExtendOrBuilder>
-          getExtendsFieldBuilder() {
+              fksproto.CsBase.ItemExtend, fksproto.CsBase.ItemExtend.Builder, fksproto.CsBase.ItemExtendOrBuilder>
+      getExtendsFieldBuilder() {
         if (extendsBuilder_ == null) {
           extendsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              CsBase.ItemExtend, CsBase.ItemExtend.Builder, CsBase.ItemExtendOrBuilder>(
+                  fksproto.CsBase.ItemExtend, fksproto.CsBase.ItemExtend.Builder, fksproto.CsBase.ItemExtendOrBuilder>(
                   extends_,
                   ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
@@ -2983,7 +3231,7 @@ public final class CsCart {
        * <code>optional bool is_selected = 14;</code>
        *
        * <pre>
-       *�Ƿ�ѡ��
+       *是否选中
        * </pre>
        */
       public boolean hasIsSelected() {
@@ -2993,7 +3241,7 @@ public final class CsCart {
        * <code>optional bool is_selected = 14;</code>
        *
        * <pre>
-       *�Ƿ�ѡ��
+       *是否选中
        * </pre>
        */
       public boolean getIsSelected() {
@@ -3003,7 +3251,7 @@ public final class CsCart {
        * <code>optional bool is_selected = 14;</code>
        *
        * <pre>
-       *�Ƿ�ѡ��
+       *是否选中
        * </pre>
        */
       public Builder setIsSelected(boolean value) {
@@ -3016,7 +3264,7 @@ public final class CsCart {
        * <code>optional bool is_selected = 14;</code>
        *
        * <pre>
-       *�Ƿ�ѡ��
+       *是否选中
        * </pre>
        */
       public Builder clearIsSelected() {
@@ -3031,7 +3279,7 @@ public final class CsCart {
        * <code>optional bool cannot_buyit = 15;</code>
        *
        * <pre>
-       *�Ƿ��ܹ���
+       *是否能购买
        * </pre>
        */
       public boolean hasCannotBuyit() {
@@ -3041,7 +3289,7 @@ public final class CsCart {
        * <code>optional bool cannot_buyit = 15;</code>
        *
        * <pre>
-       *�Ƿ��ܹ���
+       *是否能购买
        * </pre>
        */
       public boolean getCannotBuyit() {
@@ -3051,7 +3299,7 @@ public final class CsCart {
        * <code>optional bool cannot_buyit = 15;</code>
        *
        * <pre>
-       *�Ƿ��ܹ���
+       *是否能购买
        * </pre>
        */
       public Builder setCannotBuyit(boolean value) {
@@ -3064,7 +3312,7 @@ public final class CsCart {
        * <code>optional bool cannot_buyit = 15;</code>
        *
        * <pre>
-       *�Ƿ��ܹ���
+       *是否能购买
        * </pre>
        */
       public Builder clearCannotBuyit() {
@@ -3079,7 +3327,7 @@ public final class CsCart {
        * <code>optional int32 min_qty_allow = 16;</code>
        *
        * <pre>
-       *������С��������
+       *允许最小购买数量
        * </pre>
        */
       public boolean hasMinQtyAllow() {
@@ -3089,7 +3337,7 @@ public final class CsCart {
        * <code>optional int32 min_qty_allow = 16;</code>
        *
        * <pre>
-       *������С��������
+       *允许最小购买数量
        * </pre>
        */
       public int getMinQtyAllow() {
@@ -3099,7 +3347,7 @@ public final class CsCart {
        * <code>optional int32 min_qty_allow = 16;</code>
        *
        * <pre>
-       *������С��������
+       *允许最小购买数量
        * </pre>
        */
       public Builder setMinQtyAllow(int value) {
@@ -3112,7 +3360,7 @@ public final class CsCart {
        * <code>optional int32 min_qty_allow = 16;</code>
        *
        * <pre>
-       *������С��������
+       *允许最小购买数量
        * </pre>
        */
       public Builder clearMinQtyAllow() {
@@ -3127,7 +3375,7 @@ public final class CsCart {
        * <code>optional int32 max_qty_allow = 17;</code>
        *
        * <pre>
-       *�������������
+       *允许最大购买数量
        * </pre>
        */
       public boolean hasMaxQtyAllow() {
@@ -3137,7 +3385,7 @@ public final class CsCart {
        * <code>optional int32 max_qty_allow = 17;</code>
        *
        * <pre>
-       *�������������
+       *允许最大购买数量
        * </pre>
        */
       public int getMaxQtyAllow() {
@@ -3147,7 +3395,7 @@ public final class CsCart {
        * <code>optional int32 max_qty_allow = 17;</code>
        *
        * <pre>
-       *�������������
+       *允许最大购买数量
        * </pre>
        */
       public Builder setMaxQtyAllow(int value) {
@@ -3160,7 +3408,7 @@ public final class CsCart {
        * <code>optional int32 max_qty_allow = 17;</code>
        *
        * <pre>
-       *�������������
+       *允许最大购买数量
        * </pre>
        */
       public Builder clearMaxQtyAllow() {
@@ -3168,6 +3416,278 @@ public final class CsCart {
         maxQtyAllow_ = 0;
         onChanged();
         return this;
+      }
+
+      private int crowdOrderId_ ;
+      /**
+       * <code>optional int32 crowdOrderId = 18;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public boolean hasCrowdOrderId() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <code>optional int32 crowdOrderId = 18;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public int getCrowdOrderId() {
+        return crowdOrderId_;
+      }
+      /**
+       * <code>optional int32 crowdOrderId = 18;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder setCrowdOrderId(int value) {
+        bitField0_ |= 0x00020000;
+        crowdOrderId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 crowdOrderId = 18;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder clearCrowdOrderId() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        crowdOrderId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object crowdOrderStatus_ = "";
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public boolean hasCrowdOrderStatus() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public java.lang.String getCrowdOrderStatus() {
+        java.lang.Object ref = crowdOrderStatus_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            crowdOrderStatus_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public com.google.protobuf.ByteString
+      getCrowdOrderStatusBytes() {
+        java.lang.Object ref = crowdOrderStatus_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          crowdOrderStatus_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public Builder setCrowdOrderStatus(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00040000;
+        crowdOrderStatus_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public Builder clearCrowdOrderStatus() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        crowdOrderStatus_ = getDefaultInstance().getCrowdOrderStatus();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string crowdOrderStatus = 19;</code>
+       */
+      public Builder setCrowdOrderStatusBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00040000;
+        crowdOrderStatus_ = value;
+        onChanged();
+        return this;
+      }
+
+      private fksproto.CsCrowd.Crowd crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder> crowdBuilder_;
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public boolean hasCrowd() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public fksproto.CsCrowd.Crowd getCrowd() {
+        if (crowdBuilder_ == null) {
+          return crowd_;
+        } else {
+          return crowdBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public Builder setCrowd(fksproto.CsCrowd.Crowd value) {
+        if (crowdBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          crowd_ = value;
+          onChanged();
+        } else {
+          crowdBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00080000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public Builder setCrowd(
+              fksproto.CsCrowd.Crowd.Builder builderForValue) {
+        if (crowdBuilder_ == null) {
+          crowd_ = builderForValue.build();
+          onChanged();
+        } else {
+          crowdBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00080000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public Builder mergeCrowd(fksproto.CsCrowd.Crowd value) {
+        if (crowdBuilder_ == null) {
+          if (((bitField0_ & 0x00080000) == 0x00080000) &&
+                  crowd_ != fksproto.CsCrowd.Crowd.getDefaultInstance()) {
+            crowd_ =
+                    fksproto.CsCrowd.Crowd.newBuilder(crowd_).mergeFrom(value).buildPartial();
+          } else {
+            crowd_ = value;
+          }
+          onChanged();
+        } else {
+          crowdBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00080000;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public Builder clearCrowd() {
+        if (crowdBuilder_ == null) {
+          crowd_ = fksproto.CsCrowd.Crowd.getDefaultInstance();
+          onChanged();
+        } else {
+          crowdBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00080000);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public fksproto.CsCrowd.Crowd.Builder getCrowdBuilder() {
+        bitField0_ |= 0x00080000;
+        onChanged();
+        return getCrowdFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      public fksproto.CsCrowd.CrowdOrBuilder getCrowdOrBuilder() {
+        if (crowdBuilder_ != null) {
+          return crowdBuilder_.getMessageOrBuilder();
+        } else {
+          return crowd_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.Crowd crowd = 20;</code>
+       *
+       * <pre>
+       *拼单信息
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder>
+      getCrowdFieldBuilder() {
+        if (crowdBuilder_ == null) {
+          crowdBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsCrowd.Crowd, fksproto.CsCrowd.Crowd.Builder, fksproto.CsCrowd.CrowdOrBuilder>(
+                  getCrowd(),
+                  getParentForChildren(),
+                  isClean());
+          crowd_ = null;
+        }
+        return crowdBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:fksproto.SalesCartItem)
@@ -3182,8 +3702,8 @@ public final class CsCart {
   }
 
   public interface GetSalesCartListRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetSalesCartListRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetSalesCartListRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -3192,11 +3712,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -3205,17 +3725,17 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     boolean hasLocalecode();
@@ -3223,25 +3743,25 @@ public final class CsCart {
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
 
     /**
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -3249,25 +3769,25 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional int32 currencyid = 5;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     boolean hasCurrencyid();
@@ -3275,7 +3795,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 5;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     int getCurrencyid();
@@ -3284,13 +3804,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.GetSalesCartListRequest}
    *
    * <pre>
-   *��ȡ���ﳵ����
+   *获取购物车请求
    * </pre>
    */
   public static final class GetSalesCartListRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetSalesCartListRequest)
-      GetSalesCartListRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetSalesCartListRequest)
+          GetSalesCartListRequestOrBuilder {
     // Use GetSalesCartListRequest.newBuilder() to construct.
     private GetSalesCartListRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3308,19 +3828,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetSalesCartListRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3331,17 +3851,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -3350,11 +3870,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -3385,42 +3905,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetSalesCartListRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.GetSalesCartListRequest.class, fksproto.CsCart.GetSalesCartListRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetSalesCartListRequest> PARSER =
-        new com.google.protobuf.AbstractParser<GetSalesCartListRequest>() {
-      public GetSalesCartListRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetSalesCartListRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetSalesCartListRequest>() {
+              public GetSalesCartListRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetSalesCartListRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetSalesCartListRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -3430,18 +3950,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -3451,23 +3971,23 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 3;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public boolean hasLocalecode() {
@@ -3477,17 +3997,17 @@ public final class CsCart {
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -3498,16 +4018,16 @@ public final class CsCart {
      * <code>optional string localecode = 3;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -3516,12 +4036,12 @@ public final class CsCart {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 4;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -3531,17 +4051,17 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -3552,16 +4072,16 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -3575,7 +4095,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 5;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public boolean hasCurrencyid() {
@@ -3585,7 +4105,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 5;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public int getCurrencyid() {
@@ -3593,8 +4113,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       localecode_ = "";
       currencycode_ = "";
       currencyid_ = 0;
@@ -3614,7 +4134,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -3642,23 +4162,23 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getLocalecodeBytes());
+                .computeBytesSize(3, getLocalecodeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getCurrencycodeBytes());
+                .computeBytesSize(4, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, currencyid_);
+                .computeInt32Size(5, currencyid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3666,75 +4186,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetSalesCartListRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetSalesCartListRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetSalesCartListRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetSalesCartListRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetSalesCartListRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetSalesCartListRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetSalesCartListRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetSalesCartListRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetSalesCartListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetSalesCartListRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetSalesCartListRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.GetSalesCartListRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3742,23 +4262,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.GetSalesCartListRequest}
      *
      * <pre>
-     *��ȡ���ﳵ����
+     *获取购物车请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetSalesCartListRequest)
-        GetSalesCartListRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetSalesCartListRequest)
+            fksproto.CsCart.GetSalesCartListRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetSalesCartListRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.GetSalesCartListRequest.class, fksproto.CsCart.GetSalesCartListRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.GetSalesCartListRequest.newBuilder()
@@ -3767,7 +4287,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3784,13 +4304,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -3809,24 +4329,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListRequest_descriptor;
       }
 
-      public GetSalesCartListRequest getDefaultInstanceForType() {
-        return GetSalesCartListRequest.getDefaultInstance();
+      public fksproto.CsCart.GetSalesCartListRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.GetSalesCartListRequest.getDefaultInstance();
       }
 
-      public GetSalesCartListRequest build() {
-        GetSalesCartListRequest result = buildPartial();
+      public fksproto.CsCart.GetSalesCartListRequest build() {
+        fksproto.CsCart.GetSalesCartListRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetSalesCartListRequest buildPartial() {
-        GetSalesCartListRequest result = new GetSalesCartListRequest(this);
+      public fksproto.CsCart.GetSalesCartListRequest buildPartial() {
+        fksproto.CsCart.GetSalesCartListRequest result = new fksproto.CsCart.GetSalesCartListRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -3863,16 +4383,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetSalesCartListRequest) {
-          return mergeFrom((GetSalesCartListRequest)other);
+        if (other instanceof fksproto.CsCart.GetSalesCartListRequest) {
+          return mergeFrom((fksproto.CsCart.GetSalesCartListRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetSalesCartListRequest other) {
-        if (other == GetSalesCartListRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.GetSalesCartListRequest other) {
+        if (other == fksproto.CsCart.GetSalesCartListRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -3898,21 +4418,21 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetSalesCartListRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.GetSalesCartListRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetSalesCartListRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.GetSalesCartListRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -3923,9 +4443,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -3935,7 +4455,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -3945,7 +4465,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3962,7 +4482,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -3975,12 +4495,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -3996,7 +4516,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -4007,7 +4527,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -4015,7 +4535,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -4026,11 +4546,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -4039,9 +4559,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -4051,7 +4571,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -4061,7 +4581,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4078,7 +4598,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -4091,12 +4611,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -4112,7 +4632,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -4123,7 +4643,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -4131,7 +4651,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -4142,11 +4662,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -4155,12 +4675,12 @@ public final class CsCart {
         return userinfoBuilder_;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public boolean hasLocalecode() {
@@ -4170,37 +4690,37 @@ public final class CsCart {
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -4211,15 +4731,15 @@ public final class CsCart {
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         localecode_ = value;
         onChanged();
         return this;
@@ -4228,7 +4748,7 @@ public final class CsCart {
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder clearLocalecode() {
@@ -4241,26 +4761,26 @@ public final class CsCart {
        * <code>optional string localecode = 3;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         localecode_ = value;
         onChanged();
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -4270,37 +4790,37 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -4311,15 +4831,15 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         currencycode_ = value;
         onChanged();
         return this;
@@ -4328,7 +4848,7 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -4341,15 +4861,15 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         currencycode_ = value;
         onChanged();
         return this;
@@ -4360,7 +4880,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 5;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public boolean hasCurrencyid() {
@@ -4370,7 +4890,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 5;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public int getCurrencyid() {
@@ -4380,7 +4900,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 5;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder setCurrencyid(int value) {
@@ -4393,7 +4913,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 5;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder clearCurrencyid() {
@@ -4415,8 +4935,8 @@ public final class CsCart {
   }
 
   public interface GetSalesCartListResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.GetSalesCartListResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.GetSalesCartListResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -4425,17 +4945,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     boolean hasSubtotal();
@@ -4443,7 +4963,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     float getSubtotal();
@@ -4452,7 +4972,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     boolean hasGrandtotal();
@@ -4460,7 +4980,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     float getGrandtotal();
@@ -4469,24 +4989,24 @@ public final class CsCart {
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    java.util.List<SalesCartItem>
-        getItemsList();
+    java.util.List<fksproto.CsCart.SalesCartItem>
+    getItemsList();
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    SalesCartItem getItems(int index);
+    fksproto.CsCart.SalesCartItem getItems(int index);
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
     int getItemsCount();
@@ -4494,43 +5014,43 @@ public final class CsCart {
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    java.util.List<? extends SalesCartItemOrBuilder>
-        getItemsOrBuilderList();
+    java.util.List<? extends fksproto.CsCart.SalesCartItemOrBuilder>
+    getItemsOrBuilderList();
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    SalesCartItemOrBuilder getItemsOrBuilder(
+    fksproto.CsCart.SalesCartItemOrBuilder getItemsOrBuilder(
             int index);
 
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    java.util.List<CsBase.Warehouse>
-        getWarehousesList();
+    java.util.List<fksproto.CsBase.Warehouse>
+    getWarehousesList();
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    CsBase.Warehouse getWarehouses(int index);
+    fksproto.CsBase.Warehouse getWarehouses(int index);
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
     int getWarehousesCount();
@@ -4538,32 +5058,32 @@ public final class CsCart {
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    java.util.List<? extends CsBase.WarehouseOrBuilder>
-        getWarehousesOrBuilderList();
+    java.util.List<? extends fksproto.CsBase.WarehouseOrBuilder>
+    getWarehousesOrBuilderList();
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
+    fksproto.CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
             int index);
   }
   /**
    * Protobuf type {@code fksproto.GetSalesCartListResponse}
    *
    * <pre>
-   *��ȡ���ﳵӦ��
+   *获取购物车应答
    * </pre>
    */
   public static final class GetSalesCartListResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.GetSalesCartListResponse)
-      GetSalesCartListResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetSalesCartListResponse)
+          GetSalesCartListResponseOrBuilder {
     // Use GetSalesCartListResponse.newBuilder() to construct.
     private GetSalesCartListResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4581,19 +5101,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private GetSalesCartListResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4604,17 +5124,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -4634,18 +5154,18 @@ public final class CsCart {
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                items_ = new java.util.ArrayList<SalesCartItem>();
+                items_ = new java.util.ArrayList<fksproto.CsCart.SalesCartItem>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              items_.add(input.readMessage(SalesCartItem.PARSER, extensionRegistry));
+              items_.add(input.readMessage(fksproto.CsCart.SalesCartItem.PARSER, extensionRegistry));
               break;
             }
             case 42: {
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                warehouses_ = new java.util.ArrayList<CsBase.Warehouse>();
+                warehouses_ = new java.util.ArrayList<fksproto.CsBase.Warehouse>();
                 mutable_bitField0_ |= 0x00000010;
               }
-              warehouses_.add(input.readMessage(CsBase.Warehouse.PARSER, extensionRegistry));
+              warehouses_.add(input.readMessage(fksproto.CsBase.Warehouse.PARSER, extensionRegistry));
               break;
             }
           }
@@ -4654,7 +5174,7 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           items_ = java.util.Collections.unmodifiableList(items_);
@@ -4667,35 +5187,35 @@ public final class CsCart {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              GetSalesCartListResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.GetSalesCartListResponse.class, fksproto.CsCart.GetSalesCartListResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<GetSalesCartListResponse> PARSER =
-        new com.google.protobuf.AbstractParser<GetSalesCartListResponse>() {
-      public GetSalesCartListResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetSalesCartListResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<GetSalesCartListResponse>() {
+              public GetSalesCartListResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetSalesCartListResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<GetSalesCartListResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -4705,13 +5225,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -4721,7 +5241,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public boolean hasSubtotal() {
@@ -4731,7 +5251,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public float getSubtotal() {
@@ -4744,7 +5264,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public boolean hasGrandtotal() {
@@ -4754,7 +5274,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public float getGrandtotal() {
@@ -4762,33 +5282,33 @@ public final class CsCart {
     }
 
     public static final int ITEMS_FIELD_NUMBER = 4;
-    private java.util.List<SalesCartItem> items_;
+    private java.util.List<fksproto.CsCart.SalesCartItem> items_;
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    public java.util.List<SalesCartItem> getItemsList() {
+    public java.util.List<fksproto.CsCart.SalesCartItem> getItemsList() {
       return items_;
     }
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    public java.util.List<? extends SalesCartItemOrBuilder>
-        getItemsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsCart.SalesCartItemOrBuilder>
+    getItemsOrBuilderList() {
       return items_;
     }
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
     public int getItemsCount() {
@@ -4798,52 +5318,52 @@ public final class CsCart {
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    public SalesCartItem getItems(int index) {
+    public fksproto.CsCart.SalesCartItem getItems(int index) {
       return items_.get(index);
     }
     /**
      * <code>repeated .fksproto.SalesCartItem items = 4;</code>
      *
      * <pre>
-     *���ﳵ��Ʒ
+     *购物车单品
      * </pre>
      */
-    public SalesCartItemOrBuilder getItemsOrBuilder(
-        int index) {
+    public fksproto.CsCart.SalesCartItemOrBuilder getItemsOrBuilder(
+            int index) {
       return items_.get(index);
     }
 
     public static final int WAREHOUSES_FIELD_NUMBER = 5;
-    private java.util.List<CsBase.Warehouse> warehouses_;
+    private java.util.List<fksproto.CsBase.Warehouse> warehouses_;
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    public java.util.List<CsBase.Warehouse> getWarehousesList() {
+    public java.util.List<fksproto.CsBase.Warehouse> getWarehousesList() {
       return warehouses_;
     }
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    public java.util.List<? extends CsBase.WarehouseOrBuilder>
-        getWarehousesOrBuilderList() {
+    public java.util.List<? extends fksproto.CsBase.WarehouseOrBuilder>
+    getWarehousesOrBuilderList() {
       return warehouses_;
     }
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
     public int getWarehousesCount() {
@@ -4853,26 +5373,26 @@ public final class CsCart {
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    public CsBase.Warehouse getWarehouses(int index) {
+    public fksproto.CsBase.Warehouse getWarehouses(int index) {
       return warehouses_.get(index);
     }
     /**
      * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
      *
      * <pre>
-     *�ֿ���Ϣ
+     *仓库信息
      * </pre>
      */
-    public CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
-        int index) {
+    public fksproto.CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
+            int index) {
       return warehouses_.get(index);
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       subtotal_ = 0F;
       grandtotal_ = 0F;
       items_ = java.util.Collections.emptyList();
@@ -4903,7 +5423,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -4931,23 +5451,23 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, subtotal_);
+                .computeFloatSize(2, subtotal_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, grandtotal_);
+                .computeFloatSize(3, grandtotal_);
       }
       for (int i = 0; i < items_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, items_.get(i));
+                .computeMessageSize(4, items_.get(i));
       }
       for (int i = 0; i < warehouses_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, warehouses_.get(i));
+                .computeMessageSize(5, warehouses_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4955,75 +5475,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static GetSalesCartListResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetSalesCartListResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetSalesCartListResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static GetSalesCartListResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static GetSalesCartListResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetSalesCartListResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static GetSalesCartListResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static GetSalesCartListResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static GetSalesCartListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static GetSalesCartListResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.GetSalesCartListResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(GetSalesCartListResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.GetSalesCartListResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5031,23 +5551,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.GetSalesCartListResponse}
      *
      * <pre>
-     *��ȡ���ﳵӦ��
+     *获取购物车应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.GetSalesCartListResponse)
-        GetSalesCartListResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetSalesCartListResponse)
+            fksproto.CsCart.GetSalesCartListResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                GetSalesCartListResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.GetSalesCartListResponse.class, fksproto.CsCart.GetSalesCartListResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.GetSalesCartListResponse.newBuilder()
@@ -5056,7 +5576,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5074,7 +5594,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -5103,24 +5623,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_GetSalesCartListResponse_descriptor;
       }
 
-      public GetSalesCartListResponse getDefaultInstanceForType() {
-        return GetSalesCartListResponse.getDefaultInstance();
+      public fksproto.CsCart.GetSalesCartListResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.GetSalesCartListResponse.getDefaultInstance();
       }
 
-      public GetSalesCartListResponse build() {
-        GetSalesCartListResponse result = buildPartial();
+      public fksproto.CsCart.GetSalesCartListResponse build() {
+        fksproto.CsCart.GetSalesCartListResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public GetSalesCartListResponse buildPartial() {
-        GetSalesCartListResponse result = new GetSalesCartListResponse(this);
+      public fksproto.CsCart.GetSalesCartListResponse buildPartial() {
+        fksproto.CsCart.GetSalesCartListResponse result = new fksproto.CsCart.GetSalesCartListResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -5163,16 +5683,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof GetSalesCartListResponse) {
-          return mergeFrom((GetSalesCartListResponse)other);
+        if (other instanceof fksproto.CsCart.GetSalesCartListResponse) {
+          return mergeFrom((fksproto.CsCart.GetSalesCartListResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(GetSalesCartListResponse other) {
-        if (other == GetSalesCartListResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.GetSalesCartListResponse other) {
+        if (other == fksproto.CsCart.GetSalesCartListResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -5200,9 +5720,9 @@ public final class CsCart {
               itemsBuilder_ = null;
               items_ = other.items_;
               bitField0_ = (bitField0_ & ~0x00000008);
-              itemsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getItemsFieldBuilder() : null;
+              itemsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getItemsFieldBuilder() : null;
             } else {
               itemsBuilder_.addAllMessages(other.items_);
             }
@@ -5226,9 +5746,9 @@ public final class CsCart {
               warehousesBuilder_ = null;
               warehouses_ = other.warehouses_;
               bitField0_ = (bitField0_ & ~0x00000010);
-              warehousesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getWarehousesFieldBuilder() : null;
+              warehousesBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getWarehousesFieldBuilder() : null;
             } else {
               warehousesBuilder_.addAllMessages(other.warehouses_);
             }
@@ -5240,16 +5760,16 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         for (int i = 0; i < getItemsCount(); i++) {
           if (!getItems(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -5257,14 +5777,14 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        GetSalesCartListResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.GetSalesCartListResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (GetSalesCartListResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.GetSalesCartListResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -5275,9 +5795,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -5287,7 +5807,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -5297,7 +5817,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5314,7 +5834,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -5327,12 +5847,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -5348,7 +5868,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -5359,7 +5879,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -5367,7 +5887,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -5378,11 +5898,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -5396,7 +5916,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public boolean hasSubtotal() {
@@ -5406,7 +5926,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public float getSubtotal() {
@@ -5416,7 +5936,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder setSubtotal(float value) {
@@ -5429,7 +5949,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder clearSubtotal() {
@@ -5444,7 +5964,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public boolean hasGrandtotal() {
@@ -5454,7 +5974,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public float getGrandtotal() {
@@ -5464,7 +5984,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder setGrandtotal(float value) {
@@ -5477,7 +5997,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder clearGrandtotal() {
@@ -5487,26 +6007,26 @@ public final class CsCart {
         return this;
       }
 
-      private java.util.List<SalesCartItem> items_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsCart.SalesCartItem> items_ =
+              java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          items_ = new java.util.ArrayList<SalesCartItem>(items_);
+          items_ = new java.util.ArrayList<fksproto.CsCart.SalesCartItem>(items_);
           bitField0_ |= 0x00000008;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          SalesCartItem, SalesCartItem.Builder, SalesCartItemOrBuilder> itemsBuilder_;
+              fksproto.CsCart.SalesCartItem, fksproto.CsCart.SalesCartItem.Builder, fksproto.CsCart.SalesCartItemOrBuilder> itemsBuilder_;
 
       /**
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public java.util.List<SalesCartItem> getItemsList() {
+      public java.util.List<fksproto.CsCart.SalesCartItem> getItemsList() {
         if (itemsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(items_);
         } else {
@@ -5517,7 +6037,7 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public int getItemsCount() {
@@ -5531,10 +6051,10 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public SalesCartItem getItems(int index) {
+      public fksproto.CsCart.SalesCartItem getItems(int index) {
         if (itemsBuilder_ == null) {
           return items_.get(index);
         } else {
@@ -5545,11 +6065,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder setItems(
-          int index, SalesCartItem value) {
+              int index, fksproto.CsCart.SalesCartItem value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5566,11 +6086,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder setItems(
-          int index, SalesCartItem.Builder builderForValue) {
+              int index, fksproto.CsCart.SalesCartItem.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.set(index, builderForValue.build());
@@ -5584,10 +6104,10 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public Builder addItems(SalesCartItem value) {
+      public Builder addItems(fksproto.CsCart.SalesCartItem value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5604,11 +6124,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder addItems(
-          int index, SalesCartItem value) {
+              int index, fksproto.CsCart.SalesCartItem value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5625,11 +6145,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder addItems(
-          SalesCartItem.Builder builderForValue) {
+              fksproto.CsCart.SalesCartItem.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.add(builderForValue.build());
@@ -5643,11 +6163,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder addItems(
-          int index, SalesCartItem.Builder builderForValue) {
+              int index, fksproto.CsCart.SalesCartItem.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.add(index, builderForValue.build());
@@ -5661,15 +6181,15 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder addAllItems(
-          Iterable<? extends SalesCartItem> values) {
+              java.lang.Iterable<? extends fksproto.CsCart.SalesCartItem> values) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, items_);
+                  values, items_);
           onChanged();
         } else {
           itemsBuilder_.addAllMessages(values);
@@ -5680,7 +6200,7 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder clearItems() {
@@ -5697,7 +6217,7 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
       public Builder removeItems(int index) {
@@ -5714,22 +6234,22 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public SalesCartItem.Builder getItemsBuilder(
-          int index) {
+      public fksproto.CsCart.SalesCartItem.Builder getItemsBuilder(
+              int index) {
         return getItemsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public SalesCartItemOrBuilder getItemsOrBuilder(
-          int index) {
+      public fksproto.CsCart.SalesCartItemOrBuilder getItemsOrBuilder(
+              int index) {
         if (itemsBuilder_ == null) {
           return items_.get(index);  } else {
           return itemsBuilder_.getMessageOrBuilder(index);
@@ -5739,11 +6259,11 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public java.util.List<? extends SalesCartItemOrBuilder>
-           getItemsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsCart.SalesCartItemOrBuilder>
+      getItemsOrBuilderList() {
         if (itemsBuilder_ != null) {
           return itemsBuilder_.getMessageOrBuilderList();
         } else {
@@ -5754,42 +6274,42 @@ public final class CsCart {
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public SalesCartItem.Builder addItemsBuilder() {
+      public fksproto.CsCart.SalesCartItem.Builder addItemsBuilder() {
         return getItemsFieldBuilder().addBuilder(
-            SalesCartItem.getDefaultInstance());
+                fksproto.CsCart.SalesCartItem.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public SalesCartItem.Builder addItemsBuilder(
-          int index) {
+      public fksproto.CsCart.SalesCartItem.Builder addItemsBuilder(
+              int index) {
         return getItemsFieldBuilder().addBuilder(
-            index, SalesCartItem.getDefaultInstance());
+                index, fksproto.CsCart.SalesCartItem.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.SalesCartItem items = 4;</code>
        *
        * <pre>
-       *���ﳵ��Ʒ
+       *购物车单品
        * </pre>
        */
-      public java.util.List<SalesCartItem.Builder>
-           getItemsBuilderList() {
+      public java.util.List<fksproto.CsCart.SalesCartItem.Builder>
+      getItemsBuilderList() {
         return getItemsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          SalesCartItem, SalesCartItem.Builder, SalesCartItemOrBuilder>
-          getItemsFieldBuilder() {
+              fksproto.CsCart.SalesCartItem, fksproto.CsCart.SalesCartItem.Builder, fksproto.CsCart.SalesCartItemOrBuilder>
+      getItemsFieldBuilder() {
         if (itemsBuilder_ == null) {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              SalesCartItem, SalesCartItem.Builder, SalesCartItemOrBuilder>(
+                  fksproto.CsCart.SalesCartItem, fksproto.CsCart.SalesCartItem.Builder, fksproto.CsCart.SalesCartItemOrBuilder>(
                   items_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
@@ -5799,26 +6319,26 @@ public final class CsCart {
         return itemsBuilder_;
       }
 
-      private java.util.List<CsBase.Warehouse> warehouses_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsBase.Warehouse> warehouses_ =
+              java.util.Collections.emptyList();
       private void ensureWarehousesIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          warehouses_ = new java.util.ArrayList<CsBase.Warehouse>(warehouses_);
+          warehouses_ = new java.util.ArrayList<fksproto.CsBase.Warehouse>(warehouses_);
           bitField0_ |= 0x00000010;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.Warehouse, CsBase.Warehouse.Builder, CsBase.WarehouseOrBuilder> warehousesBuilder_;
+              fksproto.CsBase.Warehouse, fksproto.CsBase.Warehouse.Builder, fksproto.CsBase.WarehouseOrBuilder> warehousesBuilder_;
 
       /**
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public java.util.List<CsBase.Warehouse> getWarehousesList() {
+      public java.util.List<fksproto.CsBase.Warehouse> getWarehousesList() {
         if (warehousesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(warehouses_);
         } else {
@@ -5829,7 +6349,7 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public int getWarehousesCount() {
@@ -5843,10 +6363,10 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public CsBase.Warehouse getWarehouses(int index) {
+      public fksproto.CsBase.Warehouse getWarehouses(int index) {
         if (warehousesBuilder_ == null) {
           return warehouses_.get(index);
         } else {
@@ -5857,11 +6377,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder setWarehouses(
-          int index, CsBase.Warehouse value) {
+              int index, fksproto.CsBase.Warehouse value) {
         if (warehousesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5878,11 +6398,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder setWarehouses(
-          int index, CsBase.Warehouse.Builder builderForValue) {
+              int index, fksproto.CsBase.Warehouse.Builder builderForValue) {
         if (warehousesBuilder_ == null) {
           ensureWarehousesIsMutable();
           warehouses_.set(index, builderForValue.build());
@@ -5896,10 +6416,10 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public Builder addWarehouses(CsBase.Warehouse value) {
+      public Builder addWarehouses(fksproto.CsBase.Warehouse value) {
         if (warehousesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5916,11 +6436,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder addWarehouses(
-          int index, CsBase.Warehouse value) {
+              int index, fksproto.CsBase.Warehouse value) {
         if (warehousesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5937,11 +6457,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder addWarehouses(
-          CsBase.Warehouse.Builder builderForValue) {
+              fksproto.CsBase.Warehouse.Builder builderForValue) {
         if (warehousesBuilder_ == null) {
           ensureWarehousesIsMutable();
           warehouses_.add(builderForValue.build());
@@ -5955,11 +6475,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder addWarehouses(
-          int index, CsBase.Warehouse.Builder builderForValue) {
+              int index, fksproto.CsBase.Warehouse.Builder builderForValue) {
         if (warehousesBuilder_ == null) {
           ensureWarehousesIsMutable();
           warehouses_.add(index, builderForValue.build());
@@ -5973,15 +6493,15 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder addAllWarehouses(
-          Iterable<? extends CsBase.Warehouse> values) {
+              java.lang.Iterable<? extends fksproto.CsBase.Warehouse> values) {
         if (warehousesBuilder_ == null) {
           ensureWarehousesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, warehouses_);
+                  values, warehouses_);
           onChanged();
         } else {
           warehousesBuilder_.addAllMessages(values);
@@ -5992,7 +6512,7 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder clearWarehouses() {
@@ -6009,7 +6529,7 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
       public Builder removeWarehouses(int index) {
@@ -6026,22 +6546,22 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public CsBase.Warehouse.Builder getWarehousesBuilder(
-          int index) {
+      public fksproto.CsBase.Warehouse.Builder getWarehousesBuilder(
+              int index) {
         return getWarehousesFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
-          int index) {
+      public fksproto.CsBase.WarehouseOrBuilder getWarehousesOrBuilder(
+              int index) {
         if (warehousesBuilder_ == null) {
           return warehouses_.get(index);  } else {
           return warehousesBuilder_.getMessageOrBuilder(index);
@@ -6051,11 +6571,11 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public java.util.List<? extends CsBase.WarehouseOrBuilder>
-           getWarehousesOrBuilderList() {
+      public java.util.List<? extends fksproto.CsBase.WarehouseOrBuilder>
+      getWarehousesOrBuilderList() {
         if (warehousesBuilder_ != null) {
           return warehousesBuilder_.getMessageOrBuilderList();
         } else {
@@ -6066,42 +6586,42 @@ public final class CsCart {
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public CsBase.Warehouse.Builder addWarehousesBuilder() {
+      public fksproto.CsBase.Warehouse.Builder addWarehousesBuilder() {
         return getWarehousesFieldBuilder().addBuilder(
-            CsBase.Warehouse.getDefaultInstance());
+                fksproto.CsBase.Warehouse.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public CsBase.Warehouse.Builder addWarehousesBuilder(
-          int index) {
+      public fksproto.CsBase.Warehouse.Builder addWarehousesBuilder(
+              int index) {
         return getWarehousesFieldBuilder().addBuilder(
-            index, CsBase.Warehouse.getDefaultInstance());
+                index, fksproto.CsBase.Warehouse.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.Warehouse warehouses = 5;</code>
        *
        * <pre>
-       *�ֿ���Ϣ
+       *仓库信息
        * </pre>
        */
-      public java.util.List<CsBase.Warehouse.Builder>
-           getWarehousesBuilderList() {
+      public java.util.List<fksproto.CsBase.Warehouse.Builder>
+      getWarehousesBuilderList() {
         return getWarehousesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.Warehouse, CsBase.Warehouse.Builder, CsBase.WarehouseOrBuilder>
-          getWarehousesFieldBuilder() {
+              fksproto.CsBase.Warehouse, fksproto.CsBase.Warehouse.Builder, fksproto.CsBase.WarehouseOrBuilder>
+      getWarehousesFieldBuilder() {
         if (warehousesBuilder_ == null) {
           warehousesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              CsBase.Warehouse, CsBase.Warehouse.Builder, CsBase.WarehouseOrBuilder>(
+                  fksproto.CsBase.Warehouse, fksproto.CsBase.Warehouse.Builder, fksproto.CsBase.WarehouseOrBuilder>(
                   warehouses_,
                   ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
@@ -6123,8 +6643,8 @@ public final class CsCart {
   }
 
   public interface AppendSalesCartRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.AppendSalesCartRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.AppendSalesCartRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -6133,11 +6653,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -6146,17 +6666,17 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>required int64 item_id = 3;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     boolean hasItemId();
@@ -6164,7 +6684,7 @@ public final class CsCart {
      * <code>required int64 item_id = 3;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     long getItemId();
@@ -6173,7 +6693,7 @@ public final class CsCart {
      * <code>required int32 qty = 4;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     boolean hasQty();
@@ -6181,7 +6701,7 @@ public final class CsCart {
      * <code>required int32 qty = 4;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     int getQty();
@@ -6190,7 +6710,7 @@ public final class CsCart {
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     boolean hasNote();
@@ -6198,42 +6718,42 @@ public final class CsCart {
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
-    String getNote();
+    java.lang.String getNote();
     /**
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     com.google.protobuf.ByteString
-        getNoteBytes();
+    getNoteBytes();
 
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    java.util.List<CsBase.PairIntInt>
-        getAttrsList();
+    java.util.List<fksproto.CsBase.PairIntInt>
+    getAttrsList();
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    CsBase.PairIntInt getAttrs(int index);
+    fksproto.CsBase.PairIntInt getAttrs(int index);
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
     int getAttrsCount();
@@ -6241,26 +6761,26 @@ public final class CsCart {
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    java.util.List<? extends CsBase.PairIntIntOrBuilder>
-        getAttrsOrBuilderList();
+    java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+    getAttrsOrBuilderList();
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
+    fksproto.CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
             int index);
 
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -6268,25 +6788,25 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasLocalecode();
@@ -6294,31 +6814,31 @@ public final class CsCart {
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
   }
   /**
    * Protobuf type {@code fksproto.AppendSalesCartRequest}
    *
    * <pre>
-   *��ӹ��ﳵ����
+   *添加购物车请求
    * </pre>
    */
   public static final class AppendSalesCartRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.AppendSalesCartRequest)
-      AppendSalesCartRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.AppendSalesCartRequest)
+          AppendSalesCartRequestOrBuilder {
     // Use AppendSalesCartRequest.newBuilder() to construct.
     private AppendSalesCartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6336,19 +6856,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private AppendSalesCartRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6359,17 +6879,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -6378,11 +6898,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -6408,10 +6928,10 @@ public final class CsCart {
             }
             case 50: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                attrs_ = new java.util.ArrayList<CsBase.PairIntInt>();
+                attrs_ = new java.util.ArrayList<fksproto.CsBase.PairIntInt>();
                 mutable_bitField0_ |= 0x00000020;
               }
-              attrs_.add(input.readMessage(CsBase.PairIntInt.PARSER, extensionRegistry));
+              attrs_.add(input.readMessage(fksproto.CsBase.PairIntInt.PARSER, extensionRegistry));
               break;
             }
             case 58: {
@@ -6432,7 +6952,7 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           attrs_ = java.util.Collections.unmodifiableList(attrs_);
@@ -6442,35 +6962,35 @@ public final class CsCart {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              AppendSalesCartRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.AppendSalesCartRequest.class, fksproto.CsCart.AppendSalesCartRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<AppendSalesCartRequest> PARSER =
-        new com.google.protobuf.AbstractParser<AppendSalesCartRequest>() {
-      public AppendSalesCartRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AppendSalesCartRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<AppendSalesCartRequest>() {
+              public AppendSalesCartRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new AppendSalesCartRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<AppendSalesCartRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -6480,18 +7000,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -6501,13 +7021,13 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
@@ -6517,7 +7037,7 @@ public final class CsCart {
      * <code>required int64 item_id = 3;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public boolean hasItemId() {
@@ -6527,7 +7047,7 @@ public final class CsCart {
      * <code>required int64 item_id = 3;</code>
      *
      * <pre>
-     *��Ʒid
+     *单品id
      * </pre>
      */
     public long getItemId() {
@@ -6540,7 +7060,7 @@ public final class CsCart {
      * <code>required int32 qty = 4;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public boolean hasQty() {
@@ -6550,7 +7070,7 @@ public final class CsCart {
      * <code>required int32 qty = 4;</code>
      *
      * <pre>
-     *��������
+     *交易数量
      * </pre>
      */
     public int getQty() {
@@ -6558,12 +7078,12 @@ public final class CsCart {
     }
 
     public static final int NOTE_FIELD_NUMBER = 5;
-    private Object note_;
+    private java.lang.Object note_;
     /**
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     public boolean hasNote() {
@@ -6573,17 +7093,17 @@ public final class CsCart {
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
-    public String getNote() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getNote() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           note_ = s;
         }
@@ -6594,16 +7114,16 @@ public final class CsCart {
      * <code>optional string note = 5;</code>
      *
      * <pre>
-     *����
+     *留言
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getNoteBytes() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getNoteBytes() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         note_ = b;
         return b;
       } else {
@@ -6612,33 +7132,33 @@ public final class CsCart {
     }
 
     public static final int ATTRS_FIELD_NUMBER = 6;
-    private java.util.List<CsBase.PairIntInt> attrs_;
+    private java.util.List<fksproto.CsBase.PairIntInt> attrs_;
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    public java.util.List<CsBase.PairIntInt> getAttrsList() {
+    public java.util.List<fksproto.CsBase.PairIntInt> getAttrsList() {
       return attrs_;
     }
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    public java.util.List<? extends CsBase.PairIntIntOrBuilder>
-        getAttrsOrBuilderList() {
+    public java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+    getAttrsOrBuilderList() {
       return attrs_;
     }
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
     public int getAttrsCount() {
@@ -6648,31 +7168,31 @@ public final class CsCart {
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    public CsBase.PairIntInt getAttrs(int index) {
+    public fksproto.CsBase.PairIntInt getAttrs(int index) {
       return attrs_.get(index);
     }
     /**
      * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
      *
      * <pre>
-     *����id:����ֵid�б�
+     *属性id:属性值id列表
      * </pre>
      */
-    public CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
-        int index) {
+    public fksproto.CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
+            int index) {
       return attrs_.get(index);
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 7;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -6682,17 +7202,17 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -6703,16 +7223,16 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -6721,12 +7241,12 @@ public final class CsCart {
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 8;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasLocalecode() {
@@ -6736,17 +7256,17 @@ public final class CsCart {
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -6757,16 +7277,16 @@ public final class CsCart {
      * <code>optional string localecode = 8;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -6775,8 +7295,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       itemId_ = 0L;
       qty_ = 0;
       note_ = "";
@@ -6813,7 +7333,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -6850,35 +7370,35 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, itemId_);
+                .computeInt64Size(3, itemId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, qty_);
+                .computeInt32Size(4, qty_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getNoteBytes());
+                .computeBytesSize(5, getNoteBytes());
       }
       for (int i = 0; i < attrs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, attrs_.get(i));
+                .computeMessageSize(6, attrs_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getCurrencycodeBytes());
+                .computeBytesSize(7, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getLocalecodeBytes());
+                .computeBytesSize(8, getLocalecodeBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6886,75 +7406,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static AppendSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AppendSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AppendSalesCartRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AppendSalesCartRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AppendSalesCartRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static AppendSalesCartRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static AppendSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static AppendSalesCartRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static AppendSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static AppendSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(AppendSalesCartRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.AppendSalesCartRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6962,23 +7482,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.AppendSalesCartRequest}
      *
      * <pre>
-     *��ӹ��ﳵ����
+     *添加购物车请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.AppendSalesCartRequest)
-        AppendSalesCartRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.AppendSalesCartRequest)
+            fksproto.CsCart.AppendSalesCartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                AppendSalesCartRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.AppendSalesCartRequest.class, fksproto.CsCart.AppendSalesCartRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.AppendSalesCartRequest.newBuilder()
@@ -6987,7 +7507,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7005,13 +7525,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -7040,24 +7560,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartRequest_descriptor;
       }
 
-      public AppendSalesCartRequest getDefaultInstanceForType() {
-        return AppendSalesCartRequest.getDefaultInstance();
+      public fksproto.CsCart.AppendSalesCartRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.AppendSalesCartRequest.getDefaultInstance();
       }
 
-      public AppendSalesCartRequest build() {
-        AppendSalesCartRequest result = buildPartial();
+      public fksproto.CsCart.AppendSalesCartRequest build() {
+        fksproto.CsCart.AppendSalesCartRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public AppendSalesCartRequest buildPartial() {
-        AppendSalesCartRequest result = new AppendSalesCartRequest(this);
+      public fksproto.CsCart.AppendSalesCartRequest buildPartial() {
+        fksproto.CsCart.AppendSalesCartRequest result = new fksproto.CsCart.AppendSalesCartRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7111,16 +7631,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AppendSalesCartRequest) {
-          return mergeFrom((AppendSalesCartRequest)other);
+        if (other instanceof fksproto.CsCart.AppendSalesCartRequest) {
+          return mergeFrom((fksproto.CsCart.AppendSalesCartRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AppendSalesCartRequest other) {
-        if (other == AppendSalesCartRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.AppendSalesCartRequest other) {
+        if (other == fksproto.CsCart.AppendSalesCartRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -7156,9 +7676,9 @@ public final class CsCart {
               attrsBuilder_ = null;
               attrs_ = other.attrs_;
               bitField0_ = (bitField0_ & ~0x00000020);
-              attrsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getAttrsFieldBuilder() : null;
+              attrsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getAttrsFieldBuilder() : null;
             } else {
               attrsBuilder_.addAllMessages(other.attrs_);
             }
@@ -7180,20 +7700,20 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!hasItemId()) {
-          
+
           return false;
         }
         if (!hasQty()) {
-          
+
           return false;
         }
         for (int i = 0; i < getAttrsCount(); i++) {
           if (!getAttrs(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -7201,14 +7721,14 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        AppendSalesCartRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.AppendSalesCartRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AppendSalesCartRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.AppendSalesCartRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -7219,9 +7739,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -7231,7 +7751,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -7241,7 +7761,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7258,7 +7778,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -7271,12 +7791,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -7292,7 +7812,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -7303,7 +7823,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -7311,7 +7831,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -7322,11 +7842,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -7335,9 +7855,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -7347,7 +7867,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -7357,7 +7877,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7374,7 +7894,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -7387,12 +7907,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -7408,7 +7928,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -7419,7 +7939,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -7427,7 +7947,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -7438,11 +7958,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -7456,7 +7976,7 @@ public final class CsCart {
        * <code>required int64 item_id = 3;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public boolean hasItemId() {
@@ -7466,7 +7986,7 @@ public final class CsCart {
        * <code>required int64 item_id = 3;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public long getItemId() {
@@ -7476,7 +7996,7 @@ public final class CsCart {
        * <code>required int64 item_id = 3;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder setItemId(long value) {
@@ -7489,7 +8009,7 @@ public final class CsCart {
        * <code>required int64 item_id = 3;</code>
        *
        * <pre>
-       *��Ʒid
+       *单品id
        * </pre>
        */
       public Builder clearItemId() {
@@ -7504,7 +8024,7 @@ public final class CsCart {
        * <code>required int32 qty = 4;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public boolean hasQty() {
@@ -7514,7 +8034,7 @@ public final class CsCart {
        * <code>required int32 qty = 4;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public int getQty() {
@@ -7524,7 +8044,7 @@ public final class CsCart {
        * <code>required int32 qty = 4;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder setQty(int value) {
@@ -7537,7 +8057,7 @@ public final class CsCart {
        * <code>required int32 qty = 4;</code>
        *
        * <pre>
-       *��������
+       *交易数量
        * </pre>
        */
       public Builder clearQty() {
@@ -7547,12 +8067,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object note_ = "";
+      private java.lang.Object note_ = "";
       /**
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public boolean hasNote() {
@@ -7562,37 +8082,37 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
-      public String getNote() {
-        Object ref = note_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getNote() {
+        java.lang.Object ref = note_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             note_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getNoteBytes() {
-        Object ref = note_;
+      getNoteBytes() {
+        java.lang.Object ref = note_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           note_ = b;
           return b;
         } else {
@@ -7603,15 +8123,15 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder setNote(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         note_ = value;
         onChanged();
         return this;
@@ -7620,7 +8140,7 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder clearNote() {
@@ -7633,40 +8153,40 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        *
        * <pre>
-       *����
+       *留言
        * </pre>
        */
       public Builder setNoteBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         note_ = value;
         onChanged();
         return this;
       }
 
-      private java.util.List<CsBase.PairIntInt> attrs_ =
-        java.util.Collections.emptyList();
+      private java.util.List<fksproto.CsBase.PairIntInt> attrs_ =
+              java.util.Collections.emptyList();
       private void ensureAttrsIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          attrs_ = new java.util.ArrayList<CsBase.PairIntInt>(attrs_);
+          attrs_ = new java.util.ArrayList<fksproto.CsBase.PairIntInt>(attrs_);
           bitField0_ |= 0x00000020;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder> attrsBuilder_;
+              fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder> attrsBuilder_;
 
       /**
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public java.util.List<CsBase.PairIntInt> getAttrsList() {
+      public java.util.List<fksproto.CsBase.PairIntInt> getAttrsList() {
         if (attrsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(attrs_);
         } else {
@@ -7677,7 +8197,7 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public int getAttrsCount() {
@@ -7691,10 +8211,10 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public CsBase.PairIntInt getAttrs(int index) {
+      public fksproto.CsBase.PairIntInt getAttrs(int index) {
         if (attrsBuilder_ == null) {
           return attrs_.get(index);
         } else {
@@ -7705,11 +8225,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder setAttrs(
-          int index, CsBase.PairIntInt value) {
+              int index, fksproto.CsBase.PairIntInt value) {
         if (attrsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7726,11 +8246,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder setAttrs(
-          int index, CsBase.PairIntInt.Builder builderForValue) {
+              int index, fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (attrsBuilder_ == null) {
           ensureAttrsIsMutable();
           attrs_.set(index, builderForValue.build());
@@ -7744,10 +8264,10 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public Builder addAttrs(CsBase.PairIntInt value) {
+      public Builder addAttrs(fksproto.CsBase.PairIntInt value) {
         if (attrsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7764,11 +8284,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder addAttrs(
-          int index, CsBase.PairIntInt value) {
+              int index, fksproto.CsBase.PairIntInt value) {
         if (attrsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7785,11 +8305,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder addAttrs(
-          CsBase.PairIntInt.Builder builderForValue) {
+              fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (attrsBuilder_ == null) {
           ensureAttrsIsMutable();
           attrs_.add(builderForValue.build());
@@ -7803,11 +8323,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder addAttrs(
-          int index, CsBase.PairIntInt.Builder builderForValue) {
+              int index, fksproto.CsBase.PairIntInt.Builder builderForValue) {
         if (attrsBuilder_ == null) {
           ensureAttrsIsMutable();
           attrs_.add(index, builderForValue.build());
@@ -7821,15 +8341,15 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder addAllAttrs(
-          Iterable<? extends CsBase.PairIntInt> values) {
+              java.lang.Iterable<? extends fksproto.CsBase.PairIntInt> values) {
         if (attrsBuilder_ == null) {
           ensureAttrsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, attrs_);
+                  values, attrs_);
           onChanged();
         } else {
           attrsBuilder_.addAllMessages(values);
@@ -7840,7 +8360,7 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder clearAttrs() {
@@ -7857,7 +8377,7 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
       public Builder removeAttrs(int index) {
@@ -7874,22 +8394,22 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public CsBase.PairIntInt.Builder getAttrsBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntInt.Builder getAttrsBuilder(
+              int index) {
         return getAttrsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntIntOrBuilder getAttrsOrBuilder(
+              int index) {
         if (attrsBuilder_ == null) {
           return attrs_.get(index);  } else {
           return attrsBuilder_.getMessageOrBuilder(index);
@@ -7899,11 +8419,11 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public java.util.List<? extends CsBase.PairIntIntOrBuilder>
-           getAttrsOrBuilderList() {
+      public java.util.List<? extends fksproto.CsBase.PairIntIntOrBuilder>
+      getAttrsOrBuilderList() {
         if (attrsBuilder_ != null) {
           return attrsBuilder_.getMessageOrBuilderList();
         } else {
@@ -7914,42 +8434,42 @@ public final class CsCart {
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public CsBase.PairIntInt.Builder addAttrsBuilder() {
+      public fksproto.CsBase.PairIntInt.Builder addAttrsBuilder() {
         return getAttrsFieldBuilder().addBuilder(
-            CsBase.PairIntInt.getDefaultInstance());
+                fksproto.CsBase.PairIntInt.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public CsBase.PairIntInt.Builder addAttrsBuilder(
-          int index) {
+      public fksproto.CsBase.PairIntInt.Builder addAttrsBuilder(
+              int index) {
         return getAttrsFieldBuilder().addBuilder(
-            index, CsBase.PairIntInt.getDefaultInstance());
+                index, fksproto.CsBase.PairIntInt.getDefaultInstance());
       }
       /**
        * <code>repeated .fksproto.PairIntInt attrs = 6;</code>
        *
        * <pre>
-       *����id:����ֵid�б�
+       *属性id:属性值id列表
        * </pre>
        */
-      public java.util.List<CsBase.PairIntInt.Builder>
-           getAttrsBuilderList() {
+      public java.util.List<fksproto.CsBase.PairIntInt.Builder>
+      getAttrsBuilderList() {
         return getAttrsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder>
-          getAttrsFieldBuilder() {
+              fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder>
+      getAttrsFieldBuilder() {
         if (attrsBuilder_ == null) {
           attrsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              CsBase.PairIntInt, CsBase.PairIntInt.Builder, CsBase.PairIntIntOrBuilder>(
+                  fksproto.CsBase.PairIntInt, fksproto.CsBase.PairIntInt.Builder, fksproto.CsBase.PairIntIntOrBuilder>(
                   attrs_,
                   ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
@@ -7959,12 +8479,12 @@ public final class CsCart {
         return attrsBuilder_;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -7974,37 +8494,37 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -8015,15 +8535,15 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
         currencycode_ = value;
         onChanged();
         return this;
@@ -8032,7 +8552,7 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -8045,26 +8565,26 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
         currencycode_ = value;
         onChanged();
         return this;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasLocalecode() {
@@ -8074,37 +8594,37 @@ public final class CsCart {
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -8115,15 +8635,15 @@ public final class CsCart {
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
         localecode_ = value;
         onChanged();
         return this;
@@ -8132,7 +8652,7 @@ public final class CsCart {
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearLocalecode() {
@@ -8145,15 +8665,15 @@ public final class CsCart {
        * <code>optional string localecode = 8;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
         localecode_ = value;
         onChanged();
         return this;
@@ -8171,8 +8691,8 @@ public final class CsCart {
   }
 
   public interface AppendSalesCartResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.AppendSalesCartResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.AppendSalesCartResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -8181,23 +8701,23 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
   }
   /**
    * Protobuf type {@code fksproto.AppendSalesCartResponse}
    *
    * <pre>
-   *��ӹ��ﳵӦ��
+   *添加购物车应答
    * </pre>
    */
   public static final class AppendSalesCartResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.AppendSalesCartResponse)
-      AppendSalesCartResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.AppendSalesCartResponse)
+          AppendSalesCartResponseOrBuilder {
     // Use AppendSalesCartResponse.newBuilder() to construct.
     private AppendSalesCartResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8215,19 +8735,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private AppendSalesCartResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -8238,17 +8758,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -8262,42 +8782,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              AppendSalesCartResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.AppendSalesCartResponse.class, fksproto.CsCart.AppendSalesCartResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<AppendSalesCartResponse> PARSER =
-        new com.google.protobuf.AbstractParser<AppendSalesCartResponse>() {
-      public AppendSalesCartResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AppendSalesCartResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<AppendSalesCartResponse>() {
+              public AppendSalesCartResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new AppendSalesCartResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<AppendSalesCartResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -8307,18 +8827,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8339,7 +8859,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -8355,7 +8875,7 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8363,75 +8883,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static AppendSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AppendSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AppendSalesCartResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AppendSalesCartResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AppendSalesCartResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static AppendSalesCartResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static AppendSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static AppendSalesCartResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static AppendSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static AppendSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.AppendSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(AppendSalesCartResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.AppendSalesCartResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -8439,23 +8959,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.AppendSalesCartResponse}
      *
      * <pre>
-     *��ӹ��ﳵӦ��
+     *添加购物车应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.AppendSalesCartResponse)
-        AppendSalesCartResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.AppendSalesCartResponse)
+            fksproto.CsCart.AppendSalesCartResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                AppendSalesCartResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.AppendSalesCartResponse.class, fksproto.CsCart.AppendSalesCartResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.AppendSalesCartResponse.newBuilder()
@@ -8464,7 +8984,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -8480,7 +9000,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -8493,24 +9013,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_AppendSalesCartResponse_descriptor;
       }
 
-      public AppendSalesCartResponse getDefaultInstanceForType() {
-        return AppendSalesCartResponse.getDefaultInstance();
+      public fksproto.CsCart.AppendSalesCartResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.AppendSalesCartResponse.getDefaultInstance();
       }
 
-      public AppendSalesCartResponse build() {
-        AppendSalesCartResponse result = buildPartial();
+      public fksproto.CsCart.AppendSalesCartResponse build() {
+        fksproto.CsCart.AppendSalesCartResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public AppendSalesCartResponse buildPartial() {
-        AppendSalesCartResponse result = new AppendSalesCartResponse(this);
+      public fksproto.CsCart.AppendSalesCartResponse buildPartial() {
+        fksproto.CsCart.AppendSalesCartResponse result = new fksproto.CsCart.AppendSalesCartResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -8527,16 +9047,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AppendSalesCartResponse) {
-          return mergeFrom((AppendSalesCartResponse)other);
+        if (other instanceof fksproto.CsCart.AppendSalesCartResponse) {
+          return mergeFrom((fksproto.CsCart.AppendSalesCartResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AppendSalesCartResponse other) {
-        if (other == AppendSalesCartResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.AppendSalesCartResponse other) {
+        if (other == fksproto.CsCart.AppendSalesCartResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -8546,25 +9066,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        AppendSalesCartResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.AppendSalesCartResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AppendSalesCartResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.AppendSalesCartResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -8575,9 +9095,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -8587,7 +9107,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -8597,7 +9117,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8614,7 +9134,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -8627,12 +9147,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -8648,7 +9168,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -8659,7 +9179,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -8667,7 +9187,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -8678,11 +9198,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -8703,8 +9223,8 @@ public final class CsCart {
   }
 
   public interface RemoveSalesCartRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.RemoveSalesCartRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.RemoveSalesCartRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -8713,11 +9233,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -8726,11 +9246,11 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>optional int64 cart_item_id = 3;</code>
@@ -8745,7 +9265,7 @@ public final class CsCart {
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     boolean hasLocalecode();
@@ -8753,25 +9273,25 @@ public final class CsCart {
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
 
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -8779,25 +9299,25 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional int32 currencyid = 6;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     boolean hasCurrencyid();
@@ -8805,7 +9325,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 6;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     int getCurrencyid();
@@ -8814,13 +9334,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.RemoveSalesCartRequest}
    *
    * <pre>
-   *�Ƴ����ﳵ����
+   *移除购物车请求
    * </pre>
    */
   public static final class RemoveSalesCartRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.RemoveSalesCartRequest)
-      RemoveSalesCartRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.RemoveSalesCartRequest)
+          RemoveSalesCartRequestOrBuilder {
     // Use RemoveSalesCartRequest.newBuilder() to construct.
     private RemoveSalesCartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8838,19 +9358,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private RemoveSalesCartRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -8861,17 +9381,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -8880,11 +9400,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -8920,42 +9440,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              RemoveSalesCartRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.RemoveSalesCartRequest.class, fksproto.CsCart.RemoveSalesCartRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RemoveSalesCartRequest> PARSER =
-        new com.google.protobuf.AbstractParser<RemoveSalesCartRequest>() {
-      public RemoveSalesCartRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RemoveSalesCartRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<RemoveSalesCartRequest>() {
+              public RemoveSalesCartRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new RemoveSalesCartRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RemoveSalesCartRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -8965,18 +9485,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -8986,13 +9506,13 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
@@ -9012,12 +9532,12 @@ public final class CsCart {
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 4;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public boolean hasLocalecode() {
@@ -9027,17 +9547,17 @@ public final class CsCart {
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -9048,16 +9568,16 @@ public final class CsCart {
      * <code>optional string localecode = 4;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -9066,12 +9586,12 @@ public final class CsCart {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 5;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -9081,17 +9601,17 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -9102,16 +9622,16 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -9125,7 +9645,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 6;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public boolean hasCurrencyid() {
@@ -9135,7 +9655,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 6;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public int getCurrencyid() {
@@ -9143,8 +9663,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       cartItemId_ = 0L;
       localecode_ = "";
       currencycode_ = "";
@@ -9165,7 +9685,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -9196,27 +9716,27 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, cartItemId_);
+                .computeInt64Size(3, cartItemId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getLocalecodeBytes());
+                .computeBytesSize(4, getLocalecodeBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getCurrencycodeBytes());
+                .computeBytesSize(5, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, currencyid_);
+                .computeInt32Size(6, currencyid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9224,75 +9744,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RemoveSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveSalesCartRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveSalesCartRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveSalesCartRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveSalesCartRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RemoveSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RemoveSalesCartRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RemoveSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RemoveSalesCartRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.RemoveSalesCartRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -9300,23 +9820,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.RemoveSalesCartRequest}
      *
      * <pre>
-     *�Ƴ����ﳵ����
+     *移除购物车请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.RemoveSalesCartRequest)
-        RemoveSalesCartRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.RemoveSalesCartRequest)
+            fksproto.CsCart.RemoveSalesCartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                RemoveSalesCartRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.RemoveSalesCartRequest.class, fksproto.CsCart.RemoveSalesCartRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.RemoveSalesCartRequest.newBuilder()
@@ -9325,7 +9845,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -9342,13 +9862,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -9369,24 +9889,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartRequest_descriptor;
       }
 
-      public RemoveSalesCartRequest getDefaultInstanceForType() {
-        return RemoveSalesCartRequest.getDefaultInstance();
+      public fksproto.CsCart.RemoveSalesCartRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.RemoveSalesCartRequest.getDefaultInstance();
       }
 
-      public RemoveSalesCartRequest build() {
-        RemoveSalesCartRequest result = buildPartial();
+      public fksproto.CsCart.RemoveSalesCartRequest build() {
+        fksproto.CsCart.RemoveSalesCartRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RemoveSalesCartRequest buildPartial() {
-        RemoveSalesCartRequest result = new RemoveSalesCartRequest(this);
+      public fksproto.CsCart.RemoveSalesCartRequest buildPartial() {
+        fksproto.CsCart.RemoveSalesCartRequest result = new fksproto.CsCart.RemoveSalesCartRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9427,16 +9947,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RemoveSalesCartRequest) {
-          return mergeFrom((RemoveSalesCartRequest)other);
+        if (other instanceof fksproto.CsCart.RemoveSalesCartRequest) {
+          return mergeFrom((fksproto.CsCart.RemoveSalesCartRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RemoveSalesCartRequest other) {
-        if (other == RemoveSalesCartRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.RemoveSalesCartRequest other) {
+        if (other == fksproto.CsCart.RemoveSalesCartRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -9465,21 +9985,21 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        RemoveSalesCartRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.RemoveSalesCartRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RemoveSalesCartRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.RemoveSalesCartRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -9490,9 +10010,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -9502,7 +10022,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -9512,7 +10032,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9529,7 +10049,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -9542,12 +10062,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -9563,7 +10083,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -9574,7 +10094,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -9582,7 +10102,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -9593,11 +10113,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -9606,9 +10126,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -9618,7 +10138,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -9628,7 +10148,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9645,7 +10165,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -9658,12 +10178,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -9679,7 +10199,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -9690,7 +10210,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -9698,7 +10218,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -9709,11 +10229,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -9754,12 +10274,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public boolean hasLocalecode() {
@@ -9769,37 +10289,37 @@ public final class CsCart {
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -9810,15 +10330,15 @@ public final class CsCart {
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         localecode_ = value;
         onChanged();
         return this;
@@ -9827,7 +10347,7 @@ public final class CsCart {
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder clearLocalecode() {
@@ -9840,26 +10360,26 @@ public final class CsCart {
        * <code>optional string localecode = 4;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         localecode_ = value;
         onChanged();
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -9869,37 +10389,37 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -9910,15 +10430,15 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
@@ -9927,7 +10447,7 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -9940,15 +10460,15 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
@@ -9959,7 +10479,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 6;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public boolean hasCurrencyid() {
@@ -9969,7 +10489,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 6;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public int getCurrencyid() {
@@ -9979,7 +10499,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 6;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder setCurrencyid(int value) {
@@ -9992,7 +10512,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 6;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder clearCurrencyid() {
@@ -10014,8 +10534,8 @@ public final class CsCart {
   }
 
   public interface RemoveSalesCartResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.RemoveSalesCartResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.RemoveSalesCartResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -10024,17 +10544,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     boolean hasSubtotal();
@@ -10042,7 +10562,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     float getSubtotal();
@@ -10051,7 +10571,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     boolean hasGrandtotal();
@@ -10059,7 +10579,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     float getGrandtotal();
@@ -10068,13 +10588,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.RemoveSalesCartResponse}
    *
    * <pre>
-   *�Ƴ����ﳵӦ��
+   *移除购物车应答
    * </pre>
    */
   public static final class RemoveSalesCartResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.RemoveSalesCartResponse)
-      RemoveSalesCartResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.RemoveSalesCartResponse)
+          RemoveSalesCartResponseOrBuilder {
     // Use RemoveSalesCartResponse.newBuilder() to construct.
     private RemoveSalesCartResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10092,19 +10612,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private RemoveSalesCartResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -10115,17 +10635,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -10149,42 +10669,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              RemoveSalesCartResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.RemoveSalesCartResponse.class, fksproto.CsCart.RemoveSalesCartResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RemoveSalesCartResponse> PARSER =
-        new com.google.protobuf.AbstractParser<RemoveSalesCartResponse>() {
-      public RemoveSalesCartResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RemoveSalesCartResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<RemoveSalesCartResponse>() {
+              public RemoveSalesCartResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new RemoveSalesCartResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RemoveSalesCartResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -10194,13 +10714,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -10210,7 +10730,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public boolean hasSubtotal() {
@@ -10220,7 +10740,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public float getSubtotal() {
@@ -10233,7 +10753,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public boolean hasGrandtotal() {
@@ -10243,7 +10763,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public float getGrandtotal() {
@@ -10251,7 +10771,7 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       subtotal_ = 0F;
       grandtotal_ = 0F;
     }
@@ -10274,7 +10794,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -10296,15 +10816,15 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, subtotal_);
+                .computeFloatSize(2, subtotal_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, grandtotal_);
+                .computeFloatSize(3, grandtotal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10312,75 +10832,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RemoveSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveSalesCartResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveSalesCartResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveSalesCartResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveSalesCartResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RemoveSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RemoveSalesCartResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RemoveSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RemoveSalesCartResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.RemoveSalesCartResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -10388,23 +10908,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.RemoveSalesCartResponse}
      *
      * <pre>
-     *�Ƴ����ﳵӦ��
+     *移除购物车应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.RemoveSalesCartResponse)
-        RemoveSalesCartResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.RemoveSalesCartResponse)
+            fksproto.CsCart.RemoveSalesCartResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                RemoveSalesCartResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.RemoveSalesCartResponse.class, fksproto.CsCart.RemoveSalesCartResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.RemoveSalesCartResponse.newBuilder()
@@ -10413,7 +10933,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -10429,7 +10949,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -10446,24 +10966,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveSalesCartResponse_descriptor;
       }
 
-      public RemoveSalesCartResponse getDefaultInstanceForType() {
-        return RemoveSalesCartResponse.getDefaultInstance();
+      public fksproto.CsCart.RemoveSalesCartResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.RemoveSalesCartResponse.getDefaultInstance();
       }
 
-      public RemoveSalesCartResponse build() {
-        RemoveSalesCartResponse result = buildPartial();
+      public fksproto.CsCart.RemoveSalesCartResponse build() {
+        fksproto.CsCart.RemoveSalesCartResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RemoveSalesCartResponse buildPartial() {
-        RemoveSalesCartResponse result = new RemoveSalesCartResponse(this);
+      public fksproto.CsCart.RemoveSalesCartResponse buildPartial() {
+        fksproto.CsCart.RemoveSalesCartResponse result = new fksproto.CsCart.RemoveSalesCartResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -10488,16 +11008,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RemoveSalesCartResponse) {
-          return mergeFrom((RemoveSalesCartResponse)other);
+        if (other instanceof fksproto.CsCart.RemoveSalesCartResponse) {
+          return mergeFrom((fksproto.CsCart.RemoveSalesCartResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RemoveSalesCartResponse other) {
-        if (other == RemoveSalesCartResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.RemoveSalesCartResponse other) {
+        if (other == fksproto.CsCart.RemoveSalesCartResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -10513,25 +11033,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        RemoveSalesCartResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.RemoveSalesCartResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RemoveSalesCartResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.RemoveSalesCartResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -10542,9 +11062,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -10554,7 +11074,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -10564,7 +11084,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10581,7 +11101,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -10594,12 +11114,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -10615,7 +11135,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -10626,7 +11146,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -10634,7 +11154,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -10645,11 +11165,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -10663,7 +11183,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public boolean hasSubtotal() {
@@ -10673,7 +11193,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public float getSubtotal() {
@@ -10683,7 +11203,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder setSubtotal(float value) {
@@ -10696,7 +11216,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder clearSubtotal() {
@@ -10711,7 +11231,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public boolean hasGrandtotal() {
@@ -10721,7 +11241,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public float getGrandtotal() {
@@ -10731,7 +11251,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder setGrandtotal(float value) {
@@ -10744,7 +11264,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder clearGrandtotal() {
@@ -10766,8 +11286,8 @@ public final class CsCart {
   }
 
   public interface ModifySalesCartRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.ModifySalesCartRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.ModifySalesCartRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -10776,11 +11296,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -10789,11 +11309,11 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>optional int64 cart_item_id = 3;</code>
@@ -10820,18 +11340,18 @@ public final class CsCart {
     /**
      * <code>optional string note = 5;</code>
      */
-    String getNote();
+    java.lang.String getNote();
     /**
      * <code>optional string note = 5;</code>
      */
     com.google.protobuf.ByteString
-        getNoteBytes();
+    getNoteBytes();
 
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     boolean hasLocalecode();
@@ -10839,25 +11359,25 @@ public final class CsCart {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    String getLocalecode();
+    java.lang.String getLocalecode();
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getLocalecodeBytes();
+    getLocalecodeBytes();
 
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -10865,25 +11385,25 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
 
     /**
      * <code>optional int32 currencyid = 8;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     boolean hasCurrencyid();
@@ -10891,7 +11411,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 8;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     int getCurrencyid();
@@ -10900,13 +11420,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.ModifySalesCartRequest}
    *
    * <pre>
-   *�޸Ĺ��ﳵ����
+   *修改购物车请求
    * </pre>
    */
   public static final class ModifySalesCartRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.ModifySalesCartRequest)
-      ModifySalesCartRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ModifySalesCartRequest)
+          ModifySalesCartRequestOrBuilder {
     // Use ModifySalesCartRequest.newBuilder() to construct.
     private ModifySalesCartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10924,19 +11444,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ModifySalesCartRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -10947,17 +11467,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -10966,11 +11486,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -11017,42 +11537,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ModifySalesCartRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.ModifySalesCartRequest.class, fksproto.CsCart.ModifySalesCartRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<ModifySalesCartRequest> PARSER =
-        new com.google.protobuf.AbstractParser<ModifySalesCartRequest>() {
-      public ModifySalesCartRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ModifySalesCartRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<ModifySalesCartRequest>() {
+              public ModifySalesCartRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ModifySalesCartRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<ModifySalesCartRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -11062,18 +11582,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -11083,13 +11603,13 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
@@ -11124,7 +11644,7 @@ public final class CsCart {
     }
 
     public static final int NOTE_FIELD_NUMBER = 5;
-    private Object note_;
+    private java.lang.Object note_;
     /**
      * <code>optional string note = 5;</code>
      */
@@ -11134,14 +11654,14 @@ public final class CsCart {
     /**
      * <code>optional string note = 5;</code>
      */
-    public String getNote() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getNote() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           note_ = s;
         }
@@ -11152,12 +11672,12 @@ public final class CsCart {
      * <code>optional string note = 5;</code>
      */
     public com.google.protobuf.ByteString
-        getNoteBytes() {
-      Object ref = note_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getNoteBytes() {
+      java.lang.Object ref = note_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         note_ = b;
         return b;
       } else {
@@ -11166,12 +11686,12 @@ public final class CsCart {
     }
 
     public static final int LOCALECODE_FIELD_NUMBER = 6;
-    private Object localecode_;
+    private java.lang.Object localecode_;
     /**
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public boolean hasLocalecode() {
@@ -11181,17 +11701,17 @@ public final class CsCart {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
-    public String getLocalecode() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           localecode_ = s;
         }
@@ -11202,16 +11722,16 @@ public final class CsCart {
      * <code>optional string localecode = 6;</code>
      *
      * <pre>
-     *����
+     *语种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getLocalecodeBytes() {
-      Object ref = localecode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         localecode_ = b;
         return b;
       } else {
@@ -11220,12 +11740,12 @@ public final class CsCart {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 7;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -11235,17 +11755,17 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -11256,16 +11776,16 @@ public final class CsCart {
      * <code>optional string currencycode = 7;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -11279,7 +11799,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 8;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public boolean hasCurrencyid() {
@@ -11289,7 +11809,7 @@ public final class CsCart {
      * <code>optional int32 currencyid = 8;</code>
      *
      * <pre>
-     *����id
+     *币种id
      * </pre>
      */
     public int getCurrencyid() {
@@ -11297,8 +11817,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       cartItemId_ = 0L;
       qty_ = 0;
       note_ = "";
@@ -11321,7 +11841,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -11358,35 +11878,35 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, cartItemId_);
+                .computeInt64Size(3, cartItemId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, qty_);
+                .computeInt32Size(4, qty_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getNoteBytes());
+                .computeBytesSize(5, getNoteBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getLocalecodeBytes());
+                .computeBytesSize(6, getLocalecodeBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getCurrencycodeBytes());
+                .computeBytesSize(7, getCurrencycodeBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, currencyid_);
+                .computeInt32Size(8, currencyid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11394,75 +11914,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static ModifySalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ModifySalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ModifySalesCartRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ModifySalesCartRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ModifySalesCartRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ModifySalesCartRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static ModifySalesCartRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static ModifySalesCartRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static ModifySalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ModifySalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(ModifySalesCartRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.ModifySalesCartRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -11470,23 +11990,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.ModifySalesCartRequest}
      *
      * <pre>
-     *�޸Ĺ��ﳵ����
+     *修改购物车请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.ModifySalesCartRequest)
-        ModifySalesCartRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ModifySalesCartRequest)
+            fksproto.CsCart.ModifySalesCartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ModifySalesCartRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.ModifySalesCartRequest.class, fksproto.CsCart.ModifySalesCartRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.ModifySalesCartRequest.newBuilder()
@@ -11495,7 +12015,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -11512,13 +12032,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -11543,24 +12063,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartRequest_descriptor;
       }
 
-      public ModifySalesCartRequest getDefaultInstanceForType() {
-        return ModifySalesCartRequest.getDefaultInstance();
+      public fksproto.CsCart.ModifySalesCartRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.ModifySalesCartRequest.getDefaultInstance();
       }
 
-      public ModifySalesCartRequest build() {
-        ModifySalesCartRequest result = buildPartial();
+      public fksproto.CsCart.ModifySalesCartRequest build() {
+        fksproto.CsCart.ModifySalesCartRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public ModifySalesCartRequest buildPartial() {
-        ModifySalesCartRequest result = new ModifySalesCartRequest(this);
+      public fksproto.CsCart.ModifySalesCartRequest buildPartial() {
+        fksproto.CsCart.ModifySalesCartRequest result = new fksproto.CsCart.ModifySalesCartRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -11609,16 +12129,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ModifySalesCartRequest) {
-          return mergeFrom((ModifySalesCartRequest)other);
+        if (other instanceof fksproto.CsCart.ModifySalesCartRequest) {
+          return mergeFrom((fksproto.CsCart.ModifySalesCartRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ModifySalesCartRequest other) {
-        if (other == ModifySalesCartRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.ModifySalesCartRequest other) {
+        if (other == fksproto.CsCart.ModifySalesCartRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -11655,21 +12175,21 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        ModifySalesCartRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.ModifySalesCartRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ModifySalesCartRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.ModifySalesCartRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -11680,9 +12200,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -11692,7 +12212,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -11702,7 +12222,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -11719,7 +12239,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -11732,12 +12252,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -11753,7 +12273,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -11764,7 +12284,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -11772,7 +12292,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -11783,11 +12303,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -11796,9 +12316,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -11808,7 +12328,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -11818,7 +12338,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -11835,7 +12355,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -11848,12 +12368,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -11869,7 +12389,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -11880,7 +12400,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -11888,7 +12408,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -11899,11 +12419,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -11976,7 +12496,7 @@ public final class CsCart {
         return this;
       }
 
-      private Object note_ = "";
+      private java.lang.Object note_ = "";
       /**
        * <code>optional string note = 5;</code>
        */
@@ -11986,30 +12506,30 @@ public final class CsCart {
       /**
        * <code>optional string note = 5;</code>
        */
-      public String getNote() {
-        Object ref = note_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getNote() {
+        java.lang.Object ref = note_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             note_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string note = 5;</code>
        */
       public com.google.protobuf.ByteString
-          getNoteBytes() {
-        Object ref = note_;
+      getNoteBytes() {
+        java.lang.Object ref = note_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           note_ = b;
           return b;
         } else {
@@ -12020,11 +12540,11 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        */
       public Builder setNote(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         note_ = value;
         onChanged();
         return this;
@@ -12042,22 +12562,22 @@ public final class CsCart {
        * <code>optional string note = 5;</code>
        */
       public Builder setNoteBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         note_ = value;
         onChanged();
         return this;
       }
 
-      private Object localecode_ = "";
+      private java.lang.Object localecode_ = "";
       /**
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public boolean hasLocalecode() {
@@ -12067,37 +12587,37 @@ public final class CsCart {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
-      public String getLocalecode() {
-        Object ref = localecode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             localecode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getLocalecodeBytes() {
-        Object ref = localecode_;
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           localecode_ = b;
           return b;
         } else {
@@ -12108,15 +12628,15 @@ public final class CsCart {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         localecode_ = value;
         onChanged();
         return this;
@@ -12125,7 +12645,7 @@ public final class CsCart {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder clearLocalecode() {
@@ -12138,26 +12658,26 @@ public final class CsCart {
        * <code>optional string localecode = 6;</code>
        *
        * <pre>
-       *����
+       *语种
        * </pre>
        */
       public Builder setLocalecodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         localecode_ = value;
         onChanged();
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -12167,37 +12687,37 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -12208,15 +12728,15 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
         currencycode_ = value;
         onChanged();
         return this;
@@ -12225,7 +12745,7 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -12238,15 +12758,15 @@ public final class CsCart {
        * <code>optional string currencycode = 7;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
         currencycode_ = value;
         onChanged();
         return this;
@@ -12257,7 +12777,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 8;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public boolean hasCurrencyid() {
@@ -12267,7 +12787,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 8;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public int getCurrencyid() {
@@ -12277,7 +12797,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 8;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder setCurrencyid(int value) {
@@ -12290,7 +12810,7 @@ public final class CsCart {
        * <code>optional int32 currencyid = 8;</code>
        *
        * <pre>
-       *����id
+       *币种id
        * </pre>
        */
       public Builder clearCurrencyid() {
@@ -12312,8 +12832,8 @@ public final class CsCart {
   }
 
   public interface ModifySalesCartResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.ModifySalesCartResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.ModifySalesCartResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -12322,17 +12842,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     boolean hasSubtotal();
@@ -12340,7 +12860,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     float getSubtotal();
@@ -12349,7 +12869,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     boolean hasGrandtotal();
@@ -12357,7 +12877,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     float getGrandtotal();
@@ -12366,13 +12886,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.ModifySalesCartResponse}
    *
    * <pre>
-   *�޸Ĺ��ﳵӦ��
+   *修改购物车应答
    * </pre>
    */
   public static final class ModifySalesCartResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.ModifySalesCartResponse)
-      ModifySalesCartResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ModifySalesCartResponse)
+          ModifySalesCartResponseOrBuilder {
     // Use ModifySalesCartResponse.newBuilder() to construct.
     private ModifySalesCartResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -12390,19 +12910,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ModifySalesCartResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -12413,17 +12933,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -12447,42 +12967,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ModifySalesCartResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.ModifySalesCartResponse.class, fksproto.CsCart.ModifySalesCartResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<ModifySalesCartResponse> PARSER =
-        new com.google.protobuf.AbstractParser<ModifySalesCartResponse>() {
-      public ModifySalesCartResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ModifySalesCartResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<ModifySalesCartResponse>() {
+              public ModifySalesCartResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ModifySalesCartResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<ModifySalesCartResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -12492,13 +13012,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -12508,7 +13028,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public boolean hasSubtotal() {
@@ -12518,7 +13038,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public float getSubtotal() {
@@ -12531,7 +13051,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public boolean hasGrandtotal() {
@@ -12541,7 +13061,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public float getGrandtotal() {
@@ -12549,7 +13069,7 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       subtotal_ = 0F;
       grandtotal_ = 0F;
     }
@@ -12572,7 +13092,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -12594,15 +13114,15 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, subtotal_);
+                .computeFloatSize(2, subtotal_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, grandtotal_);
+                .computeFloatSize(3, grandtotal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -12610,75 +13130,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static ModifySalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ModifySalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ModifySalesCartResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ModifySalesCartResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ModifySalesCartResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ModifySalesCartResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static ModifySalesCartResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static ModifySalesCartResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static ModifySalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ModifySalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ModifySalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(ModifySalesCartResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.ModifySalesCartResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -12686,23 +13206,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.ModifySalesCartResponse}
      *
      * <pre>
-     *�޸Ĺ��ﳵӦ��
+     *修改购物车应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.ModifySalesCartResponse)
-        ModifySalesCartResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ModifySalesCartResponse)
+            fksproto.CsCart.ModifySalesCartResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ModifySalesCartResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.ModifySalesCartResponse.class, fksproto.CsCart.ModifySalesCartResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.ModifySalesCartResponse.newBuilder()
@@ -12711,7 +13231,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -12727,7 +13247,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -12744,24 +13264,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_ModifySalesCartResponse_descriptor;
       }
 
-      public ModifySalesCartResponse getDefaultInstanceForType() {
-        return ModifySalesCartResponse.getDefaultInstance();
+      public fksproto.CsCart.ModifySalesCartResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.ModifySalesCartResponse.getDefaultInstance();
       }
 
-      public ModifySalesCartResponse build() {
-        ModifySalesCartResponse result = buildPartial();
+      public fksproto.CsCart.ModifySalesCartResponse build() {
+        fksproto.CsCart.ModifySalesCartResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public ModifySalesCartResponse buildPartial() {
-        ModifySalesCartResponse result = new ModifySalesCartResponse(this);
+      public fksproto.CsCart.ModifySalesCartResponse buildPartial() {
+        fksproto.CsCart.ModifySalesCartResponse result = new fksproto.CsCart.ModifySalesCartResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -12786,16 +13306,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ModifySalesCartResponse) {
-          return mergeFrom((ModifySalesCartResponse)other);
+        if (other instanceof fksproto.CsCart.ModifySalesCartResponse) {
+          return mergeFrom((fksproto.CsCart.ModifySalesCartResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ModifySalesCartResponse other) {
-        if (other == ModifySalesCartResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.ModifySalesCartResponse other) {
+        if (other == fksproto.CsCart.ModifySalesCartResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -12811,25 +13331,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        ModifySalesCartResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.ModifySalesCartResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ModifySalesCartResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.ModifySalesCartResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -12840,9 +13360,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -12852,7 +13372,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -12862,7 +13382,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12879,7 +13399,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -12892,12 +13412,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -12913,7 +13433,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -12924,7 +13444,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -12932,7 +13452,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -12943,11 +13463,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -12961,7 +13481,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public boolean hasSubtotal() {
@@ -12971,7 +13491,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public float getSubtotal() {
@@ -12981,7 +13501,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder setSubtotal(float value) {
@@ -12994,7 +13514,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder clearSubtotal() {
@@ -13009,7 +13529,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public boolean hasGrandtotal() {
@@ -13019,7 +13539,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public float getGrandtotal() {
@@ -13029,7 +13549,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder setGrandtotal(float value) {
@@ -13042,7 +13562,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder clearGrandtotal() {
@@ -13064,8 +13584,8 @@ public final class CsCart {
   }
 
   public interface SelectedSalesCartRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.SelectedSalesCartRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.SelectedSalesCartRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -13074,11 +13594,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -13087,16 +13607,16 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
-    java.util.List<Long> getCartItemIdsList();
+    java.util.List<java.lang.Long> getCartItemIdsList();
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
@@ -13110,7 +13630,7 @@ public final class CsCart {
      * <code>optional int32 action = 4;</code>
      *
      * <pre>
-     *����Action����
+     *见宏Action定义
      * </pre>
      */
     boolean hasAction();
@@ -13118,7 +13638,7 @@ public final class CsCart {
      * <code>optional int32 action = 4;</code>
      *
      * <pre>
-     *����Action����
+     *见宏Action定义
      * </pre>
      */
     int getAction();
@@ -13127,7 +13647,7 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -13135,31 +13655,31 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
   }
   /**
    * Protobuf type {@code fksproto.SelectedSalesCartRequest}
    *
    * <pre>
-   *ѡ�й��ﳵ(��Ʒ)����
+   *选中购物车(单品)请求
    * </pre>
    */
   public static final class SelectedSalesCartRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.SelectedSalesCartRequest)
-      SelectedSalesCartRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.SelectedSalesCartRequest)
+          SelectedSalesCartRequestOrBuilder {
     // Use SelectedSalesCartRequest.newBuilder() to construct.
     private SelectedSalesCartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -13177,19 +13697,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private SelectedSalesCartRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -13200,17 +13720,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -13219,11 +13739,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -13233,7 +13753,7 @@ public final class CsCart {
             }
             case 24: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                cartItemIds_ = new java.util.ArrayList<Long>();
+                cartItemIds_ = new java.util.ArrayList<java.lang.Long>();
                 mutable_bitField0_ |= 0x00000004;
               }
               cartItemIds_.add(input.readInt64());
@@ -13243,7 +13763,7 @@ public final class CsCart {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                cartItemIds_ = new java.util.ArrayList<Long>();
+                cartItemIds_ = new java.util.ArrayList<java.lang.Long>();
                 mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -13269,7 +13789,7 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           cartItemIds_ = java.util.Collections.unmodifiableList(cartItemIds_);
@@ -13279,35 +13799,35 @@ public final class CsCart {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              SelectedSalesCartRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.SelectedSalesCartRequest.class, fksproto.CsCart.SelectedSalesCartRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<SelectedSalesCartRequest> PARSER =
-        new com.google.protobuf.AbstractParser<SelectedSalesCartRequest>() {
-      public SelectedSalesCartRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SelectedSalesCartRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<SelectedSalesCartRequest>() {
+              public SelectedSalesCartRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new SelectedSalesCartRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<SelectedSalesCartRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -13317,18 +13837,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -13338,23 +13858,23 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
     public static final int CART_ITEM_IDS_FIELD_NUMBER = 3;
-    private java.util.List<Long> cartItemIds_;
+    private java.util.List<java.lang.Long> cartItemIds_;
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
-    public java.util.List<Long>
-        getCartItemIdsList() {
+    public java.util.List<java.lang.Long>
+    getCartItemIdsList() {
       return cartItemIds_;
     }
     /**
@@ -13376,7 +13896,7 @@ public final class CsCart {
      * <code>optional int32 action = 4;</code>
      *
      * <pre>
-     *����Action����
+     *见宏Action定义
      * </pre>
      */
     public boolean hasAction() {
@@ -13386,7 +13906,7 @@ public final class CsCart {
      * <code>optional int32 action = 4;</code>
      *
      * <pre>
-     *����Action����
+     *见宏Action定义
      * </pre>
      */
     public int getAction() {
@@ -13394,12 +13914,12 @@ public final class CsCart {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 5;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -13409,17 +13929,17 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -13430,16 +13950,16 @@ public final class CsCart {
      * <code>optional string currencycode = 5;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -13448,8 +13968,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       cartItemIds_ = java.util.Collections.emptyList();
       action_ = 0;
       currencycode_ = "";
@@ -13469,7 +13989,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -13497,28 +14017,28 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       {
         int dataSize = 0;
         for (int i = 0; i < cartItemIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(cartItemIds_.get(i));
+                  .computeInt64SizeNoTag(cartItemIds_.get(i));
         }
         size += dataSize;
         size += 1 * getCartItemIdsList().size();
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, action_);
+                .computeInt32Size(4, action_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getCurrencycodeBytes());
+                .computeBytesSize(5, getCurrencycodeBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13526,75 +14046,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static SelectedSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SelectedSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SelectedSalesCartRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SelectedSalesCartRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SelectedSalesCartRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SelectedSalesCartRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static SelectedSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static SelectedSalesCartRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static SelectedSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SelectedSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(SelectedSalesCartRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.SelectedSalesCartRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -13602,23 +14122,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.SelectedSalesCartRequest}
      *
      * <pre>
-     *ѡ�й��ﳵ(��Ʒ)����
+     *选中购物车(单品)请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.SelectedSalesCartRequest)
-        SelectedSalesCartRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.SelectedSalesCartRequest)
+            fksproto.CsCart.SelectedSalesCartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                SelectedSalesCartRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.SelectedSalesCartRequest.class, fksproto.CsCart.SelectedSalesCartRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.SelectedSalesCartRequest.newBuilder()
@@ -13627,7 +14147,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -13644,13 +14164,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -13669,24 +14189,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartRequest_descriptor;
       }
 
-      public SelectedSalesCartRequest getDefaultInstanceForType() {
-        return SelectedSalesCartRequest.getDefaultInstance();
+      public fksproto.CsCart.SelectedSalesCartRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.SelectedSalesCartRequest.getDefaultInstance();
       }
 
-      public SelectedSalesCartRequest build() {
-        SelectedSalesCartRequest result = buildPartial();
+      public fksproto.CsCart.SelectedSalesCartRequest build() {
+        fksproto.CsCart.SelectedSalesCartRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public SelectedSalesCartRequest buildPartial() {
-        SelectedSalesCartRequest result = new SelectedSalesCartRequest(this);
+      public fksproto.CsCart.SelectedSalesCartRequest buildPartial() {
+        fksproto.CsCart.SelectedSalesCartRequest result = new fksproto.CsCart.SelectedSalesCartRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -13724,16 +14244,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SelectedSalesCartRequest) {
-          return mergeFrom((SelectedSalesCartRequest)other);
+        if (other instanceof fksproto.CsCart.SelectedSalesCartRequest) {
+          return mergeFrom((fksproto.CsCart.SelectedSalesCartRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(SelectedSalesCartRequest other) {
-        if (other == SelectedSalesCartRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.SelectedSalesCartRequest other) {
+        if (other == fksproto.CsCart.SelectedSalesCartRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -13764,21 +14284,21 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        SelectedSalesCartRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.SelectedSalesCartRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (SelectedSalesCartRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.SelectedSalesCartRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -13789,9 +14309,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -13801,7 +14321,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -13811,7 +14331,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13828,7 +14348,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -13841,12 +14361,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -13862,7 +14382,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -13873,7 +14393,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -13881,7 +14401,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -13892,11 +14412,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -13905,9 +14425,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -13917,7 +14437,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -13927,7 +14447,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13944,7 +14464,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -13957,12 +14477,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -13978,7 +14498,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -13989,7 +14509,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -13997,7 +14517,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -14008,11 +14528,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -14021,18 +14541,18 @@ public final class CsCart {
         return userinfoBuilder_;
       }
 
-      private java.util.List<Long> cartItemIds_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Long> cartItemIds_ = java.util.Collections.emptyList();
       private void ensureCartItemIdsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          cartItemIds_ = new java.util.ArrayList<Long>(cartItemIds_);
+          cartItemIds_ = new java.util.ArrayList<java.lang.Long>(cartItemIds_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
       /**
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
-      public java.util.List<Long>
-          getCartItemIdsList() {
+      public java.util.List<java.lang.Long>
+      getCartItemIdsList() {
         return java.util.Collections.unmodifiableList(cartItemIds_);
       }
       /**
@@ -14051,7 +14571,7 @@ public final class CsCart {
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
       public Builder setCartItemIds(
-          int index, long value) {
+              int index, long value) {
         ensureCartItemIdsIsMutable();
         cartItemIds_.set(index, value);
         onChanged();
@@ -14070,10 +14590,10 @@ public final class CsCart {
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
       public Builder addAllCartItemIds(
-          Iterable<? extends Long> values) {
+              java.lang.Iterable<? extends java.lang.Long> values) {
         ensureCartItemIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, cartItemIds_);
+                values, cartItemIds_);
         onChanged();
         return this;
       }
@@ -14092,7 +14612,7 @@ public final class CsCart {
        * <code>optional int32 action = 4;</code>
        *
        * <pre>
-       *����Action����
+       *见宏Action定义
        * </pre>
        */
       public boolean hasAction() {
@@ -14102,7 +14622,7 @@ public final class CsCart {
        * <code>optional int32 action = 4;</code>
        *
        * <pre>
-       *����Action����
+       *见宏Action定义
        * </pre>
        */
       public int getAction() {
@@ -14112,7 +14632,7 @@ public final class CsCart {
        * <code>optional int32 action = 4;</code>
        *
        * <pre>
-       *����Action����
+       *见宏Action定义
        * </pre>
        */
       public Builder setAction(int value) {
@@ -14125,7 +14645,7 @@ public final class CsCart {
        * <code>optional int32 action = 4;</code>
        *
        * <pre>
-       *����Action����
+       *见宏Action定义
        * </pre>
        */
       public Builder clearAction() {
@@ -14135,12 +14655,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -14150,37 +14670,37 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -14191,15 +14711,15 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
@@ -14208,7 +14728,7 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -14221,15 +14741,15 @@ public final class CsCart {
        * <code>optional string currencycode = 5;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         currencycode_ = value;
         onChanged();
         return this;
@@ -14247,8 +14767,8 @@ public final class CsCart {
   }
 
   public interface SelectedSalesCartResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.SelectedSalesCartResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.SelectedSalesCartResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -14257,17 +14777,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     boolean hasSubtotal();
@@ -14275,7 +14795,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     float getSubtotal();
@@ -14284,7 +14804,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     boolean hasGrandtotal();
@@ -14292,7 +14812,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     float getGrandtotal();
@@ -14301,13 +14821,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.SelectedSalesCartResponse}
    *
    * <pre>
-   *ѡ�й��ﳵ(��Ʒ)Ӧ��
+   *选中购物车(单品)应答
    * </pre>
    */
   public static final class SelectedSalesCartResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.SelectedSalesCartResponse)
-      SelectedSalesCartResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.SelectedSalesCartResponse)
+          SelectedSalesCartResponseOrBuilder {
     // Use SelectedSalesCartResponse.newBuilder() to construct.
     private SelectedSalesCartResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -14325,19 +14845,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private SelectedSalesCartResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -14348,17 +14868,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -14382,42 +14902,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              SelectedSalesCartResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.SelectedSalesCartResponse.class, fksproto.CsCart.SelectedSalesCartResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<SelectedSalesCartResponse> PARSER =
-        new com.google.protobuf.AbstractParser<SelectedSalesCartResponse>() {
-      public SelectedSalesCartResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SelectedSalesCartResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<SelectedSalesCartResponse>() {
+              public SelectedSalesCartResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new SelectedSalesCartResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<SelectedSalesCartResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -14427,13 +14947,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -14443,7 +14963,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public boolean hasSubtotal() {
@@ -14453,7 +14973,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public float getSubtotal() {
@@ -14466,7 +14986,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public boolean hasGrandtotal() {
@@ -14476,7 +14996,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public float getGrandtotal() {
@@ -14484,7 +15004,7 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       subtotal_ = 0F;
       grandtotal_ = 0F;
     }
@@ -14507,7 +15027,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -14529,15 +15049,15 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, subtotal_);
+                .computeFloatSize(2, subtotal_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, grandtotal_);
+                .computeFloatSize(3, grandtotal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14545,75 +15065,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static SelectedSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SelectedSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SelectedSalesCartResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SelectedSalesCartResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SelectedSalesCartResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SelectedSalesCartResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static SelectedSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static SelectedSalesCartResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static SelectedSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static SelectedSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.SelectedSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(SelectedSalesCartResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.SelectedSalesCartResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -14621,23 +15141,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.SelectedSalesCartResponse}
      *
      * <pre>
-     *ѡ�й��ﳵ(��Ʒ)Ӧ��
+     *选中购物车(单品)应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.SelectedSalesCartResponse)
-        SelectedSalesCartResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.SelectedSalesCartResponse)
+            fksproto.CsCart.SelectedSalesCartResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                SelectedSalesCartResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.SelectedSalesCartResponse.class, fksproto.CsCart.SelectedSalesCartResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.SelectedSalesCartResponse.newBuilder()
@@ -14646,7 +15166,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -14662,7 +15182,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -14679,24 +15199,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_SelectedSalesCartResponse_descriptor;
       }
 
-      public SelectedSalesCartResponse getDefaultInstanceForType() {
-        return SelectedSalesCartResponse.getDefaultInstance();
+      public fksproto.CsCart.SelectedSalesCartResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.SelectedSalesCartResponse.getDefaultInstance();
       }
 
-      public SelectedSalesCartResponse build() {
-        SelectedSalesCartResponse result = buildPartial();
+      public fksproto.CsCart.SelectedSalesCartResponse build() {
+        fksproto.CsCart.SelectedSalesCartResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public SelectedSalesCartResponse buildPartial() {
-        SelectedSalesCartResponse result = new SelectedSalesCartResponse(this);
+      public fksproto.CsCart.SelectedSalesCartResponse buildPartial() {
+        fksproto.CsCart.SelectedSalesCartResponse result = new fksproto.CsCart.SelectedSalesCartResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -14721,16 +15241,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SelectedSalesCartResponse) {
-          return mergeFrom((SelectedSalesCartResponse)other);
+        if (other instanceof fksproto.CsCart.SelectedSalesCartResponse) {
+          return mergeFrom((fksproto.CsCart.SelectedSalesCartResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(SelectedSalesCartResponse other) {
-        if (other == SelectedSalesCartResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.SelectedSalesCartResponse other) {
+        if (other == fksproto.CsCart.SelectedSalesCartResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -14746,25 +15266,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        SelectedSalesCartResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.SelectedSalesCartResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (SelectedSalesCartResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.SelectedSalesCartResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -14775,9 +15295,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -14787,7 +15307,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -14797,7 +15317,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -14814,7 +15334,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -14827,12 +15347,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -14848,7 +15368,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -14859,7 +15379,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -14867,7 +15387,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -14878,11 +15398,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -14896,7 +15416,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public boolean hasSubtotal() {
@@ -14906,7 +15426,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public float getSubtotal() {
@@ -14916,7 +15436,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder setSubtotal(float value) {
@@ -14929,7 +15449,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder clearSubtotal() {
@@ -14944,7 +15464,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public boolean hasGrandtotal() {
@@ -14954,7 +15474,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public float getGrandtotal() {
@@ -14964,7 +15484,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder setGrandtotal(float value) {
@@ -14977,7 +15497,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder clearGrandtotal() {
@@ -14999,8 +15519,8 @@ public final class CsCart {
   }
 
   public interface ApplyCouponRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.ApplyCouponRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.ApplyCouponRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -15009,11 +15529,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -15022,11 +15542,11 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>required string coupon = 3;</code>
@@ -15035,24 +15555,24 @@ public final class CsCart {
     /**
      * <code>required string coupon = 3;</code>
      */
-    String getCoupon();
+    java.lang.String getCoupon();
     /**
      * <code>required string coupon = 3;</code>
      */
     com.google.protobuf.ByteString
-        getCouponBytes();
+    getCouponBytes();
   }
   /**
    * Protobuf type {@code fksproto.ApplyCouponRequest}
    *
    * <pre>
-   *ʹ���Ż�ȯ����
+   *使用优惠券请求
    * </pre>
    */
   public static final class ApplyCouponRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.ApplyCouponRequest)
-      ApplyCouponRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ApplyCouponRequest)
+          ApplyCouponRequestOrBuilder {
     // Use ApplyCouponRequest.newBuilder() to construct.
     private ApplyCouponRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -15070,19 +15590,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ApplyCouponRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -15093,17 +15613,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -15112,11 +15632,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -15136,42 +15656,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ApplyCouponRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.ApplyCouponRequest.class, fksproto.CsCart.ApplyCouponRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<ApplyCouponRequest> PARSER =
-        new com.google.protobuf.AbstractParser<ApplyCouponRequest>() {
-      public ApplyCouponRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ApplyCouponRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<ApplyCouponRequest>() {
+              public ApplyCouponRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ApplyCouponRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<ApplyCouponRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -15181,18 +15701,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -15202,18 +15722,18 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
     public static final int COUPON_FIELD_NUMBER = 3;
-    private Object coupon_;
+    private java.lang.Object coupon_;
     /**
      * <code>required string coupon = 3;</code>
      */
@@ -15223,14 +15743,14 @@ public final class CsCart {
     /**
      * <code>required string coupon = 3;</code>
      */
-    public String getCoupon() {
-      Object ref = coupon_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCoupon() {
+      java.lang.Object ref = coupon_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           coupon_ = s;
         }
@@ -15241,12 +15761,12 @@ public final class CsCart {
      * <code>required string coupon = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getCouponBytes() {
-      Object ref = coupon_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCouponBytes() {
+      java.lang.Object ref = coupon_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         coupon_ = b;
         return b;
       } else {
@@ -15255,8 +15775,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       coupon_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -15278,7 +15798,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -15300,15 +15820,15 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getCouponBytes());
+                .computeBytesSize(3, getCouponBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15316,75 +15836,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static ApplyCouponRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ApplyCouponRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ApplyCouponRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ApplyCouponRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ApplyCouponRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ApplyCouponRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static ApplyCouponRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static ApplyCouponRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static ApplyCouponRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ApplyCouponRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(ApplyCouponRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.ApplyCouponRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -15392,23 +15912,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.ApplyCouponRequest}
      *
      * <pre>
-     *ʹ���Ż�ȯ����
+     *使用优惠券请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.ApplyCouponRequest)
-        ApplyCouponRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ApplyCouponRequest)
+            fksproto.CsCart.ApplyCouponRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ApplyCouponRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.ApplyCouponRequest.class, fksproto.CsCart.ApplyCouponRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.ApplyCouponRequest.newBuilder()
@@ -15417,7 +15937,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -15434,13 +15954,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -15455,24 +15975,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponRequest_descriptor;
       }
 
-      public ApplyCouponRequest getDefaultInstanceForType() {
-        return ApplyCouponRequest.getDefaultInstance();
+      public fksproto.CsCart.ApplyCouponRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.ApplyCouponRequest.getDefaultInstance();
       }
 
-      public ApplyCouponRequest build() {
-        ApplyCouponRequest result = buildPartial();
+      public fksproto.CsCart.ApplyCouponRequest build() {
+        fksproto.CsCart.ApplyCouponRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public ApplyCouponRequest buildPartial() {
-        ApplyCouponRequest result = new ApplyCouponRequest(this);
+      public fksproto.CsCart.ApplyCouponRequest buildPartial() {
+        fksproto.CsCart.ApplyCouponRequest result = new fksproto.CsCart.ApplyCouponRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -15501,16 +16021,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ApplyCouponRequest) {
-          return mergeFrom((ApplyCouponRequest)other);
+        if (other instanceof fksproto.CsCart.ApplyCouponRequest) {
+          return mergeFrom((fksproto.CsCart.ApplyCouponRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ApplyCouponRequest other) {
-        if (other == ApplyCouponRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.ApplyCouponRequest other) {
+        if (other == fksproto.CsCart.ApplyCouponRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -15528,25 +16048,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!hasCoupon()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        ApplyCouponRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.ApplyCouponRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ApplyCouponRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.ApplyCouponRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -15557,9 +16077,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -15569,7 +16089,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -15579,7 +16099,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -15596,7 +16116,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -15609,12 +16129,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -15630,7 +16150,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -15641,7 +16161,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -15649,7 +16169,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -15660,11 +16180,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -15673,9 +16193,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -15685,7 +16205,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -15695,7 +16215,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -15712,7 +16232,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -15725,12 +16245,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -15746,7 +16266,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -15757,7 +16277,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -15765,7 +16285,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -15776,11 +16296,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -15789,7 +16309,7 @@ public final class CsCart {
         return userinfoBuilder_;
       }
 
-      private Object coupon_ = "";
+      private java.lang.Object coupon_ = "";
       /**
        * <code>required string coupon = 3;</code>
        */
@@ -15799,30 +16319,30 @@ public final class CsCart {
       /**
        * <code>required string coupon = 3;</code>
        */
-      public String getCoupon() {
-        Object ref = coupon_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCoupon() {
+        java.lang.Object ref = coupon_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             coupon_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>required string coupon = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getCouponBytes() {
-        Object ref = coupon_;
+      getCouponBytes() {
+        java.lang.Object ref = coupon_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           coupon_ = b;
           return b;
         } else {
@@ -15833,11 +16353,11 @@ public final class CsCart {
        * <code>required string coupon = 3;</code>
        */
       public Builder setCoupon(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         coupon_ = value;
         onChanged();
         return this;
@@ -15855,11 +16375,11 @@ public final class CsCart {
        * <code>required string coupon = 3;</code>
        */
       public Builder setCouponBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         coupon_ = value;
         onChanged();
         return this;
@@ -15877,8 +16397,8 @@ public final class CsCart {
   }
 
   public interface ApplyCouponResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.ApplyCouponResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.ApplyCouponResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -15887,17 +16407,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float discount = 2;</code>
      *
      * <pre>
-     *�ۿ۽��
+     *折扣金额
      * </pre>
      */
     boolean hasDiscount();
@@ -15905,7 +16425,7 @@ public final class CsCart {
      * <code>optional float discount = 2;</code>
      *
      * <pre>
-     *�ۿ۽��
+     *折扣金额
      * </pre>
      */
     float getDiscount();
@@ -15914,13 +16434,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.ApplyCouponResponse}
    *
    * <pre>
-   *ʹ���Ż�ȯӦ��
+   *使用优惠券应答
    * </pre>
    */
   public static final class ApplyCouponResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.ApplyCouponResponse)
-      ApplyCouponResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ApplyCouponResponse)
+          ApplyCouponResponseOrBuilder {
     // Use ApplyCouponResponse.newBuilder() to construct.
     private ApplyCouponResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -15938,19 +16458,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ApplyCouponResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -15961,17 +16481,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -15990,42 +16510,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ApplyCouponResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.ApplyCouponResponse.class, fksproto.CsCart.ApplyCouponResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<ApplyCouponResponse> PARSER =
-        new com.google.protobuf.AbstractParser<ApplyCouponResponse>() {
-      public ApplyCouponResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ApplyCouponResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<ApplyCouponResponse>() {
+              public ApplyCouponResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ApplyCouponResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<ApplyCouponResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -16035,13 +16555,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -16051,7 +16571,7 @@ public final class CsCart {
      * <code>optional float discount = 2;</code>
      *
      * <pre>
-     *�ۿ۽��
+     *折扣金额
      * </pre>
      */
     public boolean hasDiscount() {
@@ -16061,7 +16581,7 @@ public final class CsCart {
      * <code>optional float discount = 2;</code>
      *
      * <pre>
-     *�ۿ۽��
+     *折扣金额
      * </pre>
      */
     public float getDiscount() {
@@ -16069,7 +16589,7 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       discount_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
@@ -16091,7 +16611,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -16110,11 +16630,11 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, discount_);
+                .computeFloatSize(2, discount_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16122,75 +16642,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static ApplyCouponResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ApplyCouponResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ApplyCouponResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ApplyCouponResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ApplyCouponResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ApplyCouponResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static ApplyCouponResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static ApplyCouponResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static ApplyCouponResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static ApplyCouponResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.ApplyCouponResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(ApplyCouponResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.ApplyCouponResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -16198,23 +16718,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.ApplyCouponResponse}
      *
      * <pre>
-     *ʹ���Ż�ȯӦ��
+     *使用优惠券应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.ApplyCouponResponse)
-        ApplyCouponResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ApplyCouponResponse)
+            fksproto.CsCart.ApplyCouponResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ApplyCouponResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.ApplyCouponResponse.class, fksproto.CsCart.ApplyCouponResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.ApplyCouponResponse.newBuilder()
@@ -16223,7 +16743,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -16239,7 +16759,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -16254,24 +16774,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_ApplyCouponResponse_descriptor;
       }
 
-      public ApplyCouponResponse getDefaultInstanceForType() {
-        return ApplyCouponResponse.getDefaultInstance();
+      public fksproto.CsCart.ApplyCouponResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.ApplyCouponResponse.getDefaultInstance();
       }
 
-      public ApplyCouponResponse build() {
-        ApplyCouponResponse result = buildPartial();
+      public fksproto.CsCart.ApplyCouponResponse build() {
+        fksproto.CsCart.ApplyCouponResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public ApplyCouponResponse buildPartial() {
-        ApplyCouponResponse result = new ApplyCouponResponse(this);
+      public fksproto.CsCart.ApplyCouponResponse buildPartial() {
+        fksproto.CsCart.ApplyCouponResponse result = new fksproto.CsCart.ApplyCouponResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -16292,16 +16812,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ApplyCouponResponse) {
-          return mergeFrom((ApplyCouponResponse)other);
+        if (other instanceof fksproto.CsCart.ApplyCouponResponse) {
+          return mergeFrom((fksproto.CsCart.ApplyCouponResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ApplyCouponResponse other) {
-        if (other == ApplyCouponResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.ApplyCouponResponse other) {
+        if (other == fksproto.CsCart.ApplyCouponResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -16314,25 +16834,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        ApplyCouponResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.ApplyCouponResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ApplyCouponResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.ApplyCouponResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -16343,9 +16863,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -16355,7 +16875,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -16365,7 +16885,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -16382,7 +16902,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -16395,12 +16915,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -16416,7 +16936,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -16427,7 +16947,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -16435,7 +16955,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -16446,11 +16966,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -16464,7 +16984,7 @@ public final class CsCart {
        * <code>optional float discount = 2;</code>
        *
        * <pre>
-       *�ۿ۽��
+       *折扣金额
        * </pre>
        */
       public boolean hasDiscount() {
@@ -16474,7 +16994,7 @@ public final class CsCart {
        * <code>optional float discount = 2;</code>
        *
        * <pre>
-       *�ۿ۽��
+       *折扣金额
        * </pre>
        */
       public float getDiscount() {
@@ -16484,7 +17004,7 @@ public final class CsCart {
        * <code>optional float discount = 2;</code>
        *
        * <pre>
-       *�ۿ۽��
+       *折扣金额
        * </pre>
        */
       public Builder setDiscount(float value) {
@@ -16497,7 +17017,7 @@ public final class CsCart {
        * <code>optional float discount = 2;</code>
        *
        * <pre>
-       *�ۿ۽��
+       *折扣金额
        * </pre>
        */
       public Builder clearDiscount() {
@@ -16518,9 +17038,9 @@ public final class CsCart {
     // @@protoc_insertion_point(class_scope:fksproto.ApplyCouponResponse)
   }
 
-  public interface RemoveBatchSalesCartRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.RemoveBatchSalesCartRequest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PlaceOrderAgainRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.PlaceOrderAgainRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
@@ -16529,11 +17049,11 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequest getHead();
+    fksproto.CsHead.BaseRequest getHead();
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
@@ -16542,16 +17062,1725 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequest getUserinfo();
+    fksproto.CsBase.BaseUserRequest getUserinfo();
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+
+    /**
+     * <code>optional int32 sales_order_id = 3;</code>
+     *
+     * <pre>
+     *订单ID
+     * </pre>
+     */
+    boolean hasSalesOrderId();
+    /**
+     * <code>optional int32 sales_order_id = 3;</code>
+     *
+     * <pre>
+     *订单ID
+     * </pre>
+     */
+    int getSalesOrderId();
+
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    boolean hasCurrencyCode();
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    java.lang.String getCurrencyCode();
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    com.google.protobuf.ByteString
+    getCurrencyCodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.PlaceOrderAgainRequest}
+   *
+   * <pre>
+   *重新下单
+   * </pre>
+   */
+  public static final class PlaceOrderAgainRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.PlaceOrderAgainRequest)
+          PlaceOrderAgainRequestOrBuilder {
+    // Use PlaceOrderAgainRequest.newBuilder() to construct.
+    private PlaceOrderAgainRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlaceOrderAgainRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlaceOrderAgainRequest defaultInstance;
+    public static PlaceOrderAgainRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlaceOrderAgainRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlaceOrderAgainRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userinfo_.toBuilder();
+              }
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userinfo_);
+                userinfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              salesOrderId_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localeCode_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              currencyCode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.PlaceOrderAgainRequest.class, fksproto.CsCart.PlaceOrderAgainRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlaceOrderAgainRequest> PARSER =
+            new com.google.protobuf.AbstractParser<PlaceOrderAgainRequest>() {
+              public PlaceOrderAgainRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new PlaceOrderAgainRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlaceOrderAgainRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USERINFO_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public boolean hasUserinfo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
+      return userinfo_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      return userinfo_;
+    }
+
+    public static final int SALES_ORDER_ID_FIELD_NUMBER = 3;
+    private int salesOrderId_;
+    /**
+     * <code>optional int32 sales_order_id = 3;</code>
+     *
+     * <pre>
+     *订单ID
+     * </pre>
+     */
+    public boolean hasSalesOrderId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 sales_order_id = 3;</code>
+     *
+     * <pre>
+     *订单ID
+     * </pre>
+     */
+    public int getSalesOrderId() {
+      return salesOrderId_;
+    }
+
+    public static final int LOCALE_CODE_FIELD_NUMBER = 4;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     *
+     * <pre>
+     *语种
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CURRENCY_CODE_FIELD_NUMBER = 5;
+    private java.lang.Object currencyCode_;
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    public boolean hasCurrencyCode() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    public java.lang.String getCurrencyCode() {
+      java.lang.Object ref = currencyCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          currencyCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string currency_code = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+    getCurrencyCodeBytes() {
+      java.lang.Object ref = currencyCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        currencyCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      salesOrderId_ = 0;
+      localeCode_ = "";
+      currencyCode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocaleCodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCurrencyCodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocaleCodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getCurrencyCodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsCart.PlaceOrderAgainRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.PlaceOrderAgainRequest}
+     *
+     * <pre>
+     *重新下单
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.PlaceOrderAgainRequest)
+            fksproto.CsCart.PlaceOrderAgainRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.PlaceOrderAgainRequest.class, fksproto.CsCart.PlaceOrderAgainRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsCart.PlaceOrderAgainRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserinfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        salesOrderId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        currencyCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainRequest_descriptor;
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.PlaceOrderAgainRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainRequest build() {
+        fksproto.CsCart.PlaceOrderAgainRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainRequest buildPartial() {
+        fksproto.CsCart.PlaceOrderAgainRequest result = new fksproto.CsCart.PlaceOrderAgainRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userinfoBuilder_ == null) {
+          result.userinfo_ = userinfo_;
+        } else {
+          result.userinfo_ = userinfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.salesOrderId_ = salesOrderId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localeCode_ = localeCode_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.currencyCode_ = currencyCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsCart.PlaceOrderAgainRequest) {
+          return mergeFrom((fksproto.CsCart.PlaceOrderAgainRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsCart.PlaceOrderAgainRequest other) {
+        if (other == fksproto.CsCart.PlaceOrderAgainRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserinfo()) {
+          mergeUserinfo(other.getUserinfo());
+        }
+        if (other.hasSalesOrderId()) {
+          setSalesOrderId(other.getSalesOrderId());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000008;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        if (other.hasCurrencyCode()) {
+          bitField0_ |= 0x00000010;
+          currencyCode_ = other.currencyCode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.PlaceOrderAgainRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsCart.PlaceOrderAgainRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public boolean hasUserinfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
+        if (userinfoBuilder_ == null) {
+          return userinfo_;
+        } else {
+          return userinfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userinfo_ = value;
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userinfo_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+          } else {
+            userinfo_ = value;
+          }
+          onChanged();
+        } else {
+          userinfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder clearUserinfo() {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserinfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+        if (userinfoBuilder_ != null) {
+          return userinfoBuilder_.getMessageOrBuilder();
+        } else {
+          return userinfo_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
+        if (userinfoBuilder_ == null) {
+          userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserinfo(),
+                  getParentForChildren(),
+                  isClean());
+          userinfo_ = null;
+        }
+        return userinfoBuilder_;
+      }
+
+      private int salesOrderId_ ;
+      /**
+       * <code>optional int32 sales_order_id = 3;</code>
+       *
+       * <pre>
+       *订单ID
+       * </pre>
+       */
+      public boolean hasSalesOrderId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 sales_order_id = 3;</code>
+       *
+       * <pre>
+       *订单ID
+       * </pre>
+       */
+      public int getSalesOrderId() {
+        return salesOrderId_;
+      }
+      /**
+       * <code>optional int32 sales_order_id = 3;</code>
+       *
+       * <pre>
+       *订单ID
+       * </pre>
+       */
+      public Builder setSalesOrderId(int value) {
+        bitField0_ |= 0x00000004;
+        salesOrderId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 sales_order_id = 3;</code>
+       *
+       * <pre>
+       *订单ID
+       * </pre>
+       */
+      public Builder clearSalesOrderId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        salesOrderId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       *
+       * <pre>
+       *语种
+       * </pre>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object currencyCode_ = "";
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public boolean hasCurrencyCode() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public java.lang.String getCurrencyCode() {
+        java.lang.Object ref = currencyCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            currencyCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+      getCurrencyCodeBytes() {
+        java.lang.Object ref = currencyCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          currencyCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public Builder setCurrencyCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        currencyCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public Builder clearCurrencyCode() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currencyCode_ = getDefaultInstance().getCurrencyCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currency_code = 5;</code>
+       */
+      public Builder setCurrencyCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        currencyCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.PlaceOrderAgainRequest)
+    }
+
+    static {
+      defaultInstance = new PlaceOrderAgainRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.PlaceOrderAgainRequest)
+  }
+
+  public interface PlaceOrderAgainResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.PlaceOrderAgainResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+  }
+  /**
+   * Protobuf type {@code fksproto.PlaceOrderAgainResponse}
+   */
+  public static final class PlaceOrderAgainResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.PlaceOrderAgainResponse)
+          PlaceOrderAgainResponseOrBuilder {
+    // Use PlaceOrderAgainResponse.newBuilder() to construct.
+    private PlaceOrderAgainResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlaceOrderAgainResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlaceOrderAgainResponse defaultInstance;
+    public static PlaceOrderAgainResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlaceOrderAgainResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlaceOrderAgainResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.PlaceOrderAgainResponse.class, fksproto.CsCart.PlaceOrderAgainResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlaceOrderAgainResponse> PARSER =
+            new com.google.protobuf.AbstractParser<PlaceOrderAgainResponse>() {
+              public PlaceOrderAgainResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new PlaceOrderAgainResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlaceOrderAgainResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsCart.PlaceOrderAgainResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsCart.PlaceOrderAgainResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.PlaceOrderAgainResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.PlaceOrderAgainResponse)
+            fksproto.CsCart.PlaceOrderAgainResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.PlaceOrderAgainResponse.class, fksproto.CsCart.PlaceOrderAgainResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsCart.PlaceOrderAgainResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_PlaceOrderAgainResponse_descriptor;
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.PlaceOrderAgainResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainResponse build() {
+        fksproto.CsCart.PlaceOrderAgainResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsCart.PlaceOrderAgainResponse buildPartial() {
+        fksproto.CsCart.PlaceOrderAgainResponse result = new fksproto.CsCart.PlaceOrderAgainResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsCart.PlaceOrderAgainResponse) {
+          return mergeFrom((fksproto.CsCart.PlaceOrderAgainResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsCart.PlaceOrderAgainResponse other) {
+        if (other == fksproto.CsCart.PlaceOrderAgainResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.PlaceOrderAgainResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsCart.PlaceOrderAgainResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.PlaceOrderAgainResponse)
+    }
+
+    static {
+      defaultInstance = new PlaceOrderAgainResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.PlaceOrderAgainResponse)
+  }
+
+  public interface RemoveBatchSalesCartRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.RemoveBatchSalesCartRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    boolean hasUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
 
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
-    java.util.List<Long> getCartItemIdsList();
+    java.util.List<java.lang.Long> getCartItemIdsList();
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
@@ -16565,7 +18794,7 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     boolean hasCurrencycode();
@@ -16573,31 +18802,31 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    String getCurrencycode();
+    java.lang.String getCurrencycode();
     /**
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     com.google.protobuf.ByteString
-        getCurrencycodeBytes();
+    getCurrencycodeBytes();
   }
   /**
    * Protobuf type {@code fksproto.RemoveBatchSalesCartRequest}
    *
    * <pre>
-   *�����Ƴ����ﳵ����
+   *批量移除购物车请求
    * </pre>
    */
   public static final class RemoveBatchSalesCartRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.RemoveBatchSalesCartRequest)
-      RemoveBatchSalesCartRequestOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.RemoveBatchSalesCartRequest)
+          RemoveBatchSalesCartRequestOrBuilder {
     // Use RemoveBatchSalesCartRequest.newBuilder() to construct.
     private RemoveBatchSalesCartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -16615,19 +18844,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private RemoveBatchSalesCartRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -16638,17 +18867,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseRequest.Builder subBuilder = null;
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseRequest.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -16657,11 +18886,11 @@ public final class CsCart {
               break;
             }
             case 18: {
-              CsBase.BaseUserRequest.Builder subBuilder = null;
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = userinfo_.toBuilder();
               }
-              userinfo_ = input.readMessage(CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(userinfo_);
                 userinfo_ = subBuilder.buildPartial();
@@ -16671,7 +18900,7 @@ public final class CsCart {
             }
             case 24: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                cartItemIds_ = new java.util.ArrayList<Long>();
+                cartItemIds_ = new java.util.ArrayList<java.lang.Long>();
                 mutable_bitField0_ |= 0x00000004;
               }
               cartItemIds_.add(input.readInt64());
@@ -16681,7 +18910,7 @@ public final class CsCart {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                cartItemIds_ = new java.util.ArrayList<Long>();
+                cartItemIds_ = new java.util.ArrayList<java.lang.Long>();
                 mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -16702,7 +18931,7 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           cartItemIds_ = java.util.Collections.unmodifiableList(cartItemIds_);
@@ -16712,35 +18941,35 @@ public final class CsCart {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              RemoveBatchSalesCartRequest.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.RemoveBatchSalesCartRequest.class, fksproto.CsCart.RemoveBatchSalesCartRequest.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RemoveBatchSalesCartRequest> PARSER =
-        new com.google.protobuf.AbstractParser<RemoveBatchSalesCartRequest>() {
-      public RemoveBatchSalesCartRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RemoveBatchSalesCartRequest(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<RemoveBatchSalesCartRequest>() {
+              public RemoveBatchSalesCartRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new RemoveBatchSalesCartRequest(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RemoveBatchSalesCartRequest> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseRequest head_;
+    private fksproto.CsHead.BaseRequest head_;
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
@@ -16750,18 +18979,18 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequest getHead() {
+    public fksproto.CsHead.BaseRequest getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseRequest head = 1;</code>
      */
-    public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
     public static final int USERINFO_FIELD_NUMBER = 2;
-    private CsBase.BaseUserRequest userinfo_;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
@@ -16771,23 +19000,23 @@ public final class CsCart {
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequest getUserinfo() {
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
       return userinfo_;
     }
     /**
      * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
      */
-    public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
       return userinfo_;
     }
 
     public static final int CART_ITEM_IDS_FIELD_NUMBER = 3;
-    private java.util.List<Long> cartItemIds_;
+    private java.util.List<java.lang.Long> cartItemIds_;
     /**
      * <code>repeated int64 cart_item_ids = 3;</code>
      */
-    public java.util.List<Long>
-        getCartItemIdsList() {
+    public java.util.List<java.lang.Long>
+    getCartItemIdsList() {
       return cartItemIds_;
     }
     /**
@@ -16804,12 +19033,12 @@ public final class CsCart {
     }
 
     public static final int CURRENCYCODE_FIELD_NUMBER = 4;
-    private Object currencycode_;
+    private java.lang.Object currencycode_;
     /**
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public boolean hasCurrencycode() {
@@ -16819,17 +19048,17 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
-    public String getCurrencycode() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           currencycode_ = s;
         }
@@ -16840,16 +19069,16 @@ public final class CsCart {
      * <code>optional string currencycode = 4;</code>
      *
      * <pre>
-     *����
+     *币种
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getCurrencycodeBytes() {
-      Object ref = currencycode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         currencycode_ = b;
         return b;
       } else {
@@ -16858,8 +19087,8 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseRequest.getDefaultInstance();
-      userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       cartItemIds_ = java.util.Collections.emptyList();
       currencycode_ = "";
     }
@@ -16878,7 +19107,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -16903,24 +19132,24 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, userinfo_);
+                .computeMessageSize(2, userinfo_);
       }
       {
         int dataSize = 0;
         for (int i = 0; i < cartItemIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(cartItemIds_.get(i));
+                  .computeInt64SizeNoTag(cartItemIds_.get(i));
         }
         size += dataSize;
         size += 1 * getCartItemIdsList().size();
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getCurrencycodeBytes());
+                .computeBytesSize(4, getCurrencycodeBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16928,75 +19157,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RemoveBatchSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RemoveBatchSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RemoveBatchSalesCartRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveBatchSalesCartRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RemoveBatchSalesCartRequest prototype) {
+    public static Builder newBuilder(fksproto.CsCart.RemoveBatchSalesCartRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -17004,23 +19233,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.RemoveBatchSalesCartRequest}
      *
      * <pre>
-     *�����Ƴ����ﳵ����
+     *批量移除购物车请求
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.RemoveBatchSalesCartRequest)
-        RemoveBatchSalesCartRequestOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.RemoveBatchSalesCartRequest)
+            fksproto.CsCart.RemoveBatchSalesCartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                RemoveBatchSalesCartRequest.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.RemoveBatchSalesCartRequest.class, fksproto.CsCart.RemoveBatchSalesCartRequest.Builder.class);
       }
 
       // Construct using fksproto.CsCart.RemoveBatchSalesCartRequest.newBuilder()
@@ -17029,7 +19258,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -17046,13 +19275,13 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
         } else {
           userinfoBuilder_.clear();
         }
@@ -17069,24 +19298,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
       }
 
-      public RemoveBatchSalesCartRequest getDefaultInstanceForType() {
-        return RemoveBatchSalesCartRequest.getDefaultInstance();
+      public fksproto.CsCart.RemoveBatchSalesCartRequest getDefaultInstanceForType() {
+        return fksproto.CsCart.RemoveBatchSalesCartRequest.getDefaultInstance();
       }
 
-      public RemoveBatchSalesCartRequest build() {
-        RemoveBatchSalesCartRequest result = buildPartial();
+      public fksproto.CsCart.RemoveBatchSalesCartRequest build() {
+        fksproto.CsCart.RemoveBatchSalesCartRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RemoveBatchSalesCartRequest buildPartial() {
-        RemoveBatchSalesCartRequest result = new RemoveBatchSalesCartRequest(this);
+      public fksproto.CsCart.RemoveBatchSalesCartRequest buildPartial() {
+        fksproto.CsCart.RemoveBatchSalesCartRequest result = new fksproto.CsCart.RemoveBatchSalesCartRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -17120,16 +19349,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RemoveBatchSalesCartRequest) {
-          return mergeFrom((RemoveBatchSalesCartRequest)other);
+        if (other instanceof fksproto.CsCart.RemoveBatchSalesCartRequest) {
+          return mergeFrom((fksproto.CsCart.RemoveBatchSalesCartRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RemoveBatchSalesCartRequest other) {
-        if (other == RemoveBatchSalesCartRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.RemoveBatchSalesCartRequest other) {
+        if (other == fksproto.CsCart.RemoveBatchSalesCartRequest.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -17157,21 +19386,21 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        RemoveBatchSalesCartRequest parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.RemoveBatchSalesCartRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RemoveBatchSalesCartRequest) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.RemoveBatchSalesCartRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -17182,9 +19411,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseRequest head_ = CsHead.BaseRequest.getDefaultInstance();
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
@@ -17194,7 +19423,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest getHead() {
+      public fksproto.CsHead.BaseRequest getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -17204,7 +19433,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseRequest value) {
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -17221,7 +19450,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseRequest.Builder builderForValue) {
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -17234,12 +19463,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseRequest value) {
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseRequest.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
             head_ =
-              CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -17255,7 +19484,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseRequest.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -17266,7 +19495,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequest.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -17274,7 +19503,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
-      public CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -17285,11 +19514,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseRequest head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseRequest, CsHead.BaseRequest.Builder, CsHead.BaseRequestOrBuilder>(
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -17298,9 +19527,9 @@ public final class CsCart {
         return headBuilder_;
       }
 
-      private CsBase.BaseUserRequest userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
@@ -17310,7 +19539,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest getUserinfo() {
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
         if (userinfoBuilder_ == null) {
           return userinfo_;
         } else {
@@ -17320,7 +19549,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder setUserinfo(CsBase.BaseUserRequest value) {
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -17337,7 +19566,7 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       public Builder setUserinfo(
-          CsBase.BaseUserRequest.Builder builderForValue) {
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
         if (userinfoBuilder_ == null) {
           userinfo_ = builderForValue.build();
           onChanged();
@@ -17350,12 +19579,12 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public Builder mergeUserinfo(CsBase.BaseUserRequest value) {
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
         if (userinfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              userinfo_ != CsBase.BaseUserRequest.getDefaultInstance()) {
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
             userinfo_ =
-              CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
           } else {
             userinfo_ = value;
           }
@@ -17371,7 +19600,7 @@ public final class CsCart {
        */
       public Builder clearUserinfo() {
         if (userinfoBuilder_ == null) {
-          userinfo_ = CsBase.BaseUserRequest.getDefaultInstance();
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
           onChanged();
         } else {
           userinfoBuilder_.clear();
@@ -17382,7 +19611,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUserinfoFieldBuilder().getBuilder();
@@ -17390,7 +19619,7 @@ public final class CsCart {
       /**
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
-      public CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
         if (userinfoBuilder_ != null) {
           return userinfoBuilder_.getMessageOrBuilder();
         } else {
@@ -17401,11 +19630,11 @@ public final class CsCart {
        * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>
-          getUserinfoFieldBuilder() {
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
         if (userinfoBuilder_ == null) {
           userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsBase.BaseUserRequest, CsBase.BaseUserRequest.Builder, CsBase.BaseUserRequestOrBuilder>(
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
                   getUserinfo(),
                   getParentForChildren(),
                   isClean());
@@ -17414,18 +19643,18 @@ public final class CsCart {
         return userinfoBuilder_;
       }
 
-      private java.util.List<Long> cartItemIds_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Long> cartItemIds_ = java.util.Collections.emptyList();
       private void ensureCartItemIdsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          cartItemIds_ = new java.util.ArrayList<Long>(cartItemIds_);
+          cartItemIds_ = new java.util.ArrayList<java.lang.Long>(cartItemIds_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
       /**
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
-      public java.util.List<Long>
-          getCartItemIdsList() {
+      public java.util.List<java.lang.Long>
+      getCartItemIdsList() {
         return java.util.Collections.unmodifiableList(cartItemIds_);
       }
       /**
@@ -17444,7 +19673,7 @@ public final class CsCart {
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
       public Builder setCartItemIds(
-          int index, long value) {
+              int index, long value) {
         ensureCartItemIdsIsMutable();
         cartItemIds_.set(index, value);
         onChanged();
@@ -17463,10 +19692,10 @@ public final class CsCart {
        * <code>repeated int64 cart_item_ids = 3;</code>
        */
       public Builder addAllCartItemIds(
-          Iterable<? extends Long> values) {
+              java.lang.Iterable<? extends java.lang.Long> values) {
         ensureCartItemIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, cartItemIds_);
+                values, cartItemIds_);
         onChanged();
         return this;
       }
@@ -17480,12 +19709,12 @@ public final class CsCart {
         return this;
       }
 
-      private Object currencycode_ = "";
+      private java.lang.Object currencycode_ = "";
       /**
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public boolean hasCurrencycode() {
@@ -17495,37 +19724,37 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
-      public String getCurrencycode() {
-        Object ref = currencycode_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             currencycode_ = s;
           }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getCurrencycodeBytes() {
-        Object ref = currencycode_;
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           currencycode_ = b;
           return b;
         } else {
@@ -17536,15 +19765,15 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycode(
-          String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         currencycode_ = value;
         onChanged();
         return this;
@@ -17553,7 +19782,7 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder clearCurrencycode() {
@@ -17566,15 +19795,15 @@ public final class CsCart {
        * <code>optional string currencycode = 4;</code>
        *
        * <pre>
-       *����
+       *币种
        * </pre>
        */
       public Builder setCurrencycodeBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         currencycode_ = value;
         onChanged();
         return this;
@@ -17592,8 +19821,8 @@ public final class CsCart {
   }
 
   public interface RemoveBatchSalesCartResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:fksproto.RemoveBatchSalesCartResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:fksproto.RemoveBatchSalesCartResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
@@ -17602,17 +19831,17 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponse getHead();
+    fksproto.CsHead.BaseResponse getHead();
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
 
     /**
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     boolean hasSubtotal();
@@ -17620,7 +19849,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     float getSubtotal();
@@ -17629,7 +19858,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     boolean hasGrandtotal();
@@ -17637,7 +19866,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     float getGrandtotal();
@@ -17646,13 +19875,13 @@ public final class CsCart {
    * Protobuf type {@code fksproto.RemoveBatchSalesCartResponse}
    *
    * <pre>
-   *�����Ƴ����ﳵӦ��
+   *批量移除购物车应答
    * </pre>
    */
   public static final class RemoveBatchSalesCartResponse extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:fksproto.RemoveBatchSalesCartResponse)
-      RemoveBatchSalesCartResponseOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.RemoveBatchSalesCartResponse)
+          RemoveBatchSalesCartResponseOrBuilder {
     // Use RemoveBatchSalesCartResponse.newBuilder() to construct.
     private RemoveBatchSalesCartResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -17670,19 +19899,19 @@ public final class CsCart {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private RemoveBatchSalesCartResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -17693,17 +19922,17 @@ public final class CsCart {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              CsHead.BaseResponse.Builder subBuilder = null;
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = head_.toBuilder();
               }
-              head_ = input.readMessage(CsHead.BaseResponse.PARSER, extensionRegistry);
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(head_);
                 head_ = subBuilder.buildPartial();
@@ -17727,42 +19956,42 @@ public final class CsCart {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+                e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
+    getDescriptor() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
     }
 
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              RemoveBatchSalesCartResponse.class, Builder.class);
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsCart.RemoveBatchSalesCartResponse.class, fksproto.CsCart.RemoveBatchSalesCartResponse.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RemoveBatchSalesCartResponse> PARSER =
-        new com.google.protobuf.AbstractParser<RemoveBatchSalesCartResponse>() {
-      public RemoveBatchSalesCartResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RemoveBatchSalesCartResponse(input, extensionRegistry);
-      }
-    };
+            new com.google.protobuf.AbstractParser<RemoveBatchSalesCartResponse>() {
+              public RemoveBatchSalesCartResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new RemoveBatchSalesCartResponse(input, extensionRegistry);
+              }
+            };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RemoveBatchSalesCartResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
     public static final int HEAD_FIELD_NUMBER = 1;
-    private CsHead.BaseResponse head_;
+    private fksproto.CsHead.BaseResponse head_;
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
@@ -17772,13 +20001,13 @@ public final class CsCart {
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponse getHead() {
+    public fksproto.CsHead.BaseResponse getHead() {
       return head_;
     }
     /**
      * <code>required .fksproto.BaseResponse head = 1;</code>
      */
-    public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
       return head_;
     }
 
@@ -17788,7 +20017,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public boolean hasSubtotal() {
@@ -17798,7 +20027,7 @@ public final class CsCart {
      * <code>optional float subtotal = 2;</code>
      *
      * <pre>
-     *С��
+     *小计
      * </pre>
      */
     public float getSubtotal() {
@@ -17811,7 +20040,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public boolean hasGrandtotal() {
@@ -17821,7 +20050,7 @@ public final class CsCart {
      * <code>optional float grandtotal = 3;</code>
      *
      * <pre>
-     *�ܼ�
+     *总计
      * </pre>
      */
     public float getGrandtotal() {
@@ -17829,7 +20058,7 @@ public final class CsCart {
     }
 
     private void initFields() {
-      head_ = CsHead.BaseResponse.getDefaultInstance();
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       subtotal_ = 0F;
       grandtotal_ = 0F;
     }
@@ -17852,7 +20081,7 @@ public final class CsCart {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, head_);
@@ -17874,15 +20103,15 @@ public final class CsCart {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
+                .computeMessageSize(1, head_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, subtotal_);
+                .computeFloatSize(2, subtotal_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, grandtotal_);
+                .computeFloatSize(3, grandtotal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -17890,75 +20119,75 @@ public final class CsCart {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
-        throws java.io.ObjectStreamException {
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RemoveBatchSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RemoveBatchSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RemoveBatchSalesCartResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RemoveBatchSalesCartResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+    public static fksproto.CsCart.RemoveBatchSalesCartResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RemoveBatchSalesCartResponse prototype) {
+    public static Builder newBuilder(fksproto.CsCart.RemoveBatchSalesCartResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -17966,23 +20195,23 @@ public final class CsCart {
      * Protobuf type {@code fksproto.RemoveBatchSalesCartResponse}
      *
      * <pre>
-     *�����Ƴ����ﳵӦ��
+     *批量移除购物车应答
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:fksproto.RemoveBatchSalesCartResponse)
-        RemoveBatchSalesCartResponseOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.RemoveBatchSalesCartResponse)
+            fksproto.CsCart.RemoveBatchSalesCartResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
+      getDescriptor() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
       }
 
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                RemoveBatchSalesCartResponse.class, Builder.class);
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsCart.RemoveBatchSalesCartResponse.class, fksproto.CsCart.RemoveBatchSalesCartResponse.Builder.class);
       }
 
       // Construct using fksproto.CsCart.RemoveBatchSalesCartResponse.newBuilder()
@@ -17991,7 +20220,7 @@ public final class CsCart {
       }
 
       private Builder(
-          BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -18007,7 +20236,7 @@ public final class CsCart {
       public Builder clear() {
         super.clear();
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
         } else {
           headBuilder_.clear();
         }
@@ -18024,24 +20253,24 @@ public final class CsCart {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
+      getDescriptorForType() {
+        return fksproto.CsCart.internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
       }
 
-      public RemoveBatchSalesCartResponse getDefaultInstanceForType() {
-        return RemoveBatchSalesCartResponse.getDefaultInstance();
+      public fksproto.CsCart.RemoveBatchSalesCartResponse getDefaultInstanceForType() {
+        return fksproto.CsCart.RemoveBatchSalesCartResponse.getDefaultInstance();
       }
 
-      public RemoveBatchSalesCartResponse build() {
-        RemoveBatchSalesCartResponse result = buildPartial();
+      public fksproto.CsCart.RemoveBatchSalesCartResponse build() {
+        fksproto.CsCart.RemoveBatchSalesCartResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RemoveBatchSalesCartResponse buildPartial() {
-        RemoveBatchSalesCartResponse result = new RemoveBatchSalesCartResponse(this);
+      public fksproto.CsCart.RemoveBatchSalesCartResponse buildPartial() {
+        fksproto.CsCart.RemoveBatchSalesCartResponse result = new fksproto.CsCart.RemoveBatchSalesCartResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -18066,16 +20295,16 @@ public final class CsCart {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RemoveBatchSalesCartResponse) {
-          return mergeFrom((RemoveBatchSalesCartResponse)other);
+        if (other instanceof fksproto.CsCart.RemoveBatchSalesCartResponse) {
+          return mergeFrom((fksproto.CsCart.RemoveBatchSalesCartResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RemoveBatchSalesCartResponse other) {
-        if (other == RemoveBatchSalesCartResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(fksproto.CsCart.RemoveBatchSalesCartResponse other) {
+        if (other == fksproto.CsCart.RemoveBatchSalesCartResponse.getDefaultInstance()) return this;
         if (other.hasHead()) {
           mergeHead(other.getHead());
         }
@@ -18091,25 +20320,25 @@ public final class CsCart {
 
       public final boolean isInitialized() {
         if (!hasHead()) {
-          
+
           return false;
         }
         if (!getHead().isInitialized()) {
-          
+
           return false;
         }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        RemoveBatchSalesCartResponse parsedMessage = null;
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsCart.RemoveBatchSalesCartResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RemoveBatchSalesCartResponse) e.getUnfinishedMessage();
+          parsedMessage = (fksproto.CsCart.RemoveBatchSalesCartResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -18120,9 +20349,9 @@ public final class CsCart {
       }
       private int bitField0_;
 
-      private CsHead.BaseResponse head_ = CsHead.BaseResponse.getDefaultInstance();
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder> headBuilder_;
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
@@ -18132,7 +20361,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse getHead() {
+      public fksproto.CsHead.BaseResponse getHead() {
         if (headBuilder_ == null) {
           return head_;
         } else {
@@ -18142,7 +20371,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder setHead(CsHead.BaseResponse value) {
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -18159,7 +20388,7 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       public Builder setHead(
-          CsHead.BaseResponse.Builder builderForValue) {
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
         if (headBuilder_ == null) {
           head_ = builderForValue.build();
           onChanged();
@@ -18172,12 +20401,12 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public Builder mergeHead(CsHead.BaseResponse value) {
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
         if (headBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != CsHead.BaseResponse.getDefaultInstance()) {
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
             head_ =
-              CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
           } else {
             head_ = value;
           }
@@ -18193,7 +20422,7 @@ public final class CsCart {
        */
       public Builder clearHead() {
         if (headBuilder_ == null) {
-          head_ = CsHead.BaseResponse.getDefaultInstance();
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
           onChanged();
         } else {
           headBuilder_.clear();
@@ -18204,7 +20433,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponse.Builder getHeadBuilder() {
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getHeadFieldBuilder().getBuilder();
@@ -18212,7 +20441,7 @@ public final class CsCart {
       /**
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
-      public CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
         if (headBuilder_ != null) {
           return headBuilder_.getMessageOrBuilder();
         } else {
@@ -18223,11 +20452,11 @@ public final class CsCart {
        * <code>required .fksproto.BaseResponse head = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>
-          getHeadFieldBuilder() {
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
         if (headBuilder_ == null) {
           headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              CsHead.BaseResponse, CsHead.BaseResponse.Builder, CsHead.BaseResponseOrBuilder>(
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
                   getHead(),
                   getParentForChildren(),
                   isClean());
@@ -18241,7 +20470,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public boolean hasSubtotal() {
@@ -18251,7 +20480,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public float getSubtotal() {
@@ -18261,7 +20490,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder setSubtotal(float value) {
@@ -18274,7 +20503,7 @@ public final class CsCart {
        * <code>optional float subtotal = 2;</code>
        *
        * <pre>
-       *С��
+       *小计
        * </pre>
        */
       public Builder clearSubtotal() {
@@ -18289,7 +20518,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public boolean hasGrandtotal() {
@@ -18299,7 +20528,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public float getGrandtotal() {
@@ -18309,7 +20538,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder setGrandtotal(float value) {
@@ -18322,7 +20551,7 @@ public final class CsCart {
        * <code>optional float grandtotal = 3;</code>
        *
        * <pre>
-       *�ܼ�
+       *总计
        * </pre>
        */
       public Builder clearGrandtotal() {
@@ -18344,257 +20573,290 @@ public final class CsCart {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_SalesCartItem_descriptor;
+          internal_static_fksproto_SalesCartItem_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_SalesCartItem_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_SalesCartItem_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetSalesCartListRequest_descriptor;
+          internal_static_fksproto_GetSalesCartListRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_GetSalesCartListResponse_descriptor;
+          internal_static_fksproto_GetSalesCartListResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_AppendSalesCartRequest_descriptor;
+          internal_static_fksproto_AppendSalesCartRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_AppendSalesCartResponse_descriptor;
+          internal_static_fksproto_AppendSalesCartResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_RemoveSalesCartRequest_descriptor;
+          internal_static_fksproto_RemoveSalesCartRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_RemoveSalesCartResponse_descriptor;
+          internal_static_fksproto_RemoveSalesCartResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_ModifySalesCartRequest_descriptor;
+          internal_static_fksproto_ModifySalesCartRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_ModifySalesCartResponse_descriptor;
+          internal_static_fksproto_ModifySalesCartResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_SelectedSalesCartRequest_descriptor;
+          internal_static_fksproto_SelectedSalesCartRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_SelectedSalesCartResponse_descriptor;
+          internal_static_fksproto_SelectedSalesCartResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_ApplyCouponRequest_descriptor;
+          internal_static_fksproto_ApplyCouponRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_ApplyCouponResponse_descriptor;
+          internal_static_fksproto_ApplyCouponResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
+          internal_static_fksproto_PlaceOrderAgainRequest_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_PlaceOrderAgainRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
+          internal_static_fksproto_PlaceOrderAgainResponse_descriptor;
   private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable;
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_PlaceOrderAgainResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
-    String[] descriptorData = {
-      "\n\rcs_cart.proto\022\010fksproto\032\rcs_head.proto" +
-      "\032\rcs_base.proto\"\337\002\n\rSalesCartItem\022\024\n\014car" +
-      "t_item_id\030\001 \002(\003\022\017\n\007item_id\030\002 \002(\003\022\024\n\014ware" +
-      "house_id\030\003 \002(\005\022\r\n\005title\030\004 \002(\t\022\020\n\010subtitl" +
-      "e\030\005 \002(\t\022\021\n\timage_url\030\006 \002(\t\022\013\n\003qty\030\007 \002(\005\022" +
-      "\022\n\nunit_price\030\010 \002(\002\022\r\n\005stock\030\t \001(\005\022\014\n\004no" +
-      "te\030\n \001(\t\022\016\n\006seller\030\013 \001(\t\022\017\n\007buyfrom\030\014 \001(" +
-      "\t\022%\n\007extends\030\r \003(\0132\024.fksproto.ItemExtend" +
-      "\022\023\n\013is_selected\030\016 \001(\010\022\024\n\014cannot_buyit\030\017 " +
-      "\001(\010\022\025\n\rmin_qty_allow\030\020 \001(\005\022\025\n\rmax_qty_al",
-      "low\030\021 \001(\005\"\251\001\n\027GetSalesCartListRequest\022#\n" +
-      "\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010us" +
-      "erinfo\030\002 \001(\0132\031.fksproto.BaseUserRequest\022" +
-      "\022\n\nlocalecode\030\003 \001(\t\022\024\n\014currencycode\030\004 \001(" +
-      "\t\022\022\n\ncurrencyid\030\005 \001(\005\"\267\001\n\030GetSalesCartLi" +
-      "stResponse\022$\n\004head\030\001 \002(\0132\026.fksproto.Base" +
-      "Response\022\020\n\010subtotal\030\002 \001(\002\022\022\n\ngrandtotal" +
-      "\030\003 \001(\002\022&\n\005items\030\004 \003(\0132\027.fksproto.SalesCa" +
-      "rtItem\022\'\n\nwarehouses\030\005 \003(\0132\023.fksproto.Wa" +
-      "rehouse\"\345\001\n\026AppendSalesCartRequest\022#\n\004he",
-      "ad\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010useri" +
-      "nfo\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\017\n\007" +
-      "item_id\030\003 \002(\003\022\013\n\003qty\030\004 \002(\005\022\014\n\004note\030\005 \001(\t" +
-      "\022#\n\005attrs\030\006 \003(\0132\024.fksproto.PairIntInt\022\024\n" +
-      "\014currencycode\030\007 \001(\t\022\022\n\nlocalecode\030\010 \001(\t\"" +
-      "?\n\027AppendSalesCartResponse\022$\n\004head\030\001 \002(\013" +
-      "2\026.fksproto.BaseResponse\"\276\001\n\026RemoveSales" +
-      "CartRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Bas" +
-      "eRequest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.Ba" +
-      "seUserRequest\022\024\n\014cart_item_id\030\003 \001(\003\022\022\n\nl",
-      "ocalecode\030\004 \001(\t\022\024\n\014currencycode\030\005 \001(\t\022\022\n" +
-      "\ncurrencyid\030\006 \001(\005\"e\n\027RemoveSalesCartResp" +
-      "onse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRespon" +
-      "se\022\020\n\010subtotal\030\002 \001(\002\022\022\n\ngrandtotal\030\003 \001(\002" +
-      "\"\331\001\n\026ModifySalesCartRequest\022#\n\004head\030\001 \002(" +
-      "\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \001" +
-      "(\0132\031.fksproto.BaseUserRequest\022\024\n\014cart_it" +
-      "em_id\030\003 \001(\003\022\013\n\003qty\030\004 \001(\005\022\014\n\004note\030\005 \001(\t\022\022" +
-      "\n\nlocalecode\030\006 \001(\t\022\024\n\014currencycode\030\007 \001(\t" +
-      "\022\022\n\ncurrencyid\030\010 \001(\005\"e\n\027ModifySalesCartR",
-      "esponse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRes" +
-      "ponse\022\020\n\010subtotal\030\002 \001(\002\022\022\n\ngrandtotal\030\003 " +
-      "\001(\002\"\251\001\n\030SelectedSalesCartRequest\022#\n\004head" +
-      "\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinf" +
-      "o\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\025\n\rca" +
-      "rt_item_ids\030\003 \003(\003\022\016\n\006action\030\004 \001(\005\022\024\n\014cur" +
-      "rencycode\030\005 \001(\t\"g\n\031SelectedSalesCartResp" +
-      "onse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRespon" +
-      "se\022\020\n\010subtotal\030\002 \001(\002\022\022\n\ngrandtotal\030\003 \001(\002" +
-      "\"v\n\022ApplyCouponRequest\022#\n\004head\030\001 \002(\0132\025.f",
-      "ksproto.BaseRequest\022+\n\010userinfo\030\002 \001(\0132\031." +
-      "fksproto.BaseUserRequest\022\016\n\006coupon\030\003 \002(\t" +
-      "\"M\n\023ApplyCouponResponse\022$\n\004head\030\001 \002(\0132\026." +
-      "fksproto.BaseResponse\022\020\n\010discount\030\002 \001(\002\"" +
-      "\234\001\n\033RemoveBatchSalesCartRequest\022#\n\004head\030" +
-      "\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010userinfo" +
-      "\030\002 \001(\0132\031.fksproto.BaseUserRequest\022\025\n\rcar" +
-      "t_item_ids\030\003 \003(\003\022\024\n\014currencycode\030\004 \001(\t\"j" +
-      "\n\034RemoveBatchSalesCartResponse\022$\n\004head\030\001" +
-      " \002(\0132\026.fksproto.BaseResponse\022\020\n\010subtotal",
-      "\030\002 \001(\002\022\022\n\ngrandtotal\030\003 \001(\002"
+    java.lang.String[] descriptorData = {
+            "\n\rcs_cart.proto\022\010fksproto\032\rcs_head.proto" +
+                    "\032\rcs_base.proto\032\016cs_crowd.proto\"\257\003\n\rSale" +
+                    "sCartItem\022\024\n\014cart_item_id\030\001 \002(\003\022\017\n\007item_" +
+                    "id\030\002 \002(\003\022\024\n\014warehouse_id\030\003 \002(\005\022\r\n\005title\030" +
+                    "\004 \002(\t\022\020\n\010subtitle\030\005 \002(\t\022\021\n\timage_url\030\006 \002" +
+                    "(\t\022\013\n\003qty\030\007 \002(\005\022\022\n\nunit_price\030\010 \002(\002\022\r\n\005s" +
+                    "tock\030\t \001(\005\022\014\n\004note\030\n \001(\t\022\016\n\006seller\030\013 \001(\t" +
+                    "\022\017\n\007buyfrom\030\014 \001(\t\022%\n\007extends\030\r \003(\0132\024.fks" +
+                    "proto.ItemExtend\022\023\n\013is_selected\030\016 \001(\010\022\024\n" +
+                    "\014cannot_buyit\030\017 \001(\010\022\025\n\rmin_qty_allow\030\020 \001",
+            "(\005\022\025\n\rmax_qty_allow\030\021 \001(\005\022\024\n\014crowdOrderI" +
+                    "d\030\022 \001(\005\022\030\n\020crowdOrderStatus\030\023 \001(\t\022\036\n\005cro" +
+                    "wd\030\024 \001(\0132\017.fksproto.Crowd\"\251\001\n\027GetSalesCa" +
+                    "rtListRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.B" +
+                    "aseRequest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto." +
+                    "BaseUserRequest\022\022\n\nlocalecode\030\003 \001(\t\022\024\n\014c" +
+                    "urrencycode\030\004 \001(\t\022\022\n\ncurrencyid\030\005 \001(\005\"\267\001" +
+                    "\n\030GetSalesCartListResponse\022$\n\004head\030\001 \002(\013" +
+                    "2\026.fksproto.BaseResponse\022\020\n\010subtotal\030\002 \001" +
+                    "(\002\022\022\n\ngrandtotal\030\003 \001(\002\022&\n\005items\030\004 \003(\0132\027.",
+            "fksproto.SalesCartItem\022\'\n\nwarehouses\030\005 \003" +
+                    "(\0132\023.fksproto.Warehouse\"\345\001\n\026AppendSalesC" +
+                    "artRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Base" +
+                    "Request\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.Bas" +
+                    "eUserRequest\022\017\n\007item_id\030\003 \002(\003\022\013\n\003qty\030\004 \002" +
+                    "(\005\022\014\n\004note\030\005 \001(\t\022#\n\005attrs\030\006 \003(\0132\024.fkspro" +
+                    "to.PairIntInt\022\024\n\014currencycode\030\007 \001(\t\022\022\n\nl" +
+                    "ocalecode\030\010 \001(\t\"?\n\027AppendSalesCartRespon" +
+                    "se\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse" +
+                    "\"\276\001\n\026RemoveSalesCartRequest\022#\n\004head\030\001 \002(",
+            "\0132\025.fksproto.BaseRequest\022+\n\010userinfo\030\002 \001" +
+                    "(\0132\031.fksproto.BaseUserRequest\022\024\n\014cart_it" +
+                    "em_id\030\003 \001(\003\022\022\n\nlocalecode\030\004 \001(\t\022\024\n\014curre" +
+                    "ncycode\030\005 \001(\t\022\022\n\ncurrencyid\030\006 \001(\005\"e\n\027Rem" +
+                    "oveSalesCartResponse\022$\n\004head\030\001 \002(\0132\026.fks" +
+                    "proto.BaseResponse\022\020\n\010subtotal\030\002 \001(\002\022\022\n\n" +
+                    "grandtotal\030\003 \001(\002\"\331\001\n\026ModifySalesCartRequ" +
+                    "est\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest" +
+                    "\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUserRe" +
+                    "quest\022\024\n\014cart_item_id\030\003 \001(\003\022\013\n\003qty\030\004 \001(\005",
+            "\022\014\n\004note\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(\t\022\024\n\014cu" +
+                    "rrencycode\030\007 \001(\t\022\022\n\ncurrencyid\030\010 \001(\005\"e\n\027" +
+                    "ModifySalesCartResponse\022$\n\004head\030\001 \002(\0132\026." +
+                    "fksproto.BaseResponse\022\020\n\010subtotal\030\002 \001(\002\022" +
+                    "\022\n\ngrandtotal\030\003 \001(\002\"\251\001\n\030SelectedSalesCar" +
+                    "tRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRe" +
+                    "quest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseU" +
+                    "serRequest\022\025\n\rcart_item_ids\030\003 \003(\003\022\016\n\006act" +
+                    "ion\030\004 \001(\005\022\024\n\014currencycode\030\005 \001(\t\"g\n\031Selec" +
+                    "tedSalesCartResponse\022$\n\004head\030\001 \002(\0132\026.fks",
+            "proto.BaseResponse\022\020\n\010subtotal\030\002 \001(\002\022\022\n\n" +
+                    "grandtotal\030\003 \001(\002\"v\n\022ApplyCouponRequest\022#" +
+                    "\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022+\n\010u" +
+                    "serinfo\030\002 \001(\0132\031.fksproto.BaseUserRequest" +
+                    "\022\016\n\006coupon\030\003 \002(\t\"M\n\023ApplyCouponResponse\022" +
+                    "$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022\020\n" +
+                    "\010discount\030\002 \001(\002\"\256\001\n\026PlaceOrderAgainReque" +
+                    "st\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022" +
+                    "+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUserReq" +
+                    "uest\022\026\n\016sales_order_id\030\003 \001(\005\022\023\n\013locale_c",
+            "ode\030\004 \001(\t\022\025\n\rcurrency_code\030\005 \001(\t\"?\n\027Plac" +
+                    "eOrderAgainResponse\022$\n\004head\030\001 \002(\0132\026.fksp" +
+                    "roto.BaseResponse\"\234\001\n\033RemoveBatchSalesCa" +
+                    "rtRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseR" +
+                    "equest\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.Base" +
+                    "UserRequest\022\025\n\rcart_item_ids\030\003 \003(\003\022\024\n\014cu" +
+                    "rrencycode\030\004 \001(\t\"j\n\034RemoveBatchSalesCart" +
+                    "Response\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRe" +
+                    "sponse\022\020\n\010subtotal\030\002 \001(\002\022\022\n\ngrandtotal\030\003" +
+                    " \001(\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                      com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          CsHead.getDescriptor(),
-          CsBase.getDescriptor(),
-        }, assigner);
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                            fksproto.CsHead.getDescriptor(),
+                            fksproto.CsBase.getDescriptor(),
+                            fksproto.CsCrowd.getDescriptor(),
+                    }, assigner);
     internal_static_fksproto_SalesCartItem_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+            getDescriptor().getMessageTypes().get(0);
     internal_static_fksproto_SalesCartItem_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_SalesCartItem_descriptor,
-        new String[] { "CartItemId", "ItemId", "WarehouseId", "Title", "Subtitle", "ImageUrl", "Qty", "UnitPrice", "Stock", "Note", "Seller", "Buyfrom", "Extends", "IsSelected", "CannotBuyit", "MinQtyAllow", "MaxQtyAllow", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_SalesCartItem_descriptor,
+            new java.lang.String[] { "CartItemId", "ItemId", "WarehouseId", "Title", "Subtitle", "ImageUrl", "Qty", "UnitPrice", "Stock", "Note", "Seller", "Buyfrom", "Extends", "IsSelected", "CannotBuyit", "MinQtyAllow", "MaxQtyAllow", "CrowdOrderId", "CrowdOrderStatus", "Crowd", });
     internal_static_fksproto_GetSalesCartListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(1);
     internal_static_fksproto_GetSalesCartListRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetSalesCartListRequest_descriptor,
-        new String[] { "Head", "Userinfo", "Localecode", "Currencycode", "Currencyid", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetSalesCartListRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "Localecode", "Currencycode", "Currencyid", });
     internal_static_fksproto_GetSalesCartListResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(2);
     internal_static_fksproto_GetSalesCartListResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_GetSalesCartListResponse_descriptor,
-        new String[] { "Head", "Subtotal", "Grandtotal", "Items", "Warehouses", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetSalesCartListResponse_descriptor,
+            new java.lang.String[] { "Head", "Subtotal", "Grandtotal", "Items", "Warehouses", });
     internal_static_fksproto_AppendSalesCartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(3);
     internal_static_fksproto_AppendSalesCartRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_AppendSalesCartRequest_descriptor,
-        new String[] { "Head", "Userinfo", "ItemId", "Qty", "Note", "Attrs", "Currencycode", "Localecode", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_AppendSalesCartRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "ItemId", "Qty", "Note", "Attrs", "Currencycode", "Localecode", });
     internal_static_fksproto_AppendSalesCartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(4);
     internal_static_fksproto_AppendSalesCartResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_AppendSalesCartResponse_descriptor,
-        new String[] { "Head", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_AppendSalesCartResponse_descriptor,
+            new java.lang.String[] { "Head", });
     internal_static_fksproto_RemoveSalesCartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(5);
     internal_static_fksproto_RemoveSalesCartRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_RemoveSalesCartRequest_descriptor,
-        new String[] { "Head", "Userinfo", "CartItemId", "Localecode", "Currencycode", "Currencyid", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_RemoveSalesCartRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "CartItemId", "Localecode", "Currencycode", "Currencyid", });
     internal_static_fksproto_RemoveSalesCartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(6);
     internal_static_fksproto_RemoveSalesCartResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_RemoveSalesCartResponse_descriptor,
-        new String[] { "Head", "Subtotal", "Grandtotal", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_RemoveSalesCartResponse_descriptor,
+            new java.lang.String[] { "Head", "Subtotal", "Grandtotal", });
     internal_static_fksproto_ModifySalesCartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(7);
     internal_static_fksproto_ModifySalesCartRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_ModifySalesCartRequest_descriptor,
-        new String[] { "Head", "Userinfo", "CartItemId", "Qty", "Note", "Localecode", "Currencycode", "Currencyid", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ModifySalesCartRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "CartItemId", "Qty", "Note", "Localecode", "Currencycode", "Currencyid", });
     internal_static_fksproto_ModifySalesCartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(8);
     internal_static_fksproto_ModifySalesCartResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_ModifySalesCartResponse_descriptor,
-        new String[] { "Head", "Subtotal", "Grandtotal", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ModifySalesCartResponse_descriptor,
+            new java.lang.String[] { "Head", "Subtotal", "Grandtotal", });
     internal_static_fksproto_SelectedSalesCartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(9);
     internal_static_fksproto_SelectedSalesCartRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_SelectedSalesCartRequest_descriptor,
-        new String[] { "Head", "Userinfo", "CartItemIds", "Action", "Currencycode", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_SelectedSalesCartRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "CartItemIds", "Action", "Currencycode", });
     internal_static_fksproto_SelectedSalesCartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(10);
     internal_static_fksproto_SelectedSalesCartResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_SelectedSalesCartResponse_descriptor,
-        new String[] { "Head", "Subtotal", "Grandtotal", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_SelectedSalesCartResponse_descriptor,
+            new java.lang.String[] { "Head", "Subtotal", "Grandtotal", });
     internal_static_fksproto_ApplyCouponRequest_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(11);
     internal_static_fksproto_ApplyCouponRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_ApplyCouponRequest_descriptor,
-        new String[] { "Head", "Userinfo", "Coupon", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ApplyCouponRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "Coupon", });
     internal_static_fksproto_ApplyCouponResponse_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(12);
     internal_static_fksproto_ApplyCouponResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_ApplyCouponResponse_descriptor,
-        new String[] { "Head", "Discount", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ApplyCouponResponse_descriptor,
+            new java.lang.String[] { "Head", "Discount", });
+    internal_static_fksproto_PlaceOrderAgainRequest_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+    internal_static_fksproto_PlaceOrderAgainRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_PlaceOrderAgainRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "SalesOrderId", "LocaleCode", "CurrencyCode", });
+    internal_static_fksproto_PlaceOrderAgainResponse_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+    internal_static_fksproto_PlaceOrderAgainResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_PlaceOrderAgainResponse_descriptor,
+            new java.lang.String[] { "Head", });
     internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(15);
     internal_static_fksproto_RemoveBatchSalesCartRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor,
-        new String[] { "Head", "Userinfo", "CartItemIds", "Currencycode", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_RemoveBatchSalesCartRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "CartItemIds", "Currencycode", });
     internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(16);
     internal_static_fksproto_RemoveBatchSalesCartResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor,
-        new String[] { "Head", "Subtotal", "Grandtotal", });
-    CsHead.getDescriptor();
-    CsBase.getDescriptor();
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_RemoveBatchSalesCartResponse_descriptor,
+            new java.lang.String[] { "Head", "Subtotal", "Grandtotal", });
+    fksproto.CsHead.getDescriptor();
+    fksproto.CsBase.getDescriptor();
+    fksproto.CsCrowd.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

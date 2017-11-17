@@ -3,6 +3,7 @@ package com.fuexpress.kr.ui.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -34,9 +35,9 @@ public class CrowdItemAdapter extends BaseAdapter {
 
     Activity mContext;
     private List<CsBase.Item> mItems;
-    ArrayList<Float> mDiscountList;
+    android.support.v4.util.ArrayMap<Long, Float> mDiscountList;
 
-    public CrowdItemAdapter(Activity context, List<CsBase.Item> items, ArrayList<Float> discountList) {
+    public CrowdItemAdapter(Activity context, List<CsBase.Item> items, android.support.v4.util.ArrayMap<Long, Float> discountList) {
         this.mContext = context;
         this.mItems = items;
         this.mDiscountList = discountList;
@@ -44,9 +45,10 @@ public class CrowdItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (mItems != null && mDiscountList != null) {
+      /*  if (mItems != null && mDiscountList != null) {
             return mItems.size() > mDiscountList.size() ? mDiscountList.size() : mItems.size();
-        }
+        }*/
+        if (mItems != null) return mItems.size();
         return 0;
     }
 
@@ -78,12 +80,12 @@ public class CrowdItemAdapter extends BaseAdapter {
         final CsBase.Item item = mItems.get(position);
 //        boolean en = AccountManager.getInstance().getLocaleCode().contains("en");
         boolean en = LgUitl.isOtherLanguage(AccountManager.getInstance().getLocaleCode());
-        float discount = mDiscountList.get(position);
+        float discount = mDiscountList.get(item.getItemid()) == null ? 0 : mDiscountList.get(item.getItemid());
         boolean hasDiscount = discount > 0 && discount < 1;
         if (en) {
-            discount = mDiscountList.get(position) * 100;
+            discount = discount * 100;
         } else {
-            discount = (1 - mDiscountList.get(position)) * 10;
+            discount = (1 - discount) * 10;
         }
 
         if (isInt(discount)) {
@@ -109,12 +111,15 @@ public class CrowdItemAdapter extends BaseAdapter {
             }
         }*/
 
+        float discount2 = mDiscountList.get(item.getItemid()) == null ? 0 : mDiscountList.get(item.getItemid());
+        float price = item.getDefaultPrice() * item.getExchangeRate() * (1 - discount2);
+/*
         float price;
         if (hasDiscount) {
-            price = item.getDefaultPrice() * item.getExchangeRate() * (1 - mDiscountList.get(position));
+            price = item.getPrice() * (1 - discount2);
         } else {
-            price = item.getDefaultPrice() * item.getExchangeRate() - mDiscountList.get(position);
-        }
+            price = item.getPrice() - discount2;
+        }*/
         String sPrice = UIUtils.getCurrency(mContext, price);
         holder.mPrice.setText(String.format(sPrice, price));
         String uri = item.getImageUrl() + Constants.ImgUrlSuffix.small_9;

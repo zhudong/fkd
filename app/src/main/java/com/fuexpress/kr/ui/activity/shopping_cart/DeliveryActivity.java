@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,7 +24,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
@@ -42,6 +42,7 @@ import com.fuexpress.kr.ui.view.CustomDialog;
 import com.fuexpress.kr.ui.view.CustomListView;
 import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.LogUtils;
+import com.fuexpress.kr.utils.SPUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ import java.util.Set;
 import fksproto.CsAddress;
 import fksproto.CsBase;
 import fksproto.CsCart;
+import fksproto.CsOrder;
 import fksproto.CsShipping;
 
 
@@ -67,12 +69,14 @@ public class DeliveryActivity extends BaseActivity {
     private final static String TAG = "DelivertActivity";
     private View rootView;
     private TextView confirmOrderTv;
+    private RelativeLayout giftLayout;
     private RelativeLayout mergeOrderLayout;
     private RelativeLayout directMailLayout;
     private RelativeLayout shippingLayout;
     private LinearLayout commodityLayout;
     private RelativeLayout addressLayout;
 
+    private ImageView giftIv;
     private ImageView mergeOrderIv;
     private ImageView directMailIv;
     private TextView nameAndPhoneTv;
@@ -83,6 +87,7 @@ public class DeliveryActivity extends BaseActivity {
     private TextView shippingFee;
     private ImageView mergeOrerHelpIv;
     private ImageView directMailHelpIv;
+    private ImageView giftHelpIv;
     private TextView defaultAddressIv;
 
     private List<CommoditysBean> list;
@@ -114,6 +119,11 @@ public class DeliveryActivity extends BaseActivity {
     private float dutyRate;
     private float shippingDuty;
     private Map<Integer, Float> dutyMap = new HashMap<Integer, Float>();
+    public static final String SHIPPING_POSITION = "shipping_position";
+    private int shipPosition = -1;
+    private boolean isActualValueOutOfRange;
+    private float parcelSubtotalQuota;
+    private int oldShippingScheme;
 
     @Override
     public View setInitView() {
@@ -127,36 +137,50 @@ public class DeliveryActivity extends BaseActivity {
         itemList = (List<CsCart.SalesCartItem>) intent.getExtras().getSerializable("itemList");
         warehouseList = (List<CsBase.Warehouse>) intent.getExtras().getSerializable("warehouseList");
         address = (CsAddress.CustomerAddress) intent.getExtras().get("address");
-        shippingScheme = intent.getExtras().getInt("shippingScheme", 2);
+        shippingScheme = intent.getExtras().getInt("shippingScheme", 3);
+        oldShippingScheme = shippingScheme;
 //        shipList = (List<CsShipping.Shipping>) intent.getExtras().getSerializable("shipList");
         isCrowdOrder = intent.getBooleanExtra(ORDER_TYPE, false);
 
+        giftLayout = (RelativeLayout) rootView.findViewById(R.id.delivery_gift_layout);
         mergeOrderLayout = (RelativeLayout) rootView.findViewById(R.id.delivery_merge_order_layout);
         directMailLayout = (RelativeLayout) rootView.findViewById(R.id.delivery_direct_mail_layout);
 
         addressLayout = (RelativeLayout) rootView.findViewById(R.id.delivery_address_layout);
         commodityLayout = (LinearLayout) rootView.findViewById(R.id.delivery_commodity_layout);
+        giftIv = (ImageView) rootView.findViewById(R.id.delivery_gift_iv);
         mergeOrderIv = (ImageView) rootView.findViewById(R.id.delivery_merge_order_iv);
         directMailIv = (ImageView) rootView.findViewById(R.id.delivery_direct_mail_iv);
         nameAndPhoneTv = (TextView) rootView.findViewById(R.id.delivery_name_and_phone_tv);
         phoneTv = (TextView) rootView.findViewById(R.id.delivery_phone_tv);
         confirmBtn = (Button) rootView.findViewById(R.id.delivery_confirm_btn);
 
+        giftHelpIv = (ImageView) rootView.findViewById(R.id.delivery_gift_help_iv);
+        giftHelpIv.setOnClickListener(this);
         mergeOrerHelpIv = (ImageView) rootView.findViewById(R.id.delivery_merge_order_help_iv);
         directMailHelpIv = (ImageView) rootView.findViewById(R.id.delivery_direct_mail_help_iv);
         defaultAddressIv = (TextView) rootView.findViewById(R.id.delivery_default_address_iv);
+        shipPosition = getIntent().getIntExtra(SHIPPING_POSITION, -1);
 
-        if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
+        if (shippingScheme == Constants.SHIPPING_SCHEME_GIFT) {
+            giftIv.setImageResource(R.mipmap.cart_select);
+            mergeOrderIv.setImageResource(R.mipmap.cart_unselect);
+            directMailIv.setImageResource(R.mipmap.cart_unselect);
+            commodityLayout.setVisibility(View.GONE);
+            addressLayout.setVisibility(View.GONE);
+        } else if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
+            giftIv.setImageResource(R.mipmap.cart_unselect);
             mergeOrderIv.setImageResource(R.mipmap.cart_select);
             directMailIv.setImageResource(R.mipmap.cart_unselect);
             commodityLayout.setVisibility(View.GONE);
-//            addressLayout.setVisibility(View.GONE);
+            addressLayout.setVisibility(View.VISIBLE);
 //            shippingLayout.setVisibility(View.GONE);
         } else if (shippingScheme == Constants.SHIPPING_SCHEME_DIRECT) {
+            giftIv.setImageResource(R.mipmap.cart_unselect);
             mergeOrderIv.setImageResource(R.mipmap.cart_unselect);
             directMailIv.setImageResource(R.mipmap.cart_select);
             commodityLayout.setVisibility(View.VISIBLE);
-//            addressLayout.setVisibility(View.VISIBLE);
+            addressLayout.setVisibility(View.VISIBLE);
 
 //            shippingLayout.setVisibility(View.VISIBLE);
         }
@@ -178,6 +202,7 @@ public class DeliveryActivity extends BaseActivity {
 
         toBackIv.setOnClickListener(this);
         addressLayout.setOnClickListener(this);
+        giftLayout.setOnClickListener(this);
         mergeOrderLayout.setOnClickListener(this);
         directMailLayout.setOnClickListener(this);
 //        confirmOrderTv.setOnClickListener(this);
@@ -194,13 +219,118 @@ public class DeliveryActivity extends BaseActivity {
         isOpen = false;
     }
 
+    public void setDataToResult(boolean isOld) {
+        int resultScheme = isOld ? oldShippingScheme : shippingScheme;
+        Intent intent;
+        Iterator iter = shipMap.entrySet().iterator();
+        shippingList.clear();
+        if (shipMap != null && shipMap.size() > 0) {
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                int key = (int) entry.getKey();
+                CsShipping.Shipping value = (CsShipping.Shipping) entry.getValue();
+                shippingList.add(value);
+            }
+        } else {
+            if (shipList != null) {
+                for (int i = 0; i < shipList.size(); i++) {
+                    shippingList.add(shipList.get(i));
+                }
+            }
+        }
+        if (shippingList != null && shippingList.size() > 0 ||
+                resultScheme == Constants.SHIPPING_SCHEME_MERGE ||
+                resultScheme == CsOrder.ShippingScheme.SHIPPING_SCHEME_FBAG_GIFT_VALUE) {
+            intent = new Intent();
+            intent.putExtra("shippingScheme", resultScheme);
+            Bundle bundle = new Bundle();
+            List<CsBase.PairIntInt> mPairList = new ArrayList<CsBase.PairIntInt>();
+            if (isCrowdOrder) {
+                for (int i = 0; i < crowdPairList.size(); i++) {
+                    for (int j = 0; j < shippingList.size(); j++) {
+                        if (shippingList.get(j).getShippingId() == crowdPairList.get(i).getV()) {
+                            mPairList.add(crowdPairList.get(i));
+                        }
+                    }
+                }
+            } else {
+                if (pairList != null) {
+
+                    for (int i = 0; i < pairList.size(); i++) {
+                        for (int j = 0; j < shippingList.size(); j++) {
+                            if (shippingList.get(j).getShippingId() == pairList.get(i).getV()) {
+                                mPairList.add(pairList.get(i));
+                            }
+                        }
+                    }
+                }
+
+            }
+            if (resultScheme == Constants.SHIPPING_SCHEME_DIRECT) {
+                bundle.putSerializable("pairList", (Serializable) mPairList);
+            }
+            bundle.putSerializable("crowdPairList", (Serializable) crowdPairList);
+            bundle.putSerializable("shippingList", (Serializable) shippingList);
+            bundle.putSerializable("callBackAddress", address);
+            bundle.putSerializable("feeMap", (Serializable) feeMap);
+            bundle.putSerializable("fee", fee);
+            bundle.putSerializable("dutyRate", dutyRate);
+            bundle.putSerializable("dutyMap", (Serializable) dutyMap);
+            bundle.putSerializable("shippingDuty", shippingDuty);
+            bundle.putSerializable("cb", initListData(cb.getWarehouses(), itemList));
+            intent.putExtras(bundle);
+            setResult(Constants.DELIVERY_REQUEST_CODE, intent);
+            // TODO: 2017/8/21 tb bug fkd1.1.0 FU-1611
+            /*if (resultScheme == Constants.SHIPPING_SCHEME_DIRECT)
+                if (!isActualValueOutOfRange) {
+                    SPUtils.put(this, Constants.KEY_SELECTED_DELIVERY, resultScheme);
+                    finish();
+                } else
+                    showCustomerToastSafly(getString(R.string.out_of_range_note_text, UIUtils.getCurrency(this, parcelSubtotalQuota)));
+            else {
+                SPUtils.put(this, Constants.KEY_SELECTED_DELIVERY, resultScheme);
+                finish();
+            }*/
+            SPUtils.put(this, Constants.KEY_SELECTED_DELIVERY, resultScheme);
+            finish();
+        } else {
+//                    final AlertDialog alertDialog = new AlertDialog.Builder(DeliveryActivity.this).create();
+//                    alertDialog.show();
+//                    alertDialog.show();
+//                    Window window = alertDialog.getWindow();
+//                    window.setContentView(R.layout.dialog_notice);
+//                    TextView tv_title = (TextView) window.findViewById(R.id.tv_dialog_message);
+//                    TextView tv_message = (TextView) window.findViewById(R.id.tv_dialog_message01);
+//                    tv_title.setText("图集内有单品");
+//                    tv_message.setText(list.get(0).getWarehouses().get(0).getName());
+//                    phoneTv.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            alertDialog.hide();
+////                        Intent intent = new Intent();
+////                        //设置返回值
+////                        intent.putExtra("isCreat", false);
+////                        setResult(MeActivity.EDIT_CANCEL, intent);
+////                        finish();
+//                        }
+//                    }, 500);
+            Toast.makeText(this, list.get(0).getWarehouses().get(0).getName() + getString(R.string.delivery_toast_msg), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setDataToResult(true);
+    }
+
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
             case R.id.iv_in_title_back:
             case R.id.confirm_order_tv:
-                finish();
+                //finish();
+                onBackPressed();
                 break;
             case R.id.delivery_address_layout:
                 /*intent = new Intent(this, PackageAddressActivity.class);
@@ -212,21 +342,30 @@ public class DeliveryActivity extends BaseActivity {
                 intent.putExtra(AddressManagerActivity.KEY_IS_CHOOSE_TYPE, true);
                 startActivityForResult(intent, Constants.ADDRESS_REQUEST_CODE);
                 break;
+            case R.id.delivery_gift_layout:
+                giftIv.setImageResource(R.mipmap.cart_select);
+                mergeOrderIv.setImageResource(R.mipmap.cart_unselect);
+                directMailIv.setImageResource(R.mipmap.cart_unselect);
+                commodityLayout.setVisibility(View.GONE);
+                shippingScheme = Constants.SHIPPING_SCHEME_GIFT;
+                addressLayout.setVisibility(View.GONE);
+                break;
             case R.id.delivery_merge_order_layout:
+                giftIv.setImageResource(R.mipmap.cart_unselect);
                 mergeOrderIv.setImageResource(R.mipmap.cart_select);
                 directMailIv.setImageResource(R.mipmap.cart_unselect);
                 commodityLayout.setVisibility(View.GONE);
-//                shippingLayout.setVisibility(View.GONE);
-//                addressLayout.setVisibility(View.GONE);
                 shippingScheme = Constants.SHIPPING_SCHEME_MERGE;
+                addressLayout.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.delivery_direct_mail_layout:
+                giftIv.setImageResource(R.mipmap.cart_unselect);
                 mergeOrderIv.setImageResource(R.mipmap.cart_unselect);
                 directMailIv.setImageResource(R.mipmap.cart_select);
                 commodityLayout.setVisibility(View.VISIBLE);
-//                addressLayout.setVisibility(View.VISIBLE);
-//                shippingLayout.setVisibility(View.VISIBLE);
                 shippingScheme = Constants.SHIPPING_SCHEME_DIRECT;
+                addressLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.delivery_confirm_btn:
                 Iterator iter = shipMap.entrySet().iterator();
@@ -245,7 +384,8 @@ public class DeliveryActivity extends BaseActivity {
                         }
                     }
                 }
-                if (shippingList != null && shippingList.size() > 0 || shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
+                if (shipMap.size() == cb.getWarehouses().size() || shippingScheme == Constants.SHIPPING_SCHEME_MERGE ||
+                        shippingScheme == CsOrder.ShippingScheme.SHIPPING_SCHEME_FBAG_GIFT_VALUE) {
                     intent = new Intent();
                     intent.putExtra("shippingScheme", shippingScheme);
                     Bundle bundle = new Bundle();
@@ -285,7 +425,21 @@ public class DeliveryActivity extends BaseActivity {
                     bundle.putSerializable("cb", initListData(cb.getWarehouses(), itemList));
                     intent.putExtras(bundle);
                     setResult(Constants.DELIVERY_REQUEST_CODE, intent);
-                    finish();
+                    // TODO: 2017/8/21 tb bug fkd1.1.0 FU-1611
+                    if (shippingScheme == Constants.SHIPPING_SCHEME_DIRECT)
+                        if (!isActualValueOutOfRange) {
+                            SPUtils.put(this, Constants.KEY_SELECTED_DELIVERY, shippingScheme);
+                            finish();
+                        } else {
+                            /*showProgressDiaLog(SweetAlertDialog.ERROR_TYPE, getString(R.string.out_of_range_note_text, UIUtils.getCurrency(this, parcelSubtotalQuota)));
+                            dissMissProgressDiaLog(1000);*/
+                            showFeeDialog(getString(R.string.out_of_range_note_text, UIUtils.getCurrency(this, parcelSubtotalQuota)));
+                        }
+                        //showCustomerToastSafly(getString(R.string.out_of_range_note_text, UIUtils.getCurrency(this, parcelSubtotalQuota)));
+                    else {
+                        SPUtils.put(this, Constants.KEY_SELECTED_DELIVERY, shippingScheme);
+                        finish();
+                    }
                 } else {
 //                    final AlertDialog alertDialog = new AlertDialog.Builder(DeliveryActivity.this).create();
 //                    alertDialog.show();
@@ -307,7 +461,7 @@ public class DeliveryActivity extends BaseActivity {
 ////                        finish();
 //                        }
 //                    }, 500);
-                    Toast.makeText(this, list.get(0).getWarehouses().get(0).getName() + getString(R.string.delivery_toast_msg), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, list.get(0).getWarehouses().get(0).getName() + " " + getString(R.string.delivery_toast_msg), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 break;
@@ -316,6 +470,9 @@ public class DeliveryActivity extends BaseActivity {
                 break;
             case R.id.delivery_direct_mail_help_iv:
                 showDialog(getString(R.string.String_direct_mail_1), getString(R.string.dialog_direct_mail_help_msg));
+                break;
+            case R.id.delivery_gift_help_iv:
+                showDialog(getString(R.string.String_direct_fu), getString(R.string.dialog_gift_help_msg));
                 break;
             default:
                 return;
@@ -338,6 +495,19 @@ public class DeliveryActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    public void showFeeDialog(String msg) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setTitle("");
+        builder.setMessage(msg);
+        builder.setNegativeButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
     public void showDialog(String title, String msg) {
@@ -419,8 +589,8 @@ public class DeliveryActivity extends BaseActivity {
             List<CsShipping.Shipping> shippingList = response.getShippingsList();
             List<CsBase.PairIntInt> pairList = response.getPairsList();
 
-            if (shippingList.size() > 0) {
             setListAdapter(shippingList, pairList);
+            if (shippingList.size() > 0) {
 
 
             } else {
@@ -529,13 +699,16 @@ public class DeliveryActivity extends BaseActivity {
         public void init() {
             for (int i = 0; i < shipList.size(); i++) {
                 if (checkedShip != null) {
-                    for (int j = 0; j < checkedShip.size(); j++) {
+//                    checkMap.put(0, true);
+
+                    /*for (int j = 0; j < checkedShip.size(); j++) {
                         if (checkedShip.get(j).getShippingId() == shipList.get(i).getShippingId()) {
+                            position = i;
                             checkMap.put(i, true);
                         } else {
                             checkMap.put(i, false);
                         }
-                    }
+                    }*/
 
                 } else {
                     if (shipList.size() == 1) {
@@ -585,9 +758,10 @@ public class DeliveryActivity extends BaseActivity {
             holder.infoTv.setText(ship.getInfo());
 //            holder.feeTv.setText(getString(R.string.String_order_price, UIUtils.getCurrency(DeliveryActivity.this), ship.getFee()));
             holder.feeTv.setText(UIUtils.getCurrency(DeliveryActivity.this, (float) ship.getFee()));
-            if (checkMap != null) {
+            if (checkMap.size() > 0) {
                 if (checkMap.get(position)) {
                     holder.checkedTv.setChecked(true);
+//                    shipMap.put(position, ship);
                 } else {
                     holder.checkedTv.setChecked(false);
                 }
@@ -672,13 +846,14 @@ public class DeliveryActivity extends BaseActivity {
                 }
             });
 
+            float subtotal = 0.0f;
             List<CsCart.SalesCartItem> list = new ArrayList<>();
             for (int j = 0; j < itemList.size(); j++) {
                 if (warehouse.getWarehouseId() == itemList.get(j).getWarehouseId()) {
                     if (itemList.get(j).getIsSelected()) {
                         LogUtils.d("------id " + itemList.get(j).getWarehouseId() + " tid " + titleLayout.getTag());
                         list.add(itemList.get(j));
-
+                        subtotal += itemList.get(j).getUnitPrice() * itemList.get(j).getQty();
                     } else {
                     }
                 }
@@ -715,7 +890,6 @@ public class DeliveryActivity extends BaseActivity {
 //            shippingTitle = (TextView) freightLayout.findViewById(R.id.shipping_title_tv);
 //            shippingInfo = (TextView) freightLayout.findViewById(R.id.shipping_info_tv);
 //            shippingFee = (TextView) freightLayout.findViewById(R.id.shipping_fee_tv);
-
             final List<CsShipping.Shipping> shippings = new ArrayList<CsShipping.Shipping>();
             double totalFee = 0;
             for (int h = 0; h < pairList.size(); h++) {
@@ -736,32 +910,49 @@ public class DeliveryActivity extends BaseActivity {
                 }
             }
 
-            ListView shipListView = new ListView(this);
-            shipListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            final ShipAdapter shipAdapter = new ShipAdapter(this, shippings, shipList);
-            dutyRate = shippings.get(position).getDutyRate();
-            shipListView.setAdapter(shipAdapter);
-            setListViewHeightBasedOnChildren(shipListView);
-            shipMap.put(warehouse.getWarehouseId(), shippings.get(position));
-            if(shippings.get(position).getIsNeedDuty()){
-                dutyMap.put(warehouse.getWarehouseId(), shippings.get(position).getDutyRate());
-            }
-            shipListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    checkMap.put(position, true);
-                    fee = shippings.get(position).getFee();
-                    mShipping = shippings.get(position);
-                    shipMap.put(warehouse.getWarehouseId(), mShipping);
+            if (shippings.size() == 0 || shippings == null) {
+                shipMap.clear();
+                continue;
+            } else {
+                ListView shipListView = new ListView(this);
+                shipListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                final ShipAdapter shipAdapter = new ShipAdapter(this, shippings, shipList);
+                dutyRate = shippings.get(position).getDutyRate();
+                shipListView.setAdapter(shipAdapter);
+//                shipAdapter.setCheckedAtPosition(position);
+                setListViewHeightBasedOnChildren(shipListView);
+//                shipMap.put(warehouse.getWarehouseId(), shippings.get(position));
+                if (shippings.get(position).getIsNeedDuty()) {
                     dutyMap.put(warehouse.getWarehouseId(), shippings.get(position).getDutyRate());
-                    dutyRate = shippings.get(position).getDutyRate();
-                    shippingDuty = shippings.get(position).getShippingDuty();
-//                    DeliveryActivity.this.shippingList.add(mShipping);
-                    shipAdapter.setCheckedAtPosition(position);
-                    shipAdapter.notifyDataSetChanged();
                 }
-            });
-            commodityLayout.addView(shipListView);
+                final float finalSubtotal = subtotal;
+                final View feeView = LayoutInflater.from(this).inflate(R.layout.delivery_fee_reference, null);
+
+                shipListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if (!TextUtils.isEmpty(shippings.get(position).getAlertMsg())) {
+                            showFeeDialog(shippings.get(position).getAlertMsg());
+                            return;
+                        }
+                        checkMap.put(position, true);
+                        fee = shippings.get(position).getFee();
+                        mShipping = shippings.get(position);
+                        shipMap.put(warehouse.getWarehouseId(), mShipping);
+                        dutyMap.put(warehouse.getWarehouseId(), shippings.get(position).getDutyRate());
+                        showFeeView(shippings.get(position), finalSubtotal, feeView);
+                        dutyRate = shippings.get(position).getDutyRate();
+                        shippingDuty = shippings.get(position).getShippingDuty();
+//                    DeliveryActivity.this.shippingList.add(mShipping);
+                        shipAdapter.setCheckedAtPosition(position);
+                        shipAdapter.notifyDataSetChanged();
+
+                    }
+                });
+                commodityLayout.addView(shipListView);
+//                showFeeView(shippings.get(position), subtotal, feeView);
+                feeView.setVisibility(View.GONE);
+                commodityLayout.addView(feeView);
 
 //            commodityLayout.addView(freightLayout);
 //
@@ -770,7 +961,33 @@ public class DeliveryActivity extends BaseActivity {
 //            } else {
 //                freightLayout.setVisibility(View.GONE);
 //            }
+            }
 
+        }
+    }
+
+    public void showFeeView(CsShipping.Shipping shipping, float subtotal, View feeView) {
+        if (!shipping.getIsNeedDuty()) {
+            feeView.setVisibility(View.GONE);
+        }else {
+            parcelSubtotalQuota = shipping.getParcelSubtotalQuota();
+            isActualValueOutOfRange = subtotal > parcelSubtotalQuota;
+            feeView.setVisibility(View.VISIBLE);
+            TextView actualTv = (TextView) feeView.findViewById(R.id.delivery_actual_fee_tv);
+            TextView actualValueTv = (TextView) feeView.findViewById(R.id.delivery_actual_fee_value_tv);
+            TextView commodityTv = (TextView) feeView.findViewById(R.id.delivery_commodity_fee_tv);
+            TextView commodityValueTv = (TextView) feeView.findViewById(R.id.delivery_commodity_fee_value_tv);
+            TextView freightTv = (TextView) feeView.findViewById(R.id.delivery_freight_fee_tv);
+            TextView freightValueTv = (TextView) feeView.findViewById(R.id.delivery_freight_fee_value_tv);
+
+            actualTv.setText(getString(R.string.package_product_realy_price_note, UIUtils.getCurrency(this, shipping.getParcelSubtotalQuota())));
+            actualValueTv.setText(UIUtils.getCurrency(this, subtotal));
+            // TODO: 2017/8/21 tb fkdbug FU-1611
+            //float actualSubtotal = subtotal * shipping.getDutyRate() / 100;
+            commodityTv.setText(getString(R.string.package_product_tarrif_note, shipping.getDutyRate()));
+            commodityValueTv.setText(UIUtils.getCurrency(this, subtotal * shipping.getDutyRate() / 100));
+            freightTv.setText(getString(R.string.package_shipping_tarrif_note_ver2, shipping.getDutyRate()));
+            freightValueTv.setText(UIUtils.getCurrency(this, shipping.getShippingDuty()));
         }
     }
 
@@ -861,7 +1078,7 @@ public class DeliveryActivity extends BaseActivity {
                 shippingTitle.setText(shipping.getTitle());
                 shippingInfo.setText(shipping.getInfo());
                 String fee = getResources().getString(R.string.String_order_price);
-                fee = UIUtils.getCurrency(DeliveryActivity.this, (float) shipping.getFee()) ;
+                fee = UIUtils.getCurrency(DeliveryActivity.this, (float) shipping.getFee());
                 shippingFee.setText(fee);
                 commodityLayout.addView(freightLayout);
                 CsBase.PairIntInt build = CsBase.PairIntInt.newBuilder().setK(warehouseId).setV(shipping.getShippingId()).build();

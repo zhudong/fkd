@@ -1,6 +1,9 @@
 package com.fuexpress.kr;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,12 +14,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.AnimationBean;
 import com.fuexpress.kr.bean.BottomStateBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.conf.PermissionCode;
@@ -26,12 +31,16 @@ import com.fuexpress.kr.model.RedPointCountManager;
 import com.fuexpress.kr.model.UserManager;
 import com.fuexpress.kr.model.download.UpdateManager;
 import com.fuexpress.kr.ui.activity.AccountSettingActivity;
+import com.fuexpress.kr.ui.activity.bind_module.BindPhoneActivity;
+import com.fuexpress.kr.ui.activity.crowd.CrowdListFragment;
 import com.fuexpress.kr.ui.activity.help_send.ToHelpSendActivity;
 import com.fuexpress.kr.ui.activity.produ_source.ProduSrcMainFragment;
 import com.fuexpress.kr.ui.fragment.HomeFragment;
 import com.fuexpress.kr.ui.fragment.MeFragment;
 import com.fuexpress.kr.ui.fragment.MyNeedFragment;
 import com.fuexpress.kr.ui.fragment.MyPackageFragment;
+import com.fuexpress.kr.ui.uiutils.AnimationUtils;
+import com.fuexpress.kr.ui.view.CustomDialog;
 import com.fuexpress.kr.ui.view.CustomToast;
 import com.fuexpress.kr.ui.view.NoteRadioGroup;
 import com.fuexpress.kr.utils.SPUtils;
@@ -53,6 +62,11 @@ public class MainActivity extends BaseActivity {
     private ImageView mIv_package_red_point;
     FrameLayout mFlResource;
     private FrameLayout flGroup;
+    private FrameLayout fl_home_btn_top;
+    private boolean isShowBtnView = false;
+    private FrameLayout fl_home_button;
+    private ImageView iv_home_btn;
+    private boolean isShowingAnimation = false;
 
 
     @Override
@@ -68,13 +82,23 @@ public class MainActivity extends BaseActivity {
         mIv_package_red_point = (ImageView) mainView.findViewById(R.id.iv_package_red_point);
         mFlResource = (FrameLayout) mainView.findViewById(R.id.fl_resource);
         flGroup = (FrameLayout) mainView.findViewById(R.id.fl_group);
+        fl_home_btn_top = (FrameLayout) mainView.findViewById(R.id.fl_home_btn_top);
+        fl_home_button = (FrameLayout) mainView.findViewById(R.id.fl_home_button);
+        fl_home_button.setOnClickListener(this);
+        iv_home_btn = (ImageView) mainView.findViewById(R.id.iv_home_btn);
         //KLog.i("YDK ,run");
         //    AccountManager.getInstance().login(this);
         //AccountManager.getInstance().getRedPoint();
         //        AccountManager.getInstance().loginByEmail("feicui@qq.com", "111111", null);
+
+        return mainView;
+    }
+
+    public void showHomeTips() {
         boolean isShowTips = (boolean) SPUtils.get(this, Constants.KEY_IS_SHOW_HM_MASK, true);
         //isShowTips = true;
         if (isShowTips) {
+            SPUtils.put(MainActivity.this, Constants.KEY_IS_SHOW_HM_MASK, false);
             final FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
             final View tipsView = View.inflate(this, R.layout.home_fragment_mask, null);
             decorView.addView(tipsView);
@@ -86,23 +110,138 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
-        return mainView;
+    }
+
+    private CustomDialog.Builder dialog;
+
+    public void showDialog() {
+        String dialogConfig = getString(R.string.go_to_bind);
+        String dialogcancle = getString(R.string.no_bind);
+        dialog = new CustomDialog.Builder(this);
+        dialog.setTitle(getString(R.string.String_bind_phone));
+        dialog.setMessage(getString(R.string.bind_ph_dialog_text));
+        dialog.setPositiveButton(dialogConfig, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Toast.makeText(BindingGiftCardActivity.this, "点击了确定", Toast.LENGTH_SHORT).show();
+                //GiftCardManager.getInstance().bindGiftCardRequest(mCardNum);
+                startActivity(new Intent(MainActivity.this, BindPhoneActivity.class));
+                dialog.dismiss();
+            }
+        });
+        dialog.setNegativeButton(dialogcancle, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.create().show();
     }
 
     @Override
     public void initView() {
         initData();
         initListener();
-        //默认主页第一个rb是被选中:
-        mRbgHomeFragment.check(R.id.rb_home);
+
         MPermissions.requestPermissions(this, PermissionCode.readSDcard, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         boolean booleanExtra = getIntent().getBooleanExtra(ConfigManager.KEY_JUMP_SETTING, false);
-        if (booleanExtra) {
+        boolean isJumpMeFrag = getIntent().getBooleanExtra(Constants.KEY_IS_JUMP_MEFRAG, false);
+        if (booleanExtra || isJumpMeFrag) {
             mRbgHomeFragment.check(R.id.rb_me);
-            Intent intent = new Intent(this, AccountSettingActivity.class);
-            intent.putExtra(AccountSettingActivity.KEY_JUMP_PREFERENCE, true);
-            startActivity(intent);
+            if (isJumpMeFrag) showDialog();
+            if (booleanExtra) {
+                Intent intent = new Intent(this, AccountSettingActivity.class);
+                intent.putExtra(AccountSettingActivity.KEY_JUMP_PREFERENCE, true);
+                startActivity(intent);
+            }
+        } else {
+            //默认主页第一个rb是被选中:
+            mRbgHomeFragment.check(R.id.rb_home);
+            showHomeTips();
         }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fl_home_button:
+                operateHomeBtnView(!isShowBtnView);
+                break;
+            case R.id.rl_source:
+                //CustomToast.makeText(this, "我是货源", Toast.LENGTH_SHORT).show();
+                if (!isShowingAnimation) {
+                    if (mFrragmentIndex != 4) {
+                        switchFrag(4);
+                        RadioButton child = (RadioButton) mRbgHomeFragment.findViewById(R.id.rb_source);
+                        child.setChecked(true);
+                    }
+                    operateHomeBtnView(false);
+                }
+
+                break;
+            case R.id.rl_group:
+                if (!isShowingAnimation) {
+                    //CustomToast.makeText(this, "我是拼单", Toast.LENGTH_SHORT).show();
+                    if (mFrragmentIndex != 5) {
+                        switchFrag(5);
+                        RadioButton child = (RadioButton) mRbgHomeFragment.findViewById(R.id.rb_source);
+                        child.setChecked(true);
+                    }
+                    operateHomeBtnView(false);
+                }
+
+                break;
+            case R.id.rl_mask:
+                if (!isShowingAnimation)
+                    operateHomeBtnView(!isShowBtnView);
+                break;
+        }
+    }
+
+    //显示点击按钮之后的两个货源和拼单按钮
+    private void operateHomeBtnView(boolean isShow) {
+        LinearLayout ll_main_btn_contair = (LinearLayout) fl_home_btn_top.findViewById(R.id.ll_main_btn_contair);
+        AnimationBean animationBean = AnimationBean.create().setWantAniView(ll_main_btn_contair).setDuration(250)
+                .setSpan(100).setRotateView(iv_home_btn).setFromRotateAngle(0f).setToRotateAngle(135f);
+        if (isShow) {
+            fl_home_btn_top.setVisibility(View.VISIBLE);
+            fl_home_btn_top.findViewById(R.id.rl_mask).setOnClickListener(this);
+            // TODO: 02/08/2017 动画相关
+            animationBean.setAnimatiorAdapter(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    isShowingAnimation = true;
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    fl_home_btn_top.findViewById(R.id.rl_source).setOnClickListener(MainActivity.this);
+                    fl_home_btn_top.findViewById(R.id.rl_group).setOnClickListener(MainActivity.this);
+                    isShowingAnimation = false;
+                }
+            });
+        } else {
+            // TODO: 02/08/2017 动画相关
+            animationBean.setFromRotateAngle(135f);
+            animationBean.setToRotateAngle(0f);
+            animationBean.setAnimatiorAdapter(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    isShowingAnimation = true;
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    fl_home_btn_top.setVisibility(View.GONE);
+                    isShowingAnimation = false;
+                }
+            });
+
+        }
+        AnimationUtils.doTranslationYAnimation(animationBean, isShow);
+        AnimationUtils.doRotationAnimation(animationBean);
+        isShowBtnView = isShow;
     }
 
     private void initListener() {
@@ -126,9 +265,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.rb_source:
                         mFrragmentIndex = 4;
+                        break;
                     case R.id.rb_group:
-                        // TODO: 01/08/2017 拼单
-
+                        mFrragmentIndex = 5;
                         break;
                     default:
                         break;
@@ -186,6 +325,7 @@ public class MainActivity extends BaseActivity {
                 }
                 transaction.commitAllowingStateLoss();
                 isInSwithch = false;
+                if (index == 0) showHomeTips();
             }
         }, 0);
 
@@ -199,6 +339,7 @@ public class MainActivity extends BaseActivity {
         mFragmentLists.add(new MyPackageFragment());
         mFragmentLists.add(new MeFragment());
         mFragmentLists.add(new ProduSrcMainFragment());
+        mFragmentLists.add(new CrowdListFragment());
         RedPointCountManager.getOrderCount();
         //HelpSignedLocalDataSource.getInstance().initLoaclData();
         MaterialsManager.getInstance().getMaterials();
@@ -278,8 +419,11 @@ public class MainActivity extends BaseActivity {
             if (isSuccess) {
                 BottomStateBean stateBean = (BottomStateBean) event.getParam();
                 showDAndPRedPoint(stateBean.getRequirecount(), stateBean.getParcelcount());
-                mFlResource.setVisibility(stateBean.isShowResource() ? View.VISIBLE : View.GONE);
-                flGroup.setVisibility(stateBean.isShowResource() ? View.VISIBLE : View.GONE);
+                boolean showResource = stateBean.isShowResource();
+                mFlResource.setVisibility(showResource ? View.VISIBLE : View.GONE);
+                flGroup.setVisibility(stateBean.isShowGroup() ? View.VISIBLE : View.GONE);
+                //fl_home_button.setVisibility(showResource ? View.VISIBLE : View.GONE);
+                //flGroup.setVisibility(stateBean.isShowResource() ? View.VISIBLE : View.GONE);
             }
             //CustomToast.makeText(this, "请求需求和包裹数量失败", Toast.LENGTH_SHORT).show();
         }
@@ -297,6 +441,12 @@ public class MainActivity extends BaseActivity {
             app.setQtyCount(count);
         }
 
+        if (event.getType() == BusEvent.GO_CROWD_PAGE) {
+            mFrragmentIndex = 5;
+            switchFrag(mFrragmentIndex);
+            RadioButton child = (RadioButton) mRbgHomeFragment.findViewById(R.id.rb_group);
+            child.setChecked(true);
+        }
     }
 
 

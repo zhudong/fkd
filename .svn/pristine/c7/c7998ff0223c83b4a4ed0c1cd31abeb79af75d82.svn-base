@@ -1,0 +1,812 @@
+package com.fuexpress.kr.ui.activity.package_detail;
+
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.MbaseActivity;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.ParcelItemBean;
+import com.fuexpress.kr.bean.ShareFriendsBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.ShareManager2Friend;
+import com.fuexpress.kr.ui.activity.AddNewAddressActivity;
+import com.fuexpress.kr.ui.activity.AddressManagerActivity;
+import com.fuexpress.kr.ui.activity.ParcelSplitActivity;
+import com.fuexpress.kr.ui.activity.append_parcel.IdCardActivity;
+import com.fuexpress.kr.ui.adapter.ParcelItemAdapter;
+import com.fuexpress.kr.ui.adapter.ParcelItemOrderAdapter;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CustomDialog;
+import com.fuexpress.kr.ui.view.wheel.OpenListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import fksproto.CsAddress;
+import fksproto.CsParcel;
+
+public class PackageDetailActivity extends MbaseActivity<PackageDetailContract.Presenter, PackageDetailContract.Model> implements PackageDetailContract.View {
+
+    public static final String FROM_WHERE = "from_where";
+    public static final String PARCEL_ID = "parcel_id";
+    public static final String PARCEL_BEAN = "parcel_beal";
+    /*foot*/
+    @BindView(R.id.tv_transport_type)
+    TextView mTvTransportType;
+    @BindView(R.id.tv_transport_detail)
+    TextView mTvTransportDetail;
+    @BindView(R.id.tv_address_name)
+    TextView mTvAddressName;
+    @BindView(R.id.tv_address_detail_foot)
+    TextView mTvAddressDetailFoot;
+    @BindView(R.id.ll_comment_container)
+    LinearLayout mLlCommentContainer;
+    @BindView(R.id.ll_comment_all)
+    LinearLayout mLlCommentAll;
+    /*header*/
+    @BindView(R.id.tv_package_number)
+    TextView mTvPackageNumber;
+    @BindView(R.id.tv_package_type)
+    TextView mTvPackageType;
+    @BindView(R.id.tv_in_storage_time)
+    TextView mTvInStorageTime;
+    @BindView(R.id.tv_out_storage_time)
+    TextView mTvOutStorageTime;
+    @BindView(R.id.tv_storage_name)
+    TextView mTvStorageName;
+    @BindView(R.id.tv_is_default)
+    TextView mTvIsDefault;
+    @BindView(R.id.tv_person_name)
+    TextView mTvPersonName;
+    /* @BindView(R.id.tv_address_detail)
+     TextView mTvAddressDetail;*/
+    @BindView(R.id.ll_transport_container)
+    LinearLayout mLlTransportContainer;
+    @BindView(R.id.tv_apply_price_text)
+    TextView mTvApplyPriceText;
+    @BindView(R.id.tv_apply_price_notice)
+    TextView mTvApplyPriceNotice;
+    @BindView(R.id.tv_apply_price)
+    TextView mTvApplyPrice;
+    @BindView(R.id.tv_transport_insurance_text)
+    TextView mTvTransportInsuranceText;
+    @BindView(R.id.tv_transport_insurance_notice)
+    TextView mTvTransportInsuranceNotice;
+    @BindView(R.id.tv_transport_insurance)
+    TextView mTvTransportInsurance;
+    @BindView(R.id.rl_insurance)
+    RelativeLayout mRlInsurance;
+    @BindView(R.id.ll_transport_all)
+    LinearLayout mLlTransportAll;
+    @BindView(R.id.tv_account_balance)
+    TextView mTvAccountBalance;
+    //    @BindView(R.id.tv_account_balance_pay_type)
+    TextView mTvAccountBalancePayType;
+    @BindView(R.id.img_is_choice)
+    ImageView mImgIsChoice;
+    @BindView(R.id.ll_balance_container)
+    RelativeLayout mLlBalanceContainer;
+    @BindView(R.id.rl_counter)
+    RelativeLayout mRlCounter;
+    @BindView(R.id.tv_pavkage_item_count)
+    TextView mTvPavkageItemCount;
+    @BindView(R.id.tv_pavkage_real_price)
+    TextView mTvRealPrice;
+    @BindView(R.id.tv_pavkage_apply_price)
+    TextView mTvPavkageApplyPrice;
+    @BindView(R.id.rl_customer_address)
+    RelativeLayout mRlCustomerAddress;
+    @BindView(R.id.tv_forecast_carriage)
+    TextView mTvForecastCarriage;
+    @BindView(R.id.tv_prospect_price)
+    TextView mTvProspectPrice;
+    @BindView(R.id.tv_prospect_price_des)
+    TextView mTvProspectPriceDes;
+    @BindView(R.id.tv_forecast_weight)
+    TextView mTvForecastWeight;
+    @BindView(R.id.tv_prospect_weight)
+    TextView mTvProspectWeight;
+    @BindView(R.id.tv_commint_send_package)
+    TextView mTvCommintSendPackage;
+    @BindView(R.id.rl_parcle_detail_bottom)
+    RelativeLayout mRlParcleDetailBottom;
+    //    @BindView(R.id.tv_Coupon)
+    TextView tvCoupon;
+    @BindView(R.id.tv_realy_price_notice)
+    TextView mTvRealyPriceNotice;
+    @BindView(R.id.tv_product_price)
+    TextView mTvProductPrice;
+    @BindView(R.id.tv_product_tarrif_notice)
+    TextView mTvProductTarrifNotice;
+    @BindView(R.id.tv_product_tarrif_price)
+    TextView mTvProductTarrifPrice;
+    @BindView(R.id.tv_shipping_tarrif_notice)
+    TextView mTvShippingTarrifNotice;
+    @BindView(R.id.tv_shipping_tarrif_price)
+    TextView mTvShippingTarrifPrice;
+    @BindView(R.id.rl_tariff)
+    RelativeLayout mRlTariff;
+    @BindView(R.id.tv_id_card_name)
+    TextView mTvIdCardName;
+    @BindView(R.id.tv_trace)
+    TextView mTvTrace;
+    @BindView(R.id.tv_split_parcel)
+    TextView mTvSplitParcel;
+    @BindView(R.id.tv_insurance_parcel)
+    TextView mTvInsuranceParcel;
+    @BindView(R.id.tv_shipping_des)
+    TextView mTvShippingDes;
+    @BindView(R.id.tl_to_input_id)
+    RelativeLayout mTlToInputId;
+    @BindView(R.id.rl_gift_address)
+    RelativeLayout mRlGiftAddress;
+    @BindView(R.id.img_arrow_address_right)
+    ImageView mImgArrowAddressRight;
+
+    private ListView mBody;
+    private View mFoot;
+    private String sWaitReceive;
+    private String sSended;
+    private String sToSend;
+    private String sWaitOut;
+    private boolean mNeedIdCard;
+    private String sTopay;
+    private float mPureFee;
+    private String mTitleName;
+    private String mFromWhere;
+    private ShareManager2Friend mShareManager2Friend;
+    private CsAddress.CustomerAddress mCustomerAddress;
+    private int mGiftAddressCode = 1003;
+
+    @Override
+    protected int getViewResId() {
+        return R.layout.activity_package_detail;
+    }
+
+    @Override
+    public View setInitView() {
+        super.setInitView();
+        mBody = (ListView) mRootView.findViewById(R.id.lv_body);
+        mBody.addHeaderView(View.inflate(this, R.layout.view_package_detail_header, null));
+        mFoot = View.inflate(this, R.layout.view_parcel_detail_foot, null);
+        mBody.addFooterView(mFoot);
+
+        ArrayList<ParcelItemBean> data = new ArrayList<>();
+        data.add(new ParcelItemBean());
+        return mRootView;
+    }
+
+    @Override
+    public void initView() {
+        hintIVRight();
+        long parcelId = getIntent().getLongExtra(PARCEL_ID, 0);
+//        String fromWhere = getString(R.string.main_package_tab_string);
+        mFromWhere = getIntent().getStringExtra(FROM_WHERE);
+        if (TextUtils.isEmpty(mFromWhere)) mFromWhere = getString(R.string.main_package_tab_string);
+
+        Bundle bundleExtra = getIntent().getBundleExtra(PARCEL_BEAN);
+        mTitleName = "";
+        sWaitReceive = getString(R.string.String_waite_receive);
+        sWaitOut = getString(R.string.String_waite_out);
+        sSended = getString(R.string.String_sended);
+        sToSend = getString(R.string.String_parcel_goto_send);
+        sTopay = getString(R.string.String_parcel_goto_pay);
+
+        if (bundleExtra != null) {
+            CsParcel.Parcel parcel = (CsParcel.Parcel) bundleExtra.getSerializable(PARCEL_BEAN);
+        }
+        mPresenter = new PackageDeatilPresent(parcelId);
+        mModel = new PackageDetailModel();
+        mPresenter.setVM(this, mModel);
+    }
+
+    public void showTitle(CsParcel.Parcel parcel) {
+        int status = parcel.getState();
+        switch (status) {
+         /* PARCEL_STATE_SUBMITTED     = 0;//已提交
+                            PARCEL_STATE_PAYED         = 1;//待入库
+                            PARCEL_STATE_INSTORED      = 2;//已入库
+                            PARCEL_STATE_NOTICED       = 3;//待出库
+                            PARCEL_STATE_CHECKED       = 4;//已审核
+                            PARCEL_STATE_SHIPPED       = 5;//已发货*/
+            case CsParcel.ParcelState.PARCEL_STATE_SUBMITTED_VALUE:
+                mTitleName = sTopay;
+                mRlParcleDetailBottom.setVisibility(View.VISIBLE);
+                break;
+            case CsParcel.ParcelState.PARCEL_STATE_PAYED_VALUE:
+                mTitleName = sWaitReceive;
+                break;
+            case CsParcel.ParcelState.PARCEL_STATE_INSTORED_VALUE:
+                mTitleName = sToSend;
+                mRlParcleDetailBottom.setVisibility(View.VISIBLE);
+                break;
+            case CsParcel.ParcelState.PARCEL_STATE_NOTICED_VALUE:
+                mTitleName = sWaitOut;
+                break;
+            case CsParcel.ParcelState.PARCEL_STATE_CHECKED_VALUE:
+                mTitleName = sWaitOut;
+                break;
+            case CsParcel.ParcelState.PARCEL_STATE_SHIPPED_VALUE:
+                mTitleName = sSended;
+                break;
+        }
+        initTitle(mFromWhere, mTitleName, "");
+        hintIVRight();
+    }
+
+
+    public void hintHeader() {
+        mRlCustomerAddress.setVisibility(View.GONE);
+        mLlTransportAll.setVisibility(View.GONE);
+        mRlCounter.setVisibility(View.GONE);
+        mRlParcleDetailBottom.setVisibility(View.GONE);
+    }
+
+    public void setTraceVisibility(boolean visibility, List<CsParcel.ParcelItemList> items) {
+
+        mTvTrace.setVisibility(visibility ? View.VISIBLE : View.INVISIBLE);
+        mTvTrace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.traceShiping();
+            }
+        });
+        int size = 0;
+        for (CsParcel.ParcelItemList itemList : items) {
+            size += itemList.getQty();
+        }
+        if (size < 2
+                || mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_TRANSPORT_VALUE
+                || mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE)
+            return;
+        final CsParcel.Parcel parcel = mPresenter.getParcel();
+        switch (parcel.getState()) {
+            case CsParcel.ParcelState.PARCEL_STATE_SUBMITTED_VALUE:
+            case CsParcel.ParcelState.PARCEL_STATE_INSTORED_VALUE:
+                mTvSplitParcel.setVisibility(View.VISIBLE);
+                mTvSplitParcel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toParcelSplit(parcel);
+                    }
+                });
+                break;
+        }
+    }
+
+    private void toParcelSplit(CsParcel.Parcel parcel) {
+        Intent intent = new Intent(PackageDetailActivity.this, ParcelSplitActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ParcelSplitActivity.PARCEL_IREM, parcel);
+        intent.putExtra(ParcelSplitActivity.PARCEL_IREM, bundle);
+        startActivity(intent);
+    }
+
+    public void hitFoot() {
+        mRlParcleDetailBottom.setVisibility(View.VISIBLE);
+        mBody.removeFooterView(mFoot);
+        TextView textView = new TextView(this);
+        textView.setBackgroundColor(getResources().getColor(R.color.default_bg));
+        int height = UIUtils.dip2px(10);
+        textView.setHeight(height);
+        mBody.addFooterView(textView);
+    }
+
+    public void showComment(List<CsParcel.ParcelMessage> comments) {
+        if (comments == null || comments.size() <= 0) {
+            mLlCommentAll.setVisibility(View.GONE);
+            return;
+        } else {
+            mLlCommentAll.setVisibility(View.VISIBLE);
+        }
+        mLlCommentContainer.removeAllViews();
+        for (int i = 0; i < comments.size(); i++) {
+            CsParcel.ParcelMessage message = comments.get(i);
+            View commentView = View.inflate(this, R.layout.item_parcel_comment, null);
+            TextView name = (TextView) commentView.findViewById(R.id.tv_comment_name);
+            TextView time = (TextView) commentView.findViewById(R.id.tv_comment_time);
+            TextView content = (TextView) commentView.findViewById(R.id.tv_comment_content);
+            name.setText(message.getFromRole());
+            time.setText(message.getCreateTime());
+            content.setText(message.getContent());
+            mLlCommentContainer.addView(commentView);
+        }
+    }
+
+    public void showHeader(CsParcel.Parcel parcel, String wareHouse, boolean outStore) {
+
+    /*    PARCEL_TYPE_NONE       = 0;
+        PARCEL_TYPE_ORDER      = 1;//订单包裹
+        PARCEL_TYPE_TRANSPORT  = 2;//转运包裹
+        PARCEL_TYPE_DIRECT     = 3;//直邮包裹
+*/
+        String parcleType = "";
+        if (parcel != null) {
+            mTvPackageNumber.setText(getString(R.string.package_number) + parcel.getParcelNumber());
+            switch (parcel.getType()) {
+                case CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE:
+                case 5://第三方订单包裹
+                    mTvCommintSendPackage.setText(getString(R.string.String_submit_send));
+                    parcleType = getString(R.string.package_type_order);
+                    break;
+                case CsParcel.ParcelType.PARCEL_TYPE_TRANSPORT_VALUE:
+                    parcleType = getString(R.string.package_type_transport);
+                    break;
+                case CsParcel.ParcelType.PARCEL_TYPE_DIRECT_VALUE:
+                    parcleType = getString(R.string.package_type_direct);
+                    break;
+                case CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE:
+                    mTvCommintSendPackage.setText(getString(R.string.String_submit_send));
+                    parcleType = getString(R.string.parcel_type_gift);
+                    break;
+            }
+            mTvPackageType.setText(getString(R.string.package_type) + parcleType);
+            final String instoreTime = parcel.getInstoreTime();
+//            final String instoreTime = "";
+            if ("".equals(instoreTime)) {
+                mTvInStorageTime.setVisibility(View.GONE);
+            }
+
+            if (outStore) {
+                mTvOutStorageTime.setVisibility(View.VISIBLE);
+                mTvOutStorageTime.setText(getString(R.string.package_out_house_time) + parcel.getOutstoreTime());
+            }
+            mTvInStorageTime.setText(getString(R.string.package_in_house_time) + instoreTime);
+
+            if (wareHouse != null) {
+                mTvStorageName.setText(getString(R.string.package_house_location) + wareHouse);
+            }
+        }
+    }
+
+
+    public void showCustomerAddress(String topText, String addressText, int id) {
+//        mTvPersonName.setText(topText);
+//        String region = AssetFileManager.getInstance().readFile(this, address.getRegioncode(), AssetFileManager.ADDRESS_TYPE);
+//        String detail = (region + "," + address.getStreet());
+//        mTvAddressDetail.setText(addressText);
+        String detail = topText + "\n";
+        detail += addressText;
+        showAddress(detail);
+    }
+
+    public void showCustomerAddress(CsAddress.CustomerAddress address) {
+        mCustomerAddress = address;
+        if (mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE & address.getAddressId() == 0) {
+            mRlGiftAddress.setVisibility(View.VISIBLE);
+            mRlCustomerAddress.setClickable(false);
+            mImgArrowAddressRight.setVisibility(View.GONE);
+        }
+
+        String detail = address.getName() + "," + address.getPhone() + "  " + address.getPostcode() + "\n";
+        detail += address.getStreet() + "," + (address.getRegion());
+//        mTvAddressDetail.setText(detail);
+        showAddress(detail);
+
+    }
+
+    public void showAddress(String address) {
+        if (address == null) address = "";
+        if (TextUtils.isEmpty(address.replaceAll(",", "").replaceAll("\n", ""))) {
+            mTvPersonName.setText(getString(R.string.String_parcel_item_address_tips));
+        } else {
+            SpannableStringBuilder ssb = new SpannableStringBuilder(address);
+            ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.black_parcel)), 0, address.indexOf("\n"), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            mTvPersonName.setText(ssb);
+        }
+    }
+
+    public void showShippingMethods(List<CsParcel.MerchantParcelShippingMethodList> methods) {
+        TransportClickListener listener = new TransportClickListener();
+        mLlTransportContainer.removeAllViews();
+        if (methods != null) {
+            for (int i = 0; i < methods.size(); i++) {
+                ViewGroup inflate = (ViewGroup) View.inflate(this, R.layout.view_item_transport_parcel, null);
+                inflate.setOnClickListener(listener);
+                TextView child2 = (TextView) inflate.findViewById(R.id.tv_transport_des);
+                TextView child3 = (TextView) inflate.findViewById(R.id.tv_transport_detail);
+                // TODO: 2017/8/22  
+                CsParcel.MerchantParcelShippingMethodList shippingMethod = methods.get(i)/*.toBuilder().setIsneedidcard(1).setIsNeedIdcardImage(1).build()*/;
+                String shippingmethodstring = shippingMethod.getShippingmethodstring();
+                String[] split = shippingmethodstring.split("\n");
+                String title = "";
+                String content = "";
+                if (split.length >= 1) {
+                    title = split[0];
+                    if (split.length >= 2) {
+                        for (int j = 1; j < split.length; j++) {
+                            if (j == split.length - 1) {
+                                content += split[j];
+                            } else {
+                                content += split[j] + "\n";
+                            }
+                        }
+                    }
+                }
+                child2.setText(title);
+                child3.setText(content);
+                inflate.setTag(shippingMethod);
+                mLlTransportContainer.addView(inflate);
+                if (i == 0)
+                    inflate.callOnClick();
+            }
+        }
+    }
+
+
+    @Override
+    public float getPureFee() {
+        return mPureFee;
+    }
+
+    public void showBalanceAndPayType(final String result) {
+        UIUtils.postTaskSafely(new Runnable() {
+            @Override
+            public void run() {
+                mTvAccountBalance.setVisibility(View.VISIBLE);
+                mTvAccountBalance.setText(result);
+            }
+        });
+
+    }
+
+
+    public void showProductInfo(int count, float declarePrice) {
+        mTvPavkageApplyPrice.setText(
+                getString(R.string.package_declare_price, UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), declarePrice)));
+        mPresenter.getParcel().getSubtotal();
+        mTvRealPrice.setText(getString(R.string.package_price_realy, UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), mPresenter.getParcel().getSubtotal())));
+        if (mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE |
+                mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE |
+                mPresenter.getParcel().getType() == 5) {
+            mTvRealPrice.setVisibility(View.VISIBLE);
+        } else {
+            mTvRealPrice.setVisibility(View.GONE);
+        }
+        if (count != 0) {
+            mTvPavkageItemCount.setText(
+                    getString(R.string.package_product_count, count));
+        }
+    }
+
+    public void showTransportInfo(String name, String detail) {
+        mTvTransportType.setText(name);
+        mTvTransportDetail.setText(detail);
+    }
+
+    public String getTitel() {
+        return mTitleName;
+    }
+
+    /*  PARCEL_TYPE_NONE       = 0;
+      PARCEL_TYPE_ORDER      = 1;//订单包裹
+      PARCEL_TYPE_TRANSPORT  = 2;//转运包裹
+      PARCEL_TYPE_DIRECT     = 3;//直邮包裹
+      PARCEL_TYPE_GIFT       = 4;//礼品包裹*/
+    @Override
+    public void setParcelsItme(List<CsParcel.ParcelItemList> itemBeans, int parcelType) {
+//        == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE | mParcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_DIRECT_VALUE
+        switch (parcelType) {
+            case CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE:
+            case CsParcel.ParcelType.PARCEL_TYPE_DIRECT_VALUE:
+            case CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE:
+            case 5://第三方订单包裹
+                mBody.setAdapter(new ParcelItemOrderAdapter(this, itemBeans));
+                break;
+            case CsParcel.ParcelType.PARCEL_TYPE_TRANSPORT_VALUE:
+                mBody.setAdapter(new ParcelItemAdapter(this, itemBeans));
+                break;
+        }
+    }
+
+    public void showParcelAddress(CsAddress.CustomerAddress address) {
+        mTvAddressName.setText(address.getName() + "," + address.getPhone());
+        String detail = address.getStreet() + "\n" + (address.getRegion());
+        mTvAddressDetailFoot.setText(detail);
+    }
+
+
+    public void showEstimatePrice(float price) {
+        mTvProspectPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), price));
+    }
+
+    public void showEstimateWeight(float weight) {
+        String text = getString(R.string.package_weight, weight) + getString(R.string.package_weight_tips);
+        int start = text.indexOf(getString(R.string.package_weight_tips));
+        int end = start + getString(R.string.package_weight_tips).length();
+
+        SpannableStringBuilder ssb = new SpannableStringBuilder(text);
+        ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.gray_999)), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        mTvProspectWeight.setText(ssb);
+
+    }
+
+    public void showInsurance(CsParcel.MerchantParcelShippingMethodList shippingMethod) {
+        if (mPresenter.getParcel().getState() != CsParcel.ParcelState.PARCEL_STATE_INSTORED_VALUE || shippingMethod.getValuealert() == 0) {
+            mTvInsuranceParcel.setVisibility(View.GONE);
+            return;
+        }
+
+        mTvInsuranceParcel.setVisibility(View.VISIBLE);
+        mTvInsuranceParcel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insurance();
+            }
+        });
+    }
+
+    int declareCode = 93;
+
+    public void insurance() {
+        Intent intent = new Intent(PackageDetailActivity.this, InsuranceDeclarationActivity.class);
+        intent.putExtra(InsuranceDeclarationActivity.CURRENCY_CODE, mPresenter.getCurrencyCode());
+        intent.putExtra(InsuranceDeclarationActivity.PARCLE_ID, mPresenter.getParcel().getParcelId());
+        PackageDetailActivity.this.startActivityForResult(intent, declareCode);
+    }
+
+    @OnClick(R.id.rl_customer_address)
+    public void pickAddress() {
+        mPresenter.choiceAddress();
+    }
+
+    @OnClick(R.id.tv_commint_send_package)
+    public void sendPackage() {
+        if (mNeedIdCard) {
+            if (mPresenter.checkIdCard()) {
+                mPresenter.toPay();
+            } /*else {
+                Toast.makeText(this, R.string.parcel_need_input_idcard, Toast.LENGTH_SHORT).show();
+            }*/
+        } else {
+            mPresenter.toPay();
+        }
+
+    }
+
+
+    @OnClick(R.id.rl_counter)
+    public void pickPayType() {
+        mPresenter.switchPayType();
+    }
+
+    @OnClick(R.id.tl_to_input_id)
+    public void inputIdNumber() {
+        mPresenter.inputIdNumber();
+    }
+
+    @OnClick(R.id.tv_edit_address)
+    public void onClick(View view) {
+        super.onClick(view);
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.tv_edit_address:
+                intent = new Intent(this, AddNewAddressActivity.class);
+                intent.putExtra(AddNewAddressActivity.KEY_PARCEL_ID, mPresenter.getParcel().getParcelId());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("address", mCustomerAddress);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, mGiftAddressCode);
+                break;
+        }
+    }
+
+    class TransportClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) v.getTag();
+            for (int i = 0; i < mLlTransportContainer.getChildCount(); i++) {
+                View child = mLlTransportContainer.getChildAt(i);
+                RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+                radioButton.setChecked(false);
+            }
+            mPresenter.selectShippingMethod(shippingMethod);
+//            showInsurance(shippingMethod);
+        }
+    }
+
+    public void showShippingMethodInsurance(int isShow, float maxdeclaredvalue, float declareValue, float premiumrate, float premium, float shippingid, CsParcel.SelectShippingMethodReponse response) {
+        CsParcel.MerchantParcelShippingMethodList currentShippingMethod = null;
+        for (int i = 0; i < mLlTransportContainer.getChildCount(); i++) {
+            View child = mLlTransportContainer.getChildAt(i);
+            RadioButton radioButton = (RadioButton) child.findViewById(R.id.rb_check_state);
+            radioButton.setChecked(false);
+            CsParcel.MerchantParcelShippingMethodList shippingMethod = (CsParcel.MerchantParcelShippingMethodList) child.getTag();
+
+            if (shippingid == shippingMethod.getParcelshippingmethodid()) {
+                radioButton.setChecked(true);
+                currentShippingMethod = shippingMethod;
+            }
+        }
+        if (isShow == 1) {
+            mRlInsurance.setVisibility(View.VISIBLE);
+            mTvApplyPriceNotice.setText(getString(R.string.package_apply_price_detail, UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), maxdeclaredvalue)));
+            mTvApplyPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), declareValue));
+            mTvTransportInsuranceNotice.setText(getString(R.string.package_shipping_insurance_detail, premiumrate));
+            mTvTransportInsurance.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), premium));
+        } else {
+            mRlInsurance.setVisibility(View.GONE);
+        }
+
+        if (currentShippingMethod != null && response != null) {
+            boolean show = currentShippingMethod.getIsneedidcard() == 1;
+            mTlToInputId.setVisibility(show ? View.VISIBLE : View.GONE);
+            mNeedIdCard = show;
+            if (currentShippingMethod.getIsneedduty() == 0) {
+                mRlTariff.setVisibility(View.GONE);
+                return;
+            }
+            mRlTariff.setVisibility(View.VISIBLE);
+            mTvRealyPriceNotice.setText(getResources().getString(R.string.package_product_realy_price_note, UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), currentShippingMethod.getParcelsubtotalquota())));
+            mTvProductPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), mPresenter.getParcel().getSubtotal()));
+            mTvProductTarrifNotice.setText(getString(R.string.package_product_tarrif_note, response.getDuty()));
+            mTvProductTarrifPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), response.getProductduty()));
+            mTvShippingTarrifNotice.setText(getString(R.string.package_shipping_tarrif_note, response.getDuty()));
+            mTvShippingTarrifPrice.setText(UIUtils.getCurrency(this, mPresenter.getCurrencyCode(), response.getShippingduty()));
+        }
+    }
+
+    @Override
+    public void showIdNumber(boolean show, String number) {
+//        mNeedIdCard = show;
+        mTlToInputId.setVisibility(show ? View.VISIBLE : View.GONE);
+        mTvIdCardName.setText(number);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.ADDRESS_REQUEST_CODE && resultCode == AddressManagerActivity.AddressresultCode) {
+            if (data != null) {
+                String topString = data.getStringExtra(AddressManagerActivity.topText1);
+                String addressString = data.getStringExtra(AddressManagerActivity.addressText);
+                int addressID = data.getIntExtra(AddressManagerActivity.addressId, 0);
+                mPresenter.setAddress(topString, addressString, addressID);
+                CsAddress.CustomerAddress customerAddress = (CsAddress.CustomerAddress) data.getExtras().getSerializable("address");
+                mPresenter.setIdInfo(customerAddress.getIdCard(), customerAddress.getIdcardfrontimage(), customerAddress.getIdcardbackimage());
+                mTvIdCardName.setText(customerAddress.getIdCard());
+
+            }
+        }
+        if (requestCode == 0 && resultCode == Constants.PAYMENT_REQUEST_CODE && data != null) {
+            {
+                mPresenter.setCouponsAndCalc(true);
+            }
+        }
+
+        if (requestCode == 11 && resultCode == Activity.RESULT_OK) {
+            String idCardFront = data.getStringExtra(IdCardActivity.ID_CARD_FRONT);
+            String idCardBack = data.getStringExtra(IdCardActivity.ID_CARD_BACK);
+            String idCardNumber = data.getStringExtra(IdCardActivity.ID_CARD_NUMBER);
+            mTvIdCardName.setText(idCardNumber);
+            mPresenter.setIdInfo(idCardNumber, idCardFront, idCardBack);
+        }
+
+        if (requestCode == mGiftAddressCode | requestCode == declareCode) {
+            if (resultCode == Activity.RESULT_OK)
+                mPresenter.onStart();
+        }
+
+        if (mShareManager2Friend != null)
+            mShareManager2Friend.onActivityResult(requestCode, resultCode, data);
+
+
+    }
+
+    public void showParcleDialog(String message, final int type, final String cancelText) {
+        final String split_text = getString(R.string.package_split_parcel);
+        final String re_declaration = getString(R.string.package_re_declaration);
+        String positiveString = getString(R.string.confirm);
+        switch (type) {
+            case 1:
+                positiveString = split_text;
+                break;
+            case 2:
+                positiveString = re_declaration;
+                break;
+        }
+
+        final CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.create().setCanceledOnTouchOutside(false);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveString, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (type) {
+                    case 1:
+                        toParcelSplit(mPresenter.getParcel());
+                        break;
+                    case 2:
+                        insurance();
+                        break;
+                }
+                dialog.dismiss();
+            }
+        });
+        if (!"".equals(cancelText)) {
+            builder.setNegativeButton(cancelText, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        CustomDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    public void showFuGiftShipping() {
+        mLlTransportContainer.removeAllViews();
+        mRlCustomerAddress.setVisibility(View.GONE);
+        mRlCounter.setVisibility(View.GONE);
+        mTvShippingDes.setText(getString(R.string.send_friend_for_address));
+        mTvShippingDes.setTextColor(Color.BLACK);
+        mTvCommintSendPackage.setEnabled(false);
+
+        OpenListView listView = new OpenListView(this);
+        View divider = new View(this);
+        divider.setBackgroundResource(R.color.divide_line);
+        mLlTransportContainer.addView(divider, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIUtils.dip2px(1)));
+        mLlTransportContainer.addView(listView);
+        mShareManager2Friend = new ShareManager2Friend(this);
+        Integer[] shareMethods = new Integer[]{ShareManager2Friend.PHONEBOOK, ShareManager2Friend.SMS, ShareManager2Friend.WECHAT, ShareManager2Friend.QQ, ShareManager2Friend.MESSENGER};
+        mShareManager2Friend.setmMethods(Arrays.asList(shareMethods));
+        mShareManager2Friend.initView(listView, this);
+        ShareFriendsBean response = new ShareFriendsBean();
+        response.setTitle(getString(R.string.share_friend_title));
+        response.setInfo(getString(R.string.share_friend_info));
+//        String url = "https://github.com/features";
+//        response.setUrl(url);
+        response.setUrl(mPresenter.getParcel().getInitaddressurl());
+        mShareManager2Friend.setShareInfo(response);
+    }
+
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.PAY_MENT_RESULT && event.getStrParam().equals(PackageDetailContract.Presenter.mParcelName)) {
+            SysApplication.mCurrentRequestPayment = "";
+            if (mPresenter.getParcel().getType() == CsParcel.ParcelType.PARCEL_TYPE_ORDER_VALUE) {
+                mPresenter.getOrderParcelUseCase().paySuccess(event.getBooleanParam());
+            } else {
+                closeLoading();
+                mPresenter.submitSucess(event.getBooleanParam());
+            }
+        }
+
+        if (event.getType() == BusEvent.REFRESH_TOSEND_PARCEL) {
+            if (event.getmLongParam() == mPresenter.getParcel().getParcelId())
+                finish();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        closeLoading();
+    }
+}

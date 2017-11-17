@@ -1,0 +1,373 @@
+package com.fuexpress.kr.ui.view;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.TranslateManager;
+import com.fuexpress.kr.ui.activity.my_order.OrderAll;
+import com.fuexpress.kr.ui.activity.order_detail.OrderDetailPayedActivity;
+import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
+import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fksproto.CsParcel;
+
+/**
+ * Created by andy on 2017/1/18.
+ */
+public class ParcelItemView2 extends LinearLayout {
+    @BindView(R.id.img_parcle_item_icon)
+    ImageView mImgParcleItemIcon;
+    @BindView(R.id.tv_item_name)
+    TextView mTvItemName;
+    @BindView(R.id.tv_where_buy)
+    TextView mTvWhereBuy;
+    @BindView(R.id.tv_size)
+    TextView mTvSize;
+    @BindView(R.id.tv_parcle_state)
+    TextView mTvParcleState;
+    @BindView(R.id.tv_item_price)
+    TextView mTvItemPrice;
+    @BindView(R.id.tv_korea_color)
+    TextView mTvKoreaColor;
+    @BindView(R.id.ll_top)
+    LinearLayout mLlTop;
+    @BindView(R.id.tv_item_count)
+    TextView mTvItemCount;
+    @BindView(R.id.tv_merchant_message)
+    TextView mTvMerchantMessage;
+    @BindView(R.id.tv_korea_order)
+    TextView mTvKoreaOrder;
+    @BindView(R.id.order_message)
+    TextView mTvOrderMesage;
+    @BindView(R.id.auto_translate_tv)
+    TextView mAutoTranslateTv;
+    @BindView(R.id.message_3_layout)
+    RelativeLayout mMessage3Layout;
+    @BindView(R.id.ll_other)
+    LinearLayout mLlOther;
+    @BindView(R.id.img_translate)
+    ImageView mImgTranslate;
+    @BindView(R.id.devide)
+    TextView mTvDevide;
+    @BindView(R.id.tv_order_number)
+    TextView mTvOrderNumber;
+    private String sAttendWarehouse;
+    private String sWaiteSend;
+    private String sHasSended;
+    private String sWhere;
+    private String sSize;
+    private String sState;
+    private String sX;
+    private static ArrayMap<String, String> translatedMap = new ArrayMap<>();
+    private static List<Long> translatedID = new ArrayList<>();
+    private RotateAnimation mRotateAnimation;
+    private String mOrderMessage;
+    private CsParcel.ParcelItemList mItem;
+
+    public ParcelItemView2(Context context) {
+        this(context, null);
+    }
+
+    public ParcelItemView2(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ParcelItemView2(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView();
+    }
+
+    private void initView() {
+        inflate(getContext(), R.layout.view_parcel_item_gift, this);
+        sAttendWarehouse = getContext().getString(R.string.package_attend_Warehouse);
+        sWaiteSend = getContext().getString(R.string.package_waite_send);
+        sHasSended = getContext().getString(R.string.package_has_sended);
+        sWhere = getContext().getString(R.string.String_cart_buyfrom);
+        sSize = getContext().getString(R.string.String_cart_size);
+        sState = getContext().getString(R.string.package_item_state);
+        sX = getContext().getString(R.string.package_cheng);
+        mOrderMessage = getContext().getString(R.string.String_details_order_note_02);
+        ButterKnife.bind(this);
+    }
+
+
+    private void setTranslateText(String order, String message) {
+        if (!TextUtils.isEmpty(order)) {
+            mTvKoreaOrder.setText(order);
+            if (mTranState) {
+                String tr = translatedMap.get(order);
+                String s = (!TextUtils.isEmpty(tr)) ? tr : order;
+                mTvKoreaOrder.setText(s);
+            }
+        }
+
+        if (!TextUtils.isEmpty(message)) {
+            mTvMerchantMessage.setText(message);
+            if (mTranState) {
+                String tr = translatedMap.get(message);
+                String s = (!TextUtils.isEmpty(tr)) ? tr : message;
+                mTvMerchantMessage.setText(s);
+            }
+        }
+
+
+        if (mTranState) {
+            mAutoTranslateTv.setText(getContext().getString(R.string.view_original));
+        } else {
+            mAutoTranslateTv.setText(getContext().getString(R.string.auto_translate));
+        }
+
+    }
+
+    public void setItem(CsParcel.ParcelItemList item) {
+        loading = false;
+        mItem = item;
+        initState(mItem);
+        mTvOrderNumber.setText(getResources().getString(R.string.gift_card_order_id_title) + ":" + item.getOrderNumber());
+
+        mMessage3Layout.setOnClickListener(new TranslateListener(item));
+        mTvItemName.setText(item.getName());
+        mTvItemCount.setText(sX + " " + item.getQty() + "");
+        mTvOrderMesage.setText(mOrderMessage + " " + item.getMessage());
+        mTvOrderMesage.setVisibility(TextUtils.isEmpty(item.getMessage()) ? View.GONE : View.VISIBLE);
+
+
+        boolean emptyKoreaOrder = TextUtils.isEmpty(item.getKoreaorder());
+        boolean emptyMessage = TextUtils.isEmpty(item.getMessage());
+        boolean bothNo = emptyKoreaOrder && emptyMessage;
+        ((LinearLayout) mTvMerchantMessage.getParent()).setVisibility(emptyMessage ? View.GONE : View.VISIBLE);
+        ((LinearLayout) mTvKoreaOrder.getParent()).setVisibility(emptyKoreaOrder ? View.GONE : View.VISIBLE);
+        mTvKoreaColor.setVisibility(TextUtils.isEmpty(item.getKoreacolor()) ? View.GONE : View.VISIBLE);
+        mLlOther.setVisibility(bothNo ? View.GONE : View.VISIBLE);
+        mTvDevide.setVisibility(bothNo ? View.INVISIBLE : View.VISIBLE);
+//        mTvMerchantMessage.setText(item.getMerchantMessage());
+//        mTvKoreaOrder.setText(item.getKoreaOrder());
+        mTvKoreaColor.setText(item.getKoreacolor());
+        setTranslateText(item.getKoreaorder(), item.getMessage());
+
+        String state = Constants.getStatusString(item.getStatus());
+
+        mTvParcleState.setText(String.format(sState,state ));
+        String price = UIUtils.getCurrency(getContext(), item.getPriceCurrencyCode(), item.getPrice());
+        mTvItemPrice.setText(price);
+        mTvWhereBuy.setText(sWhere + " " + item.getBuyfrom());
+        String label = item.getExtendattributes();
+        if (!"".equals(label)) {
+            mTvSize.setVisibility(View.VISIBLE);
+            mTvSize.setText(label);
+        } else {
+            mTvSize.setVisibility(View.GONE);
+        }
+        ImageLoader.getInstance().displayImage(item.getImageurl() + Constants.ImgUrlSuffix.small_9, mImgParcleItemIcon, ImageLoaderHelper.getInstance(getContext()).getDisplayOptions());
+    }
+
+    @OnClick({R.id.rl_top, R.id.item_info})
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.rl_top:
+                intent = new Intent(getContext(), OrderDetailPayedActivity.class);
+                intent.putExtra(OrderAll.BEAN, (long) mItem.getSalesOrderId());
+                getContext().startActivity(intent);
+                break;
+            case R.id.item_info:
+                intent = new Intent(getContext(), ProductDetailActivity.class);
+                intent.putExtra(ProductDetailActivity.ITEM_ID, (long) mItem.getMatchItemId());
+                getContext().startActivity(intent);
+                break;
+        }
+    }
+
+
+    class TranslateListener implements OnClickListener {
+        CsParcel.ParcelItemList item;
+
+        public CsParcel.ParcelItemList getItem() {
+            return item;
+        }
+
+        public TranslateListener(CsParcel.ParcelItemList item) {
+            this.item = item;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (translatedID.contains((long) item.getParcelitemid())) {
+                translatedID.remove((long) item.getParcelitemid());
+                mTranState = false;
+                setTranslateText(item.getKoreaorder(), item.getMessage());
+            } else {
+                translate(this);
+            }
+        }
+    }
+
+    private boolean mTranState;
+
+    private void initState(CsParcel.ParcelItemList item) {
+        if (translatedID.contains((long) item.getParcelitemid())) {
+            mTranState = true;
+        } else {
+            mTranState = false;
+        }
+    }
+
+
+    private void translate(TranslateListener listener) {
+        rotate(true);
+        mAutoTranslateTv.setText(getContext().getString(R.string.auto_translateing));
+        final CsParcel.ParcelItemList item = listener.getItem();
+        List<String> texts = new ArrayList<>();
+        if (!TextUtils.isEmpty(item.getKoreaorder())) texts.add(item.getKoreaorder());
+        if (!TextUtils.isEmpty(item.getMessage())) texts.add(item.getMessage());
+        TranslateManager.getInstance().translate(texts, new TranslateManager.iTranslateListener() {
+            @Override
+            public void onResult(final boolean success, Map<String, String> result, final String msg) {
+                loading = false;
+                if (success) {
+                    translatedMap.putAll(result);
+                    translatedID.add((long) item.getParcelid());
+                    mTranState = true;
+                }
+
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (success && ParcelItemView2.this.isShown()) {
+                            setTranslateText(item.getKoreaorder(), item.getMessage());
+                            mAutoTranslateTv.setText(getContext().getString(R.string.view_original));
+                        }
+
+                        if (!success) {
+                            mAutoTranslateTv.setText(getContext().getString(R.string.auto_translate));
+                            Toast.makeText(getContext(), getResources().getString(R.string.translation_failure), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    boolean loading;
+
+    private void rotate(boolean start) {
+        if (start) {
+            loading = true;
+            if (mRotateAnimation == null)
+                mRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//            rotateAnimation.setRepeatMode(Animation.INFINITE);
+            mRotateAnimation.setRepeatCount(Animation.INFINITE);
+            mRotateAnimation.setDuration(500);
+            mRotateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+            mRotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                    if (!loading) {
+                        animation.cancel();
+                    }
+                }
+            });
+            mImgTranslate.startAnimation(mRotateAnimation);
+        }
+    }
+
+
+    /*private void translate(TranslateListener listener) {
+        mAutoTranslateTv.setText(getContext().getString(R.string.auto_translateing) + "...");
+
+        CsOrder.BatchTranslateRequest.Builder builder = CsOrder.BatchTranslateRequest.newBuilder();
+        final CsParcel.ParcelItemList mItem = listener.getItem();
+        if (!TextUtils.isEmpty(mItem.getKoreaOrder())) {
+            CsOrder.TextContent.Builder builder1 = CsOrder.TextContent.newBuilder();
+            builder1.setText(mItem.getKoreaOrder());
+            builder.addTextrequest(builder1.build());
+        }
+        if (!TextUtils.isEmpty(mItem.getMerchantMessage())) {
+            CsOrder.TextContent.Builder builder1 = CsOrder.TextContent.newBuilder();
+            builder1.setText(mItem.getMerchantMessage());
+            builder.addTextrequest(builder1.build());
+        }
+//        builder.setFrom("ko_KR");
+        builder.setTo("zh_CN");
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsOrder.BatchTranslateResponse>() {
+            @Override
+            public void onSuccess(final CsOrder.BatchTranslateResponse response) {
+                if (response == null || response.getTextresponseList() == null || response.getTextresponseList().size() == 0) {
+                    return;
+                }
+                for (CsOrder.TextContent textContent : response.getTextresponseList()) {
+                    KLog.i(textContent.getText().toString());
+                }
+
+                if (!TextUtils.isEmpty(mItem.getKoreaOrder())) {
+//                    item.korea_order_translated = response.getTextresponseList().get(0).getText();
+                    translatedMap.put(mItem.getKoreaOrder(), response.getTextresponseList().get(0).getText());
+                    if (!TextUtils.isEmpty(mItem.getMerchantMessage())) {
+//                        item.merchant_message_translated = response.getTextresponseList().get(1).getText();
+                        translatedMap.put(mItem.getMerchantMessage(), response.getTextresponseList().get(1).getText());
+                    }
+                } else if (!TextUtils.isEmpty(mItem.getMerchantMessage())) {
+//                    item.merchant_message_translated = response.getTextresponseList().get(0).getText();
+                    translatedMap.put(mItem.getMerchantMessage(), response.getTextresponseList().get(0).getText());
+                }
+
+                if (ParcelItemView.this.isShown()) {
+                    UIUtils.postTaskSafely(new Runnable() {
+                        @Override
+                        public void run() {
+                            setTranslateText(mItem.getKoreaOrder(), mItem.getMerchantMessage());
+                            mAutoTranslateTv.setText(getContext().getString(R.string.auto_translate));
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(final int ret, final String errMsg) {
+                UIUtils.postTaskSafely(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (ParcelItemView.this.isShown())
+                            mAutoTranslateTv.setText(getContext().getString(R.string.auto_translate));
+                        Toast.makeText(getContext(), "翻译失败" + ret + ":" + errMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }*/
+}

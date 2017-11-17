@@ -496,6 +496,7 @@ message MyRequireParcelNumResponse
     optional int32           requirecount          = 2;//我的需求单数量
     optional int32           parcelcount           = 3;//我的包裹数量
     optional string          supply                = 4;//1代表显示货源,0代表不显示货源
+    optional string          group                 = 5;//1代表显示拼团,0代表不显示
 }
 
 message CancelRequireRequest

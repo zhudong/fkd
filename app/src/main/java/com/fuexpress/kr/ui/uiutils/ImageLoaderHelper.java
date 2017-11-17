@@ -47,9 +47,9 @@ public class ImageLoaderHelper {
 
     public DisplayImageOptions getDisplayOptionsIcon() {
         return new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.icon_default)
-                .showImageForEmptyUri(R.mipmap.icon_default)
-                .showImageOnFail(R.mipmap.icon_default)
+                .showImageOnLoading(R.mipmap.default_icon)
+                .showImageForEmptyUri(R.mipmap.default_icon)
+                .showImageOnFail(R.mipmap.default_icon)
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .imageScaleType(ImageScaleType.EXACTLY)

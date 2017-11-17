@@ -14,7 +14,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.SysApplication;
@@ -207,12 +212,13 @@ public class UIUtils {
     private static long lastClickTime;
 
     public synchronized static boolean isFastClick() {
-        long time = System.currentTimeMillis();
-        if (time - lastClickTime < 1000) {
-            return true;
+        boolean flag = false;
+        long curClickTime = System.currentTimeMillis();
+        if ((curClickTime - lastClickTime) >= 1000) {
+            flag = true;
         }
-        lastClickTime = time;
-        return false;
+        lastClickTime = curClickTime;
+        return flag;
     }
 
 
@@ -563,4 +569,35 @@ public class UIUtils {
     }
 
     private static Properties pro;
+
+
+    public static float getNumber(float price) {
+        return getNumber("", price);
+    }
+
+    public static float getNumber(String currencyCode, float price) {
+        if (TextUtils.isEmpty(currencyCode))
+            currencyCode = AccountManager.getInstance().getCurrencyCode();
+        BigDecimal d = new BigDecimal(price);
+        if (currencyCode.contains("KRW")) {
+            return d.setScale(0, BigDecimal.ROUND_HALF_UP).floatValue();
+        } else if (currencyCode.contains("TWD")) {
+            return d.setScale(0, BigDecimal.ROUND_HALF_UP).floatValue();
+        } else {
+            return d.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+        }
+    }
+
+    public static void fixScrollEditText(ScrollView scrollView){
+        scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+        scrollView.setFocusable(true);
+        scrollView.setFocusableInTouchMode(true);
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.requestFocusFromTouch();
+                return false;
+            }
+        });
+    }
 }

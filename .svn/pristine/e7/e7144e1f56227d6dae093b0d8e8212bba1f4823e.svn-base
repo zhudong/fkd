@@ -1,0 +1,153 @@
+import "cs_head.proto";
+import "cs_base.proto";
+
+package fksproto;
+
+
+// 帮我寄单个操作请求
+message CheckToPayRequest
+{
+	required BaseRequest head                       = 1;
+	required string   parcelid                      = 2;//
+	required string   paymentcode                   = 3;//支付方式
+	required BaseUserRequest  baseuser              = 4;//用户id
+	optional int32    shippingmethodid              = 5;//物流方式id
+	required int32    shippingcouponcustomerid      = 6;//该用户的优惠券ID
+	optional int32    customeraddressid             = 7;//用户地址id
+	optional string              idcard             = 8;//身份证号
+	optional string              idcardfrontimage   = 9;//身份证正面
+	optional string              idcardbackimage    = 10;//身份证反面
+	optional int32    useaccountpay                 = 11;//0和1都是使用账户余额支付，2不使用  
+	optional int32    is_new_version                = 12;//是否是新物流 1表示新物流  非1表示老物流
+}
+
+//帮我寄单个操作应答
+message CheckToPayResponse
+{
+	required BaseResponse    head               = 1;
+	optional string          redirecturl        = 2;//url地址
+}
+
+
+//获取账户余额请求
+message GetAccountBalanceRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional string          currencycode       = 3;// 币种
+}
+
+//获取账户余额应答
+message GetAccountBalanceResponse
+{
+	required BaseResponse  head                       = 1;
+	optional float         free_balance               = 2;//可用额度
+	optional float         frozen_balance             = 3;//冻结额度 
+}
+
+// 积分提现申请请求
+message CreditsWithdrawRequest
+{
+	required BaseRequest head                       = 1;
+	optional int32       uin                        = 2;
+	optional int32       changeamount				= 3;
+	optional string      currencycode				= 4;
+	optional string      sendemail					= 5;
+	optional string      localecode                 = 6;
+
+}
+
+//积分提现申请应答
+message CreditsWithdrawResponse
+{
+	required BaseResponse    head               = 1;
+}
+
+message DoShareBagRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional int32           parcelid           = 3;
+	optional string          locale_code        = 4;
+	optional int32           qty_split          = 5;
+	optional string          message            = 6;
+}
+
+message DoShareBagResponse
+{
+	required BaseResponse    head               = 1;
+	optional string          msg                = 2;
+	optional string          bag_url            = 3;
+	optional string          icon_url           = 4;
+}
+
+//福袋弹出
+message InitBagAjaxRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional int32           parcelid           = 3;
+	optional string          locale_code        = 4;
+}
+message InitBagAjaxResponse
+{
+	required BaseResponse    head               = 1;
+	optional string          icon               = 2;
+	optional string          nickname           = 3;
+	optional string          message            = 4;
+	optional int32           flag               = 5;//0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+}
+
+
+message salesOrderItemOfBag
+{
+	required string caption    = 1;//描述
+	required string imagePath  = 2;//宝贝图像
+	required int32  qty        = 3;//宝贝数
+}
+
+message ParcelOfBag
+{
+	repeated salesOrderItemOfBag  items_parcel = 1;
+	optional string     icon                   = 2;
+	optional string     nickname               = 3;
+	optional string     grab_time              = 4;//抢袋时间
+
+}
+
+message BagInfoAjaxRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional int32           parcelid           = 3;
+	optional string          locale_code        = 4;
+}
+message BagInfoAjaxResponse
+{
+	required BaseResponse    head               = 1;
+	repeated ParcelOfBag     parces             = 2;
+	repeated salesOrderItemOfBag  items         = 3;//抢到的商品
+	optional int32           qty                = 4;//领到的宝贝数
+	optional string          message            = 5;//提示
+	optional int32           flag               = 6;//0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+	optional int32           isGrab             = 7;//0:福袋派完了  1:还有福袋
+	optional int32           bagStatus          = 8;//福袋是否发送标志 0:未发送 1:已发送
+}
+
+message InitSendBagRequest
+{
+	required BaseRequest     head               = 1;
+	optional BaseUserRequest user_head          = 2;
+	optional int32           parcelId           = 3;
+	optional string          localeCode         = 4;
+}
+message InitSendBagResponse
+{
+	required BaseResponse    head               = 1;
+	repeated salesOrderItemOfBag  items         = 2;//抢到的商品
+	optional int32           bagQty             = 3;//福袋数
+	optional string          message            = 4;//留言
+	optional int32           itemQty            = 5;//宝贝总数
+	optional int32           isGrab             = 6;//是否显示发送福袋 0:不显示 1:显示
+	optional int32           bagStatus          = 7;//福袋是否发送标志 0:未发送 1:已发送
+}

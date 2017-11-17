@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_title_normal"/>
+
+    <ListView
+        android:id="@+id/lv_body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/default_bg"
+        android:divider="@null"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_parcle_detail_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:paddingLeft="8dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_forecast_carriage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@string/package_forcecast_shipping_fee"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_prospect_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/tv_forecast_carriage"
+            android:text=""
+            android:textColor="@color/the_red"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_prospect_price_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/tv_prospect_price"
+            android:text="@string/include_duty_insurance"
+            android:textColor="@color/text_color_999"
+            android:textSize="11sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_forecast_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_forecast_carriage"
+            android:text="@string/package_forcecast_weight"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_prospect_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_forecast_carriage"
+            android:layout_toRightOf="@id/tv_forecast_carriage"
+            android:textColor="@color/text_color_333"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_forecast_weight"
+            android:layout_marginRight="128dp"
+            android:ellipsize="end"
+            android:text="@string/package_carriage_dsc"
+            android:textColor="@color/text_color_999"
+            android:textSize="10sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_commint_send_package"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/selector_send_package_btn"
+            android:gravity="center"
+            android:text="@string/package_to_pay"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

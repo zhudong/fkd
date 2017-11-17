@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+
+    <View
+        android:id="@+id/view_divide"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/divide_line"/>
+
+    <ImageView
+        android:id="@+id/img_parcle_item_icon"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@id/img_parcle_item_icon"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="ee"
+            android:textColor="#333333"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_where_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ee"
+            android:textColor="#999999"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ee"
+            android:textColor="#999999"
+            android:textSize="11sp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:id="@+id/tv_parcle_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ee"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+
+
+        <TextView
+            android:id="@+id/order_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_korea_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="11sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="x12"
+        android:textColor="@color/text_color_333"
+        android:textSize="12sp"/>
+
+
+    <TextView
+        android:id="@+id/devide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+        android:textColor="@color/divide_line"
+        android:textSize="14sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingBottom="6dp"
+        android:layout_below="@+id/devide"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/connect"/>
+
+            <TextView
+                android:id="@+id/tv_merchant_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="asdfasdfasdf"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/me_icon_01"/>
+
+            <TextView
+                android:id="@+id/tv_korea_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="asdfasdf"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/message_3_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_translate"
+                android:layout_width="@dimen/payed_image_size"
+                android:layout_height="@dimen/payed_image_size"
+                android:src="@mipmap/translation"
+                />
+
+            <TextView
+                android:id="@+id/auto_translate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="22dp"
+                android:text="@string/auto_translate"
+                android:textColor="@color/auto_translate"
+                android:textSize="@dimen/payed_text_size_12"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

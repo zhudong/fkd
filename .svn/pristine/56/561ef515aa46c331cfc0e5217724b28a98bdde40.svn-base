@@ -1,0 +1,140 @@
+package com.fuexpress.kr.ui.activity.shopping_cart;
+
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.ShareFriendsBean;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.ShareManager2Friend;
+import com.fuexpress.kr.ui.activity.crowd.CrowdCartOrderActivity;
+import com.fuexpress.kr.ui.view.TitleBarView;
+
+import java.util.Arrays;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import fksproto.CsOrder;
+
+/**
+ * Created by Administrator on 2016/4/27.
+ */
+public class PaymentSuccessActivity extends BaseActivity {
+    public static final String IS_CROWD = "is_crowd";
+    private View rootView;
+
+    private TextView orderNumberTv;
+    private TextView shippingTv;
+    private TextView msgTv;
+    private Button shoppingBtn;
+    private SysApplication app;
+    private ImageView toBackIv;
+    boolean sendFriendAble = true;
+    private ListView mListView;
+    private ShareManager2Friend shareManager2Friend;
+    private boolean mIsCrowd;
+
+    @Override
+    public View setInitView() {
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_payment_success, null);
+        mListView = (ListView) rootView.findViewById(R.id.lv_body);
+        mListView.addHeaderView(View.inflate(this, R.layout.item_pay_sucess_head, null));
+
+        TitleBarView titleBarView = (TitleBarView) rootView.findViewById(R.id.payment_titlebar);
+        titleBarView.setTitleText(getString(R.string.card_payment_success_title_bar_title));
+        toBackIv = titleBarView.getIv_in_title_back();
+
+        orderNumberTv = (TextView) rootView.findViewById(R.id.payment_success_order_number_tv);
+        shippingTv = (TextView) rootView.findViewById(R.id.payment_success_shipping_tv);
+        msgTv = (TextView) rootView.findViewById(R.id.payment_success_message_tv);
+        shoppingBtn = (Button) rootView.findViewById(R.id.payment_success_shopping_btn);
+
+        app = (SysApplication) getApplication();
+        orderNumberTv.setText(app.getOrderNumber());
+        showShippingType();
+
+        if (app.getOrderType() == 1) {
+            msgTv.setText(getResources().getString(R.string.pay_result_payment_success_crowd_title));
+        }
+        if (app.getOrderType() == 0) {
+            msgTv.setText(getResources().getString(R.string.pay_result_payment_success_order_title));
+        }
+
+        shoppingBtn.setOnClickListener(this);
+        toBackIv.setOnClickListener(this);
+
+        return rootView;
+    }
+
+    private void showShippingType() {
+        String text = "";
+        switch (app.getShippingScheme()) {
+            case CsOrder.ShippingScheme.SHIPPING_SCHEME_DIRECT_VALUE:
+                text = getResources().getString(R.string.String_direct_mail);
+                break;
+            case CsOrder.ShippingScheme.SHIPPING_SCHEME_MERGE_VALUE:
+                text = getResources().getString(R.string.String_merge_order);
+                break;
+            case CsOrder.ShippingScheme.SHIPPING_SCHEME_FBAG_GIFT_VALUE:
+                text = getResources().getString(R.string.String_direct_fu);
+                break;
+        }
+        shippingTv.setText(text);
+    }
+
+    @Override
+    public void initView() {
+        mIsCrowd = getIntent().getBooleanExtra(IS_CROWD, false);
+        sendFriendAble = (app.getShippingScheme() == CsOrder.ShippingScheme.SHIPPING_SCHEME_FBAG_GIFT_VALUE);
+        Integer[] shareMethods;
+        shareManager2Friend = new ShareManager2Friend(this);
+        if (!sendFriendAble) {
+            rootView.findViewById(R.id.tv_address).setVisibility(View.GONE);
+            shareMethods = new Integer[0];
+        } else {
+            rootView.findViewById(R.id.tv_address).setVisibility(View.VISIBLE);
+            shareMethods = new Integer[]{ShareManager2Friend.PHONEBOOK, ShareManager2Friend.SMS, ShareManager2Friend.WECHAT, ShareManager2Friend.QQ, ShareManager2Friend.MESSENGER};
+            ShareFriendsBean response = new ShareFriendsBean();
+            response.setUrl(CrowdCartOrderActivity.mFuShippingUrl);
+            shareManager2Friend.setShareInfo(response);
+        }
+        List<Integer> ints = Arrays.asList(shareMethods);
+        shareManager2Friend.setmMethods(ints);
+        shareManager2Friend.initView(mListView, this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.payment_success_shopping_btn:
+                if (mIsCrowd) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GO_CROWD_PAGE, null));
+                } else {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GO_PRODUSRC_PAGE, null));
+                }
+                finish();
+                break;
+            case R.id.iv_in_title_back:
+                if (mIsCrowd) {
+                    EventBus.getDefault().post(new BusEvent(BusEvent.GO_CROWD_Detail, null));
+                }else {
+                    finish();
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        shareManager2Friend.onActivityResult(requestCode, resultCode, data);
+    }
+}

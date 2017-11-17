@@ -15,12 +15,10 @@ import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.model.AddressManager;
-import com.fuexpress.kr.model.AssetFileManager;
 import com.fuexpress.kr.ui.adapter.AddressManagerAdapter;
 import com.fuexpress.kr.ui.view.RefreshListView;
 import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.ui.view.wheel.ClearEditTextOrg;
-import com.fuexpress.kr.utils.LogUtils;
 
 import butterknife.BindView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -170,6 +168,9 @@ public class AddressManagerActivity extends BaseActivity implements RefreshListV
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CsAddress.CustomerAddress customerAddress = AddressManager.getInstance().mAddressesList.get(position - 1);
         Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("address", customerAddress);
+        intent.putExtras(bundle);
         if (mIsChooseType) {
             String topText = customerAddress.getName() + "  " + customerAddress.getPhone() + "  " + customerAddress.getPostcode();
             //String s = AssetFileManager.getInstance().readFilePlus(customerAddress.getRegion(), AssetFileManager.ADDRESS_TYPE);
@@ -177,17 +178,17 @@ public class AddressManagerActivity extends BaseActivity implements RefreshListV
             intent.putExtra(topText1, topText);
             intent.putExtra(addressText, customerAddress.getStreet() + "," + s);
             intent.putExtra(addressId, customerAddress.getAddressId());
-            Bundle bundle = new Bundle();
+            /*Bundle bundle = new Bundle();
             bundle.putSerializable("address", customerAddress);
-            intent.putExtras(bundle);
+            intent.putExtras(bundle);*/
             setResult(AddressresultCode, intent);
             finish();
         } else {
             intent = new Intent(this, AddNewAddressActivity.class);
-            Bundle bundle = new Bundle();
+            /*Bundle bundle = new Bundle();
             bundle.putSerializable("address", customerAddress);
+            intent.putExtras(bundle);*/
             intent.putExtra("addressListSize", AddressManager.getInstance().mAddressesList.size());
-            intent.putExtras(bundle);
             startActivity(intent);
         }
 

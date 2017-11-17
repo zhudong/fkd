@@ -2241,13 +2241,189 @@ public final class CsMsgid {
      */
     MSGID_GET_ITEM_CROWD_DETAIL_RESPONSE(281, 284),
     /**
+     * <code>MSGID_INIT_ADDRESS_AJAX_REQUEST = 285;</code>
+     *
+     * <pre>
+     *收货地址初始化请求
+     * </pre>
+     */
+    MSGID_INIT_ADDRESS_AJAX_REQUEST(282, 285),
+    /**
+     * <code>MSGID_INIT_ADDRESS_AJAX_RESPONSE = 286;</code>
+     *
+     * <pre>
+     *收货地址初始化应答
+     * </pre>
+     */
+    MSGID_INIT_ADDRESS_AJAX_RESPONSE(283, 286),
+    /**
+     * <code>MSGID_SAVE_ADDRESS_AJAX_REQUEST = 287;</code>
+     *
+     * <pre>
+     *保存收货地址请求
+     * </pre>
+     */
+    MSGID_SAVE_ADDRESS_AJAX_REQUEST(284, 287),
+    /**
+     * <code>MSGID_SAVE_ADDRESS_AJAX_RESPONSE = 288;</code>
+     *
+     * <pre>
+     *保存收货地址应答
+     * </pre>
+     */
+    MSGID_SAVE_ADDRESS_AJAX_RESPONSE(285, 288),
+    /**
+     * <code>MSGID_ADD_CROWD_TO_CART_REQUEST = 289;</code>
+     *
+     * <pre>
+     *拼单加入购物车请求
+     * </pre>
+     */
+    MSGID_ADD_CROWD_TO_CART_REQUEST(286, 289),
+    /**
+     * <code>MSGID_ADD_CROWD_TO_CART_RESPONSE = 290;</code>
+     *
+     * <pre>
+     *拼单加入购物车应答
+     * </pre>
+     */
+    MSGID_ADD_CROWD_TO_CART_RESPONSE(287, 290),
+    /**
+     * <code>MSGID_NEW_SALES_ORDER_DETAIL_REQUEST = 291;</code>
+     *
+     * <pre>
+     *新订单详情请求
+     * </pre>
+     */
+    MSGID_NEW_SALES_ORDER_DETAIL_REQUEST(288, 291),
+    /**
+     * <code>MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE = 292;</code>
+     *
+     * <pre>
+     *新订单详情应答
+     * </pre>
+     */
+    MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE(289, 292),
+    /**
+     * <code>MSGID_PLACE_ORDER_AGAIN_REQUEST = 293;</code>
+     *
+     * <pre>
+     *重新下单请求
+     * </pre>
+     */
+    MSGID_PLACE_ORDER_AGAIN_REQUEST(290, 293),
+    /**
+     * <code>MSGID_PLACE_ORDER_AGAIN_RESPONSE = 294;</code>
+     *
+     * <pre>
+     *重新下单应答
+     * </pre>
+     */
+    MSGID_PLACE_ORDER_AGAIN_RESPONSE(291, 294),
+    /**
+     * <code>MSG_DO_SHARE_BAG_REQUEST = 295;</code>
+     *
+     * <pre>
+     *送福袋保存福袋数量请求
+     * </pre>
+     */
+    MSG_DO_SHARE_BAG_REQUEST(292, 295),
+    /**
+     * <code>MSG_DO_SHARE_BAG_RESPONSE = 296;</code>
+     *
+     * <pre>
+     *送福袋保存福袋数量应答
+     * </pre>
+     */
+    MSG_DO_SHARE_BAG_RESPONSE(293, 296),
+    /**
+     * <code>MSG_INIT_BAG_AJAX_REQUEST = 297;</code>
+     *
+     * <pre>
+     *福袋弹出请求
+     * </pre>
+     */
+    MSG_INIT_BAG_AJAX_REQUEST(294, 297),
+    /**
+     * <code>MSG_INIT_BAG_AJAX_RESPONSE = 298;</code>
+     *
+     * <pre>
+     *福袋弹出应答
+     * </pre>
+     */
+    MSG_INIT_BAG_AJAX_RESPONSE(295, 298),
+    /**
+     * <code>MSG_BAG_INFO_AJAX_REQUEST = 299;</code>
+     *
+     * <pre>
+     *福袋详情请求
+     * </pre>
+     */
+    MSG_BAG_INFO_AJAX_REQUEST(296, 299),
+    /**
+     * <code>MSG_BAG_INFO_AJAX_RESPONSE = 300;</code>
+     *
+     * <pre>
+     *福袋详情应答
+     * </pre>
+     */
+    MSG_BAG_INFO_AJAX_RESPONSE(297, 300),
+    /**
+     * <code>MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST = 301;</code>
+     *
+     * <pre>
+     *无绑定第三方登录请求
+     * </pre>
+     */
+    MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST(298, 301),
+    /**
+     * <code>MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE = 302;</code>
+     *
+     * <pre>
+     *无绑定第三方登录应答
+     * </pre>
+     */
+    MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE(299, 302),
+    /**
+     * <code>MSGID_GET_BIND_INFO_REQUEST = 303;</code>
+     *
+     * <pre>
+     *获取绑定信息请求
+     * </pre>
+     */
+    MSGID_GET_BIND_INFO_REQUEST(300, 303),
+    /**
+     * <code>MSGID_GET_BIND_INFO_RESPONSE = 304;</code>
+     *
+     * <pre>
+     *获取绑定信息应答
+     * </pre>
+     */
+    MSGID_GET_BIND_INFO_RESPONSE(301, 304),
+    /**
+     * <code>MSGID_INIT_SEND_BAG_REQUEST = 305;</code>
+     *
+     * <pre>
+     *初始化发送福袋请求
+     * </pre>
+     */
+    MSGID_INIT_SEND_BAG_REQUEST(302, 305),
+    /**
+     * <code>MSGID_INIT_SEND_BAG_RESPONSE = 306;</code>
+     *
+     * <pre>
+     *初始化发送福袋应答
+     * </pre>
+     */
+    MSGID_INIT_SEND_BAG_RESPONSE(303, 306),
+    /**
      * <code>MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST = 503;</code>
      *
      * <pre>
      *add by jack.zuoquan
      * </pre>
      */
-    MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST(282, 503),
+    MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST(304, 503),
     /**
      * <code>MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE = 504;</code>
      *
@@ -2255,7 +2431,7 @@ public final class CsMsgid {
      *获取充值卡购物车应答
      * </pre>
      */
-    MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE(283, 504),
+    MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE(305, 504),
     /**
      * <code>MSGID_COUNTRY_LIST_REQUEST = 505;</code>
      *
@@ -2263,7 +2439,7 @@ public final class CsMsgid {
      *地区联动-国家列表请求
      * </pre>
      */
-    MSGID_COUNTRY_LIST_REQUEST(284, 505),
+    MSGID_COUNTRY_LIST_REQUEST(306, 505),
     /**
      * <code>MSGID_COUNTRY_LIST_RESPONSE = 506;</code>
      *
@@ -2271,7 +2447,7 @@ public final class CsMsgid {
      *地区联动-国家列表应答
      * </pre>
      */
-    MSGID_COUNTRY_LIST_RESPONSE(285, 506),
+    MSGID_COUNTRY_LIST_RESPONSE(307, 506),
     /**
      * <code>MSGID_REGION_LIST_REQUEST = 507;</code>
      *
@@ -2279,7 +2455,7 @@ public final class CsMsgid {
      *地区联动-国家下一级地区列表请求
      * </pre>
      */
-    MSGID_REGION_LIST_REQUEST(286, 507),
+    MSGID_REGION_LIST_REQUEST(308, 507),
     /**
      * <code>MSGID_REGION_LIST_RESPONSE = 508;</code>
      *
@@ -2287,7 +2463,7 @@ public final class CsMsgid {
      *地区联动-国家下一级地区列表应答
      * </pre>
      */
-    MSGID_REGION_LIST_RESPONSE(287, 508),
+    MSGID_REGION_LIST_RESPONSE(309, 508),
     /**
      * <code>MSGID_GET_CHILDREN_COUNT_REQUEST = 511;</code>
      *
@@ -2295,7 +2471,7 @@ public final class CsMsgid {
      *地区联动-地区数量请求
      * </pre>
      */
-    MSGID_GET_CHILDREN_COUNT_REQUEST(288, 511),
+    MSGID_GET_CHILDREN_COUNT_REQUEST(310, 511),
     /**
      * <code>MSGID_GET_CHILDREN_COUNT_RESPONSE = 512;</code>
      *
@@ -2303,7 +2479,7 @@ public final class CsMsgid {
      *地区联动-地区数量应答
      * </pre>
      */
-    MSGID_GET_CHILDREN_COUNT_RESPONSE(289, 512),
+    MSGID_GET_CHILDREN_COUNT_RESPONSE(311, 512),
     /**
      * <code>MSGID_MERCHANT_INDEX_REQUEST = 513;</code>
      *
@@ -2311,7 +2487,7 @@ public final class CsMsgid {
      *店铺首页请求merchantIndex
      * </pre>
      */
-    MSGID_MERCHANT_INDEX_REQUEST(290, 513),
+    MSGID_MERCHANT_INDEX_REQUEST(312, 513),
     /**
      * <code>MSGID_MERCHANT_INDEX_RESPONSE = 514;</code>
      *
@@ -2319,7 +2495,7 @@ public final class CsMsgid {
      *店铺首页应答
      * </pre>
      */
-    MSGID_MERCHANT_INDEX_RESPONSE(291, 514),
+    MSGID_MERCHANT_INDEX_RESPONSE(313, 514),
     /**
      * <code>MSGID_ITEMS_REQUEST = 515;</code>
      *
@@ -2327,7 +2503,7 @@ public final class CsMsgid {
      *我的店铺（店铺单品列表）请求items
      * </pre>
      */
-    MSGID_ITEMS_REQUEST(292, 515),
+    MSGID_ITEMS_REQUEST(314, 515),
     /**
      * <code>MSGID_ITEMS_RESPONSE = 516;</code>
      *
@@ -2335,7 +2511,7 @@ public final class CsMsgid {
      *我的店铺（店铺单品列表）应答
      * </pre>
      */
-    MSGID_ITEMS_RESPONSE(293, 516),
+    MSGID_ITEMS_RESPONSE(315, 516),
     /**
      * <code>MSGID_MERCHANT_INTRO_REQUEST = 517;</code>
      *
@@ -2343,7 +2519,7 @@ public final class CsMsgid {
      *我的店铺－简介请求merchantIntro
      * </pre>
      */
-    MSGID_MERCHANT_INTRO_REQUEST(294, 517),
+    MSGID_MERCHANT_INTRO_REQUEST(316, 517),
     /**
      * <code>MSGID_MERCHANT_INTRO_RESPONSE = 518;</code>
      *
@@ -2351,7 +2527,7 @@ public final class CsMsgid {
      *我的店铺－简介应答
      * </pre>
      */
-    MSGID_MERCHANT_INTRO_RESPONSE(295, 518),
+    MSGID_MERCHANT_INTRO_RESPONSE(317, 518),
     /**
      * <code>MSGID_GET_MERCHANT_ALBUM_LIST_REQUEST = 523;</code>
      *
@@ -2359,7 +2535,7 @@ public final class CsMsgid {
      *商品管理-专辑 请求
      * </pre>
      */
-    MSGID_GET_MERCHANT_ALBUM_LIST_REQUEST(296, 523),
+    MSGID_GET_MERCHANT_ALBUM_LIST_REQUEST(318, 523),
     /**
      * <code>MSGID_GET_MERCHANT_ALBUM_LIST_RESPONSE = 524;</code>
      *
@@ -2367,7 +2543,7 @@ public final class CsMsgid {
      *商品管理-专辑 应答
      * </pre>
      */
-    MSGID_GET_MERCHANT_ALBUM_LIST_RESPONSE(297, 524),
+    MSGID_GET_MERCHANT_ALBUM_LIST_RESPONSE(319, 524),
     /**
      * <code>MSGID_GET_ALBUM_ITEM_LIST_REQUEST = 525;</code>
      *
@@ -2375,7 +2551,7 @@ public final class CsMsgid {
      *专辑详情-单品列表 请求
      * </pre>
      */
-    MSGID_GET_ALBUM_ITEM_LIST_REQUEST(298, 525),
+    MSGID_GET_ALBUM_ITEM_LIST_REQUEST(320, 525),
     /**
      * <code>MSGID_GET_ALBUM_ITEM_LIST_RESPONSE = 526;</code>
      *
@@ -2383,7 +2559,7 @@ public final class CsMsgid {
      *专辑详情-单品列表 应答
      * </pre>
      */
-    MSGID_GET_ALBUM_ITEM_LIST_RESPONSE(299, 526),
+    MSGID_GET_ALBUM_ITEM_LIST_RESPONSE(321, 526),
     /**
      * <code>MSGID_INIT_ADD_ALBUM_REQUEST = 527;</code>
      *
@@ -2391,7 +2567,7 @@ public final class CsMsgid {
      *新建专辑-初始化 请求
      * </pre>
      */
-    MSGID_INIT_ADD_ALBUM_REQUEST(300, 527),
+    MSGID_INIT_ADD_ALBUM_REQUEST(322, 527),
     /**
      * <code>MSGID_INIT_ADD_ALBUM_RESPONSE = 528;</code>
      *
@@ -2399,7 +2575,7 @@ public final class CsMsgid {
      *新建专辑-初始化 应答
      * </pre>
      */
-    MSGID_INIT_ADD_ALBUM_RESPONSE(301, 528),
+    MSGID_INIT_ADD_ALBUM_RESPONSE(323, 528),
     /**
      * <code>MSGID_IS_ALBUM_NAME_EXIST_REQUEST = 529;</code>
      *
@@ -2407,7 +2583,7 @@ public final class CsMsgid {
      *专辑名称是否存在 请求
      * </pre>
      */
-    MSGID_IS_ALBUM_NAME_EXIST_REQUEST(302, 529),
+    MSGID_IS_ALBUM_NAME_EXIST_REQUEST(324, 529),
     /**
      * <code>MSGID_IS_ALBUM_NAME_EXIST_RESPONSE = 530;</code>
      *
@@ -2415,7 +2591,7 @@ public final class CsMsgid {
      *专辑名称是否存在 应答
      * </pre>
      */
-    MSGID_IS_ALBUM_NAME_EXIST_RESPONSE(303, 530),
+    MSGID_IS_ALBUM_NAME_EXIST_RESPONSE(325, 530),
     /**
      * <code>MSGID_ALBUM_CATEGORY_LIST_REQUEST = 531;</code>
      *
@@ -2423,7 +2599,7 @@ public final class CsMsgid {
      *新建专辑-联动专辑分类列表 请求
      * </pre>
      */
-    MSGID_ALBUM_CATEGORY_LIST_REQUEST(304, 531),
+    MSGID_ALBUM_CATEGORY_LIST_REQUEST(326, 531),
     /**
      * <code>MSGID_ALBUM_CATEGORY_LIST_RESPONSE = 532;</code>
      *
@@ -2431,7 +2607,7 @@ public final class CsMsgid {
      *新建专辑-联动专辑分类列表 应答
      * </pre>
      */
-    MSGID_ALBUM_CATEGORY_LIST_RESPONSE(305, 532),
+    MSGID_ALBUM_CATEGORY_LIST_RESPONSE(327, 532),
     /**
      * <code>MSGID_ADD_ALBUM_SAVE_REQUEST = 533;</code>
      *
@@ -2439,7 +2615,7 @@ public final class CsMsgid {
      *新建专辑-保存 请求
      * </pre>
      */
-    MSGID_ADD_ALBUM_SAVE_REQUEST(306, 533),
+    MSGID_ADD_ALBUM_SAVE_REQUEST(328, 533),
     /**
      * <code>MSGID_ADD_ALBUM_SAVE_RESPONSE = 534;</code>
      *
@@ -2447,7 +2623,7 @@ public final class CsMsgid {
      *新建专辑-保存 应答
      * </pre>
      */
-    MSGID_ADD_ALBUM_SAVE_RESPONSE(307, 534),
+    MSGID_ADD_ALBUM_SAVE_RESPONSE(329, 534),
     /**
      * <code>MSGID_INIT_EDIT_ALBUM_REQUEST = 535;</code>
      *
@@ -2455,7 +2631,7 @@ public final class CsMsgid {
      *编辑专辑-初始化 请求
      * </pre>
      */
-    MSGID_INIT_EDIT_ALBUM_REQUEST(308, 535),
+    MSGID_INIT_EDIT_ALBUM_REQUEST(330, 535),
     /**
      * <code>MSGID_INIT_EDIT_ALBUM_RESPONSE = 536;</code>
      *
@@ -2463,7 +2639,7 @@ public final class CsMsgid {
      *编辑专辑-初始化 应答
      * </pre>
      */
-    MSGID_INIT_EDIT_ALBUM_RESPONSE(309, 536),
+    MSGID_INIT_EDIT_ALBUM_RESPONSE(331, 536),
     /**
      * <code>MSGID_EDIT_ALBUM_SAVE_REQUEST = 537;</code>
      *
@@ -2471,7 +2647,7 @@ public final class CsMsgid {
      *编辑专辑-保存 请求
      * </pre>
      */
-    MSGID_EDIT_ALBUM_SAVE_REQUEST(310, 537),
+    MSGID_EDIT_ALBUM_SAVE_REQUEST(332, 537),
     /**
      * <code>MSGID_EDIT_ALBUM_SAVE_RESPONSE = 538;</code>
      *
@@ -2479,7 +2655,7 @@ public final class CsMsgid {
      *编辑专辑-保存 应答
      * </pre>
      */
-    MSGID_EDIT_ALBUM_SAVE_RESPONSE(311, 538),
+    MSGID_EDIT_ALBUM_SAVE_RESPONSE(333, 538),
     /**
      * <code>MSGID_DELETE_ALBUM_REQUEST = 539;</code>
      *
@@ -2487,7 +2663,7 @@ public final class CsMsgid {
      *编辑专辑-删除 请求
      * </pre>
      */
-    MSGID_DELETE_ALBUM_REQUEST(312, 539),
+    MSGID_DELETE_ALBUM_REQUEST(334, 539),
     /**
      * <code>MSGID_DELETE_ALBUM_RESPONSE = 540;</code>
      *
@@ -2495,7 +2671,7 @@ public final class CsMsgid {
      *编辑专辑-删除 应答
      * </pre>
      */
-    MSGID_DELETE_ALBUM_RESPONSE(313, 540),
+    MSGID_DELETE_ALBUM_RESPONSE(335, 540),
     /**
      * <code>MSGID_INIT_ADD_ITEM_REQREST = 541;</code>
      *
@@ -2503,7 +2679,7 @@ public final class CsMsgid {
      *添加单品-初始化 	 请求
      * </pre>
      */
-    MSGID_INIT_ADD_ITEM_REQREST(314, 541),
+    MSGID_INIT_ADD_ITEM_REQREST(336, 541),
     /**
      * <code>MSGID_INIT_ADD_ITEM_RESPONSE = 542;</code>
      *
@@ -2511,7 +2687,7 @@ public final class CsMsgid {
      *添加单品-初始化 	 应答
      * </pre>
      */
-    MSGID_INIT_ADD_ITEM_RESPONSE(315, 542),
+    MSGID_INIT_ADD_ITEM_RESPONSE(337, 542),
     /**
      * <code>MSGID_ADD_ITEM_SAVE_REQUEST = 543;</code>
      *
@@ -2519,7 +2695,7 @@ public final class CsMsgid {
      *添加单品-保存 请求
      * </pre>
      */
-    MSGID_ADD_ITEM_SAVE_REQUEST(316, 543),
+    MSGID_ADD_ITEM_SAVE_REQUEST(338, 543),
     /**
      * <code>MSGID_ADD_ITEM_SAVE_RESPONSE = 544;</code>
      *
@@ -2527,7 +2703,7 @@ public final class CsMsgid {
      *添加单品-保存 应答
      * </pre>
      */
-    MSGID_ADD_ITEM_SAVE_RESPONSE(317, 544),
+    MSGID_ADD_ITEM_SAVE_RESPONSE(339, 544),
     /**
      * <code>MSGID_INIT_EDIT_ITEM_REQUEST = 545;</code>
      *
@@ -2535,7 +2711,7 @@ public final class CsMsgid {
      *编辑商品-初始化 请求
      * </pre>
      */
-    MSGID_INIT_EDIT_ITEM_REQUEST(318, 545),
+    MSGID_INIT_EDIT_ITEM_REQUEST(340, 545),
     /**
      * <code>MSGID_INIT_EDIT_ITEM_RESPONSE = 546;</code>
      *
@@ -2543,7 +2719,7 @@ public final class CsMsgid {
      *编辑商品-初始化 应答
      * </pre>
      */
-    MSGID_INIT_EDIT_ITEM_RESPONSE(319, 546),
+    MSGID_INIT_EDIT_ITEM_RESPONSE(341, 546),
     /**
      * <code>MSGID_EDIT_ITEM_SAVE_REQUEST = 547;</code>
      *
@@ -2551,7 +2727,7 @@ public final class CsMsgid {
      *编辑商品-保存 请求
      * </pre>
      */
-    MSGID_EDIT_ITEM_SAVE_REQUEST(320, 547),
+    MSGID_EDIT_ITEM_SAVE_REQUEST(342, 547),
     /**
      * <code>MSGID_EDIT_ITEM_SAVE_RESPONSE = 548;</code>
      *
@@ -2559,7 +2735,7 @@ public final class CsMsgid {
      *编辑商品-保存 应答
      * </pre>
      */
-    MSGID_EDIT_ITEM_SAVE_RESPONSE(321, 548),
+    MSGID_EDIT_ITEM_SAVE_RESPONSE(343, 548),
     /**
      * <code>MSGID_DELETE_ALBUM_ITEM_REQUSET = 549;</code>
      *
@@ -2567,7 +2743,7 @@ public final class CsMsgid {
      *编辑专辑-删除商品 请求
      * </pre>
      */
-    MSGID_DELETE_ALBUM_ITEM_REQUSET(322, 549),
+    MSGID_DELETE_ALBUM_ITEM_REQUSET(344, 549),
     /**
      * <code>MSGID_DELETE_ALBUM_ITEM_RESPONSE = 550;</code>
      *
@@ -2575,7 +2751,7 @@ public final class CsMsgid {
      *编辑专辑-删除商品 应答
      * </pre>
      */
-    MSGID_DELETE_ALBUM_ITEM_RESPONSE(323, 550),
+    MSGID_DELETE_ALBUM_ITEM_RESPONSE(345, 550),
     /**
      * <code>MSGID_IMAGES_REQUEST = 553;</code>
      *
@@ -2583,7 +2759,7 @@ public final class CsMsgid {
      *我的店铺－图片请求images
      * </pre>
      */
-    MSGID_IMAGES_REQUEST(324, 553),
+    MSGID_IMAGES_REQUEST(346, 553),
     /**
      * <code>MSGID_IMAGES_RESPONSE = 554;</code>
      *
@@ -2591,7 +2767,7 @@ public final class CsMsgid {
      *我的店铺－图片应答
      * </pre>
      */
-    MSGID_IMAGES_RESPONSE(325, 554),
+    MSGID_IMAGES_RESPONSE(347, 554),
     /**
      * <code>MSGID_UPLOAD_MERCHANT_IMAGE_REQUEST = 555;</code>
      *
@@ -2599,7 +2775,7 @@ public final class CsMsgid {
      *我的店铺-点加号上传图片(无用)请求uploadMerchantImage
      * </pre>
      */
-    MSGID_UPLOAD_MERCHANT_IMAGE_REQUEST(326, 555),
+    MSGID_UPLOAD_MERCHANT_IMAGE_REQUEST(348, 555),
     /**
      * <code>MSGID_UPLOAD_MERCHANT_IMAGE_RESPONSE = 556;</code>
      *
@@ -2607,7 +2783,7 @@ public final class CsMsgid {
      *我的店铺-点加号上传图片(无用)应答
      * </pre>
      */
-    MSGID_UPLOAD_MERCHANT_IMAGE_RESPONSE(327, 556),
+    MSGID_UPLOAD_MERCHANT_IMAGE_RESPONSE(349, 556),
     /**
      * <code>MSGID_SAVE_MERCHANT_IMAGE_REQUEST = 557;</code>
      *
@@ -2615,7 +2791,7 @@ public final class CsMsgid {
      *我的店铺-上传保存请求saveMerchantImage
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_IMAGE_REQUEST(328, 557),
+    MSGID_SAVE_MERCHANT_IMAGE_REQUEST(350, 557),
     /**
      * <code>MSGID_SAVE_MERCHANT_IMAGE_RESPONSE = 558;</code>
      *
@@ -2623,7 +2799,7 @@ public final class CsMsgid {
      *我的店铺-上传保存应答
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_IMAGE_RESPONSE(329, 558),
+    MSGID_SAVE_MERCHANT_IMAGE_RESPONSE(351, 558),
     /**
      * <code>MSGID_MY_MERCHANT_REQUEST = 559;</code>
      *
@@ -2631,7 +2807,7 @@ public final class CsMsgid {
      *我请求myMerchant
      * </pre>
      */
-    MSGID_MY_MERCHANT_REQUEST(330, 559),
+    MSGID_MY_MERCHANT_REQUEST(352, 559),
     /**
      * <code>MSGID_MY_MERCHANT_RESPONSE = 560;</code>
      *
@@ -2639,7 +2815,7 @@ public final class CsMsgid {
      *我应答
      * </pre>
      */
-    MSGID_MY_MERCHANT_RESPONSE(331, 560),
+    MSGID_MY_MERCHANT_RESPONSE(353, 560),
     /**
      * <code>MSGID_MY_ORDER_ITEM_REQUEST = 561;</code>
      *
@@ -2647,7 +2823,7 @@ public final class CsMsgid {
      *我-我的订单请求myOrderItem
      * </pre>
      */
-    MSGID_MY_ORDER_ITEM_REQUEST(332, 561),
+    MSGID_MY_ORDER_ITEM_REQUEST(354, 561),
     /**
      * <code>MSGID_MY_ORDER_ITEM_RESPONSE = 562;</code>
      *
@@ -2655,7 +2831,7 @@ public final class CsMsgid {
      *我-我的订单应答
      * </pre>
      */
-    MSGID_MY_ORDER_ITEM_RESPONSE(333, 562),
+    MSGID_MY_ORDER_ITEM_RESPONSE(355, 562),
     /**
      * <code>MSGID_MERCHANT_SALES_STATISTICS_LIST_REQUEST = 563;</code>
      *
@@ -2663,7 +2839,7 @@ public final class CsMsgid {
      *我-我的订单-历史统计请求merchantsalesStatisticsList
      * </pre>
      */
-    MSGID_MERCHANT_SALES_STATISTICS_LIST_REQUEST(334, 563),
+    MSGID_MERCHANT_SALES_STATISTICS_LIST_REQUEST(356, 563),
     /**
      * <code>MSGID_MERCHANT_SALES_STATISTICS_LIST_RESPONSE = 564;</code>
      *
@@ -2671,7 +2847,7 @@ public final class CsMsgid {
      *我-我的订单-历史统计应答
      * </pre>
      */
-    MSGID_MERCHANT_SALES_STATISTICS_LIST_RESPONSE(335, 564),
+    MSGID_MERCHANT_SALES_STATISTICS_LIST_RESPONSE(357, 564),
     /**
      * <code>MSGID_MERCHANT_FORM_REQUEST = 565;</code>
      *
@@ -2679,7 +2855,7 @@ public final class CsMsgid {
      *我-商户信息-修改初始化请求merchantForm
      * </pre>
      */
-    MSGID_MERCHANT_FORM_REQUEST(336, 565),
+    MSGID_MERCHANT_FORM_REQUEST(358, 565),
     /**
      * <code>MSGID_MERCHANT_FORM_RESPONSE = 566;</code>
      *
@@ -2687,7 +2863,7 @@ public final class CsMsgid {
      *我-商户信息-修改初始化应答
      * </pre>
      */
-    MSGID_MERCHANT_FORM_RESPONSE(337, 566),
+    MSGID_MERCHANT_FORM_RESPONSE(359, 566),
     /**
      * <code>MSGID_SAVE_MERCHANT_REQUEST = 567;</code>
      *
@@ -2695,7 +2871,7 @@ public final class CsMsgid {
      *我-商户信息-修改保存请求saveMerchant
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_REQUEST(338, 567),
+    MSGID_SAVE_MERCHANT_REQUEST(360, 567),
     /**
      * <code>MSGID_SAVE_MERCHANT_RESPONSE = 568;</code>
      *
@@ -2703,7 +2879,7 @@ public final class CsMsgid {
      *我-商户信息-修改保存应答
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_RESPONSE(339, 568),
+    MSGID_SAVE_MERCHANT_RESPONSE(361, 568),
     /**
      * <code>MSGID_SAVE_MERCHANT_INDEX_IMAGE_REQUEST = 569;</code>
      *
@@ -2711,7 +2887,7 @@ public final class CsMsgid {
      *我的店铺-店招选择保存请求
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_INDEX_IMAGE_REQUEST(340, 569),
+    MSGID_SAVE_MERCHANT_INDEX_IMAGE_REQUEST(362, 569),
     /**
      * <code>MSGID_SAVE_MERCHANT_INDEX_IMAGE_RESPONSE = 570;</code>
      *
@@ -2719,7 +2895,7 @@ public final class CsMsgid {
      *我的店铺-店招选择保存应答
      * </pre>
      */
-    MSGID_SAVE_MERCHANT_INDEX_IMAGE_RESPONSE(341, 570),
+    MSGID_SAVE_MERCHANT_INDEX_IMAGE_RESPONSE(363, 570),
     /**
      * <code>MSGID_SEND_PARCEL_LIST_REQUEST = 571;</code>
      *
@@ -2727,7 +2903,7 @@ public final class CsMsgid {
      *帮我寄包裹列表 请求
      * </pre>
      */
-    MSGID_SEND_PARCEL_LIST_REQUEST(342, 571),
+    MSGID_SEND_PARCEL_LIST_REQUEST(364, 571),
     /**
      * <code>MSGID_SEND_PARCEL_LIST_RESPONSE = 572;</code>
      *
@@ -2735,7 +2911,7 @@ public final class CsMsgid {
      *帮我寄包裹列表 应答
      * </pre>
      */
-    MSGID_SEND_PARCEL_LIST_RESPONSE(343, 572),
+    MSGID_SEND_PARCEL_LIST_RESPONSE(365, 572),
     /**
      * <code>MSGID_GET_MY_NOTICE_LIST_REQUEST = 573;</code>
      *
@@ -2743,7 +2919,7 @@ public final class CsMsgid {
      *我的通知消息请求
      * </pre>
      */
-    MSGID_GET_MY_NOTICE_LIST_REQUEST(344, 573),
+    MSGID_GET_MY_NOTICE_LIST_REQUEST(366, 573),
     /**
      * <code>MSGID_GET_MY_NOTICE_LIST_RESPONSE = 574;</code>
      *
@@ -2751,7 +2927,7 @@ public final class CsMsgid {
      *我的通知消息应答
      * </pre>
      */
-    MSGID_GET_MY_NOTICE_LIST_RESPONSE(345, 574),
+    MSGID_GET_MY_NOTICE_LIST_RESPONSE(367, 574),
     /**
      * <code>MSGID_GET_MY_CUSTOMER_ICON_REQUEST = 575;</code>
      *
@@ -2759,7 +2935,7 @@ public final class CsMsgid {
      *修改头像初始化请求
      * </pre>
      */
-    MSGID_GET_MY_CUSTOMER_ICON_REQUEST(346, 575),
+    MSGID_GET_MY_CUSTOMER_ICON_REQUEST(368, 575),
     /**
      * <code>MSGID_GET_MY_CUSTOMER_ICON_RESPONSE = 576;</code>
      *
@@ -2767,7 +2943,7 @@ public final class CsMsgid {
      *修改头像初始化应答
      * </pre>
      */
-    MSGID_GET_MY_CUSTOMER_ICON_RESPONSE(347, 576),
+    MSGID_GET_MY_CUSTOMER_ICON_RESPONSE(369, 576),
     /**
      * <code>MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST = 577;</code>
      *
@@ -2775,7 +2951,7 @@ public final class CsMsgid {
      *保存用户头像请求
      * </pre>
      */
-    MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST(348, 577),
+    MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST(370, 577),
     /**
      * <code>MSGID_SET_MY_SAVE_CUSTOMER_ICON_RESPONSE = 578;</code>
      *
@@ -2783,7 +2959,7 @@ public final class CsMsgid {
      *保存用户头像应答
      * </pre>
      */
-    MSGID_SET_MY_SAVE_CUSTOMER_ICON_RESPONSE(349, 578),
+    MSGID_SET_MY_SAVE_CUSTOMER_ICON_RESPONSE(371, 578),
     /**
      * <code>MSGID_SET_MY_SAVE_CUSTOMER_PSW_REQUEST = 579;</code>
      *
@@ -2791,7 +2967,7 @@ public final class CsMsgid {
      *设置保存用户密码请求
      * </pre>
      */
-    MSGID_SET_MY_SAVE_CUSTOMER_PSW_REQUEST(350, 579),
+    MSGID_SET_MY_SAVE_CUSTOMER_PSW_REQUEST(372, 579),
     /**
      * <code>MSGID_SET_MY_SAVE_CUSTOMER_PSW_RESPONSE = 580;</code>
      *
@@ -2799,7 +2975,7 @@ public final class CsMsgid {
      *设置保存用户密码应答
      * </pre>
      */
-    MSGID_SET_MY_SAVE_CUSTOMER_PSW_RESPONSE(351, 580),
+    MSGID_SET_MY_SAVE_CUSTOMER_PSW_RESPONSE(373, 580),
     /**
      * <code>MSGID_SET_MY_SEND_CONFIRM_EMAIL_REQUEST = 581;</code>
      *
@@ -2807,7 +2983,7 @@ public final class CsMsgid {
      *设置发送确认邮箱请求
      * </pre>
      */
-    MSGID_SET_MY_SEND_CONFIRM_EMAIL_REQUEST(352, 581),
+    MSGID_SET_MY_SEND_CONFIRM_EMAIL_REQUEST(374, 581),
     /**
      * <code>MSGID_SET_MY_SEND_CONFIRM_EMAIL_RESPONSE = 582;</code>
      *
@@ -2815,7 +2991,7 @@ public final class CsMsgid {
      *设置发送确认邮箱应答
      * </pre>
      */
-    MSGID_SET_MY_SEND_CONFIRM_EMAIL_RESPONSE(353, 582),
+    MSGID_SET_MY_SEND_CONFIRM_EMAIL_RESPONSE(375, 582),
     /**
      * <code>MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUEST = 583;</code>
      *
@@ -2823,7 +2999,7 @@ public final class CsMsgid {
      *绑定手机发送验证码请求
      * </pre>
      */
-    MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUEST(354, 583),
+    MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUEST(376, 583),
     /**
      * <code>MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_RESPONSE = 584;</code>
      *
@@ -2831,7 +3007,7 @@ public final class CsMsgid {
      *绑定手机发送验证码应答
      * </pre>
      */
-    MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_RESPONSE(355, 584),
+    MSGID_SEND_MY_PHONE_BIND_VERIFY_CODE_RESPONSE(377, 584),
     /**
      * <code>MSGID_SEND_MY_PHONE_BIND_REQUEST = 585;</code>
      *
@@ -2839,7 +3015,7 @@ public final class CsMsgid {
      *完成绑定手机请求
      * </pre>
      */
-    MSGID_SEND_MY_PHONE_BIND_REQUEST(356, 585),
+    MSGID_SEND_MY_PHONE_BIND_REQUEST(378, 585),
     /**
      * <code>MSGID_SEND_MY_PHONE_BIND_RESPONSE = 586;</code>
      *
@@ -2847,7 +3023,7 @@ public final class CsMsgid {
      *完成绑定手机应答
      * </pre>
      */
-    MSGID_SEND_MY_PHONE_BIND_RESPONSE(357, 586),
+    MSGID_SEND_MY_PHONE_BIND_RESPONSE(379, 586),
     /**
      * <code>MSGID_SET_LOGDO_MERCHANT_REQUEST = 587;</code>
      *
@@ -2855,7 +3031,7 @@ public final class CsMsgid {
      *邮箱登录请求
      * </pre>
      */
-    MSGID_SET_LOGDO_MERCHANT_REQUEST(358, 587),
+    MSGID_SET_LOGDO_MERCHANT_REQUEST(380, 587),
     /**
      * <code>MSGID_SET_LOGDO_MERCHANT_RESPONSE = 588;</code>
      *
@@ -2863,7 +3039,7 @@ public final class CsMsgid {
      *邮箱登录应答
      * </pre>
      */
-    MSGID_SET_LOGDO_MERCHANT_RESPONSE(359, 588),
+    MSGID_SET_LOGDO_MERCHANT_RESPONSE(381, 588),
     /**
      * <code>MSGID_SET_LOGDO_MERCHANT_PHONE_REQUEST = 589;</code>
      *
@@ -2871,7 +3047,7 @@ public final class CsMsgid {
      *手机登录请求
      * </pre>
      */
-    MSGID_SET_LOGDO_MERCHANT_PHONE_REQUEST(360, 589),
+    MSGID_SET_LOGDO_MERCHANT_PHONE_REQUEST(382, 589),
     /**
      * <code>MSGID_SET_LOGDO_MERCHANT_PHONE_RESPONSE = 590;</code>
      *
@@ -2879,7 +3055,7 @@ public final class CsMsgid {
      *手机登录应答
      * </pre>
      */
-    MSGID_SET_LOGDO_MERCHANT_PHONE_RESPONSE(361, 590),
+    MSGID_SET_LOGDO_MERCHANT_PHONE_RESPONSE(383, 590),
     /**
      * <code>MSGID_GET_REG_MERCHANT_EMAIL_INIT_REQUEST = 591;</code>
      *
@@ -2887,7 +3063,7 @@ public final class CsMsgid {
      *邮箱注册初始化请求
      * </pre>
      */
-    MSGID_GET_REG_MERCHANT_EMAIL_INIT_REQUEST(362, 591),
+    MSGID_GET_REG_MERCHANT_EMAIL_INIT_REQUEST(384, 591),
     /**
      * <code>MSGID_GET_REG_MERCHANT_EMAIL_INIT_RESPONSE = 592;</code>
      *
@@ -2895,7 +3071,7 @@ public final class CsMsgid {
      *邮箱注册初始化应答
      * </pre>
      */
-    MSGID_GET_REG_MERCHANT_EMAIL_INIT_RESPONSE(363, 592),
+    MSGID_GET_REG_MERCHANT_EMAIL_INIT_RESPONSE(385, 592),
     /**
      * <code>MSGID_GET_REGDO_MERCHANT_EMAIL_REQUEST = 593;</code>
      *
@@ -2903,7 +3079,7 @@ public final class CsMsgid {
      *邮箱注册请求
      * </pre>
      */
-    MSGID_GET_REGDO_MERCHANT_EMAIL_REQUEST(364, 593),
+    MSGID_GET_REGDO_MERCHANT_EMAIL_REQUEST(386, 593),
     /**
      * <code>MSGID_GET_REGDO_MERCHANT_EMAIL_RESPONSE = 594;</code>
      *
@@ -2911,7 +3087,7 @@ public final class CsMsgid {
      *邮箱注册应答
      * </pre>
      */
-    MSGID_GET_REGDO_MERCHANT_EMAIL_RESPONSE(365, 594),
+    MSGID_GET_REGDO_MERCHANT_EMAIL_RESPONSE(387, 594),
     /**
      * <code>MSGID_GET_IS_EXIST_EMAIL_REQUEST = 595;</code>
      *
@@ -2919,7 +3095,7 @@ public final class CsMsgid {
      *邮箱是否存在请求
      * </pre>
      */
-    MSGID_GET_IS_EXIST_EMAIL_REQUEST(366, 595),
+    MSGID_GET_IS_EXIST_EMAIL_REQUEST(388, 595),
     /**
      * <code>MSGID_GET_IS_EXIST_EMAIL_RESPONSE = 596;</code>
      *
@@ -2927,7 +3103,7 @@ public final class CsMsgid {
      *邮箱是否存在应答
      * </pre>
      */
-    MSGID_GET_IS_EXIST_EMAIL_RESPONSE(367, 596),
+    MSGID_GET_IS_EXIST_EMAIL_RESPONSE(389, 596),
     /**
      * <code>MSGID_GET_IS_EXIST_PHONE_REQUEST = 597;</code>
      *
@@ -2935,7 +3111,7 @@ public final class CsMsgid {
      *手机是否存在请求
      * </pre>
      */
-    MSGID_GET_IS_EXIST_PHONE_REQUEST(368, 597),
+    MSGID_GET_IS_EXIST_PHONE_REQUEST(390, 597),
     /**
      * <code>MSGID_GET_IS_EXIST_PHONE_RESPONSE = 598;</code>
      *
@@ -2943,7 +3119,7 @@ public final class CsMsgid {
      *手机是否存在应答
      * </pre>
      */
-    MSGID_GET_IS_EXIST_PHONE_RESPONSE(369, 598),
+    MSGID_GET_IS_EXIST_PHONE_RESPONSE(391, 598),
     /**
      * <code>MSGID_SEND_FIND_PSW_REQUEST = 601;</code>
      *
@@ -2951,7 +3127,7 @@ public final class CsMsgid {
      *发送邮件找回密码请求
      * </pre>
      */
-    MSGID_SEND_FIND_PSW_REQUEST(370, 601),
+    MSGID_SEND_FIND_PSW_REQUEST(392, 601),
     /**
      * <code>MSGID_SEND_FIND_PSW_RESPONSE = 602;</code>
      *
@@ -2959,7 +3135,7 @@ public final class CsMsgid {
      *发送邮件找回密码应答
      * </pre>
      */
-    MSGID_SEND_FIND_PSW_RESPONSE(371, 602),
+    MSGID_SEND_FIND_PSW_RESPONSE(393, 602),
     /**
      * <code>MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_REQUEST = 603;</code>
      *
@@ -2967,7 +3143,7 @@ public final class CsMsgid {
      *手机找回密码找回验证码请求
      * </pre>
      */
-    MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_REQUEST(372, 603),
+    MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_REQUEST(394, 603),
     /**
      * <code>MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_RESPONSE = 604;</code>
      *
@@ -2975,7 +3151,7 @@ public final class CsMsgid {
      *手机找回密码找回验证码应答
      * </pre>
      */
-    MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_RESPONSE(373, 604),
+    MSGID_SEND_FIND_PASSWORD_VERIFY_CODE_RESPONSE(395, 604),
     /**
      * <code>MSGID_GET_REST_PASSWORD_BY_PHONE_REQUEST = 605;</code>
      *
@@ -2983,7 +3159,7 @@ public final class CsMsgid {
      *手机找回密码确定请求
      * </pre>
      */
-    MSGID_GET_REST_PASSWORD_BY_PHONE_REQUEST(374, 605),
+    MSGID_GET_REST_PASSWORD_BY_PHONE_REQUEST(396, 605),
     /**
      * <code>MSGID_GET_REST_PASSWORD_BY_PHONE_RESPONSE = 606;</code>
      *
@@ -2991,7 +3167,7 @@ public final class CsMsgid {
      *手机找回密码确定应答
      * </pre>
      */
-    MSGID_GET_REST_PASSWORD_BY_PHONE_RESPONSE(375, 606),
+    MSGID_GET_REST_PASSWORD_BY_PHONE_RESPONSE(397, 606),
     /**
      * <code>MSGID_SELECT_ADDRESS_AJAX_REQUEST = 607;</code>
      *
@@ -2999,7 +3175,7 @@ public final class CsMsgid {
      *获取配送方式请求
      * </pre>
      */
-    MSGID_SELECT_ADDRESS_AJAX_REQUEST(376, 607),
+    MSGID_SELECT_ADDRESS_AJAX_REQUEST(398, 607),
     /**
      * <code>MSGID_SELECT_ADDRESS_AJAX_RESPONSE = 608;</code>
      *
@@ -3007,7 +3183,7 @@ public final class CsMsgid {
      *获取配送方式应答
      * </pre>
      */
-    MSGID_SELECT_ADDRESS_AJAX_RESPONSE(377, 608),
+    MSGID_SELECT_ADDRESS_AJAX_RESPONSE(399, 608),
     /**
      * <code>MSGID_SEND_REGISTER_VERIFY_CODE_REQUEST = 609;</code>
      *
@@ -3015,7 +3191,7 @@ public final class CsMsgid {
      *手机注册发送验证码
      * </pre>
      */
-    MSGID_SEND_REGISTER_VERIFY_CODE_REQUEST(378, 609),
+    MSGID_SEND_REGISTER_VERIFY_CODE_REQUEST(400, 609),
     /**
      * <code>MSGID_SEND_REGISTER_VERIFY_CODE_RESPONSE = 610;</code>
      *
@@ -3023,7 +3199,7 @@ public final class CsMsgid {
      *手机注册发送验证码应答
      * </pre>
      */
-    MSGID_SEND_REGISTER_VERIFY_CODE_RESPONSE(379, 610),
+    MSGID_SEND_REGISTER_VERIFY_CODE_RESPONSE(401, 610),
     /**
      * <code>MSGID_REDO_MERCHANT_BY_PHONE_REQUEST = 611;</code>
      *
@@ -3031,7 +3207,7 @@ public final class CsMsgid {
      *手机注册
      * </pre>
      */
-    MSGID_REDO_MERCHANT_BY_PHONE_REQUEST(380, 611),
+    MSGID_REDO_MERCHANT_BY_PHONE_REQUEST(402, 611),
     /**
      * <code>MSGID_REDO_MERCHANT_BY_PHONE_RESPONSE = 612;</code>
      *
@@ -3039,7 +3215,7 @@ public final class CsMsgid {
      *手机应答
      * </pre>
      */
-    MSGID_REDO_MERCHANT_BY_PHONE_RESPONSE(381, 612),
+    MSGID_REDO_MERCHANT_BY_PHONE_RESPONSE(403, 612),
     /**
      * <code>MSGID_REST_PSW_BY_PHONE_REQUEST = 613;</code>
      *
@@ -3047,7 +3223,7 @@ public final class CsMsgid {
      *手机找回密码
      * </pre>
      */
-    MSGID_REST_PSW_BY_PHONE_REQUEST(382, 613),
+    MSGID_REST_PSW_BY_PHONE_REQUEST(404, 613),
     /**
      * <code>MSGID_REST_PSW_BY_PHONE_RESPONSE = 614;</code>
      *
@@ -3055,7 +3231,7 @@ public final class CsMsgid {
      *手机找回密码应答
      * </pre>
      */
-    MSGID_REST_PSW_BY_PHONE_RESPONSE(383, 614),
+    MSGID_REST_PSW_BY_PHONE_RESPONSE(405, 614),
     /**
      * <code>MSGID_SAVE_PAY_METHOD_REQUEST = 615;</code>
      *
@@ -3063,7 +3239,7 @@ public final class CsMsgid {
      *修改支付方式
      * </pre>
      */
-    MSGID_SAVE_PAY_METHOD_REQUEST(384, 615),
+    MSGID_SAVE_PAY_METHOD_REQUEST(406, 615),
     /**
      * <code>MSGID_SAVE_PAY_METHOD_RESPONSE = 616;</code>
      *
@@ -3071,7 +3247,7 @@ public final class CsMsgid {
      *修改支付方式应答
      * </pre>
      */
-    MSGID_SAVE_PAY_METHOD_RESPONSE(385, 616),
+    MSGID_SAVE_PAY_METHOD_RESPONSE(407, 616),
     /**
      * <code>MSGID_GET_PARCEL_ITEM_LIST_REQUEST = 617;</code>
      *
@@ -3079,7 +3255,7 @@ public final class CsMsgid {
      *包裹中的单品列表
      * </pre>
      */
-    MSGID_GET_PARCEL_ITEM_LIST_REQUEST(386, 617),
+    MSGID_GET_PARCEL_ITEM_LIST_REQUEST(408, 617),
     /**
      * <code>MSGID_GET_PARCEL_ITEM_LIST_RESPONSE = 618;</code>
      *
@@ -3087,7 +3263,7 @@ public final class CsMsgid {
      *包裹中的单品列表应答
      * </pre>
      */
-    MSGID_GET_PARCEL_ITEM_LIST_RESPONSE(387, 618),
+    MSGID_GET_PARCEL_ITEM_LIST_RESPONSE(409, 618),
     /**
      * <code>MSGID_GET_MATCH_ITEM_CATEGORY_REQUEST = 619;</code>
      *
@@ -3095,7 +3271,7 @@ public final class CsMsgid {
      *获得单品分类请求
      * </pre>
      */
-    MSGID_GET_MATCH_ITEM_CATEGORY_REQUEST(388, 619),
+    MSGID_GET_MATCH_ITEM_CATEGORY_REQUEST(410, 619),
     /**
      * <code>MSGID_GET_MATCH_ITEM_CATEGORY_RESPONSE = 620;</code>
      *
@@ -3103,7 +3279,7 @@ public final class CsMsgid {
      *获得单品分类应答
      * </pre>
      */
-    MSGID_GET_MATCH_ITEM_CATEGORY_RESPONSE(389, 620),
+    MSGID_GET_MATCH_ITEM_CATEGORY_RESPONSE(411, 620),
     /**
      * <code>MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST = 621;</code>
      *
@@ -3111,7 +3287,7 @@ public final class CsMsgid {
      *收货地址列表请求
      * </pre>
      */
-    MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST(390, 621),
+    MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST(412, 621),
     /**
      * <code>MSG_GET_CUSTOMER_ADDRESS_LIST_RESPONSE = 622;</code>
      *
@@ -3119,7 +3295,7 @@ public final class CsMsgid {
      *收货地址列表应答
      * </pre>
      */
-    MSG_GET_CUSTOMER_ADDRESS_LIST_RESPONSE(391, 622),
+    MSG_GET_CUSTOMER_ADDRESS_LIST_RESPONSE(413, 622),
     /**
      * <code>MSG_GET_COLLECTION_LIST_REQUEST = 625;</code>
      *
@@ -3127,7 +3303,7 @@ public final class CsMsgid {
      *包裹详情里选中配送方式
      * </pre>
      */
-    MSG_GET_COLLECTION_LIST_REQUEST(392, 625),
+    MSG_GET_COLLECTION_LIST_REQUEST(414, 625),
     /**
      * <code>MSG_GET_COLLECTION_LIST_RESPONSE = 626;</code>
      *
@@ -3135,7 +3311,7 @@ public final class CsMsgid {
      *编辑商品-获得专辑列表应答
      * </pre>
      */
-    MSG_GET_COLLECTION_LIST_RESPONSE(393, 626),
+    MSG_GET_COLLECTION_LIST_RESPONSE(415, 626),
     /**
      * <code>MSGID_MY_ACCOUNT_HINT_REQUEST = 631;</code>
      *
@@ -3143,7 +3319,7 @@ public final class CsMsgid {
      *获取我的红点请求
      * </pre>
      */
-    MSGID_MY_ACCOUNT_HINT_REQUEST(394, 631),
+    MSGID_MY_ACCOUNT_HINT_REQUEST(416, 631),
     /**
      * <code>MSGID_MY_ACCOUNT_HINT_RESPONSE = 632;</code>
      *
@@ -3151,7 +3327,7 @@ public final class CsMsgid {
      *获取我的红点应答
      * </pre>
      */
-    MSGID_MY_ACCOUNT_HINT_RESPONSE(395, 632),
+    MSGID_MY_ACCOUNT_HINT_RESPONSE(417, 632),
     /**
      * <code>MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_REQUEST = 633;</code>
      *
@@ -3159,7 +3335,7 @@ public final class CsMsgid {
      *add by jianh2016/04/16
      * </pre>
      */
-    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_REQUEST(396, 633),
+    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_REQUEST(418, 633),
     /**
      * <code>MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_RESPONSE = 634;</code>
      *
@@ -3167,7 +3343,7 @@ public final class CsMsgid {
      *修改充值卡订单支付方式初始化应答
      * </pre>
      */
-    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_RESPONSE(397, 634),
+    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_INITIAL_RESPONSE(419, 634),
     /**
      * <code>MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_REQUEST = 635;</code>
      *
@@ -3175,7 +3351,7 @@ public final class CsMsgid {
      *修改充值卡订单支付方式请求
      * </pre>
      */
-    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_REQUEST(398, 635),
+    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_REQUEST(420, 635),
     /**
      * <code>MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_RESPONSE = 636;</code>
      *
@@ -3183,7 +3359,7 @@ public final class CsMsgid {
      *修改充值卡订单支付方式应答
      * </pre>
      */
-    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_RESPONSE(399, 636),
+    MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_RESPONSE(421, 636),
     /**
      * <code>MSGID_SET_MERCHANT_MESSAGE_REQUEST = 637;</code>
      *
@@ -3191,7 +3367,7 @@ public final class CsMsgid {
      *充值卡账户明细下拉请求
      * </pre>
      */
-    MSGID_SET_MERCHANT_MESSAGE_REQUEST(400, 637),
+    MSGID_SET_MERCHANT_MESSAGE_REQUEST(422, 637),
     /**
      * <code>MSGID_SET_MERCHANT_MESSAGE_RESPONSE = 638;</code>
      *
@@ -3199,7 +3375,7 @@ public final class CsMsgid {
      *充值卡账户明细下拉应答
      * </pre>
      */
-    MSGID_SET_MERCHANT_MESSAGE_RESPONSE(401, 638),
+    MSGID_SET_MERCHANT_MESSAGE_RESPONSE(423, 638),
     /**
      * <code>MSGID_GET_RECEIPT_LIST_REQUEST = 639;</code>
      *
@@ -3207,7 +3383,7 @@ public final class CsMsgid {
      *新订单列表请求
      * </pre>
      */
-    MSGID_GET_RECEIPT_LIST_REQUEST(402, 639),
+    MSGID_GET_RECEIPT_LIST_REQUEST(424, 639),
     /**
      * <code>MSGID_GET_RECEIPT_LIST_RESPONSE = 640;</code>
      *
@@ -3215,7 +3391,7 @@ public final class CsMsgid {
      *新订单列表应答
      * </pre>
      */
-    MSGID_GET_RECEIPT_LIST_RESPONSE(403, 640),
+    MSGID_GET_RECEIPT_LIST_RESPONSE(425, 640),
     /**
      * <code>MSGID_SET_SOLD_OUT_REQUEST = 641;</code>
      *
@@ -3223,7 +3399,7 @@ public final class CsMsgid {
      *设置商品已下架请求
      * </pre>
      */
-    MSGID_SET_SOLD_OUT_REQUEST(404, 641),
+    MSGID_SET_SOLD_OUT_REQUEST(426, 641),
     /**
      * <code>MSGID_SET_SOLD_OUT_RESPONSE = 642;</code>
      *
@@ -3231,7 +3407,7 @@ public final class CsMsgid {
      *设置商品已下架应答
      * </pre>
      */
-    MSGID_SET_SOLD_OUT_RESPONSE(405, 642),
+    MSGID_SET_SOLD_OUT_RESPONSE(427, 642),
     /**
      * <code>MSGID_SET_EDIT_QTY_REQUEST = 643;</code>
      *
@@ -3239,7 +3415,7 @@ public final class CsMsgid {
      *设置商品的确认数量请求
      * </pre>
      */
-    MSGID_SET_EDIT_QTY_REQUEST(406, 643),
+    MSGID_SET_EDIT_QTY_REQUEST(428, 643),
     /**
      * <code>MSGID_SET_EDIT_QTY_RESPONSE = 644;</code>
      *
@@ -3247,7 +3423,7 @@ public final class CsMsgid {
      *设置商品的确认数量应答
      * </pre>
      */
-    MSGID_SET_EDIT_QTY_RESPONSE(407, 644),
+    MSGID_SET_EDIT_QTY_RESPONSE(429, 644),
     /**
      * <code>MSGID_SET_REGISTER_VERIFY_REQUEST = 645;</code>
      *
@@ -3255,7 +3431,7 @@ public final class CsMsgid {
      *设置注册下一步验证请求
      * </pre>
      */
-    MSGID_SET_REGISTER_VERIFY_REQUEST(408, 645),
+    MSGID_SET_REGISTER_VERIFY_REQUEST(430, 645),
     /**
      * <code>MSGID_SET_REGISTER_VERIFY_RESPONSE = 646;</code>
      *
@@ -3263,7 +3439,7 @@ public final class CsMsgid {
      *设置注册下一步验证应答
      * </pre>
      */
-    MSGID_SET_REGISTER_VERIFY_RESPONSE(409, 646),
+    MSGID_SET_REGISTER_VERIFY_RESPONSE(431, 646),
     /**
      * <code>MSGID_INIT_PERMISSIONS_REQUEST = 647;</code>
      *
@@ -3271,7 +3447,7 @@ public final class CsMsgid {
      *权限设置初始化请求	initPermissions
      * </pre>
      */
-    MSGID_INIT_PERMISSIONS_REQUEST(410, 647),
+    MSGID_INIT_PERMISSIONS_REQUEST(432, 647),
     /**
      * <code>MSGID_INIT_PERMISSIONS_RESPONSE = 648;</code>
      *
@@ -3279,7 +3455,7 @@ public final class CsMsgid {
      *权限设置初始化应答
      * </pre>
      */
-    MSGID_INIT_PERMISSIONS_RESPONSE(411, 648),
+    MSGID_INIT_PERMISSIONS_RESPONSE(433, 648),
     /**
      * <code>MSGID_SAVE_PERMISSIONS_REQUEST = 649;</code>
      *
@@ -3287,7 +3463,7 @@ public final class CsMsgid {
      *权限设置保存请求
      * </pre>
      */
-    MSGID_SAVE_PERMISSIONS_REQUEST(412, 649),
+    MSGID_SAVE_PERMISSIONS_REQUEST(434, 649),
     /**
      * <code>MSGID_SAVE_PERMISSIONS_RESPONSE = 650;</code>
      *
@@ -3295,7 +3471,7 @@ public final class CsMsgid {
      *权限设置保存应答
      * </pre>
      */
-    MSGID_SAVE_PERMISSIONS_RESPONSE(413, 650),
+    MSGID_SAVE_PERMISSIONS_RESPONSE(435, 650),
     /**
      * <code>MSGID_ENABLE_MERCHANT_CUSTOMER_REQUEST = 651;</code>
      *
@@ -3303,7 +3479,7 @@ public final class CsMsgid {
      *启用商户子账号请求
      * </pre>
      */
-    MSGID_ENABLE_MERCHANT_CUSTOMER_REQUEST(414, 651),
+    MSGID_ENABLE_MERCHANT_CUSTOMER_REQUEST(436, 651),
     /**
      * <code>MSGID_ENABLE_MERCHANT_CUSTOMER_RESPONSE = 652;</code>
      *
@@ -3311,7 +3487,7 @@ public final class CsMsgid {
      *启用商户子账号应答
      * </pre>
      */
-    MSGID_ENABLE_MERCHANT_CUSTOMER_RESPONSE(415, 652),
+    MSGID_ENABLE_MERCHANT_CUSTOMER_RESPONSE(437, 652),
     /**
      * <code>MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST = 653;</code>
      *
@@ -3319,7 +3495,7 @@ public final class CsMsgid {
      *停用商户子账号请求
      * </pre>
      */
-    MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST(416, 653),
+    MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST(438, 653),
     /**
      * <code>MSGID_DISABLE_MERCHANT_CUSTOMER_RESPONSE = 654;</code>
      *
@@ -3327,7 +3503,7 @@ public final class CsMsgid {
      *停用商户子账号应答
      * </pre>
      */
-    MSGID_DISABLE_MERCHANT_CUSTOMER_RESPONSE(417, 654),
+    MSGID_DISABLE_MERCHANT_CUSTOMER_RESPONSE(439, 654),
     /**
      * <code>MSGID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST = 655;</code>
      *
@@ -3335,7 +3511,7 @@ public final class CsMsgid {
      *添加商户子账户请求
      * </pre>
      */
-    MSGID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST(418, 655),
+    MSGID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST(440, 655),
     /**
      * <code>MSGID_ADD_MERCHANT_SUB_ACCOUNT_RESPONSE = 656;</code>
      *
@@ -3343,7 +3519,7 @@ public final class CsMsgid {
      *添加商户子账户应答
      * </pre>
      */
-    MSGID_ADD_MERCHANT_SUB_ACCOUNT_RESPONSE(419, 656),
+    MSGID_ADD_MERCHANT_SUB_ACCOUNT_RESPONSE(441, 656),
     /**
      * <code>MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_REQUEST = 657;</code>
      *
@@ -3351,7 +3527,7 @@ public final class CsMsgid {
      *获取商户子账户列表请求
      * </pre>
      */
-    MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_REQUEST(420, 657),
+    MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_REQUEST(442, 657),
     /**
      * <code>MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_RESPONSE = 658;</code>
      *
@@ -3359,7 +3535,7 @@ public final class CsMsgid {
      *获取商户子账户列表应答
      * </pre>
      */
-    MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_RESPONSE(421, 658),
+    MSGID_GET_MERCHANT_SUB_ACCOUNT_LIST_RESPONSE(443, 658),
     /**
      * <code>MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_REQUEST = 659;</code>
      *
@@ -3367,7 +3543,7 @@ public final class CsMsgid {
      *获取商户子账户权限请求
      * </pre>
      */
-    MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_REQUEST(422, 659),
+    MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_REQUEST(444, 659),
     /**
      * <code>MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_RESPONSE = 660;</code>
      *
@@ -3375,7 +3551,7 @@ public final class CsMsgid {
      *获取商户子账号权限应答
      * </pre>
      */
-    MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_RESPONSE(423, 660),
+    MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMISION_RESPONSE(445, 660),
     ;
 
     /**
@@ -5606,6 +5782,182 @@ public final class CsMsgid {
      */
     public static final int MSGID_GET_ITEM_CROWD_DETAIL_RESPONSE_VALUE = 284;
     /**
+     * <code>MSGID_INIT_ADDRESS_AJAX_REQUEST = 285;</code>
+     *
+     * <pre>
+     *收货地址初始化请求
+     * </pre>
+     */
+    public static final int MSGID_INIT_ADDRESS_AJAX_REQUEST_VALUE = 285;
+    /**
+     * <code>MSGID_INIT_ADDRESS_AJAX_RESPONSE = 286;</code>
+     *
+     * <pre>
+     *收货地址初始化应答
+     * </pre>
+     */
+    public static final int MSGID_INIT_ADDRESS_AJAX_RESPONSE_VALUE = 286;
+    /**
+     * <code>MSGID_SAVE_ADDRESS_AJAX_REQUEST = 287;</code>
+     *
+     * <pre>
+     *保存收货地址请求
+     * </pre>
+     */
+    public static final int MSGID_SAVE_ADDRESS_AJAX_REQUEST_VALUE = 287;
+    /**
+     * <code>MSGID_SAVE_ADDRESS_AJAX_RESPONSE = 288;</code>
+     *
+     * <pre>
+     *保存收货地址应答
+     * </pre>
+     */
+    public static final int MSGID_SAVE_ADDRESS_AJAX_RESPONSE_VALUE = 288;
+    /**
+     * <code>MSGID_ADD_CROWD_TO_CART_REQUEST = 289;</code>
+     *
+     * <pre>
+     *拼单加入购物车请求
+     * </pre>
+     */
+    public static final int MSGID_ADD_CROWD_TO_CART_REQUEST_VALUE = 289;
+    /**
+     * <code>MSGID_ADD_CROWD_TO_CART_RESPONSE = 290;</code>
+     *
+     * <pre>
+     *拼单加入购物车应答
+     * </pre>
+     */
+    public static final int MSGID_ADD_CROWD_TO_CART_RESPONSE_VALUE = 290;
+    /**
+     * <code>MSGID_NEW_SALES_ORDER_DETAIL_REQUEST = 291;</code>
+     *
+     * <pre>
+     *新订单详情请求
+     * </pre>
+     */
+    public static final int MSGID_NEW_SALES_ORDER_DETAIL_REQUEST_VALUE = 291;
+    /**
+     * <code>MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE = 292;</code>
+     *
+     * <pre>
+     *新订单详情应答
+     * </pre>
+     */
+    public static final int MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE_VALUE = 292;
+    /**
+     * <code>MSGID_PLACE_ORDER_AGAIN_REQUEST = 293;</code>
+     *
+     * <pre>
+     *重新下单请求
+     * </pre>
+     */
+    public static final int MSGID_PLACE_ORDER_AGAIN_REQUEST_VALUE = 293;
+    /**
+     * <code>MSGID_PLACE_ORDER_AGAIN_RESPONSE = 294;</code>
+     *
+     * <pre>
+     *重新下单应答
+     * </pre>
+     */
+    public static final int MSGID_PLACE_ORDER_AGAIN_RESPONSE_VALUE = 294;
+    /**
+     * <code>MSG_DO_SHARE_BAG_REQUEST = 295;</code>
+     *
+     * <pre>
+     *送福袋保存福袋数量请求
+     * </pre>
+     */
+    public static final int MSG_DO_SHARE_BAG_REQUEST_VALUE = 295;
+    /**
+     * <code>MSG_DO_SHARE_BAG_RESPONSE = 296;</code>
+     *
+     * <pre>
+     *送福袋保存福袋数量应答
+     * </pre>
+     */
+    public static final int MSG_DO_SHARE_BAG_RESPONSE_VALUE = 296;
+    /**
+     * <code>MSG_INIT_BAG_AJAX_REQUEST = 297;</code>
+     *
+     * <pre>
+     *福袋弹出请求
+     * </pre>
+     */
+    public static final int MSG_INIT_BAG_AJAX_REQUEST_VALUE = 297;
+    /**
+     * <code>MSG_INIT_BAG_AJAX_RESPONSE = 298;</code>
+     *
+     * <pre>
+     *福袋弹出应答
+     * </pre>
+     */
+    public static final int MSG_INIT_BAG_AJAX_RESPONSE_VALUE = 298;
+    /**
+     * <code>MSG_BAG_INFO_AJAX_REQUEST = 299;</code>
+     *
+     * <pre>
+     *福袋详情请求
+     * </pre>
+     */
+    public static final int MSG_BAG_INFO_AJAX_REQUEST_VALUE = 299;
+    /**
+     * <code>MSG_BAG_INFO_AJAX_RESPONSE = 300;</code>
+     *
+     * <pre>
+     *福袋详情应答
+     * </pre>
+     */
+    public static final int MSG_BAG_INFO_AJAX_RESPONSE_VALUE = 300;
+    /**
+     * <code>MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST = 301;</code>
+     *
+     * <pre>
+     *无绑定第三方登录请求
+     * </pre>
+     */
+    public static final int MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST_VALUE = 301;
+    /**
+     * <code>MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE = 302;</code>
+     *
+     * <pre>
+     *无绑定第三方登录应答
+     * </pre>
+     */
+    public static final int MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE_VALUE = 302;
+    /**
+     * <code>MSGID_GET_BIND_INFO_REQUEST = 303;</code>
+     *
+     * <pre>
+     *获取绑定信息请求
+     * </pre>
+     */
+    public static final int MSGID_GET_BIND_INFO_REQUEST_VALUE = 303;
+    /**
+     * <code>MSGID_GET_BIND_INFO_RESPONSE = 304;</code>
+     *
+     * <pre>
+     *获取绑定信息应答
+     * </pre>
+     */
+    public static final int MSGID_GET_BIND_INFO_RESPONSE_VALUE = 304;
+    /**
+     * <code>MSGID_INIT_SEND_BAG_REQUEST = 305;</code>
+     *
+     * <pre>
+     *初始化发送福袋请求
+     * </pre>
+     */
+    public static final int MSGID_INIT_SEND_BAG_REQUEST_VALUE = 305;
+    /**
+     * <code>MSGID_INIT_SEND_BAG_RESPONSE = 306;</code>
+     *
+     * <pre>
+     *初始化发送福袋应答
+     * </pre>
+     */
+    public static final int MSGID_INIT_SEND_BAG_RESPONSE_VALUE = 306;
+    /**
      * <code>MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST = 503;</code>
      *
      * <pre>
@@ -7029,6 +7381,28 @@ public final class CsMsgid {
         case 282: return MSGID_INITIATE_CROWD_RESPONSE;
         case 283: return MSGID_GET_ITEM_CROWD_DETAIL_REQUEST;
         case 284: return MSGID_GET_ITEM_CROWD_DETAIL_RESPONSE;
+        case 285: return MSGID_INIT_ADDRESS_AJAX_REQUEST;
+        case 286: return MSGID_INIT_ADDRESS_AJAX_RESPONSE;
+        case 287: return MSGID_SAVE_ADDRESS_AJAX_REQUEST;
+        case 288: return MSGID_SAVE_ADDRESS_AJAX_RESPONSE;
+        case 289: return MSGID_ADD_CROWD_TO_CART_REQUEST;
+        case 290: return MSGID_ADD_CROWD_TO_CART_RESPONSE;
+        case 291: return MSGID_NEW_SALES_ORDER_DETAIL_REQUEST;
+        case 292: return MSGID_NEW_SALES_ORDER_DETAIL_RESPONSE;
+        case 293: return MSGID_PLACE_ORDER_AGAIN_REQUEST;
+        case 294: return MSGID_PLACE_ORDER_AGAIN_RESPONSE;
+        case 295: return MSG_DO_SHARE_BAG_REQUEST;
+        case 296: return MSG_DO_SHARE_BAG_RESPONSE;
+        case 297: return MSG_INIT_BAG_AJAX_REQUEST;
+        case 298: return MSG_INIT_BAG_AJAX_RESPONSE;
+        case 299: return MSG_BAG_INFO_AJAX_REQUEST;
+        case 300: return MSG_BAG_INFO_AJAX_RESPONSE;
+        case 301: return MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST;
+        case 302: return MSGID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE;
+        case 303: return MSGID_GET_BIND_INFO_REQUEST;
+        case 304: return MSGID_GET_BIND_INFO_RESPONSE;
+        case 305: return MSGID_INIT_SEND_BAG_REQUEST;
+        case 306: return MSGID_INIT_SEND_BAG_RESPONSE;
         case 503: return MSGID_DELETE_GIFT_CARD_CART_NUMBER_REQUEST;
         case 504: return MSGID_DELETE_GIFT_CARD_CART_NUMBER_RESPONSE;
         case 505: return MSGID_COUNTRY_LIST_REQUEST;
@@ -7231,7 +7605,7 @@ public final class CsMsgid {
           descriptor;
   static {
     java.lang.String[] descriptorData = {
-            "\n\016cs_msgid.proto\022\010fksproto*\332\204\001\n\017FksCSPro" +
+            "\n\016cs_msgid.proto\022\010fksproto*\213\213\001\n\017FksCSPro" +
                     "toMsgId\022\031\n\025MSGID_ACCOUNT_REQUEST\020\001\022\032\n\026MS" +
                     "GID_ACCOUNT_RESPONSE\020\002\022\027\n\023MSGID_LOGIN_RE" +
                     "QUEST\020\003\022\030\n\024MSGID_LOGIN_RESPONSE\020\004\022\035\n\031MSG" +
@@ -7512,151 +7886,171 @@ public final class CsMsgid {
                     "\022\"\n\035MSGID_INITIATE_CROWD_RESPONSE\020\232\002\022(\n#" +
                     "MSGID_GET_ITEM_CROWD_DETAIL_REQUEST\020\233\002\022)",
             "\n$MSGID_GET_ITEM_CROWD_DETAIL_RESPONSE\020\234" +
-                    "\002\022/\n*MSGID_DELETE_GIFT_CARD_CART_NUMBER_" +
-                    "REQUEST\020\367\003\0220\n+MSGID_DELETE_GIFT_CARD_CAR" +
-                    "T_NUMBER_RESPONSE\020\370\003\022\037\n\032MSGID_COUNTRY_LI" +
-                    "ST_REQUEST\020\371\003\022 \n\033MSGID_COUNTRY_LIST_RESP" +
-                    "ONSE\020\372\003\022\036\n\031MSGID_REGION_LIST_REQUEST\020\373\003\022" +
-                    "\037\n\032MSGID_REGION_LIST_RESPONSE\020\374\003\022%\n MSGI" +
-                    "D_GET_CHILDREN_COUNT_REQUEST\020\377\003\022&\n!MSGID" +
-                    "_GET_CHILDREN_COUNT_RESPONSE\020\200\004\022!\n\034MSGID" +
-                    "_MERCHANT_INDEX_REQUEST\020\201\004\022\"\n\035MSGID_MERC",
-            "HANT_INDEX_RESPONSE\020\202\004\022\030\n\023MSGID_ITEMS_RE" +
-                    "QUEST\020\203\004\022\031\n\024MSGID_ITEMS_RESPONSE\020\204\004\022!\n\034M" +
-                    "SGID_MERCHANT_INTRO_REQUEST\020\205\004\022\"\n\035MSGID_" +
-                    "MERCHANT_INTRO_RESPONSE\020\206\004\022*\n%MSGID_GET_" +
-                    "MERCHANT_ALBUM_LIST_REQUEST\020\213\004\022+\n&MSGID_" +
-                    "GET_MERCHANT_ALBUM_LIST_RESPONSE\020\214\004\022&\n!M" +
-                    "SGID_GET_ALBUM_ITEM_LIST_REQUEST\020\215\004\022\'\n\"M" +
-                    "SGID_GET_ALBUM_ITEM_LIST_RESPONSE\020\216\004\022!\n\034" +
-                    "MSGID_INIT_ADD_ALBUM_REQUEST\020\217\004\022\"\n\035MSGID" +
-                    "_INIT_ADD_ALBUM_RESPONSE\020\220\004\022&\n!MSGID_IS_",
-            "ALBUM_NAME_EXIST_REQUEST\020\221\004\022\'\n\"MSGID_IS_" +
-                    "ALBUM_NAME_EXIST_RESPONSE\020\222\004\022&\n!MSGID_AL" +
-                    "BUM_CATEGORY_LIST_REQUEST\020\223\004\022\'\n\"MSGID_AL" +
-                    "BUM_CATEGORY_LIST_RESPONSE\020\224\004\022!\n\034MSGID_A" +
-                    "DD_ALBUM_SAVE_REQUEST\020\225\004\022\"\n\035MSGID_ADD_AL" +
-                    "BUM_SAVE_RESPONSE\020\226\004\022\"\n\035MSGID_INIT_EDIT_" +
-                    "ALBUM_REQUEST\020\227\004\022#\n\036MSGID_INIT_EDIT_ALBU" +
-                    "M_RESPONSE\020\230\004\022\"\n\035MSGID_EDIT_ALBUM_SAVE_R" +
-                    "EQUEST\020\231\004\022#\n\036MSGID_EDIT_ALBUM_SAVE_RESPO" +
-                    "NSE\020\232\004\022\037\n\032MSGID_DELETE_ALBUM_REQUEST\020\233\004\022",
-            " \n\033MSGID_DELETE_ALBUM_RESPONSE\020\234\004\022 \n\033MSG" +
-                    "ID_INIT_ADD_ITEM_REQREST\020\235\004\022!\n\034MSGID_INI" +
-                    "T_ADD_ITEM_RESPONSE\020\236\004\022 \n\033MSGID_ADD_ITEM" +
-                    "_SAVE_REQUEST\020\237\004\022!\n\034MSGID_ADD_ITEM_SAVE_" +
-                    "RESPONSE\020\240\004\022!\n\034MSGID_INIT_EDIT_ITEM_REQU" +
-                    "EST\020\241\004\022\"\n\035MSGID_INIT_EDIT_ITEM_RESPONSE\020" +
-                    "\242\004\022!\n\034MSGID_EDIT_ITEM_SAVE_REQUEST\020\243\004\022\"\n" +
-                    "\035MSGID_EDIT_ITEM_SAVE_RESPONSE\020\244\004\022$\n\037MSG" +
-                    "ID_DELETE_ALBUM_ITEM_REQUSET\020\245\004\022%\n MSGID" +
-                    "_DELETE_ALBUM_ITEM_RESPONSE\020\246\004\022\031\n\024MSGID_",
-            "IMAGES_REQUEST\020\251\004\022\032\n\025MSGID_IMAGES_RESPON" +
-                    "SE\020\252\004\022(\n#MSGID_UPLOAD_MERCHANT_IMAGE_REQ" +
-                    "UEST\020\253\004\022)\n$MSGID_UPLOAD_MERCHANT_IMAGE_R" +
-                    "ESPONSE\020\254\004\022&\n!MSGID_SAVE_MERCHANT_IMAGE_" +
-                    "REQUEST\020\255\004\022\'\n\"MSGID_SAVE_MERCHANT_IMAGE_" +
-                    "RESPONSE\020\256\004\022\036\n\031MSGID_MY_MERCHANT_REQUEST" +
-                    "\020\257\004\022\037\n\032MSGID_MY_MERCHANT_RESPONSE\020\260\004\022 \n\033" +
-                    "MSGID_MY_ORDER_ITEM_REQUEST\020\261\004\022!\n\034MSGID_" +
-                    "MY_ORDER_ITEM_RESPONSE\020\262\004\0221\n,MSGID_MERCH" +
-                    "ANT_SALES_STATISTICS_LIST_REQUEST\020\263\004\0222\n-",
-            "MSGID_MERCHANT_SALES_STATISTICS_LIST_RES" +
-                    "PONSE\020\264\004\022 \n\033MSGID_MERCHANT_FORM_REQUEST\020" +
-                    "\265\004\022!\n\034MSGID_MERCHANT_FORM_RESPONSE\020\266\004\022 \n" +
-                    "\033MSGID_SAVE_MERCHANT_REQUEST\020\267\004\022!\n\034MSGID" +
-                    "_SAVE_MERCHANT_RESPONSE\020\270\004\022,\n\'MSGID_SAVE" +
-                    "_MERCHANT_INDEX_IMAGE_REQUEST\020\271\004\022-\n(MSGI" +
-                    "D_SAVE_MERCHANT_INDEX_IMAGE_RESPONSE\020\272\004\022" +
-                    "#\n\036MSGID_SEND_PARCEL_LIST_REQUEST\020\273\004\022$\n\037" +
-                    "MSGID_SEND_PARCEL_LIST_RESPONSE\020\274\004\022%\n MS" +
-                    "GID_GET_MY_NOTICE_LIST_REQUEST\020\275\004\022&\n!MSG",
-            "ID_GET_MY_NOTICE_LIST_RESPONSE\020\276\004\022\'\n\"MSG" +
-                    "ID_GET_MY_CUSTOMER_ICON_REQUEST\020\277\004\022(\n#MS" +
-                    "GID_GET_MY_CUSTOMER_ICON_RESPONSE\020\300\004\022,\n\'" +
-                    "MSGID_SET_MY_SAVE_CUSTOMER_ICON_REQUEST\020" +
-                    "\301\004\022-\n(MSGID_SET_MY_SAVE_CUSTOMER_ICON_RE" +
-                    "SPONSE\020\302\004\022+\n&MSGID_SET_MY_SAVE_CUSTOMER_" +
-                    "PSW_REQUEST\020\303\004\022,\n\'MSGID_SET_MY_SAVE_CUST" +
-                    "OMER_PSW_RESPONSE\020\304\004\022,\n\'MSGID_SET_MY_SEN" +
-                    "D_CONFIRM_EMAIL_REQUEST\020\305\004\022-\n(MSGID_SET_" +
-                    "MY_SEND_CONFIRM_EMAIL_RESPONSE\020\306\004\0221\n,MSG",
-            "ID_SEND_MY_PHONE_BIND_VERIFY_CODE_REQUES" +
-                    "T\020\307\004\0222\n-MSGID_SEND_MY_PHONE_BIND_VERIFY_" +
-                    "CODE_RESPONSE\020\310\004\022%\n MSGID_SEND_MY_PHONE_" +
-                    "BIND_REQUEST\020\311\004\022&\n!MSGID_SEND_MY_PHONE_B" +
-                    "IND_RESPONSE\020\312\004\022%\n MSGID_SET_LOGDO_MERCH" +
-                    "ANT_REQUEST\020\313\004\022&\n!MSGID_SET_LOGDO_MERCHA" +
-                    "NT_RESPONSE\020\314\004\022+\n&MSGID_SET_LOGDO_MERCHA" +
-                    "NT_PHONE_REQUEST\020\315\004\022,\n\'MSGID_SET_LOGDO_M" +
-                    "ERCHANT_PHONE_RESPONSE\020\316\004\022.\n)MSGID_GET_R" +
-                    "EG_MERCHANT_EMAIL_INIT_REQUEST\020\317\004\022/\n*MSG",
-            "ID_GET_REG_MERCHANT_EMAIL_INIT_RESPONSE\020" +
-                    "\320\004\022+\n&MSGID_GET_REGDO_MERCHANT_EMAIL_REQ" +
-                    "UEST\020\321\004\022,\n\'MSGID_GET_REGDO_MERCHANT_EMAI" +
-                    "L_RESPONSE\020\322\004\022%\n MSGID_GET_IS_EXIST_EMAI" +
-                    "L_REQUEST\020\323\004\022&\n!MSGID_GET_IS_EXIST_EMAIL" +
-                    "_RESPONSE\020\324\004\022%\n MSGID_GET_IS_EXIST_PHONE" +
-                    "_REQUEST\020\325\004\022&\n!MSGID_GET_IS_EXIST_PHONE_" +
-                    "RESPONSE\020\326\004\022 \n\033MSGID_SEND_FIND_PSW_REQUE" +
-                    "ST\020\331\004\022!\n\034MSGID_SEND_FIND_PSW_RESPONSE\020\332\004" +
-                    "\0221\n,MSGID_SEND_FIND_PASSWORD_VERIFY_CODE",
-            "_REQUEST\020\333\004\0222\n-MSGID_SEND_FIND_PASSWORD_" +
-                    "VERIFY_CODE_RESPONSE\020\334\004\022-\n(MSGID_GET_RES" +
-                    "T_PASSWORD_BY_PHONE_REQUEST\020\335\004\022.\n)MSGID_" +
-                    "GET_REST_PASSWORD_BY_PHONE_RESPONSE\020\336\004\022&" +
-                    "\n!MSGID_SELECT_ADDRESS_AJAX_REQUEST\020\337\004\022\'" +
-                    "\n\"MSGID_SELECT_ADDRESS_AJAX_RESPONSE\020\340\004\022" +
-                    ",\n\'MSGID_SEND_REGISTER_VERIFY_CODE_REQUE" +
-                    "ST\020\341\004\022-\n(MSGID_SEND_REGISTER_VERIFY_CODE" +
-                    "_RESPONSE\020\342\004\022)\n$MSGID_REDO_MERCHANT_BY_P" +
-                    "HONE_REQUEST\020\343\004\022*\n%MSGID_REDO_MERCHANT_B",
-            "Y_PHONE_RESPONSE\020\344\004\022$\n\037MSGID_REST_PSW_BY" +
-                    "_PHONE_REQUEST\020\345\004\022%\n MSGID_REST_PSW_BY_P" +
-                    "HONE_RESPONSE\020\346\004\022\"\n\035MSGID_SAVE_PAY_METHO" +
-                    "D_REQUEST\020\347\004\022#\n\036MSGID_SAVE_PAY_METHOD_RE" +
-                    "SPONSE\020\350\004\022\'\n\"MSGID_GET_PARCEL_ITEM_LIST_" +
-                    "REQUEST\020\351\004\022(\n#MSGID_GET_PARCEL_ITEM_LIST" +
-                    "_RESPONSE\020\352\004\022*\n%MSGID_GET_MATCH_ITEM_CAT" +
-                    "EGORY_REQUEST\020\353\004\022+\n&MSGID_GET_MATCH_ITEM" +
-                    "_CATEGORY_RESPONSE\020\354\004\022*\n%MSG_GET_CUSTOME" +
-                    "R_ADDRESS_LIST_REQUEST\020\355\004\022+\n&MSG_GET_CUS",
-            "TOMER_ADDRESS_LIST_RESPONSE\020\356\004\022$\n\037MSG_GE" +
-                    "T_COLLECTION_LIST_REQUEST\020\361\004\022%\n MSG_GET_" +
-                    "COLLECTION_LIST_RESPONSE\020\362\004\022\"\n\035MSGID_MY_" +
-                    "ACCOUNT_HINT_REQUEST\020\367\004\022#\n\036MSGID_MY_ACCO" +
-                    "UNT_HINT_RESPONSE\020\370\004\022:\n5MSGID_EDIT_GIFT_" +
-                    "CARD_ORDER_PAY_METHOD_INITIAL_REQUEST\020\371\004" +
-                    "\022;\n6MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHO" +
-                    "D_INITIAL_RESPONSE\020\372\004\0222\n-MSGID_EDIT_GIFT" +
-                    "_CARD_ORDER_PAY_METHOD_REQUEST\020\373\004\0223\n.MSG" +
-                    "ID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_RESPO",
-            "NSE\020\374\004\022\'\n\"MSGID_SET_MERCHANT_MESSAGE_REQ" +
-                    "UEST\020\375\004\022(\n#MSGID_SET_MERCHANT_MESSAGE_RE" +
-                    "SPONSE\020\376\004\022#\n\036MSGID_GET_RECEIPT_LIST_REQU" +
-                    "EST\020\377\004\022$\n\037MSGID_GET_RECEIPT_LIST_RESPONS" +
-                    "E\020\200\005\022\037\n\032MSGID_SET_SOLD_OUT_REQUEST\020\201\005\022 \n" +
-                    "\033MSGID_SET_SOLD_OUT_RESPONSE\020\202\005\022\037\n\032MSGID" +
-                    "_SET_EDIT_QTY_REQUEST\020\203\005\022 \n\033MSGID_SET_ED" +
-                    "IT_QTY_RESPONSE\020\204\005\022&\n!MSGID_SET_REGISTER" +
-                    "_VERIFY_REQUEST\020\205\005\022\'\n\"MSGID_SET_REGISTER" +
-                    "_VERIFY_RESPONSE\020\206\005\022#\n\036MSGID_INIT_PERMIS",
-            "SIONS_REQUEST\020\207\005\022$\n\037MSGID_INIT_PERMISSIO" +
-                    "NS_RESPONSE\020\210\005\022#\n\036MSGID_SAVE_PERMISSIONS" +
-                    "_REQUEST\020\211\005\022$\n\037MSGID_SAVE_PERMISSIONS_RE" +
-                    "SPONSE\020\212\005\022+\n&MSGID_ENABLE_MERCHANT_CUSTO" +
-                    "MER_REQUEST\020\213\005\022,\n\'MSGID_ENABLE_MERCHANT_" +
-                    "CUSTOMER_RESPONSE\020\214\005\022,\n\'MSGID_DISABLE_ME" +
-                    "RCHANT_CUSTOMER_REQUEST\020\215\005\022-\n(MSGID_DISA" +
-                    "BLE_MERCHANT_CUSTOMER_RESPONSE\020\216\005\022+\n&MSG" +
-                    "ID_ADD_MERCHANT_SUB_ACCOUNT_REQUEST\020\217\005\022," +
-                    "\n\'MSGID_ADD_MERCHANT_SUB_ACCOUNT_RESPONS",
-            "E\020\220\005\0220\n+MSGID_GET_MERCHANT_SUB_ACCOUNT_L" +
-                    "IST_REQUEST\020\221\005\0221\n,MSGID_GET_MERCHANT_SUB" +
-                    "_ACCOUNT_LIST_RESPONSE\020\222\005\0225\n0MSGID_GET_M" +
-                    "ERCHANT_SUB_ACCOUNT_PERMISION_REQUEST\020\223\005" +
-                    "\0226\n1MSGID_GET_MERCHANT_SUB_ACCOUNT_PERMI" +
-                    "SION_RESPONSE\020\224\005"
+                    "\002\022$\n\037MSGID_INIT_ADDRESS_AJAX_REQUEST\020\235\002\022" +
+                    "%\n MSGID_INIT_ADDRESS_AJAX_RESPONSE\020\236\002\022$" +
+                    "\n\037MSGID_SAVE_ADDRESS_AJAX_REQUEST\020\237\002\022%\n " +
+                    "MSGID_SAVE_ADDRESS_AJAX_RESPONSE\020\240\002\022$\n\037M" +
+                    "SGID_ADD_CROWD_TO_CART_REQUEST\020\241\002\022%\n MSG" +
+                    "ID_ADD_CROWD_TO_CART_RESPONSE\020\242\002\022)\n$MSGI" +
+                    "D_NEW_SALES_ORDER_DETAIL_REQUEST\020\243\002\022*\n%M" +
+                    "SGID_NEW_SALES_ORDER_DETAIL_RESPONSE\020\244\002\022" +
+                    "$\n\037MSGID_PLACE_ORDER_AGAIN_REQUEST\020\245\002\022%\n",
+            " MSGID_PLACE_ORDER_AGAIN_RESPONSE\020\246\002\022\035\n\030" +
+                    "MSG_DO_SHARE_BAG_REQUEST\020\247\002\022\036\n\031MSG_DO_SH" +
+                    "ARE_BAG_RESPONSE\020\250\002\022\036\n\031MSG_INIT_BAG_AJAX" +
+                    "_REQUEST\020\251\002\022\037\n\032MSG_INIT_BAG_AJAX_RESPONS" +
+                    "E\020\252\002\022\036\n\031MSG_BAG_INFO_AJAX_REQUEST\020\253\002\022\037\n\032" +
+                    "MSG_BAG_INFO_AJAX_RESPONSE\020\254\002\022+\n&MSGID_T" +
+                    "HIRD_LOGIN_WITHOUT_BIND_REQUEST\020\255\002\022,\n\'MS" +
+                    "GID_THIRD_LOGIN_WITHOUT_BIND_RESPONSE\020\256\002" +
+                    "\022 \n\033MSGID_GET_BIND_INFO_REQUEST\020\257\002\022!\n\034MS" +
+                    "GID_GET_BIND_INFO_RESPONSE\020\260\002\022 \n\033MSGID_I",
+            "NIT_SEND_BAG_REQUEST\020\261\002\022!\n\034MSGID_INIT_SE" +
+                    "ND_BAG_RESPONSE\020\262\002\022/\n*MSGID_DELETE_GIFT_" +
+                    "CARD_CART_NUMBER_REQUEST\020\367\003\0220\n+MSGID_DEL" +
+                    "ETE_GIFT_CARD_CART_NUMBER_RESPONSE\020\370\003\022\037\n" +
+                    "\032MSGID_COUNTRY_LIST_REQUEST\020\371\003\022 \n\033MSGID_" +
+                    "COUNTRY_LIST_RESPONSE\020\372\003\022\036\n\031MSGID_REGION" +
+                    "_LIST_REQUEST\020\373\003\022\037\n\032MSGID_REGION_LIST_RE" +
+                    "SPONSE\020\374\003\022%\n MSGID_GET_CHILDREN_COUNT_RE" +
+                    "QUEST\020\377\003\022&\n!MSGID_GET_CHILDREN_COUNT_RES" +
+                    "PONSE\020\200\004\022!\n\034MSGID_MERCHANT_INDEX_REQUEST",
+            "\020\201\004\022\"\n\035MSGID_MERCHANT_INDEX_RESPONSE\020\202\004\022" +
+                    "\030\n\023MSGID_ITEMS_REQUEST\020\203\004\022\031\n\024MSGID_ITEMS" +
+                    "_RESPONSE\020\204\004\022!\n\034MSGID_MERCHANT_INTRO_REQ" +
+                    "UEST\020\205\004\022\"\n\035MSGID_MERCHANT_INTRO_RESPONSE" +
+                    "\020\206\004\022*\n%MSGID_GET_MERCHANT_ALBUM_LIST_REQ" +
+                    "UEST\020\213\004\022+\n&MSGID_GET_MERCHANT_ALBUM_LIST" +
+                    "_RESPONSE\020\214\004\022&\n!MSGID_GET_ALBUM_ITEM_LIS" +
+                    "T_REQUEST\020\215\004\022\'\n\"MSGID_GET_ALBUM_ITEM_LIS" +
+                    "T_RESPONSE\020\216\004\022!\n\034MSGID_INIT_ADD_ALBUM_RE" +
+                    "QUEST\020\217\004\022\"\n\035MSGID_INIT_ADD_ALBUM_RESPONS",
+            "E\020\220\004\022&\n!MSGID_IS_ALBUM_NAME_EXIST_REQUES" +
+                    "T\020\221\004\022\'\n\"MSGID_IS_ALBUM_NAME_EXIST_RESPON" +
+                    "SE\020\222\004\022&\n!MSGID_ALBUM_CATEGORY_LIST_REQUE" +
+                    "ST\020\223\004\022\'\n\"MSGID_ALBUM_CATEGORY_LIST_RESPO" +
+                    "NSE\020\224\004\022!\n\034MSGID_ADD_ALBUM_SAVE_REQUEST\020\225" +
+                    "\004\022\"\n\035MSGID_ADD_ALBUM_SAVE_RESPONSE\020\226\004\022\"\n" +
+                    "\035MSGID_INIT_EDIT_ALBUM_REQUEST\020\227\004\022#\n\036MSG" +
+                    "ID_INIT_EDIT_ALBUM_RESPONSE\020\230\004\022\"\n\035MSGID_" +
+                    "EDIT_ALBUM_SAVE_REQUEST\020\231\004\022#\n\036MSGID_EDIT" +
+                    "_ALBUM_SAVE_RESPONSE\020\232\004\022\037\n\032MSGID_DELETE_",
+            "ALBUM_REQUEST\020\233\004\022 \n\033MSGID_DELETE_ALBUM_R" +
+                    "ESPONSE\020\234\004\022 \n\033MSGID_INIT_ADD_ITEM_REQRES" +
+                    "T\020\235\004\022!\n\034MSGID_INIT_ADD_ITEM_RESPONSE\020\236\004\022" +
+                    " \n\033MSGID_ADD_ITEM_SAVE_REQUEST\020\237\004\022!\n\034MSG" +
+                    "ID_ADD_ITEM_SAVE_RESPONSE\020\240\004\022!\n\034MSGID_IN" +
+                    "IT_EDIT_ITEM_REQUEST\020\241\004\022\"\n\035MSGID_INIT_ED" +
+                    "IT_ITEM_RESPONSE\020\242\004\022!\n\034MSGID_EDIT_ITEM_S" +
+                    "AVE_REQUEST\020\243\004\022\"\n\035MSGID_EDIT_ITEM_SAVE_R" +
+                    "ESPONSE\020\244\004\022$\n\037MSGID_DELETE_ALBUM_ITEM_RE" +
+                    "QUSET\020\245\004\022%\n MSGID_DELETE_ALBUM_ITEM_RESP",
+            "ONSE\020\246\004\022\031\n\024MSGID_IMAGES_REQUEST\020\251\004\022\032\n\025MS" +
+                    "GID_IMAGES_RESPONSE\020\252\004\022(\n#MSGID_UPLOAD_M" +
+                    "ERCHANT_IMAGE_REQUEST\020\253\004\022)\n$MSGID_UPLOAD" +
+                    "_MERCHANT_IMAGE_RESPONSE\020\254\004\022&\n!MSGID_SAV" +
+                    "E_MERCHANT_IMAGE_REQUEST\020\255\004\022\'\n\"MSGID_SAV" +
+                    "E_MERCHANT_IMAGE_RESPONSE\020\256\004\022\036\n\031MSGID_MY" +
+                    "_MERCHANT_REQUEST\020\257\004\022\037\n\032MSGID_MY_MERCHAN" +
+                    "T_RESPONSE\020\260\004\022 \n\033MSGID_MY_ORDER_ITEM_REQ" +
+                    "UEST\020\261\004\022!\n\034MSGID_MY_ORDER_ITEM_RESPONSE\020" +
+                    "\262\004\0221\n,MSGID_MERCHANT_SALES_STATISTICS_LI",
+            "ST_REQUEST\020\263\004\0222\n-MSGID_MERCHANT_SALES_ST" +
+                    "ATISTICS_LIST_RESPONSE\020\264\004\022 \n\033MSGID_MERCH" +
+                    "ANT_FORM_REQUEST\020\265\004\022!\n\034MSGID_MERCHANT_FO" +
+                    "RM_RESPONSE\020\266\004\022 \n\033MSGID_SAVE_MERCHANT_RE" +
+                    "QUEST\020\267\004\022!\n\034MSGID_SAVE_MERCHANT_RESPONSE" +
+                    "\020\270\004\022,\n\'MSGID_SAVE_MERCHANT_INDEX_IMAGE_R" +
+                    "EQUEST\020\271\004\022-\n(MSGID_SAVE_MERCHANT_INDEX_I" +
+                    "MAGE_RESPONSE\020\272\004\022#\n\036MSGID_SEND_PARCEL_LI" +
+                    "ST_REQUEST\020\273\004\022$\n\037MSGID_SEND_PARCEL_LIST_" +
+                    "RESPONSE\020\274\004\022%\n MSGID_GET_MY_NOTICE_LIST_",
+            "REQUEST\020\275\004\022&\n!MSGID_GET_MY_NOTICE_LIST_R" +
+                    "ESPONSE\020\276\004\022\'\n\"MSGID_GET_MY_CUSTOMER_ICON" +
+                    "_REQUEST\020\277\004\022(\n#MSGID_GET_MY_CUSTOMER_ICO" +
+                    "N_RESPONSE\020\300\004\022,\n\'MSGID_SET_MY_SAVE_CUSTO" +
+                    "MER_ICON_REQUEST\020\301\004\022-\n(MSGID_SET_MY_SAVE" +
+                    "_CUSTOMER_ICON_RESPONSE\020\302\004\022+\n&MSGID_SET_" +
+                    "MY_SAVE_CUSTOMER_PSW_REQUEST\020\303\004\022,\n\'MSGID" +
+                    "_SET_MY_SAVE_CUSTOMER_PSW_RESPONSE\020\304\004\022,\n" +
+                    "\'MSGID_SET_MY_SEND_CONFIRM_EMAIL_REQUEST" +
+                    "\020\305\004\022-\n(MSGID_SET_MY_SEND_CONFIRM_EMAIL_R",
+            "ESPONSE\020\306\004\0221\n,MSGID_SEND_MY_PHONE_BIND_V" +
+                    "ERIFY_CODE_REQUEST\020\307\004\0222\n-MSGID_SEND_MY_P" +
+                    "HONE_BIND_VERIFY_CODE_RESPONSE\020\310\004\022%\n MSG" +
+                    "ID_SEND_MY_PHONE_BIND_REQUEST\020\311\004\022&\n!MSGI" +
+                    "D_SEND_MY_PHONE_BIND_RESPONSE\020\312\004\022%\n MSGI" +
+                    "D_SET_LOGDO_MERCHANT_REQUEST\020\313\004\022&\n!MSGID" +
+                    "_SET_LOGDO_MERCHANT_RESPONSE\020\314\004\022+\n&MSGID" +
+                    "_SET_LOGDO_MERCHANT_PHONE_REQUEST\020\315\004\022,\n\'" +
+                    "MSGID_SET_LOGDO_MERCHANT_PHONE_RESPONSE\020" +
+                    "\316\004\022.\n)MSGID_GET_REG_MERCHANT_EMAIL_INIT_",
+            "REQUEST\020\317\004\022/\n*MSGID_GET_REG_MERCHANT_EMA" +
+                    "IL_INIT_RESPONSE\020\320\004\022+\n&MSGID_GET_REGDO_M" +
+                    "ERCHANT_EMAIL_REQUEST\020\321\004\022,\n\'MSGID_GET_RE" +
+                    "GDO_MERCHANT_EMAIL_RESPONSE\020\322\004\022%\n MSGID_" +
+                    "GET_IS_EXIST_EMAIL_REQUEST\020\323\004\022&\n!MSGID_G" +
+                    "ET_IS_EXIST_EMAIL_RESPONSE\020\324\004\022%\n MSGID_G" +
+                    "ET_IS_EXIST_PHONE_REQUEST\020\325\004\022&\n!MSGID_GE" +
+                    "T_IS_EXIST_PHONE_RESPONSE\020\326\004\022 \n\033MSGID_SE" +
+                    "ND_FIND_PSW_REQUEST\020\331\004\022!\n\034MSGID_SEND_FIN" +
+                    "D_PSW_RESPONSE\020\332\004\0221\n,MSGID_SEND_FIND_PAS",
+            "SWORD_VERIFY_CODE_REQUEST\020\333\004\0222\n-MSGID_SE" +
+                    "ND_FIND_PASSWORD_VERIFY_CODE_RESPONSE\020\334\004" +
+                    "\022-\n(MSGID_GET_REST_PASSWORD_BY_PHONE_REQ" +
+                    "UEST\020\335\004\022.\n)MSGID_GET_REST_PASSWORD_BY_PH" +
+                    "ONE_RESPONSE\020\336\004\022&\n!MSGID_SELECT_ADDRESS_" +
+                    "AJAX_REQUEST\020\337\004\022\'\n\"MSGID_SELECT_ADDRESS_" +
+                    "AJAX_RESPONSE\020\340\004\022,\n\'MSGID_SEND_REGISTER_" +
+                    "VERIFY_CODE_REQUEST\020\341\004\022-\n(MSGID_SEND_REG" +
+                    "ISTER_VERIFY_CODE_RESPONSE\020\342\004\022)\n$MSGID_R" +
+                    "EDO_MERCHANT_BY_PHONE_REQUEST\020\343\004\022*\n%MSGI",
+            "D_REDO_MERCHANT_BY_PHONE_RESPONSE\020\344\004\022$\n\037" +
+                    "MSGID_REST_PSW_BY_PHONE_REQUEST\020\345\004\022%\n MS" +
+                    "GID_REST_PSW_BY_PHONE_RESPONSE\020\346\004\022\"\n\035MSG" +
+                    "ID_SAVE_PAY_METHOD_REQUEST\020\347\004\022#\n\036MSGID_S" +
+                    "AVE_PAY_METHOD_RESPONSE\020\350\004\022\'\n\"MSGID_GET_" +
+                    "PARCEL_ITEM_LIST_REQUEST\020\351\004\022(\n#MSGID_GET" +
+                    "_PARCEL_ITEM_LIST_RESPONSE\020\352\004\022*\n%MSGID_G" +
+                    "ET_MATCH_ITEM_CATEGORY_REQUEST\020\353\004\022+\n&MSG" +
+                    "ID_GET_MATCH_ITEM_CATEGORY_RESPONSE\020\354\004\022*" +
+                    "\n%MSG_GET_CUSTOMER_ADDRESS_LIST_REQUEST\020",
+            "\355\004\022+\n&MSG_GET_CUSTOMER_ADDRESS_LIST_RESP" +
+                    "ONSE\020\356\004\022$\n\037MSG_GET_COLLECTION_LIST_REQUE" +
+                    "ST\020\361\004\022%\n MSG_GET_COLLECTION_LIST_RESPONS" +
+                    "E\020\362\004\022\"\n\035MSGID_MY_ACCOUNT_HINT_REQUEST\020\367\004" +
+                    "\022#\n\036MSGID_MY_ACCOUNT_HINT_RESPONSE\020\370\004\022:\n" +
+                    "5MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_I" +
+                    "NITIAL_REQUEST\020\371\004\022;\n6MSGID_EDIT_GIFT_CAR" +
+                    "D_ORDER_PAY_METHOD_INITIAL_RESPONSE\020\372\004\0222" +
+                    "\n-MSGID_EDIT_GIFT_CARD_ORDER_PAY_METHOD_" +
+                    "REQUEST\020\373\004\0223\n.MSGID_EDIT_GIFT_CARD_ORDER",
+            "_PAY_METHOD_RESPONSE\020\374\004\022\'\n\"MSGID_SET_MER" +
+                    "CHANT_MESSAGE_REQUEST\020\375\004\022(\n#MSGID_SET_ME" +
+                    "RCHANT_MESSAGE_RESPONSE\020\376\004\022#\n\036MSGID_GET_" +
+                    "RECEIPT_LIST_REQUEST\020\377\004\022$\n\037MSGID_GET_REC" +
+                    "EIPT_LIST_RESPONSE\020\200\005\022\037\n\032MSGID_SET_SOLD_" +
+                    "OUT_REQUEST\020\201\005\022 \n\033MSGID_SET_SOLD_OUT_RES" +
+                    "PONSE\020\202\005\022\037\n\032MSGID_SET_EDIT_QTY_REQUEST\020\203" +
+                    "\005\022 \n\033MSGID_SET_EDIT_QTY_RESPONSE\020\204\005\022&\n!M" +
+                    "SGID_SET_REGISTER_VERIFY_REQUEST\020\205\005\022\'\n\"M" +
+                    "SGID_SET_REGISTER_VERIFY_RESPONSE\020\206\005\022#\n\036",
+            "MSGID_INIT_PERMISSIONS_REQUEST\020\207\005\022$\n\037MSG" +
+                    "ID_INIT_PERMISSIONS_RESPONSE\020\210\005\022#\n\036MSGID" +
+                    "_SAVE_PERMISSIONS_REQUEST\020\211\005\022$\n\037MSGID_SA" +
+                    "VE_PERMISSIONS_RESPONSE\020\212\005\022+\n&MSGID_ENAB" +
+                    "LE_MERCHANT_CUSTOMER_REQUEST\020\213\005\022,\n\'MSGID" +
+                    "_ENABLE_MERCHANT_CUSTOMER_RESPONSE\020\214\005\022,\n" +
+                    "\'MSGID_DISABLE_MERCHANT_CUSTOMER_REQUEST" +
+                    "\020\215\005\022-\n(MSGID_DISABLE_MERCHANT_CUSTOMER_R" +
+                    "ESPONSE\020\216\005\022+\n&MSGID_ADD_MERCHANT_SUB_ACC" +
+                    "OUNT_REQUEST\020\217\005\022,\n\'MSGID_ADD_MERCHANT_SU",
+            "B_ACCOUNT_RESPONSE\020\220\005\0220\n+MSGID_GET_MERCH" +
+                    "ANT_SUB_ACCOUNT_LIST_REQUEST\020\221\005\0221\n,MSGID" +
+                    "_GET_MERCHANT_SUB_ACCOUNT_LIST_RESPONSE\020" +
+                    "\222\005\0225\n0MSGID_GET_MERCHANT_SUB_ACCOUNT_PER" +
+                    "MISION_REQUEST\020\223\005\0226\n1MSGID_GET_MERCHANT_" +
+                    "SUB_ACCOUNT_PERMISION_RESPONSE\020\224\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

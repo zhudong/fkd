@@ -349,11 +349,25 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="rl_for_login_4463">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44.63dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="tv_for_login">
         <item name="android:textSize">13sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="tv_for_login_ll">
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -509,5 +523,11 @@
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress_crowd</item>
         <!-- progress_horizontal -->
+    </style>
+
+
+    <style name="tv_for_login_note">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_color_for_login_note</item>
     </style>
 </resources>

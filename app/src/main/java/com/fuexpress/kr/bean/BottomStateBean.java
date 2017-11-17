@@ -7,15 +7,17 @@ public class BottomStateBean {
     int requirecount;
     int parcelcount;
     boolean showResource;
+    boolean showGroup;
 
 
     public BottomStateBean() {
     }
 
-    public BottomStateBean(int requirecount, int parcelcount, String showResource) {
+    public BottomStateBean(int requirecount, int parcelcount, String showResource, String showGroup) {
         this.requirecount = requirecount;
         this.parcelcount = parcelcount;
         this.showResource = "1".equals(showResource);
+        this.showGroup = "1".equals(showGroup);
     }
 
     public int getRequirecount() {
@@ -43,4 +45,10 @@ public class BottomStateBean {
 //        = 4;//1代表显示货源,0代表不显示货源
         this.showResource = "1".equals(showResource);
     }
+
+    public boolean isShowGroup() {
+        //同上
+        return showGroup;
+    }
+
 }

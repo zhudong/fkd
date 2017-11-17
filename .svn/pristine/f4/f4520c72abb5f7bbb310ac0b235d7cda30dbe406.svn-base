@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/shape_stroke"
+        android:hardwareAccelerated="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/package_product_realy_price"
+            android:textColor="@color/gray_666"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_actual_fee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/package_product_realy_price_note"
+            android:textColor="@color/gray_3f"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_actual_fee_value_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/delivery_fee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/package_product_tarrif"
+            android:textColor="@color/gray_666"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_commodity_fee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/package_product_tarrif_note"
+            android:textColor="@color/gray_3f"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_commodity_fee_value_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/package_shipping_tarrif"
+            android:textColor="@color/gray_666"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_freight_fee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/package_shipping_tarrif_note"
+            android:textColor="@color/gray_3f"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/delivery_freight_fee_value_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

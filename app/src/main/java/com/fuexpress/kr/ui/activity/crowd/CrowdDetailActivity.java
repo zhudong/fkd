@@ -2,33 +2,32 @@ package com.fuexpress.kr.ui.activity.crowd;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.util.ArrayMap;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fuexpress.kr.model.UserInfoBean;
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
+import com.fuexpress.kr.model.ShareManager;
+import com.fuexpress.kr.net.INetEngineListener;
+import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.activity.ItemDetailActivity;
-import com.fuexpress.kr.ui.activity.ShareActivity;
+import com.fuexpress.kr.ui.activity.ItemMoreInfoActivity;
 import com.fuexpress.kr.ui.adapter.CrowdItemAdapter;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
-import com.joooonho.SelectableRoundedImageView;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.fuexpress.kr.R;
-import com.fuexpress.kr.base.BaseActivity;
-import com.fuexpress.kr.conf.Constants;
-import com.fuexpress.kr.model.AccountManager;
-import com.fuexpress.kr.net.INetEngineListener;
-import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.view.CrowdProgressDetail;
 import com.fuexpress.kr.ui.view.CrowdTimer;
 import com.fuexpress.kr.ui.view.RefreshListView;
-import com.fuexpress.kr.ui.view.TitleBarView;
-import com.fuexpress.kr.utils.ClassUtil;
+import com.joooonho.SelectableRoundedImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +60,9 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
     private List<CsBase.PairIntFloat> discountsList;
     private CrowdItemAdapter adapter;
     private int mPageNO = 1;
-    private ArrayList<Float> finaldiscountList;
+    private ArrayMap<Long,Float> finaldiscountList;
     private long mCrowdId = 2902;
+    private CsCrowd.GetCrowdDetailResponse mResponse;
 
     @Override
     public View setInitView() {
@@ -114,14 +114,20 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.tv_go_crowd_detail:
-                String url = Constants.WebWiewUrl.getUrl(Constants.WebWiewUrl.CROWD_DETAIL) + mCrowd.getCrowdId() + "?decorator=empty" + "&localeCode=" + AccountManager.getInstance().getLocaleCode();
-//                String url = "http://122.226.100.91/static/ChatraTest.html";
-                Intent intent = new Intent(this, ItemDetailActivity.class);
-                intent.putExtra(ItemDetailActivity.URL, url);
-                intent.putExtra(ItemDetailActivity.TAG, true);
-                startActivity(intent);
+                if ("".equals(mResponse.getSelectImage()) | "0".equals(mResponse.getSelectImage())) {
+                    String url = Constants.WebWiewUrl.getUrl(Constants.WebWiewUrl.CROWD_DETAIL) + mCrowdId + "?decorator=empty" + "&localeCode=" + AccountManager.getInstance().getLocaleCode();
+                    intent = new Intent(this, ItemDetailActivity.class);
+                    intent.putExtra(ItemDetailActivity.URL, url);
+                    intent.putExtra(ItemDetailActivity.TAG, true);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(this, ItemMoreInfoActivity.class);
+                    intent.putExtra(ItemMoreInfoActivity.URL, mResponse.getImageUrl());
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -132,14 +138,15 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
         mBack = mRootView.findViewById(R.id.title_iv_left);
         mRight = mRootView.findViewById(R.id.title_iv_right);
         ((TextView) mRootView.findViewById(R.id.title_tv_center)).setText(getResources().getString(R.string.String_crowd_detail_title));
+        mRight.setVisibility(View.VISIBLE);
     }
 
     private void initData() {
         Intent intent = getIntent();
-        mCrowdId = intent.getLongExtra(CROWD_ID,0);
+        mCrowdId = intent.getLongExtra(CROWD_ID, 0);
         itemsList = new ArrayList<>();
         discountsList = new ArrayList<>();
-        finaldiscountList = new ArrayList<>();
+        finaldiscountList = new ArrayMap<Long, Float>();
         getCrowdDetail(mPageNO);
     }
 
@@ -147,8 +154,8 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
         String uri = mCrowd.getLogo() + Constants.ImgUrlSuffix.mob_list;
         ImageLoader.getInstance().displayImage(uri, mMCover, ImageLoaderHelper.getInstance(this).getDisplayOptions());
 
-        mCrowdName.setText(mCrowd.getName());
-        mCrowdDes.setText(Html.fromHtml(mCrowd.getTitle()));
+        mCrowdName.setText(mCrowd.getTitle());
+        mCrowdDes.setText(Html.fromHtml(mCrowd.getName()));
         mProgressDetail.setData(mCrowd);
 
         mTimerView.initTime(mCrowd);
@@ -166,7 +173,8 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
 
             @Override
             public void onSuccess(final CsCrowd.GetCrowdDetailResponse response) {
-                mCrowd = response.getCrowd();
+                mResponse = response;
+                mCrowd = mResponse.getCrowd();
               /*  itemsList = response.getItemsList();
                 discountsList = response.getDiscountsList();*/
                 if (index == 1) {
@@ -188,7 +196,6 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
                         String attendCount = CrowdDetailActivity.this.getResources().getString(R.string.String_has_attend_count);
                         mAttendCount.setText(String.format(attendCount, response.getUsersTotal()));
 //                        showUsers(response.getUsersList());去掉邀请用户
-                        mCrowdDes.setText(Html.fromHtml(mCrowd.getTitle()));
                         mListView.stopRefresh();
                         mListView.stopLoadMore(true);
                         mListView.setHasLoadMore(response.getMore());
@@ -206,14 +213,15 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
     private void initAdapter(List<CsBase.Item> itemsList, List<CsBase.PairIntFloat> discountsList) {
         finaldiscountList.clear();
 
-        for (CsBase.Item item : itemsList) {
-            for (CsBase.PairIntFloat pairIntFloat : discountsList) {
-                if (pairIntFloat.getK() == item.getItemid()) {
+        for (CsBase.PairIntFloat pairIntFloat : discountsList) {
+               /* if (pairIntFloat.getK() == item.getItemid()) {
                     float discount = pairIntFloat.getV();
                     finaldiscountList.add(discount);
-                }
-            }
+                }*/
+
+            finaldiscountList.put(pairIntFloat.getK(),pairIntFloat.getV());
         }
+
         if (adapter == null) {
             adapter = new CrowdItemAdapter(this, itemsList, finaldiscountList);
             mListView.setAdapter(adapter);
@@ -265,11 +273,21 @@ public class CrowdDetailActivity extends BaseActivity implements RefreshListView
 
     @Override
     protected void share() {
-      /*  ArrayList<String> urls = new ArrayList<>();
-        urls.add(mItem.getImageUrl());
-        String url = ShareUtil.getShareCrowdDetail().replace("1%", mCrowd.getCrowdId() + "") + Constants.WebWiewUrl.SHARE_URL_SUFFIX + AccountManager.getInstance().mInviteKey;
+        ArrayList<CsBase.ItemImage> urls = new ArrayList<>();
+        urls.add(CsBase.ItemImage.newBuilder().setImageUrl(mCrowd.getLogo()).build());
+       /* String url = ShareUtil.getShareCrowdDetail().replace("1%", mCrowd.getCrowdId() + "") + Constants.WebWiewUrl.SHARE_URL_SUFFIX + AccountManager.getInstance().mInviteKey;
         ShareBean bean = new ShareBean(1, mCrowd.getTitle(), mItem.getImageUrl(), url, urls, null, ShareActivity.CategoryShare.CROWD);
         shareDetail(0, bean);*/
+        ShareManager.initWithRes(urls, mCrowd.getName(), this);
+
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.GO_CROWD_Detail) {
+            mListView.autoRefresh();
+        }
     }
 
     @Override

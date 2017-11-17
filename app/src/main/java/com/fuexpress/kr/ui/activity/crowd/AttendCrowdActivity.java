@@ -15,23 +15,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
+import com.fuexpress.kr.bean.CartCommodityBean;
 import com.fuexpress.kr.bean.CommoditysBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.model.ItemBean;
+import com.fuexpress.kr.model.ShareManager;
+import com.fuexpress.kr.model.ShopCartManager;
 import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.activity.ItemDetailActivity;
-import com.fuexpress.kr.ui.activity.ShareActivity;
+import com.fuexpress.kr.ui.activity.ItemMoreInfoActivity;
+import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
 import com.fuexpress.kr.ui.activity.product_detail.ProductDetailHead;
-import com.fuexpress.kr.ui.activity.shopping_cart.CartOrderActivity;
+import com.fuexpress.kr.ui.activity.shopping_cart.ShopCartActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.CrowdProgressDetail;
 import com.fuexpress.kr.ui.view.CrowdTimer;
@@ -39,13 +43,14 @@ import com.fuexpress.kr.ui.view.FlowLayout;
 import com.fuexpress.kr.ui.view.MyNumberCounter;
 import com.fuexpress.kr.ui.view.OrderMessageView;
 import com.fuexpress.kr.ui.view.ProductExtendView;
-import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.ClassUtil;
 import com.fuexpress.kr.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import fksproto.CsBase;
 import fksproto.CsCart;
 import fksproto.CsCrowd;
@@ -96,6 +101,8 @@ public class AttendCrowdActivity extends BaseActivity {
     private int mCurrentColor;
     private int anInt;
     private LinearLayout mLlExtendsContainer;
+    private CsCrowd.GetItemCrowdDetailResponse mResponse;
+    private TextView mTvRedPoint;
 
     @Override
     public View setInitView() {
@@ -126,6 +133,7 @@ public class AttendCrowdActivity extends BaseActivity {
 //        mFlColorContainer = (FlowLayout) mRootView.findViewById(R.id.fl_color_container);
         mBtnCrowNow = (TextView) mRootView.findViewById(R.id.btn_crowd_now);
         mNumberCounter = (MyNumberCounter) mRootView.findViewById(R.id.numbercounter_attend_crowd);
+        mTvRedPoint = (TextView) mRootView.findViewById(R.id.tv_red_point);
 
         initTitle();
         initEvent();
@@ -155,21 +163,19 @@ public class AttendCrowdActivity extends BaseActivity {
 
     private void initData() {
         mItem = (ItemBean) getIntent().getBundleExtra(ITEM_BEAN).getSerializable(ITEM_BEAN);
-        mCrowdId = getIntent().getLongExtra(CROWD_ID, 0);
+       /* mCrowdId = getIntent().getLongExtra(CROWD_ID, 0);
         if (mCrowdId > 0) {
             getCrowdDetail(mCrowdId);
+        } else {
+            mCrowdId = mItem.getCrowdId();
         }
         if (mItemImagesList != null) {
             mHeadView.initData(mItemImagesList);
             mProgressDetail.setData(mCrowd);
         } else {
-            getItemBase();
-            getItemCrowdDeatail();
-//            getItemPurchaseDetail();
-        }
-
+        }*/
+        getItemBase();
         mMargin = UIUtils.dip2px(8);
-
     }
 
     private void initFromItem() {
@@ -254,7 +260,8 @@ public class AttendCrowdActivity extends BaseActivity {
         NetEngine.postRequest(builder, new INetEngineListener<CsCrowd.GetItemCrowdDetailResponse>() {
             @Override
             public void onSuccess(CsCrowd.GetItemCrowdDetailResponse response) {
-                mCrowd = response.getCrowd();
+                mResponse = response;
+                mCrowd = mResponse.getCrowd();
                 mSeller = response.getSeller();
                 mWarehouse = response.getWarehouse();
                 List<CsBase.ItemExtend> itemExtendsList = response.getItemExtendsList();
@@ -302,6 +309,7 @@ public class AttendCrowdActivity extends BaseActivity {
                         initnNumCount();
                         setCrowdButton(mCrowd);
                         initCount(mItemProduct);
+                        mProgressDetail.setData(mCrowd, mItem);
                     }
                 });
             }
@@ -315,8 +323,7 @@ public class AttendCrowdActivity extends BaseActivity {
 
 
     private void initCount(CsBase.ItemProduct itemProduct) {
-        if (itemProduct != null) {
-//            int max = itemProduct.getMaxQty()<itemProduct.getItemStock()?itemProduct.getMaxQty():itemProduct.getItemStock();
+        /*if (itemProduct != null) {
             int min = itemProduct.getMinQty();
             mNumberCounter.init(min, itemProduct.getMaxQty());
             if (mItemOffer.getQty() >= mItemProduct.getMinQty() && mItemOffer.getQty() < mItemProduct.getMaxQty())
@@ -326,7 +333,8 @@ public class AttendCrowdActivity extends BaseActivity {
                 mBtnCrowNow.setEnabled(false);
                 mNumberCounter.init((int) mItemOffer.getQty(), (int) mItemOffer.getQty());
             }
-        }
+        }*/
+        mNumberCounter.init(mItemProduct.getMinQty(), mItemProduct.getMaxQty());
     }
 
     private void initnNumCount() {
@@ -381,18 +389,18 @@ public class AttendCrowdActivity extends BaseActivity {
                     mTv_in_user_info_member_group.setText("普通会员");
                 }
                 */
-                int memberGroup = 0;
-                String sMenberGroup = null;
+//                int memberGroup = 0;
+                String sMenberGroup = "";
                 if (AccountManager.getInstance().userInfo != null) {
-                    memberGroup = AccountManager.getInstance().userInfo.getMemberGroup();
+                    sMenberGroup = AccountManager.getInstance().userInfo.getMemberGroupName();
                 }
-                if (3 == memberGroup) {
+               /* if (3 == memberGroup) {
                     sMenberGroup = getString(R.string.String_super_member);
                 } else if (2 == memberGroup) {
                     sMenberGroup = getString(R.string.String_vip_member);
                 } else {
                     sMenberGroup = getString(R.string.String_norme_member);
-                }
+                }*/
                 CsBase.ItemOfferGroup group = mItemOfferGroupsList.get(0);
                 float rate = group.getRate();
                 String vipSeller = String.format(this.getResources().getString(R.string.String_vip_rate), sMenberGroup, group.getQty(), CommonUtils.formatFloat(this, rate * 100));
@@ -438,12 +446,15 @@ public class AttendCrowdActivity extends BaseActivity {
                     @Override
                     public void run() {
                         mItem = ClassUtil.convertItem2ItemBean(response.getItem());
+//                        if (mPrice > 0) mItem.setPrice(mPrice);
                         mHeadView.initData(mItemImagesList);
                         mHeadView.setImageSize(mItem.getImageRatio());
-                        ClassUtil.convertItem2ItemBean(mItem, response.getItem());
+//                        ClassUtil.convertItem2ItemBean(mItem, response.getItem());
                         initFromItem();
                     }
                 });
+
+                getItemCrowdDeatail();
 
                /* mHandler.sendEmptyMessage(SHOW_BASE);
                 getMerchantByLinkID();*/
@@ -456,15 +467,27 @@ public class AttendCrowdActivity extends BaseActivity {
         });
     }
 
-    @Override
+    @OnClick({R.id.tv_item_detail, R.id.btn_crowd_now, R.id.rl_cart})
     public void onClick(View v) {
+        Intent intent;
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.rl_cart:
+                intent = new Intent(AttendCrowdActivity.this, ShopCartActivity.class);
+                intent.putExtra("fromWhere", ShopCartActivity.TYPE_FROM_CROWD);
+                startActivity(intent);
+                break;
             case R.id.btn_crowd_now:
                 addCart();
                 break;
             case R.id.tv_item_detail:
-                goItemDetail();
+                if ("".equals(mResponse.getSelectImage()) | "0".equals(mResponse.getSelectImage())) {
+                    goItemDetail();
+                } else {
+                    intent = new Intent(this, ItemMoreInfoActivity.class);
+                    intent.putExtra(ItemMoreInfoActivity.URL, mResponse.getImageUrl());
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -493,6 +516,7 @@ public class AttendCrowdActivity extends BaseActivity {
     private void initTitle() {
         mBack = mRootView.findViewById(R.id.title_iv_left);
         mRight = mRootView.findViewById(R.id.title_iv_right);
+        mRight.setVisibility(View.VISIBLE);
         ((TextView) mRootView.findViewById(R.id.title_tv_center)).setText(getResources().getString(R.string.String_attend_crowd_title));
     }
 
@@ -503,6 +527,32 @@ public class AttendCrowdActivity extends BaseActivity {
 
 
     private void addCart() {
+        boolean userLogin = AccountManager.getInstance().isUserLogin(this);
+        if (!userLogin)
+            return;
+        int number = mNumberCounter.getCurrentNumber();
+        CartCommodityBean bean = new CartCommodityBean();
+        bean.setQty(number);
+        bean.setItemID(mItem.getItemid());
+        bean.setNote(mOrderMessage.getMessage());
+//        bean.
+//        mCrowdId;
+        List<CsBase.PairIntInt> list = new ArrayList<>();
+        for (int i = 0; i < mLlExtendsContainer.getChildCount(); i++) {
+            ProductExtendView chile = (ProductExtendView) mLlExtendsContainer.getChildAt(i);
+            CsBase.PairIntInt currentOptionValue = chile.getCurrentOptionValue();
+            if (currentOptionValue != null) {
+                list.add(currentOptionValue);
+            }
+        }
+        ShopCartManager.getInstance(this, (SysApplication) getApplication()).addCrowdToCartRequest(
+                (int) mCrowd.getCrowdId(),
+                (int) mItem.getItemid(),
+                number, mOrderMessage.getMessage(), list);
+/*
+
+
+        CrowdOrderInfo crowdOrderInfo = new CrowdOrderInfo();
         int number = mNumberCounter.getCurrentNumber();
         String where = null;
         if (mItemPlace != null && mItemPlace.getPlaceId() != 0) {
@@ -511,8 +561,8 @@ public class AttendCrowdActivity extends BaseActivity {
             if (mItemLink != null)
                 where = mItemLink.getWebsiteName();
         }
-        float value = (float) Math.round((mProgressDetail.getEndPrice() + mCharge) * 100) / 100;
-
+        float price = (float) Math.round((mProgressDetail.getEndPrice() + mCharge) * 100) / 100;
+        crowdOrderInfo.setCurrencyPrice(price);
         CsCart.SalesCartItem.Builder builder = CsCart.SalesCartItem.newBuilder()
                 .setNote(mOrderMessage.getMessage())
                 .setTitle(mItem.getTitle())
@@ -526,59 +576,38 @@ public class AttendCrowdActivity extends BaseActivity {
                 .setCartItemId((12334))
                 .setSubtitle(mItem.getTitle())
                 .setQty(mNumberCounter.getCurrentNumber())
-                .setUnitPrice(value);
+                .setUnitPrice(price);
 
         for (int i = 0; i < mLlExtendsContainer.getChildCount(); i++) {
             ProductExtendView child = (ProductExtendView) mLlExtendsContainer.getChildAt(i);
             CsBase.ItemExtend extend = child.getExtendValue();
             if (extend != null) builder.addExtends(extend);
         }
-
-
         CsCart.SalesCartItem salesCartItem = builder.build();
-        ArrayList<CommoditysBean> cartCommodityBeans = new ArrayList<>();
-        CommoditysBean commoditysBean = new CommoditysBean();
-        ArrayList<CsCart.SalesCartItem> salesCartItems = new ArrayList<>();
-        salesCartItems.add(salesCartItem);
-        commoditysBean.setSalesCartItems(salesCartItems);
-        commoditysBean.crowdId = mCrowd.getCrowdId();
-
-        commoditysBean.getExtendAttrs().clear();
+        crowdOrderInfo.setSalesCartItem(salesCartItem);
+        mItem.setCrowd_id(mCrowd.getCrowdId());
+        crowdOrderInfo.setItemBean(mItem);
+        List<CsBase.PairIntInt> selectedAttrs = crowdOrderInfo.getSelectedAttrs();
+        selectedAttrs.clear();
         for (int i = 0; i < mLlExtendsContainer.getChildCount(); i++) {
             ProductExtendView child = (ProductExtendView) mLlExtendsContainer.getChildAt(i);
-            commoditysBean.getExtendAttrs().add(child.getCurrentOptionValue());
+            selectedAttrs.add(child.getCurrentOptionValue());
         }
-
-        CommoditysBean commoditysBean2 = new CommoditysBean();
-        List<CsBase.Warehouse> warehouses = new ArrayList<>();
-        warehouses.add(mWarehouse);
-        commoditysBean2.setWarehouses(warehouses);
-        commoditysBean2.setCrowdId(mItem.getCrowdId());
-        commoditysBean2.setItemId(mItem.getItemid());
-        commoditysBean2.setQty(number);
-
-        cartCommodityBeans.add(commoditysBean2);
-        cartCommodityBeans.add(commoditysBean);
-
-        Intent intent = new Intent(this, CartOrderActivity.class);
+        crowdOrderInfo.setWarehouse(mWarehouse);
+        crowdOrderInfo.setCount(number);
+        Intent intent = new Intent(this, CrowdCartOrderActivity.class);
         Bundle bundle = new Bundle();
-        cartItems = cartCommodityBeans;
-        intent.putExtra("grandTotal", value * mNumberCounter.getCurrentNumber());
-        intent.putExtra("qtyCount", mNumberCounter.getCurrentNumber());
+        bundle.putSerializable(CrowdCartOrderActivity.Crowd_order_info, crowdOrderInfo);
         intent.putExtras(bundle);
-        intent.putExtra(CartOrderActivity.FLAG_FROM_CROWD, true);
-        startActivity(intent);
+        startActivity(intent);*/
     }
+
 
     @Override
     protected void share() {
-      /*  ArrayList<String> urls = new ArrayList<>();
-        for (CsBase.ItemImage itemImage : mItemImagesList) {
-            urls.add(itemImage.getImageUrl() + Constants.ImgUrlSuffix.mob_list);
-        }
-        String url = ShareUtil.getShareCrowdAttend().replace("1%", mCrowd.getCrowdId() + "") + Constants.WebWiewUrl.SHARE_URL_SUFFIX + AccountManager.getInstance().mInviteKey;
-        ShareBean bean = new ShareBean(1, mCrowd.getTitle(), mItem.getImageUrl(), url, urls, null, ShareActivity.CategoryShare.CROWD);
-        shareDetail(0, bean);*/
+        ArrayList<CsBase.ItemImage> urls = new ArrayList<>();
+        urls.add(CsBase.ItemImage.newBuilder().setImageUrl(mItem.getImageUrl()).build());
+        ShareManager.initWithRes(urls, mCrowd.getName(), this);
     }
 
     @Override
@@ -595,5 +624,30 @@ public class AttendCrowdActivity extends BaseActivity {
                 return false;
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showCartsItemCount(((SysApplication) getApplication()).getQtyCount());
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        //更改购物车的数量显示
+        if (event.getType() == BusEvent.SHOP_CART_COMMODITY_COUNT) {
+            showCartsItemCount(event.getIntParam());
+        }
+    }
+
+    private void showCartsItemCount(int count) {
+        if (count > 0) {
+            mTvRedPoint.setText(count + "");
+            mTvRedPoint.setVisibility(View.VISIBLE);
+        } else {
+            mTvRedPoint.setVisibility(View.GONE);
+        }
     }
 }

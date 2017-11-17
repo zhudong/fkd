@@ -53,6 +53,9 @@ public class PayMethodManager {
         return instance;
     }
 
+    private PayMethodManager() {
+    }
+
     public String getPayMethodName() {
         return payMethodName;
     }
@@ -316,13 +319,11 @@ public class PayMethodManager {
     public static float getNumber(String currencyCode, float price) {
         BigDecimal d = new BigDecimal(price);
         if (currencyCode.contains("KRW")) {
-            return d.setScale(0, BigDecimal.ROUND_UP).floatValue();
+            return d.setScale(0, BigDecimal.ROUND_HALF_UP).floatValue();
         } else if (currencyCode.contains("TWD")) {
-            return d.setScale(0, BigDecimal.ROUND_UP).floatValue();
+            return d.setScale(0, BigDecimal.ROUND_HALF_UP).floatValue();
         } else {
-            return d.setScale(2, BigDecimal.ROUND_UP).floatValue();
+            return d.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
         }
     }
-
-
 }

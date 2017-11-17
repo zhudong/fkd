@@ -7,31 +7,33 @@
     >
 
     <RelativeLayout
-        android:background="@color/white"
+        android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
 
         <ImageView
             android:id="@+id/img_parcel_item_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/red_btn_bg_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/img_parcel_item_icon"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/img_parcel_item_icon"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_item_name"
+                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
@@ -60,30 +62,32 @@
                 android:id="@+id/tv_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#333333"
-                android:textSize="11sp"
-                android:text="状态:已取消"/>
+                android:text="状态:已取消"
+                android:textColor="#999999"
+                android:textSize="11sp"/>
+
             <TextView
                 android:id="@+id/tv_state_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="买家取消订单"
                 android:textColor="#333333"
                 android:textSize="11sp"
-                android:visibility="gone"
-                android:text="买家取消订单"/>
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_item_price_end"
-                android:textColor="#333333"
-                android:textSize="11sp"
-                android:text="$200.00"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="$200.00"
+                android:textColor="#333333"
+                android:textSize="11sp"/>
+
             <LinearLayout
                 android:id="@+id/order_message_layout"
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -97,18 +101,18 @@
                     android:id="@+id/order_message_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="订单留言："
                     android:textColor="@color/gray_02"
-                    android:textSize="@dimen/payed_text_size_12"
-                    android:text="订单留言："/>
+                    android:textSize="@dimen/payed_text_size_12"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/korea_color_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="订单留言："
                 android:textColor="@color/gray_02"
-                android:textSize="@dimen/payed_text_size_12"
-                android:text="订单留言："/>
+                android:textSize="@dimen/payed_text_size_12"/>
         </LinearLayout>
 
         <TextView
@@ -122,79 +126,134 @@
             android:text="x12"/>
 
     </RelativeLayout>
+
     <LinearLayout
-        android:id="@+id/merchant_message_layout"
-        android:background="@color/white"
-        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/shape_stroke"
+            android:layerType="software"/>
+
+        <TextView
+            android:id="@+id/tv_crowd_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="4dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="-4dp"
+            android:drawableLeft="@mipmap/time"
+            android:text="@string/String_crowd_sucess"
+            android:textSize="12sp"/>
+
+        <com.fuexpress.kr.ui.view.CrowdProgressDetail
+            android:id="@+id/corwd_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:paddingBottom="2dp"/>
+
+        <View
+            android:id="@+id/view_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/shape_stroke"
+            android:layerType="software"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/merchant_message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <RelativeLayout
             android:id="@+id/message_1_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="@dimen/payed_image_size"
                 android:layout_height="@dimen/payed_image_size"
                 android:src="@mipmap/connect"
                 />
+
             <TextView
-                android:layout_marginLeft="@dimen/payed_image_text_span"
                 android:id="@+id/merchant_message_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="您好我已经为您处理完毕！"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/payed_image_text_span"
+                android:text="您好我已经为您处理完毕！"
+                android:textColor="@color/black"
                 android:textSize="@dimen/payed_text_size_12"/>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/message_2_layout"
-            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             >
+
             <ImageView
                 android:layout_width="@dimen/payed_image_size"
                 android:layout_height="@dimen/payed_image_size"
                 android:src="@mipmap/me_icon_01"
                 />
+
             <TextView
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/payed_image_text_span"
-                android:textColor="@color/black"
-                android:text="只要现货"
                 android:id="@+id/korea_order_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/payed_image_text_span"
+                android:text="只要现货"
+                android:textColor="@color/black"
                 android:textSize="@dimen/payed_text_size_12"/>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/message_3_layout"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
             <RelativeLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 >
+
                 <ImageView
+                    android:id="@+id/anim_view"
                     android:layout_width="@dimen/payed_image_size"
                     android:layout_height="@dimen/payed_image_size"
                     android:src="@mipmap/translation"
-                    android:id="@+id/anim_view"
                     />
+
                 <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/payed_image_text_span"
-                    android:textColor="@color/auto_translate"
                     android:id="@+id/auto_translate_tv"
-                    android:text="@string/auto_translate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/payed_image_text_span"
+                    android:text="@string/auto_translate"
+                    android:textColor="@color/auto_translate"
                     android:textSize="@dimen/payed_text_size_12"/>
             </RelativeLayout>
         </RelativeLayout>

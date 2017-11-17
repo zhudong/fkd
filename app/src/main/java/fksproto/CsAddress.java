@@ -30594,6 +30594,7825 @@ public final class CsAddress {
     // @@protoc_insertion_point(class_scope:fksproto.GetCustomerAddressListExResponse)
   }
 
+  public interface InitAddressAjaxRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitAddressAjaxRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    boolean hasUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    boolean hasParcelId();
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    int getParcelId();
+
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    boolean hasSalesOrderId();
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    int getSalesOrderId();
+
+    /**
+     * <code>optional int32 appType = 5;</code>
+     */
+    boolean hasAppType();
+    /**
+     * <code>optional int32 appType = 5;</code>
+     */
+    int getAppType();
+
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.InitAddressAjaxRequest}
+   *
+   * <pre>
+   *收货地址初始化  java接口
+   * </pre>
+   */
+  public static final class InitAddressAjaxRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitAddressAjaxRequest)
+          InitAddressAjaxRequestOrBuilder {
+    // Use InitAddressAjaxRequest.newBuilder() to construct.
+    private InitAddressAjaxRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitAddressAjaxRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitAddressAjaxRequest defaultInstance;
+    public static InitAddressAjaxRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitAddressAjaxRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitAddressAjaxRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userinfo_.toBuilder();
+              }
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userinfo_);
+                userinfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              salesOrderId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              appType_ = input.readInt32();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              localeCode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.InitAddressAjaxRequest.class, fksproto.CsAddress.InitAddressAjaxRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitAddressAjaxRequest> PARSER =
+            new com.google.protobuf.AbstractParser<InitAddressAjaxRequest>() {
+              public InitAddressAjaxRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitAddressAjaxRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitAddressAjaxRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USERINFO_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public boolean hasUserinfo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
+      return userinfo_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      return userinfo_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelId_;
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public boolean hasParcelId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public int getParcelId() {
+      return parcelId_;
+    }
+
+    public static final int SALESORDERID_FIELD_NUMBER = 4;
+    private int salesOrderId_;
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    public boolean hasSalesOrderId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    public int getSalesOrderId() {
+      return salesOrderId_;
+    }
+
+    public static final int APPTYPE_FIELD_NUMBER = 5;
+    private int appType_;
+    /**
+     * <code>optional int32 appType = 5;</code>
+     */
+    public boolean hasAppType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 appType = 5;</code>
+     */
+    public int getAppType() {
+      return appType_;
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 6;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string localeCode = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelId_ = 0;
+      salesOrderId_ = 0;
+      appType_ = 0;
+      localeCode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, appType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getLocaleCodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(4, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(5, appType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getLocaleCodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.InitAddressAjaxRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitAddressAjaxRequest}
+     *
+     * <pre>
+     *收货地址初始化  java接口
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitAddressAjaxRequest)
+            fksproto.CsAddress.InitAddressAjaxRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.InitAddressAjaxRequest.class, fksproto.CsAddress.InitAddressAjaxRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.InitAddressAjaxRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserinfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        salesOrderId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        appType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxRequest_descriptor;
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxRequest getDefaultInstanceForType() {
+        return fksproto.CsAddress.InitAddressAjaxRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxRequest build() {
+        fksproto.CsAddress.InitAddressAjaxRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxRequest buildPartial() {
+        fksproto.CsAddress.InitAddressAjaxRequest result = new fksproto.CsAddress.InitAddressAjaxRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userinfoBuilder_ == null) {
+          result.userinfo_ = userinfo_;
+        } else {
+          result.userinfo_ = userinfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelId_ = parcelId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.salesOrderId_ = salesOrderId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.appType_ = appType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.localeCode_ = localeCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.InitAddressAjaxRequest) {
+          return mergeFrom((fksproto.CsAddress.InitAddressAjaxRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.InitAddressAjaxRequest other) {
+        if (other == fksproto.CsAddress.InitAddressAjaxRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserinfo()) {
+          mergeUserinfo(other.getUserinfo());
+        }
+        if (other.hasParcelId()) {
+          setParcelId(other.getParcelId());
+        }
+        if (other.hasSalesOrderId()) {
+          setSalesOrderId(other.getSalesOrderId());
+        }
+        if (other.hasAppType()) {
+          setAppType(other.getAppType());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000020;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.InitAddressAjaxRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.InitAddressAjaxRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public boolean hasUserinfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
+        if (userinfoBuilder_ == null) {
+          return userinfo_;
+        } else {
+          return userinfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userinfo_ = value;
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userinfo_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+          } else {
+            userinfo_ = value;
+          }
+          onChanged();
+        } else {
+          userinfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder clearUserinfo() {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserinfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+        if (userinfoBuilder_ != null) {
+          return userinfoBuilder_.getMessageOrBuilder();
+        } else {
+          return userinfo_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
+        if (userinfoBuilder_ == null) {
+          userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserinfo(),
+                  getParentForChildren(),
+                  isClean());
+          userinfo_ = null;
+        }
+        return userinfoBuilder_;
+      }
+
+      private int parcelId_ ;
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public boolean hasParcelId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public int getParcelId() {
+        return parcelId_;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder setParcelId(int value) {
+        bitField0_ |= 0x00000004;
+        parcelId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder clearParcelId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int salesOrderId_ ;
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public boolean hasSalesOrderId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public int getSalesOrderId() {
+        return salesOrderId_;
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public Builder setSalesOrderId(int value) {
+        bitField0_ |= 0x00000008;
+        salesOrderId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public Builder clearSalesOrderId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        salesOrderId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int appType_ ;
+      /**
+       * <code>optional int32 appType = 5;</code>
+       */
+      public boolean hasAppType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 appType = 5;</code>
+       */
+      public int getAppType() {
+        return appType_;
+      }
+      /**
+       * <code>optional int32 appType = 5;</code>
+       */
+      public Builder setAppType(int value) {
+        bitField0_ |= 0x00000010;
+        appType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 appType = 5;</code>
+       */
+      public Builder clearAppType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        appType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localeCode = 6;</code>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitAddressAjaxRequest)
+    }
+
+    static {
+      defaultInstance = new InitAddressAjaxRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitAddressAjaxRequest)
+  }
+
+  public interface TinySalesOrderItemOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.TinySalesOrderItem)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    boolean hasTitle();
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    java.lang.String getTitle();
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getTitleBytes();
+
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getUrlBytes();
+
+    /**
+     * <code>optional int32 qty = 3;</code>
+     *
+     * <pre>
+     *订单单品状态
+     * </pre>
+     */
+    boolean hasQty();
+    /**
+     * <code>optional int32 qty = 3;</code>
+     *
+     * <pre>
+     *订单单品状态
+     * </pre>
+     */
+    int getQty();
+  }
+  /**
+   * Protobuf type {@code fksproto.TinySalesOrderItem}
+   */
+  public static final class TinySalesOrderItem extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.TinySalesOrderItem)
+          TinySalesOrderItemOrBuilder {
+    // Use TinySalesOrderItem.newBuilder() to construct.
+    private TinySalesOrderItem(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TinySalesOrderItem(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TinySalesOrderItem defaultInstance;
+    public static TinySalesOrderItem getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TinySalesOrderItem getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TinySalesOrderItem(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              title_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              url_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              qty_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_TinySalesOrderItem_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_TinySalesOrderItem_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.TinySalesOrderItem.class, fksproto.CsAddress.TinySalesOrderItem.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TinySalesOrderItem> PARSER =
+            new com.google.protobuf.AbstractParser<TinySalesOrderItem>() {
+              public TinySalesOrderItem parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new TinySalesOrderItem(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TinySalesOrderItem> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TITLE_FIELD_NUMBER = 1;
+    private java.lang.Object title_;
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    public boolean hasTitle() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          title_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string title = 1;</code>
+     *
+     * <pre>
+     *标题
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        title_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int URL_FIELD_NUMBER = 2;
+    private java.lang.Object url_;
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 2;</code>
+     *
+     * <pre>
+     *图片url
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int QTY_FIELD_NUMBER = 3;
+    private int qty_;
+    /**
+     * <code>optional int32 qty = 3;</code>
+     *
+     * <pre>
+     *订单单品状态
+     * </pre>
+     */
+    public boolean hasQty() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 qty = 3;</code>
+     *
+     * <pre>
+     *订单单品状态
+     * </pre>
+     */
+    public int getQty() {
+      return qty_;
+    }
+
+    private void initFields() {
+      title_ = "";
+      url_ = "";
+      qty_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, qty_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(1, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, qty_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.TinySalesOrderItem parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.TinySalesOrderItem prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.TinySalesOrderItem}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.TinySalesOrderItem)
+            fksproto.CsAddress.TinySalesOrderItemOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_TinySalesOrderItem_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_TinySalesOrderItem_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.TinySalesOrderItem.class, fksproto.CsAddress.TinySalesOrderItem.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.TinySalesOrderItem.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        title_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        url_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        qty_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_TinySalesOrderItem_descriptor;
+      }
+
+      public fksproto.CsAddress.TinySalesOrderItem getDefaultInstanceForType() {
+        return fksproto.CsAddress.TinySalesOrderItem.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.TinySalesOrderItem build() {
+        fksproto.CsAddress.TinySalesOrderItem result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.TinySalesOrderItem buildPartial() {
+        fksproto.CsAddress.TinySalesOrderItem result = new fksproto.CsAddress.TinySalesOrderItem(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.title_ = title_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.url_ = url_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.qty_ = qty_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.TinySalesOrderItem) {
+          return mergeFrom((fksproto.CsAddress.TinySalesOrderItem)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.TinySalesOrderItem other) {
+        if (other == fksproto.CsAddress.TinySalesOrderItem.getDefaultInstance()) return this;
+        if (other.hasTitle()) {
+          bitField0_ |= 0x00000001;
+          title_ = other.title_;
+          onChanged();
+        }
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000002;
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.hasQty()) {
+          setQty(other.getQty());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.TinySalesOrderItem parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.TinySalesOrderItem) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object title_ = "";
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public boolean hasTitle() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public java.lang.String getTitle() {
+        java.lang.Object ref = title_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            title_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getTitleBytes() {
+        java.lang.Object ref = title_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          title_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public Builder setTitle(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public Builder clearTitle() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        title_ = getDefaultInstance().getTitle();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string title = 1;</code>
+       *
+       * <pre>
+       *标题
+       * </pre>
+       */
+      public Builder setTitleBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object url_ = "";
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            url_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public Builder setUrl(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 2;</code>
+       *
+       * <pre>
+       *图片url
+       * </pre>
+       */
+      public Builder setUrlBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int qty_ ;
+      /**
+       * <code>optional int32 qty = 3;</code>
+       *
+       * <pre>
+       *订单单品状态
+       * </pre>
+       */
+      public boolean hasQty() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 qty = 3;</code>
+       *
+       * <pre>
+       *订单单品状态
+       * </pre>
+       */
+      public int getQty() {
+        return qty_;
+      }
+      /**
+       * <code>optional int32 qty = 3;</code>
+       *
+       * <pre>
+       *订单单品状态
+       * </pre>
+       */
+      public Builder setQty(int value) {
+        bitField0_ |= 0x00000004;
+        qty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 qty = 3;</code>
+       *
+       * <pre>
+       *订单单品状态
+       * </pre>
+       */
+      public Builder clearQty() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        qty_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.TinySalesOrderItem)
+    }
+
+    static {
+      defaultInstance = new TinySalesOrderItem(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.TinySalesOrderItem)
+  }
+
+  public interface TinyParcelOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.TinyParcel)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int64 parcel_id = 1;</code>
+     *
+     * <pre>
+     *包裹id
+     * </pre>
+     */
+    boolean hasParcelId();
+    /**
+     * <code>optional int64 parcel_id = 1;</code>
+     *
+     * <pre>
+     *包裹id
+     * </pre>
+     */
+    long getParcelId();
+
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    boolean hasParcelName();
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    java.lang.String getParcelName();
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getParcelNameBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.TinyParcel}
+   */
+  public static final class TinyParcel extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.TinyParcel)
+          TinyParcelOrBuilder {
+    // Use TinyParcel.newBuilder() to construct.
+    private TinyParcel(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TinyParcel(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TinyParcel defaultInstance;
+    public static TinyParcel getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TinyParcel getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TinyParcel(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              parcelId_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              parcelName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_TinyParcel_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_TinyParcel_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.TinyParcel.class, fksproto.CsAddress.TinyParcel.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TinyParcel> PARSER =
+            new com.google.protobuf.AbstractParser<TinyParcel>() {
+              public TinyParcel parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new TinyParcel(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TinyParcel> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int PARCEL_ID_FIELD_NUMBER = 1;
+    private long parcelId_;
+    /**
+     * <code>optional int64 parcel_id = 1;</code>
+     *
+     * <pre>
+     *包裹id
+     * </pre>
+     */
+    public boolean hasParcelId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int64 parcel_id = 1;</code>
+     *
+     * <pre>
+     *包裹id
+     * </pre>
+     */
+    public long getParcelId() {
+      return parcelId_;
+    }
+
+    public static final int PARCEL_NAME_FIELD_NUMBER = 2;
+    private java.lang.Object parcelName_;
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    public boolean hasParcelName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    public java.lang.String getParcelName() {
+      java.lang.Object ref = parcelName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          parcelName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string parcel_name = 2;</code>
+     *
+     * <pre>
+     *包裹名称
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getParcelNameBytes() {
+      java.lang.Object ref = parcelName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        parcelName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      parcelId_ = 0L;
+      parcelName_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, parcelId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getParcelNameBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt64Size(1, parcelId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getParcelNameBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinyParcel parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.TinyParcel parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.TinyParcel parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.TinyParcel prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.TinyParcel}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.TinyParcel)
+            fksproto.CsAddress.TinyParcelOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_TinyParcel_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_TinyParcel_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.TinyParcel.class, fksproto.CsAddress.TinyParcel.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.TinyParcel.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        parcelId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        parcelName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_TinyParcel_descriptor;
+      }
+
+      public fksproto.CsAddress.TinyParcel getDefaultInstanceForType() {
+        return fksproto.CsAddress.TinyParcel.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.TinyParcel build() {
+        fksproto.CsAddress.TinyParcel result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.TinyParcel buildPartial() {
+        fksproto.CsAddress.TinyParcel result = new fksproto.CsAddress.TinyParcel(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.parcelId_ = parcelId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.parcelName_ = parcelName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.TinyParcel) {
+          return mergeFrom((fksproto.CsAddress.TinyParcel)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.TinyParcel other) {
+        if (other == fksproto.CsAddress.TinyParcel.getDefaultInstance()) return this;
+        if (other.hasParcelId()) {
+          setParcelId(other.getParcelId());
+        }
+        if (other.hasParcelName()) {
+          bitField0_ |= 0x00000002;
+          parcelName_ = other.parcelName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.TinyParcel parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.TinyParcel) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long parcelId_ ;
+      /**
+       * <code>optional int64 parcel_id = 1;</code>
+       *
+       * <pre>
+       *包裹id
+       * </pre>
+       */
+      public boolean hasParcelId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int64 parcel_id = 1;</code>
+       *
+       * <pre>
+       *包裹id
+       * </pre>
+       */
+      public long getParcelId() {
+        return parcelId_;
+      }
+      /**
+       * <code>optional int64 parcel_id = 1;</code>
+       *
+       * <pre>
+       *包裹id
+       * </pre>
+       */
+      public Builder setParcelId(long value) {
+        bitField0_ |= 0x00000001;
+        parcelId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 parcel_id = 1;</code>
+       *
+       * <pre>
+       *包裹id
+       * </pre>
+       */
+      public Builder clearParcelId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        parcelId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object parcelName_ = "";
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public boolean hasParcelName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public java.lang.String getParcelName() {
+        java.lang.Object ref = parcelName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            parcelName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getParcelNameBytes() {
+        java.lang.Object ref = parcelName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          parcelName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public Builder setParcelName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        parcelName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public Builder clearParcelName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelName_ = getDefaultInstance().getParcelName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string parcel_name = 2;</code>
+       *
+       * <pre>
+       *包裹名称
+       * </pre>
+       */
+      public Builder setParcelNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        parcelName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.TinyParcel)
+    }
+
+    static {
+      defaultInstance = new TinyParcel(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.TinyParcel)
+  }
+
+  public interface InitAddressAjaxResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitAddressAjaxResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    boolean hasMsg();
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    java.lang.String getMsg();
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    com.google.protobuf.ByteString
+    getMsgBytes();
+
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    boolean hasSign();
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    java.lang.String getSign();
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    com.google.protobuf.ByteString
+    getSignBytes();
+
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    boolean hasWarehouseName();
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    java.lang.String getWarehouseName();
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getWarehouseNameBytes();
+
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    com.google.protobuf.ByteString
+    getNameBytes();
+
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    boolean hasTelephone();
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    java.lang.String getTelephone();
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getTelephoneBytes();
+
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    boolean hasPostcode();
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    java.lang.String getPostcode();
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    com.google.protobuf.ByteString
+    getPostcodeBytes();
+
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    boolean hasStreet();
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    java.lang.String getStreet();
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    com.google.protobuf.ByteString
+    getStreetBytes();
+
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    boolean hasCountryCode();
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    java.lang.String getCountryCode();
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    com.google.protobuf.ByteString
+    getCountryCodeBytes();
+
+    /**
+     * <code>optional int32 regionId = 10;</code>
+     */
+    boolean hasRegionId();
+    /**
+     * <code>optional int32 regionId = 10;</code>
+     */
+    int getRegionId();
+
+    /**
+     * <code>optional int32 parcelId = 11;</code>
+     */
+    boolean hasParcelId();
+    /**
+     * <code>optional int32 parcelId = 11;</code>
+     */
+    int getParcelId();
+
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    boolean hasCountryName();
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    java.lang.String getCountryName();
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    com.google.protobuf.ByteString
+    getCountryNameBytes();
+
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    boolean hasRegionName();
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    java.lang.String getRegionName();
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    com.google.protobuf.ByteString
+    getRegionNameBytes();
+
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    java.util.List<fksproto.CsAddress.TinySalesOrderItem>
+    getOrderItemListList();
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    fksproto.CsAddress.TinySalesOrderItem getOrderItemList(int index);
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    int getOrderItemListCount();
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    java.util.List<? extends fksproto.CsAddress.TinySalesOrderItemOrBuilder>
+    getOrderItemListOrBuilderList();
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    fksproto.CsAddress.TinySalesOrderItemOrBuilder getOrderItemListOrBuilder(
+            int index);
+
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    java.util.List<fksproto.CsAddress.TinyParcel>
+    getParcelListList();
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    fksproto.CsAddress.TinyParcel getParcelList(int index);
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    int getParcelListCount();
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    java.util.List<? extends fksproto.CsAddress.TinyParcelOrBuilder>
+    getParcelListOrBuilderList();
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    fksproto.CsAddress.TinyParcelOrBuilder getParcelListOrBuilder(
+            int index);
+  }
+  /**
+   * Protobuf type {@code fksproto.InitAddressAjaxResponse}
+   *
+   * <pre>
+   *收货地址初始化应答
+   * </pre>
+   */
+  public static final class InitAddressAjaxResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitAddressAjaxResponse)
+          InitAddressAjaxResponseOrBuilder {
+    // Use InitAddressAjaxResponse.newBuilder() to construct.
+    private InitAddressAjaxResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitAddressAjaxResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitAddressAjaxResponse defaultInstance;
+    public static InitAddressAjaxResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitAddressAjaxResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitAddressAjaxResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              msg_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              sign_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              warehouseName_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              name_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              telephone_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              postcode_ = bs;
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              street_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              countryCode_ = bs;
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              regionId_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              parcelId_ = input.readInt32();
+              break;
+            }
+            case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000800;
+              countryName_ = bs;
+              break;
+            }
+            case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00001000;
+              regionName_ = bs;
+              break;
+            }
+            case 114: {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                orderItemList_ = new java.util.ArrayList<fksproto.CsAddress.TinySalesOrderItem>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              orderItemList_.add(input.readMessage(fksproto.CsAddress.TinySalesOrderItem.PARSER, extensionRegistry));
+              break;
+            }
+            case 122: {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                parcelList_ = new java.util.ArrayList<fksproto.CsAddress.TinyParcel>();
+                mutable_bitField0_ |= 0x00004000;
+              }
+              parcelList_.add(input.readMessage(fksproto.CsAddress.TinyParcel.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          orderItemList_ = java.util.Collections.unmodifiableList(orderItemList_);
+        }
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+          parcelList_ = java.util.Collections.unmodifiableList(parcelList_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.InitAddressAjaxResponse.class, fksproto.CsAddress.InitAddressAjaxResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitAddressAjaxResponse> PARSER =
+            new com.google.protobuf.AbstractParser<InitAddressAjaxResponse>() {
+              public InitAddressAjaxResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitAddressAjaxResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitAddressAjaxResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int MSG_FIELD_NUMBER = 2;
+    private java.lang.Object msg_;
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public boolean hasMsg() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+    getMsgBytes() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        msg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SIGN_FIELD_NUMBER = 3;
+    private java.lang.Object sign_;
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    public boolean hasSign() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    public java.lang.String getSign() {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sign_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string sign = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+    getSignBytes() {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        sign_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int WAREHOUSENAME_FIELD_NUMBER = 4;
+    private java.lang.Object warehouseName_;
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    public boolean hasWarehouseName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    public java.lang.String getWarehouseName() {
+      java.lang.Object ref = warehouseName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          warehouseName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string warehouseName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getWarehouseNameBytes() {
+      java.lang.Object ref = warehouseName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        warehouseName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 5;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+    getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TELEPHONE_FIELD_NUMBER = 6;
+    private java.lang.Object telephone_;
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public boolean hasTelephone() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public java.lang.String getTelephone() {
+      java.lang.Object ref = telephone_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          telephone_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getTelephoneBytes() {
+      java.lang.Object ref = telephone_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        telephone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int POSTCODE_FIELD_NUMBER = 7;
+    private java.lang.Object postcode_;
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public boolean hasPostcode() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public java.lang.String getPostcode() {
+      java.lang.Object ref = postcode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          postcode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+    getPostcodeBytes() {
+      java.lang.Object ref = postcode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        postcode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STREET_FIELD_NUMBER = 8;
+    private java.lang.Object street_;
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public boolean hasStreet() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public java.lang.String getStreet() {
+      java.lang.Object ref = street_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          street_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+    getStreetBytes() {
+      java.lang.Object ref = street_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        street_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COUNTRYCODE_FIELD_NUMBER = 9;
+    private java.lang.Object countryCode_;
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    public boolean hasCountryCode() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    public java.lang.String getCountryCode() {
+      java.lang.Object ref = countryCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          countryCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string countryCode = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+    getCountryCodeBytes() {
+      java.lang.Object ref = countryCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        countryCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int REGIONID_FIELD_NUMBER = 10;
+    private int regionId_;
+    /**
+     * <code>optional int32 regionId = 10;</code>
+     */
+    public boolean hasRegionId() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 regionId = 10;</code>
+     */
+    public int getRegionId() {
+      return regionId_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 11;
+    private int parcelId_;
+    /**
+     * <code>optional int32 parcelId = 11;</code>
+     */
+    public boolean hasParcelId() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 parcelId = 11;</code>
+     */
+    public int getParcelId() {
+      return parcelId_;
+    }
+
+    public static final int COUNTRYNAME_FIELD_NUMBER = 12;
+    private java.lang.Object countryName_;
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    public boolean hasCountryName() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    public java.lang.String getCountryName() {
+      java.lang.Object ref = countryName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          countryName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string countryName = 12;</code>
+     */
+    public com.google.protobuf.ByteString
+    getCountryNameBytes() {
+      java.lang.Object ref = countryName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        countryName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int REGIONNAME_FIELD_NUMBER = 13;
+    private java.lang.Object regionName_;
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    public boolean hasRegionName() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    public java.lang.String getRegionName() {
+      java.lang.Object ref = regionName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          regionName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string regionName = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+    getRegionNameBytes() {
+      java.lang.Object ref = regionName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        regionName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ORDERITEMLIST_FIELD_NUMBER = 14;
+    private java.util.List<fksproto.CsAddress.TinySalesOrderItem> orderItemList_;
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    public java.util.List<fksproto.CsAddress.TinySalesOrderItem> getOrderItemListList() {
+      return orderItemList_;
+    }
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    public java.util.List<? extends fksproto.CsAddress.TinySalesOrderItemOrBuilder>
+    getOrderItemListOrBuilderList() {
+      return orderItemList_;
+    }
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    public int getOrderItemListCount() {
+      return orderItemList_.size();
+    }
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    public fksproto.CsAddress.TinySalesOrderItem getOrderItemList(int index) {
+      return orderItemList_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+     */
+    public fksproto.CsAddress.TinySalesOrderItemOrBuilder getOrderItemListOrBuilder(
+            int index) {
+      return orderItemList_.get(index);
+    }
+
+    public static final int PARCELLIST_FIELD_NUMBER = 15;
+    private java.util.List<fksproto.CsAddress.TinyParcel> parcelList_;
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    public java.util.List<fksproto.CsAddress.TinyParcel> getParcelListList() {
+      return parcelList_;
+    }
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    public java.util.List<? extends fksproto.CsAddress.TinyParcelOrBuilder>
+    getParcelListOrBuilderList() {
+      return parcelList_;
+    }
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    public int getParcelListCount() {
+      return parcelList_.size();
+    }
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    public fksproto.CsAddress.TinyParcel getParcelList(int index) {
+      return parcelList_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+     */
+    public fksproto.CsAddress.TinyParcelOrBuilder getParcelListOrBuilder(
+            int index) {
+      return parcelList_.get(index);
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      msg_ = "";
+      sign_ = "";
+      warehouseName_ = "";
+      name_ = "";
+      telephone_ = "";
+      postcode_ = "";
+      street_ = "";
+      countryCode_ = "";
+      regionId_ = 0;
+      parcelId_ = 0;
+      countryName_ = "";
+      regionName_ = "";
+      orderItemList_ = java.util.Collections.emptyList();
+      parcelList_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getSignBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getWarehouseNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getTelephoneBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getPostcodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getStreetBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, regionId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, parcelId_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, getCountryNameBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(13, getRegionNameBytes());
+      }
+      for (int i = 0; i < orderItemList_.size(); i++) {
+        output.writeMessage(14, orderItemList_.get(i));
+      }
+      for (int i = 0; i < parcelList_.size(); i++) {
+        output.writeMessage(15, parcelList_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getSignBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getWarehouseNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getTelephoneBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(7, getPostcodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(8, getStreetBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(9, getCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(10, regionId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(11, parcelId_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(12, getCountryNameBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(13, getRegionNameBytes());
+      }
+      for (int i = 0; i < orderItemList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(14, orderItemList_.get(i));
+      }
+      for (int i = 0; i < parcelList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(15, parcelList_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.InitAddressAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.InitAddressAjaxResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitAddressAjaxResponse}
+     *
+     * <pre>
+     *收货地址初始化应答
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitAddressAjaxResponse)
+            fksproto.CsAddress.InitAddressAjaxResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.InitAddressAjaxResponse.class, fksproto.CsAddress.InitAddressAjaxResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.InitAddressAjaxResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getOrderItemListFieldBuilder();
+          getParcelListFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sign_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        warehouseName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        telephone_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        postcode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        street_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        countryCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        regionId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        parcelId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        countryName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000800);
+        regionName_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
+        if (orderItemListBuilder_ == null) {
+          orderItemList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00002000);
+        } else {
+          orderItemListBuilder_.clear();
+        }
+        if (parcelListBuilder_ == null) {
+          parcelList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00004000);
+        } else {
+          parcelListBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_InitAddressAjaxResponse_descriptor;
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxResponse getDefaultInstanceForType() {
+        return fksproto.CsAddress.InitAddressAjaxResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxResponse build() {
+        fksproto.CsAddress.InitAddressAjaxResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.InitAddressAjaxResponse buildPartial() {
+        fksproto.CsAddress.InitAddressAjaxResponse result = new fksproto.CsAddress.InitAddressAjaxResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.msg_ = msg_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.sign_ = sign_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.warehouseName_ = warehouseName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.telephone_ = telephone_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.postcode_ = postcode_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.street_ = street_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.countryCode_ = countryCode_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.regionId_ = regionId_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.parcelId_ = parcelId_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.countryName_ = countryName_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.regionName_ = regionName_;
+        if (orderItemListBuilder_ == null) {
+          if (((bitField0_ & 0x00002000) == 0x00002000)) {
+            orderItemList_ = java.util.Collections.unmodifiableList(orderItemList_);
+            bitField0_ = (bitField0_ & ~0x00002000);
+          }
+          result.orderItemList_ = orderItemList_;
+        } else {
+          result.orderItemList_ = orderItemListBuilder_.build();
+        }
+        if (parcelListBuilder_ == null) {
+          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+            parcelList_ = java.util.Collections.unmodifiableList(parcelList_);
+            bitField0_ = (bitField0_ & ~0x00004000);
+          }
+          result.parcelList_ = parcelList_;
+        } else {
+          result.parcelList_ = parcelListBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.InitAddressAjaxResponse) {
+          return mergeFrom((fksproto.CsAddress.InitAddressAjaxResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.InitAddressAjaxResponse other) {
+        if (other == fksproto.CsAddress.InitAddressAjaxResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasMsg()) {
+          bitField0_ |= 0x00000002;
+          msg_ = other.msg_;
+          onChanged();
+        }
+        if (other.hasSign()) {
+          bitField0_ |= 0x00000004;
+          sign_ = other.sign_;
+          onChanged();
+        }
+        if (other.hasWarehouseName()) {
+          bitField0_ |= 0x00000008;
+          warehouseName_ = other.warehouseName_;
+          onChanged();
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000010;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasTelephone()) {
+          bitField0_ |= 0x00000020;
+          telephone_ = other.telephone_;
+          onChanged();
+        }
+        if (other.hasPostcode()) {
+          bitField0_ |= 0x00000040;
+          postcode_ = other.postcode_;
+          onChanged();
+        }
+        if (other.hasStreet()) {
+          bitField0_ |= 0x00000080;
+          street_ = other.street_;
+          onChanged();
+        }
+        if (other.hasCountryCode()) {
+          bitField0_ |= 0x00000100;
+          countryCode_ = other.countryCode_;
+          onChanged();
+        }
+        if (other.hasRegionId()) {
+          setRegionId(other.getRegionId());
+        }
+        if (other.hasParcelId()) {
+          setParcelId(other.getParcelId());
+        }
+        if (other.hasCountryName()) {
+          bitField0_ |= 0x00000800;
+          countryName_ = other.countryName_;
+          onChanged();
+        }
+        if (other.hasRegionName()) {
+          bitField0_ |= 0x00001000;
+          regionName_ = other.regionName_;
+          onChanged();
+        }
+        if (orderItemListBuilder_ == null) {
+          if (!other.orderItemList_.isEmpty()) {
+            if (orderItemList_.isEmpty()) {
+              orderItemList_ = other.orderItemList_;
+              bitField0_ = (bitField0_ & ~0x00002000);
+            } else {
+              ensureOrderItemListIsMutable();
+              orderItemList_.addAll(other.orderItemList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.orderItemList_.isEmpty()) {
+            if (orderItemListBuilder_.isEmpty()) {
+              orderItemListBuilder_.dispose();
+              orderItemListBuilder_ = null;
+              orderItemList_ = other.orderItemList_;
+              bitField0_ = (bitField0_ & ~0x00002000);
+              orderItemListBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getOrderItemListFieldBuilder() : null;
+            } else {
+              orderItemListBuilder_.addAllMessages(other.orderItemList_);
+            }
+          }
+        }
+        if (parcelListBuilder_ == null) {
+          if (!other.parcelList_.isEmpty()) {
+            if (parcelList_.isEmpty()) {
+              parcelList_ = other.parcelList_;
+              bitField0_ = (bitField0_ & ~0x00004000);
+            } else {
+              ensureParcelListIsMutable();
+              parcelList_.addAll(other.parcelList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.parcelList_.isEmpty()) {
+            if (parcelListBuilder_.isEmpty()) {
+              parcelListBuilder_.dispose();
+              parcelListBuilder_ = null;
+              parcelList_ = other.parcelList_;
+              bitField0_ = (bitField0_ & ~0x00004000);
+              parcelListBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getParcelListFieldBuilder() : null;
+            } else {
+              parcelListBuilder_.addAllMessages(other.parcelList_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.InitAddressAjaxResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.InitAddressAjaxResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.lang.Object msg_ = "";
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public boolean hasMsg() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            msg_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+      getMsgBytes() {
+        java.lang.Object ref = msg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          msg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder setMsg(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder clearMsg() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        msg_ = getDefaultInstance().getMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder setMsgBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object sign_ = "";
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public boolean hasSign() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public java.lang.String getSign() {
+        java.lang.Object ref = sign_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            sign_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+      getSignBytes() {
+        java.lang.Object ref = sign_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          sign_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public Builder setSign(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        sign_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public Builder clearSign() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sign_ = getDefaultInstance().getSign();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sign = 3;</code>
+       */
+      public Builder setSignBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        sign_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object warehouseName_ = "";
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public boolean hasWarehouseName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public java.lang.String getWarehouseName() {
+        java.lang.Object ref = warehouseName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            warehouseName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getWarehouseNameBytes() {
+        java.lang.Object ref = warehouseName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          warehouseName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public Builder setWarehouseName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        warehouseName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public Builder clearWarehouseName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        warehouseName_ = getDefaultInstance().getWarehouseName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string warehouseName = 4;</code>
+       */
+      public Builder setWarehouseNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        warehouseName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+      getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder setName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder setNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object telephone_ = "";
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public boolean hasTelephone() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public java.lang.String getTelephone() {
+        java.lang.Object ref = telephone_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            telephone_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+      getTelephoneBytes() {
+        java.lang.Object ref = telephone_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          telephone_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder setTelephone(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        telephone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder clearTelephone() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        telephone_ = getDefaultInstance().getTelephone();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder setTelephoneBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        telephone_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object postcode_ = "";
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public boolean hasPostcode() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public java.lang.String getPostcode() {
+        java.lang.Object ref = postcode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            postcode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+      getPostcodeBytes() {
+        java.lang.Object ref = postcode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          postcode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder setPostcode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        postcode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder clearPostcode() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        postcode_ = getDefaultInstance().getPostcode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder setPostcodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        postcode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object street_ = "";
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public boolean hasStreet() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public java.lang.String getStreet() {
+        java.lang.Object ref = street_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            street_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+      getStreetBytes() {
+        java.lang.Object ref = street_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          street_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder setStreet(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        street_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder clearStreet() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        street_ = getDefaultInstance().getStreet();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder setStreetBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        street_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object countryCode_ = "";
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public boolean hasCountryCode() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public java.lang.String getCountryCode() {
+        java.lang.Object ref = countryCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            countryCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+      getCountryCodeBytes() {
+        java.lang.Object ref = countryCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          countryCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public Builder setCountryCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        countryCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public Builder clearCountryCode() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        countryCode_ = getDefaultInstance().getCountryCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string countryCode = 9;</code>
+       */
+      public Builder setCountryCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        countryCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int regionId_ ;
+      /**
+       * <code>optional int32 regionId = 10;</code>
+       */
+      public boolean hasRegionId() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 regionId = 10;</code>
+       */
+      public int getRegionId() {
+        return regionId_;
+      }
+      /**
+       * <code>optional int32 regionId = 10;</code>
+       */
+      public Builder setRegionId(int value) {
+        bitField0_ |= 0x00000200;
+        regionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 regionId = 10;</code>
+       */
+      public Builder clearRegionId() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        regionId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int parcelId_ ;
+      /**
+       * <code>optional int32 parcelId = 11;</code>
+       */
+      public boolean hasParcelId() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 parcelId = 11;</code>
+       */
+      public int getParcelId() {
+        return parcelId_;
+      }
+      /**
+       * <code>optional int32 parcelId = 11;</code>
+       */
+      public Builder setParcelId(int value) {
+        bitField0_ |= 0x00000400;
+        parcelId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelId = 11;</code>
+       */
+      public Builder clearParcelId() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        parcelId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object countryName_ = "";
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public boolean hasCountryName() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public java.lang.String getCountryName() {
+        java.lang.Object ref = countryName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            countryName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public com.google.protobuf.ByteString
+      getCountryNameBytes() {
+        java.lang.Object ref = countryName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          countryName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public Builder setCountryName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000800;
+        countryName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public Builder clearCountryName() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        countryName_ = getDefaultInstance().getCountryName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string countryName = 12;</code>
+       */
+      public Builder setCountryNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000800;
+        countryName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object regionName_ = "";
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public boolean hasRegionName() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public java.lang.String getRegionName() {
+        java.lang.Object ref = regionName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            regionName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+      getRegionNameBytes() {
+        java.lang.Object ref = regionName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          regionName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public Builder setRegionName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00001000;
+        regionName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public Builder clearRegionName() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        regionName_ = getDefaultInstance().getRegionName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string regionName = 13;</code>
+       */
+      public Builder setRegionNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00001000;
+        regionName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<fksproto.CsAddress.TinySalesOrderItem> orderItemList_ =
+              java.util.Collections.emptyList();
+      private void ensureOrderItemListIsMutable() {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          orderItemList_ = new java.util.ArrayList<fksproto.CsAddress.TinySalesOrderItem>(orderItemList_);
+          bitField0_ |= 0x00002000;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsAddress.TinySalesOrderItem, fksproto.CsAddress.TinySalesOrderItem.Builder, fksproto.CsAddress.TinySalesOrderItemOrBuilder> orderItemListBuilder_;
+
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public java.util.List<fksproto.CsAddress.TinySalesOrderItem> getOrderItemListList() {
+        if (orderItemListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(orderItemList_);
+        } else {
+          return orderItemListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public int getOrderItemListCount() {
+        if (orderItemListBuilder_ == null) {
+          return orderItemList_.size();
+        } else {
+          return orderItemListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public fksproto.CsAddress.TinySalesOrderItem getOrderItemList(int index) {
+        if (orderItemListBuilder_ == null) {
+          return orderItemList_.get(index);
+        } else {
+          return orderItemListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder setOrderItemList(
+              int index, fksproto.CsAddress.TinySalesOrderItem value) {
+        if (orderItemListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemListIsMutable();
+          orderItemList_.set(index, value);
+          onChanged();
+        } else {
+          orderItemListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder setOrderItemList(
+              int index, fksproto.CsAddress.TinySalesOrderItem.Builder builderForValue) {
+        if (orderItemListBuilder_ == null) {
+          ensureOrderItemListIsMutable();
+          orderItemList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder addOrderItemList(fksproto.CsAddress.TinySalesOrderItem value) {
+        if (orderItemListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemListIsMutable();
+          orderItemList_.add(value);
+          onChanged();
+        } else {
+          orderItemListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder addOrderItemList(
+              int index, fksproto.CsAddress.TinySalesOrderItem value) {
+        if (orderItemListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemListIsMutable();
+          orderItemList_.add(index, value);
+          onChanged();
+        } else {
+          orderItemListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder addOrderItemList(
+              fksproto.CsAddress.TinySalesOrderItem.Builder builderForValue) {
+        if (orderItemListBuilder_ == null) {
+          ensureOrderItemListIsMutable();
+          orderItemList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          orderItemListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder addOrderItemList(
+              int index, fksproto.CsAddress.TinySalesOrderItem.Builder builderForValue) {
+        if (orderItemListBuilder_ == null) {
+          ensureOrderItemListIsMutable();
+          orderItemList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder addAllOrderItemList(
+              java.lang.Iterable<? extends fksproto.CsAddress.TinySalesOrderItem> values) {
+        if (orderItemListBuilder_ == null) {
+          ensureOrderItemListIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, orderItemList_);
+          onChanged();
+        } else {
+          orderItemListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder clearOrderItemList() {
+        if (orderItemListBuilder_ == null) {
+          orderItemList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00002000);
+          onChanged();
+        } else {
+          orderItemListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public Builder removeOrderItemList(int index) {
+        if (orderItemListBuilder_ == null) {
+          ensureOrderItemListIsMutable();
+          orderItemList_.remove(index);
+          onChanged();
+        } else {
+          orderItemListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public fksproto.CsAddress.TinySalesOrderItem.Builder getOrderItemListBuilder(
+              int index) {
+        return getOrderItemListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public fksproto.CsAddress.TinySalesOrderItemOrBuilder getOrderItemListOrBuilder(
+              int index) {
+        if (orderItemListBuilder_ == null) {
+          return orderItemList_.get(index);  } else {
+          return orderItemListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public java.util.List<? extends fksproto.CsAddress.TinySalesOrderItemOrBuilder>
+      getOrderItemListOrBuilderList() {
+        if (orderItemListBuilder_ != null) {
+          return orderItemListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(orderItemList_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public fksproto.CsAddress.TinySalesOrderItem.Builder addOrderItemListBuilder() {
+        return getOrderItemListFieldBuilder().addBuilder(
+                fksproto.CsAddress.TinySalesOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public fksproto.CsAddress.TinySalesOrderItem.Builder addOrderItemListBuilder(
+              int index) {
+        return getOrderItemListFieldBuilder().addBuilder(
+                index, fksproto.CsAddress.TinySalesOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.TinySalesOrderItem orderItemList = 14;</code>
+       */
+      public java.util.List<fksproto.CsAddress.TinySalesOrderItem.Builder>
+      getOrderItemListBuilderList() {
+        return getOrderItemListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsAddress.TinySalesOrderItem, fksproto.CsAddress.TinySalesOrderItem.Builder, fksproto.CsAddress.TinySalesOrderItemOrBuilder>
+      getOrderItemListFieldBuilder() {
+        if (orderItemListBuilder_ == null) {
+          orderItemListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsAddress.TinySalesOrderItem, fksproto.CsAddress.TinySalesOrderItem.Builder, fksproto.CsAddress.TinySalesOrderItemOrBuilder>(
+                  orderItemList_,
+                  ((bitField0_ & 0x00002000) == 0x00002000),
+                  getParentForChildren(),
+                  isClean());
+          orderItemList_ = null;
+        }
+        return orderItemListBuilder_;
+      }
+
+      private java.util.List<fksproto.CsAddress.TinyParcel> parcelList_ =
+              java.util.Collections.emptyList();
+      private void ensureParcelListIsMutable() {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+          parcelList_ = new java.util.ArrayList<fksproto.CsAddress.TinyParcel>(parcelList_);
+          bitField0_ |= 0x00004000;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsAddress.TinyParcel, fksproto.CsAddress.TinyParcel.Builder, fksproto.CsAddress.TinyParcelOrBuilder> parcelListBuilder_;
+
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public java.util.List<fksproto.CsAddress.TinyParcel> getParcelListList() {
+        if (parcelListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(parcelList_);
+        } else {
+          return parcelListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public int getParcelListCount() {
+        if (parcelListBuilder_ == null) {
+          return parcelList_.size();
+        } else {
+          return parcelListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public fksproto.CsAddress.TinyParcel getParcelList(int index) {
+        if (parcelListBuilder_ == null) {
+          return parcelList_.get(index);
+        } else {
+          return parcelListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder setParcelList(
+              int index, fksproto.CsAddress.TinyParcel value) {
+        if (parcelListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcelListIsMutable();
+          parcelList_.set(index, value);
+          onChanged();
+        } else {
+          parcelListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder setParcelList(
+              int index, fksproto.CsAddress.TinyParcel.Builder builderForValue) {
+        if (parcelListBuilder_ == null) {
+          ensureParcelListIsMutable();
+          parcelList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          parcelListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder addParcelList(fksproto.CsAddress.TinyParcel value) {
+        if (parcelListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcelListIsMutable();
+          parcelList_.add(value);
+          onChanged();
+        } else {
+          parcelListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder addParcelList(
+              int index, fksproto.CsAddress.TinyParcel value) {
+        if (parcelListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcelListIsMutable();
+          parcelList_.add(index, value);
+          onChanged();
+        } else {
+          parcelListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder addParcelList(
+              fksproto.CsAddress.TinyParcel.Builder builderForValue) {
+        if (parcelListBuilder_ == null) {
+          ensureParcelListIsMutable();
+          parcelList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          parcelListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder addParcelList(
+              int index, fksproto.CsAddress.TinyParcel.Builder builderForValue) {
+        if (parcelListBuilder_ == null) {
+          ensureParcelListIsMutable();
+          parcelList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          parcelListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder addAllParcelList(
+              java.lang.Iterable<? extends fksproto.CsAddress.TinyParcel> values) {
+        if (parcelListBuilder_ == null) {
+          ensureParcelListIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, parcelList_);
+          onChanged();
+        } else {
+          parcelListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder clearParcelList() {
+        if (parcelListBuilder_ == null) {
+          parcelList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00004000);
+          onChanged();
+        } else {
+          parcelListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public Builder removeParcelList(int index) {
+        if (parcelListBuilder_ == null) {
+          ensureParcelListIsMutable();
+          parcelList_.remove(index);
+          onChanged();
+        } else {
+          parcelListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public fksproto.CsAddress.TinyParcel.Builder getParcelListBuilder(
+              int index) {
+        return getParcelListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public fksproto.CsAddress.TinyParcelOrBuilder getParcelListOrBuilder(
+              int index) {
+        if (parcelListBuilder_ == null) {
+          return parcelList_.get(index);  } else {
+          return parcelListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public java.util.List<? extends fksproto.CsAddress.TinyParcelOrBuilder>
+      getParcelListOrBuilderList() {
+        if (parcelListBuilder_ != null) {
+          return parcelListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(parcelList_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public fksproto.CsAddress.TinyParcel.Builder addParcelListBuilder() {
+        return getParcelListFieldBuilder().addBuilder(
+                fksproto.CsAddress.TinyParcel.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public fksproto.CsAddress.TinyParcel.Builder addParcelListBuilder(
+              int index) {
+        return getParcelListFieldBuilder().addBuilder(
+                index, fksproto.CsAddress.TinyParcel.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.TinyParcel parcelList = 15;</code>
+       */
+      public java.util.List<fksproto.CsAddress.TinyParcel.Builder>
+      getParcelListBuilderList() {
+        return getParcelListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsAddress.TinyParcel, fksproto.CsAddress.TinyParcel.Builder, fksproto.CsAddress.TinyParcelOrBuilder>
+      getParcelListFieldBuilder() {
+        if (parcelListBuilder_ == null) {
+          parcelListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsAddress.TinyParcel, fksproto.CsAddress.TinyParcel.Builder, fksproto.CsAddress.TinyParcelOrBuilder>(
+                  parcelList_,
+                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  getParentForChildren(),
+                  isClean());
+          parcelList_ = null;
+        }
+        return parcelListBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitAddressAjaxResponse)
+    }
+
+    static {
+      defaultInstance = new InitAddressAjaxResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitAddressAjaxResponse)
+  }
+
+  public interface SaveAddressAjaxRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.SaveAddressAjaxRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    boolean hasUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserinfo();
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder();
+
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    boolean hasParcelId();
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    int getParcelId();
+
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    boolean hasSalesOrderId();
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    int getSalesOrderId();
+
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    com.google.protobuf.ByteString
+    getNameBytes();
+
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    boolean hasTelephone();
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    java.lang.String getTelephone();
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getTelephoneBytes();
+
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    boolean hasPostcode();
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    java.lang.String getPostcode();
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    com.google.protobuf.ByteString
+    getPostcodeBytes();
+
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    boolean hasStreet();
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    java.lang.String getStreet();
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    com.google.protobuf.ByteString
+    getStreetBytes();
+
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    boolean hasDirectoryCountryCode();
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    java.lang.String getDirectoryCountryCode();
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    com.google.protobuf.ByteString
+    getDirectoryCountryCodeBytes();
+
+    /**
+     * <code>optional int32 directoryCountryRegionId = 10;</code>
+     */
+    boolean hasDirectoryCountryRegionId();
+    /**
+     * <code>optional int32 directoryCountryRegionId = 10;</code>
+     */
+    int getDirectoryCountryRegionId();
+  }
+  /**
+   * Protobuf type {@code fksproto.SaveAddressAjaxRequest}
+   *
+   * <pre>
+   *保存收货地址请求  java接口
+   * </pre>
+   */
+  public static final class SaveAddressAjaxRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.SaveAddressAjaxRequest)
+          SaveAddressAjaxRequestOrBuilder {
+    // Use SaveAddressAjaxRequest.newBuilder() to construct.
+    private SaveAddressAjaxRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SaveAddressAjaxRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SaveAddressAjaxRequest defaultInstance;
+    public static SaveAddressAjaxRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SaveAddressAjaxRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SaveAddressAjaxRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userinfo_.toBuilder();
+              }
+              userinfo_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userinfo_);
+                userinfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              salesOrderId_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              name_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              telephone_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              postcode_ = bs;
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              street_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              directoryCountryCode_ = bs;
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              directoryCountryRegionId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.SaveAddressAjaxRequest.class, fksproto.CsAddress.SaveAddressAjaxRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SaveAddressAjaxRequest> PARSER =
+            new com.google.protobuf.AbstractParser<SaveAddressAjaxRequest>() {
+              public SaveAddressAjaxRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new SaveAddressAjaxRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SaveAddressAjaxRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USERINFO_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userinfo_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public boolean hasUserinfo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserinfo() {
+      return userinfo_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+      return userinfo_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelId_;
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public boolean hasParcelId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public int getParcelId() {
+      return parcelId_;
+    }
+
+    public static final int SALESORDERID_FIELD_NUMBER = 4;
+    private int salesOrderId_;
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    public boolean hasSalesOrderId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 salesOrderId = 4;</code>
+     */
+    public int getSalesOrderId() {
+      return salesOrderId_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 5;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+    getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TELEPHONE_FIELD_NUMBER = 6;
+    private java.lang.Object telephone_;
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public boolean hasTelephone() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public java.lang.String getTelephone() {
+      java.lang.Object ref = telephone_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          telephone_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string telephone = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getTelephoneBytes() {
+      java.lang.Object ref = telephone_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        telephone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int POSTCODE_FIELD_NUMBER = 7;
+    private java.lang.Object postcode_;
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public boolean hasPostcode() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public java.lang.String getPostcode() {
+      java.lang.Object ref = postcode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          postcode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string postcode = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+    getPostcodeBytes() {
+      java.lang.Object ref = postcode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        postcode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STREET_FIELD_NUMBER = 8;
+    private java.lang.Object street_;
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public boolean hasStreet() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public java.lang.String getStreet() {
+      java.lang.Object ref = street_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          street_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string street = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+    getStreetBytes() {
+      java.lang.Object ref = street_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        street_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DIRECTORYCOUNTRYCODE_FIELD_NUMBER = 9;
+    private java.lang.Object directoryCountryCode_;
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    public boolean hasDirectoryCountryCode() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    public java.lang.String getDirectoryCountryCode() {
+      java.lang.Object ref = directoryCountryCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          directoryCountryCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string directoryCountryCode = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+    getDirectoryCountryCodeBytes() {
+      java.lang.Object ref = directoryCountryCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        directoryCountryCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DIRECTORYCOUNTRYREGIONID_FIELD_NUMBER = 10;
+    private int directoryCountryRegionId_;
+    /**
+     * <code>optional int32 directoryCountryRegionId = 10;</code>
+     */
+    public boolean hasDirectoryCountryRegionId() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 directoryCountryRegionId = 10;</code>
+     */
+    public int getDirectoryCountryRegionId() {
+      return directoryCountryRegionId_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelId_ = 0;
+      salesOrderId_ = 0;
+      name_ = "";
+      telephone_ = "";
+      postcode_ = "";
+      street_ = "";
+      directoryCountryCode_ = "";
+      directoryCountryRegionId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getTelephoneBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getPostcodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getStreetBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getDirectoryCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, directoryCountryRegionId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userinfo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(4, salesOrderId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getTelephoneBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(7, getPostcodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(8, getStreetBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(9, getDirectoryCountryCodeBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(10, directoryCountryRegionId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.SaveAddressAjaxRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.SaveAddressAjaxRequest}
+     *
+     * <pre>
+     *保存收货地址请求  java接口
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.SaveAddressAjaxRequest)
+            fksproto.CsAddress.SaveAddressAjaxRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.SaveAddressAjaxRequest.class, fksproto.CsAddress.SaveAddressAjaxRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.SaveAddressAjaxRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserinfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        salesOrderId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        telephone_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        postcode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        street_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        directoryCountryCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        directoryCountryRegionId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxRequest_descriptor;
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxRequest getDefaultInstanceForType() {
+        return fksproto.CsAddress.SaveAddressAjaxRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxRequest build() {
+        fksproto.CsAddress.SaveAddressAjaxRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxRequest buildPartial() {
+        fksproto.CsAddress.SaveAddressAjaxRequest result = new fksproto.CsAddress.SaveAddressAjaxRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userinfoBuilder_ == null) {
+          result.userinfo_ = userinfo_;
+        } else {
+          result.userinfo_ = userinfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelId_ = parcelId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.salesOrderId_ = salesOrderId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.telephone_ = telephone_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.postcode_ = postcode_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.street_ = street_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.directoryCountryCode_ = directoryCountryCode_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.directoryCountryRegionId_ = directoryCountryRegionId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.SaveAddressAjaxRequest) {
+          return mergeFrom((fksproto.CsAddress.SaveAddressAjaxRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.SaveAddressAjaxRequest other) {
+        if (other == fksproto.CsAddress.SaveAddressAjaxRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserinfo()) {
+          mergeUserinfo(other.getUserinfo());
+        }
+        if (other.hasParcelId()) {
+          setParcelId(other.getParcelId());
+        }
+        if (other.hasSalesOrderId()) {
+          setSalesOrderId(other.getSalesOrderId());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000010;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasTelephone()) {
+          bitField0_ |= 0x00000020;
+          telephone_ = other.telephone_;
+          onChanged();
+        }
+        if (other.hasPostcode()) {
+          bitField0_ |= 0x00000040;
+          postcode_ = other.postcode_;
+          onChanged();
+        }
+        if (other.hasStreet()) {
+          bitField0_ |= 0x00000080;
+          street_ = other.street_;
+          onChanged();
+        }
+        if (other.hasDirectoryCountryCode()) {
+          bitField0_ |= 0x00000100;
+          directoryCountryCode_ = other.directoryCountryCode_;
+          onChanged();
+        }
+        if (other.hasDirectoryCountryRegionId()) {
+          setDirectoryCountryRegionId(other.getDirectoryCountryRegionId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.SaveAddressAjaxRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.SaveAddressAjaxRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userinfoBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public boolean hasUserinfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserinfo() {
+        if (userinfoBuilder_ == null) {
+          return userinfo_;
+        } else {
+          return userinfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userinfo_ = value;
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder setUserinfo(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          userinfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder mergeUserinfo(fksproto.CsBase.BaseUserRequest value) {
+        if (userinfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userinfo_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userinfo_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userinfo_).mergeFrom(value).buildPartial();
+          } else {
+            userinfo_ = value;
+          }
+          onChanged();
+        } else {
+          userinfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public Builder clearUserinfo() {
+        if (userinfoBuilder_ == null) {
+          userinfo_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userinfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserinfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserinfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserinfoOrBuilder() {
+        if (userinfoBuilder_ != null) {
+          return userinfoBuilder_.getMessageOrBuilder();
+        } else {
+          return userinfo_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest userinfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserinfoFieldBuilder() {
+        if (userinfoBuilder_ == null) {
+          userinfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserinfo(),
+                  getParentForChildren(),
+                  isClean());
+          userinfo_ = null;
+        }
+        return userinfoBuilder_;
+      }
+
+      private int parcelId_ ;
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public boolean hasParcelId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public int getParcelId() {
+        return parcelId_;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder setParcelId(int value) {
+        bitField0_ |= 0x00000004;
+        parcelId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder clearParcelId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int salesOrderId_ ;
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public boolean hasSalesOrderId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public int getSalesOrderId() {
+        return salesOrderId_;
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public Builder setSalesOrderId(int value) {
+        bitField0_ |= 0x00000008;
+        salesOrderId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 salesOrderId = 4;</code>
+       */
+      public Builder clearSalesOrderId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        salesOrderId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+      getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder setName(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 5;</code>
+       */
+      public Builder setNameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object telephone_ = "";
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public boolean hasTelephone() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public java.lang.String getTelephone() {
+        java.lang.Object ref = telephone_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            telephone_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+      getTelephoneBytes() {
+        java.lang.Object ref = telephone_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          telephone_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder setTelephone(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        telephone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder clearTelephone() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        telephone_ = getDefaultInstance().getTelephone();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string telephone = 6;</code>
+       */
+      public Builder setTelephoneBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        telephone_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object postcode_ = "";
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public boolean hasPostcode() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public java.lang.String getPostcode() {
+        java.lang.Object ref = postcode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            postcode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+      getPostcodeBytes() {
+        java.lang.Object ref = postcode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          postcode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder setPostcode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        postcode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder clearPostcode() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        postcode_ = getDefaultInstance().getPostcode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string postcode = 7;</code>
+       */
+      public Builder setPostcodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        postcode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object street_ = "";
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public boolean hasStreet() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public java.lang.String getStreet() {
+        java.lang.Object ref = street_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            street_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+      getStreetBytes() {
+        java.lang.Object ref = street_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          street_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder setStreet(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        street_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder clearStreet() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        street_ = getDefaultInstance().getStreet();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string street = 8;</code>
+       */
+      public Builder setStreetBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        street_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object directoryCountryCode_ = "";
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public boolean hasDirectoryCountryCode() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public java.lang.String getDirectoryCountryCode() {
+        java.lang.Object ref = directoryCountryCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            directoryCountryCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+      getDirectoryCountryCodeBytes() {
+        java.lang.Object ref = directoryCountryCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          directoryCountryCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public Builder setDirectoryCountryCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        directoryCountryCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public Builder clearDirectoryCountryCode() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        directoryCountryCode_ = getDefaultInstance().getDirectoryCountryCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string directoryCountryCode = 9;</code>
+       */
+      public Builder setDirectoryCountryCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        directoryCountryCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int directoryCountryRegionId_ ;
+      /**
+       * <code>optional int32 directoryCountryRegionId = 10;</code>
+       */
+      public boolean hasDirectoryCountryRegionId() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 directoryCountryRegionId = 10;</code>
+       */
+      public int getDirectoryCountryRegionId() {
+        return directoryCountryRegionId_;
+      }
+      /**
+       * <code>optional int32 directoryCountryRegionId = 10;</code>
+       */
+      public Builder setDirectoryCountryRegionId(int value) {
+        bitField0_ |= 0x00000200;
+        directoryCountryRegionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 directoryCountryRegionId = 10;</code>
+       */
+      public Builder clearDirectoryCountryRegionId() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        directoryCountryRegionId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.SaveAddressAjaxRequest)
+    }
+
+    static {
+      defaultInstance = new SaveAddressAjaxRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.SaveAddressAjaxRequest)
+  }
+
+  public interface SaveAddressAjaxResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.SaveAddressAjaxResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+  }
+  /**
+   * Protobuf type {@code fksproto.SaveAddressAjaxResponse}
+   *
+   * <pre>
+   *保存收货地址应答
+   * </pre>
+   */
+  public static final class SaveAddressAjaxResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.SaveAddressAjaxResponse)
+          SaveAddressAjaxResponseOrBuilder {
+    // Use SaveAddressAjaxResponse.newBuilder() to construct.
+    private SaveAddressAjaxResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SaveAddressAjaxResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SaveAddressAjaxResponse defaultInstance;
+    public static SaveAddressAjaxResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SaveAddressAjaxResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SaveAddressAjaxResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsAddress.SaveAddressAjaxResponse.class, fksproto.CsAddress.SaveAddressAjaxResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SaveAddressAjaxResponse> PARSER =
+            new com.google.protobuf.AbstractParser<SaveAddressAjaxResponse>() {
+              public SaveAddressAjaxResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new SaveAddressAjaxResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SaveAddressAjaxResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsAddress.SaveAddressAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsAddress.SaveAddressAjaxResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.SaveAddressAjaxResponse}
+     *
+     * <pre>
+     *保存收货地址应答
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.SaveAddressAjaxResponse)
+            fksproto.CsAddress.SaveAddressAjaxResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsAddress.SaveAddressAjaxResponse.class, fksproto.CsAddress.SaveAddressAjaxResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsAddress.SaveAddressAjaxResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsAddress.internal_static_fksproto_SaveAddressAjaxResponse_descriptor;
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxResponse getDefaultInstanceForType() {
+        return fksproto.CsAddress.SaveAddressAjaxResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxResponse build() {
+        fksproto.CsAddress.SaveAddressAjaxResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsAddress.SaveAddressAjaxResponse buildPartial() {
+        fksproto.CsAddress.SaveAddressAjaxResponse result = new fksproto.CsAddress.SaveAddressAjaxResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsAddress.SaveAddressAjaxResponse) {
+          return mergeFrom((fksproto.CsAddress.SaveAddressAjaxResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsAddress.SaveAddressAjaxResponse other) {
+        if (other == fksproto.CsAddress.SaveAddressAjaxResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsAddress.SaveAddressAjaxResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsAddress.SaveAddressAjaxResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.SaveAddressAjaxResponse)
+    }
+
+    static {
+      defaultInstance = new SaveAddressAjaxResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.SaveAddressAjaxResponse)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_fksproto_CustomerAddress_descriptor;
   private static
@@ -30724,6 +38543,36 @@ public final class CsAddress {
   private static
   com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internal_static_fksproto_GetCustomerAddressListExResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitAddressAjaxRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitAddressAjaxRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_TinySalesOrderItem_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_TinySalesOrderItem_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_TinyParcel_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_TinyParcel_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitAddressAjaxResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitAddressAjaxResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_SaveAddressAjaxRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_SaveAddressAjaxRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_SaveAddressAjaxResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_SaveAddressAjaxResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
   getDescriptor() {
@@ -30832,7 +38681,32 @@ public final class CsAddress {
                     "erAddressListExResponse\022$\n\004head\030\001 \002(\0132\026." +
                     "fksproto.BaseResponse\022,\n\taddresses\030\002 \003(\013" +
                     "2\031.fksproto.CustomerAddress\022\014\n\004more\030\003 \001(" +
-                    "\010\022\r\n\005count\030\004 \001(\005"
+                    "\010\022\r\n\005count\030\004 \001(\005\"\267\001\n\026InitAddressAjaxRequ",
+            "est\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest" +
+                    "\022+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUserRe" +
+                    "quest\022\020\n\010parcelId\030\003 \001(\005\022\024\n\014salesOrderId\030" +
+                    "\004 \001(\005\022\017\n\007appType\030\005 \001(\005\022\022\n\nlocaleCode\030\006 \001" +
+                    "(\t\"=\n\022TinySalesOrderItem\022\r\n\005title\030\001 \001(\t\022" +
+                    "\013\n\003url\030\002 \001(\t\022\013\n\003qty\030\003 \001(\005\"4\n\nTinyParcel\022" +
+                    "\021\n\tparcel_id\030\001 \001(\003\022\023\n\013parcel_name\030\002 \001(\t\"" +
+                    "\365\002\n\027InitAddressAjaxResponse\022$\n\004head\030\001 \002(" +
+                    "\0132\026.fksproto.BaseResponse\022\013\n\003msg\030\002 \001(\t\022\014" +
+                    "\n\004sign\030\003 \001(\t\022\025\n\rwarehouseName\030\004 \001(\t\022\014\n\004n",
+            "ame\030\005 \001(\t\022\021\n\ttelephone\030\006 \001(\t\022\020\n\010postcode" +
+                    "\030\007 \001(\t\022\016\n\006street\030\010 \001(\t\022\023\n\013countryCode\030\t " +
+                    "\001(\t\022\020\n\010regionId\030\n \001(\005\022\020\n\010parcelId\030\013 \001(\005\022" +
+                    "\023\n\013countryName\030\014 \001(\t\022\022\n\nregionName\030\r \001(\t" +
+                    "\0223\n\rorderItemList\030\016 \003(\0132\034.fksproto.TinyS" +
+                    "alesOrderItem\022(\n\nparcelList\030\017 \003(\0132\024.fksp" +
+                    "roto.TinyParcel\"\225\002\n\026SaveAddressAjaxReque" +
+                    "st\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022" +
+                    "+\n\010userinfo\030\002 \001(\0132\031.fksproto.BaseUserReq" +
+                    "uest\022\020\n\010parcelId\030\003 \001(\005\022\024\n\014salesOrderId\030\004",
+            " \001(\005\022\014\n\004name\030\005 \001(\t\022\021\n\ttelephone\030\006 \001(\t\022\020\n" +
+                    "\010postcode\030\007 \001(\t\022\016\n\006street\030\010 \001(\t\022\034\n\024direc" +
+                    "toryCountryCode\030\t \001(\t\022 \n\030directoryCountr" +
+                    "yRegionId\030\n \001(\005\"?\n\027SaveAddressAjaxRespon" +
+                    "se\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResponse"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -31004,6 +38878,42 @@ public final class CsAddress {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_GetCustomerAddressListExResponse_descriptor,
             new java.lang.String[] { "Head", "Addresses", "More", "Count", });
+    internal_static_fksproto_InitAddressAjaxRequest_descriptor =
+            getDescriptor().getMessageTypes().get(26);
+    internal_static_fksproto_InitAddressAjaxRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitAddressAjaxRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "ParcelId", "SalesOrderId", "AppType", "LocaleCode", });
+    internal_static_fksproto_TinySalesOrderItem_descriptor =
+            getDescriptor().getMessageTypes().get(27);
+    internal_static_fksproto_TinySalesOrderItem_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_TinySalesOrderItem_descriptor,
+            new java.lang.String[] { "Title", "Url", "Qty", });
+    internal_static_fksproto_TinyParcel_descriptor =
+            getDescriptor().getMessageTypes().get(28);
+    internal_static_fksproto_TinyParcel_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_TinyParcel_descriptor,
+            new java.lang.String[] { "ParcelId", "ParcelName", });
+    internal_static_fksproto_InitAddressAjaxResponse_descriptor =
+            getDescriptor().getMessageTypes().get(29);
+    internal_static_fksproto_InitAddressAjaxResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitAddressAjaxResponse_descriptor,
+            new java.lang.String[] { "Head", "Msg", "Sign", "WarehouseName", "Name", "Telephone", "Postcode", "Street", "CountryCode", "RegionId", "ParcelId", "CountryName", "RegionName", "OrderItemList", "ParcelList", });
+    internal_static_fksproto_SaveAddressAjaxRequest_descriptor =
+            getDescriptor().getMessageTypes().get(30);
+    internal_static_fksproto_SaveAddressAjaxRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_SaveAddressAjaxRequest_descriptor,
+            new java.lang.String[] { "Head", "Userinfo", "ParcelId", "SalesOrderId", "Name", "Telephone", "Postcode", "Street", "DirectoryCountryCode", "DirectoryCountryRegionId", });
+    internal_static_fksproto_SaveAddressAjaxResponse_descriptor =
+            getDescriptor().getMessageTypes().get(31);
+    internal_static_fksproto_SaveAddressAjaxResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_SaveAddressAjaxResponse_descriptor,
+            new java.lang.String[] { "Head", });
     fksproto.CsHead.getDescriptor();
     fksproto.CsBase.getDescriptor();
   }

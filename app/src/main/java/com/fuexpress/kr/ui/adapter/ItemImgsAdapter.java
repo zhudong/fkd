@@ -1,6 +1,7 @@
 package com.fuexpress.kr.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,6 +45,7 @@ public class ItemImgsAdapter extends PagerAdapter {
         int index = position % urls.size();
         ImageView imageView = new ImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setBackgroundColor(Color.WHITE);
         String url = urls.get(index);
         if (!TextUtils.isEmpty(mSuffix)) {
             url = url + mSuffix;

@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/package_package_number"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="13sp"/>
 
             <TextView

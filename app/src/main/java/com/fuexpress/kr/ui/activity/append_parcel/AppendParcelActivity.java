@@ -128,6 +128,7 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
     private boolean mNeedIdCard;
     private int mItemCount;
     private boolean mShowInputethod;
+    private CsParcel.AddressList mAddressList;
 
     @Override
     protected int getViewResId() {
@@ -392,13 +393,15 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
 
     @Override
     public void showAddress(CsParcel.AddressList address) {
+        mAddressList = address;
         String s2 = null;
         if (address != null) {
             String s = address.getName() + "  " + address.getTelephone() + "  " + address.getPostcode() + "\n";
             s2 = s + address.getStreet() + "," + address.getFullregionname();
+            setIdInfo(address.getIdcardFrontImage(), address.getIdcardBackImage(), address.getIdcard());
+            mPresenter.getParcelBean().setCustomeraddressid(address.getCustomeraddressid());
         }
         showAddress(s2);
-        setIdInfo(address.getIdcardFrontImage(), address.getIdcardBackImage(), address.getIdcard());
     }
 
     @Override
@@ -409,6 +412,13 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
         } else {
             mTvAddress.setText(address);
             mPresenter.getParcelBean().setCustomeraddress(address);
+        }
+        if (mAddressList == null) {
+            String[] split = address.split(" ");
+            if (split.length > 0)
+                mAddressList = CsParcel.AddressList.newBuilder()
+                        .setCustomeraddressid((mPresenter.getParcelBean().getCustomeraddressid()))
+                        .setName(split[0]).build();
         }
     }
 
@@ -554,6 +564,14 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
                 if (mNeedIdCard && b) {
                     state = 7;
                     if (toast)
+                        CustomToast.makeText(this, getString(R.string.String_please_input_id_card_num), Toast.LENGTH_SHORT).show();
+                }
+                boolean hasImg = TextUtils.isEmpty(idInfo.getUrlFront()) && TextUtils.isEmpty(idInfo.getServerUrlFront()) &&
+                        TextUtils.isEmpty(idInfo.getUrlBack()) && TextUtils.isEmpty(idInfo.getServerUrlBack());
+
+                if (mNeedIdCard && mNeedIdImg && hasImg) {
+                    state = 7;
+                    if (toast)
                         CustomToast.makeText(this, getString(R.string.id_card_notice), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -610,7 +628,7 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
             if (shippingMethod.getParcelshippingmethodid() == id) {
                 radioButton.setChecked(true);
                 showInsurance(shippingMethod, shippingDutFee, shippingFee);
-                showIdCard(shippingMethod.getIsneedidcard() == 1);
+                showIdCard(shippingMethod.getIsneedidcard() == 1, shippingMethod.getIsNeedIdcardImage() == 1);
             } else {
                 radioButton.setChecked(false);
             }
@@ -619,17 +637,22 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
         mRootView.postInvalidate();
     }
 
-    private void showIdCard(boolean b) {
-//        b = true;// TODO: 2016/12/15 正式注释掉
+    boolean mNeedIdImg;
+
+    private void showIdCard(boolean b, boolean needIdImg) {
+        mNeedIdImg = needIdImg;
         mNeedIdCard = b;
-        rlInputId.setVisibility(b ? View.VISIBLE : View.GONE);
+        rlInputId.setVisibility(mNeedIdCard ? View.VISIBLE : View.GONE);
         IDinfoBean idInfo = mPresenter.getIdInfo();
         idInfo.setNeedId(b);
         String idNumber = idInfo.getIdNumber();
         if (!TextUtils.isEmpty(idNumber)) {
-            mTvIdCardName.setText(idNumber);
+//            mTvIdCardName.setText(idNumber);
+            setIdCardNum(idNumber);
         } else {
-            mTvIdCardName.setText(idInfo.getServerIDNumber() != null ? idInfo.getServerIDNumber() : "");
+            String text = idInfo.getServerIDNumber() != null ? idInfo.getServerIDNumber() : "";
+//            mTvIdCardName.setText(text);
+            setIdCardNum(text);
         }
     }
 
@@ -707,7 +730,18 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
                 int addressID = data.getIntExtra(AddressManagerActivity.addressId, 0);
                 CsAddress.CustomerAddress customerAddress = (CsAddress.CustomerAddress) data.getExtras().getSerializable("address");
                 setIdInfo(customerAddress.getIdcardfrontimage(), customerAddress.getIdcardbackimage(), customerAddress.getIdCard());
-                mPresenter.setAddress(topString, addressString, addressID);
+                CsParcel.AddressList addressList = CsParcel.AddressList.newBuilder()
+                        .setName(customerAddress.getName())
+                        .setIdcard(customerAddress.getIdCard())
+                        .setIdcardFrontImage(customerAddress.getIdcardfrontimage())
+                        .setIdcardBackImage(customerAddress.getIdcardbackimage())
+                        .setCustomeraddressid(customerAddress.getAddressId())
+                        .setStreet(customerAddress.getStreet())
+                        .setTelephone(customerAddress.getPhone())
+                        .setFullregionname(customerAddress.getFullRegionName())
+                        .setPostcode(customerAddress.getCountryname())
+                        .build();
+                mPresenter.setAddress(addressList);
                 isClicking = false;
 //                mTvParcelShippingFee.setText("");
                 hintShippingMethod();
@@ -750,11 +784,29 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
     }
 
     private void setIdInfo(String idCardFront, String idCardBack, String idCardNumber) {
-        mTvIdCardName.setText(idCardNumber);
+//        mTvIdCardName.setText(idCardNumber);
+        setIdCardNum(idCardNumber);
         IDinfoBean idInfo = mPresenter.getIdInfo();
         idInfo.setIdNumber(idCardNumber);
         idInfo.setUrlBack(idCardBack);
         idInfo.setUrlFront(idCardFront);
+    }
+
+    private void setIdCardNum(String number) {
+        String name = "";
+        if (null != mAddressList) {
+            name = mAddressList.getName();
+        }
+        StringBuilder temp = new StringBuilder();
+        if (number.length() > 6) {
+            temp.append(number.substring(0, 6));
+            for (int i = 6; i < number.length(); i++)
+                temp.append("*");
+        } else {
+            temp.append(number);
+        }
+        String text = name + "  " + temp.toString();
+        mTvIdCardName.setText(text);
     }
 
     JsonSerializer jsonSerializer = new JsonSerializer();
@@ -947,6 +999,7 @@ public class AppendParcelActivity extends MbaseActivity<ParcelAppendContract.Pre
                 intent = new Intent(this, IdCardActivity.class);
                 String s = jsonSerializer.serializeIDinfo(mPresenter.getIdInfo());
                 intent.putExtra(IdCardActivity.ID_CARD_BEAN, s);
+                intent.putExtra(IdCardActivity.NEED_CARD_IMG, mNeedIdImg);
                 startActivityForResult(intent, 11);
                 this.overridePendingTransition(R.anim.activity_translate_x_in, R.anim.activity_translate_x_out);
                 break;

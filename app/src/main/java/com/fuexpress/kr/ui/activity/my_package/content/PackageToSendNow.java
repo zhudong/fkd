@@ -84,11 +84,9 @@ public class PackageToSendNow extends Fragment implements RefreshListView.OnRefr
         CsParcel.SendParcelListRequest.Builder builder = CsParcel.SendParcelListRequest.newBuilder();
         builder.setUserHead(AccountManager.getInstance().mBaseUserRequest);
         builder.setPageNo(mPageIndex);
-        if (mPageIndex == 1 && mParcelsList == null) {
+      /*  if (mPageIndex == 1 && mParcelsList == null) {
             mParcelsList = new ArrayList<>();
-            BaseActivity activity = (BaseActivity) getActivity();
-//            activity.showLoading();
-        }
+        }*/
         builder.setStatus(getTab()).setType(getType());
         NetEngine.postRequest(builder, new INetEngineListener<CsParcel.SendParcleListResponse>() {
 

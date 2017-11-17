@@ -1,0 +1,598 @@
+package com.fuexpress.kr.ui.activity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckedTextView;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+
+import com.fuexpress.kr.R;
+import com.fuexpress.kr.*;
+import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.bean.AdyenUserInfoBean;
+import com.fuexpress.kr.bean.CheckoutRequest;
+import com.fuexpress.kr.bean.CheckoutResponse;
+import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
+import com.fuexpress.kr.ui.view.CreditCardForm;
+import com.fuexpress.kr.ui.view.TitleBarView;
+import com.fuexpress.kr.utils.AndroidBug5497Workaround;
+import com.fuexpress.kr.utils.LogUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import adyen.com.adyenpaysdk.Adyen;
+import adyen.com.adyenpaysdk.exceptions.CheckoutRequestException;
+import adyen.com.adyenpaysdk.exceptions.EncrypterException;
+import adyen.com.adyenpaysdk.exceptions.NoPublicKeyExeption;
+import adyen.com.adyenpaysdk.pojo.CardPaymentData;
+import adyen.com.adyenuisdk.customcomponents.AdyenEditText;
+import adyen.com.adyenuisdk.listener.EditTextImeBackListener;
+import adyen.com.adyenuisdk.util.ColorUtil;
+import adyen.com.adyenuisdk.customcomponents.AdyenEditText;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+
+/**
+ * Created by Administrator on 2016/8/19.
+ */
+public class MyPayActivity extends Activity implements View.OnClickListener {
+    private static final String tag = MyPayActivity.class.getSimpleName();
+    public static final int ERROR_CANCEL = 1;
+
+    private TitleBarView titleBarView;
+    private ImageView backIv;
+
+    private TextView mPaymentAmount;
+    private TextView mPaymentTitle;
+    private RelativeLayout mPayButton;
+    private LinearLayout mPaymentForm;
+    private LinearLayout mMerchantLogo;
+    private ScrollView mMainLayout;
+    private ImageView mMerchantLogoImage;
+    private AdyenEditText mCreditCardNo;
+    private AdyenEditText mCreditCardExpDate;
+    private AdyenEditText mCreditCardCvc;
+    private AdyenEditText mCreditCardHolderName;
+    private CheckedTextView mCheckTxtView;
+    private LinearLayout mTabLayout;
+    private LinearLayout mSaveLayout;
+    private LinearLayout mUpdateLayout;
+    private TextView mSavedTv;
+    private TextView mSavedLineTv;
+    private TextView mUpdateTv;
+    private TextView mUpdateLineTv;
+    private ImageSwitcher mCardType;
+
+    private boolean isChecked;
+    public static boolean isSaved = false;
+
+    ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
+    InputMethodManager inputMethodManager;
+    private static AdyenCheckoutListener adyenCheckoutListener;
+    private Bundle extras;
+    private AdyenUserInfoBean adyenInfo;
+    public SweetAlertDialog mPDialog;
+
+    public MyPayActivity() {
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+        this.requestWindowFeature(1);
+        this.setContentView(R.layout.adyen_payment_form);
+        this.extras = this.getIntent().getExtras();
+        titleBarView = (TitleBarView) findViewById(R.id.adyen_titlebar);
+        backIv = titleBarView.getIv_in_title_back();
+
+        this.mPaymentAmount = (TextView) this.findViewById(R.id.credit_card_pay);
+        this.mPaymentTitle = (TextView) this.findViewById(R.id.payment_form_title);
+        this.mPayButton = (RelativeLayout) this.findViewById(R.id.pay_button);
+        this.mPaymentForm = (LinearLayout) this.findViewById(R.id.payment_form_layout);
+        this.mMerchantLogo = (LinearLayout) this.findViewById(R.id.merchant_logo_layout);
+        this.mMainLayout = (ScrollView) this.findViewById(R.id.main_layout);
+        this.mCreditCardNo = (AdyenEditText) this.findViewById(R.id.credit_card_no);
+        this.mCreditCardExpDate = (AdyenEditText) this.findViewById(R.id.credit_card_exp_date);
+        this.mCreditCardCvc = (AdyenEditText) this.findViewById(R.id.credit_card_cvc);
+        this.mCreditCardHolderName = (AdyenEditText) this.findViewById(R.id.cardholdername);
+        this.mCreditCardHolderName.getBackground().setColorFilter(this.getResources().getColor(R.color.light_grey_border), PorterDuff.Mode.SRC_ATOP);
+
+        this.mMerchantLogoImage = (ImageView) this.findViewById(R.id.merchantLogoImage);
+        this.mMerchantLogoImage.setImageResource(this.extras.getInt("logo"));
+        this.mCheckTxtView = (CheckedTextView) this.findViewById(R.id.save_checkbox);
+        this.mCheckTxtView.setCheckMarkDrawable(R.drawable.adyen_checkbox);
+        this.mTabLayout = (LinearLayout) this.findViewById(R.id.adyen_save_and_update_tab_layout);
+        this.mSaveLayout = (LinearLayout) this.findViewById(R.id.adyen_save_layout);
+        this.mUpdateLayout = (LinearLayout) this.findViewById(R.id.adyen_update_layout);
+        this.mSavedTv = (TextView) this.findViewById(R.id.adyen_saved_tv);
+        this.mSavedLineTv = (TextView) this.findViewById(R.id.adyen_saved_line_tv);
+        this.mUpdateTv = (TextView) this.findViewById(R.id.adyen_update_tv);
+        this.mUpdateLineTv = (TextView) this.findViewById(R.id.adyen_update_line_tv);
+        this.mCardType = (ImageSwitcher) this.findViewById(R.id.cardType);
+//        this.showInputKeyboard();
+
+
+        adyenInfo = (AdyenUserInfoBean) extras.getSerializable("userInfoBean");
+        if (adyenInfo.details != null) {
+            mCreditCardCvc.requestFocus();
+            if (adyenInfo.details.size() > 1) {
+                Collections.sort(adyenInfo.details, new ComparatorDate());
+            }
+            isSaved = true;
+            changeCardTypeImg(adyenInfo.details.get(0).RecurringDetail.variant);
+            mTabLayout.setVisibility(View.VISIBLE);
+            mCheckTxtView.setVisibility(View.GONE);
+            mCreditCardHolderName.setEnabled(false);
+            mCreditCardNo.setEnabled(false);
+            mCreditCardExpDate.setEnabled(false);
+            mCreditCardExpDate.setTextColor(getResources().getColor(R.color.gray_999));
+            mCreditCardHolderName.setText(adyenInfo.details.get(0).RecurringDetail.card.holderName);
+            mCreditCardNo.setText("**** **** **** " + adyenInfo.details.get(0).RecurringDetail.card.number);
+            String month = adyenInfo.details.get(0).RecurringDetail.card.expiryMonth.length() == 1
+                    ? "0" + adyenInfo.details.get(0).RecurringDetail.card.expiryMonth
+                    : adyenInfo.details.get(0).RecurringDetail.card.expiryMonth;
+            mCreditCardExpDate.setText(month + "/" + adyenInfo.details.get(0).RecurringDetail.card.expiryYear.substring(2, 4));
+        } else {
+            isSaved = false;
+            mCreditCardHolderName.requestFocus();
+            mCreditCardHolderName.setEnabled(true);
+            mCreditCardNo.setEnabled(true);
+            mCreditCardExpDate.setEnabled(true);
+            mTabLayout.setVisibility(View.GONE);
+            mCheckTxtView.setVisibility(View.VISIBLE);
+        }
+        String orderNumber = getIntent().getStringExtra("orderNumber");
+//        String paymentString = getIntent().getStringExtra("paymentString");
+        titleBarView.setTitleText(getString(R.string.package_pay_text_only));
+        mPaymentTitle.setText(getString(R.string.adyen_title_order_id_msg) + orderNumber);
+        this.initPaymentButtonText();
+        this.initPaymentButton();
+        this.initAdyenEditTextListeners();
+        if (Build.VERSION.SDK_INT >= 21) {
+            this.getWindow().setStatusBarColor(Color.parseColor(ColorUtil.changeColorHSB(this.getResources().getString(this.extras.getInt("backgroundColor")))));
+        }
+
+        this.mCheckTxtView.setOnClickListener(checkClick);
+        this.backIv.setOnClickListener(this);
+        this.mSaveLayout.setOnClickListener(this);
+        this.mUpdateLayout.setOnClickListener(this);
+        this.mCreditCardNo.setOnFocusChangeListener(focusChangeListener);
+    }
+
+
+    class ComparatorDate implements Comparator {
+        public static final String TAG = "ComparatorDate";
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        public int compare(Object obj1, Object obj2) {
+            AdyenUserInfoBean.Details t1 = (AdyenUserInfoBean.Details) obj1;
+            AdyenUserInfoBean.Details t2 = (AdyenUserInfoBean.Details) obj2;
+            //   return t1.getTradetime().compareTo(t2.getTradetime());  // 时间格式不好，不然可以直接这样比较
+            Date d1, d2;
+            try {
+                d1 = format.parse(t1.RecurringDetail.creationDate);
+                d2 = format.parse(t2.RecurringDetail.creationDate);
+            } catch (ParseException e) {
+                // 解析出错，则不进行排序
+                e.printStackTrace();
+                LogUtils.e(TAG, "ComparatorDate--compare--SimpleDateFormat.parse--error");
+                return 0;
+            }
+            if (d1.before(d2)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
+    public void changeCardTypeImg(String variant) {
+        if (TextUtils.equals("visa", variant)) {
+            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+        } else if (TextUtils.equals("cup", variant)) {
+            this.mCardType.setImageResource(R.mipmap.ady_card_unionpay);
+        } else if (TextUtils.equals("jcb", variant)) {
+            this.mCardType.setImageResource(R.mipmap.ady_card_jcb);
+        } else if (TextUtils.equals("mc", variant)) {
+            this.mCardType.setImageResource(R.mipmap.ady_card_mastercard);
+        } else {
+            this.mCardType.setImageResource(R.mipmap.ady_card_unknown);
+        }
+//        if(TextUtils.equals("visa", variant)){
+//            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+//        }
+//        if(TextUtils.equals("visa", variant)){
+//            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+//        }
+//        if(TextUtils.equals("visa", variant)){
+//            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+//        }
+//        if(TextUtils.equals("visa", variant)){
+//            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+//        }
+//        if(TextUtils.equals("visa", variant)){
+//            this.mCardType.setImageResource(R.mipmap.ady_card_visa);
+//        }
+    }
+//    public static List<AdyenUserInfoBean.Details> sortListDesc(List<AdyenUserInfoBean.Details> list) throws ParseException {
+//
+//
+//        List<String> retStr=new ArrayList<String>();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Map<Long,String> map = new TreeMap<Long,String>();
+//        for(int i=0;i<list.size();i++){
+//            String dateStr = list.get(i).RecurringDetail.creationDate;
+//            map.put(sdf.parse(dateStr).getTime(), dateStr);
+//        }
+//        Collection<String> coll=map.values();
+//        retStr.addAll(coll);
+//        Collections.reverse(retStr);
+//        return retStr;
+//    }
+
+    private View.OnClickListener checkClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            isChecked = !isChecked;
+            mCheckTxtView.setChecked(isChecked);
+        }
+    };
+
+    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (isSaved) {
+                mCreditCardNo.setTextColor(getResources().getColor(R.color.gray_999));
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void closeLoading() {
+        if (mPDialog != null && mPDialog.isShowing()) {
+            mPDialog.dismiss();
+        }
+    }
+
+    public void showLoading() {
+        if (mPDialog == null) {
+            mPDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        }
+        mPDialog.getProgressHelper().setBarColor(Color.parseColor("#ffffff"));
+        mPDialog.setCancelable(true);
+        if (!MyPayActivity.this.isFinishing() && !mPDialog.isShowing()) {
+            mPDialog.show();
+        }
+    }
+
+
+    public void onEventMainThread(BusEvent event) {
+        if (event.getType() == BusEvent.CODE_ADYEN_PAY_END) {
+            finish();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK) {
+            adyenCheckoutListener.checkoutFailedWithError("Cancel payment", ERROR_CANCEL);
+
+        }
+        return true;
+    }
+
+    public void onPause() {
+        super.onPause();
+//        this.inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private void showInputKeyboard() {
+//        this.inputMethodManager = (InputMethodManager)this.getSystemService("input_method");
+        this.inputMethodManager.toggleSoftInput(2, 1);
+        this.calculateKeyboardHeight();
+    }
+
+    public void calculateKeyboardHeight() {
+        this.mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            public void onGlobalLayout() {
+                Rect layoutRectangle = new Rect();
+                mMainLayout.getWindowVisibleDisplayFrame(layoutRectangle);
+                int screenHeight = mMainLayout.getRootView().getHeight();
+                int heightDifference = screenHeight - (layoutRectangle.bottom - layoutRectangle.top);
+                if (heightDifference > 500) {
+                    Log.i(tag, "Logo height: " + (layoutRectangle.bottom - mPaymentForm.getHeight()));
+                    setLogoLayoutHeight(layoutRectangle.bottom - mPaymentForm.getHeight());
+                }
+
+            }
+        };
+        this.mPaymentForm.getViewTreeObserver().addOnGlobalLayoutListener(this.mGlobalLayoutListener);
+    }
+
+    private void setLogoLayoutHeight(int logoHeight) {
+        ViewGroup.LayoutParams layoutParams = this.mMerchantLogo.getLayoutParams();
+        layoutParams.height = logoHeight;
+        this.mMerchantLogo.setLayoutParams(layoutParams);
+        this.mPaymentForm.getViewTreeObserver().removeOnGlobalLayoutListener(this.mGlobalLayoutListener);
+    }
+
+    public void initPaymentButtonText() {
+        String currencyCode = this.extras.getString("currency");
+//        String currencySign = this.getCurrencySign(currencyCode);
+//        if(currencyCode.equals(Currency.USD.toString())) {
+//            this.mPaymentAmount.setText(this.mPaymentAmount.getText() + " " + currencySign + " " + String.format("%.02f", new Object[]{Float.valueOf(this.extras.getFloat("amount"))}));
+//        } else {
+        this.mPaymentAmount.setText(this.mPaymentAmount.getText() + " " + String.format("%.02f", new Object[]{Float.valueOf(this.extras.getFloat("amount"))}) + " " + currencyCode);
+//        }
+
+    }
+
+//    private String getCurrencySign(String currencyCode) {
+    //return Currency.valueOf(currencyCode).getCurrencySign();
+//    }
+
+    public void initPaymentButton() {
+        this.mPayButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (isSaved) {
+                    if (TextUtils.isEmpty(mCreditCardCvc.getText())) {
+                        mCreditCardCvc.setHintTextColor(getResources().getColor(R.color.red));
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showLoading();
+                            }
+                        });
+                        adyenInfo.setCvc(mCreditCardCvc.getText().toString());
+                        final CardPaymentData cardPaymentData = buildCVCData();
+                        Adyen.getInstance().setToken(extras.getString("token"));
+                        Adyen.getInstance().setUseTestBackend(extras.getBoolean("useTestBackend"));
+                        Adyen.getInstance().setPublicKey(Constants.ADYEN_PUBLIC_KEY);
+                        try {
+                            CheckoutResponse noPublicKeyExeption = new CheckoutResponse();
+                            noPublicKeyExeption.setPaymentData(cardPaymentData.serialize());
+                            noPublicKeyExeption.setAmount(extras.getFloat("amount"));
+                            noPublicKeyExeption.setCurrency(extras.getString("currency"));
+                            adyenCheckoutListener.checkoutFastPay(adyenInfo, noPublicKeyExeption);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    if (CreditCardForm.mValidExpiryDate) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showLoading();
+                            }
+                        });
+                        final CardPaymentData cardPaymentData = buildCardData();
+                        Adyen.getInstance().setToken(extras.getString("token"));
+                        Adyen.getInstance().setUseTestBackend(extras.getBoolean("useTestBackend"));
+                        Adyen.getInstance().setPublicKey(Constants.ADYEN_PUBLIC_KEY);
+                        try {
+                            CheckoutResponse noPublicKeyExeption = new CheckoutResponse();
+                            noPublicKeyExeption.setPaymentData(cardPaymentData.serialize());
+                            noPublicKeyExeption.setAmount(extras.getFloat("amount"));
+                            noPublicKeyExeption.setCurrency(extras.getString("currency"));
+                            adyenCheckoutListener.checkoutAuthorizedPayment(noPublicKeyExeption, isChecked);
+                        } catch (EncrypterException var3) {
+                            var3.printStackTrace();
+                        } catch (NoPublicKeyExeption var4) {
+                            var4.printStackTrace();
+                        }
+//
+//                    Adyen.getInstance().fetchPublicKey(new Adyen.CompletionCallback() {
+//                        public void onSuccess(String result) {
+//                            try {
+//                                CheckoutResponse noPublicKeyExeption = new CheckoutResponse();
+//                                noPublicKeyExeption.setPaymentData(cardPaymentData.serialize());
+//                                noPublicKeyExeption.setAmount(extras.getFloat("amount"));
+//                                noPublicKeyExeption.setCurrency(extras.getString("currency"));
+//                                adyenCheckoutListener.checkoutAuthorizedPayment(noPublicKeyExeption);
+//                            } catch (EncrypterException var3) {
+//                                var3.printStackTrace();
+//                            } catch (NoPublicKeyExeption var4) {
+//                                var4.printStackTrace();
+//                            }
+//
+//                        }
+//
+//                        public void onError(String error) {
+//                            adyenCheckoutListener.checkoutFailedWithError(error);
+//                            closeLoading();
+//                            finish();
+//                        }
+//                    });
+                    }
+                }
+
+            }
+        });
+    }
+
+    private CardPaymentData buildCardData() {
+        CardPaymentData cardPaymentData = new CardPaymentData();
+        cardPaymentData.setCardHolderName(this.mCreditCardHolderName.getText().toString());
+        cardPaymentData.setCvc(this.mCreditCardCvc.getText().toString());
+        cardPaymentData.setExpiryMonth(this.mCreditCardExpDate.getText().toString().split("/")[0]);
+        cardPaymentData.setExpiryYear("20" + this.mCreditCardExpDate.getText().toString().split("/")[1]);
+        cardPaymentData.setGenerationTime(new Date());
+        cardPaymentData.setNumber(this.mCreditCardNo.getText().toString());
+        return cardPaymentData;
+    }
+
+    private CardPaymentData buildCVCData() {
+        CardPaymentData cardPaymentData = new CardPaymentData();
+//        cardPaymentData.setCardHolderName("");
+        cardPaymentData.setCvc(this.mCreditCardCvc.getText().toString());
+        cardPaymentData.setExpiryMonth("");
+        cardPaymentData.setExpiryYear("");
+        cardPaymentData.setGenerationTime(new Date());
+        cardPaymentData.setNumber("");
+        return cardPaymentData;
+    }
+
+    private void initAdyenEditTextListeners() {
+        this.mCreditCardHolderName.setOnEditTextImeBackListener(new EditTextImeBackListener() {
+            @Override
+            public void onImeBack(AdyenEditText adyenEditText, String s) {
+                finish();
+            }
+        });
+        this.mCreditCardNo.setOnEditTextImeBackListener(new EditTextImeBackListener() {
+            public void onImeBack(AdyenEditText ctrl, String text) {
+                if (adyenCheckoutListener != null) {
+                    adyenCheckoutListener.checkoutFailedWithError("non-payment", ERROR_CANCEL);
+                }
+                finish();
+            }
+        });
+        this.mCreditCardExpDate.setOnEditTextImeBackListener(new EditTextImeBackListener() {
+            public void onImeBack(AdyenEditText ctrl, String text) {
+                finish();
+            }
+        });
+        this.mCreditCardCvc.setOnEditTextImeBackListener(new EditTextImeBackListener() {
+            public void onImeBack(AdyenEditText ctrl, String text) {
+                finish();
+            }
+        });
+    }
+
+    public LinearLayout getmPaymentForm() {
+        return this.mPaymentForm;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.adyen_save_layout:
+                isSaved = true;
+                mCreditCardCvc.requestFocus();
+                mCheckTxtView.setVisibility(View.GONE);
+                mCreditCardHolderName.setEnabled(false);
+                mCreditCardNo.setEnabled(false);
+                mCreditCardExpDate.setEnabled(false);
+                mCreditCardExpDate.setTextColor(getResources().getColor(R.color.gray_999));
+                mSavedTv.setTextColor(getResources().getColor(R.color.blue_3A79BF));
+                mSavedLineTv.setBackgroundColor(getResources().getColor(R.color.blue_0054B1));
+                mUpdateTv.setTextColor(getResources().getColor(R.color.gray_999));
+                mUpdateLineTv.setBackgroundColor(getResources().getColor(R.color.gray_B5B5B5));
+                mCreditCardHolderName.setText(adyenInfo.details.get(0).RecurringDetail.card.holderName);
+                mCreditCardNo.setText("**** **** **** " + adyenInfo.details.get(0).RecurringDetail.card.number);
+                String month = adyenInfo.details.get(0).RecurringDetail.card.expiryMonth.length() == 1
+                        ? "0" + adyenInfo.details.get(0).RecurringDetail.card.expiryMonth
+                        : adyenInfo.details.get(0).RecurringDetail.card.expiryMonth;
+                mCreditCardExpDate.setText(month + "/" + adyenInfo.details.get(0).RecurringDetail.card.expiryYear.substring(2, 4));
+                changeCardTypeImg(adyenInfo.details.get(0).RecurringDetail.variant);
+                break;
+            case R.id.adyen_update_layout:
+                isSaved = false;
+                mCreditCardHolderName.requestFocus();
+                mCheckTxtView.setVisibility(View.VISIBLE);
+                mCreditCardHolderName.setEnabled(true);
+                mCreditCardNo.setEnabled(true);
+                mCreditCardExpDate.setEnabled(true);
+                mCreditCardExpDate.setTextColor(getResources().getColor(R.color.black_0));
+                mSavedTv.setTextColor(getResources().getColor(R.color.gray_999));
+                mSavedLineTv.setBackgroundColor(getResources().getColor(R.color.gray_B5B5B5));
+                mUpdateTv.setTextColor(getResources().getColor(R.color.blue_3A79BF));
+                mUpdateLineTv.setBackgroundColor(getResources().getColor(R.color.blue_0054B1));
+                mCreditCardHolderName.setText("");
+                mCreditCardNo.setText("");
+                mCreditCardExpDate.setText("");
+                this.mCardType.setImageResource(R.mipmap.ady_card_unknown);
+                break;
+            case R.id.iv_in_title_back:
+                adyenCheckoutListener.checkoutFailedWithError("Cancel payment", ERROR_CANCEL);
+                finish();
+                break;
+        }
+    }
+
+    public static class PaymentActivityBuilder {
+        Bundle arguments = new Bundle();
+        CheckoutRequest checkoutRequest;
+
+        public PaymentActivityBuilder(CheckoutRequest request) throws CheckoutRequestException {
+            this.checkoutRequest = request;
+            this.initPaymentFragment();
+        }
+
+        private void initPaymentFragment() throws CheckoutRequestException {
+            if (this.checkoutRequest.getBrandColor() != 0) {
+                this.arguments.putInt("backgroundColor", this.checkoutRequest.getBrandColor());
+                if (this.checkoutRequest.getBrandLogo() != 0) {
+                    this.arguments.putInt("logo", this.checkoutRequest.getBrandLogo());
+                    if (this.checkoutRequest.getCheckoutAmount() > 0.0F) {
+                        this.arguments.putFloat("amount", this.checkoutRequest.getCheckoutAmount());
+                        if (this.checkoutRequest.getCurrency() != null && !TextUtils.isEmpty(this.checkoutRequest.getCurrency().toString())) {
+                            this.arguments.putString("currency", this.checkoutRequest.getCurrency());
+                            if (!TextUtils.isEmpty(this.checkoutRequest.getToken())) {
+                                this.arguments.putString("token", this.checkoutRequest.getToken());
+                                this.arguments.putBoolean("useTestBackend", this.checkoutRequest.isTestBackend());
+                            } else {
+                                throw new CheckoutRequestException("Token is not set! Please set the token.");
+                            }
+                        } else {
+                            throw new CheckoutRequestException("Currency is not set! Please set the currency.");
+                        }
+                    } else {
+                        throw new CheckoutRequestException("Amount is not set! Please set the amount.");
+                    }
+                } else {
+                    throw new CheckoutRequestException("Brand logo is not set! Please set the brand logo.");
+                }
+            } else {
+                throw new CheckoutRequestException("Brand color is not set! Please set the brand color.");
+            }
+        }
+
+        public Intent build(AdyenCheckoutListener listener, Context context) {
+            adyenCheckoutListener = listener;
+            Intent intent = new Intent(context, MyPayActivity.class);
+            intent.putExtras(this.arguments);
+            return intent;
+        }
+    }
+
+}

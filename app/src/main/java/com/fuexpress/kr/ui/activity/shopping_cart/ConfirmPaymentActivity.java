@@ -24,16 +24,13 @@ import com.fuexpress.kr.model.PaymentManager;
 import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.net.OperaRequestListener;
-import com.fuexpress.kr.ui.activity.AddRequireActivity;
 import com.fuexpress.kr.ui.activity.DaoUPayActivity;
-import com.fuexpress.kr.ui.activity.PickUpActivity;
 import com.fuexpress.kr.ui.activity.PickUpSuccessActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.CustomDialog;
 import com.fuexpress.kr.ui.view.CustomToast;
 import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.LogUtils;
-import com.fuexpress.kr.utils.SPUtils;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -74,6 +71,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
     private float payTotalf;
     private ImageView toBackIv;
     private String orderNumber;
+    private float totalPaidf;
 
 
     private TextView bankNameTv, recevierNameTv, bankAccountTv, bankCountTv, redNoticeTv;
@@ -137,6 +135,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
         int commodityCount = bundle.getInt("commodityCount");
         float subTotalf = bundle.getFloat("subTotal");
         grandTotalf = bundle.getFloat("grandTotal");
+        totalPaidf = bundle.getFloat("totalpaid");
         isUseBalance = bundle.getBoolean("isUseBalance");
         List<CsShipping.Shipping> shippingList = (List<CsShipping.Shipping>) bundle.getSerializable("shippingList");
 
@@ -154,6 +153,10 @@ public class ConfirmPaymentActivity extends BaseActivity {
         //   confirmPaymentBtn = (Button) rootView.findViewById(R.id.payment_confirm_btn);
 
         orderIdTv.setText(orderNumber);
+        if (shippingScheme == CsOrder.ShippingScheme.SHIPPING_SCHEME_FBAG_GIFT_VALUE) {
+            deliveryTv.setText(getResources().getString(R.string.String_direct_fu));
+            feeLayout.setVisibility(View.GONE);
+        }
         if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
             deliveryTv.setText(getResources().getString(R.string.String_merge_order));
             feeLayout.setVisibility(View.GONE);
@@ -167,13 +170,15 @@ public class ConfirmPaymentActivity extends BaseActivity {
                     LinearLayout feeChildLayot = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.confirm_payment_fee_layout, null);
                     TextView feeTitleTv = (TextView) feeChildLayot.findViewById(R.id.payment_fee_title_tv);
                     TextView feeTv = (TextView) feeChildLayot.findViewById(R.id.payment_fee_tv);
-                    feeTitleTv.setText(shipping.getTitle());
+                    //feeTitleTv.setText(shipping.getTitle());
+                    feeTitleTv.setText(getString(R.string.String_parcel_shipping_fee));
                     String price = getResources().getString(R.string.String_order_price);
                     feeTv.setText(UIUtils.getCurrency(ConfirmPaymentActivity.this, (float) shipping.getFee()));
                     feeLayout.addView(feeChildLayot);
                 }
             }
-            deliveryTv.setText(getResources().getString(R.string.String_direct_mail_1) + fee);
+            //deliveryTv.setText(getResources().getString(R.string.String_direct_mail_1) + fee);
+            deliveryTv.setText(getResources().getString(R.string.String_direct_mail_1));
         }
         purchaseTv.setText(purchaseScheme == Constants.PURCHASE_SCHEME_STOCK
                 ? getResources().getString(R.string.String_cancel_msg)
@@ -236,30 +241,9 @@ public class ConfirmPaymentActivity extends BaseActivity {
         String balanceStr;
         float defaultFee = 0.00f;
         if (isUseBalance) {
-            if (balance >= grandTotalf) {
-                /*if(TextUtils.equals(currencyCode, "₩")) {
-                    needStr = getString(R.string.String_order_price2, UIUtils.getCurrency(this), defaultFee);
-                    balanceStr = getString(R.string.String_order_price2, UIUtils.getCurrency(this), grandTotalf);
-                }else {
-                    needStr = getString(R.string.String_order_price, UIUtils.getCurrency(this), defaultFee);
-                    balanceStr = getString(R.string.String_order_price, UIUtils.getCurrency(this), grandTotalf);
-                }*/
-
-                needStr = UIUtils.getCurrency(this, defaultFee);
-                balanceStr = UIUtils.getCurrency(this, grandTotalf);
-                payTotalf = 0;
-            } else {
-               /* if(TextUtils.equals(currencyCode, "₩")) {
-                    needStr = getString(R.string.String_order_price2,UIUtils.getCurrency(this) , (grandTotalf - balance));
-                    balanceStr = getString(R.string.String_order_price2, UIUtils.getCurrency(this) , balance);
-                }else {
-                    needStr = getString(R.string.String_order_price,UIUtils.getCurrency(this) , (grandTotalf - balance));
-                    balanceStr = getString(R.string.String_order_price, UIUtils.getCurrency(this) , balance);
-                }*/
-                needStr = UIUtils.getCurrency(this, (grandTotalf - balance));
+                needStr = UIUtils.getCurrency(this, (totalPaidf));
                 balanceStr = UIUtils.getCurrency(this, balance);
-                payTotalf = grandTotalf - balance;
-            }
+                payTotalf = totalPaidf;
         } else {
             /*if(TextUtils.equals(currencyCode, "₩")) {
                 balanceStr = getString(R.string.String_order_price2,UIUtils.getCurrency(this) , 0.00);
@@ -269,8 +253,8 @@ public class ConfirmPaymentActivity extends BaseActivity {
                 needStr = getString(R.string.String_order_price,UIUtils.getCurrency(this) , grandTotalf);
             }*/
             balanceStr = UIUtils.getCurrency(this, 0.00f);
-            needStr = UIUtils.getCurrency(this, grandTotalf);
-            payTotalf = grandTotalf;
+            needStr = UIUtils.getCurrency(this, totalPaidf);
+            payTotalf = totalPaidf;
         }
 
         subTotalTv.setText(subTotal);
@@ -313,6 +297,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
                 }
                 if (payTotalf == 0) {
                     Intent intent = new Intent();
+                    intent.putExtra(PaymentSuccessActivity.IS_CROWD, true);
                     intent.setClass(ConfirmPaymentActivity.this, PaymentSuccessActivity.class);
                     startActivity(intent);
                     finish();
@@ -340,7 +325,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
         return true;
     }
 
-    public void pay(){
+    public void pay() {
         if (payType == Constants.PAYMENT_DAOUPAY) {
             DaoUPayActivity.IntentBuilder intentBuilder = DaoUPayActivity.IntentBuilder.build(ConfirmPaymentActivity.this)
                     .setAmount((int) payTotalf)
@@ -350,6 +335,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
                         @Override
                         public void onOperaSuccess() {
                             Intent intent = new Intent();
+                            intent.putExtra(PaymentSuccessActivity.IS_CROWD, true);
                             intent.setClass(ConfirmPaymentActivity.this, PaymentSuccessActivity.class);
                             startActivity(intent);
                             finish();
@@ -376,6 +362,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
 //                            LogUtils.d(payResult.authCode);
                         if (!TextUtils.isEmpty(payResult.authCode)) {
                             Intent intent = new Intent();
+                            intent.putExtra(PaymentSuccessActivity.IS_CROWD, true);
                             intent.setClass(ConfirmPaymentActivity.this, PaymentSuccessActivity.class);
                             startActivity(intent);
                             finish();
@@ -407,7 +394,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
             });
 
         }
-        if(payType == Constants.PAYMENT_WECHAT || payType == Constants.PAYMENT_ALIPAY){
+        if (payType == Constants.PAYMENT_WECHAT || payType == Constants.PAYMENT_ALIPAY) {
             applyForSalesOrderPay();
         }
     }
@@ -477,7 +464,7 @@ public class ConfirmPaymentActivity extends BaseActivity {
                         public void onSuccess(String resultStatus) {
                             Intent intent = new Intent(ConfirmPaymentActivity.this, PickUpSuccessActivity.class);
 //                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+                            intent.putExtra(PaymentSuccessActivity.IS_CROWD, true);
                             intent.setClass(ConfirmPaymentActivity.this, PaymentSuccessActivity.class);
                             ConfirmPaymentActivity.this.startActivity(intent);
                         }

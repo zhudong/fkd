@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/layout_style"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/payment_gift_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/my_gift_card_order_binding_balance_hint"
+            android:textSize="13sp"/>
+
+        <Button
+            android:id="@+id/payment_bind_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f5f5f5"
+            android:text="@string/my_gift_card_order_binding_btn_text"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_up_member"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/system_Mytextsize_black_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/member_note_string"/>
+
+        <Switch
+            android:id="@+id/sw_member"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13.8dp"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/payment_vip_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:divider="@color/divide_line"
+        android:dividerHeight="1dp"
+        android:visibility="gone"/>
+</LinearLayout>

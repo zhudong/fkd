@@ -129,20 +129,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/btn_crowd"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_btn_bg_red_radius_stroke"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="进货"
-                android:textColor="@color/the_red"
-                android:textSize="15sp"
-                android:visibility="gone"/>
-
-            <TextView
                 android:id="@+id/btn_buy_now"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
@@ -155,6 +141,22 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/btn_crowd"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_bg_red_radius_stroke"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/String_crowd_attend"
+                android:textColor="@color/the_red"
+                android:textSize="15sp"
+                android:visibility="visible"/>
+
+
         </LinearLayout>
     </LinearLayout>
 

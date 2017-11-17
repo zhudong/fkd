@@ -77,6 +77,8 @@ message GetCrowdDetailResponse
 	repeated UserInfo     users       = 5;//参与者列表
 	repeated PairIntFloat discounts   = 6;//折扣 单品id-折扣值
 	optional bool         more        = 7;
+	optional string       image_url    = 8;//拼单详情图片
+	optional string       select_image = 9;//0使用富文本 1使用图片
 }
 
 
@@ -143,6 +145,23 @@ message InitiateCrowdResponse
 	optional int64     crowd_order_id    = 3;//拼单订单id，返回success有效
 	optional int64     match_item_id     = 4;//单品id，返回success有效
 	optional string     msg              = 5;//返回fail有效，错误的信息
+}
+
+message AddCrowdToCartRequest
+{
+	required BaseRequest     head     	  = 1;
+	optional BaseUserRequest userinfo 	  = 2;
+	optional int32           crowd_id     = 3;//拼单ID
+	optional int32           item_id      = 4;//单品ID
+	optional int32           qty          = 5;//数量
+	optional string          note         = 6;//单品留言
+	repeated PairIntInt      attrs        = 7; //属性id:属性值id列表
+	optional string          currency_code = 8;
+	optional string          locale_code   = 9;
+}
+message AddCrowdToCartResponse
+{
+	required BaseResponse 	 head         = 1;
 }
 
 message GetItemCrowdDetailRequest

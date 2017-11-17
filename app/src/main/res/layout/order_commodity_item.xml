@@ -3,37 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="10dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:descendantFocusability="blocksDescendants"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/order_commodity_img_iv"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:scaleType="fitXY"
-        android:layout_marginLeft="5dp"
         android:src="@mipmap/qq_login" />
 
     <TextView
-        android:layout_marginLeft="10dp"
         android:id="@+id/order_commodity_titile_tv"
         style="@style/system_Mytextsize_GRAY_12"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/seller_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/order_commodity_titile_tv"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
         android:orientation="horizontal">
@@ -42,23 +43,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/String_cart_seller"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/order_commodity_seller_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/buyfrom_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_ll"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
         android:orientation="horizontal">
@@ -67,8 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/String_cart_buyfrom"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/order_commodity_buyfrom_tv"
@@ -79,11 +78,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/order_size_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buyfrom_ll"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
         android:orientation="horizontal">
@@ -93,9 +92,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/String_cart_size"
-            android:visibility="gone"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/order_commodity_size_tv"
@@ -103,41 +102,42 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:textSize="13sp" />
+
         <TextView
             android:id="@+id/commodity_color_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/String_cart_color"
-            android:visibility="gone"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/order_commodity_color_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:visibility="gone"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/price_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/order_size_ll"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
         android:orientation="horizontal">
 
-       <!-- <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/String_cart_price"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
--->
+        <!-- <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/String_cart_price"
+             android:textColor="@color/black"
+             android:textSize="13sp" />
+ -->
         <TextView
             android:id="@+id/order_commodity_price_tv"
             android:layout_width="wrap_content"
@@ -145,12 +145,13 @@
             android:textColor="@color/black"
             android:textSize="13sp" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/order_note_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/price_ll"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/order_commodity_img_iv"
         android:orientation="horizontal">
@@ -171,10 +172,10 @@
 
     <TextView
         android:id="@+id/order_commodity_counter_tv"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
+        style="@style/system_Mytextsize_black_11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/system_Mytextsize_black_11"/>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp" />
 </RelativeLayout>

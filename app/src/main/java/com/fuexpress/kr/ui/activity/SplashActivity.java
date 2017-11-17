@@ -15,8 +15,6 @@ import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.SysApplication;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.AccountManager;
-import com.fuexpress.kr.model.AddressManager;
-import com.fuexpress.kr.model.AssetFileManager;
 import com.fuexpress.kr.model.ConfigManager;
 import com.fuexpress.kr.model.ShopCartManager;
 import com.fuexpress.kr.ui.activity.help_signed.data.HelpSignedLocalDataSource;
@@ -135,7 +133,7 @@ public class SplashActivity extends FragmentActivity {
             @Override
             public void run() {
                 //AssetFileManager.getInstance().getAddressData(SysApplication.getContext());
-                AddressManager.getInstance().prepareAddressData();
+                //AddressManager.getInstance().prepareAddressData();
                 //AddressManager.getInstance().getUpdateCountryAndRegionRequest();
             }
         }) {

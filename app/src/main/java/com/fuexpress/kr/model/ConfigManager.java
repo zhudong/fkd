@@ -68,7 +68,22 @@ public class ConfigManager {
                 mContext.startActivity(intent);
             }
         });
+    }
 
+    //2016/10/09 add by Longer 安全切换语种资源的方法
+    public void updateConfigByNotActivityBundBoolean(Configuration config, final String tag, final boolean booleanValue) {
+        Resources res = mContext.getResources();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        ActivityController.finishAllSafe(new ActivityController.WhenTheArrayListFinish() {
+            @Override
+            public void readComplete() {
+                Intent intent = new Intent();
+                intent.setClass(mContext, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(tag, booleanValue);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public void updateConfigInLogin(Configuration config) {

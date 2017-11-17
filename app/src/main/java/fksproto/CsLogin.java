@@ -93,6 +93,30 @@ public final class CsLogin {
      * </pre>
      */
     ACCOUNT_OPERACODE_PHONE_BIND(9, 10),
+    /**
+     * <code>ACCOUNT_OPERACODE_PHONE_BIND_NEW = 11;</code>
+     *
+     * <pre>
+     *新的手机号绑定(使用这个)
+     * </pre>
+     */
+    ACCOUNT_OPERACODE_PHONE_BIND_NEW(10, 11),
+    /**
+     * <code>ACCOUNT_OPERACODE_THIRD_BIND_NEW = 12;</code>
+     *
+     * <pre>
+     *第三方绑定(新)
+     * </pre>
+     */
+    ACCOUNT_OPERACODE_THIRD_BIND_NEW(11, 12),
+    /**
+     * <code>ACCOUNT_OPERACODE_THIRD_UNBIND = 13;</code>
+     *
+     * <pre>
+     *第三方解绑
+     * </pre>
+     */
+    ACCOUNT_OPERACODE_THIRD_UNBIND(12, 13),
     ;
 
     /**
@@ -175,6 +199,30 @@ public final class CsLogin {
      * </pre>
      */
     public static final int ACCOUNT_OPERACODE_PHONE_BIND_VALUE = 10;
+    /**
+     * <code>ACCOUNT_OPERACODE_PHONE_BIND_NEW = 11;</code>
+     *
+     * <pre>
+     *新的手机号绑定(使用这个)
+     * </pre>
+     */
+    public static final int ACCOUNT_OPERACODE_PHONE_BIND_NEW_VALUE = 11;
+    /**
+     * <code>ACCOUNT_OPERACODE_THIRD_BIND_NEW = 12;</code>
+     *
+     * <pre>
+     *第三方绑定(新)
+     * </pre>
+     */
+    public static final int ACCOUNT_OPERACODE_THIRD_BIND_NEW_VALUE = 12;
+    /**
+     * <code>ACCOUNT_OPERACODE_THIRD_UNBIND = 13;</code>
+     *
+     * <pre>
+     *第三方解绑
+     * </pre>
+     */
+    public static final int ACCOUNT_OPERACODE_THIRD_UNBIND_VALUE = 13;
 
 
     public final int getNumber() { return value; }
@@ -191,6 +239,9 @@ public final class CsLogin {
         case 8: return ACCOUNT_OPERACODE_CHECK_NICKNAME_EXIST;
         case 9: return ACCOUNT_OPERACODE_PHONE_RESET_PASSWORD;
         case 10: return ACCOUNT_OPERACODE_PHONE_BIND;
+        case 11: return ACCOUNT_OPERACODE_PHONE_BIND_NEW;
+        case 12: return ACCOUNT_OPERACODE_THIRD_BIND_NEW;
+        case 13: return ACCOUNT_OPERACODE_THIRD_UNBIND;
         default: return null;
       }
     }
@@ -626,7 +677,7 @@ public final class CsLogin {
     int getPlatform();
 
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -634,7 +685,7 @@ public final class CsLogin {
      */
     boolean hasOpenid();
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -642,7 +693,7 @@ public final class CsLogin {
      */
     java.lang.String getOpenid();
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -816,7 +867,7 @@ public final class CsLogin {
     public static final int OPENID_FIELD_NUMBER = 2;
     private java.lang.Object openid_;
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -826,7 +877,7 @@ public final class CsLogin {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -847,7 +898,7 @@ public final class CsLogin {
       }
     }
     /**
-     * <code>required string openid = 2;</code>
+     * <code>optional string openid = 2;</code>
      *
      * <pre>
      *openid
@@ -933,10 +984,6 @@ public final class CsLogin {
       if (isInitialized == 0) return false;
 
       if (!hasPlatform()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOpenid()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1182,10 +1229,6 @@ public final class CsLogin {
 
           return false;
         }
-        if (!hasOpenid()) {
-
-          return false;
-        }
         return true;
       }
 
@@ -1258,7 +1301,7 @@ public final class CsLogin {
 
       private java.lang.Object openid_ = "";
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1268,7 +1311,7 @@ public final class CsLogin {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1289,7 +1332,7 @@ public final class CsLogin {
         }
       }
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1309,7 +1352,7 @@ public final class CsLogin {
         }
       }
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1326,7 +1369,7 @@ public final class CsLogin {
         return this;
       }
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1339,7 +1382,7 @@ public final class CsLogin {
         return this;
       }
       /**
-       * <code>required string openid = 2;</code>
+       * <code>optional string openid = 2;</code>
        *
        * <pre>
        *openid
@@ -1574,7 +1617,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     boolean hasThird();
@@ -1582,7 +1625,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     fksproto.CsLogin.ThirdAccount getThird();
@@ -1590,7 +1633,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     fksproto.CsLogin.ThirdAccountOrBuilder getThirdOrBuilder();
@@ -1665,7 +1708,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     boolean hasVerifyCode();
@@ -1673,7 +1716,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     java.lang.String getVerifyCode();
@@ -1681,7 +1724,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -1726,6 +1769,15 @@ public final class CsLogin {
      */
     com.google.protobuf.ByteString
     getLocalecodeBytes();
+
+    /**
+     * <code>optional int32 uin = 13;</code>
+     */
+    boolean hasUin();
+    /**
+     * <code>optional int32 uin = 13;</code>
+     */
+    int getUin();
   }
   /**
    * Protobuf type {@code fksproto.AccountRequest}
@@ -1861,6 +1913,11 @@ public final class CsLogin {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
               localecode_ = bs;
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              uin_ = input.readInt32();
               break;
             }
           }
@@ -2084,7 +2141,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     public boolean hasThird() {
@@ -2094,7 +2151,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     public fksproto.CsLogin.ThirdAccount getThird() {
@@ -2104,7 +2161,7 @@ public final class CsLogin {
      * <code>optional .fksproto.ThirdAccount third = 6;</code>
      *
      * <pre>
-     *第三方账号  
+     *第三方账号
      * </pre>
      */
     public fksproto.CsLogin.ThirdAccountOrBuilder getThirdOrBuilder() {
@@ -2267,7 +2324,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     public boolean hasVerifyCode() {
@@ -2277,7 +2334,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     public java.lang.String getVerifyCode() {
@@ -2298,7 +2355,7 @@ public final class CsLogin {
      * <code>optional string verify_code = 10;</code>
      *
      * <pre>
-     *验证码   
+     *验证码
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2411,6 +2468,21 @@ public final class CsLogin {
       }
     }
 
+    public static final int UIN_FIELD_NUMBER = 13;
+    private int uin_;
+    /**
+     * <code>optional int32 uin = 13;</code>
+     */
+    public boolean hasUin() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional int32 uin = 13;</code>
+     */
+    public int getUin() {
+      return uin_;
+    }
+
     private void initFields() {
       head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
       operacode_ = 0;
@@ -2424,6 +2496,7 @@ public final class CsLogin {
       verifyCode_ = "";
       countrycode_ = "";
       localecode_ = "";
+      uin_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2496,6 +2569,9 @@ public final class CsLogin {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeBytes(12, getLocalecodeBytes());
       }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt32(13, uin_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2552,6 +2628,10 @@ public final class CsLogin {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(12, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(13, uin_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2704,6 +2784,8 @@ public final class CsLogin {
         bitField0_ = (bitField0_ & ~0x00000400);
         localecode_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
+        uin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -2788,6 +2870,10 @@ public final class CsLogin {
           to_bitField0_ |= 0x00000800;
         }
         result.localecode_ = localecode_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.uin_ = uin_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2855,6 +2941,9 @@ public final class CsLogin {
           bitField0_ |= 0x00000800;
           localecode_ = other.localecode_;
           onChanged();
+        }
+        if (other.hasUin()) {
+          setUin(other.getUin());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3324,7 +3413,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public boolean hasThird() {
@@ -3334,7 +3423,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public fksproto.CsLogin.ThirdAccount getThird() {
@@ -3348,7 +3437,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public Builder setThird(fksproto.CsLogin.ThirdAccount value) {
@@ -3368,7 +3457,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public Builder setThird(
@@ -3386,7 +3475,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public Builder mergeThird(fksproto.CsLogin.ThirdAccount value) {
@@ -3409,7 +3498,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public Builder clearThird() {
@@ -3426,7 +3515,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public fksproto.CsLogin.ThirdAccount.Builder getThirdBuilder() {
@@ -3438,7 +3527,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       public fksproto.CsLogin.ThirdAccountOrBuilder getThirdOrBuilder() {
@@ -3452,7 +3541,7 @@ public final class CsLogin {
        * <code>optional .fksproto.ThirdAccount third = 6;</code>
        *
        * <pre>
-       *第三方账号  
+       *第三方账号
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -3750,7 +3839,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public boolean hasVerifyCode() {
@@ -3760,7 +3849,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public java.lang.String getVerifyCode() {
@@ -3781,7 +3870,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -3801,7 +3890,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public Builder setVerifyCode(
@@ -3818,7 +3907,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public Builder clearVerifyCode() {
@@ -3831,7 +3920,7 @@ public final class CsLogin {
        * <code>optional string verify_code = 10;</code>
        *
        * <pre>
-       *验证码   
+       *验证码
        * </pre>
        */
       public Builder setVerifyCodeBytes(
@@ -4017,6 +4106,38 @@ public final class CsLogin {
         }
         bitField0_ |= 0x00000800;
         localecode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int uin_ ;
+      /**
+       * <code>optional int32 uin = 13;</code>
+       */
+      public boolean hasUin() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int32 uin = 13;</code>
+       */
+      public int getUin() {
+        return uin_;
+      }
+      /**
+       * <code>optional int32 uin = 13;</code>
+       */
+      public Builder setUin(int value) {
+        bitField0_ |= 0x00001000;
+        uin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 uin = 13;</code>
+       */
+      public Builder clearUin() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        uin_ = 0;
         onChanged();
         return this;
       }
@@ -6383,6 +6504,23 @@ public final class CsLogin {
      */
     com.google.protobuf.ByteString
     getCurrencyNameBytes();
+
+    /**
+     * <code>optional bool isBindPhone = 11;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean hasIsBindPhone();
+    /**
+     * <code>optional bool isBindPhone = 11;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean getIsBindPhone();
   }
   /**
    * Protobuf type {@code fksproto.LoginResponse}
@@ -6499,6 +6637,11 @@ public final class CsLogin {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
               currencyName_ = bs;
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              isBindPhone_ = input.readBool();
               break;
             }
           }
@@ -6954,6 +7097,29 @@ public final class CsLogin {
       }
     }
 
+    public static final int ISBINDPHONE_FIELD_NUMBER = 11;
+    private boolean isBindPhone_;
+    /**
+     * <code>optional bool isBindPhone = 11;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean hasIsBindPhone() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool isBindPhone = 11;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean getIsBindPhone() {
+      return isBindPhone_;
+    }
+
     private void initFields() {
       head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
       sessionKey_ = "";
@@ -6965,6 +7131,7 @@ public final class CsLogin {
       currencyid_ = 0;
       currencySign_ = "";
       currencyName_ = "";
+      isBindPhone_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7017,6 +7184,9 @@ public final class CsLogin {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getCurrencyNameBytes());
       }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(11, isBindPhone_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -7065,6 +7235,10 @@ public final class CsLogin {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(10, getCurrencyNameBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBoolSize(11, isBindPhone_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7208,6 +7382,8 @@ public final class CsLogin {
         bitField0_ = (bitField0_ & ~0x00000100);
         currencyName_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
+        isBindPhone_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -7280,6 +7456,10 @@ public final class CsLogin {
           to_bitField0_ |= 0x00000200;
         }
         result.currencyName_ = currencyName_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.isBindPhone_ = isBindPhone_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7339,6 +7519,9 @@ public final class CsLogin {
           bitField0_ |= 0x00000200;
           currencyName_ = other.currencyName_;
           onChanged();
+        }
+        if (other.hasIsBindPhone()) {
+          setIsBindPhone(other.getIsBindPhone());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8219,6 +8402,54 @@ public final class CsLogin {
         }
         bitField0_ |= 0x00000200;
         currencyName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean isBindPhone_ ;
+      /**
+       * <code>optional bool isBindPhone = 11;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean hasIsBindPhone() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool isBindPhone = 11;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean getIsBindPhone() {
+        return isBindPhone_;
+      }
+      /**
+       * <code>optional bool isBindPhone = 11;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder setIsBindPhone(boolean value) {
+        bitField0_ |= 0x00000400;
+        isBindPhone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isBindPhone = 11;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder clearIsBindPhone() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isBindPhone_ = false;
         onChanged();
         return this;
       }
@@ -11297,6 +11528,5177 @@ public final class CsLogin {
     // @@protoc_insertion_point(class_scope:fksproto.ThirdLoginResponse)
   }
 
+  public interface ThirdLoginWithoutBindRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.ThirdLoginWithoutBindRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>required int32 platform = 2;</code>
+     *
+     * <pre>
+     *refer AuthPlatform
+     * </pre>
+     */
+    boolean hasPlatform();
+    /**
+     * <code>required int32 platform = 2;</code>
+     *
+     * <pre>
+     *refer AuthPlatform
+     * </pre>
+     */
+    int getPlatform();
+
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    boolean hasOpenid();
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    java.lang.String getOpenid();
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getOpenidBytes();
+
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    boolean hasToken();
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    java.lang.String getToken();
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getTokenBytes();
+
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    boolean hasRandomKey();
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    java.lang.String getRandomKey();
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getRandomKeyBytes();
+
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    boolean hasLocalecode();
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    java.lang.String getLocalecode();
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocalecodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.ThirdLoginWithoutBindRequest}
+   *
+   * <pre>
+   *无绑定第三方登录
+   * </pre>
+   */
+  public static final class ThirdLoginWithoutBindRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ThirdLoginWithoutBindRequest)
+          ThirdLoginWithoutBindRequestOrBuilder {
+    // Use ThirdLoginWithoutBindRequest.newBuilder() to construct.
+    private ThirdLoginWithoutBindRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThirdLoginWithoutBindRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThirdLoginWithoutBindRequest defaultInstance;
+    public static ThirdLoginWithoutBindRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThirdLoginWithoutBindRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThirdLoginWithoutBindRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              platform_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              openid_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              token_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              randomKey_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              localecode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsLogin.ThirdLoginWithoutBindRequest.class, fksproto.CsLogin.ThirdLoginWithoutBindRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThirdLoginWithoutBindRequest> PARSER =
+            new com.google.protobuf.AbstractParser<ThirdLoginWithoutBindRequest>() {
+              public ThirdLoginWithoutBindRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ThirdLoginWithoutBindRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThirdLoginWithoutBindRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int PLATFORM_FIELD_NUMBER = 2;
+    private int platform_;
+    /**
+     * <code>required int32 platform = 2;</code>
+     *
+     * <pre>
+     *refer AuthPlatform
+     * </pre>
+     */
+    public boolean hasPlatform() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 platform = 2;</code>
+     *
+     * <pre>
+     *refer AuthPlatform
+     * </pre>
+     */
+    public int getPlatform() {
+      return platform_;
+    }
+
+    public static final int OPENID_FIELD_NUMBER = 3;
+    private java.lang.Object openid_;
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    public boolean hasOpenid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    public java.lang.String getOpenid() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          openid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string openid = 3;</code>
+     *
+     * <pre>
+     *openid
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getOpenidBytes() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        openid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TOKEN_FIELD_NUMBER = 4;
+    private java.lang.Object token_;
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    public boolean hasToken() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          token_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     *access token
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getTokenBytes() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        token_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RANDOM_KEY_FIELD_NUMBER = 5;
+    private java.lang.Object randomKey_;
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public boolean hasRandomKey() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public java.lang.String getRandomKey() {
+      java.lang.Object ref = randomKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          randomKey_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string random_key = 5;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getRandomKeyBytes() {
+      java.lang.Object ref = randomKey_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        randomKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 6;
+    private java.lang.Object localecode_;
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    public boolean hasLocalecode() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localecode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string localecode = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localecode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      platform_ = 0;
+      openid_ = "";
+      token_ = "";
+      randomKey_ = "";
+      localecode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlatform()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOpenid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, platform_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getTokenBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getRandomKeyBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getLocalecodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(2, platform_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getTokenBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getRandomKeyBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getLocalecodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsLogin.ThirdLoginWithoutBindRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.ThirdLoginWithoutBindRequest}
+     *
+     * <pre>
+     *无绑定第三方登录
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ThirdLoginWithoutBindRequest)
+            fksproto.CsLogin.ThirdLoginWithoutBindRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsLogin.ThirdLoginWithoutBindRequest.class, fksproto.CsLogin.ThirdLoginWithoutBindRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsLogin.ThirdLoginWithoutBindRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        platform_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        openid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        token_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        randomKey_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        localecode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor;
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindRequest getDefaultInstanceForType() {
+        return fksproto.CsLogin.ThirdLoginWithoutBindRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindRequest build() {
+        fksproto.CsLogin.ThirdLoginWithoutBindRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindRequest buildPartial() {
+        fksproto.CsLogin.ThirdLoginWithoutBindRequest result = new fksproto.CsLogin.ThirdLoginWithoutBindRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.platform_ = platform_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.openid_ = openid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.token_ = token_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.randomKey_ = randomKey_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.localecode_ = localecode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsLogin.ThirdLoginWithoutBindRequest) {
+          return mergeFrom((fksproto.CsLogin.ThirdLoginWithoutBindRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsLogin.ThirdLoginWithoutBindRequest other) {
+        if (other == fksproto.CsLogin.ThirdLoginWithoutBindRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasPlatform()) {
+          setPlatform(other.getPlatform());
+        }
+        if (other.hasOpenid()) {
+          bitField0_ |= 0x00000004;
+          openid_ = other.openid_;
+          onChanged();
+        }
+        if (other.hasToken()) {
+          bitField0_ |= 0x00000008;
+          token_ = other.token_;
+          onChanged();
+        }
+        if (other.hasRandomKey()) {
+          bitField0_ |= 0x00000010;
+          randomKey_ = other.randomKey_;
+          onChanged();
+        }
+        if (other.hasLocalecode()) {
+          bitField0_ |= 0x00000020;
+          localecode_ = other.localecode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!hasPlatform()) {
+
+          return false;
+        }
+        if (!hasOpenid()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsLogin.ThirdLoginWithoutBindRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsLogin.ThirdLoginWithoutBindRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private int platform_ ;
+      /**
+       * <code>required int32 platform = 2;</code>
+       *
+       * <pre>
+       *refer AuthPlatform
+       * </pre>
+       */
+      public boolean hasPlatform() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 platform = 2;</code>
+       *
+       * <pre>
+       *refer AuthPlatform
+       * </pre>
+       */
+      public int getPlatform() {
+        return platform_;
+      }
+      /**
+       * <code>required int32 platform = 2;</code>
+       *
+       * <pre>
+       *refer AuthPlatform
+       * </pre>
+       */
+      public Builder setPlatform(int value) {
+        bitField0_ |= 0x00000002;
+        platform_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 platform = 2;</code>
+       *
+       * <pre>
+       *refer AuthPlatform
+       * </pre>
+       */
+      public Builder clearPlatform() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        platform_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object openid_ = "";
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public boolean hasOpenid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public java.lang.String getOpenid() {
+        java.lang.Object ref = openid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            openid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getOpenidBytes() {
+        java.lang.Object ref = openid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          openid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public Builder setOpenid(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        openid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public Builder clearOpenid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        openid_ = getDefaultInstance().getOpenid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string openid = 3;</code>
+       *
+       * <pre>
+       *openid
+       * </pre>
+       */
+      public Builder setOpenidBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        openid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object token_ = "";
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public boolean hasToken() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            token_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getTokenBytes() {
+        java.lang.Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public Builder setToken(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public Builder clearToken() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       *access token
+       * </pre>
+       */
+      public Builder setTokenBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        token_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object randomKey_ = "";
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public boolean hasRandomKey() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public java.lang.String getRandomKey() {
+        java.lang.Object ref = randomKey_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            randomKey_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getRandomKeyBytes() {
+        java.lang.Object ref = randomKey_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          randomKey_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder setRandomKey(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        randomKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder clearRandomKey() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        randomKey_ = getDefaultInstance().getRandomKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string random_key = 5;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder setRandomKeyBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        randomKey_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localecode_ = "";
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public boolean hasLocalecode() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localecode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localecode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public Builder setLocalecode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public Builder clearLocalecode() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        localecode_ = getDefaultInstance().getLocalecode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 6;</code>
+       */
+      public Builder setLocalecodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.ThirdLoginWithoutBindRequest)
+    }
+
+    static {
+      defaultInstance = new ThirdLoginWithoutBindRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.ThirdLoginWithoutBindRequest)
+  }
+
+  public interface ThirdLoginWithoutBindResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.ThirdLoginWithoutBindResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    boolean hasSessionKey();
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    java.lang.String getSessionKey();
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getSessionKeyBytes();
+
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    boolean hasTicket();
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    java.lang.String getTicket();
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getTicketBytes();
+
+    /**
+     * <code>optional uint32 uin = 4;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    boolean hasUin();
+    /**
+     * <code>optional uint32 uin = 4;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    int getUin();
+
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    boolean hasH5Ticket();
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    java.lang.String getH5Ticket();
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getH5TicketBytes();
+
+    /**
+     * <code>optional bool isBindPhone = 6;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean hasIsBindPhone();
+    /**
+     * <code>optional bool isBindPhone = 6;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean getIsBindPhone();
+
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    boolean hasLocalecode();
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    java.lang.String getLocalecode();
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocalecodeBytes();
+
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    boolean hasCurrencycode();
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    java.lang.String getCurrencycode();
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    com.google.protobuf.ByteString
+    getCurrencycodeBytes();
+
+    /**
+     * <code>optional uint32 currencyid = 9;</code>
+     */
+    boolean hasCurrencyid();
+    /**
+     * <code>optional uint32 currencyid = 9;</code>
+     */
+    int getCurrencyid();
+  }
+  /**
+   * Protobuf type {@code fksproto.ThirdLoginWithoutBindResponse}
+   */
+  public static final class ThirdLoginWithoutBindResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ThirdLoginWithoutBindResponse)
+          ThirdLoginWithoutBindResponseOrBuilder {
+    // Use ThirdLoginWithoutBindResponse.newBuilder() to construct.
+    private ThirdLoginWithoutBindResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThirdLoginWithoutBindResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThirdLoginWithoutBindResponse defaultInstance;
+    public static ThirdLoginWithoutBindResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThirdLoginWithoutBindResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThirdLoginWithoutBindResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              sessionKey_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              ticket_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              uin_ = input.readUInt32();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              h5Ticket_ = bs;
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              isBindPhone_ = input.readBool();
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              localecode_ = bs;
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              currencycode_ = bs;
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              currencyid_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsLogin.ThirdLoginWithoutBindResponse.class, fksproto.CsLogin.ThirdLoginWithoutBindResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThirdLoginWithoutBindResponse> PARSER =
+            new com.google.protobuf.AbstractParser<ThirdLoginWithoutBindResponse>() {
+              public ThirdLoginWithoutBindResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ThirdLoginWithoutBindResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThirdLoginWithoutBindResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int SESSION_KEY_FIELD_NUMBER = 2;
+    private java.lang.Object sessionKey_;
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    public boolean hasSessionKey() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    public java.lang.String getSessionKey() {
+      java.lang.Object ref = sessionKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sessionKey_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string session_key = 2;</code>
+     *
+     * <pre>
+     *后续的会话密钥，客户端保留在本地
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getSessionKeyBytes() {
+      java.lang.Object ref = sessionKey_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        sessionKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TICKET_FIELD_NUMBER = 3;
+    private java.lang.Object ticket_;
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    public boolean hasTicket() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    public java.lang.String getTicket() {
+      java.lang.Object ref = ticket_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          ticket_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ticket = 3;</code>
+     *
+     * <pre>
+     *票据，客户端保留在本地
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getTicketBytes() {
+      java.lang.Object ref = ticket_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        ticket_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int UIN_FIELD_NUMBER = 4;
+    private int uin_;
+    /**
+     * <code>optional uint32 uin = 4;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    public boolean hasUin() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional uint32 uin = 4;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    public int getUin() {
+      return uin_;
+    }
+
+    public static final int H5_TICKET_FIELD_NUMBER = 5;
+    private java.lang.Object h5Ticket_;
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    public boolean hasH5Ticket() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    public java.lang.String getH5Ticket() {
+      java.lang.Object ref = h5Ticket_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          h5Ticket_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string h5_ticket = 5;</code>
+     *
+     * <pre>
+     *H5票据，客户端保留在本地，客户端调用H5页面时用到
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getH5TicketBytes() {
+      java.lang.Object ref = h5Ticket_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        h5Ticket_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ISBINDPHONE_FIELD_NUMBER = 6;
+    private boolean isBindPhone_;
+    /**
+     * <code>optional bool isBindPhone = 6;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean hasIsBindPhone() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bool isBindPhone = 6;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean getIsBindPhone() {
+      return isBindPhone_;
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 7;
+    private java.lang.Object localecode_;
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    public boolean hasLocalecode() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localecode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string localecode = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localecode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CURRENCYCODE_FIELD_NUMBER = 8;
+    private java.lang.Object currencycode_;
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    public boolean hasCurrencycode() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    public java.lang.String getCurrencycode() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          currencycode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string currencycode = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+    getCurrencycodeBytes() {
+      java.lang.Object ref = currencycode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        currencycode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CURRENCYID_FIELD_NUMBER = 9;
+    private int currencyid_;
+    /**
+     * <code>optional uint32 currencyid = 9;</code>
+     */
+    public boolean hasCurrencyid() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional uint32 currencyid = 9;</code>
+     */
+    public int getCurrencyid() {
+      return currencyid_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      sessionKey_ = "";
+      ticket_ = "";
+      uin_ = 0;
+      h5Ticket_ = "";
+      isBindPhone_ = false;
+      localecode_ = "";
+      currencycode_ = "";
+      currencyid_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getSessionKeyBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getTicketBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, uin_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getH5TicketBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, isBindPhone_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getCurrencycodeBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeUInt32(9, currencyid_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getSessionKeyBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getTicketBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeUInt32Size(4, uin_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getH5TicketBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBoolSize(6, isBindPhone_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(7, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(8, getCurrencycodeBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeUInt32Size(9, currencyid_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.ThirdLoginWithoutBindResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsLogin.ThirdLoginWithoutBindResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.ThirdLoginWithoutBindResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ThirdLoginWithoutBindResponse)
+            fksproto.CsLogin.ThirdLoginWithoutBindResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsLogin.ThirdLoginWithoutBindResponse.class, fksproto.CsLogin.ThirdLoginWithoutBindResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsLogin.ThirdLoginWithoutBindResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sessionKey_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        ticket_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        uin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        h5Ticket_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isBindPhone_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        localecode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        currencycode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        currencyid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsLogin.internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor;
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindResponse getDefaultInstanceForType() {
+        return fksproto.CsLogin.ThirdLoginWithoutBindResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindResponse build() {
+        fksproto.CsLogin.ThirdLoginWithoutBindResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsLogin.ThirdLoginWithoutBindResponse buildPartial() {
+        fksproto.CsLogin.ThirdLoginWithoutBindResponse result = new fksproto.CsLogin.ThirdLoginWithoutBindResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.sessionKey_ = sessionKey_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.ticket_ = ticket_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.uin_ = uin_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.h5Ticket_ = h5Ticket_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.isBindPhone_ = isBindPhone_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.localecode_ = localecode_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.currencycode_ = currencycode_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.currencyid_ = currencyid_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsLogin.ThirdLoginWithoutBindResponse) {
+          return mergeFrom((fksproto.CsLogin.ThirdLoginWithoutBindResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsLogin.ThirdLoginWithoutBindResponse other) {
+        if (other == fksproto.CsLogin.ThirdLoginWithoutBindResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasSessionKey()) {
+          bitField0_ |= 0x00000002;
+          sessionKey_ = other.sessionKey_;
+          onChanged();
+        }
+        if (other.hasTicket()) {
+          bitField0_ |= 0x00000004;
+          ticket_ = other.ticket_;
+          onChanged();
+        }
+        if (other.hasUin()) {
+          setUin(other.getUin());
+        }
+        if (other.hasH5Ticket()) {
+          bitField0_ |= 0x00000010;
+          h5Ticket_ = other.h5Ticket_;
+          onChanged();
+        }
+        if (other.hasIsBindPhone()) {
+          setIsBindPhone(other.getIsBindPhone());
+        }
+        if (other.hasLocalecode()) {
+          bitField0_ |= 0x00000040;
+          localecode_ = other.localecode_;
+          onChanged();
+        }
+        if (other.hasCurrencycode()) {
+          bitField0_ |= 0x00000080;
+          currencycode_ = other.currencycode_;
+          onChanged();
+        }
+        if (other.hasCurrencyid()) {
+          setCurrencyid(other.getCurrencyid());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsLogin.ThirdLoginWithoutBindResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsLogin.ThirdLoginWithoutBindResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.lang.Object sessionKey_ = "";
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public boolean hasSessionKey() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public java.lang.String getSessionKey() {
+        java.lang.Object ref = sessionKey_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            sessionKey_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getSessionKeyBytes() {
+        java.lang.Object ref = sessionKey_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          sessionKey_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public Builder setSessionKey(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        sessionKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public Builder clearSessionKey() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sessionKey_ = getDefaultInstance().getSessionKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string session_key = 2;</code>
+       *
+       * <pre>
+       *后续的会话密钥，客户端保留在本地
+       * </pre>
+       */
+      public Builder setSessionKeyBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        sessionKey_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ticket_ = "";
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public boolean hasTicket() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public java.lang.String getTicket() {
+        java.lang.Object ref = ticket_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            ticket_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getTicketBytes() {
+        java.lang.Object ref = ticket_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          ticket_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public Builder setTicket(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        ticket_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public Builder clearTicket() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        ticket_ = getDefaultInstance().getTicket();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ticket = 3;</code>
+       *
+       * <pre>
+       *票据，客户端保留在本地
+       * </pre>
+       */
+      public Builder setTicketBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        ticket_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int uin_ ;
+      /**
+       * <code>optional uint32 uin = 4;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public boolean hasUin() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional uint32 uin = 4;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public int getUin() {
+        return uin_;
+      }
+      /**
+       * <code>optional uint32 uin = 4;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public Builder setUin(int value) {
+        bitField0_ |= 0x00000008;
+        uin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 uin = 4;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public Builder clearUin() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        uin_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object h5Ticket_ = "";
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public boolean hasH5Ticket() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public java.lang.String getH5Ticket() {
+        java.lang.Object ref = h5Ticket_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            h5Ticket_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getH5TicketBytes() {
+        java.lang.Object ref = h5Ticket_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          h5Ticket_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public Builder setH5Ticket(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        h5Ticket_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public Builder clearH5Ticket() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        h5Ticket_ = getDefaultInstance().getH5Ticket();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string h5_ticket = 5;</code>
+       *
+       * <pre>
+       *H5票据，客户端保留在本地，客户端调用H5页面时用到
+       * </pre>
+       */
+      public Builder setH5TicketBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        h5Ticket_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean isBindPhone_ ;
+      /**
+       * <code>optional bool isBindPhone = 6;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean hasIsBindPhone() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bool isBindPhone = 6;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean getIsBindPhone() {
+        return isBindPhone_;
+      }
+      /**
+       * <code>optional bool isBindPhone = 6;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder setIsBindPhone(boolean value) {
+        bitField0_ |= 0x00000020;
+        isBindPhone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isBindPhone = 6;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder clearIsBindPhone() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        isBindPhone_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localecode_ = "";
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public boolean hasLocalecode() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localecode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localecode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public Builder setLocalecode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public Builder clearLocalecode() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        localecode_ = getDefaultInstance().getLocalecode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localecode = 7;</code>
+       */
+      public Builder setLocalecodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object currencycode_ = "";
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public boolean hasCurrencycode() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public java.lang.String getCurrencycode() {
+        java.lang.Object ref = currencycode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            currencycode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+      getCurrencycodeBytes() {
+        java.lang.Object ref = currencycode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          currencycode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public Builder setCurrencycode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        currencycode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public Builder clearCurrencycode() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        currencycode_ = getDefaultInstance().getCurrencycode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string currencycode = 8;</code>
+       */
+      public Builder setCurrencycodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        currencycode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int currencyid_ ;
+      /**
+       * <code>optional uint32 currencyid = 9;</code>
+       */
+      public boolean hasCurrencyid() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional uint32 currencyid = 9;</code>
+       */
+      public int getCurrencyid() {
+        return currencyid_;
+      }
+      /**
+       * <code>optional uint32 currencyid = 9;</code>
+       */
+      public Builder setCurrencyid(int value) {
+        bitField0_ |= 0x00000100;
+        currencyid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 currencyid = 9;</code>
+       */
+      public Builder clearCurrencyid() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        currencyid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.ThirdLoginWithoutBindResponse)
+    }
+
+    static {
+      defaultInstance = new ThirdLoginWithoutBindResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.ThirdLoginWithoutBindResponse)
+  }
+
+  public interface GetBindInfoRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.GetBindInfoRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>required uint32 uin = 2;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    boolean hasUin();
+    /**
+     * <code>required uint32 uin = 2;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    int getUin();
+
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    boolean hasLocalecode();
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    java.lang.String getLocalecode();
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocalecodeBytes();
+
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    boolean hasRandomKey();
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    java.lang.String getRandomKey();
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getRandomKeyBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.GetBindInfoRequest}
+   */
+  public static final class GetBindInfoRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetBindInfoRequest)
+          GetBindInfoRequestOrBuilder {
+    // Use GetBindInfoRequest.newBuilder() to construct.
+    private GetBindInfoRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetBindInfoRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetBindInfoRequest defaultInstance;
+    public static GetBindInfoRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetBindInfoRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetBindInfoRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              uin_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              localecode_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              randomKey_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsLogin.internal_static_fksproto_GetBindInfoRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsLogin.internal_static_fksproto_GetBindInfoRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsLogin.GetBindInfoRequest.class, fksproto.CsLogin.GetBindInfoRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetBindInfoRequest> PARSER =
+            new com.google.protobuf.AbstractParser<GetBindInfoRequest>() {
+              public GetBindInfoRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetBindInfoRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetBindInfoRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int UIN_FIELD_NUMBER = 2;
+    private int uin_;
+    /**
+     * <code>required uint32 uin = 2;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    public boolean hasUin() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 uin = 2;</code>
+     *
+     * <pre>
+     *userid，全平台唯一
+     * </pre>
+     */
+    public int getUin() {
+      return uin_;
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 3;
+    private java.lang.Object localecode_;
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    public boolean hasLocalecode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    public java.lang.String getLocalecode() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localecode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string localecode = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocalecodeBytes() {
+      java.lang.Object ref = localecode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localecode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RANDOM_KEY_FIELD_NUMBER = 4;
+    private java.lang.Object randomKey_;
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public boolean hasRandomKey() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public java.lang.String getRandomKey() {
+      java.lang.Object ref = randomKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          randomKey_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string random_key = 4;</code>
+     *
+     * <pre>
+     *会话密钥，随机key
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getRandomKeyBytes() {
+      java.lang.Object ref = randomKey_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        randomKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      uin_ = 0;
+      localecode_ = "";
+      randomKey_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUin()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLocalecode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, uin_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getRandomKeyBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeUInt32Size(2, uin_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getLocalecodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getRandomKeyBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsLogin.GetBindInfoRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.GetBindInfoRequest}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetBindInfoRequest)
+            fksproto.CsLogin.GetBindInfoRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsLogin.GetBindInfoRequest.class, fksproto.CsLogin.GetBindInfoRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsLogin.GetBindInfoRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        uin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        localecode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        randomKey_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoRequest_descriptor;
+      }
+
+      public fksproto.CsLogin.GetBindInfoRequest getDefaultInstanceForType() {
+        return fksproto.CsLogin.GetBindInfoRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsLogin.GetBindInfoRequest build() {
+        fksproto.CsLogin.GetBindInfoRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsLogin.GetBindInfoRequest buildPartial() {
+        fksproto.CsLogin.GetBindInfoRequest result = new fksproto.CsLogin.GetBindInfoRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.uin_ = uin_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.localecode_ = localecode_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.randomKey_ = randomKey_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsLogin.GetBindInfoRequest) {
+          return mergeFrom((fksproto.CsLogin.GetBindInfoRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsLogin.GetBindInfoRequest other) {
+        if (other == fksproto.CsLogin.GetBindInfoRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUin()) {
+          setUin(other.getUin());
+        }
+        if (other.hasLocalecode()) {
+          bitField0_ |= 0x00000004;
+          localecode_ = other.localecode_;
+          onChanged();
+        }
+        if (other.hasRandomKey()) {
+          bitField0_ |= 0x00000008;
+          randomKey_ = other.randomKey_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!hasUin()) {
+
+          return false;
+        }
+        if (!hasLocalecode()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsLogin.GetBindInfoRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsLogin.GetBindInfoRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private int uin_ ;
+      /**
+       * <code>required uint32 uin = 2;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public boolean hasUin() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 uin = 2;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public int getUin() {
+        return uin_;
+      }
+      /**
+       * <code>required uint32 uin = 2;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public Builder setUin(int value) {
+        bitField0_ |= 0x00000002;
+        uin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 uin = 2;</code>
+       *
+       * <pre>
+       *userid，全平台唯一
+       * </pre>
+       */
+      public Builder clearUin() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        uin_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localecode_ = "";
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public boolean hasLocalecode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public java.lang.String getLocalecode() {
+        java.lang.Object ref = localecode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localecode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocalecodeBytes() {
+        java.lang.Object ref = localecode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localecode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public Builder setLocalecode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public Builder clearLocalecode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localecode_ = getDefaultInstance().getLocalecode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string localecode = 3;</code>
+       */
+      public Builder setLocalecodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        localecode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object randomKey_ = "";
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public boolean hasRandomKey() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public java.lang.String getRandomKey() {
+        java.lang.Object ref = randomKey_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            randomKey_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getRandomKeyBytes() {
+        java.lang.Object ref = randomKey_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          randomKey_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder setRandomKey(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        randomKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder clearRandomKey() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        randomKey_ = getDefaultInstance().getRandomKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string random_key = 4;</code>
+       *
+       * <pre>
+       *会话密钥，随机key
+       * </pre>
+       */
+      public Builder setRandomKeyBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        randomKey_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.GetBindInfoRequest)
+    }
+
+    static {
+      defaultInstance = new GetBindInfoRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.GetBindInfoRequest)
+  }
+
+  public interface GetBindInfoResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.GetBindInfoResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional bool is_bindphone = 2;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean hasIsBindphone();
+    /**
+     * <code>optional bool is_bindphone = 2;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    boolean getIsBindphone();
+
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    boolean hasPhoneNumer();
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    java.lang.String getPhoneNumer();
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getPhoneNumerBytes();
+
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    java.util.List<java.lang.Integer> getPlatformList();
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    int getPlatformCount();
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    int getPlatform(int index);
+  }
+  /**
+   * Protobuf type {@code fksproto.GetBindInfoResponse}
+   */
+  public static final class GetBindInfoResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.GetBindInfoResponse)
+          GetBindInfoResponseOrBuilder {
+    // Use GetBindInfoResponse.newBuilder() to construct.
+    private GetBindInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetBindInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetBindInfoResponse defaultInstance;
+    public static GetBindInfoResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetBindInfoResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetBindInfoResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              isBindphone_ = input.readBool();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              phoneNumer_ = bs;
+              break;
+            }
+            case 32: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                platform_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              platform_.add(input.readInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                platform_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                platform_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          platform_ = java.util.Collections.unmodifiableList(platform_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsLogin.internal_static_fksproto_GetBindInfoResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsLogin.internal_static_fksproto_GetBindInfoResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsLogin.GetBindInfoResponse.class, fksproto.CsLogin.GetBindInfoResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetBindInfoResponse> PARSER =
+            new com.google.protobuf.AbstractParser<GetBindInfoResponse>() {
+              public GetBindInfoResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new GetBindInfoResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetBindInfoResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int IS_BINDPHONE_FIELD_NUMBER = 2;
+    private boolean isBindphone_;
+    /**
+     * <code>optional bool is_bindphone = 2;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean hasIsBindphone() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bool is_bindphone = 2;</code>
+     *
+     * <pre>
+     *是否绑定手机
+     * </pre>
+     */
+    public boolean getIsBindphone() {
+      return isBindphone_;
+    }
+
+    public static final int PHONE_NUMER_FIELD_NUMBER = 3;
+    private java.lang.Object phoneNumer_;
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    public boolean hasPhoneNumer() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    public java.lang.String getPhoneNumer() {
+      java.lang.Object ref = phoneNumer_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          phoneNumer_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string phone_numer = 3;</code>
+     *
+     * <pre>
+     *如果绑定手机号,对应的手机号码
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getPhoneNumerBytes() {
+      java.lang.Object ref = phoneNumer_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        phoneNumer_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PLATFORM_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> platform_;
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    public java.util.List<java.lang.Integer>
+    getPlatformList() {
+      return platform_;
+    }
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    public int getPlatformCount() {
+      return platform_.size();
+    }
+    /**
+     * <code>repeated int32 platform = 4;</code>
+     */
+    public int getPlatform(int index) {
+      return platform_.get(index);
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      isBindphone_ = false;
+      phoneNumer_ = "";
+      platform_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, isBindphone_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getPhoneNumerBytes());
+      }
+      for (int i = 0; i < platform_.size(); i++) {
+        output.writeInt32(4, platform_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBoolSize(2, isBindphone_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getPhoneNumerBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < platform_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+                  .computeInt32SizeNoTag(platform_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getPlatformList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsLogin.GetBindInfoResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsLogin.GetBindInfoResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.GetBindInfoResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.GetBindInfoResponse)
+            fksproto.CsLogin.GetBindInfoResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsLogin.GetBindInfoResponse.class, fksproto.CsLogin.GetBindInfoResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsLogin.GetBindInfoResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        isBindphone_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        phoneNumer_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        platform_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsLogin.internal_static_fksproto_GetBindInfoResponse_descriptor;
+      }
+
+      public fksproto.CsLogin.GetBindInfoResponse getDefaultInstanceForType() {
+        return fksproto.CsLogin.GetBindInfoResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsLogin.GetBindInfoResponse build() {
+        fksproto.CsLogin.GetBindInfoResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsLogin.GetBindInfoResponse buildPartial() {
+        fksproto.CsLogin.GetBindInfoResponse result = new fksproto.CsLogin.GetBindInfoResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.isBindphone_ = isBindphone_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.phoneNumer_ = phoneNumer_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          platform_ = java.util.Collections.unmodifiableList(platform_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.platform_ = platform_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsLogin.GetBindInfoResponse) {
+          return mergeFrom((fksproto.CsLogin.GetBindInfoResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsLogin.GetBindInfoResponse other) {
+        if (other == fksproto.CsLogin.GetBindInfoResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasIsBindphone()) {
+          setIsBindphone(other.getIsBindphone());
+        }
+        if (other.hasPhoneNumer()) {
+          bitField0_ |= 0x00000004;
+          phoneNumer_ = other.phoneNumer_;
+          onChanged();
+        }
+        if (!other.platform_.isEmpty()) {
+          if (platform_.isEmpty()) {
+            platform_ = other.platform_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensurePlatformIsMutable();
+            platform_.addAll(other.platform_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsLogin.GetBindInfoResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsLogin.GetBindInfoResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private boolean isBindphone_ ;
+      /**
+       * <code>optional bool is_bindphone = 2;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean hasIsBindphone() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional bool is_bindphone = 2;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public boolean getIsBindphone() {
+        return isBindphone_;
+      }
+      /**
+       * <code>optional bool is_bindphone = 2;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder setIsBindphone(boolean value) {
+        bitField0_ |= 0x00000002;
+        isBindphone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool is_bindphone = 2;</code>
+       *
+       * <pre>
+       *是否绑定手机
+       * </pre>
+       */
+      public Builder clearIsBindphone() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isBindphone_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object phoneNumer_ = "";
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public boolean hasPhoneNumer() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public java.lang.String getPhoneNumer() {
+        java.lang.Object ref = phoneNumer_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            phoneNumer_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getPhoneNumerBytes() {
+        java.lang.Object ref = phoneNumer_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          phoneNumer_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public Builder setPhoneNumer(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        phoneNumer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public Builder clearPhoneNumer() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        phoneNumer_ = getDefaultInstance().getPhoneNumer();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string phone_numer = 3;</code>
+       *
+       * <pre>
+       *如果绑定手机号,对应的手机号码
+       * </pre>
+       */
+      public Builder setPhoneNumerBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        phoneNumer_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> platform_ = java.util.Collections.emptyList();
+      private void ensurePlatformIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          platform_ = new java.util.ArrayList<java.lang.Integer>(platform_);
+          bitField0_ |= 0x00000008;
+        }
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public java.util.List<java.lang.Integer>
+      getPlatformList() {
+        return java.util.Collections.unmodifiableList(platform_);
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public int getPlatformCount() {
+        return platform_.size();
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public int getPlatform(int index) {
+        return platform_.get(index);
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public Builder setPlatform(
+              int index, int value) {
+        ensurePlatformIsMutable();
+        platform_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public Builder addPlatform(int value) {
+        ensurePlatformIsMutable();
+        platform_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public Builder addAllPlatform(
+              java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensurePlatformIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, platform_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 platform = 4;</code>
+       */
+      public Builder clearPlatform() {
+        platform_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.GetBindInfoResponse)
+    }
+
+    static {
+      defaultInstance = new GetBindInfoResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.GetBindInfoResponse)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_fksproto_ThirdAccount_descriptor;
   private static
@@ -11332,6 +16734,26 @@ public final class CsLogin {
   private static
   com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internal_static_fksproto_ThirdLoginResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ThirdLoginWithoutBindRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ThirdLoginWithoutBindResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_GetBindInfoRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetBindInfoRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_GetBindInfoResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_GetBindInfoResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
   getDescriptor() {
@@ -11343,53 +16765,72 @@ public final class CsLogin {
     java.lang.String[] descriptorData = {
             "\n\016cs_login.proto\022\010fksproto\032\rcs_head.prot" +
                     "o\"?\n\014ThirdAccount\022\020\n\010platform\030\001 \002(\005\022\016\n\006o" +
-                    "penid\030\002 \002(\t\022\r\n\005token\030\003 \001(\t\"\242\002\n\016AccountRe" +
+                    "penid\030\002 \001(\t\022\r\n\005token\030\003 \001(\t\"\257\002\n\016AccountRe" +
                     "quest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseReque" +
                     "st\022\021\n\toperacode\030\002 \002(\005\022\024\n\014account_type\030\003 " +
                     "\002(\005\022\017\n\007account\030\004 \002(\t\022\020\n\010password\030\005 \001(\t\022%" +
                     "\n\005third\030\006 \001(\0132\026.fksproto.ThirdAccount\022\017\n" +
                     "\007reserve\030\007 \001(\t\022\022\n\nrandom_key\030\010 \001(\t\022\025\n\rac" +
                     "count_extra\030\t \001(\t\022\023\n\013verify_code\030\n \001(\t\022\023" +
-                    "\n\013countrycode\030\013 \001(\t\022\022\n\nlocalecode\030\014 \001(\t\"",
-            "7\n\017AccountResponse\022$\n\004head\030\001 \002(\0132\026.fkspr" +
-                    "oto.BaseResponse\"\253\001\n\014LoginRequest\022#\n\004hea" +
-                    "d\030\001 \002(\0132\025.fksproto.BaseRequest\022\024\n\014accoun" +
-                    "t_type\030\002 \002(\005\022\017\n\007account\030\003 \002(\t\022\020\n\010passwor" +
-                    "d\030\004 \001(\t\022\022\n\nrandom_key\030\005 \001(\t\022\025\n\raccount_e" +
-                    "xtra\030\006 \001(\t\022\022\n\nlocalecode\030\007 \001(\t\"\346\001\n\rLogin" +
-                    "Response\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseRe" +
-                    "sponse\022\023\n\013session_key\030\002 \001(\t\022\016\n\006ticket\030\003 " +
-                    "\001(\t\022\013\n\003uin\030\004 \001(\r\022\021\n\th5_ticket\030\005 \001(\t\022\022\n\nl" +
-                    "ocalecode\030\006 \001(\t\022\024\n\014currencycode\030\007 \001(\t\022\022\n",
-            "\ncurrencyid\030\010 \001(\r\022\025\n\rcurrency_sign\030\t \001(\t" +
-                    "\022\025\n\rcurrency_name\030\n \001(\t\"\221\001\n\021ThirdLoginRe" +
-                    "quest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseReque" +
-                    "st\022\020\n\010platform\030\002 \002(\005\022\016\n\006openid\030\003 \002(\t\022\r\n\005" +
-                    "token\030\004 \001(\t\022\022\n\nrandom_key\030\005 \001(\t\022\022\n\nlocal" +
-                    "ecode\030\006 \001(\t\"\275\001\n\022ThirdLoginResponse\022$\n\004he" +
-                    "ad\030\001 \002(\0132\026.fksproto.BaseResponse\022\023\n\013sess" +
-                    "ion_key\030\002 \001(\t\022\016\n\006ticket\030\003 \001(\t\022\013\n\003uin\030\004 \001" +
-                    "(\r\022\021\n\th5_ticket\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(" +
-                    "\t\022\024\n\014currencycode\030\007 \001(\t\022\022\n\ncurrencyid\030\010 ",
-            "\001(\r*\233\003\n\020AccountOperacode\022\'\n#ACCOUNT_OPER" +
-                    "ACODE_APPLY_VERIFY_CODE\020\001\022\036\n\032ACCOUNT_OPE" +
-                    "RACODE_REGISTER\020\002\022*\n&ACCOUNT_OPERACODE_E" +
-                    "MAIL_RESET_PASSWORD\020\003\022%\n!ACCOUNT_OPERACO" +
-                    "DE_MODIFY_PASSWORD\020\004\022 \n\034ACCOUNT_OPERACOD" +
-                    "E_THIRD_BIND\020\005\022$\n ACCOUNT_OPERACODE_MODI" +
-                    "FY_ACCOUNT\020\006\022)\n%ACCOUNT_OPERACODE_CHECK_" +
-                    "ACCOUNT_EXIST\020\007\022*\n&ACCOUNT_OPERACODE_CHE" +
-                    "CK_NICKNAME_EXIST\020\010\022*\n&ACCOUNT_OPERACODE" +
-                    "_PHONE_RESET_PASSWORD\020\t\022 \n\034ACCOUNT_OPERA",
-            "CODE_PHONE_BIND\020\n*=\n\013AccountType\022\026\n\022ACCO" +
-                    "UNT_TYPE_EMAIL\020\001\022\026\n\022ACCOUNT_TYPE_PHONE\020\002" +
-                    "*\204\001\n\014AuthPlatform\022\024\n\020AUTH_PLATFORM_WT\020\000\022" +
-                    "\024\n\020AUTH_PLATFORM_WX\020\001\022\024\n\020AUTH_PLATFORM_Q" +
-                    "Q\020\002\022\026\n\022AUTH_PLATFORM_SINA\020\003\022\032\n\026AUTH_PLAT" +
-                    "FORM_FACEBOOK\020\004*y\n\017VerifyCodeScene\022\036\n\032VE" +
-                    "RIFY_CODE_SCENE_REGISTER\020\001\022$\n VERIFY_COD" +
-                    "E_SCENE_RESET_PASSWORD\020\002\022 \n\034VERIFY_CODE_" +
-                    "SCENE_PHONE_BIND\020\003"
+                    "\n\013countrycode\030\013 \001(\t\022\022\n\nlocalecode\030\014 \001(\t\022",
+            "\013\n\003uin\030\r \001(\005\"7\n\017AccountResponse\022$\n\004head\030" +
+                    "\001 \002(\0132\026.fksproto.BaseResponse\"\253\001\n\014LoginR" +
+                    "equest\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequ" +
+                    "est\022\024\n\014account_type\030\002 \002(\005\022\017\n\007account\030\003 \002" +
+                    "(\t\022\020\n\010password\030\004 \001(\t\022\022\n\nrandom_key\030\005 \001(\t" +
+                    "\022\025\n\raccount_extra\030\006 \001(\t\022\022\n\nlocalecode\030\007 " +
+                    "\001(\t\"\373\001\n\rLoginResponse\022$\n\004head\030\001 \002(\0132\026.fk" +
+                    "sproto.BaseResponse\022\023\n\013session_key\030\002 \001(\t" +
+                    "\022\016\n\006ticket\030\003 \001(\t\022\013\n\003uin\030\004 \001(\r\022\021\n\th5_tick" +
+                    "et\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(\t\022\024\n\014currency",
+            "code\030\007 \001(\t\022\022\n\ncurrencyid\030\010 \001(\r\022\025\n\rcurren" +
+                    "cy_sign\030\t \001(\t\022\025\n\rcurrency_name\030\n \001(\t\022\023\n\013" +
+                    "isBindPhone\030\013 \001(\010\"\221\001\n\021ThirdLoginRequest\022" +
+                    "#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022\020\n\010" +
+                    "platform\030\002 \002(\005\022\016\n\006openid\030\003 \002(\t\022\r\n\005token\030" +
+                    "\004 \001(\t\022\022\n\nrandom_key\030\005 \001(\t\022\022\n\nlocalecode\030" +
+                    "\006 \001(\t\"\275\001\n\022ThirdLoginResponse\022$\n\004head\030\001 \002" +
+                    "(\0132\026.fksproto.BaseResponse\022\023\n\013session_ke" +
+                    "y\030\002 \001(\t\022\016\n\006ticket\030\003 \001(\t\022\013\n\003uin\030\004 \001(\r\022\021\n\t" +
+                    "h5_ticket\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(\t\022\024\n\014c",
+            "urrencycode\030\007 \001(\t\022\022\n\ncurrencyid\030\010 \001(\r\"\234\001" +
+                    "\n\034ThirdLoginWithoutBindRequest\022#\n\004head\030\001" +
+                    " \002(\0132\025.fksproto.BaseRequest\022\020\n\010platform\030" +
+                    "\002 \002(\005\022\016\n\006openid\030\003 \002(\t\022\r\n\005token\030\004 \001(\t\022\022\n\n" +
+                    "random_key\030\005 \001(\t\022\022\n\nlocalecode\030\006 \001(\t\"\335\001\n" +
+                    "\035ThirdLoginWithoutBindResponse\022$\n\004head\030\001" +
+                    " \002(\0132\026.fksproto.BaseResponse\022\023\n\013session_" +
+                    "key\030\002 \001(\t\022\016\n\006ticket\030\003 \001(\t\022\013\n\003uin\030\004 \001(\r\022\021" +
+                    "\n\th5_ticket\030\005 \001(\t\022\023\n\013isBindPhone\030\006 \001(\010\022\022" +
+                    "\n\nlocalecode\030\007 \001(\t\022\024\n\014currencycode\030\010 \001(\t",
+            "\022\022\n\ncurrencyid\030\t \001(\r\"n\n\022GetBindInfoReque" +
+                    "st\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022" +
+                    "\013\n\003uin\030\002 \002(\r\022\022\n\nlocalecode\030\003 \002(\t\022\022\n\nrand" +
+                    "om_key\030\004 \001(\t\"x\n\023GetBindInfoResponse\022$\n\004h" +
+                    "ead\030\001 \002(\0132\026.fksproto.BaseResponse\022\024\n\014is_" +
+                    "bindphone\030\002 \001(\010\022\023\n\013phone_numer\030\003 \001(\t\022\020\n\010" +
+                    "platform\030\004 \003(\005*\213\004\n\020AccountOperacode\022\'\n#A" +
+                    "CCOUNT_OPERACODE_APPLY_VERIFY_CODE\020\001\022\036\n\032" +
+                    "ACCOUNT_OPERACODE_REGISTER\020\002\022*\n&ACCOUNT_" +
+                    "OPERACODE_EMAIL_RESET_PASSWORD\020\003\022%\n!ACCO",
+            "UNT_OPERACODE_MODIFY_PASSWORD\020\004\022 \n\034ACCOU" +
+                    "NT_OPERACODE_THIRD_BIND\020\005\022$\n ACCOUNT_OPE" +
+                    "RACODE_MODIFY_ACCOUNT\020\006\022)\n%ACCOUNT_OPERA" +
+                    "CODE_CHECK_ACCOUNT_EXIST\020\007\022*\n&ACCOUNT_OP" +
+                    "ERACODE_CHECK_NICKNAME_EXIST\020\010\022*\n&ACCOUN" +
+                    "T_OPERACODE_PHONE_RESET_PASSWORD\020\t\022 \n\034AC" +
+                    "COUNT_OPERACODE_PHONE_BIND\020\n\022$\n ACCOUNT_" +
+                    "OPERACODE_PHONE_BIND_NEW\020\013\022$\n ACCOUNT_OP" +
+                    "ERACODE_THIRD_BIND_NEW\020\014\022\"\n\036ACCOUNT_OPER" +
+                    "ACODE_THIRD_UNBIND\020\r*=\n\013AccountType\022\026\n\022A",
+            "CCOUNT_TYPE_EMAIL\020\001\022\026\n\022ACCOUNT_TYPE_PHON" +
+                    "E\020\002*\204\001\n\014AuthPlatform\022\024\n\020AUTH_PLATFORM_WT" +
+                    "\020\000\022\024\n\020AUTH_PLATFORM_WX\020\001\022\024\n\020AUTH_PLATFOR" +
+                    "M_QQ\020\002\022\026\n\022AUTH_PLATFORM_SINA\020\003\022\032\n\026AUTH_P" +
+                    "LATFORM_FACEBOOK\020\004*y\n\017VerifyCodeScene\022\036\n" +
+                    "\032VERIFY_CODE_SCENE_REGISTER\020\001\022$\n VERIFY_" +
+                    "CODE_SCENE_RESET_PASSWORD\020\002\022 \n\034VERIFY_CO" +
+                    "DE_SCENE_PHONE_BIND\020\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11415,7 +16856,7 @@ public final class CsLogin {
     internal_static_fksproto_AccountRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_AccountRequest_descriptor,
-            new java.lang.String[] { "Head", "Operacode", "AccountType", "Account", "Password", "Third", "Reserve", "RandomKey", "AccountExtra", "VerifyCode", "Countrycode", "Localecode", });
+            new java.lang.String[] { "Head", "Operacode", "AccountType", "Account", "Password", "Third", "Reserve", "RandomKey", "AccountExtra", "VerifyCode", "Countrycode", "Localecode", "Uin", });
     internal_static_fksproto_AccountResponse_descriptor =
             getDescriptor().getMessageTypes().get(2);
     internal_static_fksproto_AccountResponse_fieldAccessorTable = new
@@ -11433,7 +16874,7 @@ public final class CsLogin {
     internal_static_fksproto_LoginResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_LoginResponse_descriptor,
-            new java.lang.String[] { "Head", "SessionKey", "Ticket", "Uin", "H5Ticket", "Localecode", "Currencycode", "Currencyid", "CurrencySign", "CurrencyName", });
+            new java.lang.String[] { "Head", "SessionKey", "Ticket", "Uin", "H5Ticket", "Localecode", "Currencycode", "Currencyid", "CurrencySign", "CurrencyName", "IsBindPhone", });
     internal_static_fksproto_ThirdLoginRequest_descriptor =
             getDescriptor().getMessageTypes().get(5);
     internal_static_fksproto_ThirdLoginRequest_fieldAccessorTable = new
@@ -11446,6 +16887,30 @@ public final class CsLogin {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_ThirdLoginResponse_descriptor,
             new java.lang.String[] { "Head", "SessionKey", "Ticket", "Uin", "H5Ticket", "Localecode", "Currencycode", "Currencyid", });
+    internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+    internal_static_fksproto_ThirdLoginWithoutBindRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ThirdLoginWithoutBindRequest_descriptor,
+            new java.lang.String[] { "Head", "Platform", "Openid", "Token", "RandomKey", "Localecode", });
+    internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+    internal_static_fksproto_ThirdLoginWithoutBindResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ThirdLoginWithoutBindResponse_descriptor,
+            new java.lang.String[] { "Head", "SessionKey", "Ticket", "Uin", "H5Ticket", "IsBindPhone", "Localecode", "Currencycode", "Currencyid", });
+    internal_static_fksproto_GetBindInfoRequest_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+    internal_static_fksproto_GetBindInfoRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetBindInfoRequest_descriptor,
+            new java.lang.String[] { "Head", "Uin", "Localecode", "RandomKey", });
+    internal_static_fksproto_GetBindInfoResponse_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+    internal_static_fksproto_GetBindInfoResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_GetBindInfoResponse_descriptor,
+            new java.lang.String[] { "Head", "IsBindphone", "PhoneNumer", "Platform", });
     fksproto.CsHead.getDescriptor();
   }
 

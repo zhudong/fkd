@@ -168,7 +168,7 @@ message ItemProduct
 {
 	optional int32 min_qty 		= 1;
 	optional int32 max_qty 		= 2;
-	optional int32          item_stock 	 = 3	;//现存库存量
+	optional int32 item_stock 	= 3	;//现存库存量
 }
 
 //商店图片信息
@@ -207,7 +207,7 @@ message Merchant
 	optional string contact     = 7;  //联系方式
 	optional string desc        = 8;  //商户介绍
 	optional int32  follow_num  = 9;  //商户关注数
-	optional bool   is_follow   = 10; //商户是否关注	
+	optional bool   is_follow   = 10; //商户是否关注
 	optional string url			= 11; //商户的url
 	optional float  longitude   = 12; //商户经度
 	optional float  latitude    = 13; //商户纬度
@@ -221,9 +221,10 @@ message UserInfo
 	required string nickname     = 3;//昵称
 	required int32  gender       = 4;//性别
 	required string region       = 5;//地区
-	required int32  member_group = 6;//会员组
+	required int32  member_group = 6;//会员组ID
 	optional string intro		 = 7;//个人简介
 	optional string full_region_name = 8;//地区全称
+	optional string member_group_name =9;//会员组名称
 
 }
 

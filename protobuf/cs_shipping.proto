@@ -15,6 +15,7 @@ message Shipping
 	optional int32  parcel_subtotal_quota = 6;//包裹商品实际价格限额
 	optional float  duty_rate   = 7;//关税率
 	optional float  shipping_duty         = 8;//运费关税
+	optional string alert_msg    = 9;//免运费的配送,订单金额不足时的提示
 }
 
 message GetShippingListRequest

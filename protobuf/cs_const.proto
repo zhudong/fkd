@@ -26,6 +26,8 @@ enum FksCSResultld
     RESULT_ID_ACCOUNT_NICKNAME_EXIST	= -27;//账号: 昵称已存在
     RESULT_ID_ACCOUNT_VERIFY_CODE_ERROR = -28;//账号: 验证码错误
     RESULT_ID_ACCOUNT_VERIFY_CODE_LIMIT = -29;//账号: 验证码频率限制
+    RESULT_ID_ACCOUNT_NOT_BIND_PHONET   = -30;//该帐号没有绑定手机，无法解绑第三方
+
     RESULT_ID_MERCHANT_BEEN_FOLLOW  	= -31;//商户: 已关注
     RESULT_ID_MERCHANT_NOT_FOLLOW   	= -32;//商户: 未关注
     RESULT_ID_MERCHANT_NOT_EXIST    	= -33;//商户: 不存在
@@ -44,5 +46,4 @@ enum FksCSResultld
     RESULT_ID_NO_JSON_DATA_ERROR        =-73;//没有json数据
 
     RESULT_ID_DATA_INVALID_ERROR        =-74 ;//数据失效
-
 }

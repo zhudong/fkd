@@ -2,7 +2,13 @@ package com.fuexpress.kr.ui.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -21,18 +27,21 @@ import com.fuexpress.kr.bean.OrderConstants;
 import com.fuexpress.kr.bean.SalesOrderItemBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.TranslateManager;
+import com.fuexpress.kr.ui.activity.order_detail.OrderDetailCanceledActivity;
 import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.CrowdProgressDetail;
+import com.fuexpress.kr.ui.view.RadiusBackgroundSpan;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.socks.library.KLog;
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
+import fksproto.CsCrowd;
 
 /**
  * Created by k550 on 5/10/2016.
@@ -158,11 +167,22 @@ public class SalesOrderDetailAdapter extends SimpleBaseAdapter<SalesOrderItemBea
             holder.message3Layout = (RelativeLayout) convertView.findViewById(R.id.message_3_layout);
             holder.autoTranslateTv = (TextView) convertView.findViewById(R.id.auto_translate_tv);
             holder.animIv = (ImageView) convertView.findViewById(R.id.anim_view);
+            holder.corwdProgress = (CrowdProgressDetail) convertView.findViewById(R.id.corwd_progress);
+            holder.crowdState = (TextView) convertView.findViewById(R.id.tv_crowd_state);
+            holder.viewStroke = convertView.findViewById(R.id.view_stroke);
+
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
 
+        if (item.crowd != null && item.crowd.getCrowdId() > 0) {
+            holder.corwdProgress.setData(item.crowd);
+            ((View) holder.corwdProgress.getParent()).setVisibility(View.VISIBLE);
+            holder.crowdState.setText(getCrowdState(item.crowd));
+        } else {
+            ((View) holder.corwdProgress.getParent()).setVisibility(View.GONE);
+        }
 
         holder.orderMessageLayout.setVisibility(View.VISIBLE);
         if (TextUtils.isEmpty(item.order_message)) {
@@ -193,15 +213,17 @@ public class SalesOrderDetailAdapter extends SimpleBaseAdapter<SalesOrderItemBea
         }
 
         holder.lnMerchantLayout.setVisibility(View.VISIBLE);
+        holder.viewStroke.setVisibility(View.VISIBLE);
         if (TextUtils.isEmpty(item.korea_order) && TextUtils.isEmpty(item.merchant_message)) {
             holder.lnMerchantLayout.setVisibility(View.GONE);
+            holder.viewStroke.setVisibility(View.GONE);
         }
 
-        holder.nameTv.setText(item.title);
+        setTitle(item.title, holder.nameTv, item.crowd);
         holder.whereTv.setText(mContent.getString(R.string.String_cart_buyfrom) + item.buyfrom);
         holder.sizeTv.setText(/*mContent.getString(R.string.String_for_cart_lv_item_size)+*/item.extend_label);
         if (0 <= item.state && item.state <= 10) {
-            holder.stateTv.setText(mContent.getString(R.string.order_status) + OrderConstants.getOrderState(item.state));
+            holder.stateTv.setText(mContent.getString(R.string.order_status) + OrderConstants.getOrderState(item.state, item));
         }
 
         if (item.state == 8 || item.state == 9) {
@@ -284,19 +306,31 @@ public class SalesOrderDetailAdapter extends SimpleBaseAdapter<SalesOrderItemBea
 
                 Intent intent = new Intent(mContent, ProductDetailActivity.class);
                 intent.putExtra(ProductDetailActivity.ITEM_ID, item.item_id);
-                mContent.startActivity(intent);
+//                mContent.startActivity(intent);
             }
         };
         holder.message3Layout.setOnClickListener(new TranslateListener(holder.animIv, holder.autoTranslateTv, holder.koreaOrderTv, holder.merchantMessageTv, item));
         convertView.setOnClickListener(onClickListener);
         //  holder.message3Layout.setOnClickListener(onClickListener);
         hintEmpty(holder);
+        setMargin(convertView, position);
         return convertView;
+    }
+
+    private void setMargin(View convertView, int position) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if (position == 0) {
+            params.setMargins(0, UIUtils.dip2px(0), 0, 0);
+        } else {
+            params.setMargins(0, UIUtils.dip2px(8), 0, 0);
+
+        }
+        ((LinearLayout) convertView).updateViewLayout(convertView.findViewById(R.id.rl_top), params);
     }
 
     private void hintEmpty(Holder holder) {
         ViewGroup group = (ViewGroup) holder.nameTv.getParent();
-        for (int i = 0; i < group.getChildCount()-1; i++) {
+        for (int i = 0; i < group.getChildCount() - 1; i++) {
             View child = group.getChildAt(i);
             if (child instanceof TextView) {
                 String s = ((TextView) child).getText().toString();
@@ -314,6 +348,9 @@ public class SalesOrderDetailAdapter extends SimpleBaseAdapter<SalesOrderItemBea
         RelativeLayout message1Layout, message2Layout, message3Layout;
         LinearLayout lnMerchantLayout, orderMessageLayout;
         ImageView iconIv, animIv;
+        CrowdProgressDetail corwdProgress;
+        TextView crowdState;
+        View viewStroke;
     }
 
     private void rotate(View v, boolean start) {
@@ -347,4 +384,47 @@ public class SalesOrderDetailAdapter extends SimpleBaseAdapter<SalesOrderItemBea
         }
     }
 
+    private String getCrowdState(CsCrowd.Crowd crowd) {
+        String state = "";
+        switch (crowd.getState()) {
+            case CsCrowd.CrowdState.CROWD_STATE_PENDING_VALUE:
+            case CsCrowd.CrowdState.CROWD_STATE_CHECKING_VALUE:
+            case CsCrowd.CrowdState.CROWD_STATE_NONE_VALUE:
+                state = UIUtils.getString(R.string.String_start_crowd);
+                break;
+            case CsCrowd.CrowdState.CROWD_STATE_CROWDING_VALUE:
+                if (mContent instanceof OrderDetailCanceledActivity) {
+                    state = UIUtils.getString(R.string.crowding);
+                } else {
+                    state = UIUtils.getString(R.string.String_crowd_panding);
+                }
+                break;
+            case CsCrowd.CrowdState.CROWD_STATE_SUCCESS_VALUE:
+                state = UIUtils.getString(R.string.String_crowd_sucess);
+                break;
+            case CsCrowd.CrowdState.CROWD_STATE_FAILED_VALUE:
+                state = UIUtils.getString(R.string.String_crowd_fail);
+                break;
+        }
+        return state;
+    }
+
+    private void setTitle(String title, TextView nameTv, CsCrowd.Crowd crowd) {
+        if (crowd.getCrowdId() > 0) {
+            nameTv.setTextColor(Color.WHITE);
+            title += " ";
+            String source = title + UIUtils.getString(R.string.crowd_);
+            SpannableString spanString = new SpannableString(source);
+            spanString.setSpan(new RadiusBackgroundSpan(UIUtils.getColor(R.color.the_red), UIUtils.dip2px(6f)),
+                    title.length(), source.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new AbsoluteSizeSpan(10, true),
+                    title.length(), source.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new ForegroundColorSpan(Color.BLACK),
+                    0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            nameTv.setText(spanString);
+        } else {
+            nameTv.setText(title);
+            nameTv.setTextColor(Color.BLACK);
+        }
+    }
 }

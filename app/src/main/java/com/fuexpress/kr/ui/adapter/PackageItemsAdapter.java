@@ -2,7 +2,13 @@ package com.fuexpress.kr.ui.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,17 +17,16 @@ import android.widget.TextView;
 
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.SimpleBaseAdapter;
-import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.ui.activity.package_detail.PackageDetailActivity;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.RadiusBackgroundSpan;
 import com.google.protobuf.ProtocolStringList;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fksproto.CsBase;
 import fksproto.CsParcel;
 
 
@@ -91,8 +96,17 @@ public class PackageItemsAdapter extends SimpleBaseAdapter<CsParcel.Parcel> impl
             holer.mTvState.setText(sSended);
         }
 
-        holer.mTvNumber.setText(parcel.getParcelName());
+        /*福袋包裹超时*/
+        if (parcel.getIsexpiry() == 1) {
+            holer.mTvState.setText(R.string.string_had_send_fu);
+        }
+        /*福袋已发送*/
+        if (parcel.getBagstatus()) {
+            holer.mTvState.setText(R.string.string_had_send_fu);
+        }
 
+//        holer.mTvNumber.setText(parcel.getParcelName());
+        setTitle(parcel.getParcelName(), holer.mTvNumber, parcel);
         ProtocolStringList imageListList = parcel.getImageListList();
         List<String> imgs = new ArrayList<>();
         for (int i = 0; i < imageListList.size(); i++) {
@@ -145,5 +159,30 @@ public class PackageItemsAdapter extends SimpleBaseAdapter<CsParcel.Parcel> impl
         TextView mTvState;
         LinearLayout mLlCovers;
     }
+
+    private void setTitle(String title, TextView nameTv, CsParcel.Parcel parcel) {
+        if (parcel.getType() == CsParcel.ParcelType.PARCEL_TYPE_GIFT_VALUE && (parcel.getBagstatus()|parcel.getIsexpiry() == 1)) {
+            nameTv.setTextColor(Color.WHITE);
+            title = mContent.getString(R.string.package_package_number) + title + " ";
+            String tag = mContent.getString(R.string.string_fu_text);
+            String date = TextUtils.isEmpty(parcel.getExpiryDate()) ? "" : mContent.getString(R.string.string_availabe_time) + parcel.getExpiryDate();
+            String source = title + tag + "\n" + date;
+            source = source.trim();
+            SpannableString spanString = new SpannableString(source);
+            spanString.setSpan(new RadiusBackgroundSpan(UIUtils.getColor(R.color.the_red), UIUtils.dip2px(6f)),
+                    title.length(), title.length() + tag.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new AbsoluteSizeSpan(10, true),
+                    title.length(), title.length() + tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new ForegroundColorSpan(Color.BLACK),
+                    0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new ForegroundColorSpan(mContent.getResources().getColor(R.color.text_color_666)),
+                    title.length() + tag.length(), source.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            nameTv.setText(spanString);
+        } else {
+            nameTv.setText(mContent.getString(R.string.package_package_number) + title);
+            nameTv.setTextColor(Color.BLACK);
+        }
+    }
+
 }
 

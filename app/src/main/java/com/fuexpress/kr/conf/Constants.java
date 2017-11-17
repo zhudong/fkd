@@ -13,6 +13,8 @@ import com.socks.library.KLog;
 import java.util.HashMap;
 import java.util.Map;
 
+import fksproto.CsParcel;
+
 /**
  * Created by Longer on 2016/10/26.
  */
@@ -82,6 +84,9 @@ public class Constants {
     public static final String UPLOAD_IMG_FOR_MERCHANT_USERINFO = "/fksapp/userinfo/";
     public static final String UPLOAD_IMG_FOR_MERCHANT_COVER = "/fksapp/merchant/";
 
+    //Facebook Messager link
+    public static final String FACEBOOK_MESSAGER_LINK = "<a href=”fb-messenger://share/?link= https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fsharing%2Freference%2Fsend-dialog&app_id=123456789”>Send In Messenger</a>";
+
     //Chatra URL
     public static String URL_CHATRA_OFFICIAL;
     public static final String URL_CHATRA_Test = "http://122.226.100.91/m/chatra?decorator=empty&localeCode=";
@@ -138,17 +143,20 @@ public class Constants {
 
     public static final int SHIPPING_SCHEME_DIRECT = 1;//直邮订单
     public static final int SHIPPING_SCHEME_MERGE = 2;//合并订单
+    public static final int SHIPPING_SCHEME_GIFT = 3;//福袋送礼
     public static final int PURCHASE_SCHEME_STOCK = 1;//仅采购现货
     public static final int PURCHASE_SCHEME_BOOK = 2; //可预订
     public static final int DELIVERY_REQUEST_CODE = 0x1010;
     public static final String GIFT_CARD_PAYMENT_WXCHAT = "wxap";
     public static final int CODE_ADD_TO_CART_ERROR = -72;
 
+    public static final String KEY_IS_JUMP_MEFRAG = "KEY_IS_JUMP_MEFRAG";
+
 
     //选择分类需要传的参数:
-    public static final String KEY_PARENTID = "PARENTID";
-    public static final String KEY_SUBID = "SUBID";
-    public static final String KEY_WHERE_FROM = "WHEREFROM";
+    public static final String KEY_PARENTID = "PARENT_ID";
+    public static final String KEY_SUBID = "SUB_ID";
+    public static final String KEY_WHERE_FROM = "WHERE_FROM";
 
     //网易七鱼的appkey:
     public static final String WYQY_APP_KEY = "879d6db69a4ee55d765c0cdcc0e6d001";
@@ -165,6 +173,8 @@ public class Constants {
 
     //返回标题栏的标记:
     public static final String RETURN_TITLE = "return_title";
+
+    public static final String KEY_SELECTED_DELIVERY = "SELECTED_DELIVERY";
 
 
     public static Map<String, String> sStatusMap = new HashMap<>();
@@ -229,6 +239,9 @@ public class Constants {
 
         //crowd_order
         String crowd_order = "!crowdorder";
+
+        //tall
+        String tall = "!tall";
     }
 
 
@@ -342,7 +355,7 @@ public class Constants {
     public class QQ {
         // 在QQ开发者平台申请的APPID
         public static final String QQ_APPID = "1105716549";
-        public static final String QQ_APPKEY = "S9JNdXQVqj64UVz4";
+        public static final String QQ_APPKEY = "Jh78fiQ0dfendqga";
         public static final String QQ_OPENDID = "QQ_openid";
         public static final String QQ_ACCESS_TOKEN = "QQ_access_token";
         public static final String QQ_EXPIRES_IN = "QQ_expires_in";
@@ -433,7 +446,7 @@ public class Constants {
         }
     }
 
-    public static String getStatusString(String key) {
+    public static String getStatusString(String key, CsParcel.ParcelItemList item) {
         if (TextUtils.isEmpty(key)) {
             return "";
         }
@@ -450,7 +463,12 @@ public class Constants {
         sStatusMap.put(DemandStatus.STATUS_AWAITINGCANCEL, UIUtils.getString(R.string.awaitingcancel));
         sStatusMap.put(DemandStatus.STATUS_CANCELED, UIUtils.getString(R.string.canceled));
 
-        return sStatusMap.get(key);
+
+        String state = sStatusMap.get(key);
+        if (item != null && key.equals(DemandStatus.STATUS_PACKING) && item.getQtyPack() < item.getQty()) {
+            state += " " + UIUtils.getString(R.string.packing_num, item.getQtyPack());
+        }
+        return state;
     }
 
     public static int getTyptByCode(String key) {

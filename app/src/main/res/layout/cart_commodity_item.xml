@@ -32,16 +32,19 @@
         android:scaleType="fitXY"
         android:src="@mipmap/qq_login" />
 
+
     <TextView
         android:id="@+id/commodity_titile_tv"
         style="@style/system_Mytextsize_GRAY_12"
+        android:layout_toRightOf="@+id/commodity_iv"
         android:focusable="false"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/commodity_iv"
+        android:text="1111111111111111111111111111111111111111"
         android:textColor="@color/black"
         android:textSize="13sp" />
+
 
     <LinearLayout
         android:id="@+id/seller_ll"
@@ -195,7 +198,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/commodity_titile_tv"
@@ -215,9 +218,17 @@
             android:layout_height="wrap_content"
             android:text="@string/sold_out_waring_msg"
             android:textColor="@color/red"
-            android:textSize="11sp"
+            android:textSize="13sp"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/crowd_end_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/crowd_end_waring_msg"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:textSize="13sp" />
         <com.fuexpress.kr.ui.view.NumberCounter2
             android:focusable="true"
             android:id="@+id/commodity_nc"

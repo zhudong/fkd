@@ -31,6 +31,7 @@ enum ParcelType
 	PARCEL_TYPE_ORDER      = 1;//订单包裹
 	PARCEL_TYPE_TRANSPORT  = 2;//转运包裹
 	PARCEL_TYPE_DIRECT     = 3;//直邮包裹
+	PARCEL_TYPE_GIFT       = 4;//礼品包裹
 }
 
 message Images
@@ -176,6 +177,7 @@ message MerchantParcelShippingMethodList
 	optional int32   qtyalert                     = 10;//保险申报是否控制包裹单品数量
 	optional int32   qty                          = 11;//
 	optional int32   valuealert                   = 12;//保险申报是否控制包裹单品申报价
+	optional int32   isNeedIdcardImage            = 13;//是否需要用户必填身份证图片
 }
 
 message ParcelItemList
@@ -196,6 +198,11 @@ message ParcelItemList
 	optional int32   salesOrderId = 14;//商品订单id，需求单时为0
 	optional int32   matchItemId  = 15;//单品id，需求单时为0
 	optional string  orderNumber  = 16;//商品订单编码，需求单时为空字符串
+	optional string  buyfrom      = 17;//在哪儿买
+	optional string  extendattributes   = 18;//尺码
+	optional string  koreacolor         = 19;//韩文颜色备注
+	optional string  koreaorder         = 20;//韩文订单备注
+	optional int32   qtyPack            = 21;//打包数
 }
 
 //获取配送方式请求    add by tianz
@@ -240,6 +247,10 @@ message Parcel
 	repeated string image_list           = 13;//包裹中的单品图片，数组格式：[url1,url2,url3]
 	optional string status               = 14;//状态,{Submitted: 已提交,Payed: 待入库,Instore： 已入库,Notice：待出库,Checked: 已审核,Shipped: 已发货}
 	optional string currencycode         = 15;//包裹币种
+	optional string initaddressurl       = 16;//礼品订单设置地址的url
+	optional string expiryDate           = 17;//福袋有效期
+	optional bool   bagstatus            = 18;//福袋是否发送 false：否 ，true：是
+	optional int32  isexpiry             = 19;
 }
 
 //包裹物流
@@ -399,6 +410,7 @@ message GetParcelDetailResponse
 	repeated ParcelMessage   messages 	   = 6;//留言信息
 	repeated MerchantParcelShippingMethodList merchantparcelshippingmethodlist = 7;
 	repeated ParcelItemList parcelitemlist = 8;
+	optional int32  isGrab       	       = 9;//0:福袋派完了  1:还有福袋
 };
 
 message ProductDataList

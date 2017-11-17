@@ -77,7 +77,10 @@ public class CrowdListAdapter extends CrowdAdapter {
             if (en) {
                 discount = ladder.getDiscount() * 100;
             } else {
-                discount = (1 - ladder.getDiscount()) * 10;
+//                discount = (float) Math.rint((1 - ladder.getDiscount()) * 10);
+//                discount = (1 - ladder.getDiscount()) * 10;
+                float i = 100 - (int) (ladder.getDiscount() * 100);
+                discount = i / 10;
             }
             if (discount != 0) {
                 holder.mTvDisCount.setVisibility(View.VISIBLE);
@@ -99,7 +102,7 @@ public class CrowdListAdapter extends CrowdAdapter {
         }
 
         holder.mCrowdProgressDetail.setData(crowd);
-        holder.mCrowdName.setText(crowd.getName());
+        holder.mCrowdName.setText(crowd.getTitle());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,15 +123,7 @@ public class CrowdListAdapter extends CrowdAdapter {
     }
 
     private boolean isInt(float num) {
-        String sNum = String.format(mContent.getResources().getString(R.string.String_float_1), num);
-        String start = ((int) num) + "";
-        String suffix = sNum.substring(start.length() + 1, sNum.length());
-        Integer value = Integer.valueOf(suffix);
-        if (value > 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return (int) num == num;
     }
 
 

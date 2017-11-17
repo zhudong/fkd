@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.fuexpress.kr.MainActivity;
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseFragment;
+import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.base.SimpleBaseAdapter;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.net.INetEngineListener;
@@ -23,10 +24,8 @@ import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.FlowListLayout;
 import com.fuexpress.kr.ui.view.RefreshListView;
 import com.fuexpress.kr.ui.view.SwitcherHotAndNew;
-import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.SPUtils;
 import com.umeng.analytics.MobclickAgent;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,21 +99,19 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
         mRootToast.setOnClickListener(this);
 
         mSwitcherHotAndNew = (SwitcherHotAndNew) mRootView.findViewById(R.id.sw_hot_new);
-//        mSwitcherHotAndNew = new SwitcherHotAndNew(this);
         mSwitcherHotAndNew.setLeftTextAndCount(getResources().getString(R.string.String_hot_crowd), null);
         mSwitcherHotAndNew.setRightTextCount(getResources().getString(R.string.String_finish_crowd), null);
         mSwitcherHotAndNew.setOnSwitchListener(this);
         mSwitcherHotAndNew.setArrowEnable(true);
         mSwitcherHotAndNew.setmOnArrowStateListener(this);
-//        mBody.addHeaderView(mSwitcherHotAndNew);
         mBody.setOnRefreshListener(this);
-//        TitleBarView TitleBarView = new TitleBarView();
-//        RelativeLayout commonTitle = TitleBarView.getCommonTitle();
         mRight = (ImageView) mRootView.findViewById(R.id.title_iv_right);
+        mRootView.findViewById(R.id.title_iv_left).setVisibility(View.GONE);
         mRight.setOnClickListener(this);
-        mRight.setVisibility(View.VISIBLE);
+//        mRight.setVisibility(View.VISIBLE);
         ((TextView) mRootView.findViewById(R.id.title_tv_center)).setText(getResources().getString(R.string.String_crowd_title));
-        mShowList = (boolean) SPUtils.get(mContext, SHOWLIST, true);
+//        mShowList = (boolean) SPUtils.get(mContext, SHOWLIST, true);
+        mShowList = true;
         showStateButton();
         return mRootView;
     }
@@ -160,7 +157,6 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
         mToast.setOnItemClickListener(new FlowListLayout.OnItemClickListener() {
             @Override
             public void onItemClick(FlowListLayout parent, View view, int position, long id) {
-//                Toast.makeText(mContext, position + "", Toast.LENGTH_SHORT).show();
                 mSwitcherHotAndNew.closeToast();
                 showLoading();
                 if (mState == SHOW_HOT_NEW) {
@@ -255,7 +251,6 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
                         closeLoading();
 
                         if (mAdapter == null) {
-//                            mAdapter = new CrowdGrideAdapter(mContext, mNewHot);
                             newAdapter(mNewHot);
                             mBody.setAdapter(mAdapter);
                         } else {
@@ -282,7 +277,6 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
                         closeLoading();
                     }
                 });
-
             }
         });
     }
@@ -332,7 +326,6 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
                     public void run() {
                         closeLoading();
                         if (mAdapter == null) {
-//                            mAdapter = new CrowdGrideAdapter(mContext, mfinishing);
                             newAdapter(mfinishing);
                             mBody.setAdapter(mAdapter);
                         } else {
@@ -449,5 +442,22 @@ public class CrowdListFragment extends BaseFragment<MainActivity> implements Swi
         } else {
             mRootToast.setVisibility(View.GONE);
         }
+    }
+
+    boolean needRefresh;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (needRefresh)
+            refresh();
+        needRefresh = false;
+    }
+
+    @Override
+    public void onEventMainThread(BusEvent event) {
+        super.onEventMainThread(event);
+        if (event.getType() == BusEvent.CHANGE_CURRENCY_COMPLETE | event.getType() == BusEvent.GO_CROWD_Detail)
+            needRefresh = true;
     }
 }

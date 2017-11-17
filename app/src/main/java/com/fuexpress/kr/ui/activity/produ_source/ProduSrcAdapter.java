@@ -351,6 +351,21 @@ public class ProduSrcAdapter extends BaseAdapter implements View.OnClickListener
         mLoaclMapForPairInAdapter = pairsList;
     }
 
+    public void setData(LongSparseArray<ItemBean> localMapForItems, LongSparseArray<List<Long>> pairsList) {
+        //总的我们需要显示的MerchantsLocalList
+        //mAllMerchantsLocalList = merchantsLocalList;
+        //item的map集合:,用于给我们取出值
+        mLoaclMapForItemsInAdapter = localMapForItems;
+        //对应的商铺和其对应的单品的键值对集合:
+        int size = pairsList.size();
+        for (int x = 0; x < size; x++) {
+            long key = pairsList.keyAt(x);
+            mLoaclMapForPairInAdapter.put(key, pairsList.get(key));
+        }
+
+        //mLoaclMapForPairInAdapter = pairsList;
+    }
+
     public String getmType() {
         return mType;
     }

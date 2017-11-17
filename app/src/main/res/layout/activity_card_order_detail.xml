@@ -166,6 +166,7 @@
                     android:textSize="13sp"
                     android:textColor="@color/card_order_text_color_blank"
                     android:text="@string/card_order_detail_cancel_order"/>
+
             </LinearLayout>
 
             <LinearLayout

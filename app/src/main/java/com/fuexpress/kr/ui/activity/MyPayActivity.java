@@ -138,14 +138,14 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
         this.mSavedLineTv = (TextView) this.findViewById(R.id.adyen_saved_line_tv);
         this.mUpdateTv = (TextView) this.findViewById(R.id.adyen_update_tv);
         this.mUpdateLineTv = (TextView) this.findViewById(R.id.adyen_update_line_tv);
-        this.mCardType = (ImageSwitcher)this.findViewById(R.id.cardType);
+        this.mCardType = (ImageSwitcher) this.findViewById(R.id.cardType);
 //        this.showInputKeyboard();
 
 
         adyenInfo = (AdyenUserInfoBean) extras.getSerializable("userInfoBean");
         if (adyenInfo.details != null) {
             mCreditCardCvc.requestFocus();
-            if(adyenInfo.details.size() > 1){
+            if (adyenInfo.details.size() > 1) {
                 Collections.sort(adyenInfo.details, new ComparatorDate());
             }
             isSaved = true;
@@ -172,8 +172,8 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
             mCheckTxtView.setVisibility(View.VISIBLE);
         }
         String orderNumber = getIntent().getStringExtra("orderNumber");
-        String paymentString = getIntent().getStringExtra("paymentString");
-        titleBarView.setTitleText(paymentString);
+//        String paymentString = getIntent().getStringExtra("paymentString");
+        titleBarView.setTitleText(getString(R.string.package_pay_text_only));
         mPaymentTitle.setText(getString(R.string.adyen_title_order_id_msg) + orderNumber);
         this.initPaymentButtonText();
         this.initPaymentButton();
@@ -218,16 +218,16 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void changeCardTypeImg(String variant){
-        if(TextUtils.equals("visa", variant)){
+    public void changeCardTypeImg(String variant) {
+        if (TextUtils.equals("visa", variant)) {
             this.mCardType.setImageResource(R.mipmap.ady_card_visa);
-        }else if(TextUtils.equals("cup", variant)){
+        } else if (TextUtils.equals("cup", variant)) {
             this.mCardType.setImageResource(R.mipmap.ady_card_unionpay);
-        }else if(TextUtils.equals("jcb", variant)){
+        } else if (TextUtils.equals("jcb", variant)) {
             this.mCardType.setImageResource(R.mipmap.ady_card_jcb);
-        }else if(TextUtils.equals("mc", variant)){
+        } else if (TextUtils.equals("mc", variant)) {
             this.mCardType.setImageResource(R.mipmap.ady_card_mastercard);
-        }else {
+        } else {
             this.mCardType.setImageResource(R.mipmap.ady_card_unknown);
         }
 //        if(TextUtils.equals("visa", variant)){
@@ -311,7 +311,7 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == event.KEYCODE_BACK){
+        if (keyCode == event.KEYCODE_BACK) {
             adyenCheckoutListener.checkoutFailedWithError("Cancel payment", ERROR_CANCEL);
 
         }
@@ -372,9 +372,9 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
         this.mPayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (isSaved) {
-                    if(TextUtils.isEmpty(mCreditCardCvc.getText())){
+                    if (TextUtils.isEmpty(mCreditCardCvc.getText())) {
                         mCreditCardCvc.setHintTextColor(getResources().getColor(R.color.red));
-                    }else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -386,13 +386,13 @@ public class MyPayActivity extends Activity implements View.OnClickListener {
                         Adyen.getInstance().setToken(extras.getString("token"));
                         Adyen.getInstance().setUseTestBackend(extras.getBoolean("useTestBackend"));
                         Adyen.getInstance().setPublicKey(Constants.ADYEN_PUBLIC_KEY);
-                        try{
+                        try {
                             CheckoutResponse noPublicKeyExeption = new CheckoutResponse();
                             noPublicKeyExeption.setPaymentData(cardPaymentData.serialize());
                             noPublicKeyExeption.setAmount(extras.getFloat("amount"));
                             noPublicKeyExeption.setCurrency(extras.getString("currency"));
                             adyenCheckoutListener.checkoutFastPay(adyenInfo, noPublicKeyExeption);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

@@ -7,7 +7,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -69,7 +68,7 @@ public class ProductManage {
                 int count = group.getQty();
                 float rate = (group.getRate() * 100);
                 String sRate = formatFloat(rate);
-                String sVipRate = mContext.getString(R.string.String_vip_rate, getMenberGroupName(), count, sRate);
+                String sVipRate = mContext.getString(R.string.String_vip_rate, getMemberGroupName(), count, sRate);
                 sSVipRate_2 = new SpannableString(sVipRate);
                 int start = sVipRate.indexOf(count + "");
                 sSVipRate_2.setSpan(new StyleSpan(Typeface.BOLD), start, start + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -90,25 +89,17 @@ public class ProductManage {
             String promotion = mContext.getString(R.string.String_promotion);
             if (mItemOffer.getRate() != 0) {
                 float rPrice = mItem.getDefaultPrice() * mItem.getExchangeRate() * (1 - mItemOffer.getRate());
-/*
-                float wPrice = mItem.getDefaultPrice() * (1 - mItemOffer.getRate());
-                String currentPrice = CommonUtils.formatMoenyWidthCommaLocal((int) wPrice, mItem.getCurrency_code(), mContext);
-                String sOldPrice = CommonUtils.formatMoenyWidthCommaLocal((int) mItem.getDefaultPrice(), mItem.getCurrency_code(), mContext);
-
-                SpannableString oldPrice = new SpannableString(sOldPrice);
-                oldPrice.setSpan(new StrikethroughSpan(), 0, oldPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-//                实际售价
-                String sDefaultPrice = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate());
-                String sNewPrice = UIUtils.getCurrency(mContext, rPrice);*/
-
 //               每件%1$s，为您节省%2$d%%
                 saletPrice = new SpannableStringBuilder(promotion);
-                saletPrice.append(String.format(mContext.getString(R.string.String_promotion_rate), UIUtils.getCurrency(mContext, rPrice), sDiscount));
+                String format = String.format(mContext.getString(R.string.String_promotion_rate), UIUtils.getCurrency(mContext, rPrice), mContext.getString(R.string.String_number_oney, sDiscount));
+                if (mItemOffer.getRateType() == 0) {
+                    sDiscount = (int) (mItemOffer.getRate() * 100);
+                    rPrice = mItem.getDefaultPrice() * mItem.getExchangeRate() - mItemOffer.getRate() * 100;
+                    format = String.format(mContext.getString(R.string.String_promotion_rate), UIUtils.getCurrency(mContext, rPrice), UIUtils.getCurrency(mContext, sDiscount));
+                }
+                saletPrice.append(format);
                 ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLACK);
                 saletPrice.setSpan(colorSpan, 0, promotion.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
-//                saletPrice = new SpannableStringBuilder(promotion + saletPrice);
             }
 
             SpannableString saletPriceNew = null;
@@ -119,16 +110,25 @@ public class ProductManage {
 
 //                  ▶ %1$s，一次购买%2$d件单价%3$s，为您节省%4$d%%
                     int vipRate = (int) (group.getRate() * 100);
-                    String vipString = mContext.getString(R.string.String_vip_promotion, getMenberGroupName(), group.getQty(), UIUtils.getCurrency(mContext, finalPrice), vipRate);
+                    String achorRate = mContext.getString(R.string.String_number_oney, vipRate);
+                    String vipString = mContext.getString(R.string.String_vip_promotion, getMemberGroupName(),
+                            group.getQty(),
+                            UIUtils.getCurrency(mContext, finalPrice),
+                            achorRate);
+                    if (mItemOffer.getRateType() == 0) {
+                        finalPrice = mItem.getDefaultPrice() * mItem.getExchangeRate() - group.getRate() * 100;
+                        vipRate = (int) (group.getRate() * 100);
+                        achorRate = UIUtils.getCurrency(mContext, vipRate);
+                        vipString = mContext.getString(R.string.String_vip_promotion, getMemberGroupName(), group.getQty(), UIUtils.getCurrency(mContext, finalPrice), achorRate);
+                    }
+
                     saletPriceNew = new SpannableString(vipString);
                     saletPriceNew.setSpan(new StyleSpan(Typeface.BOLD), 13, 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     String achor = UIUtils.getCurrency(mContext, finalPrice);
                     int endlength = vipString.indexOf(achor) + achor.length();
                     int start = vipString.indexOf(achor);
                     saletPriceNew.setSpan(new StyleSpan(Typeface.BOLD), start, endlength, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    String achorRate = mContext.getString(R.string.String_number_oney, vipRate);
                     saletPriceNew.setSpan(new StyleSpan(Typeface.BOLD), vipString.indexOf(achorRate), vipString.indexOf(achorRate) + achorRate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                    saletPrice.setSpan(new StrikethroughSpan(), sellerDes.indexOf(sDiscount + "%"), sellerDes.indexOf(sDiscount + "%") + (sDiscount + "%").length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 //                    原来的促销价格划线
                     saletPrice.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.gray_999)), promotion.length(), saletPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -196,11 +196,20 @@ public class ProductManage {
 
             currentPrices[0] = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate());
             currentPrices[1] = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate() * (1 - mItemOffer.getRate()));
+            if (mItemOffer.getRateType() == 0) {
+                rowPrices[1] = CommonUtils.formatMoenyWidthCommaLocal(mItem.getDefaultPrice() - (mItemOffer.getRate() * 100 / mItem.getExchangeRate()), mItem.getCurrency_code(), mContext);
+                currentPrices[1] = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate() - (mItemOffer.getRate() * 100));
+            }
 
             if (mItemOfferGroupsList.size() > 0) {
                 CsBase.ItemOfferGroup offerGroup = mItemOfferGroupsList.get(0);
                 rowPrices[1] = CommonUtils.formatMoenyWidthCommaLocal(mItem.getDefaultPrice() * (1 - offerGroup.getRate()), mItem.getCurrency_code(), mContext);
                 currentPrices[1] = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate() * (1 - offerGroup.getRate()));
+
+                if (mItemOffer.getRateType() == 0) {
+                    rowPrices[1] = CommonUtils.formatMoenyWidthCommaLocal(mItem.getDefaultPrice() - (offerGroup.getRate() * 100 / mItem.getExchangeRate()), mItem.getCurrency_code(), mContext);
+                    currentPrices[1] = UIUtils.getCurrency(mContext, mItem.getDefaultPrice() * mItem.getExchangeRate() - (offerGroup.getRate() * 100));
+                }
             }
         } else {
             rowPrices = new String[1];
@@ -264,20 +273,11 @@ public class ProductManage {
 //        }
 //    }
 
-    String getMenberGroupName() {
+    String getMemberGroupName() {
         CsBase.UserInfo userInfo = AccountManager.getInstance().userInfo;
-        int memberGroup = 0;
         if (userInfo != null)
-            memberGroup = userInfo.getMemberGroup();
-        String sMenberGroup = "";
-        if (3 == memberGroup) {
-            sMenberGroup = mContext.getString(R.string.String_super_member);
-        } else if (2 == memberGroup) {
-            sMenberGroup = mContext.getString(R.string.String_vip_member);
-        } else {
-            sMenberGroup = mContext.getString(R.string.String_norme_member);
-        }
-        return sMenberGroup;
+            return userInfo.getMemberGroupName();
+        return "";
     }
 
     private String formatFloat(float num) {

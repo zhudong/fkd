@@ -16,6 +16,7 @@ import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
 import com.fuexpress.kr.ui.view.CustomToast;
 import com.fuexpress.kr.ui.view.RefreshListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -43,6 +44,10 @@ public class ProduSrcSubFragment extends BaseFragment implements RefreshListView
     private String mTitle;
     private ProduSrcMyFollowAdapter mProduSrcMyFollowAdapter;
     private ProduSrcAdapter produSrcAdapter;
+    private LongSparseArray<ItemBean> localMapForItems;
+    private LongSparseArray<List<Long>> pairsList;
+    private List<MerChantBean> merchantsLocalList;
+    private List<MerChantBean> followedMerchantBeans;
 
 
     public static ProduSrcSubFragment getProduSrcSubFragmentInstance(Bundle bundle) {
@@ -207,10 +212,14 @@ public class ProduSrcSubFragment extends BaseFragment implements RefreshListView
     public void operateAdapterByType(boolean hasMore, String type, String typeName) {
         if (KEY_FOLLOWED.equals(type)) {
             if (mProduSrcMyFollowAdapter == null || mPageNum == 1) {
-                mProduSrcMyFollowAdapter = new ProduSrcMyFollowAdapter(getActivity(), ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
+                followedMerchantBeans = new ArrayList<>();
+                followedMerchantBeans.addAll(ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
+                mProduSrcMyFollowAdapter = new ProduSrcMyFollowAdapter(getActivity(), followedMerchantBeans);
                 mRefreshListView.setAdapter(mProduSrcMyFollowAdapter);
             } else {
                 //mProduSrcMyFollowAdapter.setData(ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
+                followedMerchantBeans.clear();
+                followedMerchantBeans.addAll(ProduSrcDataManager.getInstance().mFollowedMerchantBeans);
                 mProduSrcMyFollowAdapter.notifyDataSetChanged();
             }
             mRefreshListView.stopRefresh();
@@ -218,26 +227,59 @@ public class ProduSrcSubFragment extends BaseFragment implements RefreshListView
             mRefreshListView.setHasLoadMore(hasMore);
         } else {
             // TODO: 2017/6/26 全部品牌和热门品牌的Adapter 处理
-            List<MerChantBean> merchantsLocalList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMerChantBeanList
+            /*List<MerChantBean> merchantsLocalList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMerChantBeanList
                     : ProduSrcDataManager.getInstance().mHotMerChantBeanList;
             LongSparseArray<ItemBean> localMapForItems = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mLocalMapForAllItems
                     : ProduSrcDataManager.getInstance().mLocalMapForHotItems;
             LongSparseArray<List<Long>> pairsList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMapForPairsProcessed
+                    : ProduSrcDataManager.getInstance().mHotMapForPairsProcessed;*/
+
+            List<MerChantBean> tempLocalList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMerChantBeanList
+                    : ProduSrcDataManager.getInstance().mHotMerChantBeanList;
+            LongSparseArray<ItemBean> tempPLocalMapForItems = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mLocalMapForAllItems
+                    : ProduSrcDataManager.getInstance().mLocalMapForHotItems;
+            LongSparseArray<List<Long>> tempPairsList = KEY_ALL.equals(type) ? ProduSrcDataManager.getInstance().mAllMapForPairsProcessed
                     : ProduSrcDataManager.getInstance().mHotMapForPairsProcessed;
+            if (mPageNum == 1)
+                merchantsLocalList = new ArrayList<>();
+            merchantsLocalList.clear();
+            merchantsLocalList.addAll(tempLocalList);
+
+            if (mPageNum == 1) localMapForItems = new LongSparseArray<>();
+            parseMap(tempPLocalMapForItems, localMapForItems);
+
+            if (mPageNum == 1) pairsList = new LongSparseArray<>();
+            parseMap(tempPairsList, pairsList);
+
+
             if (mType.equals(typeName)) {
+
+
                 if (produSrcAdapter == null || mPageNum == 1) {
+
                     produSrcAdapter = new ProduSrcAdapter(getActivity(), merchantsLocalList
                             , localMapForItems
                             , pairsList);
                     produSrcAdapter.setmType(mType);
                     mRefreshListView.setAdapter(produSrcAdapter);
-                } else
+                } else {
+                    // produSrcAdapter.setData(localMapForItems, pairsList);
                     produSrcAdapter.notifyDataSetChanged();
+                }
 
                 mRefreshListView.stopRefresh();
                 mRefreshListView.stopLoadMore(true);
                 mRefreshListView.setHasLoadMore(hasMore);
             }
+        }
+    }
+
+    public <T> void parseMap(LongSparseArray<T> longSparseArray, LongSparseArray<T> opLongArray) {
+        /*if (mPageNum == 1)
+            opLongArray = new LongSparseArray<>();*/
+        for (int i = 0; i < longSparseArray.size(); i++) {
+            long key = longSparseArray.keyAt(i);
+            opLongArray.put(key, longSparseArray.get(key));
         }
     }
 

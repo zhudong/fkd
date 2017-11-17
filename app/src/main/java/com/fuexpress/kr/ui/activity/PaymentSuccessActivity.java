@@ -30,7 +30,7 @@ public class PaymentSuccessActivity extends BaseActivity {
 
     @Override
     public View setInitView() {
-        rootView = LayoutInflater.from(this).inflate(R.layout.activity_payment_success, null);
+        rootView = LayoutInflater.from(this).inflate(R.layout.activity_payment_success2, null);
         TitleBarView titleBarView = new TitleBarView(this);
         titleBarView.setTitleText(getString(R.string.card_payment_success_title_bar_title));
         toBackIv = titleBarView.getIv_in_title_back();
@@ -41,15 +41,15 @@ public class PaymentSuccessActivity extends BaseActivity {
         shoppingBtn = (Button) rootView.findViewById(R.id.payment_success_shopping_btn);
 
         app = (SysApplication) getApplication();
-        orderNumberTv.setText(app.getOrderNumber());
+        orderNumberTv.setText(app.getOrderNumber() != null ? app.getOrderNumber() : "");
         shippingTv.setText(app.getShippingScheme() == Constants.SHIPPING_SCHEME_DIRECT
                 ? getResources().getString(R.string.String_direct_mail_1)
                 : getResources().getString(R.string.String_merge_order));
-        if(app.getOrderType() == 1){
+        if (app.getOrderType() == 1) {
             msgTv.setText(getResources().getString(R.string.pay_result_payment_success_crowd_title));
-
+            titleBarView.setTitleText(getString(R.string.card_payment_success_crowd_title));
         }
-        if(app.getOrderType() == 0){
+        if (app.getOrderType() == 0) {
             msgTv.setText(getResources().getString(R.string.pay_result_payment_success_order_title));
         }
 
@@ -60,7 +60,7 @@ public class PaymentSuccessActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.payment_success_shopping_btn:
                 EventBus.getDefault().post(new BusEvent(BusEvent.GO_PRODUSRC_PAGE, null));
                 break;

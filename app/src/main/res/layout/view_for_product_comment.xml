@@ -65,8 +65,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_shipping_name"
+                android:gravity="right"
+                android:text=""
+                android:lines="1"
+                android:ellipsize="end"
                 android:textColor="@color/text_gray"
                 android:textSize="11sp"/>
 

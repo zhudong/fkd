@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fuexpress.kr.R;
-import com.fuexpress.kr.bean.ParcelItemBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.ui.activity.DemandsDetailActivity;
 import com.fuexpress.kr.ui.activity.my_order.OrderAll;
@@ -19,13 +18,14 @@ import com.fuexpress.kr.ui.activity.order_detail.OrderDetailPayedActivity;
 import com.fuexpress.kr.ui.activity.package_detail.PackageDetailActivity;
 import com.fuexpress.kr.ui.activity.product_detail.ProductDetailActivity;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
+import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.qiyukf.unicorn.api.ProductDetail;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fksproto.CsParcel;
 import fksproto.CsUser;
 
 /**
@@ -51,10 +51,14 @@ public class ParceOrderItemView extends RelativeLayout {
     LinearLayout mLlButtom;
     @BindView(R.id.tv_merchant_message)
     TextView mTvMerchantMessage;
+    @BindView(R.id.rl_top)
+    RelativeLayout mRlTop;
+    @BindView(R.id.view_divide)
+    View mDivide;
 
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
-    private ParcelItemBean item;
+    private CsParcel.ParcelItemList item;
 
     public ParceOrderItemView(Context context) {
         this(context, null);
@@ -83,27 +87,29 @@ public class ParceOrderItemView extends RelativeLayout {
     //
 //    0:商品订单
 //    其他：1取2找3买4收
-    public void initData(ParcelItemBean item) {
+    public void initData(CsParcel.ParcelItemList item) {
         this.item = item;
-        setIvIcon(item.img);
-        mTvTitle.setText(item.titel);
-        mTvPrice.setText(item.price);
-        mTvCount.setText("×" + item.count);
-        if (item.type == 0) {
-            mTvOrderNumber.setText(getResources().getString(R.string.gift_card_order_id_title) + ":" + item.orderNumber);
+        setIvIcon(item.getImageurl());
+        mTvTitle.setText(item.getName());
+        mTvPrice.setText(UIUtils.getCurrency(getContext(), item.getPriceCurrencyCode(), item.getPrice()));
+        mTvCount.setText("×" + item.getQty());
+        if ("0".equals(item.getType())) {
+            mTvOrderNumber.setText(getResources().getString(R.string.gift_card_order_id_title) + ":" + item.getOrderNumber());
         } else {
-            mTvOrderNumber.setText(getResources().getString(R.string.package_item_need_number, item.needNumber));
+            mTvOrderNumber.setText(getResources().getString(R.string.package_item_need_number, item.getParcelitemid()));
         }
-        mTvItemState.setText(getResources().getString(R.string.package_item_state, Constants.getStatusString(item.status)));
-//        mTvItemState.setVisibility(TextUtils.isEmpty(item.status) ? GONE : VISIBLE);
-        if (item.type == 1) {
-            mTvNote.setText(getResources().getString(R.string.package_item_pick_address, item.remark));
+        setOrderNumberVisable(!TextUtils.isEmpty(item.getOrderNumber()));
+
+        mTvItemState.setText(getResources().getString(R.string.package_item_state, Constants.getStatusString(item.getStatus(), item)));
+        mTvItemState.setVisibility(TextUtils.isEmpty(item.getStatus()) ? GONE : VISIBLE);
+        if ("1".equals(item.getType())) {
+            mTvNote.setText(getResources().getString(R.string.package_item_pick_address, item.getRemark()));
         } else {
-            mTvNote.setText(getResources().getString(R.string.package_item_note, item.remark));
+            mTvNote.setText(getResources().getString(R.string.package_item_note, item.getRemark()));
         }
-//        mTvNote.setVisibility(TextUtils.isEmpty(item.remark) ? GONE : VISIBLE);
-        mTvMerchantMessage.setText(item.message);
-        mLlButtom.setVisibility(TextUtils.isEmpty(item.message) ? GONE : VISIBLE);
+        mTvNote.setVisibility(TextUtils.isEmpty(item.getRemark()) ? GONE : VISIBLE);
+        mTvMerchantMessage.setText(item.getMessage());
+        mLlButtom.setVisibility(TextUtils.isEmpty(item.getMessage()) ? GONE : VISIBLE);
     }
 
     public void setIvIcon(String url) {
@@ -130,28 +136,36 @@ public class ParceOrderItemView extends RelativeLayout {
                 topDetail();
                 break;
             case R.id.rl_bottom:
-                if (item.type == 0) {
-                    Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-                    intent.putExtra(ProductDetailActivity.ITEM_ID, (long) item.matchItemId);
-                    getContext().startActivity(intent);
+                if ("0".equals(item.getType())) {
+                 /*   Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+                    intent.putExtra(ProductDetailActivity.ITEM_ID, (long) item.getMatchItemId());
+                    getContext().startActivity(intent);*/
                 }
                 break;
         }
     }
 
     private void topDetail() {
-        if (item.type > 0) {
-            CsUser.Require require = CsUser.Require.newBuilder().setType(item.type).setSalesRequireId(item.needNumber).build();
+        if ("0".equals(item.getType())) {
+            Intent intent = new Intent(getContext(), OrderDetailPayedActivity.class);
+            intent.putExtra(OrderAll.BEAN, (long) item.getSalesOrderId());
+            getContext().startActivity(intent);
+        } else {
+            CsUser.Require require = CsUser.Require.newBuilder().setType(Integer.valueOf(item.getType())).setSalesRequireId(item.getParcelitemid()).build();
             PackageDetailActivity context = (PackageDetailActivity) getContext();
             Intent intent = new Intent(getContext(), DemandsDetailActivity.class);
             intent.putExtra(DemandsDetailActivity.TITLE_BACK, context.getTitel());
             intent.putExtra(DemandsDetailActivity.DEMAND_BEAN, require);
             context.startActivity(intent);
         }
-        if(item.type==0){
-            Intent intent = new Intent(getContext(), OrderDetailPayedActivity.class);
-            intent.putExtra(OrderAll.BEAN, (long)item.salesOrderId);
-            getContext().startActivity(intent);
+    }
+
+    public void setOrderNumberVisable(boolean orderNumberVisable) {
+        int visibility = orderNumberVisable ? VISIBLE : GONE;
+        int childCount = mRlTop.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            mRlTop.getChildAt(i).setVisibility(visibility);
         }
+//        mDivide.setVisibility(visibility);
     }
 }

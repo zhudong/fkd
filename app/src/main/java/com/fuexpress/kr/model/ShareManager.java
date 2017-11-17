@@ -167,7 +167,6 @@ public class ShareManager {
                     EventBus.getDefault().post(new BusEvent(BusEvent.SEND_DOWNLOAD_IMAGES_PROGRESS, urls.size() - mIds.size(), tag));
                 }
             } else if (intent.getAction().equals(DownloadManager.ACTION_NOTIFICATION_CLICKED)) {
-                //    Toast.makeText(UIUtils.getContext(), "别瞎点！！！", Toast.LENGTH_SHORT).show();
             }
         }
     }

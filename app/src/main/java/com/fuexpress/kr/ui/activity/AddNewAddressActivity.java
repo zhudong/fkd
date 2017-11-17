@@ -1,5 +1,6 @@
 package com.fuexpress.kr.ui.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.base.BusEvent;
 import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.model.AddressManager;
-import com.fuexpress.kr.model.AssetFileManager;
 import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.activity.choose_address.AddressBundleBean;
@@ -41,6 +41,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewAddressActivity extends BaseActivity {
 
+    //public static final String KEY_PARCEL = "PARCEL";
+    public static final String KEY_PARCEL_ID = "PARCEL_ID";
+    //private boolean isParcelType = false;
     private View rootView;
     private TextView packageAddressTv;
     private EditText consigneeEt;
@@ -70,6 +73,8 @@ public class AddNewAddressActivity extends BaseActivity {
     private String mCountryCode;
     private String mRegionID;
     private String mCurrentRegionStr;
+    private long parcelID = -1;
+    private TitleBarView title_in_address;
 
     /*public View setInitView() {
         rootView = LayoutInflater.from(this).inflate(R.layout.activity_add_new_address, null);
@@ -81,23 +86,30 @@ public class AddNewAddressActivity extends BaseActivity {
         rootView = LayoutInflater.from(this).inflate(R.layout.activity_add_new_address, null);
         Intent intent = getIntent();
         mAddressListSize = intent.getIntExtra("addressListSize", 0);
+        //isParcelType = intent.getBooleanExtra(KEY_PARCEL, false);
+        parcelID = getIntent().getLongExtra(KEY_PARCEL_ID, -1);
         Bundle bundle = intent.getExtras();
         boolean deliveryAddAddress = intent.getBooleanExtra("deliveryAddAddress", false);
         if (bundle != null) {
             address = (CsAddress.CustomerAddress) bundle.getSerializable("address");
-            if (address != null) {
-                addressId = address.getAddressId();
+            /*if (address != null) {
+                *//*addressId = address.getAddressId();
                 mRegionCode = address.getRegion();
                 mRegionID = String.valueOf(address.getRegionId());
                 mCurrentCountryStr = address.getCountryname();
                 mCountryCode = address.getCountryCode();
                 mCurrentRegionStr = address.getRegionname();
-            }
-            if (address != null) {
+                region = address.getRegion();*//*
+                if (parcelID == -1)
+                    showAddressInfo(address);
+                else
+                    AddressManager.getInstance().getParcelAddressRequest(parcelID);
+            }*/
+            /*if (address != null) {
                 region = address.getRegion();
-            }
+            }*/
         }
-        TitleBarView title_in_address = (TitleBarView) rootView.findViewById(R.id.title_in_address);
+        title_in_address = (TitleBarView) rootView.findViewById(R.id.title_in_address);
         title_in_address.getIv_in_title_back().setOnClickListener(this);
         title_in_address.getmTv_in_title_back_tv().setText(getString(R.string.address_manager));
         //TitleBarView titleBarView = new TitleBarView(rootView);
@@ -116,8 +128,12 @@ public class AddNewAddressActivity extends BaseActivity {
         isDefaultCb = (CheckBox) rootView.findViewById(R.id.cb_in_add_new_address_is_defalt);
         isDefaultLayout = (LinearLayout) rootView.findViewById(R.id.add_new_address_is_default_layout);
 
+        if (parcelID != -1)
+            isDefaultLayout.setVisibility(View.GONE);
+
+
         if (address != null) {
-            mTitleText = getString(R.string.delivery_title_bar_edit_address);
+            /*mTitleText = getString(R.string.delivery_title_bar_edit_address);
             title_in_address.setTitleText(mTitleText);
             //titleBarView.setTitle(getResources().getString(R.string.delivery_title_bar_edit_address));
             consigneeEt.setText(address.getName());
@@ -136,9 +152,12 @@ public class AddNewAddressActivity extends BaseActivity {
             idCardEt.setText(address.getIdCard());
             isDefaultCb.setChecked(address.getIsDefault());
             title_in_address.getTv_in_title_right().setText(getString(R.string.preview_delete_msg));
-            title_in_address.getTv_in_title_right().setOnClickListener(this);
+            title_in_address.getTv_in_title_right().setOnClickListener(this);*/
             //titleBarView.getTextViewRight().setText(getString(R.string.delete));
             //titleBarView.getTextViewRight().setOnClickListener(this);
+            if (parcelID == -1)
+                showAddressInfo(address);
+            else AddressManager.getInstance().getParcelAddressRequest(parcelID);
         } else {
             mTitleText = getString(R.string.delivery_title_bar_add_address);
             title_in_address.setTitleText(mTitleText);
@@ -155,6 +174,40 @@ public class AddNewAddressActivity extends BaseActivity {
         //packageAddressTv.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
         return rootView;
+    }
+
+
+    public void showAddressInfo(CsAddress.CustomerAddress address) {
+        this.address = address;
+        addressId = address.getAddressId();
+        mRegionCode = address.getRegion();
+        mRegionID = String.valueOf(address.getRegionId());
+        mCurrentCountryStr = address.getCountryname();
+        mCountryCode = address.getCountryCode();
+        mCurrentRegionStr = address.getRegionname();
+        region = address.getRegion();
+
+
+        mTitleText = getString(R.string.delivery_title_bar_edit_address);
+        title_in_address.setTitleText(mTitleText);
+        consigneeEt.setText(address.getName());
+        phoneEt.setText(address.getPhone());
+        String country = address.getCountryname();
+        processAddressData(address);
+        String city = mCurrentAddressBean.getSelectedString();
+        countryTv.setText(country);
+        cityTv.setText(city);
+        detailAddressEt.setText(address.getStreet());
+        postcodeEt.setText(address.getPostcode());
+        companyEt.setText(address.getCompany());
+        idCardEt.setText(address.getIdCard());
+        isDefaultCb.setChecked(address.getIsDefault());
+        if (parcelID == -1) {
+            title_in_address.getTv_in_title_right().setText(getString(R.string.preview_delete_msg));
+            title_in_address.getTv_in_title_right().setOnClickListener(this);
+        }
+
+
     }
 
 
@@ -228,7 +281,7 @@ public class AddNewAddressActivity extends BaseActivity {
                     toast(getResources().getString(R.string.delivery_toast_msg_country));
                     return;
                 }
-                if (TextUtils.isEmpty(mRegionCode)) {
+                if (TextUtils.isEmpty(mRegionID)) {
                     //LogUtils.e("我是添加地址的返回值:" + region);
                     toast(getResources().getString(R.string.delivery_toast_msg_region));
                     return;
@@ -260,12 +313,10 @@ public class AddNewAddressActivity extends BaseActivity {
                 customerAddress.setPhone(phone);
                 customerAddress.setCompany(company);
                 customerAddress.setIdCard(idCard);
-                if (AddressManager.getInstance().mAddressesList.size() == 0 || AddressManager.getInstance().mAddressesList == null) {
-                    customerAddress.setIsDefault(true);
-                } else {
-                    customerAddress.setIsDefault(isDefaultCb.isChecked());
-                }
                 if (address != null) {
+                    /*customerAddress.setCountryCode(address.getCountryCode());
+                    customerAddress.setRegionId(address.getRegionId());*/
+                    //customerAddress
                     editCustomerAddress(customerAddress.build());
                 } else {
                     addCustomerAddress(customerAddress);
@@ -376,9 +427,71 @@ public class AddNewAddressActivity extends BaseActivity {
     public void editCustomerAddress(CsAddress.CustomerAddress address) {
         //showLoading(5000);
         showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.uploading_string));
+        if (parcelID == -1) submitEditAddressNormalType(address);
+        else submitEditAddressParcelType(address);
+    }
+
+    private void submitEditAddressParcelType(CsAddress.CustomerAddress address) {
+
+        CsAddress.SaveAddressAjaxRequest.Builder builder = CsAddress.SaveAddressAjaxRequest.newBuilder();
+        builder.setUserinfo(AccountManager.getInstance().getBaseUserRequest());
+        builder.setDirectoryCountryCode(mCountryCode);
+        builder.setDirectoryCountryRegionId(Integer.valueOf(mRegionID));
+        builder.setName(address.getName());
+        builder.setPostcode(address.getPostcode());
+        builder.setStreet(address.getStreet());
+        //builder.setParcelId((int) parcelID);
+        builder.setTelephone(address.getPhone());
+        if (-1 == parcelID) {
+            CustomToast.makeText(this, "Not Have parcelID!", Toast.LENGTH_SHORT).show();
+            return;
+        } else
+            //builder.setSalesOrderId();
+            builder.setParcelId((int) parcelID);
+
+        NetEngine.postRequest(builder, new INetEngineListener<CsAddress.SaveAddressAjaxResponse>() {
+
+            @Override
+            public void onSuccess(CsAddress.SaveAddressAjaxResponse response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dissMissProgressDiaLog();
+                    }
+                });
+                LogUtils.d(response.toString());
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeDiagLogAlertType(SweetAlertDialog.ERROR_TYPE, getString(R.string.string_for_send_requset_fail_02));
+                        dissMissProgressDiaLog(1000);
+                    }
+                });
+
+                LogUtils.d("ret=" + ret);
+            }
+        });
+    }
+
+    private void submitEditAddressNormalType(CsAddress.CustomerAddress address) {
+        //showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.uploading_string));
+        CsAddress.CustomerAddress.Builder builder1 = address.toBuilder();
+        if (AddressManager.getInstance().mAddressesList.size() == 0 || AddressManager.getInstance().mAddressesList == null) {
+            builder1.setIsDefault(true);
+        } else {
+            builder1.setIsDefault(isDefaultCb.isChecked());
+        }
+        address = builder1.build();
         CsAddress.EditCustomerAddressRequest.Builder builder = CsAddress.EditCustomerAddressRequest.newBuilder();
         builder.setAddress(address);
         builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+
         NetEngine.postRequest(builder, new INetEngineListener<CsAddress.EditCustomerAddressResponse>() {
 
             @Override
@@ -418,9 +531,15 @@ public class AddNewAddressActivity extends BaseActivity {
     public void addCustomerAddress(CsAddress.CustomerAddress.Builder address) {
         //showLoading(5000);
         showProgressDiaLog(SweetAlertDialog.PROGRESS_TYPE, getString(R.string.uploading_string));
+        if (AddressManager.getInstance().mAddressesList.size() == 0 || AddressManager.getInstance().mAddressesList == null) {
+            address.setIsDefault(true);
+        } else {
+            address.setIsDefault(isDefaultCb.isChecked());
+        }
         CsAddress.AddCustomerAddressRequest.Builder builder = CsAddress.AddCustomerAddressRequest.newBuilder();
         builder.setAddress(address.build());
         builder.setBaseuser(AccountManager.getInstance().mBaseUserRequest);
+
         NetEngine.postRequest(builder, new INetEngineListener<CsAddress.AddCustomerAddressResponse>() {
 
             @Override
@@ -463,6 +582,11 @@ public class AddNewAddressActivity extends BaseActivity {
                 finish();
             }
         }, 500);*/
+        if (event.getType() == BusEvent.INIT_PARCEL_ADDRESS_COMPLETE) {
+            boolean isSuccessed = event.getBooleanParam();
+            if (isSuccessed) showAddressInfo((CsAddress.CustomerAddress) event.getParam());
+            else CustomToast.makeText(this, event.getStrParam(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void showDialog() {

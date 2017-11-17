@@ -4,7 +4,6 @@ package com.fuexpress.kr.model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.text.TextUtils;
@@ -18,7 +17,6 @@ import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.net.RequestNetListenerWithMsg;
 import com.fuexpress.kr.ui.activity.login_register.LoginByPhoneActivity;
-import com.fuexpress.kr.ui.activity.login_register.ThirdPlatformLoginActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.utils.CommonUtils;
 import com.fuexpress.kr.utils.MD5Util;
@@ -29,7 +27,6 @@ import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 import fksproto.CsBase;
-import fksproto.CsCard;
 import fksproto.CsLogin;
 import fksproto.CsUser;
 
@@ -105,7 +102,7 @@ public class AccountManager {
     public CsBase.BaseUserRequest.Builder mBaseUserRequest;
 
     //    用户默认地址的国家和地区id
-    public String countryCode="";
+    public String countryCode = "";
     public int regionID;
 
     public static AccountManager getInstance() {
@@ -149,6 +146,7 @@ public class AccountManager {
                         response.getLocalecode(), response.getCurrencycode(), response.getCurrencyid(),
                         response.getCurrencySign(), response.getCurrencyName(),
                         password, accountExtra);
+                changeLoacleCodeMethod(response.getLocalecode(), null, false);
                 //todo: notify login success
                 EventBus.getDefault().post(new BusEvent(BusEvent.LOGIN_SUCCESS, null));
             }
@@ -379,7 +377,7 @@ public class AccountManager {
         }
 
 
-        CsLogin.ThirdLoginRequest.Builder builder = CsLogin.ThirdLoginRequest.newBuilder();
+        CsLogin.ThirdLoginWithoutBindRequest.Builder builder = CsLogin.ThirdLoginWithoutBindRequest.newBuilder();
         switch (platform) {
             case AccountManager.THIRD_PLATFROM_QQ:
                 //QQ登录
@@ -401,13 +399,16 @@ public class AccountManager {
         builder.setOpenid(openid);
         builder.setToken(token);
         builder.setRandomKey(NetEngine.sRandomKey);
-        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.ThirdLoginResponse>() {
+        builder.setLocalecode(AccountManager.getInstance().getLocaleCode());
+        NetEngine.postRequest(builder, new INetEngineListener<CsLogin.ThirdLoginWithoutBindResponse>() {
             @Override
-            public void onSuccess(final CsLogin.ThirdLoginResponse response) {
+            public void onSuccess(final CsLogin.ThirdLoginWithoutBindResponse response) {
                 //第三方登录成功
                 KLog.i(TAG, response.toString());
                 //    EventBus.getDefault().post(new BusEvent(BusEvent.GET_INFO_SUCCESS, null));
                 saveSession(response.getUin(), response.getSessionKey(), response.getTicket(), response.getH5Ticket(), response.getLocalecode(), response.getCurrencycode(), response.getCurrencyid(), null, null, null, null);
+                boolean isBindPhone = response.getIsBindPhone();
+                changeLoacleCodeMethod(response.getLocalecode(), Constants.KEY_IS_JUMP_MEFRAG, !isBindPhone);
                 UIUtils.postTaskSafely(new Runnable() {
                     @Override
                     public void run() {
@@ -423,8 +424,8 @@ public class AccountManager {
             public void onFailure(final int ret, final String errMsg) {
                 KLog.e(TAG, "failed ,ret=" + ret + ",errMsg " + errMsg + "  " + CommonUtils.getErrMsg(ret));
 //                if (platform == AccountManager.THIRD_PLATFROM_WB) {
-//                    String url = "https://api.weibo.com/2/users/show.json?access_token=" + token + "&uid=" + openid;
-//                    WeiBoUserManager.getWeiboUserInfo(url);
+//                    String url = "httpi.weibo.com/2/users/show.json?access_token=" + token + "&uid=" + openid;
+//                    WeiBoUserManager.getWeiboUserInfo(url);ps://a
 //                }
                 UIUtils.postTaskSafely(new Runnable() {
                     @Override
@@ -440,17 +441,21 @@ public class AccountManager {
     }
 
     public void bindThirdPlatform(int type, String account, String pwd) {
-        bindThirdPlatform(type, account, pwd, null);
+        bindThirdPlatform(type, account, pwd, "", null);
+    }
+
+    public void bindThirdPlatform(int type, String account, String pwd, String verifyCode) {
+        bindThirdPlatform(type, account, pwd, verifyCode, null);
     }
 
     //第三方绑定手机号或者邮箱。在注册或者登陆成功后，调用此方法，绑定账号。绑定以后，既可以使用第三方账号登录
-    public void bindThirdPlatform(int type, String account, String pwd, final RequestNetListenerWithMsg listener) {
+    public void bindThirdPlatform(int type, String account, String pwd, String verifyCode, final RequestNetListenerWithMsg listener) {
         if (type != TYPE_PHONE && type != TYPE_EMAIL) {
             //参数有误，return
             return;
         }
         CsLogin.AccountRequest.Builder builder = CsLogin.AccountRequest.newBuilder();
-        builder.setOperacode(CsLogin.AccountOperacode.ACCOUNT_OPERACODE_THIRD_BIND_VALUE);
+        builder.setOperacode(CsLogin.AccountOperacode.ACCOUNT_OPERACODE_PHONE_BIND_NEW_VALUE);
 
         switch (type) {
             case TYPE_EMAIL:
@@ -464,7 +469,7 @@ public class AccountManager {
         KLog.i(TAG, "account = " + account + " pwd = " + pwd + " type = " + type);
         builder.setAccount(account);
         builder.setPassword(MD5Util.getMD5(pwd).toLowerCase());
-        builder.setRandomKey(NetEngine.sRandomKey);
+        builder.setRandomKey(AccountManager.isLogin ? AccountManager.getInstance().mSessionKey : NetEngine.sRandomKey);
         CsLogin.ThirdAccount.Builder thirdAccount = CsLogin.ThirdAccount.newBuilder();
         int platformInt = AccountManager.getInstance().thirdPlatfrom;
         switch (AccountManager.getInstance().thirdPlatfrom) {
@@ -485,8 +490,10 @@ public class AccountManager {
         thirdAccount.setOpenid(AccountManager.getInstance().openid);
         thirdAccount.setToken(AccountManager.getInstance().token);
         KLog.i("openid = " + openid + " token = " + token + " int = " + platformInt);
+        builder.setUin(mUin);
 
         builder.setThird(thirdAccount);
+        if (!TextUtils.isEmpty(verifyCode)) builder.setVerifyCode(verifyCode);
         NetEngine.postRequest(builder, new INetEngineListener<CsLogin.AccountResponse>() {
             @Override
             public void onSuccess(final CsLogin.AccountResponse response) {
@@ -569,7 +576,8 @@ public class AccountManager {
     }
 
     //保存对话票据到本地
-    public void saveSession(int uin, String session, String ticket, String h5ticket, String localeCode, String currencyCode, int currencyId, String sign, String currencyName, String pw, String accountEx) {
+    public void saveSession(int uin, String session, String ticket, String h5ticket, String localeCode,
+                            String currencyCode, int currencyId, String sign, String currencyName, String pw, String accountEx) {
         Context context = SysApplication.getContext();
 
         SPUtils.put(context, Constants.USER_INFO.USER_ITCKET, ticket);
@@ -600,15 +608,29 @@ public class AccountManager {
         }
         getSession();
 
+
+    }
+
+    public void changeLoacleCodeMethod(String localeCode, String key, boolean value) {
         //2016/10/09 添加了登录后根据用户的服务器返回语种切换资源文件的方法
         if (!TextUtils.isEmpty(localeCode)) {
-            String[] language = localeCode.split("_");
-            Resources res = SysApplication.getContext().getResources();
-            Configuration config = res.getConfiguration();
-            config.locale = new Locale(language[0], language[1]);
-            ConfigManager.getInstance(SysApplication.getContext()).updateConfigByNotActivity(config);
+            if (!localeCode.equals(SysApplication.DEFAULT_LANGUAGE)) {
+                String[] language = localeCode.split("_");
+                Resources res = SysApplication.getContext().getResources();
+                Configuration config = res.getConfiguration();
+                config.locale = new Locale(language[0], language[1]);
+                if (null == key)
+                    ConfigManager.getInstance(SysApplication.getContext()).updateConfigByNotActivity(config);
+                else
+                    ConfigManager.getInstance(SysApplication.getContext()).updateConfigByNotActivityBundBoolean(config, key, value);
+            } else {
+                Intent intent = new Intent();
+                intent.setClass(mContext, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(key, value);
+                mContext.startActivity(intent);
+            }
         }
-
     }
 
     /**

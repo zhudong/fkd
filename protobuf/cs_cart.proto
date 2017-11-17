@@ -1,90 +1,94 @@
 import "cs_head.proto";
 import "cs_base.proto";
+import "cs_crowd.proto";
 
 package fksproto;
 
-//???????
+//购物车单品信息
 message SalesCartItem
 {
 	required int64      cart_item_id = 1;
-	required int64      item_id      = 2; //??id
-	required int32      warehouse_id = 3; //??id
-	required string     title        = 4; //??
-	required string     subtitle     = 5; //???
-	required string     image_url    = 6; //????URL
-	required int32      qty          = 7; //????
-	required float      unit_price   = 8; //????????
-	optional int32      stock        = 9; //??
-	optional string     note         = 10;//??
-	optional string     seller       = 11;//??
-	optional string     buyfrom      = 12;//?????
-	repeated ItemExtend extends      = 13;//?????????
-	optional bool       is_selected  = 14;//????
-	optional bool       cannot_buyit = 15;//?????
-	optional int32 		min_qty_allow= 16;//????????
-	optional int32 		max_qty_allow= 17;//????????
+	required int64      item_id      = 2; //单品id
+	required int32      warehouse_id = 3; //仓库id
+	required string     title        = 4; //标题
+	required string     subtitle     = 5; //副标题
+	required string     image_url    = 6; //单品图片URL
+	required int32      qty          = 7; //交易数量
+	required float      unit_price   = 8; //单价，价格人民币
+	optional int32      stock        = 9; //库存
+	optional string     note         = 10;//留言
+	optional string     seller       = 11;//卖家
+	optional string     buyfrom      = 12;//在哪儿买的
+	repeated ItemExtend extends      = 13;//选择的变种属性列表
+	optional bool       is_selected  = 14;//是否选中
+	optional bool       cannot_buyit = 15;//是否能购买
+	optional int32 		min_qty_allow= 16;//允许最小购买数量
+	optional int32 		max_qty_allow= 17;//允许最大购买数量
+	optional int32      crowdOrderId = 18;//
+	optional string     crowdOrderStatus = 19;
+	optional Crowd      crowd        = 20;//拼单信息
 }
 
-//???????
+//获取购物车请求
 message GetSalesCartListRequest
 {
 	required BaseRequest     head         = 1;
 	optional BaseUserRequest userinfo     = 2;
-	optional string          localecode   = 3;//??
-	optional string          currencycode = 4;//??
-	optional int32           currencyid   = 5;//??id
+	optional string          localecode   = 3;//语种
+	optional string          currencycode = 4;//币种
+	optional int32           currencyid   = 5;//币种id
 
 }
 
-//???????
+//获取购物车应答
 message GetSalesCartListResponse
 {
 	required BaseResponse  head       = 1;
-	optional float         subtotal   = 2;//??
-	optional float         grandtotal = 3;//??
-	repeated SalesCartItem items      = 4;//?????
-	repeated Warehouse     warehouses = 5;//????
+	optional float         subtotal   = 2;//小计
+	optional float         grandtotal = 3;//总计
+	repeated SalesCartItem items      = 4;//购物车单品
+	repeated Warehouse     warehouses = 5;//仓库信息
 }
 
-//???????
+//添加购物车请求
 message AppendSalesCartRequest
 {
 	required BaseRequest 	 head         = 1;
 	optional BaseUserRequest userinfo 	  = 2;
-	required int64       	 item_id 	  = 3;//??id
-	required int32       	 qty     	  = 4;//????
-	optional string      	 note    	  = 5;//??
-	repeated PairIntInt  	 attrs   	  = 6;//??id:???id??
-	optional string      	 currencycode = 7;//??
-	optional string      	 localecode   = 8;//??
+	required int64       	 item_id 	  = 3;//单品id
+	required int32       	 qty     	  = 4;//交易数量
+	optional string      	 note    	  = 5;//留言
+	repeated PairIntInt  	 attrs   	  = 6;//属性id:属性值id列表
+	optional string      	 currencycode = 7;//币种
+	optional string      	 localecode   = 8;//币种
 }
 
-//???????
+//添加购物车应答
 message AppendSalesCartResponse
 {
 	required BaseResponse head = 1;
 }
 
-//???????
+//移除购物车请求
 message RemoveSalesCartRequest
 {
 	required BaseRequest     head 	      = 1;
 	optional BaseUserRequest userinfo     = 2;
 	optional int64 		     cart_item_id = 3;
-	optional string      	 localecode   = 4;//??
-	optional string      	 currencycode = 5;//??
-	optional int32       	 currencyid   = 6;//??id
+	optional string      	 localecode   = 4;//语种
+	optional string      	 currencycode = 5;//币种
+	optional int32       	 currencyid   = 6;//币种id
 }
 
-//???????
+//移除购物车应答
 message RemoveSalesCartResponse
 {
 	required BaseResponse head 		 = 1;
-	optional float        subtotal   = 2;//??
-	optional float        grandtotal = 3;//??
+	optional float        subtotal   = 2;//小计
+	optional float        grandtotal = 3;//总计
 }
 
-//???????
+//修改购物车请求
 message ModifySalesCartRequest
 {
 	required BaseRequest     head         = 1;
@@ -92,39 +96,39 @@ message ModifySalesCartRequest
 	optional int64 		 	 cart_item_id = 3;
 	optional int32		 	 qty	      = 4;
 	optional string 	 	 note		  = 5;
-	optional string      	 localecode   = 6;//??
-	optional string      	 currencycode = 7;//??
-	optional int32       	 currencyid   = 8;//??id
+	optional string      	 localecode   = 6;//语种
+	optional string      	 currencycode = 7;//币种
+	optional int32       	 currencyid   = 8;//币种id
 }
 
-//???????
+//修改购物车应答
 message ModifySalesCartResponse
 {
 	required BaseResponse head 		 = 1;
-	optional float        subtotal   = 2;//??
-	optional float        grandtotal = 3;//??
+	optional float        subtotal   = 2;//小计
+	optional float        grandtotal = 3;//总计
 }
 
-//?????(??)??
+//选中购物车(单品)请求
 message SelectedSalesCartRequest
 {
 	required BaseRequest     head          = 1;
 	optional BaseUserRequest userinfo      = 2;
 	repeated int64 		     cart_item_ids = 3;
-	optional int32           action        = 4;//??Action??
-	optional string          currencycode  = 5;//??
+	optional int32           action        = 4;//见宏Action定义
+	optional string          currencycode  = 5;//币种
 
 }
 
-//?????(??)??
+//选中购物车(单品)应答
 message SelectedSalesCartResponse
 {
 	required BaseResponse head 		 = 1;
-	optional float        subtotal   = 2;//??
-	optional float        grandtotal = 3;//??
+	optional float        subtotal   = 2;//小计
+	optional float        grandtotal = 3;//总计
 }
 
-//???????
+//使用优惠券请求
 message ApplyCouponRequest
 {
 	required BaseRequest     head     = 1;
@@ -132,28 +136,43 @@ message ApplyCouponRequest
 	required string          coupon   = 3;
 }
 
-//???????
+//使用优惠券应答
 message ApplyCouponResponse
 {
 	required BaseResponse head     = 1;
-	optional float        discount = 2;//????
+	optional float        discount = 2;//折扣金额
 
 }
 
-//?????????
+//重新下单
+message PlaceOrderAgainRequest
+{
+	required BaseRequest     head              = 1;
+	optional BaseUserRequest userinfo          = 2;
+	optional int32           sales_order_id    = 3;//订单ID
+	optional string      	 locale_code   = 4;//语种
+	optional string          currency_code = 5;
+}
+message PlaceOrderAgainResponse
+{
+	required BaseResponse head 		 = 1;
+}
+
+
+//批量移除购物车请求
 message RemoveBatchSalesCartRequest
 {
 	required BaseRequest     head 	       = 1;
 	optional BaseUserRequest userinfo      = 2;
 	repeated int64 		     cart_item_ids = 3;
-	optional string          currencycode  = 4;//??
+	optional string          currencycode  = 4;//币种
 
 }
 
-//?????????
+//批量移除购物车应答
 message RemoveBatchSalesCartResponse
 {
 	required BaseResponse head 		 = 1;
-	optional float        subtotal   = 2;//??
-	optional float        grandtotal = 3;//??
+	optional float        subtotal   = 2;//小计
+	optional float        grandtotal = 3;//总计
 }

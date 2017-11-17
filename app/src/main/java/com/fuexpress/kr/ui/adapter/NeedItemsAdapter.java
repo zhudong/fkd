@@ -83,7 +83,7 @@ public class NeedItemsAdapter extends SimpleBaseAdapter<CsUser.Require> implemen
         CsUser.Require needBean = mData.get(position);
         holer.mTvDate.setText(needBean.getCreateTime());
 
-        holer.mTvState.setText(Constants.getStatusString(needBean.getStatus()));
+        holer.mTvState.setText(Constants.getStatusString(needBean.getStatus(), null));
         addCovers(holer.mLlCovers, needBean.getImageUrlList());
 
         String type = "";
@@ -116,7 +116,6 @@ public class NeedItemsAdapter extends SimpleBaseAdapter<CsUser.Require> implemen
                 UIUtils.getString(R.string.home_fg_help_02)
         };
     }*/
-
 
 
     private void addCovers(LinearLayout llCovers, List<fksproto.CsUser.ImagesUrl> split) {

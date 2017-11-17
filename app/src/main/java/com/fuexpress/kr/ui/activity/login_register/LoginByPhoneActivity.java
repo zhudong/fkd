@@ -41,6 +41,7 @@ import com.fuexpress.kr.ui.activity.ChooseLanguageActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 import com.fuexpress.kr.ui.view.CustomDialog;
 import com.fuexpress.kr.utils.CountryNumberUtils;
+import com.fuexpress.kr.utils.LogUtils;
 import com.fuexpress.kr.utils.SPUtils;
 import com.google.protobuf.GeneratedMessage;
 import com.socks.library.KLog;
@@ -63,7 +64,6 @@ import java.util.Arrays;
 import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import fksproto.CsLogin;
@@ -136,15 +136,13 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
 
     @Override
     public View setInitView() {
+        Intent intent = getIntent();
         View view = LayoutInflater.from(this).inflate(R.layout.activity_login_phone, null);
         return view;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void initView() {
         mTitleTvCenter.setText(getString(R.string.phone_login));
         mTitleTvLeft.setVisibility(View.VISIBLE);
         mTitleTvLeft.setText(getString(R.string.cancel));
@@ -173,6 +171,7 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
             }
         });
     }
+
 
     @Override
     protected void onResume() {
@@ -233,6 +232,7 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
         }
     }
 
+
     private void loginByQQ() {
         KLog.i("account", "qq)");
         TITLE = getString(R.string.qq);
@@ -254,16 +254,33 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
                     //保存第三方登录信息_QQ
                     // saveThirdLoginInfo(AccountManager.THIRD_PLATFROM_QQ,QQ_access_token,QQ_openid);
                     getQQUserInfo();
-                    AccountManager.getInstance().loginByThirdPlatform(AccountManager.THIRD_PLATFROM_QQ, QQ_access_token, QQ_openid, new RequestNetListenerWithMsg() {
+                    AccountManager.getInstance().loginByThirdPlatform(AccountManager.THIRD_PLATFROM_QQ, QQ_access_token, QQ_openid, new RequestNetListenerWithMsg<CsLogin.ThirdLoginWithoutBindResponse>() {
                         @Override
-                        public void onSuccess(GeneratedMessage response) {
-                            toActivity(MainActivity.class);
+                        public void onSuccess(CsLogin.ThirdLoginWithoutBindResponse response) {
+                            /*boolean isBindPhone = response.getIsBindPhone();
+                            //if (!isBindPhone)
+                            Intent intent = new Intent(LoginByPhoneActivity.this, MainActivity.class);
+                            intent.putExtra(Constants.KEY_IS_JUMP_MEFRAG, !isBindPhone);*/
+                            LogUtils.e("QQ登录但未绑定手机号");
+                            //mViewUtils.toast(msg);
+                            //startActivity(intent);
+                            LogUtils.e("QQ登录成功");
                         }
 
                         @Override
                         public void onFailure(int ret, String msg) {
-                            toActivity(ThirdPlatformLoginActivity.class);
-                            mViewUtils.toast(msg);
+                            if (-25 == ret) {
+                                //toActivity(ThirdPlatformLoginActivity.class);
+                                Intent intent = new Intent(LoginByPhoneActivity.this, MainActivity.class);
+                                intent.putExtra(Constants.KEY_IS_JUMP_MEFRAG, true);
+                                LogUtils.e("QQ登录但未绑定手机号");
+                                mViewUtils.toast(msg);
+                                startActivity(intent);
+                                //finish();
+                                //showDialog();
+                            } else
+                                mViewUtils.toast(ret + msg);
+
                         }
                     });
                     //   showInfo(AccountManager.THIRD_PLATFROM_QQ);
@@ -333,17 +350,24 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
                 }
                 AccountManager.getInstance().loginByThirdPlatform(AccountManager.THIRD_PLATFROM_FB, loginResult.getAccessToken().getToken()
                         , loginResult.getAccessToken().getUserId(), new RequestNetListenerWithMsg() {
-                    @Override
-                    public void onSuccess(GeneratedMessage response) {
-                        toActivity(MainActivity.class);
-                    }
+                            @Override
+                            public void onSuccess(GeneratedMessage response) {
+                                //toActivity(MainActivity.class);
+                                LogUtils.e("Facebook登录成功");
+                            }
 
-                    @Override
-                    public void onFailure(int ret, String msg) {
-                        toActivity(ThirdPlatformLoginActivity.class);
-                        mViewUtils.toast(msg);
-                    }
-                });
+                            @Override
+                            public void onFailure(int ret, String msg) {
+                                mViewUtils.toast(msg);
+                                /*if (ret == -25) {
+                                    Intent intent = new Intent(LoginByPhoneActivity.this, MainActivity.class);
+                                    intent.putExtra(Constants.KEY_IS_JUMP_MEFRAG, true);
+                                    LogUtils.e("facebook登录但未绑定手机号");
+                                    startActivity(intent);
+                                }*/
+                                //toActivity(ThirdPlatformLoginActivity.class);
+                            }
+                        });
 
                 getFaceBookLoginInfo(loginResult.getAccessToken());
 
@@ -374,6 +398,7 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
     @Override
     public void onResp(BaseResp baseResp) {
         KLog.i(baseResp.toString());
+        LogUtils.e("微信登录回调");
     }
 
     /**
@@ -417,6 +442,7 @@ public class LoginByPhoneActivity extends BaseActivity implements IWXAPIEventHan
             @Override
             public void onError(UiError e) {
                 // TODO Auto-generated method stub
+                LogUtils.e("获取QQ信息失败");
             }
 
             @Override

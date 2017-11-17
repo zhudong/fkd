@@ -232,7 +232,7 @@ public final class CsMy {
      * <code>optional int32 useaccountpay = 11;</code>
      *
      * <pre>
-     *0和1都是使用账户余额支付，2不使用        
+     *0和1都是使用账户余额支付，2不使用
      * </pre>
      */
     boolean hasUseaccountpay();
@@ -240,7 +240,7 @@ public final class CsMy {
      * <code>optional int32 useaccountpay = 11;</code>
      *
      * <pre>
-     *0和1都是使用账户余额支付，2不使用        
+     *0和1都是使用账户余额支付，2不使用
      * </pre>
      */
     int getUseaccountpay();
@@ -835,7 +835,7 @@ public final class CsMy {
      * <code>optional int32 useaccountpay = 11;</code>
      *
      * <pre>
-     *0和1都是使用账户余额支付，2不使用        
+     *0和1都是使用账户余额支付，2不使用
      * </pre>
      */
     public boolean hasUseaccountpay() {
@@ -845,7 +845,7 @@ public final class CsMy {
      * <code>optional int32 useaccountpay = 11;</code>
      *
      * <pre>
-     *0和1都是使用账户余额支付，2不使用        
+     *0和1都是使用账户余额支付，2不使用
      * </pre>
      */
     public int getUseaccountpay() {
@@ -2274,7 +2274,7 @@ public final class CsMy {
        * <code>optional int32 useaccountpay = 11;</code>
        *
        * <pre>
-       *0和1都是使用账户余额支付，2不使用        
+       *0和1都是使用账户余额支付，2不使用
        * </pre>
        */
       public boolean hasUseaccountpay() {
@@ -2284,7 +2284,7 @@ public final class CsMy {
        * <code>optional int32 useaccountpay = 11;</code>
        *
        * <pre>
-       *0和1都是使用账户余额支付，2不使用        
+       *0和1都是使用账户余额支付，2不使用
        * </pre>
        */
       public int getUseaccountpay() {
@@ -2294,7 +2294,7 @@ public final class CsMy {
        * <code>optional int32 useaccountpay = 11;</code>
        *
        * <pre>
-       *0和1都是使用账户余额支付，2不使用        
+       *0和1都是使用账户余额支付，2不使用
        * </pre>
        */
       public Builder setUseaccountpay(int value) {
@@ -2307,7 +2307,7 @@ public final class CsMy {
        * <code>optional int32 useaccountpay = 11;</code>
        *
        * <pre>
-       *0和1都是使用账户余额支付，2不使用        
+       *0和1都是使用账户余额支付，2不使用
        * </pre>
        */
       public Builder clearUseaccountpay() {
@@ -4069,7 +4069,7 @@ public final class CsMy {
      * <code>optional float frozen_balance = 3;</code>
      *
      * <pre>
-     *冻结额度 
+     *冻结额度
      * </pre>
      */
     boolean hasFrozenBalance();
@@ -4077,7 +4077,7 @@ public final class CsMy {
      * <code>optional float frozen_balance = 3;</code>
      *
      * <pre>
-     *冻结额度 
+     *冻结额度
      * </pre>
      */
     float getFrozenBalance();
@@ -4251,7 +4251,7 @@ public final class CsMy {
      * <code>optional float frozen_balance = 3;</code>
      *
      * <pre>
-     *冻结额度 
+     *冻结额度
      * </pre>
      */
     public boolean hasFrozenBalance() {
@@ -4261,7 +4261,7 @@ public final class CsMy {
      * <code>optional float frozen_balance = 3;</code>
      *
      * <pre>
-     *冻结额度 
+     *冻结额度
      * </pre>
      */
     public float getFrozenBalance() {
@@ -4729,7 +4729,7 @@ public final class CsMy {
        * <code>optional float frozen_balance = 3;</code>
        *
        * <pre>
-       *冻结额度 
+       *冻结额度
        * </pre>
        */
       public boolean hasFrozenBalance() {
@@ -4739,7 +4739,7 @@ public final class CsMy {
        * <code>optional float frozen_balance = 3;</code>
        *
        * <pre>
-       *冻结额度 
+       *冻结额度
        * </pre>
        */
       public float getFrozenBalance() {
@@ -4749,7 +4749,7 @@ public final class CsMy {
        * <code>optional float frozen_balance = 3;</code>
        *
        * <pre>
-       *冻结额度 
+       *冻结额度
        * </pre>
        */
       public Builder setFrozenBalance(float value) {
@@ -4762,7 +4762,7 @@ public final class CsMy {
        * <code>optional float frozen_balance = 3;</code>
        *
        * <pre>
-       *冻结额度 
+       *冻结额度
        * </pre>
        */
       public Builder clearFrozenBalance() {
@@ -6466,6 +6466,11860 @@ public final class CsMy {
     // @@protoc_insertion_point(class_scope:fksproto.CreditsWithdrawResponse)
   }
 
+  public interface DoShareBagRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.DoShareBagRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    boolean hasUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder();
+
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    boolean hasParcelid();
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    int getParcelid();
+
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+
+    /**
+     * <code>optional int32 qty_split = 5;</code>
+     */
+    boolean hasQtySplit();
+    /**
+     * <code>optional int32 qty_split = 5;</code>
+     */
+    int getQtySplit();
+
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    boolean hasMessage();
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getMessageBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.DoShareBagRequest}
+   */
+  public static final class DoShareBagRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.DoShareBagRequest)
+          DoShareBagRequestOrBuilder {
+    // Use DoShareBagRequest.newBuilder() to construct.
+    private DoShareBagRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private DoShareBagRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final DoShareBagRequest defaultInstance;
+    public static DoShareBagRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public DoShareBagRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DoShareBagRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userHead_.toBuilder();
+              }
+              userHead_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userHead_);
+                userHead_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelid_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localeCode_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              qtySplit_ = input.readInt32();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              message_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_DoShareBagRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_DoShareBagRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.DoShareBagRequest.class, fksproto.CsMy.DoShareBagRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<DoShareBagRequest> PARSER =
+            new com.google.protobuf.AbstractParser<DoShareBagRequest>() {
+              public DoShareBagRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new DoShareBagRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DoShareBagRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USER_HEAD_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userHead_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public boolean hasUserHead() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserHead() {
+      return userHead_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+      return userHead_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelid_;
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public boolean hasParcelid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public int getParcelid() {
+      return parcelid_;
+    }
+
+    public static final int LOCALE_CODE_FIELD_NUMBER = 4;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int QTY_SPLIT_FIELD_NUMBER = 5;
+    private int qtySplit_;
+    /**
+     * <code>optional int32 qty_split = 5;</code>
+     */
+    public boolean hasQtySplit() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 qty_split = 5;</code>
+     */
+    public int getQtySplit() {
+      return qtySplit_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 6;
+    private java.lang.Object message_;
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    public boolean hasMessage() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          message_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string message = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelid_ = 0;
+      localeCode_ = "";
+      qtySplit_ = 0;
+      message_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocaleCodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, qtySplit_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getMessageBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocaleCodeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(5, qtySplit_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(6, getMessageBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.DoShareBagRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.DoShareBagRequest}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.DoShareBagRequest)
+            fksproto.CsMy.DoShareBagRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.DoShareBagRequest.class, fksproto.CsMy.DoShareBagRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.DoShareBagRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        qtySplit_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        message_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagRequest_descriptor;
+      }
+
+      public fksproto.CsMy.DoShareBagRequest getDefaultInstanceForType() {
+        return fksproto.CsMy.DoShareBagRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.DoShareBagRequest build() {
+        fksproto.CsMy.DoShareBagRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.DoShareBagRequest buildPartial() {
+        fksproto.CsMy.DoShareBagRequest result = new fksproto.CsMy.DoShareBagRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userHeadBuilder_ == null) {
+          result.userHead_ = userHead_;
+        } else {
+          result.userHead_ = userHeadBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelid_ = parcelid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localeCode_ = localeCode_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.qtySplit_ = qtySplit_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.message_ = message_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.DoShareBagRequest) {
+          return mergeFrom((fksproto.CsMy.DoShareBagRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.DoShareBagRequest other) {
+        if (other == fksproto.CsMy.DoShareBagRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserHead()) {
+          mergeUserHead(other.getUserHead());
+        }
+        if (other.hasParcelid()) {
+          setParcelid(other.getParcelid());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000008;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        if (other.hasQtySplit()) {
+          setQtySplit(other.getQtySplit());
+        }
+        if (other.hasMessage()) {
+          bitField0_ |= 0x00000020;
+          message_ = other.message_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.DoShareBagRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.DoShareBagRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userHeadBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public boolean hasUserHead() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserHead() {
+        if (userHeadBuilder_ == null) {
+          return userHead_;
+        } else {
+          return userHeadBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userHead_ = value;
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userHeadBuilder_ == null) {
+          userHead_ = builderForValue.build();
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder mergeUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userHead_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userHead_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userHead_).mergeFrom(value).buildPartial();
+          } else {
+            userHead_ = value;
+          }
+          onChanged();
+        } else {
+          userHeadBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder clearUserHead() {
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserHeadBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+        if (userHeadBuilder_ != null) {
+          return userHeadBuilder_.getMessageOrBuilder();
+        } else {
+          return userHead_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserHeadFieldBuilder() {
+        if (userHeadBuilder_ == null) {
+          userHeadBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserHead(),
+                  getParentForChildren(),
+                  isClean());
+          userHead_ = null;
+        }
+        return userHeadBuilder_;
+      }
+
+      private int parcelid_ ;
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public boolean hasParcelid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public int getParcelid() {
+        return parcelid_;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder setParcelid(int value) {
+        bitField0_ |= 0x00000004;
+        parcelid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder clearParcelid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int qtySplit_ ;
+      /**
+       * <code>optional int32 qty_split = 5;</code>
+       */
+      public boolean hasQtySplit() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 qty_split = 5;</code>
+       */
+      public int getQtySplit() {
+        return qtySplit_;
+      }
+      /**
+       * <code>optional int32 qty_split = 5;</code>
+       */
+      public Builder setQtySplit(int value) {
+        bitField0_ |= 0x00000010;
+        qtySplit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 qty_split = 5;</code>
+       */
+      public Builder clearQtySplit() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        qtySplit_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public boolean hasMessage() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+      getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public Builder setMessage(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public Builder clearMessage() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 6;</code>
+       */
+      public Builder setMessageBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.DoShareBagRequest)
+    }
+
+    static {
+      defaultInstance = new DoShareBagRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.DoShareBagRequest)
+  }
+
+  public interface DoShareBagResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.DoShareBagResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    boolean hasMsg();
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    java.lang.String getMsg();
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    com.google.protobuf.ByteString
+    getMsgBytes();
+
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    boolean hasBagUrl();
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    java.lang.String getBagUrl();
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    com.google.protobuf.ByteString
+    getBagUrlBytes();
+
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    boolean hasIconUrl();
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    java.lang.String getIconUrl();
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getIconUrlBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.DoShareBagResponse}
+   */
+  public static final class DoShareBagResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.DoShareBagResponse)
+          DoShareBagResponseOrBuilder {
+    // Use DoShareBagResponse.newBuilder() to construct.
+    private DoShareBagResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private DoShareBagResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final DoShareBagResponse defaultInstance;
+    public static DoShareBagResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public DoShareBagResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DoShareBagResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              msg_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              bagUrl_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              iconUrl_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_DoShareBagResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_DoShareBagResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.DoShareBagResponse.class, fksproto.CsMy.DoShareBagResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<DoShareBagResponse> PARSER =
+            new com.google.protobuf.AbstractParser<DoShareBagResponse>() {
+              public DoShareBagResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new DoShareBagResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DoShareBagResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int MSG_FIELD_NUMBER = 2;
+    private java.lang.Object msg_;
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public boolean hasMsg() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msg = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+    getMsgBytes() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        msg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BAG_URL_FIELD_NUMBER = 3;
+    private java.lang.Object bagUrl_;
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    public boolean hasBagUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    public java.lang.String getBagUrl() {
+      java.lang.Object ref = bagUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          bagUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string bag_url = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+    getBagUrlBytes() {
+      java.lang.Object ref = bagUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        bagUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ICON_URL_FIELD_NUMBER = 4;
+    private java.lang.Object iconUrl_;
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    public boolean hasIconUrl() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    public java.lang.String getIconUrl() {
+      java.lang.Object ref = iconUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          iconUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string icon_url = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getIconUrlBytes() {
+      java.lang.Object ref = iconUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        iconUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      msg_ = "";
+      bagUrl_ = "";
+      iconUrl_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getBagUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getIconUrlBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getBagUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getIconUrlBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.DoShareBagResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.DoShareBagResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.DoShareBagResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.DoShareBagResponse)
+            fksproto.CsMy.DoShareBagResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.DoShareBagResponse.class, fksproto.CsMy.DoShareBagResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.DoShareBagResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        bagUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        iconUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_DoShareBagResponse_descriptor;
+      }
+
+      public fksproto.CsMy.DoShareBagResponse getDefaultInstanceForType() {
+        return fksproto.CsMy.DoShareBagResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.DoShareBagResponse build() {
+        fksproto.CsMy.DoShareBagResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.DoShareBagResponse buildPartial() {
+        fksproto.CsMy.DoShareBagResponse result = new fksproto.CsMy.DoShareBagResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.msg_ = msg_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.bagUrl_ = bagUrl_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.iconUrl_ = iconUrl_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.DoShareBagResponse) {
+          return mergeFrom((fksproto.CsMy.DoShareBagResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.DoShareBagResponse other) {
+        if (other == fksproto.CsMy.DoShareBagResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasMsg()) {
+          bitField0_ |= 0x00000002;
+          msg_ = other.msg_;
+          onChanged();
+        }
+        if (other.hasBagUrl()) {
+          bitField0_ |= 0x00000004;
+          bagUrl_ = other.bagUrl_;
+          onChanged();
+        }
+        if (other.hasIconUrl()) {
+          bitField0_ |= 0x00000008;
+          iconUrl_ = other.iconUrl_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.DoShareBagResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.DoShareBagResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.lang.Object msg_ = "";
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public boolean hasMsg() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            msg_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+      getMsgBytes() {
+        java.lang.Object ref = msg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          msg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder setMsg(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder clearMsg() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        msg_ = getDefaultInstance().getMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 2;</code>
+       */
+      public Builder setMsgBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object bagUrl_ = "";
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public boolean hasBagUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public java.lang.String getBagUrl() {
+        java.lang.Object ref = bagUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            bagUrl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+      getBagUrlBytes() {
+        java.lang.Object ref = bagUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          bagUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public Builder setBagUrl(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        bagUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public Builder clearBagUrl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        bagUrl_ = getDefaultInstance().getBagUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string bag_url = 3;</code>
+       */
+      public Builder setBagUrlBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        bagUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object iconUrl_ = "";
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public boolean hasIconUrl() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public java.lang.String getIconUrl() {
+        java.lang.Object ref = iconUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            iconUrl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getIconUrlBytes() {
+        java.lang.Object ref = iconUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          iconUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public Builder setIconUrl(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        iconUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public Builder clearIconUrl() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        iconUrl_ = getDefaultInstance().getIconUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon_url = 4;</code>
+       */
+      public Builder setIconUrlBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        iconUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.DoShareBagResponse)
+    }
+
+    static {
+      defaultInstance = new DoShareBagResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.DoShareBagResponse)
+  }
+
+  public interface InitBagAjaxRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitBagAjaxRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    boolean hasUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder();
+
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    boolean hasParcelid();
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    int getParcelid();
+
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.InitBagAjaxRequest}
+   *
+   * <pre>
+   *福袋弹出
+   * </pre>
+   */
+  public static final class InitBagAjaxRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitBagAjaxRequest)
+          InitBagAjaxRequestOrBuilder {
+    // Use InitBagAjaxRequest.newBuilder() to construct.
+    private InitBagAjaxRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitBagAjaxRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitBagAjaxRequest defaultInstance;
+    public static InitBagAjaxRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitBagAjaxRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitBagAjaxRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userHead_.toBuilder();
+              }
+              userHead_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userHead_);
+                userHead_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelid_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localeCode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_InitBagAjaxRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_InitBagAjaxRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.InitBagAjaxRequest.class, fksproto.CsMy.InitBagAjaxRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitBagAjaxRequest> PARSER =
+            new com.google.protobuf.AbstractParser<InitBagAjaxRequest>() {
+              public InitBagAjaxRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitBagAjaxRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitBagAjaxRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USER_HEAD_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userHead_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public boolean hasUserHead() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserHead() {
+      return userHead_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+      return userHead_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelid_;
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public boolean hasParcelid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public int getParcelid() {
+      return parcelid_;
+    }
+
+    public static final int LOCALE_CODE_FIELD_NUMBER = 4;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelid_ = 0;
+      localeCode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocaleCodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocaleCodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.InitBagAjaxRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitBagAjaxRequest}
+     *
+     * <pre>
+     *福袋弹出
+     * </pre>
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitBagAjaxRequest)
+            fksproto.CsMy.InitBagAjaxRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.InitBagAjaxRequest.class, fksproto.CsMy.InitBagAjaxRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.InitBagAjaxRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxRequest_descriptor;
+      }
+
+      public fksproto.CsMy.InitBagAjaxRequest getDefaultInstanceForType() {
+        return fksproto.CsMy.InitBagAjaxRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.InitBagAjaxRequest build() {
+        fksproto.CsMy.InitBagAjaxRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.InitBagAjaxRequest buildPartial() {
+        fksproto.CsMy.InitBagAjaxRequest result = new fksproto.CsMy.InitBagAjaxRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userHeadBuilder_ == null) {
+          result.userHead_ = userHead_;
+        } else {
+          result.userHead_ = userHeadBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelid_ = parcelid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localeCode_ = localeCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.InitBagAjaxRequest) {
+          return mergeFrom((fksproto.CsMy.InitBagAjaxRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.InitBagAjaxRequest other) {
+        if (other == fksproto.CsMy.InitBagAjaxRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserHead()) {
+          mergeUserHead(other.getUserHead());
+        }
+        if (other.hasParcelid()) {
+          setParcelid(other.getParcelid());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000008;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.InitBagAjaxRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.InitBagAjaxRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userHeadBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public boolean hasUserHead() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserHead() {
+        if (userHeadBuilder_ == null) {
+          return userHead_;
+        } else {
+          return userHeadBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userHead_ = value;
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userHeadBuilder_ == null) {
+          userHead_ = builderForValue.build();
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder mergeUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userHead_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userHead_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userHead_).mergeFrom(value).buildPartial();
+          } else {
+            userHead_ = value;
+          }
+          onChanged();
+        } else {
+          userHeadBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder clearUserHead() {
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserHeadBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+        if (userHeadBuilder_ != null) {
+          return userHeadBuilder_.getMessageOrBuilder();
+        } else {
+          return userHead_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserHeadFieldBuilder() {
+        if (userHeadBuilder_ == null) {
+          userHeadBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserHead(),
+                  getParentForChildren(),
+                  isClean());
+          userHead_ = null;
+        }
+        return userHeadBuilder_;
+      }
+
+      private int parcelid_ ;
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public boolean hasParcelid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public int getParcelid() {
+        return parcelid_;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder setParcelid(int value) {
+        bitField0_ |= 0x00000004;
+        parcelid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder clearParcelid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitBagAjaxRequest)
+    }
+
+    static {
+      defaultInstance = new InitBagAjaxRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitBagAjaxRequest)
+  }
+
+  public interface InitBagAjaxResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitBagAjaxResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    boolean hasIcon();
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    java.lang.String getIcon();
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    com.google.protobuf.ByteString
+    getIconBytes();
+
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    boolean hasNickname();
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    java.lang.String getNickname();
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    com.google.protobuf.ByteString
+    getNicknameBytes();
+
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    boolean hasMessage();
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getMessageBytes();
+
+    /**
+     * <code>optional int32 flag = 5;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    boolean hasFlag();
+    /**
+     * <code>optional int32 flag = 5;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    int getFlag();
+  }
+  /**
+   * Protobuf type {@code fksproto.InitBagAjaxResponse}
+   */
+  public static final class InitBagAjaxResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitBagAjaxResponse)
+          InitBagAjaxResponseOrBuilder {
+    // Use InitBagAjaxResponse.newBuilder() to construct.
+    private InitBagAjaxResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitBagAjaxResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitBagAjaxResponse defaultInstance;
+    public static InitBagAjaxResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitBagAjaxResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitBagAjaxResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              icon_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              nickname_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              message_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              flag_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_InitBagAjaxResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_InitBagAjaxResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.InitBagAjaxResponse.class, fksproto.CsMy.InitBagAjaxResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitBagAjaxResponse> PARSER =
+            new com.google.protobuf.AbstractParser<InitBagAjaxResponse>() {
+              public InitBagAjaxResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitBagAjaxResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitBagAjaxResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int ICON_FIELD_NUMBER = 2;
+    private java.lang.Object icon_;
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public boolean hasIcon() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public java.lang.String getIcon() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icon_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+    getIconBytes() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        icon_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NICKNAME_FIELD_NUMBER = 3;
+    private java.lang.Object nickname_;
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public boolean hasNickname() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public java.lang.String getNickname() {
+      java.lang.Object ref = nickname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nickname_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+    getNicknameBytes() {
+      java.lang.Object ref = nickname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        nickname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 4;
+    private java.lang.Object message_;
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    public boolean hasMessage() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          message_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string message = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FLAG_FIELD_NUMBER = 5;
+    private int flag_;
+    /**
+     * <code>optional int32 flag = 5;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    public boolean hasFlag() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 flag = 5;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    public int getFlag() {
+      return flag_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      icon_ = "";
+      nickname_ = "";
+      message_ = "";
+      flag_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getIconBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNicknameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, flag_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getIconBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getNicknameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(5, flag_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitBagAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.InitBagAjaxResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitBagAjaxResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitBagAjaxResponse)
+            fksproto.CsMy.InitBagAjaxResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.InitBagAjaxResponse.class, fksproto.CsMy.InitBagAjaxResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.InitBagAjaxResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        icon_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nickname_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        message_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        flag_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_InitBagAjaxResponse_descriptor;
+      }
+
+      public fksproto.CsMy.InitBagAjaxResponse getDefaultInstanceForType() {
+        return fksproto.CsMy.InitBagAjaxResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.InitBagAjaxResponse build() {
+        fksproto.CsMy.InitBagAjaxResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.InitBagAjaxResponse buildPartial() {
+        fksproto.CsMy.InitBagAjaxResponse result = new fksproto.CsMy.InitBagAjaxResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.icon_ = icon_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.nickname_ = nickname_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.message_ = message_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.flag_ = flag_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.InitBagAjaxResponse) {
+          return mergeFrom((fksproto.CsMy.InitBagAjaxResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.InitBagAjaxResponse other) {
+        if (other == fksproto.CsMy.InitBagAjaxResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasIcon()) {
+          bitField0_ |= 0x00000002;
+          icon_ = other.icon_;
+          onChanged();
+        }
+        if (other.hasNickname()) {
+          bitField0_ |= 0x00000004;
+          nickname_ = other.nickname_;
+          onChanged();
+        }
+        if (other.hasMessage()) {
+          bitField0_ |= 0x00000008;
+          message_ = other.message_;
+          onChanged();
+        }
+        if (other.hasFlag()) {
+          setFlag(other.getFlag());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.InitBagAjaxResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.InitBagAjaxResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.lang.Object icon_ = "";
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public boolean hasIcon() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public java.lang.String getIcon() {
+        java.lang.Object ref = icon_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icon_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+      getIconBytes() {
+        java.lang.Object ref = icon_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          icon_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder setIcon(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        icon_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder clearIcon() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        icon_ = getDefaultInstance().getIcon();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder setIconBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        icon_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nickname_ = "";
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public boolean hasNickname() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public java.lang.String getNickname() {
+        java.lang.Object ref = nickname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nickname_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+      getNicknameBytes() {
+        java.lang.Object ref = nickname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          nickname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder setNickname(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        nickname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder clearNickname() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nickname_ = getDefaultInstance().getNickname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder setNicknameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        nickname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public boolean hasMessage() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public Builder setMessage(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public Builder clearMessage() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       */
+      public Builder setMessageBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int flag_ ;
+      /**
+       * <code>optional int32 flag = 5;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public boolean hasFlag() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 flag = 5;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public int getFlag() {
+        return flag_;
+      }
+      /**
+       * <code>optional int32 flag = 5;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public Builder setFlag(int value) {
+        bitField0_ |= 0x00000010;
+        flag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 flag = 5;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public Builder clearFlag() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        flag_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitBagAjaxResponse)
+    }
+
+    static {
+      defaultInstance = new InitBagAjaxResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitBagAjaxResponse)
+  }
+
+  public interface salesOrderItemOfBagOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.salesOrderItemOfBag)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    boolean hasCaption();
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    java.lang.String getCaption();
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getCaptionBytes();
+
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    boolean hasImagePath();
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    java.lang.String getImagePath();
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getImagePathBytes();
+
+    /**
+     * <code>required int32 qty = 3;</code>
+     *
+     * <pre>
+     *宝贝数
+     * </pre>
+     */
+    boolean hasQty();
+    /**
+     * <code>required int32 qty = 3;</code>
+     *
+     * <pre>
+     *宝贝数
+     * </pre>
+     */
+    int getQty();
+  }
+  /**
+   * Protobuf type {@code fksproto.salesOrderItemOfBag}
+   */
+  public static final class salesOrderItemOfBag extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.salesOrderItemOfBag)
+          salesOrderItemOfBagOrBuilder {
+    // Use salesOrderItemOfBag.newBuilder() to construct.
+    private salesOrderItemOfBag(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private salesOrderItemOfBag(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final salesOrderItemOfBag defaultInstance;
+    public static salesOrderItemOfBag getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public salesOrderItemOfBag getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private salesOrderItemOfBag(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              caption_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              imagePath_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              qty_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_salesOrderItemOfBag_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_salesOrderItemOfBag_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.salesOrderItemOfBag.class, fksproto.CsMy.salesOrderItemOfBag.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<salesOrderItemOfBag> PARSER =
+            new com.google.protobuf.AbstractParser<salesOrderItemOfBag>() {
+              public salesOrderItemOfBag parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new salesOrderItemOfBag(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<salesOrderItemOfBag> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int CAPTION_FIELD_NUMBER = 1;
+    private java.lang.Object caption_;
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    public boolean hasCaption() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    public java.lang.String getCaption() {
+      java.lang.Object ref = caption_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          caption_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string caption = 1;</code>
+     *
+     * <pre>
+     *描述
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getCaptionBytes() {
+      java.lang.Object ref = caption_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        caption_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IMAGEPATH_FIELD_NUMBER = 2;
+    private java.lang.Object imagePath_;
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    public boolean hasImagePath() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    public java.lang.String getImagePath() {
+      java.lang.Object ref = imagePath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          imagePath_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string imagePath = 2;</code>
+     *
+     * <pre>
+     *宝贝图像
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getImagePathBytes() {
+      java.lang.Object ref = imagePath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        imagePath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int QTY_FIELD_NUMBER = 3;
+    private int qty_;
+    /**
+     * <code>required int32 qty = 3;</code>
+     *
+     * <pre>
+     *宝贝数
+     * </pre>
+     */
+    public boolean hasQty() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 qty = 3;</code>
+     *
+     * <pre>
+     *宝贝数
+     * </pre>
+     */
+    public int getQty() {
+      return qty_;
+    }
+
+    private void initFields() {
+      caption_ = "";
+      imagePath_ = "";
+      qty_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasCaption()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasImagePath()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasQty()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCaptionBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getImagePathBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, qty_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(1, getCaptionBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getImagePathBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, qty_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.salesOrderItemOfBag parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.salesOrderItemOfBag prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.salesOrderItemOfBag}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.salesOrderItemOfBag)
+            fksproto.CsMy.salesOrderItemOfBagOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_salesOrderItemOfBag_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_salesOrderItemOfBag_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.salesOrderItemOfBag.class, fksproto.CsMy.salesOrderItemOfBag.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.salesOrderItemOfBag.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        caption_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        imagePath_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        qty_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_salesOrderItemOfBag_descriptor;
+      }
+
+      public fksproto.CsMy.salesOrderItemOfBag getDefaultInstanceForType() {
+        return fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.salesOrderItemOfBag build() {
+        fksproto.CsMy.salesOrderItemOfBag result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.salesOrderItemOfBag buildPartial() {
+        fksproto.CsMy.salesOrderItemOfBag result = new fksproto.CsMy.salesOrderItemOfBag(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.caption_ = caption_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.imagePath_ = imagePath_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.qty_ = qty_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.salesOrderItemOfBag) {
+          return mergeFrom((fksproto.CsMy.salesOrderItemOfBag)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.salesOrderItemOfBag other) {
+        if (other == fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance()) return this;
+        if (other.hasCaption()) {
+          bitField0_ |= 0x00000001;
+          caption_ = other.caption_;
+          onChanged();
+        }
+        if (other.hasImagePath()) {
+          bitField0_ |= 0x00000002;
+          imagePath_ = other.imagePath_;
+          onChanged();
+        }
+        if (other.hasQty()) {
+          setQty(other.getQty());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasCaption()) {
+
+          return false;
+        }
+        if (!hasImagePath()) {
+
+          return false;
+        }
+        if (!hasQty()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.salesOrderItemOfBag parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.salesOrderItemOfBag) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object caption_ = "";
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public boolean hasCaption() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public java.lang.String getCaption() {
+        java.lang.Object ref = caption_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            caption_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getCaptionBytes() {
+        java.lang.Object ref = caption_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          caption_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public Builder setCaption(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        caption_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public Builder clearCaption() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        caption_ = getDefaultInstance().getCaption();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string caption = 1;</code>
+       *
+       * <pre>
+       *描述
+       * </pre>
+       */
+      public Builder setCaptionBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        caption_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object imagePath_ = "";
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public boolean hasImagePath() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public java.lang.String getImagePath() {
+        java.lang.Object ref = imagePath_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imagePath_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getImagePathBytes() {
+        java.lang.Object ref = imagePath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          imagePath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public Builder setImagePath(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        imagePath_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public Builder clearImagePath() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        imagePath_ = getDefaultInstance().getImagePath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string imagePath = 2;</code>
+       *
+       * <pre>
+       *宝贝图像
+       * </pre>
+       */
+      public Builder setImagePathBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        imagePath_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int qty_ ;
+      /**
+       * <code>required int32 qty = 3;</code>
+       *
+       * <pre>
+       *宝贝数
+       * </pre>
+       */
+      public boolean hasQty() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 qty = 3;</code>
+       *
+       * <pre>
+       *宝贝数
+       * </pre>
+       */
+      public int getQty() {
+        return qty_;
+      }
+      /**
+       * <code>required int32 qty = 3;</code>
+       *
+       * <pre>
+       *宝贝数
+       * </pre>
+       */
+      public Builder setQty(int value) {
+        bitField0_ |= 0x00000004;
+        qty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 qty = 3;</code>
+       *
+       * <pre>
+       *宝贝数
+       * </pre>
+       */
+      public Builder clearQty() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        qty_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.salesOrderItemOfBag)
+    }
+
+    static {
+      defaultInstance = new salesOrderItemOfBag(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.salesOrderItemOfBag)
+  }
+
+  public interface ParcelOfBagOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.ParcelOfBag)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    java.util.List<fksproto.CsMy.salesOrderItemOfBag>
+    getItemsParcelList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    fksproto.CsMy.salesOrderItemOfBag getItemsParcel(int index);
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    int getItemsParcelCount();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsParcelOrBuilderList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsParcelOrBuilder(
+            int index);
+
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    boolean hasIcon();
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    java.lang.String getIcon();
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    com.google.protobuf.ByteString
+    getIconBytes();
+
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    boolean hasNickname();
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    java.lang.String getNickname();
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    com.google.protobuf.ByteString
+    getNicknameBytes();
+
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    boolean hasGrabTime();
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    java.lang.String getGrabTime();
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getGrabTimeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.ParcelOfBag}
+   */
+  public static final class ParcelOfBag extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.ParcelOfBag)
+          ParcelOfBagOrBuilder {
+    // Use ParcelOfBag.newBuilder() to construct.
+    private ParcelOfBag(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ParcelOfBag(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ParcelOfBag defaultInstance;
+    public static ParcelOfBag getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ParcelOfBag getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ParcelOfBag(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                itemsParcel_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              itemsParcel_.add(input.readMessage(fksproto.CsMy.salesOrderItemOfBag.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              icon_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              nickname_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              grabTime_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          itemsParcel_ = java.util.Collections.unmodifiableList(itemsParcel_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_ParcelOfBag_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_ParcelOfBag_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.ParcelOfBag.class, fksproto.CsMy.ParcelOfBag.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ParcelOfBag> PARSER =
+            new com.google.protobuf.AbstractParser<ParcelOfBag>() {
+              public ParcelOfBag parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ParcelOfBag(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ParcelOfBag> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int ITEMS_PARCEL_FIELD_NUMBER = 1;
+    private java.util.List<fksproto.CsMy.salesOrderItemOfBag> itemsParcel_;
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsParcelList() {
+      return itemsParcel_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsParcelOrBuilderList() {
+      return itemsParcel_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    public int getItemsParcelCount() {
+      return itemsParcel_.size();
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    public fksproto.CsMy.salesOrderItemOfBag getItemsParcel(int index) {
+      return itemsParcel_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+     */
+    public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsParcelOrBuilder(
+            int index) {
+      return itemsParcel_.get(index);
+    }
+
+    public static final int ICON_FIELD_NUMBER = 2;
+    private java.lang.Object icon_;
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public boolean hasIcon() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public java.lang.String getIcon() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icon_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string icon = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+    getIconBytes() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        icon_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NICKNAME_FIELD_NUMBER = 3;
+    private java.lang.Object nickname_;
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public boolean hasNickname() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public java.lang.String getNickname() {
+      java.lang.Object ref = nickname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nickname_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string nickname = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+    getNicknameBytes() {
+      java.lang.Object ref = nickname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        nickname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GRAB_TIME_FIELD_NUMBER = 4;
+    private java.lang.Object grabTime_;
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    public boolean hasGrabTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    public java.lang.String getGrabTime() {
+      java.lang.Object ref = grabTime_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          grabTime_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string grab_time = 4;</code>
+     *
+     * <pre>
+     *抢袋时间
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getGrabTimeBytes() {
+      java.lang.Object ref = grabTime_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        grabTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      itemsParcel_ = java.util.Collections.emptyList();
+      icon_ = "";
+      nickname_ = "";
+      grabTime_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getItemsParcelCount(); i++) {
+        if (!getItemsParcel(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < itemsParcel_.size(); i++) {
+        output.writeMessage(1, itemsParcel_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(2, getIconBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(3, getNicknameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(4, getGrabTimeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < itemsParcel_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, itemsParcel_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(2, getIconBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(3, getNicknameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getGrabTimeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.ParcelOfBag parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.ParcelOfBag prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.ParcelOfBag}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.ParcelOfBag)
+            fksproto.CsMy.ParcelOfBagOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_ParcelOfBag_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_ParcelOfBag_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.ParcelOfBag.class, fksproto.CsMy.ParcelOfBag.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.ParcelOfBag.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getItemsParcelFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (itemsParcelBuilder_ == null) {
+          itemsParcel_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          itemsParcelBuilder_.clear();
+        }
+        icon_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nickname_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        grabTime_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_ParcelOfBag_descriptor;
+      }
+
+      public fksproto.CsMy.ParcelOfBag getDefaultInstanceForType() {
+        return fksproto.CsMy.ParcelOfBag.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.ParcelOfBag build() {
+        fksproto.CsMy.ParcelOfBag result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.ParcelOfBag buildPartial() {
+        fksproto.CsMy.ParcelOfBag result = new fksproto.CsMy.ParcelOfBag(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (itemsParcelBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            itemsParcel_ = java.util.Collections.unmodifiableList(itemsParcel_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.itemsParcel_ = itemsParcel_;
+        } else {
+          result.itemsParcel_ = itemsParcelBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.icon_ = icon_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.nickname_ = nickname_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.grabTime_ = grabTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.ParcelOfBag) {
+          return mergeFrom((fksproto.CsMy.ParcelOfBag)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.ParcelOfBag other) {
+        if (other == fksproto.CsMy.ParcelOfBag.getDefaultInstance()) return this;
+        if (itemsParcelBuilder_ == null) {
+          if (!other.itemsParcel_.isEmpty()) {
+            if (itemsParcel_.isEmpty()) {
+              itemsParcel_ = other.itemsParcel_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureItemsParcelIsMutable();
+              itemsParcel_.addAll(other.itemsParcel_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.itemsParcel_.isEmpty()) {
+            if (itemsParcelBuilder_.isEmpty()) {
+              itemsParcelBuilder_.dispose();
+              itemsParcelBuilder_ = null;
+              itemsParcel_ = other.itemsParcel_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              itemsParcelBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getItemsParcelFieldBuilder() : null;
+            } else {
+              itemsParcelBuilder_.addAllMessages(other.itemsParcel_);
+            }
+          }
+        }
+        if (other.hasIcon()) {
+          bitField0_ |= 0x00000002;
+          icon_ = other.icon_;
+          onChanged();
+        }
+        if (other.hasNickname()) {
+          bitField0_ |= 0x00000004;
+          nickname_ = other.nickname_;
+          onChanged();
+        }
+        if (other.hasGrabTime()) {
+          bitField0_ |= 0x00000008;
+          grabTime_ = other.grabTime_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getItemsParcelCount(); i++) {
+          if (!getItemsParcel(i).isInitialized()) {
+
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.ParcelOfBag parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.ParcelOfBag) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<fksproto.CsMy.salesOrderItemOfBag> itemsParcel_ =
+              java.util.Collections.emptyList();
+      private void ensureItemsParcelIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          itemsParcel_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>(itemsParcel_);
+          bitField0_ |= 0x00000001;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder> itemsParcelBuilder_;
+
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsParcelList() {
+        if (itemsParcelBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(itemsParcel_);
+        } else {
+          return itemsParcelBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public int getItemsParcelCount() {
+        if (itemsParcelBuilder_ == null) {
+          return itemsParcel_.size();
+        } else {
+          return itemsParcelBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag getItemsParcel(int index) {
+        if (itemsParcelBuilder_ == null) {
+          return itemsParcel_.get(index);
+        } else {
+          return itemsParcelBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder setItemsParcel(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsParcelBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsParcelIsMutable();
+          itemsParcel_.set(index, value);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder setItemsParcel(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsParcelBuilder_ == null) {
+          ensureItemsParcelIsMutable();
+          itemsParcel_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsParcelBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder addItemsParcel(fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsParcelBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsParcelIsMutable();
+          itemsParcel_.add(value);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder addItemsParcel(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsParcelBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsParcelIsMutable();
+          itemsParcel_.add(index, value);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder addItemsParcel(
+              fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsParcelBuilder_ == null) {
+          ensureItemsParcelIsMutable();
+          itemsParcel_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsParcelBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder addItemsParcel(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsParcelBuilder_ == null) {
+          ensureItemsParcelIsMutable();
+          itemsParcel_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsParcelBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder addAllItemsParcel(
+              java.lang.Iterable<? extends fksproto.CsMy.salesOrderItemOfBag> values) {
+        if (itemsParcelBuilder_ == null) {
+          ensureItemsParcelIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, itemsParcel_);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder clearItemsParcel() {
+        if (itemsParcelBuilder_ == null) {
+          itemsParcel_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public Builder removeItemsParcel(int index) {
+        if (itemsParcelBuilder_ == null) {
+          ensureItemsParcelIsMutable();
+          itemsParcel_.remove(index);
+          onChanged();
+        } else {
+          itemsParcelBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder getItemsParcelBuilder(
+              int index) {
+        return getItemsParcelFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsParcelOrBuilder(
+              int index) {
+        if (itemsParcelBuilder_ == null) {
+          return itemsParcel_.get(index);  } else {
+          return itemsParcelBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsParcelOrBuilderList() {
+        if (itemsParcelBuilder_ != null) {
+          return itemsParcelBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(itemsParcel_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsParcelBuilder() {
+        return getItemsParcelFieldBuilder().addBuilder(
+                fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsParcelBuilder(
+              int index) {
+        return getItemsParcelFieldBuilder().addBuilder(
+                index, fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items_parcel = 1;</code>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag.Builder>
+      getItemsParcelBuilderList() {
+        return getItemsParcelFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsParcelFieldBuilder() {
+        if (itemsParcelBuilder_ == null) {
+          itemsParcelBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>(
+                  itemsParcel_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          itemsParcel_ = null;
+        }
+        return itemsParcelBuilder_;
+      }
+
+      private java.lang.Object icon_ = "";
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public boolean hasIcon() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public java.lang.String getIcon() {
+        java.lang.Object ref = icon_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icon_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+      getIconBytes() {
+        java.lang.Object ref = icon_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          icon_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder setIcon(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        icon_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder clearIcon() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        icon_ = getDefaultInstance().getIcon();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 2;</code>
+       */
+      public Builder setIconBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        icon_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nickname_ = "";
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public boolean hasNickname() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public java.lang.String getNickname() {
+        java.lang.Object ref = nickname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nickname_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+      getNicknameBytes() {
+        java.lang.Object ref = nickname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          nickname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder setNickname(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        nickname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder clearNickname() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nickname_ = getDefaultInstance().getNickname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string nickname = 3;</code>
+       */
+      public Builder setNicknameBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        nickname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object grabTime_ = "";
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public boolean hasGrabTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public java.lang.String getGrabTime() {
+        java.lang.Object ref = grabTime_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            grabTime_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getGrabTimeBytes() {
+        java.lang.Object ref = grabTime_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          grabTime_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public Builder setGrabTime(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        grabTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public Builder clearGrabTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        grabTime_ = getDefaultInstance().getGrabTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string grab_time = 4;</code>
+       *
+       * <pre>
+       *抢袋时间
+       * </pre>
+       */
+      public Builder setGrabTimeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        grabTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.ParcelOfBag)
+    }
+
+    static {
+      defaultInstance = new ParcelOfBag(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.ParcelOfBag)
+  }
+
+  public interface BagInfoAjaxRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.BagInfoAjaxRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    boolean hasUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder();
+
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    boolean hasParcelid();
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    int getParcelid();
+
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.BagInfoAjaxRequest}
+   */
+  public static final class BagInfoAjaxRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.BagInfoAjaxRequest)
+          BagInfoAjaxRequestOrBuilder {
+    // Use BagInfoAjaxRequest.newBuilder() to construct.
+    private BagInfoAjaxRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BagInfoAjaxRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BagInfoAjaxRequest defaultInstance;
+    public static BagInfoAjaxRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BagInfoAjaxRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BagInfoAjaxRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userHead_.toBuilder();
+              }
+              userHead_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userHead_);
+                userHead_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelid_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localeCode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.BagInfoAjaxRequest.class, fksproto.CsMy.BagInfoAjaxRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BagInfoAjaxRequest> PARSER =
+            new com.google.protobuf.AbstractParser<BagInfoAjaxRequest>() {
+              public BagInfoAjaxRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new BagInfoAjaxRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BagInfoAjaxRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USER_HEAD_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userHead_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public boolean hasUserHead() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserHead() {
+      return userHead_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+      return userHead_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelid_;
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public boolean hasParcelid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelid = 3;</code>
+     */
+    public int getParcelid() {
+      return parcelid_;
+    }
+
+    public static final int LOCALE_CODE_FIELD_NUMBER = 4;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string locale_code = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelid_ = 0;
+      localeCode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocaleCodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelid_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocaleCodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.BagInfoAjaxRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.BagInfoAjaxRequest}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.BagInfoAjaxRequest)
+            fksproto.CsMy.BagInfoAjaxRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.BagInfoAjaxRequest.class, fksproto.CsMy.BagInfoAjaxRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.BagInfoAjaxRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxRequest_descriptor;
+      }
+
+      public fksproto.CsMy.BagInfoAjaxRequest getDefaultInstanceForType() {
+        return fksproto.CsMy.BagInfoAjaxRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.BagInfoAjaxRequest build() {
+        fksproto.CsMy.BagInfoAjaxRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.BagInfoAjaxRequest buildPartial() {
+        fksproto.CsMy.BagInfoAjaxRequest result = new fksproto.CsMy.BagInfoAjaxRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userHeadBuilder_ == null) {
+          result.userHead_ = userHead_;
+        } else {
+          result.userHead_ = userHeadBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelid_ = parcelid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localeCode_ = localeCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.BagInfoAjaxRequest) {
+          return mergeFrom((fksproto.CsMy.BagInfoAjaxRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.BagInfoAjaxRequest other) {
+        if (other == fksproto.CsMy.BagInfoAjaxRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserHead()) {
+          mergeUserHead(other.getUserHead());
+        }
+        if (other.hasParcelid()) {
+          setParcelid(other.getParcelid());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000008;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.BagInfoAjaxRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.BagInfoAjaxRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userHeadBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public boolean hasUserHead() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserHead() {
+        if (userHeadBuilder_ == null) {
+          return userHead_;
+        } else {
+          return userHeadBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userHead_ = value;
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userHeadBuilder_ == null) {
+          userHead_ = builderForValue.build();
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder mergeUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userHead_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userHead_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userHead_).mergeFrom(value).buildPartial();
+          } else {
+            userHead_ = value;
+          }
+          onChanged();
+        } else {
+          userHeadBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder clearUserHead() {
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserHeadBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+        if (userHeadBuilder_ != null) {
+          return userHeadBuilder_.getMessageOrBuilder();
+        } else {
+          return userHead_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserHeadFieldBuilder() {
+        if (userHeadBuilder_ == null) {
+          userHeadBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserHead(),
+                  getParentForChildren(),
+                  isClean());
+          userHead_ = null;
+        }
+        return userHeadBuilder_;
+      }
+
+      private int parcelid_ ;
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public boolean hasParcelid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public int getParcelid() {
+        return parcelid_;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder setParcelid(int value) {
+        bitField0_ |= 0x00000004;
+        parcelid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelid = 3;</code>
+       */
+      public Builder clearParcelid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string locale_code = 4;</code>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.BagInfoAjaxRequest)
+    }
+
+    static {
+      defaultInstance = new BagInfoAjaxRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.BagInfoAjaxRequest)
+  }
+
+  public interface BagInfoAjaxResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.BagInfoAjaxResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    java.util.List<fksproto.CsMy.ParcelOfBag>
+    getParcesList();
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    fksproto.CsMy.ParcelOfBag getParces(int index);
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    int getParcesCount();
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    java.util.List<? extends fksproto.CsMy.ParcelOfBagOrBuilder>
+    getParcesOrBuilderList();
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    fksproto.CsMy.ParcelOfBagOrBuilder getParcesOrBuilder(
+            int index);
+
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    java.util.List<fksproto.CsMy.salesOrderItemOfBag>
+    getItemsList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    fksproto.CsMy.salesOrderItemOfBag getItems(int index);
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    int getItemsCount();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsOrBuilderList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+            int index);
+
+    /**
+     * <code>optional int32 qty = 4;</code>
+     *
+     * <pre>
+     *领到的宝贝数
+     * </pre>
+     */
+    boolean hasQty();
+    /**
+     * <code>optional int32 qty = 4;</code>
+     *
+     * <pre>
+     *领到的宝贝数
+     * </pre>
+     */
+    int getQty();
+
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    boolean hasMessage();
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getMessageBytes();
+
+    /**
+     * <code>optional int32 flag = 6;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    boolean hasFlag();
+    /**
+     * <code>optional int32 flag = 6;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    int getFlag();
+
+    /**
+     * <code>optional int32 isGrab = 7;</code>
+     *
+     * <pre>
+     *0:福袋派完了  1:还有福袋
+     * </pre>
+     */
+    boolean hasIsGrab();
+    /**
+     * <code>optional int32 isGrab = 7;</code>
+     *
+     * <pre>
+     *0:福袋派完了  1:还有福袋
+     * </pre>
+     */
+    int getIsGrab();
+
+    /**
+     * <code>optional int32 bagStatus = 8;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    boolean hasBagStatus();
+    /**
+     * <code>optional int32 bagStatus = 8;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    int getBagStatus();
+  }
+  /**
+   * Protobuf type {@code fksproto.BagInfoAjaxResponse}
+   */
+  public static final class BagInfoAjaxResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.BagInfoAjaxResponse)
+          BagInfoAjaxResponseOrBuilder {
+    // Use BagInfoAjaxResponse.newBuilder() to construct.
+    private BagInfoAjaxResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BagInfoAjaxResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BagInfoAjaxResponse defaultInstance;
+    public static BagInfoAjaxResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BagInfoAjaxResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BagInfoAjaxResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                parces_ = new java.util.ArrayList<fksproto.CsMy.ParcelOfBag>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              parces_.add(input.readMessage(fksproto.CsMy.ParcelOfBag.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                items_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              items_.add(input.readMessage(fksproto.CsMy.salesOrderItemOfBag.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              qty_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              message_ = bs;
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000008;
+              flag_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              isGrab_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000020;
+              bagStatus_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          parces_ = java.util.Collections.unmodifiableList(parces_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          items_ = java.util.Collections.unmodifiableList(items_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.BagInfoAjaxResponse.class, fksproto.CsMy.BagInfoAjaxResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BagInfoAjaxResponse> PARSER =
+            new com.google.protobuf.AbstractParser<BagInfoAjaxResponse>() {
+              public BagInfoAjaxResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new BagInfoAjaxResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BagInfoAjaxResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int PARCES_FIELD_NUMBER = 2;
+    private java.util.List<fksproto.CsMy.ParcelOfBag> parces_;
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    public java.util.List<fksproto.CsMy.ParcelOfBag> getParcesList() {
+      return parces_;
+    }
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    public java.util.List<? extends fksproto.CsMy.ParcelOfBagOrBuilder>
+    getParcesOrBuilderList() {
+      return parces_;
+    }
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    public int getParcesCount() {
+      return parces_.size();
+    }
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    public fksproto.CsMy.ParcelOfBag getParces(int index) {
+      return parces_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+     */
+    public fksproto.CsMy.ParcelOfBagOrBuilder getParcesOrBuilder(
+            int index) {
+      return parces_.get(index);
+    }
+
+    public static final int ITEMS_FIELD_NUMBER = 3;
+    private java.util.List<fksproto.CsMy.salesOrderItemOfBag> items_;
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsList() {
+      return items_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsOrBuilderList() {
+      return items_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public int getItemsCount() {
+      return items_.size();
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public fksproto.CsMy.salesOrderItemOfBag getItems(int index) {
+      return items_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+            int index) {
+      return items_.get(index);
+    }
+
+    public static final int QTY_FIELD_NUMBER = 4;
+    private int qty_;
+    /**
+     * <code>optional int32 qty = 4;</code>
+     *
+     * <pre>
+     *领到的宝贝数
+     * </pre>
+     */
+    public boolean hasQty() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 qty = 4;</code>
+     *
+     * <pre>
+     *领到的宝贝数
+     * </pre>
+     */
+    public int getQty() {
+      return qty_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 5;
+    private java.lang.Object message_;
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    public boolean hasMessage() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          message_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string message = 5;</code>
+     *
+     * <pre>
+     *提示
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FLAG_FIELD_NUMBER = 6;
+    private int flag_;
+    /**
+     * <code>optional int32 flag = 6;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    public boolean hasFlag() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 flag = 6;</code>
+     *
+     * <pre>
+     *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+     * </pre>
+     */
+    public int getFlag() {
+      return flag_;
+    }
+
+    public static final int ISGRAB_FIELD_NUMBER = 7;
+    private int isGrab_;
+    /**
+     * <code>optional int32 isGrab = 7;</code>
+     *
+     * <pre>
+     *0:福袋派完了  1:还有福袋
+     * </pre>
+     */
+    public boolean hasIsGrab() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 isGrab = 7;</code>
+     *
+     * <pre>
+     *0:福袋派完了  1:还有福袋
+     * </pre>
+     */
+    public int getIsGrab() {
+      return isGrab_;
+    }
+
+    public static final int BAGSTATUS_FIELD_NUMBER = 8;
+    private int bagStatus_;
+    /**
+     * <code>optional int32 bagStatus = 8;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    public boolean hasBagStatus() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 bagStatus = 8;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    public int getBagStatus() {
+      return bagStatus_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      parces_ = java.util.Collections.emptyList();
+      items_ = java.util.Collections.emptyList();
+      qty_ = 0;
+      message_ = "";
+      flag_ = 0;
+      isGrab_ = 0;
+      bagStatus_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getParcesCount(); i++) {
+        if (!getParces(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getItemsCount(); i++) {
+        if (!getItems(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      for (int i = 0; i < parces_.size(); i++) {
+        output.writeMessage(2, parces_.get(i));
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        output.writeMessage(3, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, qty_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(5, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(6, flag_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, isGrab_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(8, bagStatus_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      for (int i = 0; i < parces_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, parces_.get(i));
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(3, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(4, qty_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(5, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(6, flag_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(7, isGrab_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(8, bagStatus_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.BagInfoAjaxResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.BagInfoAjaxResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.BagInfoAjaxResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.BagInfoAjaxResponse)
+            fksproto.CsMy.BagInfoAjaxResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.BagInfoAjaxResponse.class, fksproto.CsMy.BagInfoAjaxResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.BagInfoAjaxResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getParcesFieldBuilder();
+          getItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (parcesBuilder_ == null) {
+          parces_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          parcesBuilder_.clear();
+        }
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          itemsBuilder_.clear();
+        }
+        qty_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        message_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        flag_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        isGrab_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bagStatus_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_BagInfoAjaxResponse_descriptor;
+      }
+
+      public fksproto.CsMy.BagInfoAjaxResponse getDefaultInstanceForType() {
+        return fksproto.CsMy.BagInfoAjaxResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.BagInfoAjaxResponse build() {
+        fksproto.CsMy.BagInfoAjaxResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.BagInfoAjaxResponse buildPartial() {
+        fksproto.CsMy.BagInfoAjaxResponse result = new fksproto.CsMy.BagInfoAjaxResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (parcesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            parces_ = java.util.Collections.unmodifiableList(parces_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.parces_ = parces_;
+        } else {
+          result.parces_ = parcesBuilder_.build();
+        }
+        if (itemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.items_ = items_;
+        } else {
+          result.items_ = itemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.qty_ = qty_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.message_ = message_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.flag_ = flag_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isGrab_ = isGrab_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.bagStatus_ = bagStatus_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.BagInfoAjaxResponse) {
+          return mergeFrom((fksproto.CsMy.BagInfoAjaxResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.BagInfoAjaxResponse other) {
+        if (other == fksproto.CsMy.BagInfoAjaxResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (parcesBuilder_ == null) {
+          if (!other.parces_.isEmpty()) {
+            if (parces_.isEmpty()) {
+              parces_ = other.parces_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureParcesIsMutable();
+              parces_.addAll(other.parces_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.parces_.isEmpty()) {
+            if (parcesBuilder_.isEmpty()) {
+              parcesBuilder_.dispose();
+              parcesBuilder_ = null;
+              parces_ = other.parces_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              parcesBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getParcesFieldBuilder() : null;
+            } else {
+              parcesBuilder_.addAllMessages(other.parces_);
+            }
+          }
+        }
+        if (itemsBuilder_ == null) {
+          if (!other.items_.isEmpty()) {
+            if (items_.isEmpty()) {
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureItemsIsMutable();
+              items_.addAll(other.items_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.items_.isEmpty()) {
+            if (itemsBuilder_.isEmpty()) {
+              itemsBuilder_.dispose();
+              itemsBuilder_ = null;
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              itemsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getItemsFieldBuilder() : null;
+            } else {
+              itemsBuilder_.addAllMessages(other.items_);
+            }
+          }
+        }
+        if (other.hasQty()) {
+          setQty(other.getQty());
+        }
+        if (other.hasMessage()) {
+          bitField0_ |= 0x00000010;
+          message_ = other.message_;
+          onChanged();
+        }
+        if (other.hasFlag()) {
+          setFlag(other.getFlag());
+        }
+        if (other.hasIsGrab()) {
+          setIsGrab(other.getIsGrab());
+        }
+        if (other.hasBagStatus()) {
+          setBagStatus(other.getBagStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        for (int i = 0; i < getParcesCount(); i++) {
+          if (!getParces(i).isInitialized()) {
+
+            return false;
+          }
+        }
+        for (int i = 0; i < getItemsCount(); i++) {
+          if (!getItems(i).isInitialized()) {
+
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.BagInfoAjaxResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.BagInfoAjaxResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.util.List<fksproto.CsMy.ParcelOfBag> parces_ =
+              java.util.Collections.emptyList();
+      private void ensureParcesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          parces_ = new java.util.ArrayList<fksproto.CsMy.ParcelOfBag>(parces_);
+          bitField0_ |= 0x00000002;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.ParcelOfBag, fksproto.CsMy.ParcelOfBag.Builder, fksproto.CsMy.ParcelOfBagOrBuilder> parcesBuilder_;
+
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public java.util.List<fksproto.CsMy.ParcelOfBag> getParcesList() {
+        if (parcesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(parces_);
+        } else {
+          return parcesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public int getParcesCount() {
+        if (parcesBuilder_ == null) {
+          return parces_.size();
+        } else {
+          return parcesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public fksproto.CsMy.ParcelOfBag getParces(int index) {
+        if (parcesBuilder_ == null) {
+          return parces_.get(index);
+        } else {
+          return parcesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder setParces(
+              int index, fksproto.CsMy.ParcelOfBag value) {
+        if (parcesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcesIsMutable();
+          parces_.set(index, value);
+          onChanged();
+        } else {
+          parcesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder setParces(
+              int index, fksproto.CsMy.ParcelOfBag.Builder builderForValue) {
+        if (parcesBuilder_ == null) {
+          ensureParcesIsMutable();
+          parces_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          parcesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder addParces(fksproto.CsMy.ParcelOfBag value) {
+        if (parcesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcesIsMutable();
+          parces_.add(value);
+          onChanged();
+        } else {
+          parcesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder addParces(
+              int index, fksproto.CsMy.ParcelOfBag value) {
+        if (parcesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParcesIsMutable();
+          parces_.add(index, value);
+          onChanged();
+        } else {
+          parcesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder addParces(
+              fksproto.CsMy.ParcelOfBag.Builder builderForValue) {
+        if (parcesBuilder_ == null) {
+          ensureParcesIsMutable();
+          parces_.add(builderForValue.build());
+          onChanged();
+        } else {
+          parcesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder addParces(
+              int index, fksproto.CsMy.ParcelOfBag.Builder builderForValue) {
+        if (parcesBuilder_ == null) {
+          ensureParcesIsMutable();
+          parces_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          parcesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder addAllParces(
+              java.lang.Iterable<? extends fksproto.CsMy.ParcelOfBag> values) {
+        if (parcesBuilder_ == null) {
+          ensureParcesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, parces_);
+          onChanged();
+        } else {
+          parcesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder clearParces() {
+        if (parcesBuilder_ == null) {
+          parces_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          parcesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public Builder removeParces(int index) {
+        if (parcesBuilder_ == null) {
+          ensureParcesIsMutable();
+          parces_.remove(index);
+          onChanged();
+        } else {
+          parcesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public fksproto.CsMy.ParcelOfBag.Builder getParcesBuilder(
+              int index) {
+        return getParcesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public fksproto.CsMy.ParcelOfBagOrBuilder getParcesOrBuilder(
+              int index) {
+        if (parcesBuilder_ == null) {
+          return parces_.get(index);  } else {
+          return parcesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public java.util.List<? extends fksproto.CsMy.ParcelOfBagOrBuilder>
+      getParcesOrBuilderList() {
+        if (parcesBuilder_ != null) {
+          return parcesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(parces_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public fksproto.CsMy.ParcelOfBag.Builder addParcesBuilder() {
+        return getParcesFieldBuilder().addBuilder(
+                fksproto.CsMy.ParcelOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public fksproto.CsMy.ParcelOfBag.Builder addParcesBuilder(
+              int index) {
+        return getParcesFieldBuilder().addBuilder(
+                index, fksproto.CsMy.ParcelOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.ParcelOfBag parces = 2;</code>
+       */
+      public java.util.List<fksproto.CsMy.ParcelOfBag.Builder>
+      getParcesBuilderList() {
+        return getParcesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.ParcelOfBag, fksproto.CsMy.ParcelOfBag.Builder, fksproto.CsMy.ParcelOfBagOrBuilder>
+      getParcesFieldBuilder() {
+        if (parcesBuilder_ == null) {
+          parcesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsMy.ParcelOfBag, fksproto.CsMy.ParcelOfBag.Builder, fksproto.CsMy.ParcelOfBagOrBuilder>(
+                  parces_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          parces_ = null;
+        }
+        return parcesBuilder_;
+      }
+
+      private java.util.List<fksproto.CsMy.salesOrderItemOfBag> items_ =
+              java.util.Collections.emptyList();
+      private void ensureItemsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          items_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>(items_);
+          bitField0_ |= 0x00000004;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder> itemsBuilder_;
+
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsList() {
+        if (itemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(items_);
+        } else {
+          return itemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public int getItemsCount() {
+        if (itemsBuilder_ == null) {
+          return items_.size();
+        } else {
+          return itemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag getItems(int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);
+        } else {
+          return itemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder setItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.set(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder setItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addAllItems(
+              java.lang.Iterable<? extends fksproto.CsMy.salesOrderItemOfBag> values) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, items_);
+          onChanged();
+        } else {
+          itemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder clearItems() {
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder removeItems(int index) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.remove(index);
+          onChanged();
+        } else {
+          itemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder getItemsBuilder(
+              int index) {
+        return getItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+              int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);  } else {
+          return itemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsOrBuilderList() {
+        if (itemsBuilder_ != null) {
+          return itemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(items_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsBuilder() {
+        return getItemsFieldBuilder().addBuilder(
+                fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsBuilder(
+              int index) {
+        return getItemsFieldBuilder().addBuilder(
+                index, fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 3;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag.Builder>
+      getItemsBuilderList() {
+        return getItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsFieldBuilder() {
+        if (itemsBuilder_ == null) {
+          itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>(
+                  items_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          items_ = null;
+        }
+        return itemsBuilder_;
+      }
+
+      private int qty_ ;
+      /**
+       * <code>optional int32 qty = 4;</code>
+       *
+       * <pre>
+       *领到的宝贝数
+       * </pre>
+       */
+      public boolean hasQty() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 qty = 4;</code>
+       *
+       * <pre>
+       *领到的宝贝数
+       * </pre>
+       */
+      public int getQty() {
+        return qty_;
+      }
+      /**
+       * <code>optional int32 qty = 4;</code>
+       *
+       * <pre>
+       *领到的宝贝数
+       * </pre>
+       */
+      public Builder setQty(int value) {
+        bitField0_ |= 0x00000008;
+        qty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 qty = 4;</code>
+       *
+       * <pre>
+       *领到的宝贝数
+       * </pre>
+       */
+      public Builder clearQty() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        qty_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public boolean hasMessage() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public Builder setMessage(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public Builder clearMessage() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 5;</code>
+       *
+       * <pre>
+       *提示
+       * </pre>
+       */
+      public Builder setMessageBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int flag_ ;
+      /**
+       * <code>optional int32 flag = 6;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public boolean hasFlag() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 flag = 6;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public int getFlag() {
+        return flag_;
+      }
+      /**
+       * <code>optional int32 flag = 6;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public Builder setFlag(int value) {
+        bitField0_ |= 0x00000020;
+        flag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 flag = 6;</code>
+       *
+       * <pre>
+       *0:您已经抢过这个福袋  1:手慢了,福袋派完了 2:希望您能够喜欢这个福袋
+       * </pre>
+       */
+      public Builder clearFlag() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        flag_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isGrab_ ;
+      /**
+       * <code>optional int32 isGrab = 7;</code>
+       *
+       * <pre>
+       *0:福袋派完了  1:还有福袋
+       * </pre>
+       */
+      public boolean hasIsGrab() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 isGrab = 7;</code>
+       *
+       * <pre>
+       *0:福袋派完了  1:还有福袋
+       * </pre>
+       */
+      public int getIsGrab() {
+        return isGrab_;
+      }
+      /**
+       * <code>optional int32 isGrab = 7;</code>
+       *
+       * <pre>
+       *0:福袋派完了  1:还有福袋
+       * </pre>
+       */
+      public Builder setIsGrab(int value) {
+        bitField0_ |= 0x00000040;
+        isGrab_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 isGrab = 7;</code>
+       *
+       * <pre>
+       *0:福袋派完了  1:还有福袋
+       * </pre>
+       */
+      public Builder clearIsGrab() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        isGrab_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int bagStatus_ ;
+      /**
+       * <code>optional int32 bagStatus = 8;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public boolean hasBagStatus() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 bagStatus = 8;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public int getBagStatus() {
+        return bagStatus_;
+      }
+      /**
+       * <code>optional int32 bagStatus = 8;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public Builder setBagStatus(int value) {
+        bitField0_ |= 0x00000080;
+        bagStatus_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 bagStatus = 8;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public Builder clearBagStatus() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        bagStatus_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.BagInfoAjaxResponse)
+    }
+
+    static {
+      defaultInstance = new BagInfoAjaxResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.BagInfoAjaxResponse)
+  }
+
+  public interface InitSendBagRequestOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitSendBagRequest)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequest getHead();
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    boolean hasUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequest getUserHead();
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder();
+
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    boolean hasParcelId();
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    int getParcelId();
+
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    boolean hasLocaleCode();
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    java.lang.String getLocaleCode();
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getLocaleCodeBytes();
+  }
+  /**
+   * Protobuf type {@code fksproto.InitSendBagRequest}
+   */
+  public static final class InitSendBagRequest extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitSendBagRequest)
+          InitSendBagRequestOrBuilder {
+    // Use InitSendBagRequest.newBuilder() to construct.
+    private InitSendBagRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitSendBagRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitSendBagRequest defaultInstance;
+    public static InitSendBagRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitSendBagRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitSendBagRequest(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              fksproto.CsBase.BaseUserRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = userHead_.toBuilder();
+              }
+              userHead_ = input.readMessage(fksproto.CsBase.BaseUserRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userHead_);
+                userHead_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              parcelId_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              localeCode_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_InitSendBagRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_InitSendBagRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.InitSendBagRequest.class, fksproto.CsMy.InitSendBagRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitSendBagRequest> PARSER =
+            new com.google.protobuf.AbstractParser<InitSendBagRequest>() {
+              public InitSendBagRequest parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitSendBagRequest(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitSendBagRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseRequest head_;
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequest getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseRequest head = 1;</code>
+     */
+    public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int USER_HEAD_FIELD_NUMBER = 2;
+    private fksproto.CsBase.BaseUserRequest userHead_;
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public boolean hasUserHead() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequest getUserHead() {
+      return userHead_;
+    }
+    /**
+     * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+     */
+    public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+      return userHead_;
+    }
+
+    public static final int PARCELID_FIELD_NUMBER = 3;
+    private int parcelId_;
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public boolean hasParcelId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 parcelId = 3;</code>
+     */
+    public int getParcelId() {
+      return parcelId_;
+    }
+
+    public static final int LOCALECODE_FIELD_NUMBER = 4;
+    private java.lang.Object localeCode_;
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    public boolean hasLocaleCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    public java.lang.String getLocaleCode() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localeCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string localeCode = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getLocaleCodeBytes() {
+      java.lang.Object ref = localeCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        localeCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      parcelId_ = 0;
+      localeCode_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocaleCodeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, userHead_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, parcelId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getLocaleCodeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagRequest parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.InitSendBagRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitSendBagRequest}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitSendBagRequest)
+            fksproto.CsMy.InitSendBagRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagRequest_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.InitSendBagRequest.class, fksproto.CsMy.InitSendBagRequest.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.InitSendBagRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getUserHeadFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        parcelId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        localeCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagRequest_descriptor;
+      }
+
+      public fksproto.CsMy.InitSendBagRequest getDefaultInstanceForType() {
+        return fksproto.CsMy.InitSendBagRequest.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.InitSendBagRequest build() {
+        fksproto.CsMy.InitSendBagRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.InitSendBagRequest buildPartial() {
+        fksproto.CsMy.InitSendBagRequest result = new fksproto.CsMy.InitSendBagRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (userHeadBuilder_ == null) {
+          result.userHead_ = userHead_;
+        } else {
+          result.userHead_ = userHeadBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.parcelId_ = parcelId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localeCode_ = localeCode_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.InitSendBagRequest) {
+          return mergeFrom((fksproto.CsMy.InitSendBagRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.InitSendBagRequest other) {
+        if (other == fksproto.CsMy.InitSendBagRequest.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (other.hasUserHead()) {
+          mergeUserHead(other.getUserHead());
+        }
+        if (other.hasParcelId()) {
+          setParcelId(other.getParcelId());
+        }
+        if (other.hasLocaleCode()) {
+          bitField0_ |= 0x00000008;
+          localeCode_ = other.localeCode_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.InitSendBagRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.InitSendBagRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseRequest head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseRequest.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseRequest value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseRequest.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseRequest.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequest.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      public fksproto.CsHead.BaseRequestOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseRequest head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseRequest, fksproto.CsHead.BaseRequest.Builder, fksproto.CsHead.BaseRequestOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private fksproto.CsBase.BaseUserRequest userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder> userHeadBuilder_;
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public boolean hasUserHead() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest getUserHead() {
+        if (userHeadBuilder_ == null) {
+          return userHead_;
+        } else {
+          return userHeadBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userHead_ = value;
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder setUserHead(
+              fksproto.CsBase.BaseUserRequest.Builder builderForValue) {
+        if (userHeadBuilder_ == null) {
+          userHead_ = builderForValue.build();
+          onChanged();
+        } else {
+          userHeadBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder mergeUserHead(fksproto.CsBase.BaseUserRequest value) {
+        if (userHeadBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  userHead_ != fksproto.CsBase.BaseUserRequest.getDefaultInstance()) {
+            userHead_ =
+                    fksproto.CsBase.BaseUserRequest.newBuilder(userHead_).mergeFrom(value).buildPartial();
+          } else {
+            userHead_ = value;
+          }
+          onChanged();
+        } else {
+          userHeadBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public Builder clearUserHead() {
+        if (userHeadBuilder_ == null) {
+          userHead_ = fksproto.CsBase.BaseUserRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          userHeadBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequest.Builder getUserHeadBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUserHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      public fksproto.CsBase.BaseUserRequestOrBuilder getUserHeadOrBuilder() {
+        if (userHeadBuilder_ != null) {
+          return userHeadBuilder_.getMessageOrBuilder();
+        } else {
+          return userHead_;
+        }
+      }
+      /**
+       * <code>optional .fksproto.BaseUserRequest user_head = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>
+      getUserHeadFieldBuilder() {
+        if (userHeadBuilder_ == null) {
+          userHeadBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsBase.BaseUserRequest, fksproto.CsBase.BaseUserRequest.Builder, fksproto.CsBase.BaseUserRequestOrBuilder>(
+                  getUserHead(),
+                  getParentForChildren(),
+                  isClean());
+          userHead_ = null;
+        }
+        return userHeadBuilder_;
+      }
+
+      private int parcelId_ ;
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public boolean hasParcelId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public int getParcelId() {
+        return parcelId_;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder setParcelId(int value) {
+        bitField0_ |= 0x00000004;
+        parcelId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 parcelId = 3;</code>
+       */
+      public Builder clearParcelId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        parcelId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object localeCode_ = "";
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public boolean hasLocaleCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public java.lang.String getLocaleCode() {
+        java.lang.Object ref = localeCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            localeCode_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+      getLocaleCodeBytes() {
+        java.lang.Object ref = localeCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          localeCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public Builder setLocaleCode(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public Builder clearLocaleCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localeCode_ = getDefaultInstance().getLocaleCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string localeCode = 4;</code>
+       */
+      public Builder setLocaleCodeBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        localeCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitSendBagRequest)
+    }
+
+    static {
+      defaultInstance = new InitSendBagRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitSendBagRequest)
+  }
+
+  public interface InitSendBagResponseOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:fksproto.InitSendBagResponse)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    boolean hasHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponse getHead();
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder();
+
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    java.util.List<fksproto.CsMy.salesOrderItemOfBag>
+    getItemsList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    fksproto.CsMy.salesOrderItemOfBag getItems(int index);
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    int getItemsCount();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsOrBuilderList();
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+            int index);
+
+    /**
+     * <code>optional int32 bagQty = 3;</code>
+     *
+     * <pre>
+     *福袋数
+     * </pre>
+     */
+    boolean hasBagQty();
+    /**
+     * <code>optional int32 bagQty = 3;</code>
+     *
+     * <pre>
+     *福袋数
+     * </pre>
+     */
+    int getBagQty();
+
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    boolean hasMessage();
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+    getMessageBytes();
+
+    /**
+     * <code>optional int32 itemQty = 5;</code>
+     *
+     * <pre>
+     *宝贝总数
+     * </pre>
+     */
+    boolean hasItemQty();
+    /**
+     * <code>optional int32 itemQty = 5;</code>
+     *
+     * <pre>
+     *宝贝总数
+     * </pre>
+     */
+    int getItemQty();
+
+    /**
+     * <code>optional int32 isGrab = 6;</code>
+     *
+     * <pre>
+     *是否显示发送福袋 0:不显示 1:显示
+     * </pre>
+     */
+    boolean hasIsGrab();
+    /**
+     * <code>optional int32 isGrab = 6;</code>
+     *
+     * <pre>
+     *是否显示发送福袋 0:不显示 1:显示
+     * </pre>
+     */
+    int getIsGrab();
+
+    /**
+     * <code>optional int32 bagStatus = 7;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    boolean hasBagStatus();
+    /**
+     * <code>optional int32 bagStatus = 7;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    int getBagStatus();
+  }
+  /**
+   * Protobuf type {@code fksproto.InitSendBagResponse}
+   */
+  public static final class InitSendBagResponse extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:fksproto.InitSendBagResponse)
+          InitSendBagResponseOrBuilder {
+    // Use InitSendBagResponse.newBuilder() to construct.
+    private InitSendBagResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private InitSendBagResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final InitSendBagResponse defaultInstance;
+    public static InitSendBagResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public InitSendBagResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private InitSendBagResponse(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                      extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              fksproto.CsHead.BaseResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = head_.toBuilder();
+              }
+              head_ = input.readMessage(fksproto.CsHead.BaseResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(head_);
+                head_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                items_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              items_.add(input.readMessage(fksproto.CsMy.salesOrderItemOfBag.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              bagQty_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              message_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              itemQty_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              isGrab_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              bagStatus_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          items_ = java.util.Collections.unmodifiableList(items_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return fksproto.CsMy.internal_static_fksproto_InitSendBagResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return fksproto.CsMy.internal_static_fksproto_InitSendBagResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      fksproto.CsMy.InitSendBagResponse.class, fksproto.CsMy.InitSendBagResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<InitSendBagResponse> PARSER =
+            new com.google.protobuf.AbstractParser<InitSendBagResponse>() {
+              public InitSendBagResponse parsePartialFrom(
+                      com.google.protobuf.CodedInputStream input,
+                      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                      throws com.google.protobuf.InvalidProtocolBufferException {
+                return new InitSendBagResponse(input, extensionRegistry);
+              }
+            };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InitSendBagResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HEAD_FIELD_NUMBER = 1;
+    private fksproto.CsHead.BaseResponse head_;
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public boolean hasHead() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponse getHead() {
+      return head_;
+    }
+    /**
+     * <code>required .fksproto.BaseResponse head = 1;</code>
+     */
+    public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+      return head_;
+    }
+
+    public static final int ITEMS_FIELD_NUMBER = 2;
+    private java.util.List<fksproto.CsMy.salesOrderItemOfBag> items_;
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsList() {
+      return items_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+    getItemsOrBuilderList() {
+      return items_;
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public int getItemsCount() {
+      return items_.size();
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public fksproto.CsMy.salesOrderItemOfBag getItems(int index) {
+      return items_.get(index);
+    }
+    /**
+     * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+     *
+     * <pre>
+     *抢到的商品
+     * </pre>
+     */
+    public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+            int index) {
+      return items_.get(index);
+    }
+
+    public static final int BAGQTY_FIELD_NUMBER = 3;
+    private int bagQty_;
+    /**
+     * <code>optional int32 bagQty = 3;</code>
+     *
+     * <pre>
+     *福袋数
+     * </pre>
+     */
+    public boolean hasBagQty() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 bagQty = 3;</code>
+     *
+     * <pre>
+     *福袋数
+     * </pre>
+     */
+    public int getBagQty() {
+      return bagQty_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 4;
+    private java.lang.Object message_;
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    public boolean hasMessage() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          message_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string message = 4;</code>
+     *
+     * <pre>
+     *留言
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+    getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ITEMQTY_FIELD_NUMBER = 5;
+    private int itemQty_;
+    /**
+     * <code>optional int32 itemQty = 5;</code>
+     *
+     * <pre>
+     *宝贝总数
+     * </pre>
+     */
+    public boolean hasItemQty() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 itemQty = 5;</code>
+     *
+     * <pre>
+     *宝贝总数
+     * </pre>
+     */
+    public int getItemQty() {
+      return itemQty_;
+    }
+
+    public static final int ISGRAB_FIELD_NUMBER = 6;
+    private int isGrab_;
+    /**
+     * <code>optional int32 isGrab = 6;</code>
+     *
+     * <pre>
+     *是否显示发送福袋 0:不显示 1:显示
+     * </pre>
+     */
+    public boolean hasIsGrab() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 isGrab = 6;</code>
+     *
+     * <pre>
+     *是否显示发送福袋 0:不显示 1:显示
+     * </pre>
+     */
+    public int getIsGrab() {
+      return isGrab_;
+    }
+
+    public static final int BAGSTATUS_FIELD_NUMBER = 7;
+    private int bagStatus_;
+    /**
+     * <code>optional int32 bagStatus = 7;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    public boolean hasBagStatus() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 bagStatus = 7;</code>
+     *
+     * <pre>
+     *福袋是否发送标志 0:未发送 1:已发送
+     * </pre>
+     */
+    public int getBagStatus() {
+      return bagStatus_;
+    }
+
+    private void initFields() {
+      head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      items_ = java.util.Collections.emptyList();
+      bagQty_ = 0;
+      message_ = "";
+      itemQty_ = 0;
+      isGrab_ = 0;
+      bagStatus_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHead()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHead().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getItemsCount(); i++) {
+        if (!getItems(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, head_);
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        output.writeMessage(2, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(3, bagQty_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(4, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, itemQty_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(6, isGrab_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(7, bagStatus_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(1, head_);
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(2, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(3, bagQty_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBytesSize(4, getMessageBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(5, itemQty_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(6, isGrab_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(7, bagStatus_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fksproto.CsMy.InitSendBagResponse parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fksproto.CsMy.InitSendBagResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code fksproto.InitSendBagResponse}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:fksproto.InitSendBagResponse)
+            fksproto.CsMy.InitSendBagResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagResponse_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        fksproto.CsMy.InitSendBagResponse.class, fksproto.CsMy.InitSendBagResponse.Builder.class);
+      }
+
+      // Construct using fksproto.CsMy.InitSendBagResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeadFieldBuilder();
+          getItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          itemsBuilder_.clear();
+        }
+        bagQty_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        message_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        itemQty_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isGrab_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bagStatus_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return fksproto.CsMy.internal_static_fksproto_InitSendBagResponse_descriptor;
+      }
+
+      public fksproto.CsMy.InitSendBagResponse getDefaultInstanceForType() {
+        return fksproto.CsMy.InitSendBagResponse.getDefaultInstance();
+      }
+
+      public fksproto.CsMy.InitSendBagResponse build() {
+        fksproto.CsMy.InitSendBagResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fksproto.CsMy.InitSendBagResponse buildPartial() {
+        fksproto.CsMy.InitSendBagResponse result = new fksproto.CsMy.InitSendBagResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headBuilder_ == null) {
+          result.head_ = head_;
+        } else {
+          result.head_ = headBuilder_.build();
+        }
+        if (itemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.items_ = items_;
+        } else {
+          result.items_ = itemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.bagQty_ = bagQty_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.message_ = message_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.itemQty_ = itemQty_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isGrab_ = isGrab_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.bagStatus_ = bagStatus_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fksproto.CsMy.InitSendBagResponse) {
+          return mergeFrom((fksproto.CsMy.InitSendBagResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fksproto.CsMy.InitSendBagResponse other) {
+        if (other == fksproto.CsMy.InitSendBagResponse.getDefaultInstance()) return this;
+        if (other.hasHead()) {
+          mergeHead(other.getHead());
+        }
+        if (itemsBuilder_ == null) {
+          if (!other.items_.isEmpty()) {
+            if (items_.isEmpty()) {
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureItemsIsMutable();
+              items_.addAll(other.items_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.items_.isEmpty()) {
+            if (itemsBuilder_.isEmpty()) {
+              itemsBuilder_.dispose();
+              itemsBuilder_ = null;
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              itemsBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getItemsFieldBuilder() : null;
+            } else {
+              itemsBuilder_.addAllMessages(other.items_);
+            }
+          }
+        }
+        if (other.hasBagQty()) {
+          setBagQty(other.getBagQty());
+        }
+        if (other.hasMessage()) {
+          bitField0_ |= 0x00000008;
+          message_ = other.message_;
+          onChanged();
+        }
+        if (other.hasItemQty()) {
+          setItemQty(other.getItemQty());
+        }
+        if (other.hasIsGrab()) {
+          setIsGrab(other.getIsGrab());
+        }
+        if (other.hasBagStatus()) {
+          setBagStatus(other.getBagStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHead()) {
+
+          return false;
+        }
+        if (!getHead().isInitialized()) {
+
+          return false;
+        }
+        for (int i = 0; i < getItemsCount(); i++) {
+          if (!getItems(i).isInitialized()) {
+
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        fksproto.CsMy.InitSendBagResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fksproto.CsMy.InitSendBagResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fksproto.CsHead.BaseResponse head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder> headBuilder_;
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public boolean hasHead() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse getHead() {
+        if (headBuilder_ == null) {
+          return head_;
+        } else {
+          return headBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          head_ = value;
+          onChanged();
+        } else {
+          headBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder setHead(
+              fksproto.CsHead.BaseResponse.Builder builderForValue) {
+        if (headBuilder_ == null) {
+          head_ = builderForValue.build();
+          onChanged();
+        } else {
+          headBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder mergeHead(fksproto.CsHead.BaseResponse value) {
+        if (headBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                  head_ != fksproto.CsHead.BaseResponse.getDefaultInstance()) {
+            head_ =
+                    fksproto.CsHead.BaseResponse.newBuilder(head_).mergeFrom(value).buildPartial();
+          } else {
+            head_ = value;
+          }
+          onChanged();
+        } else {
+          headBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public Builder clearHead() {
+        if (headBuilder_ == null) {
+          head_ = fksproto.CsHead.BaseResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          headBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponse.Builder getHeadBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeadFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      public fksproto.CsHead.BaseResponseOrBuilder getHeadOrBuilder() {
+        if (headBuilder_ != null) {
+          return headBuilder_.getMessageOrBuilder();
+        } else {
+          return head_;
+        }
+      }
+      /**
+       * <code>required .fksproto.BaseResponse head = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>
+      getHeadFieldBuilder() {
+        if (headBuilder_ == null) {
+          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  fksproto.CsHead.BaseResponse, fksproto.CsHead.BaseResponse.Builder, fksproto.CsHead.BaseResponseOrBuilder>(
+                  getHead(),
+                  getParentForChildren(),
+                  isClean());
+          head_ = null;
+        }
+        return headBuilder_;
+      }
+
+      private java.util.List<fksproto.CsMy.salesOrderItemOfBag> items_ =
+              java.util.Collections.emptyList();
+      private void ensureItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          items_ = new java.util.ArrayList<fksproto.CsMy.salesOrderItemOfBag>(items_);
+          bitField0_ |= 0x00000002;
+        }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder> itemsBuilder_;
+
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag> getItemsList() {
+        if (itemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(items_);
+        } else {
+          return itemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public int getItemsCount() {
+        if (itemsBuilder_ == null) {
+          return items_.size();
+        } else {
+          return itemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag getItems(int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);
+        } else {
+          return itemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder setItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.set(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder setItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addItems(
+              int index, fksproto.CsMy.salesOrderItemOfBag.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder addAllItems(
+              java.lang.Iterable<? extends fksproto.CsMy.salesOrderItemOfBag> values) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                  values, items_);
+          onChanged();
+        } else {
+          itemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder clearItems() {
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public Builder removeItems(int index) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.remove(index);
+          onChanged();
+        } else {
+          itemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder getItemsBuilder(
+              int index) {
+        return getItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBagOrBuilder getItemsOrBuilder(
+              int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);  } else {
+          return itemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<? extends fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsOrBuilderList() {
+        if (itemsBuilder_ != null) {
+          return itemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(items_);
+        }
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsBuilder() {
+        return getItemsFieldBuilder().addBuilder(
+                fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public fksproto.CsMy.salesOrderItemOfBag.Builder addItemsBuilder(
+              int index) {
+        return getItemsFieldBuilder().addBuilder(
+                index, fksproto.CsMy.salesOrderItemOfBag.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .fksproto.salesOrderItemOfBag items = 2;</code>
+       *
+       * <pre>
+       *抢到的商品
+       * </pre>
+       */
+      public java.util.List<fksproto.CsMy.salesOrderItemOfBag.Builder>
+      getItemsBuilderList() {
+        return getItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+              fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>
+      getItemsFieldBuilder() {
+        if (itemsBuilder_ == null) {
+          itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                  fksproto.CsMy.salesOrderItemOfBag, fksproto.CsMy.salesOrderItemOfBag.Builder, fksproto.CsMy.salesOrderItemOfBagOrBuilder>(
+                  items_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          items_ = null;
+        }
+        return itemsBuilder_;
+      }
+
+      private int bagQty_ ;
+      /**
+       * <code>optional int32 bagQty = 3;</code>
+       *
+       * <pre>
+       *福袋数
+       * </pre>
+       */
+      public boolean hasBagQty() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 bagQty = 3;</code>
+       *
+       * <pre>
+       *福袋数
+       * </pre>
+       */
+      public int getBagQty() {
+        return bagQty_;
+      }
+      /**
+       * <code>optional int32 bagQty = 3;</code>
+       *
+       * <pre>
+       *福袋数
+       * </pre>
+       */
+      public Builder setBagQty(int value) {
+        bitField0_ |= 0x00000004;
+        bagQty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 bagQty = 3;</code>
+       *
+       * <pre>
+       *福袋数
+       * </pre>
+       */
+      public Builder clearBagQty() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        bagQty_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public boolean hasMessage() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+      getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public Builder setMessage(
+              java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public Builder clearMessage() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string message = 4;</code>
+       *
+       * <pre>
+       *留言
+       * </pre>
+       */
+      public Builder setMessageBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int itemQty_ ;
+      /**
+       * <code>optional int32 itemQty = 5;</code>
+       *
+       * <pre>
+       *宝贝总数
+       * </pre>
+       */
+      public boolean hasItemQty() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 itemQty = 5;</code>
+       *
+       * <pre>
+       *宝贝总数
+       * </pre>
+       */
+      public int getItemQty() {
+        return itemQty_;
+      }
+      /**
+       * <code>optional int32 itemQty = 5;</code>
+       *
+       * <pre>
+       *宝贝总数
+       * </pre>
+       */
+      public Builder setItemQty(int value) {
+        bitField0_ |= 0x00000010;
+        itemQty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemQty = 5;</code>
+       *
+       * <pre>
+       *宝贝总数
+       * </pre>
+       */
+      public Builder clearItemQty() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        itemQty_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isGrab_ ;
+      /**
+       * <code>optional int32 isGrab = 6;</code>
+       *
+       * <pre>
+       *是否显示发送福袋 0:不显示 1:显示
+       * </pre>
+       */
+      public boolean hasIsGrab() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 isGrab = 6;</code>
+       *
+       * <pre>
+       *是否显示发送福袋 0:不显示 1:显示
+       * </pre>
+       */
+      public int getIsGrab() {
+        return isGrab_;
+      }
+      /**
+       * <code>optional int32 isGrab = 6;</code>
+       *
+       * <pre>
+       *是否显示发送福袋 0:不显示 1:显示
+       * </pre>
+       */
+      public Builder setIsGrab(int value) {
+        bitField0_ |= 0x00000020;
+        isGrab_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 isGrab = 6;</code>
+       *
+       * <pre>
+       *是否显示发送福袋 0:不显示 1:显示
+       * </pre>
+       */
+      public Builder clearIsGrab() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        isGrab_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int bagStatus_ ;
+      /**
+       * <code>optional int32 bagStatus = 7;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public boolean hasBagStatus() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 bagStatus = 7;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public int getBagStatus() {
+        return bagStatus_;
+      }
+      /**
+       * <code>optional int32 bagStatus = 7;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public Builder setBagStatus(int value) {
+        bitField0_ |= 0x00000040;
+        bagStatus_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 bagStatus = 7;</code>
+       *
+       * <pre>
+       *福袋是否发送标志 0:未发送 1:已发送
+       * </pre>
+       */
+      public Builder clearBagStatus() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bagStatus_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:fksproto.InitSendBagResponse)
+    }
+
+    static {
+      defaultInstance = new InitSendBagResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:fksproto.InitSendBagResponse)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_fksproto_CheckToPayRequest_descriptor;
   private static
@@ -6496,6 +18350,56 @@ public final class CsMy {
   private static
   com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internal_static_fksproto_CreditsWithdrawResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_DoShareBagRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_DoShareBagRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_DoShareBagResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_DoShareBagResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitBagAjaxRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitBagAjaxRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitBagAjaxResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitBagAjaxResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_salesOrderItemOfBag_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_salesOrderItemOfBag_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_ParcelOfBag_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_ParcelOfBag_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_BagInfoAjaxRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_BagInfoAjaxRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_BagInfoAjaxResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_BagInfoAjaxResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitSendBagRequest_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitSendBagRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_fksproto_InitSendBagResponse_descriptor;
+  private static
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_fksproto_InitSendBagResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
   getDescriptor() {
@@ -6528,7 +18432,44 @@ public final class CsMy {
             "(\005\022\024\n\014changeamount\030\003 \001(\005\022\024\n\014currencycode" +
                     "\030\004 \001(\t\022\021\n\tsendemail\030\005 \001(\t\022\022\n\nlocalecode\030" +
                     "\006 \001(\t\"?\n\027CreditsWithdrawResponse\022$\n\004head" +
-                    "\030\001 \002(\0132\026.fksproto.BaseResponse"
+                    "\030\001 \002(\0132\026.fksproto.BaseResponse\"\261\001\n\021DoSha" +
+                    "reBagRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Ba" +
+                    "seRequest\022,\n\tuser_head\030\002 \001(\0132\031.fksproto." +
+                    "BaseUserRequest\022\020\n\010parcelid\030\003 \001(\005\022\023\n\013loc" +
+                    "ale_code\030\004 \001(\t\022\021\n\tqty_split\030\005 \001(\005\022\017\n\007mes" +
+                    "sage\030\006 \001(\t\"j\n\022DoShareBagResponse\022$\n\004head" +
+                    "\030\001 \002(\0132\026.fksproto.BaseResponse\022\013\n\003msg\030\002 ",
+            "\001(\t\022\017\n\007bag_url\030\003 \001(\t\022\020\n\010icon_url\030\004 \001(\t\"\216" +
+                    "\001\n\022InitBagAjaxRequest\022#\n\004head\030\001 \002(\0132\025.fk" +
+                    "sproto.BaseRequest\022,\n\tuser_head\030\002 \001(\0132\031." +
+                    "fksproto.BaseUserRequest\022\020\n\010parcelid\030\003 \001" +
+                    "(\005\022\023\n\013locale_code\030\004 \001(\t\"z\n\023InitBagAjaxRe" +
+                    "sponse\022$\n\004head\030\001 \002(\0132\026.fksproto.BaseResp" +
+                    "onse\022\014\n\004icon\030\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022\017\n\007" +
+                    "message\030\004 \001(\t\022\014\n\004flag\030\005 \001(\005\"F\n\023salesOrde" +
+                    "rItemOfBag\022\017\n\007caption\030\001 \002(\t\022\021\n\timagePath" +
+                    "\030\002 \002(\t\022\013\n\003qty\030\003 \002(\005\"u\n\013ParcelOfBag\0223\n\014it",
+            "ems_parcel\030\001 \003(\0132\035.fksproto.salesOrderIt" +
+                    "emOfBag\022\014\n\004icon\030\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022" +
+                    "\021\n\tgrab_time\030\004 \001(\t\"\216\001\n\022BagInfoAjaxReques" +
+                    "t\022#\n\004head\030\001 \002(\0132\025.fksproto.BaseRequest\022," +
+                    "\n\tuser_head\030\002 \001(\0132\031.fksproto.BaseUserReq" +
+                    "uest\022\020\n\010parcelid\030\003 \001(\005\022\023\n\013locale_code\030\004 " +
+                    "\001(\t\"\337\001\n\023BagInfoAjaxResponse\022$\n\004head\030\001 \002(" +
+                    "\0132\026.fksproto.BaseResponse\022%\n\006parces\030\002 \003(" +
+                    "\0132\025.fksproto.ParcelOfBag\022,\n\005items\030\003 \003(\0132" +
+                    "\035.fksproto.salesOrderItemOfBag\022\013\n\003qty\030\004 ",
+            "\001(\005\022\017\n\007message\030\005 \001(\t\022\014\n\004flag\030\006 \001(\005\022\016\n\006is" +
+                    "Grab\030\007 \001(\005\022\021\n\tbagStatus\030\010 \001(\005\"\215\001\n\022InitSe" +
+                    "ndBagRequest\022#\n\004head\030\001 \002(\0132\025.fksproto.Ba" +
+                    "seRequest\022,\n\tuser_head\030\002 \001(\0132\031.fksproto." +
+                    "BaseUserRequest\022\020\n\010parcelId\030\003 \001(\005\022\022\n\nloc" +
+                    "aleCode\030\004 \001(\t\"\276\001\n\023InitSendBagResponse\022$\n" +
+                    "\004head\030\001 \002(\0132\026.fksproto.BaseResponse\022,\n\005i" +
+                    "tems\030\002 \003(\0132\035.fksproto.salesOrderItemOfBa" +
+                    "g\022\016\n\006bagQty\030\003 \001(\005\022\017\n\007message\030\004 \001(\t\022\017\n\007it" +
+                    "emQty\030\005 \001(\005\022\016\n\006isGrab\030\006 \001(\005\022\021\n\tbagStatus",
+            "\030\007 \001(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
             new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6580,6 +18521,66 @@ public final class CsMy {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
             internal_static_fksproto_CreditsWithdrawResponse_descriptor,
             new java.lang.String[] { "Head", });
+    internal_static_fksproto_DoShareBagRequest_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+    internal_static_fksproto_DoShareBagRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_DoShareBagRequest_descriptor,
+            new java.lang.String[] { "Head", "UserHead", "Parcelid", "LocaleCode", "QtySplit", "Message", });
+    internal_static_fksproto_DoShareBagResponse_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+    internal_static_fksproto_DoShareBagResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_DoShareBagResponse_descriptor,
+            new java.lang.String[] { "Head", "Msg", "BagUrl", "IconUrl", });
+    internal_static_fksproto_InitBagAjaxRequest_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+    internal_static_fksproto_InitBagAjaxRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitBagAjaxRequest_descriptor,
+            new java.lang.String[] { "Head", "UserHead", "Parcelid", "LocaleCode", });
+    internal_static_fksproto_InitBagAjaxResponse_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+    internal_static_fksproto_InitBagAjaxResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitBagAjaxResponse_descriptor,
+            new java.lang.String[] { "Head", "Icon", "Nickname", "Message", "Flag", });
+    internal_static_fksproto_salesOrderItemOfBag_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+    internal_static_fksproto_salesOrderItemOfBag_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_salesOrderItemOfBag_descriptor,
+            new java.lang.String[] { "Caption", "ImagePath", "Qty", });
+    internal_static_fksproto_ParcelOfBag_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+    internal_static_fksproto_ParcelOfBag_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_ParcelOfBag_descriptor,
+            new java.lang.String[] { "ItemsParcel", "Icon", "Nickname", "GrabTime", });
+    internal_static_fksproto_BagInfoAjaxRequest_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+    internal_static_fksproto_BagInfoAjaxRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_BagInfoAjaxRequest_descriptor,
+            new java.lang.String[] { "Head", "UserHead", "Parcelid", "LocaleCode", });
+    internal_static_fksproto_BagInfoAjaxResponse_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+    internal_static_fksproto_BagInfoAjaxResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_BagInfoAjaxResponse_descriptor,
+            new java.lang.String[] { "Head", "Parces", "Items", "Qty", "Message", "Flag", "IsGrab", "BagStatus", });
+    internal_static_fksproto_InitSendBagRequest_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+    internal_static_fksproto_InitSendBagRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitSendBagRequest_descriptor,
+            new java.lang.String[] { "Head", "UserHead", "ParcelId", "LocaleCode", });
+    internal_static_fksproto_InitSendBagResponse_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+    internal_static_fksproto_InitSendBagResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_fksproto_InitSendBagResponse_descriptor,
+            new java.lang.String[] { "Head", "Items", "BagQty", "Message", "ItemQty", "IsGrab", "BagStatus", });
     fksproto.CsHead.getDescriptor();
     fksproto.CsBase.getDescriptor();
   }

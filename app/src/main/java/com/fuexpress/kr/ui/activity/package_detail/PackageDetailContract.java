@@ -38,9 +38,9 @@ public interface PackageDetailContract {
 
         void showTransportInfo(String name, String detail);
 
-        void setParcelsItme(List<ParcelItemBean> itemBeans, boolean orderParcel);
+        void setParcelsItme(List<CsParcel.ParcelItemList> itemBeans, int parcelType);
 
-        void showCustomerAddress(String topText, String addressText, int id);
+//        void showCustomerAddress(String topText, String addressText, int id);
 
         void showCustomerAddress(CsAddress.CustomerAddress address);
 
@@ -65,6 +65,7 @@ public interface PackageDetailContract {
         void showInsurance(CsParcel.MerchantParcelShippingMethodList shippingMethod);
         void showParcleDialog(String message, final int type, final String cancelText);
 
+        void showFuGiftShipping();
     }
 
     abstract class Presenter extends BasePresenter<Model, View> {
@@ -83,7 +84,8 @@ public interface PackageDetailContract {
         public abstract void selectShippingMethod(CsParcel.MerchantParcelShippingMethodList method);
 
 
-        abstract void setAddress(String topText, String addressText, int id);
+//        abstract void setAddress(String topText, String addressText, int id);
+        abstract void setAddress( CsAddress.CustomerAddress customerAddress);
 
         protected abstract void submitSucess(boolean sucess);
 

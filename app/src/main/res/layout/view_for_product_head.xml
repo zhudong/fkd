@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.fuexpress.kr.ui.view.ViewPagerFixed
+            android:background="@color/white"
             android:id="@+id/vp_item_imgs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -486,23 +486,23 @@ public class PaymentActivity extends BaseActivity {
             final PaymentAdapter adapter = new PaymentAdapter(PaymentActivity.this, list);
             payListView.setAdapter(adapter);
             adapter.setCheckedAtPosition(paymentPos);
-//            paymentString = list.get(0).getPayname();
-//            if(list != null && list.size() > 0){
-//                payCode = list.get(0).getPaycode();
-//            }
-//            KLog.i("payCode = " + payCode);
-//            if (TextUtils.equals(payCode, "adyen")) {
-//                paymentType = Constants.PAYMENT_ADYEN;
-//            }
-//            if (TextUtils.equals(payCode, "krbank")) {
-//                paymentType = Constants.PAYMENT_KRBANK;
-//            }
-//            if (TextUtils.equals(payCode, "wxap")) {
-//                paymentType = Constants.PAYMENT_WECHAT;
-//            }
-//            if (TextUtils.equals(payCode, "alipay")) {
-//                paymentType = Constants.PAYMENT_ALIPAY;
-//            }
+            paymentString = (list.get(paymentPos)).getPayname();
+            if(list != null && list.size() > 0){
+                payCode = list.get(paymentPos).getPaycode();
+            }
+            KLog.i("payCode = " + payCode);
+            if (TextUtils.equals(payCode, "adyen")) {
+                paymentType = Constants.PAYMENT_ADYEN;
+            }
+            if (TextUtils.equals(payCode, "krbank")) {
+                paymentType = Constants.PAYMENT_KRBANK;
+            }
+            if (TextUtils.equals(payCode, "wxap")) {
+                paymentType = Constants.PAYMENT_WECHAT;
+            }
+            if (TextUtils.equals(payCode, "alipay")) {
+                paymentType = Constants.PAYMENT_ALIPAY;
+            }
             payListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

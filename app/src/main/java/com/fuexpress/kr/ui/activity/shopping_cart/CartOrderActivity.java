@@ -32,8 +32,6 @@ import com.fuexpress.kr.base.SysApplication;
 import com.fuexpress.kr.bean.CommoditysBean;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.AccountManager;
-import com.fuexpress.kr.model.ListViewManager;
-import com.fuexpress.kr.model.PaymentManager;
 import com.fuexpress.kr.model.RedPointCountManager;
 import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
@@ -43,7 +41,6 @@ import com.fuexpress.kr.ui.activity.PaymentActivity;
 import com.fuexpress.kr.ui.activity.help_signed.data.WareHouseBean;
 import com.fuexpress.kr.ui.adapter.OrderCommodityAdapter;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
-import com.fuexpress.kr.ui.view.CartListView;
 import com.fuexpress.kr.ui.view.CustomDialog;
 import com.fuexpress.kr.ui.view.CustomListView;
 import com.fuexpress.kr.ui.view.TitleBarView;
@@ -58,7 +55,6 @@ import com.socks.library.KLog;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +73,9 @@ import fksproto.CsUser;
  * Created by Administrator on 2016/4/13.
  */
 public class CartOrderActivity extends BaseActivity implements View.OnClickListener {
-    private static final String TAG = "CrowdCartOrderActivity";
+    public static String mFuShippingUrl;
+
+    private static final String TAG = "CartOrderActivity";
     public static final String FLAG_FROM_CROWD = "flag_from_crowd";
     private View rootView;
     private LinearLayout orderContentLayout;
@@ -105,6 +103,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
     private ImageView cancelIv;
     private TextView paymentTypeBalanceTv;
     private TextView grandTotalMsgTv;
+    private TextView cardOrderGiftTv;
 
 
     private CommoditysBean commoditysBean;
@@ -116,7 +115,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
     private CsAddress.CustomerAddress address;
     private int payType = -1;
     private int purchaseScheme = 2;
-    private int shippingScheme = 2;
+    private int shippingScheme = Constants.SHIPPING_SCHEME_GIFT;
     private boolean isUseBalance;
     private int paymentPos;
     private float balance;
@@ -146,9 +145,23 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private static long lastClickTime;
+    private boolean isARBack;
+
+    public static boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 500) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
 
     @Override
     public View setInitView() {
+        mFuShippingUrl = "";
+        shippingScheme = (int) SPUtils.get(this, Constants.KEY_SELECTED_DELIVERY, Constants.SHIPPING_SCHEME_GIFT);
         rootView = View.inflate(this, R.layout.activity_cart_order, null);
         TitleBarView titleBarView = (TitleBarView) rootView.findViewById(R.id.cart_order_titlebar);
         titleBarView.setTitleText(getResources().getString(R.string.cart_order_title_bar_title));
@@ -163,7 +176,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
         qtyCount = intent.getIntExtra("qtyCount", 0);
         mIsCrowdOrder = intent.getBooleanExtra(FLAG_FROM_CROWD, false);
 
-
+        cardOrderGiftTv = (TextView) rootView.findViewById(R.id.cart_order_gift_tv);
         orderContentLayout = (LinearLayout) rootView.findViewById(R.id.order_content_layout);
         deliveryLayout = (LinearLayout) rootView.findViewById(R.id.delivery_layout);
         shippingLayout = (RelativeLayout) rootView.findViewById(R.id.order_shipping_layout);
@@ -214,11 +227,12 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
             List<CsCart.SalesCartItem> listData = getListData();
             if (listData != null)
                 setListAdapter(listData);
+            getCustomerAddressList();
         } else {
             getSaleCartItem();
         }
         giftCardBalanceList();
-        getCustomerAddressList();
+        //getCustomerAddressList();
         int i = (int) SPUtils.get(this, AccountManager.getInstance().getCurrencyCode(), -1);
         if (i == -1) {
             getFKDPaymentListRequest();
@@ -232,8 +246,8 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             payTypeTv.setText(paymentString);
-                            CrowdCartOrderActivity.this.paymentString = paymentString;
-                            CrowdCartOrderActivity.this.payCode = payCode;
+                            CartOrderActivity.this.paymentString = paymentString;
+                            CartOrderActivity.this.payCode = payCode;
 
                         }
                     });
@@ -403,6 +417,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
             grandTotalTv.setText(UIUtils.getCurrency(CartOrderActivity.this, grandTotal));
 //            List<CsCart.SalesCartItem> dataList = getListData(response);
             setListAdapter(response);
+            getCustomerAddressList();
         }
     };
 
@@ -499,10 +514,12 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
             if (address == null) {
                 return;
             }
+            /*if (shippingScheme == Constants.SHIPPING_SCHEME_DIRECT||shippingScheme == Constants.SHIPPING_SCHEME_GIFT)
+                packageAddressLayout.setVisibility(View.VISIBLE);*/
             String str = getResources().getString(R.string.String_cart_consignee_msg);
             str = String.format(str, address.getName(), address.getPhone());
             nameAndPhoneTv.setText(str);
-            //AssetFileManager assetFileManager = new AssetFileManager(CrowdCartOrderActivity.this);
+            //AssetFileManager assetFileManager = new AssetFileManager(CartOrderActivity.this);
             ///String region = assetFileManager.readFile(address.getRegion());
             //String region = AssetFileManager.getInstance().readFilePlus(address.getRegion(), AssetFileManager.ADDRESS_TYPE);
             packageAddress.setText(address.getStreet() + "," + address.getFullRegionName());
@@ -511,8 +528,32 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
             } else {
                 defaultAddressIv.setVisibility(View.GONE);
             }
+
+
+            if ((shippingScheme == Constants.SHIPPING_SCHEME_DIRECT
+                    || shippingScheme == Constants.SHIPPING_SCHEME_GIFT) && !isARBack)
+                jumpDeliveryActivity();
+
+            if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE)
+                showMergeShippingView();
+
+
         }
     };
+
+    private void jumpDeliveryActivity() {
+        Intent intent = new Intent(this, DeliveryActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("itemList", (Serializable) itemList);
+        bundle.putSerializable("commoditysBean", (Serializable) list);
+        bundle.putSerializable("warehouseList", (Serializable) warehouseList);
+        bundle.putInt("shippingScheme", shippingScheme);
+        bundle.putSerializable("address", address);
+        bundle.putSerializable("shipList", (Serializable) shippingList);
+        intent.putExtras(bundle);
+        intent.putExtra(DeliveryActivity.ORDER_TYPE, mIsCrowdOrder);
+        startActivityForResult(intent, Constants.DELIVERY_REQUEST_CODE);
+    }
 
     public void submitSalesOrder() {
         CsOrder.SubmitSalesOrderRequest.Builder builder = CsOrder.SubmitSalesOrderRequest.newBuilder();
@@ -542,6 +583,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(CsOrder.SubmitSalesOrderResponse response) {
                         LogUtils.d(response.toString());
+                        mFuShippingUrl = response.getInitaddressurl();
                         RedPointCountManager.getOrderCount();
                         SysApplication app = (SysApplication) CartOrderActivity.this.getApplication();
                         app.setOrderNumber(response.getOrderNumber());
@@ -557,6 +599,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                             Bundle bundle = new Bundle();
                             bundle.putString("orderNumber", response.getOrderNumber());
                             bundle.putLong("orderId", response.getOrderId());
+                            bundle.putFloat("totalpaid", response.getTotalpaid());
 //                            bundle.putSerializable("commoditysBean", (Serializable) list);
                             bundle.putFloat("subTotal", cartResponse.getSubtotal());
                             bundle.putFloat("grandTotal", cartResponse.getGrandtotal());
@@ -572,7 +615,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                             intent.putExtras(bundle);
                             startActivityForResult(intent, Constants.CONFIRM_REQUEST_CODE);
                         }
-                        finish();
+//                        finish();
                     }
 
                     @Override
@@ -635,6 +678,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     //                bundle.putSerializable("salesCartResponse", cartResponse);
                     bundle.putFloat("subTotal", mCrowdSalesCartItem.getQty() * mCrowdSalesCartItem.getUnitPrice());
                     bundle.putFloat("grandTotal", mCrowdSalesCartItem.getQty() * mCrowdSalesCartItem.getUnitPrice());
+                    bundle.putFloat("totalpaid", response.getTotalPaid());
                     bundle.putInt("payType", payType);
                     bundle.putString("payMethod", paymentString);
                     bundle.putInt("purchaseScheme", purchaseScheme);
@@ -646,11 +690,11 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     bundle.putBoolean("isUseBalance", isUseBalance);
                     intent.putExtras(bundle);
                     intent.putExtra(ConfirmPaymentActivity.IS_CROWD_ORDER, true);
-                    startActivity(intent);
+                    startActivityForResult(intent, Constants.CONFIRM_REQUEST_CODE);
                 }
 
                 closeLoading();
-                finish();
+//                finish();
             }
 
             @Override
@@ -668,7 +712,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.delivery_layout:
-                intent = new Intent(this, DeliveryActivity.class);
+                /*intent = new Intent(this, DeliveryActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("itemList", (Serializable) itemList);
                 bundle.putSerializable("commoditysBean", (Serializable) list);
@@ -678,7 +722,8 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                 bundle.putSerializable("shipList", (Serializable) shippingList);
                 intent.putExtras(bundle);
                 intent.putExtra(DeliveryActivity.ORDER_TYPE, mIsCrowdOrder);
-                startActivityForResult(intent, Constants.DELIVERY_REQUEST_CODE);
+                startActivityForResult(intent, Constants.DELIVERY_REQUEST_CODE);*/
+                jumpDeliveryActivity();
                 break;
             case R.id.order_payment_layout:
                 intent = new Intent(this, PaymentActivity.class);
@@ -693,6 +738,10 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                 startActivityForResult(intent, Constants.PAYMENT_REQUEST_CODE);
                 break;
             case R.id.order_submit_btn:
+                LogUtils.d("isFast " + isFastDoubleClick());
+                if (isFastDoubleClick()) {
+                    return;
+                }
                 if (payType == -1 && !isUseBalance) {
                     showPaymentDialog();
                 } else {
@@ -781,7 +830,7 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
             public void onClick(DialogInterface dialog, int which) {
                 Log.d(TAG, "click");
                 dialog.dismiss();
-//                MeiqiaManager.getInstance(CrowdCartOrderActivity.this).contactCustomerService();
+//                MeiqiaManager.getInstance(CartOrderActivity.this).contactCustomerService();
                 startDDMActivity(ContractServiceActivity.class, true);
             }
         });
@@ -794,19 +843,51 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
         builder.create().show();
     }
 
+    public void showMergeShippingView() {
+        packageAddressLayout.setVisibility(View.VISIBLE);
+
+        cardOrderGiftTv.setVisibility(View.GONE);
+        shippingLayout.setVisibility(View.GONE);
+        packageAddressLayout.setClickable(true);
+        directLayout.setVisibility(View.GONE);
+        megreOrderLayout.setVisibility(View.VISIBLE);
+        addressArrowIv.setVisibility(View.VISIBLE);
+//                    packageAddressLayout.setVisibility(View.GONE);
+        needPay = grandTotal;
+        grandTotalTv.setText(UIUtils.getCurrency(this, grandTotal));
+        grandTotalMsgTv.setText(getString(R.string.String_submit_hint));
+        if (shippingList != null) {
+            shippingList.clear();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
+            isARBack = true;
             if (requestCode == Constants.DELIVERY_REQUEST_CODE) {
-                shippingScheme = data.getIntExtra("shippingScheme", 2);
+                shippingScheme = data.getIntExtra("shippingScheme", 3);
                 CsAddress.CustomerAddress address = (CsAddress.CustomerAddress) data.getExtras().getSerializable("callBackAddress");
                 Message msg = Message.obtain();
                 msg.obj = address;
                 mHandler.sendMessage(msg);
                 if (address != null) {
                     packageAddressLayout.setVisibility(View.VISIBLE);
+
                 }
-                if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
+                if (shippingScheme == Constants.SHIPPING_SCHEME_GIFT) {
+                    cardOrderGiftTv.setVisibility(View.VISIBLE);
+                    megreOrderLayout.setVisibility(View.GONE);
+                    addressArrowIv.setVisibility(View.GONE);
+                    directLayout.setVisibility(View.GONE);
+                    shippingLayout.setVisibility(View.GONE);
+                    packageAddressLayout.setVisibility(View.GONE);
+
+                } else if (shippingScheme == Constants.SHIPPING_SCHEME_MERGE) {
+                    showMergeShippingView();
+                    /*packageAddressLayout.setVisibility(View.VISIBLE);
+
+                    cardOrderGiftTv.setVisibility(View.GONE);
                     shippingLayout.setVisibility(View.GONE);
                     packageAddressLayout.setClickable(true);
                     directLayout.setVisibility(View.GONE);
@@ -818,8 +899,11 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     grandTotalMsgTv.setText(getString(R.string.String_submit_hint));
                     if (shippingList != null) {
                         shippingList.clear();
-                    }
+                    }*/
                 } else if (shippingScheme == Constants.SHIPPING_SCHEME_DIRECT) {
+                    packageAddressLayout.setVisibility(View.VISIBLE);
+
+                    cardOrderGiftTv.setVisibility(View.GONE);
                     pairList = (List<CsBase.PairIntInt>) data.getExtras().getSerializable("pairList");
                     crowdPairList = (List<CsBase.PairIntInt>) data.getExtras().getSerializable("crowdPairList");
                     shippingList = (List<CsShipping.Shipping>) data.getExtras().get("shippingList");
@@ -839,7 +923,9 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     String grandMsg = getResources().getString(R.string.cart_order_grand_total_msg);
                     if (shippingList != null) {
                         shippingLayout.setVisibility(View.VISIBLE);
-                        directPriceTv.setVisibility(View.VISIBLE);
+                        // TODO: 2017/8/21 tb bug fkd1.1.0 fu
+                        //directPriceTv.setVisibility(View.VISIBLE);
+                        directPriceTv.setVisibility(View.GONE);
                         getShippingFee(shippingList, cb);
                     } else {
                         shippingLayout.setVisibility(View.GONE);
@@ -894,10 +980,13 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
                     mHandler.sendMessage(msg);
                 }
             }
-            if (requestCode == Constants.CONFIRM_REQUEST_CODE) {
+            if (resultCode == Constants.CONFIRM_REQUEST_CODE) {
                 if (data != null) {
                     boolean isCancelPay = data.getBooleanExtra("isCancelPay", false);
                     if (isCancelPay) {
+                        Intent intent = new Intent();
+                        intent.putExtra("isCancelPay", true);
+                        setResult(Constants.CONFIRM_REQUEST_CODE, intent);
                         finish();
                     }
                 }
@@ -916,15 +1005,23 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
         String wareHouseName = "";
         String title = "";
         float duty = 0;
-        for (int i = 0; i < shippingList.size(); i++) {
-            for (int j = 0; j < cartResponse.getItemsList().size(); j++) {
-                if(cartResponse.getItems(j).getWarehouseId() == pairList.get(i).getK()
-                        && pairList.get(i).getV() == shippingList.get(i).getShippingId()){
-                    if(shippingList.get(i).getIsNeedDuty()){
-                        duty += cartResponse.getItems(j).getUnitPrice() * dutyRate / 100;
+        for (int i = 0; i < cartResponse.getItemsList().size(); i++) {
+            for (int j = 0; j < pairList.size(); j++) {
+                if (cartResponse.getItems(i).getWarehouseId() == pairList.get(j).getK()) {
+                    for (int k = 0; k < shippingList.size(); k++) {
+                        if (shippingList.get(k).getShippingId() == pairList.get(j).getV()) {
+                            if (shippingList.get(k).getIsNeedDuty()) {
+                                duty += cartResponse.getItems(i).getUnitPrice() * shippingList.get(k).getDutyRate() / 100;
+
+                            }
+                        }
                     }
                 }
             }
+        }
+
+        for (int i = 0; i < shippingList.size(); i++) {
+
             CsShipping.Shipping shipping = shippingList.get(i);
             grandFee += shipping.getFee();
             if (!mIsCrowdOrder) {
@@ -946,14 +1043,14 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
         }
 
 //        grandMsg = String.format(grandMsg, grandFee);
-        grandMsg = getString(R.string.cart_order_grand_total_msg, UIUtils.getCurrency(this,grandFee + duty));
+        grandMsg = getString(R.string.cart_order_grand_total_msg, UIUtils.getCurrency(this, grandFee));
         grandTotalMsgTv.setText(grandMsg);
 //                        price = String.format(price, grandTotal + grandFee);
 //        String feeTotal = String.format(price, grandTotal + grandFee);
         DecimalFormat df = new DecimalFormat("#.00");
-        needPay = grandTotal + grandFee + duty;
+        needPay = grandTotal + grandFee;
         grandTotalTv.setText(UIUtils.getCurrency(this, needPay));
-        fee = getString(R.string.String_order_price, UIUtils.getCurrency(this, grandFee + duty));
+        fee = getString(R.string.String_order_price, UIUtils.getCurrency(this, grandFee));
         directPriceTv.setText(getString(R.string.String_order_price, UIUtils.getCurrency(this, grandFee)));
 
     }
@@ -999,7 +1096,6 @@ public class CartOrderActivity extends BaseActivity implements View.OnClickListe
 //        if (AttendCrowdActivity.cartItems == null || AttendCrowdActivity.cartItems.size() == 0)
 //            return null;
 //        list = AttendCrowdActivity.cartItems;
-
 
 
         warehouseList = list.get(0).getWarehouses();

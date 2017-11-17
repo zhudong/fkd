@@ -96,6 +96,7 @@ public class ProduSrcMainFragment extends BaseFragment<MainActivity> {
             case R.id.fl_title_cart:
                 // TODO: 2017/7/10 跳转去购物车
                 Intent intent = new Intent(mContext, ShopCartActivity.class);
+                intent.putExtra("fromWhere", ShopCartActivity.TYPE_FROM_PRODUSRC);
                 startActivity(intent);
                 break;
         }

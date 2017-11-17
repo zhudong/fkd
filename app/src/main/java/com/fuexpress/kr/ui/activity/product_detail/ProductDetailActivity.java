@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
@@ -41,6 +42,7 @@ import com.fuexpress.kr.net.INetEngineListener;
 import com.fuexpress.kr.net.NetEngine;
 import com.fuexpress.kr.ui.activity.ItemDetailActivity;
 import com.fuexpress.kr.ui.activity.PlacesProductActivity;
+import com.fuexpress.kr.ui.activity.crowd.AttendCrowdActivity;
 import com.fuexpress.kr.ui.activity.merchant_detail.MerChantDetailActivity02;
 import com.fuexpress.kr.ui.activity.shopping_cart.ShopCartActivity;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
@@ -58,6 +60,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import fksproto.CsBase;
+import fksproto.CsCrowd;
 import fksproto.CsItem;
 import fksproto.CsMerchant;
 
@@ -171,7 +174,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void initEvent() {
-        mMiddleInfo.getBtnBuyNow().setOnClickListener(this);
+        mMiddleInfo.setClickListener(this);
         mButtomView.getImgAddCart().setOnClickListener(this);
         mButtomView.getBtnLikeItem().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,7 +254,7 @@ public class ProductDetailActivity extends BaseActivity {
 
         mNuCount.init(mProductManage.getMinQty(), mProductManage.getMaxQty());
         mBtnAddCart.setEnabled(mProductManage.isBuyNow());
-        mMiddleInfo.getBtnBuyNow().setEnabled(mProductManage.isBuyNow());
+//        mMiddleInfo.getBtnBuyNow().setEnabled(mProductManage.isBuyNow());
 
         if (mItemExtendsList != null && mItemExtendsList.size() > 0) {
             mLlExtends.removeAllViews();
@@ -271,7 +274,7 @@ public class ProductDetailActivity extends BaseActivity {
         mRlHeaderImgContainer.addView(mDetailHead.getRootView());
     }
 
-    @OnClick({R.id.rl_store_root, R.id.title_iv_left, R.id.title_iv_right, R.id.title_iv_right_home, R.id.ll_other, R.id.tv_product_detail, R.id.btn_add_cart, R.id.rl_cart})
+    @OnClick({R.id.rl_store_root, R.id.title_iv_left, R.id.title_iv_right, R.id.title_iv_right_home, R.id.ll_other, R.id.tv_product_detail, R.id.btn_add_cart, R.id.rl_cart, R.id.btn_crowd})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -299,16 +302,22 @@ public class ProductDetailActivity extends BaseActivity {
             case R.id.title_iv_right_home:
                 EventBus.getDefault().post(new BusEvent(BusEvent.GO_HOME_PAGE, null));
                 break;
-            case R.id.btn_add_cart:
-                addCart();
-                break;
+
             case R.id.rl_cart:
                 intent = new Intent(ProductDetailActivity.this, ShopCartActivity.class);
+                intent.putExtra("fromWhere", ShopCartActivity.TYPE_FROM_PRODUSRC);
                 startActivity(intent);
                 break;
             case R.id.btn_add_album:
                 AlbumListDialog albumListDialog = new AlbumListDialog(this, mItem);
                 albumListDialog.show();
+                break;
+            case R.id.btn_add_cart:
+                addCart();
+                break;
+
+            case R.id.btn_crowd:
+                initCrowd();
                 break;
         }
     }
@@ -722,4 +731,66 @@ public class ProductDetailActivity extends BaseActivity {
         }
         ShopCartManager.getInstance(this, (SysApplication) getApplication()).addToShopCart(bean);
     }
+
+    private void initCrowd() {
+        switch (mItem.getAlertType()) {
+            case 0:
+//                Toast.makeText(this, getString(R.string.String_crowd_time_out), Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+//                Toast.makeText(this, getString(R.string.String_crowd_time_out_try), Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+            case 3:
+                goAttendCrowd(mItem, 0);
+                break;
+            case 4:
+                getCrowdId();
+                break;
+        }
+    }
+
+    private void goAttendCrowd(ItemBean item, long croedId) {
+        Intent intent = new Intent(ProductDetailActivity.this, AttendCrowdActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(AttendCrowdActivity.ITEM_BEAN, item);
+        intent.putExtra(AttendCrowdActivity.ITEM_BEAN, bundle);
+        intent.putExtra(AttendCrowdActivity.CROWD_ID, croedId);
+        ProductDetailActivity.this.startActivity(intent);
+    }
+
+    boolean initCrowing;
+
+    private void getCrowdId() {
+        if (initCrowing) return;
+        initCrowing = true;
+        CsCrowd.InitiateCrowdRequest.Builder builder = CsCrowd.InitiateCrowdRequest.newBuilder();
+        builder.setCustomerId(AccountManager.getInstance().mUin);
+        builder.setMatchItemId(mItemID);
+        NetEngine.postRequest(builder, new INetEngineListener<CsCrowd.InitiateCrowdResponse>() {
+
+            @Override
+            public void onSuccess(final CsCrowd.InitiateCrowdResponse response) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initCrowing = false;
+                        if (response.getFlag().equals("fail")) {
+                            Toast.makeText(ProductDetailActivity.this, response.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+//                        mItem.setCrowd_id(response.getCrowdOrderId());
+                        goAttendCrowd(mItem, 0);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int ret, String errMsg) {
+                initCrowing = false;
+                Toast.makeText(ProductDetailActivity.this, "发起拼单失败，重试试看", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

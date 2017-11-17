@@ -4,7 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
 
-
+import com.fuexpress.kr.bean.AnimationBean;
 import com.fuexpress.kr.bean.HelpItemViewBean;
 
 /**
@@ -35,5 +35,51 @@ public class AnimationUtils {
         animatorSet.addListener(helpItemViewBean.getAnimatiorListener());
         animatorSet.start();
     }
+
+
+    /**
+     * Y坐标平移的动画
+     *
+     * @param helpItemViewBean item的View封装类
+     * @param isOpen           开启Or关闭
+     */
+    public static void doTranslationYAnimation(AnimationBean helpItemViewBean, boolean isOpen) {
+        int span = UIUtils.dip2px(helpItemViewBean.getSpan());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(helpItemViewBean.getTranYView(), View.TRANSLATION_Y, isOpen ? span : 0, isOpen ? 0 : span);
+        objectAnimator.setDuration(helpItemViewBean.getDuration());
+        if (helpItemViewBean.getAnimatiorListener() != null)
+            objectAnimator.addListener(helpItemViewBean.getAnimatiorListener());
+        objectAnimator.start();
+
+    }
+
+    /**
+     * Y坐标平移的动画
+     *
+     * @param helpItemViewBean item的View封装类
+     */
+    public static void doRotationAnimation(AnimationBean helpItemViewBean) {
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(helpItemViewBean.getRotateView(), "rotation", helpItemViewBean.getFromRotateAngle(), helpItemViewBean.getToRotateAngle());
+        rotation.setDuration(helpItemViewBean.getDuration());
+        if (helpItemViewBean.getAnimatiorListener() != null)
+            rotation.addListener(helpItemViewBean.getAnimatiorListener());
+        rotation.start();
+    }
+
+
+    public static void doHomeBtnAnimation(AnimationBean animationBean, boolean isOpen) {
+        int span = UIUtils.dip2px(animationBean.getSpan());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(animationBean.getTranYView(), View.TRANSLATION_Y, isOpen ? span : 0, isOpen ? 0 : span);
+
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(animationBean.getRotateView(), "rotation", 0f, 45f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(objectAnimator, rotation);
+        animatorSet.setDuration(animationBean.getDuration());
+        if (animationBean.getAnimatiorListener() != null)
+            animatorSet.addListener(animationBean.getAnimatiorListener());
+        animatorSet.start();
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.fuexpress.kr.ui.activity.order_detail;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -12,11 +13,14 @@ import android.widget.TextView;
 import com.fuexpress.kr.R;
 import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.base.BusEvent;
+import com.fuexpress.kr.base.SysApplication;
 import com.fuexpress.kr.bean.OrderConstants;
 import com.fuexpress.kr.bean.SalesOrderBean;
 import com.fuexpress.kr.bean.SalesOrderItemBean;
 import com.fuexpress.kr.conf.Constants;
+import com.fuexpress.kr.model.AccountManager;
 import com.fuexpress.kr.model.SalesOrderManager;
+import com.fuexpress.kr.model.ShopCartManager;
 import com.fuexpress.kr.net.RequestNetListener;
 import com.fuexpress.kr.ui.activity.my_order.OrderAll;
 import com.fuexpress.kr.ui.adapter.SalesOrderDetailAdapter;
@@ -48,6 +52,7 @@ public class OrderDetailCanceledActivity extends BaseActivity {
     final String string = UIUtils.getString(R.string.String_price);
     private SalesOrderDetailAdapter mAdapter;
     public TextView editBtn, payMethodTv;
+    private Button placeAgainBtn;
     private List<SalesOrderItemBean> mSalesOrderItemBeans;
     private CrowdProgressDetail mProgressDetail;
     private CrowdTimer mCrowdTimer;
@@ -65,7 +70,11 @@ public class OrderDetailCanceledActivity extends BaseActivity {
                 case R.id.title_iv_left:
                     onBackPressed();
                     break;
-
+                case R.id.card_order_detail_again_btn:
+                        ShopCartManager.getInstance(OrderDetailCanceledActivity.this,
+                                (SysApplication) getApplication()).placeOrderAgainRequest((int) mSalesOrderBean.order_id,
+                                AccountManager.getInstance().getCurrencyCode());
+                    break;
             }
         }
     };
@@ -103,9 +112,9 @@ public class OrderDetailCanceledActivity extends BaseActivity {
     }
 
     public void getSalesDetail() {
-        SalesOrderManager.getSalesOrderDetail(mSalesOrderBean.order_id, new RequestNetListener<CsOrder.GetSalesOrderDetailResponse>() {
+        SalesOrderManager.getSalesOrderDetail(mSalesOrderBean.order_id, new RequestNetListener<CsOrder.NewSalesOrderDetailResponse>() {
             @Override
-            public void onSuccess(CsOrder.GetSalesOrderDetailResponse response) {
+            public void onSuccess(CsOrder.NewSalesOrderDetailResponse response) {
                 KLog.i("getSalesDetail", response.toString());
                 mSalesOrderItemBeans = ClassUtil.conventSalesOrderItemList2BeanList(response.getOrderItemsList());
                 mAdapter = new SalesOrderDetailAdapter(OrderDetailCanceledActivity.this, mSalesOrderItemBeans);
@@ -122,11 +131,16 @@ public class OrderDetailCanceledActivity extends BaseActivity {
                 countTv.setText(getString(R.string.item_number) + itemOrderCount);
                 if (response.getOrder().getIsCrowd() && mProgressDetail != null) {
 
-                    mProgressDetail.setData(response.getCrowd());
-                    mCrowdTimer.initTime(response.getCrowd());
+//                    mProgressDetail.setData(response.getCrowd());
+//                    mCrowdTimer.initTime(response.getCrowd());
                 } else {
                     mProgressDetail.setVisibility(View.GONE);
                     mCrowdTimer.setVisibility(View.GONE);
+                }
+                if(hasOrdinaryOrderOfSalesBeanItem(mSalesOrderItemBeans)){
+                    placeAgainBtn.setVisibility(View.VISIBLE);
+                }else {
+                    placeAgainBtn.setVisibility(View.GONE);
                 }
                 showOtherInfo(response);
             }
@@ -138,12 +152,14 @@ public class OrderDetailCanceledActivity extends BaseActivity {
         });
     }
 
-    public void showOtherInfo(CsOrder.GetSalesOrderDetailResponse response) {
+    public void showOtherInfo(CsOrder.NewSalesOrderDetailResponse response) {
         if (response.getOrder().getShippingScheme() == 1) {
             otherLayout.setVisibility(View.VISIBLE);
             deliverTv.setText(getString(R.string.send_direct_));
         } else if (response.getOrder().getShippingScheme() == 2) {
             deliverTv.setText(getString(R.string.String_merge_order));
+        }else if (response.getOrder().getShippingScheme() == 3) {
+            deliverTv.setText(getString(R.string.String_direct_fu));
         }
         float fee = getFee(response.getShippingsList());
         String price = String.format(string, fee);
@@ -168,6 +184,9 @@ public class OrderDetailCanceledActivity extends BaseActivity {
         countTv = (TextView) mHeadView.findViewById(R.id.countTv);
         editBtn = (TextView) mHeadView.findViewById(R.id.editBtn);
         editBtn.setOnClickListener(onClickListener);
+        placeAgainBtn = (Button) mHeadView.findViewById(R.id.card_order_detail_again_btn);
+        placeAgainBtn.setVisibility(View.VISIBLE);
+        placeAgainBtn.setOnClickListener(onClickListener);
         mCrowdTimer = (CrowdTimer) mHeadView.findViewById(R.id.crowd_timer);
         mProgressDetail = (CrowdProgressDetail) mHeadView.findViewById(R.id.crowd_progress_detail);
         if (!mSalesOrderBean.is_crowd) {
@@ -207,6 +226,15 @@ public class OrderDetailCanceledActivity extends BaseActivity {
         // listView.getDividerHeght()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
+    }
+
+    public boolean hasOrdinaryOrderOfSalesBeanItem(List<SalesOrderItemBean> mSalesOrderItemBeans){
+        for (int i = 0; i < mSalesOrderItemBeans.size(); i++) {
+            if(!mSalesOrderItemBeans.get(i).isCrowd){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

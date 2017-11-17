@@ -13,6 +13,7 @@ import com.fuexpress.kr.R;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.ui.uiutils.ImageLoaderHelper;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.utils.TextSpannable;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -78,8 +79,8 @@ public class OrderCommodityAdapter extends BaseAdapter {
         }
 
         CsCart.SalesCartItem item = cartList.get(position);
+            TextSpannable.setTitle(item.getSubtitle(), cartHolder.orderCommodityTitleTV, item);
         imageLoader.displayImage(item.getImageUrl() + Constants.ImgUrlSuffix.dp_list, cartHolder.orderCommodityImgIV, options);
-        cartHolder.orderCommodityTitleTV.setText(item.getSubtitle());
         cartHolder.orderCommoditySellerTV.setText(item.getSeller());
         cartHolder.orderCommodityBuyFromTV.setText(item.getBuyfrom());
         if(item.getExtendsCount() > 0){

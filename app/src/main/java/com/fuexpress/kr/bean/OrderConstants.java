@@ -5,36 +5,65 @@ import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
 
 import fksproto.CsBase;
+import fksproto.CsOrder;
 
 /**
  * Created by andy on 2017/7/6.
  */
 
 public class OrderConstants {
-    public static String getOrderState(int i) {
+    public static String getOrderState(int i, SalesOrderItemBean item) {
+        String state = "";
         switch (i) {
             case 1:
-                return UIUtils.getString(R.string.pending_adapter);
+                state = UIUtils.getString(R.string.pending_adapter);
+                break;
             case 2:
-                return UIUtils.getString(R.string.wait_to_do);
+                state = UIUtils.getString(R.string.wait_to_do);
+                break;
+
             case 3:
-                return UIUtils.getString(R.string.check_item);
+                state = UIUtils.getString(R.string.check_item);
+                break;
+
             case 4:
-                return UIUtils.getString(R.string.to_store);
+                state = UIUtils.getString(R.string.to_store);
+                break;
+
             case 5:
-                return UIUtils.getString(R.string.package_attend_Warehouse);
+                state = UIUtils.getString(R.string.package_attend_Warehouse);
+                break;
+
             case 6:
-                return UIUtils.getString(R.string.package_waite_send);
+                state = UIUtils.getString(R.string.package_waite_send);
+                break;
+
             case 7:
-                return UIUtils.getString(R.string.package_has_sended);
+                state = UIUtils.getString(R.string.package_has_sended);
+                break;
+
             case 8:
-                return UIUtils.getString(R.string.wait_cancel);
+                state = UIUtils.getString(R.string.wait_cancel);
+                break;
+
             case 9:
-                return UIUtils.getString(R.string.card_order_detail_title_bar_canceled);
+                state = UIUtils.getString(R.string.card_order_detail_title_bar_canceled);
+                break;
+
             case 10:
-                return UIUtils.getString(R.string.crowding);
+                state = UIUtils.getString(R.string.crowding);
+                break;
         }
-        return "";
+
+        if (item != null && item.state == CsOrder.SalesOrderItemState.SALES_ORDER_ITEM_STATE_PREORDERING_VALUE) {
+            state += " " + item.prompt;
+            return state;
+        }
+
+        if (item != null && i == 5 && item.qty_pack < item.qty) {
+            state += " " + UIUtils.getString(R.string.packing_num, item.qty_pack);
+        }
+        return state;
     }
 
     public static String getPayMethod(int i) {

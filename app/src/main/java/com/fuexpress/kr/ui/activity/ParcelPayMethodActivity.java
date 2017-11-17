@@ -16,6 +16,7 @@ import com.fuexpress.kr.base.BaseActivity;
 import com.fuexpress.kr.conf.Constants;
 import com.fuexpress.kr.model.PayMethodManager;
 import com.fuexpress.kr.ui.uiutils.UIUtils;
+import com.fuexpress.kr.ui.view.PaymentGiftChargeView;
 import com.fuexpress.kr.ui.view.TitleBarView;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class ParcelPayMethodActivity extends BaseActivity {
     public static final String SHIPPING_FEE = "shipping_fee";
     public static final String CURRENCY_CODE = "currencyCode";
     public static final String USE_COUPON = "use_coupon";
+    public static final String USE_CHARGE = "USE_Charge";
     String currencyCode;
     @BindView(R.id.payment_titile_bar)
     TitleBarView titleBar;
@@ -47,12 +49,15 @@ public class ParcelPayMethodActivity extends BaseActivity {
     LinearLayout mPaymentCouponLayout;
     @BindView(R.id.btn_confirm)
     Button mBtnConfirm;
+    @BindView(R.id.payment_charge)
+    PaymentGiftChargeView mPaymentCharge;
     private PayMethodManager mPayMethodManager;
     private int mIndex = -1;
     private boolean isUseBalance;
     private float mShippingFee;
     private CsUser.CouponList coupon;
     private boolean mUseCoupon;
+    private boolean mUseCharge;
 
 
     @Override
@@ -68,15 +73,31 @@ public class ParcelPayMethodActivity extends BaseActivity {
         currencyCode = getIntent().getStringExtra(CURRENCY_CODE);
         mShippingFee = getIntent().getFloatExtra(SHIPPING_FEE, 0f);
         mUseCoupon = getIntent().getBooleanExtra(USE_COUPON, true);
+        mUseCharge = getIntent().getBooleanExtra(USE_CHARGE, false);
         isUseBalance = mPayMethodManager.isUseBalance();
         mChBalance.setChecked(isUseBalance);
+        if (mUseCharge) {
+            mPaymentCharge.setVisibility(View.VISIBLE);
+            mPaymentCharge.initView(currencyCode);
+            mPaymentCharge.setOnBindClick(new PaymentGiftChargeView.OnBindClick() {
+                @Override
+                public void onResult(boolean success) {
+                    if (!success) return;
+                    mPayMethodManager.setFreshBalance(false);
+                    getMethods();
+                }
+            });
+        }
         titleBar.getIv_in_title_back().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        getMethods();
+    }
 
+    private void getMethods() {
         mPayMethodManager.getPayMethodList(new PayMethodManager.PayMethodResultListener() {
             @Override
             public void onResult(String payCode, String result) {

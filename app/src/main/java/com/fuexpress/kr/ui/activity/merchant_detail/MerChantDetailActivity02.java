@@ -264,10 +264,10 @@ public class MerChantDetailActivity02 extends BaseActivity implements RefreshLis
                 mCategoryItemAdapter.notifyDataSetChanged();
                 List<ItemBean> loaclItemList = MerchantDetailManager.getInstance().mLoaclItemList;
                 //mLvForStoreFragmentMerchantDetail.setAdapter(mCategoryItemAdapter);
-                if (!mIsAddHeadView) {
+                /*if (!mIsAddHeadView) {
                     mLvForStoreFragmentMerchantDetail.addHeaderView(mHeadView);
                     mIsAddHeadView = true;
-                }
+                }*/
                 mLvForStoreFragmentMerchantDetail.stopRefresh();
                 mMore = event.getBooleanParam();
                 if (mMore) {
@@ -275,7 +275,7 @@ public class MerChantDetailActivity02 extends BaseActivity implements RefreshLis
                 } else {
                     mLvForStoreFragmentMerchantDetail.setHasLoadMore(false);
                 }
-                mLvForStoreFragmentMerchantDetail.invalidateViews();
+                //mLvForStoreFragmentMerchantDetail.invalidateViews();
                 break;
             case BusEvent.GET_MERCHANT_ITEMS_LIST_SUCCESS_MORE:
                 mLvForStoreFragmentMerchantDetail.stopLoadMore(true);
@@ -285,7 +285,8 @@ public class MerChantDetailActivity02 extends BaseActivity implements RefreshLis
                 } else {
                     mLvForStoreFragmentMerchantDetail.setHasLoadMore(false);
                 }
-                mDates = MerchantDetailManager.getInstance().mLoaclItemList;
+                mDates.clear();
+                mDates.addAll(MerchantDetailManager.getInstance().mLoaclItemList);
                 mCategoryItemAdapter.setDate(mDates);
                 mCategoryItemAdapter.notifyDataSetChanged();
                 break;

@@ -391,7 +391,7 @@ public class InviteFriendsActivity extends BaseActivity implements IWXAPIEventHa
         client.disconnect();
     }
 
-    class MyAdapter extends BaseAdapter {
+    public class MyAdapter extends BaseAdapter {
 
         private int[] data;
         private Context context;
@@ -511,7 +511,7 @@ public class InviteFriendsActivity extends BaseActivity implements IWXAPIEventHa
         params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "福快递专注中韩物流");       //QQ分享摘要
         params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, response.getInviteurl());   //QQ分享目标地址
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "福快递");     //QQ分享指定应用名称
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,response.getImageurl());
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, response.getImageurl());
         //     params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
         mTencent.shareToQQ(this, params, new BaseUiListener());
     }
@@ -717,26 +717,20 @@ public class InviteFriendsActivity extends BaseActivity implements IWXAPIEventHa
 
             int c;
             byte[] buf = new byte[BUFFER_SIZE];
-
             while (true) {
                 c = bis.read(buf);
                 if (c == EOF)
                     break;
-
                 baos.write(buf, 0, c);
             }
-
             conn.disconnect();
             is.close();
-
             byte[] data = baos.toByteArray();
             baos.flush();
-
             return data;
         } catch (Exception e) {
             return null;
         }
-
     }
 
     public void creditsInviteInfoRequest() {

@@ -319,6 +319,10 @@ public class ProtoConfigManager {
         mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CROWDTAG_ID_NAME_REQUEST, CsCrowd.GetCrowdTagRequest.Builder.class, CsCrowd.GetCrowdTagResponse.class));
         mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CROWD_DETAIL_REQUEST, CsCrowd.GetCrowdDetailRequest.Builder.class, CsCrowd.GetCrowdDetailResponse.class));
         mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_ITEM_CROWD_DETAIL_REQUEST, CsCrowd.GetItemCrowdDetailRequest.Builder.class, CsCrowd.GetItemCrowdDetailResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_CROWD_SHIPPING_METHOD_LIST_REQUEST, CsShipping.GetCrowdShippingMethodListRequest.Builder.class, CsShipping.GetCrowdShippingMethodListResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SUBMIT_CROWD_ORDER_REQUEST, CsOrder.SubmitCrowdOrderRequest.Builder.class, CsOrder.SubmitCrowdOrderResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_ADD_CROWD_TO_CART_REQUEST, CsCrowd.AddCrowdToCartRequest.Builder.class, CsCrowd.AddCrowdToCartResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_PLACE_ORDER_AGAIN_REQUEST, CsCart.PlaceOrderAgainRequest.Builder.class, CsCart.PlaceOrderAgainResponse.class));
 
 
         mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_ADD_IMAGE_REVIEW_REQUEST, CsItem.AddImageReviewRequest.Builder.class, CsItem.AddImageReviewResponse.class));
@@ -332,6 +336,19 @@ public class ProtoConfigManager {
 
         mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_SALES_ORDER_DETAIL_REQUEST, CsOrder.GetSalesOrderListRequest.Builder.class, CsOrder.GetSalesOrderListResponse.class));
 
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_SAVE_ADDRESS_AJAX_REQUEST, CsAddress.SaveAddressAjaxRequest.Builder.class, CsAddress.SaveAddressAjaxResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_INIT_ADDRESS_AJAX_REQUEST, CsAddress.InitAddressAjaxRequest.Builder.class, CsAddress.InitAddressAjaxResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_NEW_SALES_ORDER_DETAIL_REQUEST, CsOrder.NewSalesOrderDetailRequest.Builder.class, CsOrder.NewSalesOrderDetailResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_INITIATE_CROWD_REQUEST, CsCrowd.InitiateCrowdRequest.Builder.class, CsCrowd.InitiateCrowdResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSG_DO_SHARE_BAG_REQUEST, CsMy.DoShareBagRequest.Builder.class, CsMy.DoShareBagResponse.class));
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_INIT_SEND_BAG_REQUEST, CsMy.InitSendBagRequest.Builder.class, CsMy.InitSendBagResponse.class));
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_THIRD_LOGIN_WITHOUT_BIND_REQUEST, CsLogin.ThirdLoginWithoutBindRequest.Builder.class, CsLogin.ThirdLoginWithoutBindResponse.class,
+                CsPdu.CSPDUCompressMethod.COMPRESS_METHOD_NONE, CsPdu.CSPDUEncryptMethod.ENCRYPT_METHOD_RSA));
+
+
+        mProtoConfigList.add(new ProtoConfig(CsMsgid.FksCSProtoMsgId.MSGID_GET_BIND_INFO_REQUEST, CsLogin.GetBindInfoRequest.Builder.class, CsLogin.GetBindInfoResponse.class));
 
     }
 }

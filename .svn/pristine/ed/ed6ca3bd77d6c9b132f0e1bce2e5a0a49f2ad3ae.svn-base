@@ -1,0 +1,125 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.3'
+
+    defaultConfig {
+        applicationId "com.fuexpress.kr"
+        minSdkVersion 16
+        targetSdkVersion 23
+        multiDexEnabled true
+        versionCode 100100
+        versionName "1.1.0"
+    }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../distribution/yiss.keystore')
+            keyAlias 'dongdaemun'
+            keyPassword 'yshow110'
+            storePassword 'yshow110'
+        }
+        release {
+            storeFile file('../distribution/yiss.keystore')
+            keyAlias 'dongdaemun'
+            keyPassword 'yshow110'
+            storePassword 'yshow110'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+            mavenCentral()
+        }
+    }
+    productFlavors {
+//      gradlew  assembleGooglePlayRelease
+        baidu {}
+        yingyongbao {}
+        googleplay {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+        /*  flavor1 {
+              applicationId = "adyen.com.adyenpaysdk.controllers.NetworkController"
+          }*/
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'library_progress-release', ext: 'aar')
+    compile files('libs/universal-image-loader-1.9.5.jar')
+    compile files('libs/okhttp-2.6.0.jar')
+    compile project(':adyenpaysdk-1.0.0')
+    compile project(':adyenuisdk-1.0.0')
+    compile project(':volley-release')
+
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.pnikosis:materialish-progress:1.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.zhaokaiqiang.klog:library:0.0.1'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.upyun:upyun-android-sdk:1.0.2'
+    compile 'com.zhy:mpermission-api:1.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
+//    compile 'com.facebook.android:facebook-android-sdk:4.22.0'
+    compile 'com.meiqia:meiqiasdk:3.3.0@aar'
+    compile 'com.squareup.okio:okio:1.8.0'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'com.google.guava:guava:20.0'
+    compile 'com.alibaba:fastjson:1.2.8'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.qiyukf.unicorn:unicorn:3.3.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'in.srain.cube:ptr-load-more:1.0.3'
+    compile 'com.joooonho:selectableroundedimageview:1.0.1'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
+    compile 'com.github.rey5137:material:1.2.4'
+    compile 'com.steelkiwi:cropiwa:1.0.0'
+//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    apt 'com.zhy:mpermission-compiler:1.0.0'
+
+    compile 'com.github.florent37:materialviewpager:1.2.1'
+
+//dependencies
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //新增了一个外国的云项目：
+
+    compile 'com.cloudinary:cloudinary-android:1.14.0'
+}

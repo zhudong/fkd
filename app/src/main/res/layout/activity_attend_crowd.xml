@@ -124,7 +124,6 @@
                 android:layout_marginTop="14dp"
                 android:gravity="left"
                 android:lineSpacingExtra="4dp"
-                android:text="asdflkjsa;lfkj;ls"
                 android:textColor="@color/text_gray"
                 android:textSize="12sp"/>
 
@@ -188,6 +187,33 @@
             android:text="@string/String_addend_crowd_now"
             android:textColor="@color/white"
             android:textSize="13sp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_cart"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@id/btn_crowd_now">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/cart_icon_01"/>
+
+            <TextView
+                android:id="@+id/tv_red_point"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/shape_cricle"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="11sp"/>
+        </RelativeLayout>
 
     </RelativeLayout>
 

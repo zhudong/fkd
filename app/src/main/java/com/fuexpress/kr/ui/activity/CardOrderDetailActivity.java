@@ -37,6 +37,7 @@ import com.fuexpress.kr.ui.view.TitleBarView;
 import com.fuexpress.kr.utils.LogUtils;
 
 import fksproto.CsCard;
+import fksproto.CsCart;
 import fksproto.CsParcel;
 import okhttp3.Response;
 
@@ -212,6 +213,8 @@ public class CardOrderDetailActivity extends BaseActivity {
                 break;
             case R.id.card_order_detail_cancel_btn:
                 cancelGiftCardOrder(giftCardOrderId);
+                break;
+            case R.id.card_order_detail_again_btn:
                 break;
         }
     }
@@ -554,7 +557,6 @@ public class CardOrderDetailActivity extends BaseActivity {
             }
         });
     }
-
 
     public void payGiftCardOrder(final String cardOrderNo, final int giftCardOrderId, final String payment, final float orderAmount) {
         showLoading(5000);
